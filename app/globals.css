@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #eeebe5;
+  --color-paper: #f4f1ec;
+  --color-ink: #0e0e10;
+  --color-ink-2: #18181c;
+  --color-ink-3: #26262b;
+  --color-line: #cfc9be;
+  --color-muted: #5b5852;
+  --color-body: #3a3833;
+  --color-fog: #c9c6c0;
+  --color-accent: #c4441c;
+  --color-accent-dark: #f08a60;
+  --color-e46: #8fa2ff;
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.accent-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
