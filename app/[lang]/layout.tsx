@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   if (!isLocale(lang)) return {};
   const t = dictionaries[lang];
   return {
-    metadataBase: new URL("https://zauberlabs.de"),
+    metadataBase: new URL("https://www.zauberlabs.de"),
     title: t.meta.title,
     description: t.meta.description,
     alternates: { canonical: `/${lang}`, languages: { de: "/de", en: "/en" } },

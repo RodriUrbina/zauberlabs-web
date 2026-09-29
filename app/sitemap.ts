@@ -1,0 +1,22 @@
+import type { MetadataRoute } from "next";
+
+const BASE = "https://www.zauberlabs.de";
+
+// Served at /sitemap.xml — submit this URL in Google Search Console.
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+  const page = (path: string, priority: number) => ({
+    url: `${BASE}/de${path}`,
+    lastModified: now,
+    priority,
+    alternates: { languages: { de: `${BASE}/de${path}`, en: `${BASE}/en${path}` } },
+  });
+  const en = (path: string, priority: number) => ({
+    url: `${BASE}/en${path}`,
+    lastModified: now,
+    priority,
+    alternates: { languages: { de: `${BASE}/de${path}`, en: `${BASE}/en${path}` } },
+  });
+  // Impressum/Datenschutz are noindex, so they stay out of the sitemap.
+  return [page("", 1), en("", 0.9)];
+}
