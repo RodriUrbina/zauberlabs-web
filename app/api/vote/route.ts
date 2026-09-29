@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isCarId } from "@/lib/cars";
-import { allow, getCounts, getVotedBy, hashIp, setVote } from "@/lib/store";
+import { looksLikeCarId } from "@/lib/cars";
+import { allow, getCars, getCounts, getVotedBy, hashIp, isVotableCar, setVote } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 const COOKIE = "zl_vid";
@@ -22,8 +22,9 @@ function withVoterCookie(res: NextResponse, id: string) {
 
 export async function GET(req: NextRequest) {
   const id = voterId(req);
-  const [counts, voted] = await Promise.all([getCounts(), id ? getVotedBy(id) : Promise.resolve([])]);
-  return NextResponse.json({ counts, voted }, { headers: { "Cache-Control": "no-store" } });
+  const cars = await getCars();
+  const [counts, voted] = await Promise.all([getCounts(cars), id ? getVotedBy(id, cars) : Promise.resolve([])]);
+  return NextResponse.json({ cars, counts, voted }, { headers: { "Cache-Control": "no-store" } });
 }
 
 export async function POST(req: NextRequest) {
@@ -32,11 +33,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }
   const body = await req.json().catch(() => null);
-  if (!body || !isCarId(body.car) || typeof body.on !== "boolean") {
+  if (!body || !looksLikeCarId(body.car) || typeof body.on !== "boolean" || !(await isVotableCar(body.car))) {
     return NextResponse.json({ error: "Bad request" }, { status: 400 });
   }
   const id = voterId(req) ?? crypto.randomUUID();
   await setVote(body.car, id, body.on);
-  const [counts, voted] = await Promise.all([getCounts(), getVotedBy(id)]);
-  return withVoterCookie(NextResponse.json({ counts, voted }), id);
+  const cars = await getCars();
+  const [counts, voted] = await Promise.all([getCounts(cars), getVotedBy(id, cars)]);
+  return withVoterCookie(NextResponse.json({ cars, counts, voted }), id);
 }

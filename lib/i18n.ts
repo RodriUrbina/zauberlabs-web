@@ -77,7 +77,7 @@ const en = {
     emailPlaceholder: "you@example.com",
     submit: "Put it on the list",
     sending: "Sending…",
-    thanks: "Thanks — it’s on the list.",
+    thanks: "Thanks! Once we’ve reviewed it, it’ll show up in the vote above.",
     error: "Something went wrong. Please try again.",
   },
   footer: {
@@ -170,7 +170,7 @@ const de: Dict = {
     emailPlaceholder: "du@beispiel.de",
     submit: "Auf die Liste setzen",
     sending: "Wird gesendet…",
-    thanks: "Danke – es steht auf der Liste.",
+    thanks: "Danke! Sobald wir ihn geprüft haben, erscheint er oben im Voting.",
     error: "Da ist etwas schiefgelaufen. Bitte versuch es noch einmal.",
   },
   footer: {

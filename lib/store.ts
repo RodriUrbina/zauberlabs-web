@@ -1,5 +1,5 @@
 import { Redis } from "@upstash/redis";
-import { VOTE_CARS, type CarId } from "./cars";
+import { VOTE_CARS, isBuiltInCar, slugify, type Car, type CarId } from "./cars";
 
 // Upstash Redis credentials. The Vercel Upstash integration provides KV_REST_API_*;
 // UPSTASH_REDIS_REST_* is kept as a fallback for manual setups.
@@ -33,16 +33,37 @@ const mem = {
   voters: new Map<string, Set<string>>(),
   hits: new Map<string, { n: number; until: number }>(),
   suggestions: [] as string[],
+  cars: new Map<string, string>(), // approved suggestions: id → display name
 };
 
-export async function getCounts(): Promise<Record<CarId, number>> {
+/** Built-in cars plus approved suggestions (Redis hash "cars": id → name). */
+export async function getCars(): Promise<Car[]> {
   const redis = getRedis();
-  const out = {} as Record<CarId, number>;
+  const approved = redis
+    ? Object.entries((await redis.hgetall<Record<string, unknown>>("cars")) ?? {})
+    : [...mem.cars.entries()];
+  const extra = approved
+    .filter(([id]) => !isBuiltInCar(id))
+    .map(([id, name]) => ({ id, name: String(name) }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  return [...VOTE_CARS.map((c) => ({ id: c.id, name: c.name })), ...extra];
+}
+
+export async function isVotableCar(id: CarId): Promise<boolean> {
+  if (isBuiltInCar(id)) return true;
+  const redis = getRedis();
+  return redis ? (await redis.hexists("cars", id)) === 1 : mem.cars.has(id);
+}
+
+export async function getCounts(cars?: Car[]): Promise<Record<CarId, number>> {
+  const redis = getRedis();
+  const list = cars ?? (await getCars());
+  const out: Record<CarId, number> = {};
   if (redis) {
     const h = (await redis.hgetall<Record<string, number | string>>("votes")) ?? {};
-    for (const c of VOTE_CARS) out[c.id] = Number(h[c.id] ?? 0);
+    for (const c of list) out[c.id] = Number(h[c.id] ?? 0);
   } else {
-    for (const c of VOTE_CARS) out[c.id] = mem.counts.get(c.id) ?? 0;
+    for (const c of list) out[c.id] = mem.counts.get(c.id) ?? 0;
   }
   return out;
 }
@@ -66,15 +87,16 @@ export async function setVote(car: CarId, voter: string, on: boolean): Promise<n
   return n;
 }
 
-export async function getVotedBy(voter: string): Promise<CarId[]> {
+export async function getVotedBy(voter: string, cars?: Car[]): Promise<CarId[]> {
   const redis = getRedis();
-  const res: CarId[] = [];
-  for (const c of VOTE_CARS) {
-    const key = `voters:${c.id}`;
-    const has = redis ? await redis.sismember(key, voter) : mem.voters.get(key)?.has(voter);
-    if (has) res.push(c.id);
-  }
-  return res;
+  const list = cars ?? (await getCars());
+  const flags = await Promise.all(
+    list.map((c) => {
+      const key = `voters:${c.id}`;
+      return redis ? redis.sismember(key, voter) : Promise.resolve(mem.voters.get(key)?.has(voter) ? 1 : 0);
+    })
+  );
+  return list.filter((_, i) => flags[i]).map((c) => c.id);
 }
 
 /** Simple fixed-window rate limit. Returns true when the request is allowed. */
@@ -101,6 +123,55 @@ export async function addSuggestion(entry: object) {
   const json = JSON.stringify({ ...entry, at: new Date().toISOString() });
   if (redis) await redis.lpush("suggestions", json);
   else mem.suggestions.unshift(json);
+}
+
+// ─── Admin: review suggestions ───────────────────────────────────────────────
+
+export type Suggestion = { raw: string; car: string; email: string | null; lang: string; at: string };
+
+/** Newest first. `raw` is the exact stored entry, used to remove it again. */
+export async function listSuggestions(limit = 200): Promise<Suggestion[]> {
+  const redis = getRedis();
+  const items: unknown[] = redis ? await redis.lrange("suggestions", 0, limit - 1) : mem.suggestions.slice(0, limit);
+  return items.map((item) => {
+    // The Upstash client auto-parses JSON; re-serialising gives back the stored string.
+    const raw = typeof item === "string" ? item : JSON.stringify(item);
+    let d: Partial<Suggestion> = {};
+    try {
+      d = typeof item === "string" ? JSON.parse(item) : (item as Partial<Suggestion>);
+    } catch {}
+    return { raw, car: String(d.car ?? raw), email: d.email ?? null, lang: String(d.lang ?? ""), at: String(d.at ?? "") };
+  });
+}
+
+export async function removeSuggestion(raw: string): Promise<void> {
+  const redis = getRedis();
+  if (redis) await redis.lrem("suggestions", 1, raw);
+  else {
+    const i = mem.suggestions.indexOf(raw);
+    if (i >= 0) mem.suggestions.splice(i, 1);
+  }
+}
+
+/** Adds a car to the vote. Returns the car; if it already exists, the existing one. */
+export async function approveCar(name: string): Promise<Car> {
+  const clean = name.trim().replace(/\s+/g, " ").slice(0, 60);
+  const id = slugify(clean);
+  if (!id) throw new Error("Invalid car name");
+  const existing = (await getCars()).find((c) => c.id === id);
+  if (existing) return existing;
+  const redis = getRedis();
+  if (redis) await redis.hset("cars", { [id]: clean });
+  else mem.cars.set(id, clean);
+  return { id, name: clean };
+}
+
+/** Removes an approved car from the vote (built-in cars can't be removed; votes are kept). */
+export async function removeCar(id: CarId): Promise<void> {
+  if (isBuiltInCar(id)) return;
+  const redis = getRedis();
+  if (redis) await redis.hdel("cars", id);
+  else mem.cars.delete(id);
 }
 
 export async function hashIp(ip: string) {

@@ -74,6 +74,10 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         (Art. 6 Abs. 1 lit. a DSGVO). Du kannst sie jederzeit per E-Mail an {C.email} widerrufen; wir löschen deine Adresse dann umgehend,
         spätestens jedoch, wenn der Zweck entfallen ist.
       </p>
+      <p>
+        Vorschläge werden erst nach unserer Prüfung veröffentlicht, und zwar nur als Name des Fahrzeugmodells im Community-Voting – ohne
+        Bezug zu deiner Person und niemals zusammen mit deiner E-Mail-Adresse.
+      </p>
 
       <h2>7. Datenbank-Dienstleister</h2>
       <p>

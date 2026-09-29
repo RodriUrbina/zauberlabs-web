@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { VOTE_CARS, type CarId } from "@/lib/cars";
+import { VOTE_CARS, type Car, type CarId } from "@/lib/cars";
 import { dictionaries, type Locale } from "@/lib/i18n";
 
-type State = { counts: Record<string, number>; voted: string[] };
+type State = { cars?: Car[]; counts: Record<string, number>; voted: string[] };
 const POLL_MS = 7000;
 
 export default function VoteCard({ lang }: { lang: Locale }) {
@@ -34,6 +34,7 @@ export default function VoteCard({ lang }: { lang: Locale }) {
     setBusy(car);
     // optimistic update
     setState((s) => ({
+      ...s,
       counts: { ...s.counts, [car]: Math.max(0, (s.counts[car] ?? 0) + (on ? 1 : -1)) },
       voted: on ? [...s.voted, car] : s.voted.filter((v) => v !== car),
     }));
@@ -51,7 +52,8 @@ export default function VoteCard({ lang }: { lang: Locale }) {
   };
 
   const fmt = useMemo(() => new Intl.NumberFormat(t.numberLocale), [t.numberLocale]);
-  const cars = [...VOTE_CARS].sort((a, b) => (state.counts[b.id] ?? 0) - (state.counts[a.id] ?? 0));
+  // Built-in cars until the first response arrives; afterwards also the approved suggestions.
+  const cars = [...(state.cars ?? VOTE_CARS)].sort((a, b) => (state.counts[b.id] ?? 0) - (state.counts[a.id] ?? 0));
   const total = Object.values(state.counts).reduce((a, b) => a + b, 0);
 
   return (
