@@ -1,29 +1,111 @@
 import LegalPage from "@/components/LegalPage";
-import { CONTACT_EMAIL } from "@/lib/i18n";
 
 export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: false } };
 
-// Draft only. Replace with a reviewed privacy policy before launch.
+/*
+ * ─── FILL IN BEFORE PUBLISHING ────────────────────────────────────────────
+ * Replace every [PLACEHOLDER]. Written for what this site actually does today:
+ * Vercel hosting, self-hosted fonts, Upstash Redis for votes/suggestions, one
+ * vote cookie, no analytics, no tracking, no newsletter tool.
+ * If you add analytics, a newsletter tool, embeds or ads, this page must be updated.
+ * Boilerplate only, not legal advice — have it checked if you're unsure.
+ */
+const C = {
+  name: "Rodrigo Urbina",
+  street: "Anton-Wilhelm-Amo-Straße 50",
+  city: "10117 Berlin",
+  email: "hello@zauberlabs.de",
+  // Supervisory authority of YOUR federal state, e.g. Hessen → "Der Hessische Beauftragte für Datenschutz und Informationsfreiheit"
+  authority: "Berliner Beauftragte für Datenschutz und Informationsfreiheit, Alt-Moabit 59–61, 10555 Berlin (www.datenschutz-berlin.de)",
+  updated: "September 2026",
+};
+
 export default async function Datenschutz({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   return (
     <LegalPage lang={lang} title="Datenschutzerklärung">
-      <p>[ENTWURF – vor dem Livegang prüfen lassen]</p>
-      <h2>Verantwortlicher</h2>
-      <p>[NAME, ANSCHRIFT], E-Mail: {CONTACT_EMAIL}</p>
-      <h2>Hosting</h2>
-      <p>Diese Website wird bei Vercel Inc. gehostet. Beim Aufruf werden technisch notwendige Server-Logdaten verarbeitet.</p>
-      <h2>Schriften</h2>
-      <p>Schriften werden lokal von unserem Server ausgeliefert; es findet keine Verbindung zu Google-Servern statt.</p>
-      <h2>Community-Voting</h2>
+      {lang === "en" && <p className="italic">This privacy policy is provided in German.</p>}
+
+      <h2>1. Verantwortlicher</h2>
       <p>
-        Wenn du abstimmst, speichern wir ein zufälliges Cookie („zl_vid“), damit jede Person pro Auto nur einmal abstimmen kann. Zum Schutz vor
-        Missbrauch wird deine IP-Adresse kurzzeitig nur in gehashter Form verarbeitet. Speicherung bei Upstash (Redis).
+        {C.name}, {C.street}, {C.city}, Deutschland
+        <br />
+        E-Mail: <a className="underline" href={`mailto:${C.email}`}>{C.email}</a>
       </p>
-      <h2>Autovorschläge</h2>
-      <p>Wenn du uns ein Auto vorschlägst, speichern wir den Text und – falls angegeben – deine E-Mail-Adresse, um dich zu benachrichtigen.</p>
-      <h2>Deine Rechte</h2>
-      <p>Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Datenübertragbarkeit. Schreib uns an {CONTACT_EMAIL}.</p>
+
+      <h2>2. Überblick</h2>
+      <p>
+        Wir verarbeiten personenbezogene Daten nur, soweit es für den Betrieb dieser Website und ihrer Funktionen nötig ist. Wir setzen keine
+        Analyse-, Tracking- oder Werbe-Tools ein und verkaufen keine Daten.
+      </p>
+
+      <h2>3. Hosting und Server-Logfiles</h2>
+      <p>
+        Diese Website wird bei Vercel Inc. (USA) gehostet. Beim Aufruf der Seiten verarbeitet Vercel
+        technisch notwendige Daten, insbesondere IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Referrer sowie Browser- und
+        Betriebssysteminformationen. Dies ist erforderlich, um die Website auszuliefern, ihre Sicherheit zu gewährleisten und Missbrauch
+        abzuwehren. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und stabilen Betrieb).
+      </p>
+      <p>
+        Mit Vercel besteht ein Vertrag zur Auftragsverarbeitung. Eine Übermittlung in die USA ist möglich; sie erfolgt auf Grundlage des
+        EU-US Data Privacy Framework bzw. der EU-Standardvertragsklauseln. Weitere Informationen: https://vercel.com/legal/privacy-policy
+      </p>
+
+      <h2>4. Schriftarten</h2>
+      <p>Alle Schriftarten werden lokal von unserem Server ausgeliefert. Es findet keine Verbindung zu Servern von Google oder anderen Drittanbietern statt.</p>
+
+      <h2>5. Community-Voting</h2>
+      <p>
+        Du kannst abstimmen, welches Auto wir als Nächstes umsetzen. Damit jede Person pro Auto nur einmal abstimmen kann, setzen wir beim
+        Abstimmen ein Cookie namens „zl_vid“ mit einer zufälligen Kennung (Speicherdauer: 12 Monate). Es enthält keine Angaben zu deiner Person
+        und wird nicht für Tracking verwendet. Das Cookie ist für die von dir ausdrücklich gewünschte Abstimmfunktion unbedingt erforderlich
+        (§ 25 Abs. 2 Nr. 2 TDDDG); die weitere Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.
+      </p>
+      <p>
+        Zum Schutz vor Missbrauch (z. B. automatisierten Massenabstimmungen) wird deine IP-Adresse ausschließlich in gehashter (unkenntlich gemachter) Form
+        verarbeitet und nach spätestens 10 Minuten gelöscht. Rückschlüsse auf deine Person sind uns dadurch nicht möglich. Rechtsgrundlage ist
+        Art. 6 Abs. 1 lit. f DSGVO.
+      </p>
+
+      <h2>6. Autovorschläge</h2>
+      <p>
+        Wenn du uns über das Formular ein Auto vorschlägst, speichern wir deinen Text und – nur falls du sie angibst – deine E-Mail-Adresse, um
+        dich zu informieren, wenn wir dieses Auto umsetzen. Die Angabe der E-Mail-Adresse ist freiwillig; Rechtsgrundlage ist deine Einwilligung
+        (Art. 6 Abs. 1 lit. a DSGVO). Du kannst sie jederzeit per E-Mail an {C.email} widerrufen; wir löschen deine Adresse dann umgehend,
+        spätestens jedoch, wenn der Zweck entfallen ist.
+      </p>
+
+      <h2>7. Datenbank-Dienstleister</h2>
+      <p>
+        Abstimmungen und Vorschläge werden bei Upstash, Inc. (USA) in einem Rechenzentrum in Frankfurt am Main gespeichert. Mit Upstash besteht
+        ein Vertrag zur Auftragsverarbeitung; soweit ein Zugriff aus den USA möglich ist, erfolgt er auf Grundlage der EU-Standardvertragsklauseln.
+        Weitere Informationen: https://upstash.com
+      </p>
+
+      <h2>8. Kontakt per E-Mail</h2>
+      <p>
+        Wenn du uns per E-Mail kontaktierst, verarbeiten wir deine Angaben zur Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. b bzw. f DSGVO)
+        und löschen sie, sobald sie nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten bestehen.
+      </p>
+
+      <h2>9. Externe Links</h2>
+      <p>
+        Unsere Konfiguratoren verlinken auf externe Händler und Plattformen. Erst wenn du einen solchen Link anklickst, verlässt du unsere
+        Website; ab dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
+      </p>
+
+      <h2>10. Deine Rechte</h2>
+      <p>
+        Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
+        Datenübertragbarkeit (Art. 20) sowie auf Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21). Eine erteilte
+        Einwilligung kannst du jederzeit mit Wirkung für die Zukunft widerrufen. Schreib uns dazu einfach an {C.email}.
+      </p>
+      <p>
+        Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, zum Beispiel bei: {C.authority}.
+      </p>
+
+      <h2>11. Aktualität</h2>
+      <p>Stand: {C.updated}. Wir passen diese Erklärung an, wenn sich unsere Website oder die Rechtslage ändert.</p>
     </LegalPage>
   );
 }
