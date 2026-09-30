@@ -37,3 +37,88 @@ body {
   font-weight: 400;
   letter-spacing: -0.01em;
 }
+
+/* ---------- Hero deck (E46 centre, upcoming configurators fanned behind) ---------- */
+.deck-wrap { width: 100%; container-type: inline-size; align-self: center; }
+.deck {
+  --c-w: 50; /* centre card width, % of deck */
+  --s-w: 44; /* side card width */
+  --s-x: 9;  /* side card inset from the deck edge (leaves room for the tilt) */
+  --c-y: 19; /* centre card lift above the deck bottom, cqw */
+  --tilt: 10deg;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 0.95;
+}
+/* Narrow deck (phones, and the slim hero column on small laptops): bigger centre card, no taglines */
+@container (max-width: 559px) {
+  .deck { --c-w: 62; --s-w: 44; --s-x: 6; --c-y: 17; --tilt: 8deg; aspect-ratio: 1 / 1.1; }
+  .deck .deck-sub { display: none; }
+  .deck-center .deck-wm { font-size: 3.4em; }
+}
+.deck-card {
+  --w: var(--s-w);
+  position: absolute;
+  width: calc(var(--w) * 1%);
+  aspect-ratio: 460 / 620;
+  /* 1em == 16px on a 460px-wide card; everything inside scales with the card */
+  font-size: calc(var(--w) * 1cqw * 16 / 460);
+  border-radius: 1.875em;
+  overflow: hidden;
+  color: var(--color-paper);
+  background: var(--color-ink);
+  box-shadow: 0 2.5em 4.4em -1.6em rgb(20 16 12 / 0.55), inset 0 0 0 1px rgb(255 255 255 / 0.07);
+  transform-origin: 50% 100%;
+}
+.deck-side { bottom: 3cqw; filter: brightness(0.92); z-index: 1; user-select: none; }
+.deck-left { left: calc(var(--s-x) * 1%); transform: rotate(calc(var(--tilt) * -1)); }
+.deck-right { right: calc(var(--s-x) * 1%); transform: rotate(var(--tilt)); }
+.deck-center {
+  --w: var(--c-w);
+  aspect-ratio: 460 / 670;
+  left: calc((100% - var(--c-w) * 1%) / 2);
+  bottom: calc(var(--c-y) * 1cqw);
+  z-index: 2;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.deck-center:hover { transform: translateY(-0.5em); }
+.deck-center:focus-visible { outline: 3px solid var(--color-e46); outline-offset: 4px; }
+
+.deck-studio { position: absolute; inset: 0;
+  background:
+    linear-gradient(var(--beam), transparent 38%, rgb(255 255 255 / 0.07) 44%, rgb(255 255 255 / 0.02) 55%, transparent 60%),
+    radial-gradient(ellipse 70% 12% at 50% 56.5%, rgb(255 255 255 / 0.07), transparent 70%),
+    radial-gradient(ellipse 60% 45% at var(--lx) 30%, rgb(255 255 255 / 0.13), transparent 70%),
+    linear-gradient(180deg, #1b1c1f 0%, #121315 56%, #0b0b0c 57%, #0e0e10 100%);
+}
+.deck-studio-left { --lx: 30%; --beam: 120deg; }
+.deck-studio-right { --lx: 70%; --beam: 240deg; }
+.deck-car { position: absolute; width: 130%; max-width: none; top: 34.7%; }
+.deck-left .deck-car { left: -8.7%; }
+.deck-right .deck-car { left: -21.7%; }
+.deck-fade { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(14 14 16 / 0.6) 0%, transparent 22%, transparent 62%, #0e0e10 82%); }
+
+.deck-photo { position: absolute; left: -22%; width: 128%; top: 11%; aspect-ratio: 1600 / 1189; }
+.deck-photo-fade { position: absolute; inset: 0; background: linear-gradient(180deg, #0e0e10 0%, rgb(14 14 16 / 0.35) 12%, transparent 24%, transparent 50%, #0e0e10 71%); }
+
+.deck-top { position: absolute; left: 2em; right: 2em; top: 2.125em; display: flex; flex-direction: column; gap: 0.75em;
+  font-family: var(--font-mono); font-size: 0.8125em; letter-spacing: 0.2em; text-transform: uppercase; }
+.deck-top .deck-make { color: rgb(255 255 255 / 0.55); }
+.deck-status { display: flex; align-items: center; gap: 0.75em; }
+.deck-right .deck-top, .deck-right .deck-bottom { text-align: right; align-items: flex-end; }
+.deck-dot { width: 0.6em; height: 0.6em; border-radius: 9999px; flex: none; }
+.deck-dot-live { background: #7fd69a; box-shadow: 0 0 0.75em #7fd69a; }
+.deck-dot-soon { border: 1.5px solid rgb(255 255 255 / 0.6); }
+
+.deck-bottom { position: absolute; left: 2em; right: 2em; bottom: 2.125em; display: flex; flex-direction: column; gap: 0.875em; }
+.deck-bottom-center { right: 6em; }
+.deck-side .deck-bottom { max-width: 14.5em; }
+.deck-right .deck-bottom { left: auto; }
+.deck-side .deck-wm { font-size: 2.5em; }
+.deck-wm { font-weight: 800; font-size: 2.875em; line-height: 1; letter-spacing: -0.02em; }
+.deck-sub { font-size: 1em; line-height: 1.35; font-weight: 500; color: rgb(255 255 255 / 0.75); }
+.deck-serif { font-size: 1.1875em; color: #fff; }
+.deck-arrow { position: absolute; right: 1.875em; bottom: 1.875em; width: 3.5em; height: 3.5em; border-radius: 9999px;
+  background: var(--color-paper); color: var(--color-ink); display: grid; place-items: center; transition: transform 0.3s ease; }
+.deck-center:hover .deck-arrow { transform: rotate(45deg); }
+@media (prefers-reduced-motion: reduce) { .deck-center, .deck-arrow { transition: none; } }

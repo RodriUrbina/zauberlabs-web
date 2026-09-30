@@ -5,6 +5,7 @@ import { CONTACT_EMAIL, dictionaries, E46_URL, isLocale } from "@/lib/i18n";
 import { Arrow, ArrowUpRight, Wordmark } from "@/components/Icons";
 import VoteCard from "@/components/VoteCard";
 import SuggestForm from "@/components/SuggestForm";
+import HeroDeck from "@/components/HeroDeck";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
 
@@ -63,30 +64,15 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </div>
           </div>
 
-          <a href={E46_URL} className="group relative flex min-h-[420px] flex-col justify-between overflow-hidden rounded-3xl bg-[#0B0B0D] text-paper md:min-h-[600px]">
-            <Image src="/images/hero.jpg" alt={t.hero.heroAlt} fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-contain object-[50%_35%] transition-transform duration-500 group-hover:scale-[1.02]" />
-            <div className="relative flex items-center justify-between p-5 md:px-8 md:py-7">
-              <span className="eyebrow flex h-8 items-center gap-2 rounded-full bg-ink/75 px-3.5 text-[11px]">
-                <span className="size-2 rounded-full bg-[#7FD69A]" />
-                {t.hero.live}
-              </span>
-              <span className="eyebrow hidden text-[11px] text-fog sm:block">BMW · 1998–2006</span>
-            </div>
-            <div className="relative flex items-end justify-between gap-4 bg-gradient-to-t from-[#08080A]/95 to-transparent p-5 pt-24 md:p-8 md:pt-24">
-              <div className="flex flex-col gap-2">
-                <span className="text-3xl font-extrabold tracking-tight md:text-[40px]">
-                  E46<span className="text-e46">BUILD</span>
-                </span>
-                <span className="text-sm text-fog md:text-base">
-                  {t.hero.cardLine[0]}
-                  <span className="accent-serif text-[17px] text-paper md:text-[19px]">{t.hero.cardLine[1]}</span>
-                </span>
-              </div>
-              <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-paper text-ink">
-                <ArrowUpRight className="size-5" />
-              </span>
-            </div>
-          </a>
+          <HeroDeck
+            href={E46_URL}
+            live={t.hero.live}
+            soon={t.hero.soon}
+            e46Line={t.hero.cardLine}
+            e46Alt={t.hero.heroAlt}
+            left={{ num: "02", make: "Mercedes-Benz · 1984–1997", model: "W124", accent: "#6fd3c1", line: t.hero.w124Line, img: "/images/w124.svg", alt: "" }}
+            right={{ num: "03", make: "Audi · 1994–2001", model: "B5", accent: "#e8553d", line: t.hero.b5Line, img: "/images/b5-rs4.svg", alt: "" }}
+          />
         </section>
 
         {/* TICKER */}
