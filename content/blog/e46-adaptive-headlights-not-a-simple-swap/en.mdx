@@ -1,14 +1,14 @@
 ---
-# BL-010 — Writer draft, English. Format provisional: the blog feature (BL-001) is still being
-# designed, so the Builder may rename fields. Body is plain Markdown (no JSX) so it stays portable.
+# BL-010 — Writer draft, English (revision 2 after Editor review). Body is plain Markdown (no JSX).
+# The layout (BL-001) renders the evidence legend, the Sources & confidence box and the CTA from front matter.
 title: "Adaptive (\"cornering\") E46 headlights are not a simple swap"
-description: "On the facelift E46 Coupé and Convertible, the adaptive bi-xenon headlights share their control electronics with the automatic beam levelling. Swap an adaptive unit into a plain car, or a plain unit into an adaptive car, and the lamp lights but the levelling does not. Here is what the evidence says, and how to check your car before you buy."
+description: "Adaptive E46 bi-xenon units share their electronics with the beam levelling. Fit the wrong pair and the lamp lights but the levelling stops. How to check."
 date: 2026-10-02
 updated: 2026-10-02
 lang: en
 slug: e46-adaptive-headlights-not-a-simple-swap
 card: BL-010
-author: "Zauberlabs" # DECISION NEEDED: author name/byline (see PR report)
+author: "Zauberlabs"
 tags:
   - E46
   - headlights
@@ -19,14 +19,14 @@ tags:
   - BMW
 configurator: E46
 cta:
-  label: "Find the right headlight for your E46"
-  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts
+  label: "E46 configurator: coming soon"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts; layout shows "coming soon" until the configurator opens
 hero:
-  src: null # PLACEHOLDER — no licensed image available yet (DECISION NEEDED)
-  alt: "Facelift BMW E46 Coupé front, low beams on, one headlight turned slightly into a bend"
-  credit: null
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "Facelift BMW E46 Coupé front at dusk on a bending road, low beams on, one headlight turned slightly into the bend"
+  credit: "AI-generated illustration"
   licence: null
-  placeholder: "Own photo or AI-generated illustration (labelled) of a facelift E46 Coupé bi-xenon headlight; no third-party images. Internal illustrations exist in e46build (t022-headlight-images) but their licence must be confirmed before reuse."
+  placeholder: "AI-generated illustration, labelled as such. Brief: facelift E46 Coupé front at dusk on a bending road, low beams on, one headlight angled visibly into the bend. Must not show: readable number plate, legible BMW roundel or model badge, part numbers, dealership branding."
 evidenceRoot: "e46build master docs/research/"
 sources:
   - id: S1
@@ -34,25 +34,25 @@ sources:
     type: ETK mirror (catalogue-grade)
     path: "t024-t025-evidence/raw/coupe-bmwfans-330ci-coupe-headlight_2.html; coupe-bmwfans-E46-Coupe_USA_330Ci-M54-headlight_2.html; coupe-estore-330ci-coupe-Headlight-2.html; coupe-bmwfans-330ci-lighting.html; t024-partc-evidence/headlight-table.md"
     confidence: HIGH
-    note: "HIGH where both mirrors print the same thing (the option nesting: adaptive rows always sit under xenon + adaptive); MEDIUM for single-mirror rows such as 'Europe adaptive units are TITAN only'."
+    note: "HIGH where both mirrors print the same thing (the option nesting: adaptive rows always sit under xenon + adaptive). MEDIUM for single-mirror rows ('Europe adaptive units are TITAN only') and for every catalogue date (only one mirror prints dates)."
   - id: S2
-    title: "BMW Technical Training ST052 Body Electronics II, 'E46 Lighting Systems', and a BMW system description of Adaptive Headlights (AHL) reproduced by a third-party site"
+    title: "BMW system description of Adaptive Headlights (AHL) for the E46, reproduced by a third-party site (micro-tronik.com); BMW Technical Training ST052 'E46 Lighting Systems' (PDF on archive.org)"
     type: BMW-authored, reached only through search summaries of third-party reproductions
     path: "t038-akl-interchangeability/evidence.md §2.1–2.2"
     confidence: MEDIUM
-    note: "The PDF and the reproduction page could not be opened; wording comes from summaries. Capped at MEDIUM until the PDF is read (fetch-list item 5)."
+    note: "Neither the reproduction page nor the PDF could be opened; wording comes from summaries. The two 'levelling' quotes in the body are from the system description (§2.2). Capped at MEDIUM until read in full (fetch-list item 5)."
   - id: S3
     title: "UNECE Regulation 48 (installation of lighting devices): automatic levelling for gas-discharge dipped beam; amber direction indicators. German periodic inspection (HU) practice from inspection guides"
     type: regulation via summaries; inspection guides
     path: "t038-akl-interchangeability/evidence.md §4"
     confidence: MEDIUM
-    note: "Amber-indicator rule HIGH (consistent across primary and secondary texts). Levelling requirement MEDIUM (paragraphs not read verbatim). HU defect classification LOW–MEDIUM."
+    note: "Amber-indicator rule HIGH. Levelling requirement MEDIUM (paragraphs not read verbatim). HU defect classification LOW–MEDIUM."
   - id: S4
     title: "Owner forum threads (e46fanatics, bimmerfest, e46zone) on adaptive-headlight retrofits and mismatches"
     type: forum (search summaries; concordant across several threads; none opened)
     path: "t038-akl-interchangeability/evidence.md §3"
     confidence: LOW
-    note: "Never decides alone. Used only for the mechanism and consequences, marked LOW."
+    note: "Never decides alone. Used only for the mechanism's consequences, marked LOW."
   - id: S5
     title: "Retailer listings: BMW installation-instruction collection (m-flight-europe) and parts-dealer listings of BMW retrofit kits"
     type: retailer
@@ -63,70 +63,54 @@ sources:
     type: internal synthesis of S1–S5
     path: "t038-akl-interchangeability/REPORT.md; t038-akl-interchangeability/evidence.md; t032-evidence/T-032-findings.md"
     confidence: n/a
-    note: "The grading of every claim below follows these files."
+    note: "The grading of every claim in the body follows these files."
 ---
 
-Two used bi-xenon headlights from a facelift E46 Coupé look the same from the outside. One of them may be an **adaptive** unit, the kind that turns its low beam into the bend as you steer. The other is the plain bi-xenon. Both bolt into the same hole and take the same bulb. The evidence we have says they are **not interchangeable in either direction**, and the reason is not the swivel. It is the beam levelling.
-
-Everything below is graded. **HIGH** means two BMW catalogue mirrors print it, or it is settled regulation. **MEDIUM** means a BMW-authored text that we could only read second-hand, or a single catalogue mirror. **LOW** means owners' forums or retailers, shown as their claim, not as fact. Sources are listed at the end.
+Two used bi-xenon headlights from a facelift E46 Coupé look the same from the outside. One of them may be an **adaptive** unit, the kind that turns its low beam into the bend as you steer. The other is the plain bi-xenon. By owners' accounts both bolt in the same way and take the same bulb. [S4, LOW] The evidence we have says they are **not interchangeable in either direction**, and the reason is not the swivel. It is the beam levelling.
 
 ## The short version
 
-- Adaptive headlights on the E46 exist only on the **facelift Coupé and Convertible**, only together with **bi-xenon**, and appear on the catalogue's facelift diagrams, which start in **March 2003**. [S1, HIGH for the xenon dependency; S2, MEDIUM for "Coupé and Convertible only"]
-- According to BMW's own training material, the adaptive control unit **"is also responsible for the automatic headlight-range adjustment"**, and the motor controllers inside each adaptive headlight drive **both** the swivel and the levelling. [S2, MEDIUM]
+- Adaptive headlights on the E46 exist only on the **facelift Coupé and Convertible**, only together with **bi-xenon**, on the catalogue diagrams that begin in March 2003. [S1, HIGH for the xenon dependency; MEDIUM for the date; S2, MEDIUM for "Coupé and Convertible only"]
+- According to BMW's own system description of the feature, read through a third-party reproduction, the adaptive control unit **"is also responsible for the automatic headlight-range adjustment"**, and the motor controllers inside each adaptive headlight drive **both** the swivel and the levelling. [S2, MEDIUM]
 - An **adaptive unit in a car without the system**: it lights, it does not swivel, and the **automatic levelling does not work**. [S2 mechanism, MEDIUM; S4 reports, LOW]
 - A **plain unit in an adaptive car**: it lights, the car **stores a fault**, and the **levelling does not work**. [S4, LOW, several concordant threads]
 - Automatic levelling is a **legal requirement** for xenon low beams in ECE markets, and German inspection guides class a non-working levelling as a **significant defect**. [S3, MEDIUM for the requirement; LOW–MEDIUM for the inspection outcome]
-- **How to check your car:** do the low beams turn when you steer at night? [owner-testable; S4 for the switch-on sweep, LOW]
+- **How to check your car:** do the low beams turn when you steer at night?
 
 ## What "adaptive" means on an E46
 
 BMW's option is called **Adaptive Headlights** (option code 524 in the catalogue headers; BMW's internal names are AKL, AHL and ALC). On the catalogue diagrams of the facelift Coupé and Convertible, every "bi-xenon headlight AKL" row sits under two conditions: **Xenon Light** *and* **Adaptive Headlights**. There is no adaptive halogen unit and no adaptive plain-xenon unit. [S1, HIGH: both mirrors, Europe and USA]
 
-In Europe the adaptive units are listed only in the **TITAN** trim (the lighter inner finish), with and without white indicator lenses. [S1, MEDIUM: Europe rows on both mirrors, graded MEDIUM in the headlight table]
+In Europe the adaptive units are listed only in the **TITAN** inner-trim finish (versus the standard black), with and without white indicator lenses. [S1, MEDIUM: Europe rows, graded MEDIUM in the headlight table]
 
-What the system does, per BMW's training text: below about 50 km/h the headlights follow the **steering angle**; above that they follow the **yaw rate** from the stability-control sensor and the road speed; the light switch must be in the automatic position. [S2, MEDIUM] The parts that make this happen are a separate **adaptive control unit** in the car (on the E46 Coupé and Convertible only; its catalogue number was not established), a **stepper-motor controller inside each headlight**, and the ride-height sensors that feed it. [S2, MEDIUM; S4 for the control unit's location behind the glove box, LOW]
-
-The catalogue has a dedicated diagram for the adaptive-specific parts, "single components for headlight xenon / ALC". Its index entry is on the saved pages; the diagram itself was not saved. [S1, HIGH that it exists; contents not established]
+What the system does, per BMW's description: at town speeds the headlights follow the steering angle, above that the yaw rate from the stability-control sensor, with the light switch in the automatic position. [S2, MEDIUM] The parts that make this happen are a separate **adaptive control unit** in the car (its catalogue entry was not established), a **stepper-motor controller inside each headlight**, and the ride-height sensors that feed it. [S2, MEDIUM; S4 for the control unit's location behind the glove box, LOW] The catalogue has a dedicated diagram for the adaptive-specific parts, "single components for headlight xenon / ALC"; its index entry is on the saved pages, the diagram itself is not. [S1, HIGH that it exists; contents not established]
 
 ## Why the levelling is the problem
 
-Every xenon car has automatic beam levelling: sensors on the axles read the car's pitch and motors in the headlights keep the beam at the right height. On a **plain** bi-xenon E46 the light control module drives a conventional levelling motor in each headlight directly.
+Every xenon car has automatic beam levelling, because the lighting regulation requires it for gas-discharge low beams: sensors on the axles read the car's pitch and motors in the headlights keep the beam at the right height. [S3, MEDIUM] On a **plain** bi-xenon E46, owners who have traced the wiring say the light control module drives a conventional levelling motor in each headlight directly. [S4, LOW, with the research's inference]
 
-On an **adaptive** E46 the architecture is different. BMW's training text says the adaptive control unit, "for safety reasons", **also owns the automatic headlight-range adjustment**, and that the stepper-motor controllers in the headlights "control the stepper motors in the headlights for the automatic headlight-range adjustment and for the adaptive headlights". [S2, MEDIUM] In plain words: on an adaptive car, up-and-down and side-to-side are run by the same electronics, and the car has no direct levelling drive of its own.
+On an **adaptive** E46 the architecture is different. BMW's system description says the adaptive control unit, "for safety reasons", **is also responsible for the automatic headlight-range adjustment**, and that the stepper-motor controllers "control the stepper motors in the headlights for the automatic headlight-range adjustment and for the adaptive headlights". [S2, MEDIUM] Which means: on an adaptive car, up-and-down and side-to-side are run by the same electronics, and the car has no direct levelling drive of its own. [S6, inference from S2, MEDIUM]
 
 Owners who have opened the wiring describe the consequence: the headlight connector position that carries the plain levelling motor on a standard car carries a two-wire data bus to the stepper controller on an adaptive car. [S4, LOW] Same plug, different signal.
 
-## Adaptive unit into a plain car
+## The two wrong swaps, side by side
 
-What the evidence says happens: [S2 for the mechanism, MEDIUM; S4 for the reports, LOW]
+| | Adaptive unit into a plain car | Plain unit into an adaptive car |
+| --- | --- | --- |
+| Low and high beam | Works. Ballast, igniter and bulb are separate parts, the same for adaptive and plain rows. [S1, HIGH] | Works. [S4, LOW] |
+| Swivel | Idle; nothing commands it. [S4, LOW] | None; a plain unit has no swivel. |
+| Automatic levelling | **Does not work**: the adaptive unit's levelling is a stepper motor behind its own controller, which the plain car's light module cannot command. [S2 mechanism, MEDIUM; S4 reports, LOW] | **Does not work**: the adaptive car has no direct levelling drive. [S4, LOW; S2 mechanism, MEDIUM] |
+| Fault stored / warning | None expected; there is no module to report it. [S4, LOW] | The adaptive control unit stores a stepper-motor fault; a warning or blinking fault LED on the light module is reported. [S4, LOW, several threads] |
+| Risk of damage | One owner reports that plugging the plain levelling connector into an adaptive unit destroyed its stepper electronics. [S4, LOW, one thread] | Not reported. |
+| What a full conversion needs | Adaptive control unit, a different light control module, data-bus wiring, re-routed level sensors, coding of the option into the car. [S4, LOW] | Code the adaptive option out, re-route the level sensors to the light module, fit the non-adaptive light module: a module swap plus coding. [S4, LOW] |
+| BMW documentation | No BMW retrofit kit for adaptive headlights was found. [S6] | No BMW document on this direction at all. [S6] |
 
-- **It lights.** Ballast, igniter and bulb are not part of the headlight unit in the catalogue, and the diagram's note that the xenon headlight "does not comprise ignition control unit and xenon light bulb" applies to adaptive and plain rows alike. [S1, HIGH]
-- **It does not swivel.** There is no adaptive control unit to tell it to.
-- **The levelling does not work.** The adaptive unit's levelling is a stepper motor behind its own controller; the plain car's light module cannot command it.
-- One owner warns that connecting the plain car's levelling plug to an adaptive unit **destroyed the stepper electronics**. [S4, LOW, one thread]
-- **No warning lamp is expected**, because there is no module to report the fault. [S4, LOW]
-
-A full retrofit, according to owners who have done it, needs the adaptive control unit, a different light control module, the data-bus wiring, re-routed level sensors and coding of the option into the car. [S4, LOW] The scope of BMW's own **xenon** retrofit kit (sensors, loom, brackets, labels, no headlights) shows the baseline a xenon conversion already needs; an adaptive conversion needs that and more. [S5, LOW]
-
-**No BMW retrofit kit for adaptive headlights was found.** Earlier research read a catalogue entry called "retrofit kit cornering light" as an adaptive-headlight kit. The later review found that it is **probably the static cornering light** (German *Abbiegelicht*, an extra lamp that lights when you indicate or steer at low speed), a different function with its own BMW installation instruction for the Compact and Coupé from March 2003. A retailer states adaptive cornering light "can only be retrofitted by replacing the main headlights and control units". [S5, S6: LOW–MEDIUM, pending a read of the kit's catalogue diagram] We do not present that kit as an adaptive retrofit.
-
-## Plain unit into an adaptive car
-
-The reverse case rests on owners' reports only, but several independent threads agree: [S4, LOW]
-
-- **It lights.**
-- The adaptive control unit **stores a stepper-motor fault**; a warning or a blinking fault LED on the light module is reported.
-- **The levelling does not work**, because the adaptive car has no direct levelling drive.
-- The reported workaround is to **code the adaptive option out** of the car, re-route the level sensors to the light module and fit the non-adaptive light module. That is a module swap plus coding, not a headlight swap.
-
-We found no BMW document on this direction at all. [S6]
+A word on BMW's own kits. The scope of BMW's **xenon** retrofit kit (sensors, loom, brackets, labels, no headlights) shows the baseline a xenon conversion already needs; an adaptive conversion needs that and more. [S5, LOW] Earlier research read a catalogue entry called "retrofit kit cornering light" as an adaptive-headlight kit. The later review found that it is **probably the static cornering light** (German *Abbiegelicht*, an extra lamp that lights statically when turning), a different function with its own BMW installation instruction for the Compact and Coupé from March 2003. A retailer states adaptive cornering light "can only be retrofitted by replacing the main headlights and control units". [S5, S6: LOW–MEDIUM, pending a read of the kit's catalogue diagram] We do not present that kit as an adaptive retrofit.
 
 ## Why this is more than a convenience problem
 
 - **Automatic levelling is mandatory** for gas-discharge (xenon) low beams in ECE markets: Regulation 48 requires the levelling device to be automatic for light sources above 2000 lumen, and headlamp cleaning likewise. [S3, MEDIUM: paragraph numbers from summaries, not read verbatim]
-- German periodic inspection (HU) guides classify **non-functioning automatic levelling on a xenon car as a significant defect** ("erheblicher Mangel"), which means a re-inspection, and a clear fail if the beam is also mis-aimed. [S3, LOW–MEDIUM: inspection guides, not the official defect catalogue]
-- The headlamp itself keeps its type approval: a swivelling headlamp at rest is still an approved headlamp. **Whether an inoperative swivel function is itself recorded at inspection is not established.** [S3, S6]
+- German periodic inspection (HU) guides classify **non-functioning automatic levelling on a xenon car as a significant defect** ("erheblicher Mangel"), which means a re-inspection, and a clear fail if the beam is also mis-aimed. The headlamp itself keeps its type approval; whether an inoperative swivel is itself recorded at inspection is not established. [S3, LOW–MEDIUM: inspection guides, not the official defect catalogue]
 
 So the risk of a wrong pair is not "it looks odd". It is a car that no longer meets a lighting requirement, with an inspection consequence that depends on your country and your inspector. Treat the inspection outcome as likely, not certain: the evidence is MEDIUM at best.
 
@@ -134,44 +118,25 @@ So the risk of a wrong pair is not "it looks odd". It is a car that no longer me
 
 1. **Watch the low beams at night while you steer.** Adaptive units turn visibly into the bend; plain units do not. This is the test the system is built around. [S2 for the function, MEDIUM]
 2. **Switch the lights on with the ignition on.** Owners report that adaptive units perform a short sweep when switched on. [S4, LOW, harmless if wrong]
-3. **Check your car's build data.** The factory option is "Adaptive Headlights", option 524; a BMW dealer can read the options a car left the factory with from its vehicle data. If it is there, your car was built adaptive. If it is not, someone may still have retrofitted it; the night test decides. [S1, HIGH for the option name and code; the dealer lookup is general knowledge, not from the evidence pack]
-4. One owner reports that the projector lens on adaptive units reads "DYNAMIC" rather than "XENON". **Uncorroborated**; do not rely on it. [S4, LOW, one thread]
 
-If your car is a Sedan, Touring or Compact, or any pre-facelift E46, this article does not apply to you: adaptive headlights were never offered on those cars. [S2, MEDIUM; S1 for the catalogue rows appearing only on facelift Coupé/Convertible diagrams, HIGH]
+If your car is a Sedan, Touring or Compact, or any pre-facelift E46, this article does not apply to you: BMW's text names the Coupé and Convertible only, and no adaptive row appears on any Sedan, Touring or Compact diagram we read. [S2, MEDIUM; S1 for the absence, MEDIUM]
 
 ## What does *not* matter
 
-- **White or amber indicator lenses.** Regulation 48 requires amber *light* from indicators, and the white-lens units reach it with an amber bulb; the Europe catalogue lists them for the Europe region, so they are approved factory parts. No technical dependency on the adaptive system. Cosmetic, pick what you like. [S3, HIGH for the amber rule; S1, HIGH for the Europe listing]
-- **TITAN or black inner trim.** Cosmetic. [S1]
-- **Ballast, igniter, bulb.** Separate parts, the same for adaptive and plain units. [S1, HIGH]
+White or amber indicator lenses, TITAN or black inner trim, and the ballast, igniter and bulb are all independent of the adaptive system. The white-lens units are listed for the Europe region, so they are type-approved and must emit amber light; how the bulb achieves that is not recorded in the catalogue. [S1, HIGH for the listing; S3, HIGH for the amber rule; bulb type NOT ESTABLISHED]
 
 ## Before you buy a pair
 
-1. **Establish what your car is**: adaptive or plain, by the night test and the build data.
-2. **Buy like for like.** Adaptive to adaptive, plain to plain. The configurator tells you which is which; on the E46 it only ever matters for the facelift Coupé and Convertible with bi-xenon.
+1. **Establish what your car is**: adaptive or plain, by the night test and, if in doubt, the car's factory option list (option 524, "Adaptive Headlights"). [S1, HIGH for the option name and code]
+2. **Buy like for like.** Adaptive to adaptive, plain to plain. On the E46 this only ever matters for the facelift Coupé and Convertible with bi-xenon.
 3. **If a seller says "fits all facelift coupés"**, that is true for the bolt holes and false for the electronics. Ask whether the unit is adaptive.
 4. **Do not plug a plain levelling connector into an adaptive unit** to "test it". One owner reports the stepper electronics did not survive. [S4, LOW]
-5. **Do not plan an adaptive retrofit around a headlight.** It is a control unit, a light module, wiring, sensors and coding, and BMW published no kit for it that we could find.
+5. **Do not plan an adaptive retrofit around a headlight.** It is a control unit, a light module, wiring, sensors and coding, and BMW published no kit for it that we could find. [S6]
 
-## Find the right headlight for your car
+The configurator does not yet separate adaptive from plain units; ask the seller.
 
-The E46 configurator shows the headlight families on your body style, matched to your production date, and links to sellers for the exact part. Headlights are live in the configurator today; how it handles the adaptive question is being decided, and this article will be updated when it changes.
+## Notes on the evidence
 
-→ [Open the E46 configurator](https://e46.zauberlabs.de)
+**Corrections and conflicts recorded.** The T-032 research read the catalogue's "retrofit kit cornering light" as an adaptive-headlight kit; T-038 finds it is probably the static cornering light, and this article follows T-038 at LOW–MEDIUM until the kit's diagram is read. A control-unit location quoted in one forum summary belongs to a later BMW model, not the E46, and is not used here.
 
-## Sources & confidence
-
-| ID | Source | Type | Confidence | Evidence file (e46build, `docs/research/`) |
-| --- | --- | --- | --- | --- |
-| S1 | BMW parts-catalogue mirrors (bmwfans.info Europe and USA; eStore-Central Europe): facelift Coupé/Convertible headlight diagrams and lighting indexes, saved 2026 | ETK mirror | **HIGH** where both mirrors agree (option nesting: adaptive rows under xenon + adaptive); **MEDIUM** for single-mirror rows (Europe adaptive = TITAN only) | `t024-t025-evidence/raw/coupe-bmwfans-330ci-coupe-headlight_2.html`, `coupe-bmwfans-E46-Coupe_USA_330Ci-M54-headlight_2.html`, `coupe-estore-330ci-coupe-Headlight-2.html`, `coupe-bmwfans-330ci-lighting.html`; `t024-partc-evidence/headlight-table.md` |
-| S2 | BMW Technical Training ST052 "E46 Lighting Systems" and a BMW system description of Adaptive Headlights, reproduced by a third-party site | BMW-authored via reproduction / search summary | **MEDIUM** (neither the PDF nor the page could be opened) | `t038-akl-interchangeability/evidence.md` §2.1–2.2 |
-| S3 | UNECE Regulation 48 (automatic levelling for gas-discharge low beam; amber indicators); German HU inspection guides | regulation via summaries; inspection guides | **HIGH** amber rule; **MEDIUM** levelling requirement; **LOW–MEDIUM** HU defect class | `t038-akl-interchangeability/evidence.md` §4 |
-| S4 | Owner forum threads (e46fanatics, bimmerfest, e46zone) on retrofits and mismatches | forum, search summaries, concordant | **LOW**, never decides alone | `t038-akl-interchangeability/evidence.md` §3 |
-| S5 | Retailer listings: BMW installation-instruction collection; parts-dealer listings of BMW retrofit kits | retailer | **LOW** | `t038-akl-interchangeability/evidence.md` §2.3–2.4 |
-| S6 | T-038 report and evidence (2026-10-01); T-032 follow-ups Q2 (2026-10-01) | internal synthesis | n/a | `t038-akl-interchangeability/REPORT.md`, `evidence.md`; `t032-evidence/T-032-findings.md` |
-
-**Recorded corrections and conflicts.** (1) The T-032 research read the catalogue's "retrofit kit cornering light" as an adaptive-headlight kit; T-038 finds it is probably the static cornering light. This article follows T-038 and marks it LOW–MEDIUM until the kit's diagram is read. (2) A control-unit location quoted in one forum summary belongs to a later BMW model, not the E46, and is not used here.
-
-**Not established (open).** The adaptive-specific catalogue diagram and its parts; the adaptive control unit's catalogue entry; the verbatim Regulation 48 paragraphs on levelling and bend lighting; whether an inoperative swivel is itself an inspection item; the exact contents of the "cornering light" kit; the connector pin-out (needs BMW wiring diagrams).
-
-**Method note.** BMW's own catalogue, training PDF and workshop system were not reachable from the research environment; the catalogue was read through saved mirror pages, the BMW training text only through summaries of a reproduction. That is why the levelling mechanism is MEDIUM and not HIGH, and why the inspection consequence is worded as likely rather than certain. Part numbers are deliberately left out of this article. For the exact part for your car, use the configurator.
+**Not established (open).** The adaptive-specific catalogue diagram and its parts; the adaptive control unit's catalogue entry; the verbatim Regulation 48 paragraphs on levelling and bend lighting; whether an inoperative swivel is itself an inspection item; the exact contents of the "cornering light" kit; the connector pin-out; the indicator bulb type. BMW's own catalogue, training PDF and workshop system were not reachable from the research environment, which is why the levelling mechanism is MEDIUM and the inspection consequence is worded as likely rather than certain.
