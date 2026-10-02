@@ -11,11 +11,14 @@ export default function PostCard({ lang, item, featured = false }: { lang: Local
   const href = `/${lang}/blog/${post.slug}`;
   const langNote = fallback ? (post.lang === "en" ? t.englishOnly : t.germanOnly) : null;
   const hero = { ...post.meta.hero, credit: null, licence: null }; // credit is shown on the article, not on cards
+  const hasImage = Boolean(hero.src); // no image → no image area at all (PO decision 2026-10-02)
   return (
-    <article className={`group flex flex-col overflow-hidden rounded-3xl border border-line bg-paper ${featured ? "md:grid md:grid-cols-2" : ""}`}>
-      <Link href={href} className="block" tabIndex={-1} aria-hidden="true">
-        <HeroImage hero={hero} lang={lang} priority={featured} sizes={featured ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"} className="[&>div]:rounded-none [&>div]:rounded-t-3xl md:[&>div]:h-full" />
-      </Link>
+    <article className={`group flex flex-col overflow-hidden rounded-3xl border border-line bg-paper ${featured && hasImage ? "md:grid md:grid-cols-2" : ""}`}>
+      {hasImage && (
+        <Link href={href} className="block" tabIndex={-1} aria-hidden="true">
+          <HeroImage hero={hero} lang={lang} priority={featured} sizes={featured ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"} className="[&>div]:rounded-none [&>div]:rounded-t-3xl md:[&>div]:h-full" />
+        </Link>
+      )}
       <div className={`flex flex-1 flex-col gap-4 p-6 ${featured ? "md:p-9" : ""}`}>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] tracking-[0.1em] text-muted uppercase">
           <time dateTime={post.meta.date}>{formatDate(post.meta.date, lang)}</time>
