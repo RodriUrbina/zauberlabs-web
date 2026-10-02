@@ -6,8 +6,8 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * ─── FILL IN BEFORE PUBLISHING ────────────────────────────────────────────
  * Replace every [PLACEHOLDER]. Written for what this site actually does today:
  * Vercel hosting, self-hosted fonts, Upstash Redis for votes/suggestions, one
- * vote cookie, no analytics, no tracking, no newsletter tool.
- * If you add analytics, a newsletter tool, embeds or ads, this page must be updated.
+ * vote cookie, cookieless Vercel Web Analytics (Abschnitt 5, BL-008), no other tracking, no newsletter tool.
+ * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
 const C = {
@@ -38,8 +38,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
 
       <h2>2. Überblick</h2>
       <p>
-        Wir verarbeiten personenbezogene Daten nur, soweit es für den Betrieb dieser Website und ihrer Funktionen nötig ist. Wir setzen keine
-        Analyse-, Tracking- oder Werbe-Tools ein und verkaufen keine Daten.
+        Wir verarbeiten personenbezogene Daten nur, soweit es für den Betrieb dieser Website und ihrer Funktionen nötig ist. Zur Reichweitenmessung
+        nutzen wir ausschließlich Vercel Web Analytics, das ohne Cookies arbeitet (Abschnitt 5). Darüber hinaus setzen wir keine Tracking- oder
+        Werbe-Tools ein und verkaufen keine Daten.
       </p>
 
       <h2>3. Hosting und Server-Logfiles</h2>
@@ -58,7 +59,25 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <h2>4. Schriftarten</h2>
       <p>Alle Schriftarten werden lokal von unserem Server ausgeliefert. Es findet keine Verbindung zu Servern von Google oder anderen Drittanbietern statt.</p>
 
-      <h2>5. Community-Voting</h2>
+      {/* BL-008 — wording drafted from https://vercel.com/docs/analytics/privacy-policy (version of 2026-06-26): no cookies,
+          visitors grouped by a hash built from the request and discarded after 24 h, aggregated data only, no cross-site tracking. */}
+      <h2>5. Reichweitenmessung (Vercel Web Analytics)</h2>
+      <p>
+        Um zu verstehen, welche Seiten gelesen werden, nutzen wir Vercel Web Analytics, einen Dienst der Vercel Inc. (USA), die auch unsere Website
+        hostet. Der Dienst arbeitet ohne Cookies und speichert nichts auf deinem Gerät. Bei jedem Seitenaufruf werden erfasst: Zeitpunkt, aufgerufene
+        Seite und verweisende Seite (Referrer), gekürzte URL-Parameter, ungefährer Standort (Land, Region, Stadt), Betriebssystem, Browser und
+        Gerätetyp (Desktop, Tablet oder Mobil). Mehrere Aufrufe desselben Besuchs werden über einen aus der Anfrage gebildeten Hash-Wert
+        zusammengefasst, der nach 24 Stunden verworfen wird; deine IP-Adresse wird dabei nicht gespeichert, und eine Wiedererkennung über andere
+        Websites hinweg oder eine Zuordnung zu deiner Person ist nicht möglich. Wir sehen ausschließlich zusammengefasste Statistiken.
+      </p>
+      <p>
+        Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse, die Nutzung unserer Website zu verstehen und sie zu verbessern). Da
+        weder Cookies gesetzt noch Informationen auf deinem Endgerät gespeichert oder ausgelesen werden, ist dafür keine Einwilligung nach § 25 TDDDG
+        erforderlich. Es gilt der mit Vercel geschlossene Vertrag zur Auftragsverarbeitung (siehe Abschnitt 3). Weitere Informationen:
+        https://vercel.com/docs/analytics/privacy-policy
+      </p>
+
+      <h2>6. Community-Voting</h2>
       <p>
         Du kannst abstimmen, welches Auto wir als Nächstes umsetzen. Damit jede Person pro Auto nur einmal abstimmen kann, setzen wir beim
         Abstimmen ein Cookie namens „zl_vid“ mit einer zufälligen Kennung (Speicherdauer: 12 Monate). Es enthält keine Angaben zu deiner Person
@@ -73,7 +92,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Art. 6 Abs. 1 lit. f DSGVO.
       </p>
 
-      <h2>6. Autovorschläge</h2>
+      <h2>7. Autovorschläge</h2>
       <p>
         Wenn du uns über das Formular ein Auto vorschlägst, speichern wir deinen Text und – nur falls du sie angibst – deine E-Mail-Adresse, um
         dich zu informieren, wenn wir dieses Auto umsetzen. Zusammen mit dem Vorschlag speichern wir außerdem die Sprache der Seite (Deutsch oder
@@ -86,26 +105,26 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Bezug zu deiner Person und niemals zusammen mit deiner E-Mail-Adresse.
       </p>
 
-      <h2>7. Datenbank-Dienstleister</h2>
+      <h2>8. Datenbank-Dienstleister</h2>
       <p>
         Abstimmungen und Vorschläge werden bei Upstash, Inc. (USA) in einem Rechenzentrum in Frankfurt am Main gespeichert. Mit Upstash besteht
         ein Vertrag zur Auftragsverarbeitung; soweit ein Zugriff aus den USA möglich ist, erfolgt er auf Grundlage der EU-Standardvertragsklauseln.
         Weitere Informationen: https://upstash.com
       </p>
 
-      <h2>8. Kontakt per E-Mail</h2>
+      <h2>9. Kontakt per E-Mail</h2>
       <p>
         Wenn du uns per E-Mail kontaktierst, verarbeiten wir deine Angaben zur Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. b bzw. f DSGVO)
         und löschen sie, sobald sie nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten bestehen.
       </p>
 
-      <h2>9. Externe Links</h2>
+      <h2>10. Externe Links</h2>
       <p>
         Unsere Konfiguratoren verlinken auf externe Händler und Plattformen. Erst wenn du einen solchen Link anklickst, verlässt du unsere
         Website; ab dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
       </p>
 
-      <h2>10. Deine Rechte</h2>
+      <h2>11. Deine Rechte</h2>
       <p>
         Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
         Datenübertragbarkeit (Art. 20) sowie auf Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21). Eine erteilte
@@ -115,7 +134,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, zum Beispiel bei: {C.authority}.
       </p>
 
-      <h2>11. Aktualität</h2>
+      <h2>12. Aktualität</h2>
       <p>Stand: {C.updated}. Wir passen diese Erklärung an, wenn sich unsere Website oder die Rechtslage ändert.</p>
     </LegalPage>
   );
