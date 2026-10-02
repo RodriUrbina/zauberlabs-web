@@ -7,6 +7,7 @@ import rehypeSlug from "rehype-slug";
 import remarkCite from "@/lib/remark-cite";
 import { blogUrl, feedUrl, formatDate, getBlog, postUrl, SITE_URL, tagSlug } from "@/lib/blog";
 import { formatPublishMoment } from "@/lib/publish-time";
+import { articleOgImage } from "@/lib/blog-og";
 import { dictionaries, isLocale, LOCALES, type Locale } from "@/lib/i18n";
 import BlogHeader from "@/components/blog/BlogHeader";
 import ConfiguratorCta from "@/components/blog/ConfiguratorCta";
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const canonical = m.canonical ?? postUrl(fallback ? post.lang : lang, slug);
   const languages: Record<string, string> = Object.fromEntries(available.map((l) => [l, postUrl(l, slug)]));
   languages["x-default"] = postUrl(available.includes("en") ? "en" : available[0], slug);
-  const image = m.hero.src ?? "/images/hero.jpg";
+  const og = articleOgImage(m.hero, lang); // site hero + site alt when the article has no image (BL-005)
   return {
     metadataBase: new URL(SITE_URL),
     title: `${m.title} — Zauberlabs`,
@@ -60,9 +61,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       modifiedTime: m.updated ?? m.date,
       authors: [m.author],
       tags: m.tags,
-      images: [{ url: image, alt: m.hero.alt }],
+      images: [{ url: og.url, alt: og.alt }],
     },
-    twitter: { card: "summary_large_image", title: m.title, description: m.description, images: [image] },
+    twitter: { card: "summary_large_image", title: m.title, description: m.description, images: [{ url: og.url, alt: og.alt }] },
   };
 }
 
@@ -82,7 +83,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
     options: { mdxOptions: { remarkPlugins: [remarkGfm, remarkCite], rehypePlugins: [rehypeSlug] } },
   });
 
-  const image = m.hero.src ? `${SITE_URL}${m.hero.src}` : `${SITE_URL}/images/hero.jpg`;
+  const image = articleOgImage(m.hero, lang).url;
 
   return (
     <div className="min-h-screen">
