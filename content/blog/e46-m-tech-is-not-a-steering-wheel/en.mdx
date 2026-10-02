@@ -33,7 +33,7 @@ sources:
     type: ETK mirror (catalogue-grade, one mirror, no stated data version)
     path: "t027-evidence/raw/estore-bumper-matrix.md; t027-evidence/raw/estore-bumper-groups.json; t027-evidence/raw/estore-sedan-330i-vehicle-trim.html"
     confidence: MEDIUM
-    note: "Group names carry the option codes (SA715, SA716) and the index names an 'M Aerodynamics package'; the mirror shows no dates and no marketing names for the two packages."
+    note: "Group names carry the option codes (SA715, SA716) and the index names an 'Aerodynamics Package'; the mirror shows no dates and no marketing names for the two packages."
   - id: S2
     title: "BMW parts-catalogue mirror (eStore-Central): steering-wheel groups for all E46 body styles, fetched 2026-10-01"
     type: ETK mirror (catalogue-grade, one mirror)
@@ -58,37 +58,43 @@ sources:
     path: "t027-evidence/T-027-findings.md; t029-evidence/T-029-findings.md (attributed in the text)"
     confidence: LOW
     note: "Never decides. Used only to document what the forum names refer to."
+  - id: S7
+    title: "BMW Parts and Accessories Installation Instructions — Multi-functional steering wheel (MFL) retrofit kit / Cruise control (GRA), EBA no. 01 29 0 016 107, dated 11.2001"
+    type: BMW-authored; full text read; hosted on a third-party mirror (bmw.etk.club), PDF not archived
+    path: "t029-evidence/raw/bmw-eba-284-mfl-retrofit-kit.txt"
+    confidence: HIGH
+    note: "HIGH for what the document states; cited here for the pairing of the multifunction steering wheel with cruise control in one kit."
   - id: S6
     title: "T-027 bumper findings and T-029 steering-wheel findings (2026-10-01)"
-    type: internal synthesis of S1–S5
+    type: internal synthesis of S1–S5, S7
     path: "t027-evidence/T-027-findings.md; t029-evidence/T-029-findings.md"
     confidence: n/a
     note: "The grading of every claim in the body follows these files."
 ---
 
-Search for an E46 steering wheel and you will be offered an "M-Tech", an "M-Tech 2", an "M-Sport" and a "ZHP wheel". Search for a bumper and you will find "M-Tech I", "M-Tech II" and "M3 look". None of these words is in BMW's parts catalogue. That is not pedantry: the catalogue names are the ones that decide what fits, and the forum names blur exactly the distinctions that matter. This glossary pairs each common name with what BMW's catalogue and press material actually call the thing, and says how sure we are.
+Search for an E46 steering wheel and you will be offered an "M-Tech", an "M-Tech 2" and an "M-Sport". Search for a bumper and you will find "M-Tech I", "M-Tech II" and "M3 look". None of these words is in BMW's parts catalogue. That is not pedantry: the catalogue names are the ones that decide what fits, and the forum names blur exactly the distinctions that matter. This glossary pairs each common name with what BMW's catalogue and press material actually call the thing, and says how sure we are.
 
 ## The glossary
 
 | What people say | What BMW calls it | Where the name comes from | Confidence |
 | --- | --- | --- | --- |
-| "M-Tech", "M-Tech I", "M-Tech II" (bumpers) | **M Aerodynamics package**; catalogue groups "M trim panel bumper front / rear" under option codes **715** and **716** | catalogue index and group names [S1] | MEDIUM that the two packages exist and carry these codes; which one is "I" and which "II" is forum usage [S5, LOW] |
+| "M-Tech", "M-Tech I", "M-Tech II" (bumpers) | **Aerodynamics Package** in the catalogue index; the groups under it are "M trim panel bumper front / rear" with option codes **715** and **716** | catalogue index and group names [S1] | MEDIUM that the two packages exist and carry these codes; which one is "I" and which "II" is forum usage [S5, LOW] |
 | "M-Tech" (steering wheel) | **M sports steering wheel** (leather or Alcantara, with or without multifunction buttons) | catalogue row names [S2] | MEDIUM; "M-Tech" as a wheel name does not occur in the catalogue |
 | "M-Tech 2" (steering wheel) | no catalogue equivalent found; the catalogue shows no second generation of the M sports wheel | absence in the catalogue [S2]; forum usage [S5] | MEDIUM for the absence; LOW for what forums mean by it |
 | "Sport wheel", "three-spoke" | **Sports steering wheel**, leather; option code **255**; with multifunction buttons, **256** | catalogue group labels [S2] | MEDIUM that the codes exist, LOW for what each means |
 | "Standard wheel", "four-spoke" | **Steering wheel, leather** (four-spoke), option code **240** | catalogue [S2] | MEDIUM |
 | "SMG wheel", "paddle wheel" | **Sports steering wheel for sequential gearbox**; M version on the M3; option code **206**; the gearbox is the **Sequential Sports Gearbox (SSG)**, on the M3 **SMG** | catalogue [S2]; BMW press [S3] | MEDIUM (wheels) / HIGH (gearbox name) |
-| "MFL", "buttons" | **Multifunction steering wheel**; BMW's retrofit document pairs it with **cruise control (GRA)** | catalogue and BMW installation instruction [S2, S6] | MEDIUM / HIGH |
+| "MFL", "buttons" | **Multifunction steering wheel**; BMW's retrofit document pairs it with **cruise control (GRA)** | catalogue and BMW installation instruction [S2, MEDIUM; S7, HIGH] | MEDIUM / HIGH |
 | "M3 bumper" | M3 **front bumper trim panel** and **rear bumper trim**, with a separate rear version for cars with park distance control; the M3 CSL has its own painted front | catalogue [S1] | MEDIUM |
 | "Xenons" | **Xenon Light**, option code **522**; the units are "headlight xenon" (single) before the changeover and "bi-xenon headlight" after | catalogue option header [S4]; BMW press [S3] | HIGH |
 | "Adaptive", "cornering lights", "AKL" | **Adaptive Headlights**, option code **524**; catalogue rows "bi-xenon headlight AKL" | catalogue option header [S4] | HIGH |
 | "Clear indicators", "white corners" | **White direction indicator lights**, option code **785** (facelift Coupé/Convertible) | catalogue option header [S4] | HIGH |
-| "Facelift", "pre-facelift" | no catalogue word; the catalogue splits parts by **production date**: "up to 09/2001" and "from 09/2001" (Sedan, Touring), "from 03/2003" (Coupé, Convertible) | catalogue group names [S1, S4] | MEDIUM for the dates (one mirror prints them) |
+| "Facelift", "pre-facelift" | the catalogue does not group parts by "facelift"; it splits them by **production date**: "up to 09/2001" and "from 09/2001" (Sedan, Touring), "from 03/2003" (Coupé, Convertible) | catalogue group names [S1, S4] | MEDIUM for the dates (one mirror prints them) |
 | "TITAN" | a catalogue suffix on headlight rows, **not defined by the catalogue** | catalogue [S4] | reading as inner-trim finish is unconfirmed |
 
 ## Bumpers: "M-Tech" is a package of covers
 
-The E46 catalogue lists bumper covers in named groups, and the names are plain: "front bumper trim panel up to 09/2001", "front bumper trim panel from 09/2001", and for the M look "M trim panel bumper front SA715" and "M trim panel bumper front SA716", each with a matching rear group. [S1, MEDIUM] The vehicle index that leads to those groups names the option an **M Aerodynamics package**. [S1, MEDIUM] So "M-Tech" is the common shorthand for BMW's M Aerodynamics bumper packages, of which there are two, under two option codes.
+The E46 catalogue lists bumper covers in named groups, and the names are plain: "front bumper trim panel up to 09/2001", "front bumper trim panel from 09/2001", and for the M look "M trim panel bumper front SA715" and "M trim panel bumper front SA716", each with a matching rear group. [S1, MEDIUM] The vehicle index that leads to those groups names the option an **Aerodynamics Package**; the "M" is in the group names. [S1, MEDIUM] So "M-Tech" is the common shorthand for BMW's Aerodynamics bumper packages with M trim panels, of which there are two, under two option codes.
 
 What the catalogue does **not** say is which code is the one owners call "M-Tech I" and which "M-Tech II". The mirror shows no dates and no marketing names for the two, and the one search result that offered a mapping was returning results for a different BMW model and was discarded. [S5, LOW; S6] If a seller says "M-Tech II front", ask which option code or which part family they mean; the two families are different parts and are not interchangeable by number. [S1, MEDIUM]
 
@@ -100,9 +106,9 @@ Because the catalogue lists the M package covers against ordinary Sedans, Tourin
 
 The catalogue's steering-wheel groups use two words for the two three-spoke wheels: **sports steering wheel** (leather, in many trim-cover colours and wood-rim versions) and **M sports steering wheel** (leather or Alcantara). Each exists with and without multifunction buttons, and the groups carry the "Individual equipment" labels with option codes 255 and 256 for the sports wheel and 710 for the M sports wheel. [S2, MEDIUM that the codes exist in the labels; LOW for what each means, because the mapping also rests on an enthusiast list] The standard four-spoke wheel is just "steering wheel, leather", code 240, and appears on Sedan, Touring and Compact only. [S2, MEDIUM; absence on the other bodies is absence in one mirror]
 
-"**M-Tech**" appears nowhere in these groups. The wheel the forums call M-Tech is, in BMW's words, an M sports steering wheel. "**M-Tech 2**" has no catalogue counterpart either: the research found no second generation of the M sports wheel, only the one family in leather and Alcantara, so whatever the forums mean by it (owners describe thumb rests and a thicker rim) is a distinction the catalogue does not make. [S2, MEDIUM for the absence; S5, LOW for the forum meaning] "**ZHP**" is a US-market performance-package code; the wheel differences attributed to it are forum-level and unverified. [S5, LOW]
+"**M-Tech**" appears nowhere in these groups. The wheel the forums call M-Tech is, in BMW's words, an M sports steering wheel. "**M-Tech 2**" has no catalogue counterpart either: the research found no second generation of the M sports wheel, only the one family in leather and Alcantara, so whatever the forums mean by it (owners describe thumb rests and a thicker rim) is a distinction the catalogue does not make. [S2, MEDIUM for the absence; S5, LOW for the forum meaning]
 
-BMW's own press kit for the 2001 facelift uses the same vocabulary: "leather rim sports steering wheel" as standard on the 318i Saloon, "sports multi-function steering wheel" and "cruise control" on the SE. [S3, HIGH for the UK, model year 2002] Note the pairing: BMW's retrofit instruction treats the **multifunction steering wheel** and **cruise control** as one kit, which is why "MFL" and "cruise" wheels are the same thing in the catalogue. [S6, HIGH for the instruction]
+BMW's own press kit for the 2001 facelift uses the same vocabulary: "leather rim sports steering wheel" as standard on the 318i Saloon, "sports multi-function steering wheel" and "cruise control" on the 318i SE. [S3, HIGH for the UK, model year 2002] Note the pairing: BMW's retrofit instruction treats the **multifunction steering wheel** and **cruise control** as one kit, which is why "MFL" and "cruise" wheels are the same thing in the catalogue. [S7, HIGH; S2, MEDIUM]
 
 The **paddle wheel** has a proper name too: "sports steering wheel, leather, for sequential gearbox", code 206, with M versions on the M3. The gearbox it belongs to is the **Sequential Sports Gearbox (SSG)** in BMW's 2001 press material, "with paddles behind the steering wheel"; the M3's is the **SMG**. [S2, MEDIUM; S3, HIGH] Calling it an "SMG wheel" on a 330i is harmless; expecting it to work without the gearbox is not, and that is covered in the steering-wheel article.
 
@@ -110,7 +116,7 @@ The **paddle wheel** has a proper name too: "sports steering wheel, leather, for
 
 Headlights are the one area where the forum names map cleanly onto BMW's, because BMW's names are printed as option headers on the catalogue diagrams. On the facelift Coupé and Convertible diagrams, both mirrors print **Xenon Light** (522), **Adaptive Headlights** (524) and **White direction indicator lights** (785) as the conditions above the rows. [S4, HIGH] "Xenons" is option 522; "adaptive" or "AKL" is 524 and only exists together with 522; "clear indicators" are 785. [S4, HIGH]
 
-Two words to be careful with. "**Facelift**" is not a catalogue term: the catalogue groups parts by production date, and the dates differ by body, which is why a 2001 car is the hard case for headlights and bumpers alike. [S1, S4, MEDIUM for the dates] "**TITAN**" is a catalogue suffix the catalogue never defines; the reading as a titanium-coloured inner trim is unconfirmed. [S4]
+Two words to be careful with. "**Facelift**" is not how the catalogue groups parts: it splits them by production date, and the dates differ by body, which is why a 2001 car is the hard case for headlights and bumpers alike. [S1, S4, MEDIUM for the dates] "**TITAN**" is a catalogue suffix the catalogue never defines; the reading as a titanium-coloured inner trim is unconfirmed. [S4]
 
 ## Why the names cost money
 
@@ -123,7 +129,7 @@ Two words to be careful with. "**Facelift**" is not a catalogue term: the catalo
 
 **Conflicts recorded.** (1) The marketing names and years of option codes 715 and 716 are not in the mirror; a search summary offering a mapping returned results for another BMW model and was discarded. (2) "M-Tech" as a steering-wheel name exists in forums and in early configurator labels, not in the catalogue. (3) The option-code meanings for steering wheels rest on the catalogue labels plus an enthusiast list; the codes' existence is MEDIUM, their meaning LOW.
 
-**Not established (open).** Which M Aerodynamics package is "I" and which "II", and their years; whether the Coupé/Convertible M front cover belongs to either code; the exact content of the ZHP package; any second generation of the M sports steering wheel; the meaning of TITAN. The catalogue was read through one mirror with no data version, which caps its facts at MEDIUM.
+**Not established (open).** Which M Aerodynamics package is "I" and which "II", and their years; whether the Coupé/Convertible M front cover belongs to either code; any second generation of the M sports steering wheel; the meaning of TITAN. The catalogue was read through one mirror with no data version, which caps its facts at MEDIUM.
 
 ## What comes next
 
