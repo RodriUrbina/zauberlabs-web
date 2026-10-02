@@ -74,6 +74,56 @@ describe("front matter schema", () => {
     assert.equal(fm.sources[0].label, "BMW EBA");
   });
 
+  // Real source blocks from the Writer's drafts after the Editor's review (one grade per source, split in `note`).
+  const realSources = [
+    {
+      // BL-021 S3 (was "MEDIUM-HIGH")
+      id: "S3",
+      title: "T-032 research follow-ups Q3/Q4 — Compact and diesels in the US; halogen as base. Includes BMW Group Classic model pages (production dates, silent on market), BMW press kits MY2002 (xenon as an option, Sedan/Touring), Wikipedia 'BMW 3 Series Compact' (not sold in North America)",
+      type: "mixed (BMW-authored, encyclopaedia, ETK mirror)",
+      path: "t032-evidence/T-032-findings.md; t032-evidence/raw/bmwfans-usa-catalogue-extract.md; t032-evidence/raw/bmw-press-uk-2001-3series-page.html; t032-evidence/raw/bmw-press-us-my2002-3series-page.html",
+      confidence: "MEDIUM",
+      note: "Market statement rests on the mirror plus an encyclopaedia (MEDIUM); BMW-authored pages give production dates (HIGH) but say nothing about market.",
+    },
+    {
+      // BL-011 S1 (was "HIGH / MEDIUM")
+      id: "S1",
+      title: "T-024 part c — Coupé/Convertible headlight table from the saved BMW parts-catalogue mirror pages (bmwfans.info USA and Europe trees incl. month views; eStore-Central Europe diagrams; part pages)",
+      type: "ETK mirror (catalogue-grade), two mirrors for Europe",
+      path: "t024-partc-evidence/headlight-table.md; t024-partc-evidence/REPORT.md; t024-t025-evidence/raw/coupe-*.html",
+      confidence: "HIGH",
+      note: "Europe numbers and era grouping HIGH (both mirrors); every date MEDIUM (only one mirror prints dates); US numbers MEDIUM (one mirror). The 03/2003 cut-over month is HIGH via the front bumper evidence of the same pack.",
+    },
+    {
+      // BL-011 S2 (was "HIGH / MEDIUM")
+      id: "S2",
+      title: "T-030 — Sedan/Touring headlight numbers per band, US vs Europe (bmwfans.info USA and Europe trees, month views, part pages; eStore-Central Europe)",
+      type: "ETK mirror (catalogue-grade), two mirrors for Europe",
+      path: "t030-evidence/sedan-touring-markets.json; t030-evidence/raw/st-*.html",
+      confidence: "HIGH",
+      note: "Europe LHD rows HIGH (both mirrors); US rows MEDIUM; dates MEDIUM (one mirror).",
+    },
+  ];
+
+  test("accepts the Writer's real source blocks (one grade per source, split in note)", () => {
+    const fm = parseFrontMatter({ ...base, sources: realSources }, "x");
+    assert.deepEqual(
+      fm.sources.map((s) => [s.id, s.confidence]),
+      [
+        ["S3", "MEDIUM"],
+        ["S1", "HIGH"],
+        ["S2", "HIGH"],
+      ]
+    );
+    assert.ok(fm.sources[0].note?.includes("(HIGH)"));
+  });
+
+  for (const compound of ["MEDIUM-HIGH", "HIGH / MEDIUM", "LOW–MEDIUM"]) {
+    test(`rejects the compound grade "${compound}" (schema stays strict: one grade per source)`, () => {
+      assert.throws(() => parseFrontMatter({ ...base, sources: [{ ...realSources[0], confidence: compound }] }, "file.mdx"), /confidence must be HIGH, MEDIUM, LOW or n\/a/);
+    });
+  }
+
   test("normalises YAML Date objects to YYYY-MM-DD", () => {
     const fm = parseFrontMatter({ ...base, date: new Date("2026-05-06T00:00:00Z") }, "x");
     assert.equal(fm.date, "2026-05-06");

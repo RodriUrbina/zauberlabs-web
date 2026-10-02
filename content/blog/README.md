@@ -55,6 +55,8 @@ draft: true                        # optional, default false
 
 HIGH / MEDIUM / LOW follow the e46build evidence index (`docs/research/research-evidence-index.md`): **HIGH** = a BMW-authored document read in full, or two independent catalogue mirrors agreeing at part-number and date level; **MEDIUM** = one catalogue mirror; **LOW** = non-catalogue source only; **n/a** = an internal synthesis. The site shows **one legend** under every Sources box (`lib/confidence-legend.ts`, PO decision 2026-10-02). **Do not write a legend in the article.**
 
+`confidence` is **one grade per source** (HIGH, MEDIUM, LOW or n/a); when a source is stronger for some facts than others, write one grade and explain the split in `note`. Compound grades such as `MEDIUM-HIGH` or `HIGH / MEDIUM` fail the build.
+
 ## Body
 
 Plain Markdown (headings from `##` down, lists, tables, links, bold, quotes). Keep part numbers out of the body; link to the configurator instead.
@@ -66,6 +68,8 @@ BMW's instruction applies from June 1999. [S1, HIGH]
 The exact month is disputed. [S1, HIGH that the document says so; S4, LOW]
 Paddles need the gearbox. [S2, S4]   or   [S5, open item]
 ```
+
+Text after a `;` without a source id is kept as a caveat on the preceding chip (`[S1, HIGH for the scope; the month itself MEDIUM]` → chip "S1 · HIGH", caveat "for the scope; the month itself MEDIUM"). A compound grade inline (`LOW–MEDIUM`) shows the lower grade on the chip and keeps the full wording as the caveat. A leading colon after the grade is fine (`[S1, HIGH: both mirrors]`).
 
 Optional building blocks (nothing else is available):
 

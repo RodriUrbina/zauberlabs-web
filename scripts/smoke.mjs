@@ -13,6 +13,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 const PORT = Number(process.env.SMOKE_PORT ?? 3010);
+// Run the Next binary directly (not through npx) so the process we kill IS the server, not a wrapper around it.
+const NEXT_BIN = path.join(process.cwd(), "node_modules", "next", "dist", "bin", "next");
 const BASE = `http://127.0.0.1:${PORT}`;
 const env = { ...process.env, BLOG_SHOW_DRAFTS: "1", NEXT_TELEMETRY_DISABLED: "1" };
 
@@ -29,17 +31,20 @@ await assertPortFree(PORT);
 
 if (!process.env.SMOKE_SKIP_BUILD) {
   console.log("▶ next build");
-  await run("npx", ["next", "build"]);
+  await run(process.execPath, [NEXT_BIN, "build"]);
 }
 
 console.log(`▶ next start -p ${PORT}`);
-const server = spawn("npx", ["next", "start", "-p", String(PORT)], { env, stdio: ["ignore", "pipe", "pipe"] });
+const server = spawn(process.execPath, [NEXT_BIN, "start", "-p", String(PORT)], { env, stdio: ["ignore", "pipe", "pipe"] });
 let serverLog = "";
 server.stdout.on("data", (d) => (serverLog += d));
 server.stderr.on("data", (d) => (serverLog += d));
 const stop = () => {
   if (!server.killed) server.kill("SIGTERM");
 };
+server.on("exit", () => {
+  /* server gone */
+});
 process.on("exit", stop);
 process.on("SIGINT", () => {
   stop();
