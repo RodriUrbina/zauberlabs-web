@@ -1,0 +1,153 @@
+---
+# BL-012 — Writer draft, English. Body is plain Markdown (no JSX).
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "US vs European E46 headlights: every part number differs"
+description: "Every US-market E46 headlight has a different catalogue number from its European twin, and some units exist in one market only. What an imported car needs."
+date: 2026-10-02
+updated: 2026-10-10
+publishAt: "2026-10-10"
+lang: en
+slug: e46-us-vs-european-headlights
+card: BL-012
+author: "Zauberlabs"
+tags:
+  - E46
+  - headlights
+  - imports
+  - US market
+  - BMW
+configurator: E46
+cta:
+  label: "E46 configurator: coming soon"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts; layout shows "coming soon" until the configurator opens
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "Two BMW E46 Sedan headlight units side by side on a bench, one with an amber side-marker section, one without"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: two E46 Sedan headlight units side by side on a neutral bench, one with an amber side-marker lens section, one plain; soft light. Must not show: readable part numbers or labels, legible BMW roundel, a person."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-030 — Sedan/Touring headlight numbers per production band, US vs mainland Europe (bmwfans.info USA and Europe trees, month views, part pages; eStore-Central Europe)"
+    type: ETK mirror, two mirrors for Europe
+    path: "t030-evidence/sedan-touring-markets.json; t030-evidence/raw/st-*.html"
+    confidence: HIGH
+    note: "HIGH for the Europe LHD rows (two mirrors agree); MEDIUM for the US rows (one mirror carries a US catalogue) and for every date. The US numbers appear in no Europe tree on either mirror."
+  - id: S2
+    title: "T-024 part c — Coupé/Convertible headlight table, US and Europe LHD columns per band, incl. TITAN, white-indicator and adaptive variants"
+    type: ETK mirror, two mirrors for Europe
+    path: "t024-partc-evidence/headlight-table.md; t024-partc-evidence/REPORT.md"
+    confidence: HIGH
+    note: "HIGH for Europe numbers and era grouping; MEDIUM for US numbers and all dates. 'None on the US diagrams' statements are absence in one mirror (MEDIUM)."
+  - id: S3
+    title: "T-032 Q3 — US-region model lists (bmwfans.info) and BMW USA press information: no E46 diesel and no Compact in the US; BMW's US diesel introduction with the 2009 335d"
+    type: ETK mirror; BMW-authored; encyclopaedia
+    path: "t032-evidence/T-032-findings.md; t032-evidence/raw/bmwfans-usa-catalogue-extract.md; t032-evidence/raw/bmw-press-us-2009-3series-335d-page.html"
+    confidence: MEDIUM
+    note: "Mirror absence plus a BMW press statement (HIGH for the 2009 diesel introduction, which does not name the E46) plus an encyclopaedia entry for the Compact. The US Touring list contains a 323i the US never sold: US lists are evidence of absence only."
+  - id: S4
+    title: "T-039 supersession table — US and Europe chains run in parallel with different numbers; US chains printed, Europe Coupé chains inferred"
+    type: ETK mirror part pages
+    path: "t039-supersession-map/supersession-table.md"
+    confidence: MEDIUM
+    note: "Used only for the statement that both markets renumbered in step (1999, 2001, 2004) with separate numbers."
+  - id: S5
+    title: "T-027 — bumper impact carriers tagged '4 km/h' and '8 km/h = 5 mph' on every body (the US bumper standard); T-038 — adaptive units in the US without TITAN"
+    type: ETK mirror (one mirror)
+    path: "t027-evidence/T-027-findings.md; t038-akl-interchangeability/evidence.md §1"
+    confidence: MEDIUM
+    note: "Carrier market reading is an inference (the mirror does not name the market). Used for the 'what else differs on an import' aside."
+  - id: S6
+    title: "Owner-forum statements on US vs European E46 front ends (side-marker reflectors, headlight-washer openings)"
+    type: forum (search summaries)
+    path: "t027-evidence/T-027-findings.md (attributed in the text)"
+    confidence: LOW
+    note: "Never decides. Shown only as owners' claims about visible differences."
+  - id: S7
+    title: "T-035.1 — factory wheel applicability by market: all nine modelled wheel part numbers identical in the US and Europe trees; only the lists of cars differ"
+    type: ETK mirror
+    path: "t035-evidence/REPORT.md"
+    confidence: MEDIUM
+    note: "Used only for the aside that wheels carry identical numbers in both markets."
+---
+
+An E46 built for the United States and one built for Germany left the same factories with headlights that look nearly identical. BMW's parts catalogue treats them as different parts: **not one headlight number is shared between the US and the mainland-European catalogue**, for any body, any period, any technology. For an owner of an imported car, or anyone buying from a seller across the Atlantic, that is the whole story in one line. The rest of this article says what the catalogue shows, where the two markets' line-ups differ in kind and not just in number, and what to check before buying.
+
+## The short version
+
+- Every US headlight number has a **separate mainland-Europe equivalent**: for the Sedan and Touring, all twenty US numbers (pre- and post-facelift, halogen, xenon, bi-xenon, supplier and TITAN variants) appear in no European catalogue tree on either mirror. [S1, HIGH for the Europe numbers; MEDIUM for the US ones]
+- The same holds for the **Coupé and Convertible**: each of the three production bands has a US column and a Europe column with no number in common. [S2, HIGH / MEDIUM]
+- Right-hand-drive units are a **third set of numbers** again. [S1, S2]
+- Some units exist in **one market only**: the facelift Coupé/Convertible **TITAN** trim is European-only, and the **adaptive** headlight exists in the US only without TITAN. [S2, MEDIUM: absence on one mirror]
+- The **Compact and every diesel** were never sold in the US, so there is no US headlight for them at all. [S3, MEDIUM]
+- Both markets were **renumbered in step** (1999, 2001, 2004 for the Sedan and Touring), each with its own numbers, so an old US number is never an old European number either. [S4, MEDIUM]
+
+## What "different part number" means here
+
+The catalogue mirror used for this research keeps **separate trees per market**: a USA tree and a Europe tree for the same model, body and engine, viewable month by month. Comparing them row by row for the Sedan and Touring gives, in every band and for every technology, a US number on one side and a Europe number on the other. The Europe rows are additionally marked for left- or right-hand drive; the US rows carry no marker because the US catalogue is left-hand drive throughout. [S1]
+
+Why BMW did this is not something the catalogue says. The usual reasons are regulatory: US headlamps are built to a different beam standard and carry side-marker lamps, and owners describe exactly that difference, amber side markers on US units and headlight-washer openings that European cars often lack. Those owner statements are LOW and the regulatory reasoning is general knowledge, not from the evidence pack; what the catalogue proves is only the fact: different numbers. [S6, LOW]
+
+For buying purposes the fact is enough. **A US headlight is not an alternative number for a European one.** A listing for a "left headlight, E46 Sedan, 2002" means nothing until you know which market's number it carries.
+
+## Sedan and Touring: twenty numbers, twenty twins
+
+Before September 2001 the US Sedan and Touring catalogue lists a halogen unit in two suppliers' versions, a single-xenon unit, and, on the 330i, TITAN versions of halogen and xenon. From September 2001 it lists a halogen unit (one supplier), a TITAN halogen, a bi-xenon in two suppliers' versions and a TITAN bi-xenon. Ten pairs, twenty numbers. The European catalogue lists the **same line-up**, period for period, under twenty different numbers. [S1, HIGH for Europe; MEDIUM for US]
+
+One small difference in kind hides inside the symmetry: a plain-trim facelift halogen from the second supplier exists only on the European right-hand-drive diagram; neither the US tree nor the European left-hand-drive tree lists it. [S1, MEDIUM] It does not change the rule: match the market first, then the band, then the technology.
+
+The 323i and 328i, with the older six-cylinder engine, end before the facelift in both markets; neither market has a facelift headlight for them. [S1, HIGH]
+
+## Coupé and Convertible: where the markets diverge in kind
+
+The Coupé and Convertible share identical headlight numbers with each other in both markets, and again every US number differs from its European twin. [S2] But here the line-ups themselves are not mirror images:
+
+| Period | Unit | US | Europe (LHD) |
+| --- | --- | --- | --- |
+| to 09/2001 | halogen, xenon; TITAN versions on the 330Ci | yes | yes |
+| 09/2001 to 03/2003 | halogen, bi-xenon; TITAN on the 330Ci; M3 bi-xenon | yes | yes |
+| from 03/2003 | halogen with yellow or white indicator | yes | yes |
+| from 03/2003 | halogen or bi-xenon in **TITAN** trim | **none on the US diagrams** | yes |
+| from 03/2003 | **adaptive** bi-xenon, plain trim | yes | **none without TITAN** |
+| from 03/2003 | adaptive bi-xenon, TITAN | none on the US diagrams | yes |
+
+[S2: Europe numbers HIGH, US MEDIUM, "none" = absence on one mirror, MEDIUM]
+
+So a facelift Coupé imported from the US can have an **adaptive headlight in plain trim** that no European car was built with, and a European facelift Coupé can have a **TITAN** unit that no US car carried. Each is a legitimate factory part in its own market and simply does not exist as a number in the other. [S2] The adaptive system itself is a separate problem for any swap; our article on adaptive headlights covers it.
+
+## Cars with no US headlight at all
+
+The US catalogue trees for the Sedan, Touring, Coupé and Convertible list petrol models only. There is **no diesel E46** in any US tree, and the Compact has **no US tree**: the mirror lists it for Europe alone. BMW's own US press material dates the first BMW diesel in the US 3 Series to the 2009 335d, a later generation. [S3, MEDIUM for the E46 absence; HIGH for the 2009 statement, which does not name the E46] An encyclopaedia entry adds that the Compact was never sold in North America. [S3, MEDIUM]
+
+For a buyer this means two things. A diesel E46 or a Compact needs European numbers, full stop; there is nothing to get wrong by market. And a "US-spec" headlight offered for one of those cars is for a different body or model. [S3]
+
+One caution about the US lists: the mirror's US Touring list includes a 323i, a wagon the US never received. US-region lists are reliable for what is **absent**, less so for what is present. [S3]
+
+## The old numbers differ too
+
+Both markets renumbered their headlights at the same moments: a 1999 number replacing the 1998 original, a 2001 facelift original, and a 2004 current number. The US chains are printed on the catalogue's part pages; the European Sedan and Touring chains as well; the European Coupé chains are inferred. In every case the US chain and the European chain run in **parallel with separate numbers**, so an old US number quoted in a listing is an old US part, never an old European one. [S4, MEDIUM] Our article on supersession chains explains the chains themselves.
+
+## What else differs on an imported car
+
+Headlights are the clearest case, but not the only one. Behind the bumper cover, the catalogue lists two front impact carriers on every body, one tagged for 4 km/h and one for "8 km/h = 5 mph", the latter matching the US bumper standard; the market reading is an inference, the two parts are a fact. [S5, MEDIUM; inference] Owners add US side-marker reflectors in the bumpers and washer openings. [S6, LOW] Wheels, by contrast, carry **identical numbers in both markets**; what differs is which cars the catalogue lists them for, the subject of a separate article. [S7, MEDIUM]
+
+## Before you buy for an imported car
+
+1. **Establish the car's market first.** The build sheet, the vehicle identification data or the dealer tells you whether the car is a US or a European build. Everything else follows from it. [S1, S2]
+2. **Match market, then production band, then technology.** A European number is never a substitute for a US one, in either direction, even for the same car model and year. [S1, S2]
+3. **Facelift Coupé or Convertible from the US: check for adaptive.** A plain-trim adaptive unit is a US-only part; its replacement must be the same. [S2]
+4. **European facelift Coupé with TITAN trim: there is no US twin.** Buy European. [S2]
+5. **Diesel or Compact: European numbers only.** No US part exists. [S3]
+6. **An old number is market-bound too.** Do not assume a superseded US number maps onto a European successor. [S4]
+7. **Expect other market parts on an import.** Carriers, reflectors and washer parts may differ; the headlight is the first check, not the last. [S5, S6]
+
+## Notes on the evidence
+
+**Conflicts recorded.** (1) The mirror's US Touring list includes a 323i that was not sold in the US; US-region lists are treated as evidence of absence only. (2) Owners say US and European bumper covers are "the same except reflectors and washer holes" while the catalogue shows market-specific carriers; recorded in the bumper research, not resolved here. (3) The 1998–99 original numbers are printed on one mirror only.
+
+**Not established (open).** The regulatory reason for the separate numbering (not researched; general knowledge only); whether the US TITAN units exist for the facelift Coupé/Convertible under numbers not shown on the diagrams read; the European Coupé/Convertible supersession chains (inferred, pages not saved); Canada, which the US-region trees do not separate. US numbers rest on one mirror throughout; the Europe numbers are two-mirror.
+
+## What comes next
+
+Our E46 configurator is coming soon. When it opens it will show the headlights for your body style and build date and link to sellers for the exact part; this page will link to it then.
