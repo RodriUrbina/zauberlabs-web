@@ -1,0 +1,131 @@
+---
+# BL-014 — Writer draft, English. Body is plain Markdown (no JSX).
+# The layout (BL-001) renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+# NOTE for Editor/PO: the card's premise ("BMW never sold a complete E46 seat as one part") holds for the Sedan,
+# Touring, Coupé and Compact in the catalogue mirror; the Convertible and M3 groups DO list complete seats by
+# colour (rows "seat leather front left [colour]", ~30–37 kg). Title and body follow the evidence; see DECISIONS NEEDED.
+title: "What \"sport seats\" really are: BMW's catalogue lists complete E46 seats for two bodies only"
+description: "For four E46 bodies BMW's catalogue lists seats as frames, rails and covers, never as one part; only the Convertible and M3 differ. What a sport seat really is."
+date: 2026-10-02
+updated: 2026-10-05
+publishAt: "2026-10-05"
+lang: en
+slug: e46-sport-seats-what-you-actually-buy
+card: BL-014
+author: "Zauberlabs"
+tags:
+  - E46
+  - seats
+  - sport seats
+  - buying guide
+  - BMW
+configurator: E46
+cta:
+  label: "E46 configurator: coming soon"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts; layout shows "coming soon" until the configurator opens
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "A used pair of BMW E46 sport front seats in black leather standing on a workshop floor, rails and wiring plugs visible underneath"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: a pair of E46 front sport seats (pronounced bolsters, extendable thigh support) in black leather on a clean workshop floor, seat rails and a wiring plug visible under one seat. Must not show: BMW roundel or badges, readable labels or part numbers, a person."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW parts-catalogue mirror (eStore-Central): Seats groups for 330i Sedan, 330i Touring, 330Ci Coupé, 330Ci Convertible, 316ti Compact and M3 Coupé, fetched 2026-10-01 (group names and parsed rows incl. weights)"
+    type: ETK mirror (catalogue-grade, one mirror, no stated data version)
+    path: "t028-evidence/raw/estore-seat-groups.json; t028-evidence/scrape_estore_seats.py"
+    confidence: MEDIUM
+    note: "Capped at MEDIUM by project policy: one mirror, no dates, no equipment notes. The complete-seat pages for Sedan, Touring, Coupé and Compact show only placeholder parent rows; the Convertible and M3 pages list complete seats by upholstery and colour with weights of roughly 22–38 kg (rows re-read for this article)."
+  - id: S2
+    title: "BMW Group UK press kit, 26 Oct 2001: The new BMW 3 Series Saloon and Touring, with model specification lists"
+    type: BMW-authored
+    path: "t028-evidence/raw/bmw-press-uk-2001-seat-extract.txt"
+    confidence: HIGH
+    note: "HIGH for what it states: seat height adjustment standard on the front seats, a new upholstery range 'from flat weave cloth through to three choices of Exclusive Nappa leather', ISOFIX preparation. UK, model year 2002, Saloon and Touring."
+  - id: S3
+    title: "Owner-forum statements on E46 seat swaps (search-result summaries; the main E46 forum is paywalled and was not read)"
+    type: forum
+    path: "t028-evidence/T-028-findings.md (attributed in the text)"
+    confidence: LOW
+    note: "Never decides alone. Used for cross-body fitting details and US package content, marked LOW."
+  - id: S4
+    title: "T-028 research findings — Seats: what decides fit (2026-10-01)"
+    type: internal synthesis of S1–S3
+    path: "t028-evidence/T-028-findings.md"
+    confidence: n/a
+    note: "The grading follows this file, with one correction recorded in the body: T-028 §1c states that the catalogue lists no complete front seats; the raw rows show that this holds for Sedan, Touring, Coupé and Compact but not for the Convertible and M3."
+---
+
+"Sport seats" is one of the most common E46 interior upgrades and the least-defined one. Sellers offer "sport seats", "M3 seats", "comfort seats" and "Recaros" as if they were catalogue items. For most E46 bodies they are not. BMW's parts catalogue, read for six E46 variants, lists a Sedan, Touring, Coupé or Compact front seat as **frames, rails, controls, head restraints and covers by colour**, and never as one orderable seat. Only two bodies break the pattern. This article explains what the catalogue does and does not sell, what you are therefore actually buying, and which seats share the mechanical bits that make a swap simple.
+
+## The short version
+
+- For the **Sedan, Touring, Coupé and Compact**, the catalogue's "complete seat" pages (basic seat, sports seat, mechanically or electrically adjustable) carry only placeholder parent rows, a few unnamed "original OEM part" numbers the mirror does not describe, and the first-aid-kit parts; the orderable items with names are frames, rails, adjustment parts, head restraints and upholstery by colour. [S1, MEDIUM]
+- The **Convertible** and the **M3** are the exceptions: their basic-seat and sports-seat pages list **complete front seats by upholstery and colour**, with weights of roughly 22 to 38 kg. [S1, MEDIUM, rows re-read for this article]
+- So for four of six bodies, "a sport seat" you buy is a **used pair, a re-trim of your own frames, or an aftermarket seat**; it has no single BMW part number to check. [S1, MEDIUM; S4]
+- The catalogue's own two seat classes are **basic seat** and **BMW sports seat**; "comfort" is upholstery plus adjustment options, not a class, and "Recaro" is aftermarket. [S1, MEDIUM]
+- Mechanically, seats travel in **body groups**: Sedan and Touring share rails; Coupé and Compact share theirs; the Convertible and M3 have their own groups. [S1, MEDIUM]
+
+## What the catalogue sells, body by body
+
+The Seats chapter for a 330i Sedan has about 47 groups. Among them are four that sound like whole seats: "mechanically adjustable front seat", "electrically adjustable front seat", "BMW sports seat mechanically adjustable" and "BMW sport seat electrically adjustable". Open any of them and the parent row is a placeholder with no number, followed by a handful of numbers the mirror lists only as "original OEM part", without a name, colour or weight, and the first-aid-kit bracket that lives under the seat. No row in those groups is described as a seat. The same is true on the Touring, and on the Coupé's and the Compact's "basic seat" and "sports seat" pages. [S1, MEDIUM; the unnamed numbers NOT ESTABLISHED: they could be complete seats whose descriptions the mirror lost, or sub-assemblies]
+
+What those pages hand you instead is the seat in pieces: the **seat rail** ("seat mechanism left / right" with its covers), the **backrest frame**, the **sports-seat frame**, the **controls** (mechanical levers or electric switches and actuators), the **tilt adjustment**, the **head restraints** by class and colour, the **cover pads**, and the **upholstery** as "seat cover cloth" or "seat cover leather" by colour, plus leather sold by the running metre. [S1, MEDIUM] That is how BMW's dealers repaired seats: part by part.
+
+The **Convertible** is different. Its "basic seat" page lists rows named "seat leather front right", "seat cloth front left", "seat vinyl front right" and so on, each in a colour, each weighing 25 to 38 kg where a weight is given; its "sports seat" page does the same. Those are complete seats. The **M3** sports-seat page lists complete leather seats by colour in the same way, at 22 to 29 kg. [S1, MEDIUM] Why BMW catalogued whole seats for these two and not for the others is not stated; the Convertible's seats carry their own belt hardware and the M3's are a distinct design, which would be a plausible reason, but that is a guess and we do not rely on it. [S4, NOT ESTABLISHED]
+
+A correction belongs here. The research behind this article originally concluded that the catalogue lists **no** complete E46 front seats at all. Re-reading the saved rows for this piece shows that is true for the Sedan, Touring, Coupé and Compact and **not** for the Convertible and M3. The T-028 findings file is being corrected on the research side. The buying advice below is written body by body for that reason. [S4, correction recorded]
+
+## So what is "a sport seat"?
+
+For the four bodies without a complete-seat part, "sport seat" is a **shape**, not a product. The catalogue's own classes are **basic seat** and **BMW sports seat**, each with its own frame, rail-mechanism and controls groups, and each available with mechanical or electric adjustment. [S1, MEDIUM] The sports seat is recognisable by its larger bolsters, extendable thigh support and different head restraint; the catalogue lists separate head-restraint groups for the two classes. [S1, MEDIUM for the separate groups; the visual description is general knowledge]
+
+What people buy, then, is one of three things:
+
+1. **A used pair** from another E46, which is what most "sport seat" listings are. It carries no catalogue part number; what matters is the body group it came from and the electrical equipment under it. [S4]
+2. **A re-trim** of your own seats, which the catalogue supports directly: covers by colour, cover pads, upholstery parts and leather by the metre are all orderable. [S1, MEDIUM]
+3. **An aftermarket seat** (Recaro and others). The catalogue has no entry for these; they are not BMW parts and nothing here applies to them. [S4]
+
+Two names to drop. "**Comfort seats**" is not a BMW seat class on the E46: in the catalogue, what owners call comfort is a basic or sports seat with electric adjustment, heating or lumbar support, plus leather. "**Recaro**" is a manufacturer, not an option. [S1, MEDIUM; S4]
+
+## Body groups: which seats share rails
+
+The seat-rail mechanism is the part that decides whether a seat bolts in. The catalogue lists the **same left and right rail mechanism** on the Sedan and the Touring, and a **different pair, shared** by the Coupé and the Compact. The Convertible has its own frame groups and no plain front-seat-rail group; the M3's rail group shows only the easy-entry cables and its own electrical single parts. [S1, MEDIUM] The seat-tilt adjustment parts, by contrast, carry the same numbers on Sedan, Touring, Coupé and Compact. [S1, MEDIUM]
+
+So within a body group, swapping between basic and sports seats is a rail-for-rail job. Across groups it is not: owners report that the Sedan's outer rail carries the belt-buckle anchor while the Coupé's belt mounts on the pillar, and that Coupé seats recline at a different angle. [S3, LOW] They also report that Sedan seat brackets changed at the 2001 facelift. [S3, LOW; not in the mirror]
+
+The **easy-entry** mechanism (the backrest release that lets rear passengers in) exists in the catalogue for the Coupé, Convertible and Compact and not for the Sedan and Touring, which is one more reason a two-door seat is not a four-door seat. [S1, MEDIUM]
+
+## Options that change what is under the seat
+
+| Option | What the catalogue shows | Confidence |
+| --- | --- | --- |
+| Electric adjustment | Separate "electrically adjustable" groups and seat-adjustment wiring sets; manual seats have levers | MEDIUM [S1] |
+| Heated seats | An "installing set heated seat front" with the **same numbers** on Sedan, Touring, Coupé and Compact: a body-independent retrofit | MEDIUM [S1] |
+| Lumbar support | A "retrofit lumbar support front" group and lumbar switches; which cars had it as standard is not in the mirror | MEDIUM for the parts [S1]; availability LOW [S3] |
+| Memory | An adapter lead for memory listed for the Coupé and M3 | MEDIUM [S1] |
+| Seat height adjustment | Standard on the front seats of the UK Saloon and Touring, model year 2002 | HIGH [S2] |
+| Upholstery | A new range "from flat weave cloth through to three choices of Exclusive Nappa leather" at the facelift; covers by colour in the catalogue | HIGH [S2]; MEDIUM [S1] |
+
+Owners add that US-market packages bundled these differently (power seats standard on later 330 Sedans; memory and lumbar with the premium package). [S3, LOW] The mirror is a Europe-region catalogue and says nothing about packages.
+
+## Buying a used pair: what to ask
+
+1. **Which body did they come from?** Sedan and Touring interchange; Coupé and Compact interchange; anything else needs rail work. [S1, MEDIUM]
+2. **Manual or electric, heated or not, lumbar or not?** Match your car or budget for the wiring. The heating kit is the one retrofit the catalogue makes body-independent. [S1, MEDIUM]
+3. **Do the rails come with the seats?** For a used pair they usually do; check they are the right body group's rails, not adapters. [S4]
+4. **What is plugged in underneath?** The belt-tensioner lead and, on the passenger side, the occupancy-sensor wiring connect the seat to the airbag system. Mismatch there is the real risk of a seat swap, and it is covered in our article on seat swaps and airbags.
+5. **Convertible or M3?** If the seller quotes a BMW part number for a complete seat, it is plausible for these two bodies only. For any other E46 a "complete seat part number" is a number for a frame, a cover or a rail, not a seat. [S1, MEDIUM]
+
+## Notes on the evidence
+
+**Correction recorded.** T-028 §1c states that the catalogue lists no complete front seats for the E46. The saved rows show complete seats by upholstery and colour, with plausible seat weights, on the Convertible's basic-seat and sports-seat pages and on the M3's sports-seat page; the Sedan, Touring, Coupé and Compact pages are placeholders as T-028 says. This article follows the rows.
+
+**Conflicts recorded.** (1) Configurator-era seat labels ("standard", "sport", "comfort", "recaro") versus the catalogue's two classes (basic, BMW sports) plus options; "comfort" is not a class and "Recaro" is aftermarket. (2) Owners' "bolt-in" reports versus the wiring and airbag interface: not a contradiction, the electrical side is the caveat.
+
+**Not established (open).** The identity of the unnamed "original OEM part" numbers in the Sedan, Touring, Coupé and Compact complete-seat groups (a part-page lookup is needed; they are not reproduced here); why the Convertible and M3 have complete-seat rows and the other bodies do not; which cars had basic versus sports seats, electric adjustment, heating, lumbar or memory as standard; the Convertible's and M3's rail families in detail; the pre- and post-facelift seat-bracket split; US package content. The catalogue was read through one mirror with no dates or equipment notes, which caps its facts at MEDIUM.
+
+## What comes next
+
+Our E46 configurator is coming soon. When it opens it will show the seats for your body style and build date and link to sellers for the exact part; this page will link to it then.

@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import remarkCite from "@/lib/remark-cite";
 import { blogUrl, feedUrl, formatDate, getBlog, postUrl, SITE_URL, tagSlug } from "@/lib/blog";
+import { formatPublishMoment } from "@/lib/publish-time";
 import { dictionaries, isLocale, LOCALES, type Locale } from "@/lib/i18n";
 import BlogHeader from "@/components/blog/BlogHeader";
 import ConfiguratorCta from "@/components/blog/ConfiguratorCta";
@@ -18,8 +19,12 @@ import SiteFooter from "@/components/SiteFooter";
 
 type Params = Promise<{ lang: string; slug: string }>;
 
-// Only known articles are built; anything else (incl. drafts on production) is a 404.
-export const dynamicParams = false;
+// Scheduled publishing (BL-004): re-rendered on Vercel at most every 5 minutes, so an article whose
+// publish moment has passed appears by itself; no deploy, cron or agent needed.
+export const revalidate = 300;
+// Slugs not built at deploy time (scheduled articles) render on demand once their moment has passed;
+// before that, and for unknown slugs and production drafts, the page is a 404.
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   const slugs = getBlog().slugs();
@@ -44,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: m.description,
     authors: [{ name: m.author }],
     alternates: { canonical, languages, types: { "application/rss+xml": feedUrl(lang) } },
-    robots: m.draft ? { index: false, follow: false } : undefined,
+    robots: m.draft || resolved.scheduled ? { index: false, follow: false } : undefined,
     openGraph: {
       type: "article",
       title: m.title,
@@ -66,7 +71,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
   if (!isLocale(lang)) notFound();
   const resolved = getBlog().getPost(slug, lang);
   if (!resolved) notFound();
-  const { post, fallback } = resolved;
+  const { post, fallback, scheduled } = resolved;
   const m = post.meta;
   const t = dictionaries[lang].blog;
   const other: Locale = lang === "de" ? "en" : "de";
@@ -93,6 +98,12 @@ export default async function ArticlePage({ params }: { params: Params }) {
             {m.draft && (
               <p className="self-start rounded-full bg-accent px-3 py-1 font-mono text-[11px] tracking-[0.1em] text-paper uppercase" lang={lang}>
                 {t.draft}
+              </p>
+            )}
+            {scheduled && m.publishAtMs !== null && (
+              <p role="note" className="rounded-2xl border border-e46/60 bg-e46/15 px-5 py-3.5 text-[14px] leading-relaxed text-body" lang={lang}>
+                <span className="eyebrow mr-3 text-[10px] text-ink">{t.scheduled}</span>
+                {t.scheduledBanner(formatPublishMoment(m.publishAtMs, lang))}
               </p>
             )}
             {fallback && (
