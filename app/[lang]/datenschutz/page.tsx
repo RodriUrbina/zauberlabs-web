@@ -11,13 +11,14 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
 const C = {
-  name: "Rodrigo Urbina",
+  name: "Alvaro Hernandez",
   street: "Anton-Wilhelm-Amo-Straße 50",
   city: "10117 Berlin",
   email: "hello@zauberlabs.de",
+  vatId: "DE452363836",
   // Supervisory authority of YOUR federal state, e.g. Hessen → "Der Hessische Beauftragte für Datenschutz und Informationsfreiheit"
   authority: "Berliner Beauftragte für Datenschutz und Informationsfreiheit, Alt-Moabit 59–61, 10555 Berlin (www.datenschutz-berlin.de)",
-  updated: "September 2026",
+  updated: "Oktober 2026",
 };
 
 export default async function Datenschutz({ params }: { params: Promise<{ lang: string }> }) {
@@ -31,6 +32,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         {C.name}, {C.street}, {C.city}, Deutschland
         <br />
         E-Mail: <a className="underline" href={`mailto:${C.email}`}>{C.email}</a>
+        <br />
+        Umsatzsteuer-Identifikationsnummer: {C.vatId}
       </p>
 
       <h2>2. Überblick</h2>
