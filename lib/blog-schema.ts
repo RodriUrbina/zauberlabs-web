@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { LOCALES } from "./i18n";
+import { dayInZone, parsePublishAt } from "./publish-time";
 
 /**
  * Front matter of every blog article (content/blog/<slug>/<lang>.mdx).
@@ -55,6 +56,22 @@ const heroInput = z
   })
   .refine((h) => !h.src || (h.credit && h.licence), { message: "a hero image needs credit and licence", path: ["credit"] });
 
+// Unquoted YAML dates arrive as Date objects: a midnight-UTC Date is a date-only value, anything else an exact instant.
+const publishAtInput = z.preprocess(
+  (v) => (v instanceof Date ? (v.getTime() % 86_400_000 === 0 ? v.toISOString().slice(0, 10) : v.toISOString()) : v),
+  z.string().min(1).refine(
+    (v) => {
+      try {
+        parsePublishAt(v);
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    { message: 'publishAt must be "YYYY-MM-DD" (07:00 Berlin), "YYYY-MM-DDTHH:mm" (Berlin time) or an ISO moment with offset' }
+  )
+);
+
 const configuratorInput = z.union([
   z.string().min(1).max(40),
   z.strictObject({ tag: z.string().min(1).max(40), url: z.url().optional() }),
@@ -66,6 +83,11 @@ const base = z.strictObject({
   description: z.string().min(1).max(320),
   date: isoDate,
   updated: isoDate.optional(),
+  /**
+   * Scheduled publishing (BL-004). "YYYY-MM-DD" = 07:00 Europe/Berlin that day; or an ISO moment with offset.
+   * Absent = live as soon as it is on main. YAML turns an unquoted date into a Date object; handled.
+   */
+  publishAt: publishAtInput.optional(),
   /** Optional; must match the file name when present. */
   lang: z.enum(LOCALES).optional(),
   /** Optional; must match the folder name when present. */
@@ -102,8 +124,13 @@ export const frontMatterSchema = base
       note: s.note,
     }));
     const hero: Hero = { src: fm.hero.src ?? null, alt: fm.hero.alt, credit: fm.hero.credit ?? null, licence: fm.hero.licence ?? null, placeholder: fm.hero.placeholder };
+    // The date readers see is the publish day (Berlin) when a publish moment is set.
+    const publishAtMs = fm.publishAt ? parsePublishAt(fm.publishAt) : null;
+    const date = publishAtMs === null ? fm.date : dayInZone(publishAtMs);
     return {
       ...fm,
+      date,
+      publishAtMs,
       configurator: { tag: configurator.tag, url: fm.cta?.href ?? configurator.url },
       ctaLabel: fm.cta?.label,
       sources,

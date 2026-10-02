@@ -4,7 +4,11 @@ import { feedUrl, getBlog, SITE_URL, tagUrl } from "@/lib/blog";
 import { dictionaries, isLocale, LOCALES, type Locale } from "@/lib/i18n";
 import BlogListing from "@/components/blog/BlogListing";
 
-export const dynamicParams = false;
+// Scheduled publishing (BL-004): re-rendered on Vercel at most every 5 minutes, so an article whose
+// publish moment has passed appears by itself; no deploy, cron or agent needed.
+export const revalidate = 300;
+// Unknown tags render on demand (404 until an article with that tag is live).
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   const blog = getBlog();
