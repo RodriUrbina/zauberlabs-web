@@ -1,0 +1,139 @@
+---
+# BL-017 — Writer draft, English. Body is plain Markdown (no JSX).
+# The layout (BL-001) renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "E46 bumpers: body, era and package, and why the engine never matters"
+description: "BMW's catalogue picks an E46 bumper cover by body style, production date and package, never by engine. What sensors, tow hitches and washers really change."
+date: 2026-10-02
+updated: 2026-10-02
+lang: en
+slug: e46-bumpers-body-era-package
+card: BL-017
+author: "Zauberlabs"
+tags:
+  - E46
+  - bumpers
+  - M Aerodynamics
+  - facelift
+  - BMW
+configurator: E46
+cta:
+  label: "E46 configurator: coming soon"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts; layout shows "coming soon" until the configurator opens
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "Two primed BMW E46 Sedan front bumper covers leaning against a workshop wall, one standard and one with the deeper M package lip"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: two unpainted (grey primed) E46 Sedan front bumper covers leaning against a workshop wall, one standard, one with a deeper lip and larger corner intakes; neutral light. Must not show: BMW roundel or badges, readable labels or part numbers, a person."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW parts-catalogue mirror (eStore-Central): bumper trim-panel and carrier groups for 330i/320i/320d Sedan, 330i Touring, 330Ci Coupé and Convertible, 316ti Compact, M3 Coupé and Convertible, M3 CSL, fetched 2026-10-01"
+    type: ETK mirror (catalogue-grade, one mirror, no stated data version)
+    path: "t027-evidence/raw/estore-bumper-matrix.md; t027-evidence/raw/estore-bumper-groups.json; t027-evidence/raw/estore-bumper-groups-cabrio.json"
+    confidence: MEDIUM
+    note: "The mirror shows the catalogue's group names ('up to 9-01', 'from 09-01', 'from 03-03', SA715, SA716) and short row tags ('4 km/h', '8 km/h = 5 mph', 'AHV', 'M3 - PDC'), but no date column and no equipment notes. Where two parts sit in one group without a tag, the reason is not shown."
+  - id: S2
+    title: "BMW parts-catalogue mirror (eStore-Central): park-distance-control, PDC retrofit and headlight-cleaning groups, 330i Sedan"
+    type: ETK mirror (one mirror)
+    path: "t027-evidence/raw/estore-pdc-washer-groups.json"
+    confidence: MEDIUM
+  - id: S3
+    title: "BMW Group UK press kit, 26 Oct 2001: The new BMW 3 Series Saloon and Touring"
+    type: BMW-authored
+    path: "t032-evidence/raw/bmw-press-uk-2001-3series-page.html"
+    confidence: HIGH
+    note: "HIGH for its description of the facelift front (curved headlights with indicators behind clear glass, round fog lamps). Saloon and Touring only; no BMW text on bumper fitment was found."
+  - id: S4
+    title: "Catalogue month views of the Coupé/Convertible front bumper on a second mirror (bmwfans.info), used in the T-024 headlight research to fix the March 2003 changeover"
+    type: ETK mirror, second mirror
+    path: "t024-partc-evidence/headlight-table.md (§1, band 3 note); t024-partc-evidence/REPORT.md"
+    confidence: HIGH
+    note: "HIGH for the Coupé/Convertible changeover month only (two mirrors agree on 03/2003 via the bumper)."
+  - id: S5
+    title: "Owner-forum and retailer statements on bumper swaps (search summaries; the main E46 forum is paywalled and was not read)"
+    type: forum / retailer
+    path: "t027-evidence/T-027-findings.md (attributed in the text)"
+    confidence: LOW
+    note: "Never decides. Used for brackets, M3 wing width, US reflectors and washer holes, PDC sensor positions, all marked LOW."
+  - id: S6
+    title: "T-027 research findings — Bumpers: what decides fit (2026-10-01)"
+    type: internal synthesis of S1–S5
+    path: "t027-evidence/T-027-findings.md"
+    confidence: n/a
+    note: "The grading of every claim in the body follows this file."
+---
+
+Bumper listings for the E46 are full of engine codes: "330i front bumper", "320d rear". BMW's parts catalogue does not think that way. It picks a bumper cover by three things, **body style**, **production date** and **package** (standard, M Aerodynamics, M3), and the engine is not one of them. Once you know that, most of the confusion in used-parts listings disappears, and the few real traps stand out: the production-date split, the hidden impact carrier, and the handful of cases where equipment really does change the cover.
+
+## The short version
+
+- **Engine never matters** for a standard cover: the catalogue lists the same front and rear covers for the 320i, the 330i and the 320d Sedan. [S1, MEDIUM]
+- **Body and date do.** Sedan and Touring covers split at **September 2001**; Coupé and Convertible covers split at **March 2003**; Coupé and Convertible share identical covers. [S1, MEDIUM for the Sedan/Touring date; S4, HIGH for the Coupé/Convertible month]
+- **Package is the third axis.** The M Aerodynamics covers come in two catalogue families (option codes 715 and 716); the Coupé and Convertible have one M front cover; the M3 has its own. [S1, MEDIUM]
+- **M package covers are catalogued for ordinary cars.** Fitting them to a non-M Sedan, Touring or Compact is a normal, listed path; owners add that the brackets must match the era. [S1, MEDIUM; S5, LOW]
+- **Equipment mostly does not change the cover.** Parking sensors, headlight washers and fog lights are add-on parts and kits. The exceptions the catalogue shows: the **M3 rear with park distance control** and the **Compact rear with a tow hitch**. [S1, S2, MEDIUM]
+- Behind every cover sits an **impact carrier** in two versions, one of them marked for the US 5 mph standard. [S1, MEDIUM; the market reading is an inference]
+
+## Body and date: the two things to get right
+
+The catalogue's front-cover groups for the Sedan and Touring are named by date: "front bumper trim panel up to 9-01" and "front bumper trim panel from 09-01". The same primed cover number appears in the Sedan 320i, 330i and 320d trees and in the Touring tree, era for era. [S1, MEDIUM] The rear Sedan cover splits at the same date. [S1, MEDIUM]
+
+For the Coupé and Convertible the facelift group is "from 03-03"; the earlier cover sits in a group without a date label, so its period is inferred by elimination. [S1, MEDIUM for the facelift group; the pre-facelift period LOW–MEDIUM] The March 2003 month itself is well evidenced, because a second mirror's month-by-month views of the Coupé front bumper were used to fix the headlight changeover: the facelift parts appear in March 2003 and not in February. [S4, HIGH] Coupé and Convertible carry identical cover numbers throughout. [S1, MEDIUM]
+
+The Compact has its own front covers (two, with no label saying why) and its own rear; no production-date split is visible in its groups. [S1, MEDIUM]
+
+What the dates mean for a buyer: a 2001 Sedan or a 2003 Coupé can be on either side of its split, and the sides are different parts. Owners report that a facelift cover on a pre-facelift car needs the facelift mounting brackets, and the other way round. [S5, LOW, consistent with the catalogue's separate numbers] The production month, not the model year, decides.
+
+## Package: standard, M Aerodynamics, M3
+
+The catalogue keeps the M look in its own groups: "M trim panel bumper front" and "rear", each in two versions under option codes **715** and **716**, and the vehicle index names the option an **M Aerodynamics package**. [S1, MEDIUM] Code 715 appears in the Sedan trees (including the 320d), code 716 in the Sedan, Touring and 320d trees; the Compact has its own code-716 front and rear with different numbers. [S1, MEDIUM; the Touring's lack of a 715 group is absence in one mirror] Which of the two is the one owners call "M-Tech I" and which "M-Tech II" is not something the catalogue says. [S6]
+
+The Coupé and Convertible M front cover sits in a single group, "M front bumper trim panel", with no package code, and the M rear comes as two unlabelled alternatives. [S1, MEDIUM]
+
+The **M3** has its own front cover (two families, reason unstated) and its own rear, including a version marked for park distance control; the M3 CSL lists only painted front covers. [S1, MEDIUM] Owners add that an M3 cover does not bolt onto a non-M Coupé because the M3's wings are wider, so "M3 look" covers for ordinary Coupés are aftermarket replicas. [S5, LOW] For an ordinary E46, the catalogued upgrade path is the M Aerodynamics package, not the M3 cover.
+
+Every cover exists as a **primed** and a **painted** part number. That is a paint decision, not a fit decision. [S1, MEDIUM]
+
+## Equipment: what changes the cover, and what only looks like it does
+
+**Parking sensors.** For standard cars the catalogue handles park distance control (PDC) as **kits**: an installation kit, "retrofit kit PDC-II" front and rear, plus market-specific versions tagged for the US, and licence-plate holders by market. It does not list a separate standard cover with sensor holes. [S2, MEDIUM] The one cover the catalogue does distinguish is the **M3 rear**, which exists with and without PDC. [S1, MEDIUM] Owners report that sensor positions differ between pre- and post-facelift covers and that the later M rear is sold with or without holes. [S5, LOW] Practical reading: on a standard car the sensors are a kit and wiring job; the cover is the same part.
+
+**Headlight washers.** The pop-up nozzle covers in the bumper are separate parts, primed or painted, and BMW sells a retrofit kit for the headlight cleaning system. [S2, MEDIUM] Owners say US-market covers come with washer openings that European owners fill. [S5, LOW] Either way the opening is a trim detail, not a different cover family.
+
+**Fog lights.** The fog-lamp supports and covers (including an "M package" fog cover) are separate parts. [S1, MEDIUM]
+
+**Tow hitch.** The **Compact rear cover** exists in a version tagged "AHV", the German abbreviation for a tow hitch; on the other bodies the catalogue shows a removable tow-eye flap in the cover instead. [S1, MEDIUM] Only on the Compact does the hitch change the cover itself.
+
+**Two unexplained pairs.** The Touring's standard rear and the Coupé/Convertible facelift rear each list two covers in one group with no tag to say why (the two Coupé covers even differ in price). Equipment is the likely reason, but the catalogue does not show it, so we do not guess. [S1, MEDIUM for the listing; the reason NOT ESTABLISHED]
+
+## The hidden part: the impact carrier
+
+Behind the cover sits the carrier, the structural part that absorbs the knock. The catalogue lists two front carriers side by side on every body style: one tagged **"4 km/h"** and one tagged **"8 km/h = 5 mph"**. The rear carrier is the 4 km/h version on Sedan, Coupé and M3; the Touring and the Compact have their own. [S1, MEDIUM]
+
+Five miles per hour is the US bumper-impact standard, so the 8 km/h carrier is probably the US-market part. That is an inference; the mirror is a European one and does not say which market gets which. [S6, inference] What it means for a buyer: the cover you see is the same number for both markets in this mirror, but what is behind it may not be. Owners add that US covers differ visibly by their side-marker reflectors. [S5, LOW] If you buy a complete front end from an imported car, the carrier is the part to check, and it is a safety part.
+
+## What you can see, and what you cannot
+
+You can see: the body style; on a Sedan or Touring, the facelift front by BMW's own description, "new curved headlights, incorporating the indicators behind clear glass, and round fog lamps"; [S3, HIGH] whether the cover has fog lamps, washer covers, sensor dots or a tow-eye flap, each of which corresponds to catalogued add-on parts. [S1, S2, MEDIUM]
+
+You cannot reliably see: which of the two M Aerodynamics packages you are looking at; [S6] the exact build month near a split; which carrier is behind the cover; which of the two unlabelled Touring or Coupé rear covers a car has; and whether the car already wears a retrofitted cover, since the car and its build sheet can differ. [S6]
+
+## Before you buy a cover
+
+1. **Match body style and production-date group, not engine.** Ignore "330i" in a listing; ask for the body and the era. [S1, MEDIUM]
+2. **Expect bracket work across the date split.** A facelift cover on an earlier car, or an M cover on a car from the other era, needs the matching brackets and guides. [S5, LOW, consistent with the catalogue]
+3. **Treat PDC, washers and fogs as add-ons.** On a standard car they do not change the cover; they change what you need to buy alongside it. The exceptions are the M3 rear with PDC and the Compact rear with a hitch. [S1, S2, MEDIUM]
+4. **Ask which M package.** Two families, two codes, not interchangeable by number. [S1, MEDIUM]
+5. **Check the carrier on an import.** The 5 mph carrier is a different part from the 4 km/h one. [S1, MEDIUM; market reading inferred]
+6. **Do not plan an M3 cover for a non-M Coupé.** Owners say it needs adapters because of the wider wings; the catalogue offers no such path. [S5, LOW; S1 for the absence]
+
+## Notes on the evidence
+
+**Conflicts recorded.** (1) Owners say European and US covers are "the same except reflectors and washer holes"; the catalogue shows market-specific carriers and PDC kits. Not necessarily contradictory (cover versus hardware), but unresolved. (2) The repo's early single "M Sport" label versus the catalogue's two M Aerodynamics families and the Compact's own M front. (3) The pre-facelift Coupé/Convertible front cover has no date label; its period is inferred by elimination.
+
+**Not established (open).** The marketing names and years of option codes 715 and 716; the reason for the two Touring rear covers, the two Coupé/Convertible facelift rear covers, the two Compact front covers and the two M3 front families; which market receives which carrier; whether PDC, tow or washer equipment changes any standard cover number beyond the M3 and Compact cases; a Compact production-date split, if any. The catalogue was read through one mirror with no dates or equipment notes, which caps its facts at MEDIUM; the Coupé/Convertible changeover month is HIGH because a second mirror agrees.
+
+## What comes next
+
+Our E46 configurator is coming soon. When it opens it will show the bumpers for your body style and build date and link to sellers for the exact part; this page will link to it then.
