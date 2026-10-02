@@ -1,0 +1,135 @@
+---
+# BL-021 — Writer draft, English. Format provisional: the blog feature (BL-001) is still being
+# designed, so the Builder may rename fields. Body is plain Markdown (no JSX) so it stays portable.
+title: "The E46 Compact's headlights: Europe-only, Halogen or Bi-Xenon, never Xenon"
+description: "The E46 Compact had its own front end and its own headlights, shared with no other E46 body, never changed during production, and never sold in the US. Two families exist: halogen and bi-xenon. Here is what the BMW catalogue says, and what it leaves open."
+date: 2026-10-02
+updated: 2026-10-02
+lang: en
+slug: e46-compact-headlights
+card: BL-021
+author: "Zauberlabs"
+tags:
+  - E46
+  - Compact
+  - headlights
+  - bi-xenon
+  - halogen
+  - BMW
+configurator: E46
+cta:
+  label: "Find the right headlight for your E46"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts
+hero:
+  src: null # PLACEHOLDER — AI illustration to be made, labelled "AI-generated" (PO decision 2026-10-02); not committed until confirmed
+  alt: "Front three-quarter view of a BMW E46 Compact hatchback with its distinctive headlights, low beams on, at dusk"
+  credit: null
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: E46 Compact (three-door hatch, 2000–2004) front three-quarter, low beams on, neutral dusk street; no BMW roundel or badges legible, no readable part numbers, no number plate text."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-025 catalogue research — E46 Compact headlights on two BMW parts-catalogue mirrors (eStore-Central and bmwfans.info), all nine Compact engine variants, LHD and RHD, saved pages, fetched 2026"
+    type: ETK mirror (catalogue-grade), two mirrors
+    path: "t024-t025-evidence/compact.json; t024-t025-evidence/raw/compact-*.html; t024-t025-evidence/RULES.md"
+    confidence: HIGH
+    note: "HIGH where both mirrors agree at part-number level (the two families, LHD/RHD, Compact-only numbers). MEDIUM where only one mirror shows it (no running change; extra numbers on one mirror; option code)."
+  - id: S2
+    title: "T-030 market check — bmwfans.info region trees per E46 body (Compact: Europe only)"
+    type: ETK mirror
+    path: "t030-evidence/wheels-compact-markets.json (fact B-compact)"
+    confidence: MEDIUM
+    note: "Absence of a US tree in one mirror; no source contradicts it."
+  - id: S3
+    title: "T-032 research follow-ups Q3/Q4 — Compact and diesels in the US; halogen as base. Includes BMW Group Classic model pages (production dates, silent on market), BMW press kits MY2002 (xenon as an option, Sedan/Touring), Wikipedia 'BMW 3 Series Compact' (not sold in North America)"
+    type: mixed (BMW-authored, encyclopaedia, ETK mirror)
+    path: "t032-evidence/T-032-findings.md; t032-evidence/raw/bmwfans-usa-catalogue-extract.md; t032-evidence/raw/bmw-press-uk-2001-3series-page.html; t032-evidence/raw/bmw-press-us-my2002-3series-page.html"
+    confidence: MEDIUM-HIGH
+    note: "Market statement rests on the mirror plus an encyclopaedia; BMW-authored pages do not contradict but say nothing about market."
+  - id: S4
+    title: "T-038 — adaptive headlights exist on the E46 Coupé and Convertible only"
+    type: BMW training text via reproduction; catalogue
+    path: "t038-akl-interchangeability/REPORT.md"
+    confidence: MEDIUM
+  - id: S5
+    title: "Owner-forum cues for telling halogen from xenon (not Compact-specific)"
+    type: forum
+    path: "t032-evidence/T-032-findings.md (Q1)"
+    confidence: LOW
+    note: "Never decides alone; shown only as owners' claims."
+---
+
+The E46 Compact is the odd one out of the E46 family. BMW gave the three-door hatch its own nose, and with it its own headlights. If you own one, almost everything written about "E46 headlights" is about the Sedan, Touring, Coupé or Convertible and does not apply to your car. This short explainer covers what does.
+
+Everything below is graded. **HIGH** means two BMW parts-catalogue mirrors print the same thing. **MEDIUM** means one mirror, or a BMW-authored or encyclopaedic source that is not a catalogue. **LOW** means owners' forums, shown as their claim, not as fact. Sources are listed at the end.
+
+## The short version
+
+- The Compact's headlights are **its own design**: none of its catalogue numbers appears on any other E46 body, and none of the Sedan, Touring, Coupé, Convertible or M3 numbers appears on the Compact. [S1, HIGH]
+- Exactly **two families** exist: **halogen** and **bi-xenon**. There is no plain single-xenon Compact headlight in the catalogue. [S1, HIGH]
+- Each family comes in a **left-hand-drive and a right-hand-drive** version. [S1, HIGH]
+- The catalogue shows **no running change** in the Compact's headlights from the first cars in 2000 to the last in 2004. The Compact never received the Sedan's September 2001 facelift front. [S1, MEDIUM: one mirror, and no dates printed on the rows]
+- The Compact was sold in **Europe and other right- and left-hand-drive markets, but not in the US**. [S2, MEDIUM; S3, MEDIUM-HIGH]
+- The Compact never had **adaptive** (cornering) headlights; those exist only on the facelift Coupé and Convertible. [S4, MEDIUM]
+
+## A car on its own
+
+BMW built the E46 Compact from 2000 to the end of 2004; BMW's own classic-model page gives the 325ti's production as April 2000 to December 2004. [S3, BMW-authored, HIGH for those dates] The catalogue lists nine engine variants: 316ti (four engine generations), 318ti (two), 325ti, and the 318td and 320td diesels. [S1, HIGH]
+
+The parts catalogue sorts the E46 by region per body. The Sedan is listed for Europe, the USA and nine other regions; the Coupé, Convertible and Touring for Europe and the USA; the **Compact for Europe only**. A request for a US Compact tree returns nothing. [S2, MEDIUM] An encyclopaedia entry agrees: the E46 Compact was not sold in North America, because its E36 predecessor had not sold well there. [S3, encyclopaedia, MEDIUM-HIGH] BMW's own pages on the car give production dates but say nothing about markets, so they neither confirm nor contradict. [S3]
+
+For a parts buyer the consequence is simple: there is no "US version" of a Compact headlight to worry about, and anything described as a US-spec E46 headlight is for another body.
+
+## Two families, nothing in between
+
+On both catalogue mirrors, for every one of the nine Compact variants, the headlight page lists the same four units: a **halogen** left and right, and a **bi-xenon** left and right. [S1, HIGH]
+
+What is not there matters as much. The Sedan and Touring were sold with a plain **single-xenon** low beam before bi-xenon arrived with the 2001 facelift. [S3, BMW press kits, HIGH for Sedan/Touring] The Compact's catalogue page has **no single-xenon unit at any date**: it is halogen or bi-xenon. [S1, HIGH] If someone offers you a "xenon Compact headlight", it is either the bi-xenon unit or not a Compact part.
+
+The bi-xenon units are listed under BMW's **Xenon Light** option (option code 522), and the catalogue even lists a xenon installation kit for the Compact. [S1, MEDIUM: one mirror shows the option header] Two cautions here. First, a catalogue listing means the part is *applicable* to the car, not that the car was *built* with it: the bi-xenon unit is listed for the 316ti and the 318td as well as the 325ti, which tells you it could be ordered or fitted, not how many were. [S1, HIGH for the listing; the project's evidence rules on applicability apply] Second, no BMW text we have says in words that halogen was the Compact's standard fit; it follows from xenon being the optional code, and that inference is MEDIUM, not HIGH. [S3, Q4]
+
+### Left-hand drive, right-hand drive
+
+Both families exist in a left-hand-drive and a right-hand-drive version, and the right-hand-drive units are listed only for the engine variants that were actually built in right-hand drive. [S1, HIGH] A UK Compact needs the right-hand-drive unit; a German one needs the left-hand-drive unit. The beam pattern differs; the housing looks the same.
+
+## No facelift, no changeover
+
+Owners of a Sedan or Touring have to know whether their car was built before or after September 2001, and Coupé and Convertible owners before or after March 2003, because the headlights changed with the facelift. (We cover those changeovers in a separate article.) The Compact owner has no such date to remember.
+
+On the mirror that shows production-month views, the 325ti's headlight list is **identical** in September 2000, June 2001, March 2003 and December 2004, for left- and right-hand drive. Neither mirror prints a from/to date on any Compact headlight row. [S1, MEDIUM: one mirror's month views; absence of dates on both] The only "facelift" item in the Compact's lighting group is a **conversion kit for the 2003 rear lights**; the front was left alone. [S1, MEDIUM]
+
+One loose end: the second mirror lists an additional pair of halogen and bi-xenon numbers for the Compact that the first mirror does not show at all. One of them is not orderable. They are most likely later re-issued numbers for the same units, but neither mirror prints a supersession, so the relationship is **not established**. [S1, MEDIUM, recorded conflict] This is exactly the kind of thing the configurator resolves for you: it carries both sets and shows you the current one.
+
+## Who made them
+
+The Sedan, Touring and Coupé headlight rows in the catalogue carry supplier notes (Bosch, ZKW, AL). **No Compact headlight row carries any supplier note** on either mirror. The Compact's xenon electronics (control unit, ignition element) are marked "AL", and a xenon bulb is noted "not suitable for ZKW", which suggests but does **not** establish that the bi-xenon units are Automotive Lighting parts. The halogen supplier is not established. [S1, HIGH for what the rows show; the maker itself NOT ESTABLISHED]
+
+Why that matters: aftermarket and used listings often say "Hella" or "ZKW" as if it were a fitment fact. For the Compact, the catalogue does not say, so neither do we.
+
+## How to tell what your Compact has
+
+1. **Check the build data.** The xenon option is code 522, "Xenon Light". A BMW dealer can read the options a car left the factory with. If 522 is there, your car was built with bi-xenon. [S1, HIGH for the option name and code; the dealer lookup is general knowledge, not from the evidence pack]
+2. **Owners' cues, with a health warning.** Forum posts say factory xenon cars have no manual headlight-height dial on the dashboard, because the beam levels itself, and that xenon light is whiter and bluer than the warmer halogen. These cues come from Sedan and Touring threads, not Compact ones, and are LOW. We do not recommend judging by whether a lens is visible inside the headlight; on other E46 bodies that cue has turned out to be wrong. [S5, LOW]
+3. **Left or right-hand drive** follows from your market; a converted import is the exception, and the headlights are one of the parts that must be changed in a conversion.
+
+## Find the right headlight for your car
+
+The E46 configurator asks which body you have, so a Compact owner is never shown a Sedan part. Pick your car, pick halogen or bi-xenon, and it links to sellers for the exact unit. The Compact catalogue work behind this article is being added to the configurator; this page will link straight to the Compact headlights when it is live.
+
+→ [Open the E46 configurator](https://e46.zauberlabs.de)
+
+## Sources & confidence
+
+| ID | Source | Type | Confidence | Evidence file (e46build, `docs/research/`) |
+| --- | --- | --- | --- | --- |
+| S1 | T-025 catalogue research: Compact headlight pages on eStore-Central and bmwfans.info for all nine engine variants, LHD and RHD, plus part cross-references and negative checks on the other bodies | ETK mirror, two mirrors | **HIGH** where both agree (two families, LHD/RHD, Compact-only numbers); **MEDIUM** for single-mirror items (no running change, option header, extra numbers) | `t024-t025-evidence/compact.json`; `t024-t025-evidence/raw/compact-*.html` |
+| S2 | T-030 market check: catalogue region trees per E46 body | ETK mirror | **MEDIUM** (absence of a US tree in one mirror) | `t030-evidence/wheels-compact-markets.json`, fact B-compact |
+| S3 | T-032 follow-ups Q3 and Q4: BMW Group Classic pages (production dates), BMW press kits MY2002 (xenon optional on Sedan/Touring), Wikipedia (Compact not sold in North America) | BMW-authored; encyclopaedia | **HIGH** for BMW dates; **MEDIUM-HIGH** for the market statement; **MEDIUM** for "halogen is the base" as an inference | `t032-evidence/T-032-findings.md`; `t032-evidence/raw/bmwfans-usa-catalogue-extract.md`; `t032-evidence/raw/bmw-press-*.html` |
+| S4 | T-038: adaptive headlights on E46 Coupé and Convertible only | BMW training text via reproduction; catalogue diagrams | **MEDIUM** | `t038-akl-interchangeability/REPORT.md` |
+| S5 | Owner-forum cues for halogen vs xenon (Sedan/Touring threads) | forum | **LOW**, never decides | `t032-evidence/T-032-findings.md` (Q1) |
+
+**Recorded conflicts.** (1) One mirror lists an extra pair of halogen and bi-xenon numbers for the Compact that the other does not; relationship not established. (2) No supplier note on any Compact headlight row, where the other bodies' rows carry them; the maker of the Compact units is not established.
+
+**Not established (open).** Maker of the halogen and bi-xenon units; relationship of the extra catalogue numbers; any in-production change not visible in the catalogue; whether any market outside Europe other than right-hand-drive markets received the Compact (the catalogue says "Europe"; the encyclopaedia says "not North America"; the gap between those two statements is not closed).
+
+**Method note.** BMW's own catalogue was not accessible; two independent mirrors were read and compared, which is why the core facts here are HIGH while anything one mirror shows alone is MEDIUM. Part numbers are deliberately left out of this article. For the exact part for your car, use the configurator.
