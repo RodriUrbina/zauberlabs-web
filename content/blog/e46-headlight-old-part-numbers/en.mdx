@@ -1,0 +1,130 @@
+---
+# BL-020 — Writer draft, English. Body is plain Markdown (no JSX).
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Why old part numbers still appear in used listings: E46 headlight supersession chains"
+description: "BMW renumbered most E46 headlights up to three times. What a seller's old number means, which old numbers still fit, and the one chain step that never does."
+date: 2026-10-02
+updated: 2026-10-09
+publishAt: "2026-10-09"
+lang: en
+slug: e46-headlight-old-part-numbers
+card: BL-020
+author: "Zauberlabs"
+tags:
+  - E46
+  - headlights
+  - part numbers
+  - used parts
+  - BMW
+configurator: E46
+cta:
+  label: "E46 configurator: coming soon"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts; layout shows "coming soon" until the configurator opens
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "A used BMW E46 headlight unit on a workbench with its BMW label visible but unreadable, next to a printed parts list"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: a used E46 headlight unit on a workbench, label sticker on its back blurred/unreadable, a printed parts list beside it with blurred lines. Must not show: readable part numbers, legible BMW roundel, a person."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-039 supersession table: chain links printed on saved BMW parts-catalogue part pages (bmwfans.info 'Old partnumber' and exchangeability fields), cross-checked against eStore-Central diagrams; 58 printed links for Sedan/Touring (Europe and US) and US Coupé/Convertible"
+    type: ETK mirror part pages (catalogue-grade); two mirrors where noted
+    path: "t039-supersession-map/supersession-table.md; t039-supersession-map/supersession-chains.json; t039-supersession-map/part-pages.json"
+    confidence: HIGH
+    note: "HIGH only where both mirrors agree (the Europe Sedan/Touring 2001→2004 links); MEDIUM for links printed on one mirror (US numbers, the 1998–99 originals, pre-2001 steps). Release dates on part pages are part-number dates, not vehicle dates."
+  - id: S2
+    title: "T-039 inferred links: Europe Coupé/Convertible chains reconstructed from eStore-Central diagram adjacency and the printed US twins (18 links; no Europe Coupé part page saved except two)"
+    type: inference from catalogue diagrams; one mirror
+    path: "t039-supersession-map/supersession-table.md (§Coupé/Convertible Europe, 'inferred')"
+    confidence: MEDIUM
+    note: "MEDIUM where diagram adjacency and a printed US twin agree; LOW where only a seller note and the US twin support it (the Europe M3 left unit). Not used to state fit in this article."
+  - id: S3
+    title: "T-031 seller notes on replacement numbers (one European dealer's 'replaces' remarks) and the T-031 offer pack of pending listings under old numbers"
+    type: retailer
+    path: "t024-partc-evidence/conflicts-t031.md; t039-supersession-map/pending-resolution.json"
+    confidence: LOW
+    note: "Never decides. Used only to show which seller claims the catalogue contradicts."
+  - id: S4
+    title: "T-030 Sedan/Touring and T-024 part c Coupé/Convertible headlight tables: the production-date bands (09/2001, 03/2003) the chains cross or stay inside"
+    type: ETK mirror, two mirrors for Europe numbers
+    path: "t030-evidence/sedan-touring-markets.json; t024-partc-evidence/headlight-table.md"
+    confidence: HIGH
+    note: "HIGH for the Europe numbers and era grouping; every date MEDIUM (one mirror prints dates)."
+  - id: S5
+    title: "T-039 report — supersession map and the pending offers (2026-10-01)"
+    type: internal synthesis of S1–S4
+    path: "t039-supersession-map/REPORT.md; t039-supersession-map/README.md"
+    confidence: n/a
+    note: "The grading of every claim in the body follows this file."
+---
+
+Search for a used E46 headlight and half the listings quote a BMW number that is not in today's catalogue. Some of those numbers are the same part under an earlier name. Some are a different, older part that still fits your car. And some belong to a different car altogether, dressed up by a "replaces" note. BMW's parts catalogue records all three cases, on the part pages most people never open. This article explains what those pages say, so an old number in a listing stops being a guess.
+
+## The short version
+
+- BMW renumbered most E46 headlights **up to three times**: a 1998–99 original, a 1999 number, a 2001 facelift original and a 2004 current number. The Sedan and Touring chains are complete and printed in the catalogue for both Europe and the US. [S1, HIGH for Europe 2001→2004; MEDIUM for the rest]
+- Every chain link carries BMW's own flag: **"exchangeable retrospectively"** or **"bilaterally exchangeable"** means the new number may be fitted where the old one was; **"non-exchangeable retrospectively"** means it may not. [S1]
+- The non-exchangeable links are **exactly the ones that cross the September 2001 facelift** (and the xenon to bi-xenon change that came with it). Within a production band, every link is exchangeable. [S1, S4: HIGH where two mirrors agree]
+- The **2004 renumbering is a parts-system event**, not a change to the cars: the 2004 numbers apply to cars built from September 2001. Release dates on part pages are not vehicle dates. [S1, S4]
+- The **Europe Coupé and Convertible chains are not printed** on any saved page; they are inferred and should not be used to decide fit. The **Compact has no chain at all**. [S2, MEDIUM; S5]
+
+## Four numbers for one headlight
+
+Take a left halogen headlight for a Europe Sedan built after the 2001 facelift. The catalogue's current number for it was released in **November 2004**. Its part page names an **old part number**, released in **August 2001**, and marks the pair "exchangeable retrospectively". That 2001 number's own page names an older one again, released in **March 1999**, and this time the flag reads "**non-exchangeable retrospectively**": the 1999 part is the pre-facelift Bosch halogen, a different headlight for a different production band. And the 1999 number's page names the **1998 original**, discontinued in March 1999, "bilaterally exchangeable" with it. [S1, HIGH for the 2001→2004 link, both mirrors; MEDIUM for the earlier links, one mirror]
+
+So one position on the car has carried four numbers. Two of them (1998 and 1999) are interchangeable pre-facelift units. Two of them (2001 and 2004) are interchangeable facelift units. The step between the pairs is the one that does not cross. The same pattern repeats for the xenon side: a 1998 original, a 1999 single-xenon unit, then a 2001 **bi-xenon** unit marked non-exchangeable with the xenon it replaced, then its 2004 renumbering. [S1] The US-market twins follow the full four-number pattern. The TITAN-trim units of the 330i do not: they start in June 2000, so their chain has three numbers (2000, 2001 original, 2004 current) and no 1998 original. [S1, MEDIUM for TITAN and US]
+
+In total the research reconstructed **76 links**: 58 printed on saved catalogue part pages, 18 inferred, none invented. [S5]
+
+## What the flags mean
+
+The catalogue mirror prints one chain field per part: the old number, and BMW's phrase about the relationship. The project reads the phrases this way, since the mirror does not define them: [S1, S5]
+
+| BMW's phrase on the new part's page | Project reading | Where it appears in the E46 headlight chains |
+| --- | --- | --- |
+| Exchangeable retrospectively | the new part may be fitted where the old one was | every 2001 original → 2004 current number; the M3 and facelift Coupé renumberings |
+| Bilaterally exchangeable | either may be fitted in place of the other | mostly the 1998–99 originals → 1999 numbers (two US left-hand pages print "exchangeable retrospectively" for that step) |
+| Non-exchangeable retrospectively | the old number belongs to a different vehicle band | every pre-09/2001 → from-09/2001 step, including xenon → bi-xenon |
+
+The check that matters: **not one printed non-exchangeable link stays inside a production band, and not one printed exchangeable link crosses one.** BMW's flags and the catalogue's September 2001 split line up one to one. [S1, S4, S5] That is why a used pre-facelift xenon unit must never be "chained" to the current bi-xenon number by a seller or a database: the catalogue says in so many words that it does not go.
+
+## Three kinds of old number in a listing
+
+**1. A 2001 original for a facelift unit.** The seller quotes the number the part carried from August 2001 to late 2004. It is the **same part** as the current number, and BMW marks it exchangeable. Fits the same cars (built from September 2001). This is the common case for used Sedan and Touring units pulled from 2001–2004 cars. [S1, HIGH for Europe Sedan/Touring]
+
+**2. A 1998–99 original.** The seller quotes a number BMW discontinued in March 1999. It is the first-year pre-facelift unit, bilaterally exchangeable with the 1999 number, so it fits a car built **before September 2001** and nothing later. One European dealer lists these 1998 numbers as "successors" of the 1999 ones; the part pages show the opposite, they are the predecessors. [S1, MEDIUM; S3, LOW for the dealer claim]
+
+**3. A pre-facelift number "replaced by" a facelift one.** This is the trap. A listing, or a dealer's replacement note, says the old xenon or halogen unit "is replaced by" a 2001 or 2004 number. The catalogue agrees that the number was superseded, and marks the link **non-exchangeable**: the new part is for the facelift car, not for yours. Any note that chains a facelift unit to a pre-facelift one contradicts the catalogue's own banding and should be ignored. [S1, HIGH; S3, LOW]
+
+One number family has no chain at all: the pre-facelift **ZKW** halogen (the second supplier's version) has neither an old number nor a successor in either market. If you have one, the only replacement is another of the same. [S1, MEDIUM]
+
+## Where the chains stop being printed
+
+Everything above rests on part pages the research saved. For the **Sedan and Touring**, both markets, every link is printed. For the **US Coupé and Convertible**, the chains are printed too, with three right-hand links inferred. For the **Europe Coupé and Convertible**, only two part pages were ever saved; the rest of those chains are inferred from the second mirror listing both numbers in adjacent rows of one diagram, plus the printed US twin. That is MEDIUM at best, and for the Europe M3 left unit it rests on a dealer note and the US twin only, so LOW. [S2] The research's own rule is that **no inferred link should decide fit** until the Europe Coupé pages are fetched. [S5]
+
+The **Compact** has no chain: its part page could not be loaded, and the second set of Compact numbers that one mirror lists is not established as a supersession of the first. [S5] For a Compact buyer, an old-looking number is an open question, not a known predecessor.
+
+## Why the 2004 numbers confuse everyone
+
+Most current E46 headlight numbers were released in **October to December 2004**. People read that as "a 2004 headlight" and conclude it fits 2004–2006 cars only. It does not mean that. The part pages give release windows for the **number**; the diagram gives the production band for the **car**, and for these numbers that band is "from September 2001". A 2002 Sedan takes the 2004-numbered unit. [S1, S4] Equally, the 2001 original the seller quotes is not "for 2001 cars only"; it is the same part, superseded. The one date that decides fit is the car's production month against the band split, which is the subject of our article on the headlight changeovers.
+
+## What this means when you buy
+
+1. **Ask for the number on the part, not the number in the title.** Sellers copy numbers from old listings; the sticker on the unit is what BMW printed. [S5]
+2. **An old number is fine if it is in the same band.** A 2001 original for a facelift unit, or a 1998 original for a pre-facelift unit, fits the same cars as its successor. [S1]
+3. **"Replaced by" is not "fits instead of".** When the replacement crosses September 2001, BMW marks it non-exchangeable. Check the band, not the chain. [S1, S4]
+4. **Coupé and Convertible in Europe: do not rely on chains yet.** The links are inferred; match the unit to your production band directly. [S2]
+5. **Compact: there is no chain to rely on.** [S5]
+6. **A used unit under an old number is usually cheap for a reason.** In the research's sample of European listings, all but one of the old-number offers were used units from dismantlers (the exception a new genuine unit, out of stock), mostly for the two commonest Sedan and Touring sets, which already had plenty of current-number offers. [S3, LOW; S5]
+
+## Notes on the evidence
+
+**Conflicts recorded.** (1) A European dealer's "replaces" notes name the 1998–99 originals as successors of the 1999 numbers; the part pages print them as predecessors (discontinued March 1999, "old part number" on the 1999 pages). (2) The same dealer's note that a facelift halogen "replaces" a pre-facelift one would chain across the September 2001 band; it contradicts the catalogue's banding and is not used. (3) One number in a dealer note appears on no catalogue page. (4) Mirror oddities: one right-hand 1999 unit's page prints a release date earlier than its own predecessor's end date; one 1998 original shows no end date. Recorded, not acted on.
+
+**Not established (open).** The Europe Coupé/Convertible chains (only two part pages saved; the pages to fetch are listed in the research); the Compact chain and the second Compact number family; the old number of one Europe facelift halogen pair; whether BMW's three phrases mean exactly what the project reads into them (the mirror does not define them). Both mirrors derive from the same BMW data, so "two mirrors agree" means consistent parsing, not independent confirmation.
+
+## What comes next
+
+Our E46 configurator is coming soon. When it opens it will show the headlights for your body style and build date and link to sellers for the exact part; this page will link to it then.
