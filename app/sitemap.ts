@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getBlog } from "@/lib/blog";
 
 const BASE = "https://www.zauberlabs.de";
 
@@ -18,5 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     alternates: { languages: { de: `${BASE}/de${path}`, en: `${BASE}/en${path}` } },
   });
   // Impressum/Datenschutz are noindex, so they stay out of the sitemap.
-  return [page("", 1), en("", 0.9)];
+  // Blog: index + tag pages per language; articles only in the languages they exist in; drafts excluded on production.
+  return [page("", 1), en("", 0.9), ...getBlog().sitemapEntries()];
 }

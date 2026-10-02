@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-ivory: #eeebe5;
@@ -122,3 +123,40 @@ body {
   background: var(--color-paper); color: var(--color-ink); display: grid; place-items: center; transition: transform 0.3s ease; }
 .deck-center:hover .deck-arrow { transform: rotate(45deg); }
 @media (prefers-reduced-motion: reduce) { .deck-center, .deck-arrow { transition: none; } }
+
+/* ---------- Blog article typography (Tailwind typography plugin themed to the brand tokens) ---------- */
+.prose-zl {
+  --tw-prose-body: var(--color-body);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-lead: var(--color-body);
+  --tw-prose-links: var(--color-ink);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-counters: var(--color-muted);
+  --tw-prose-bullets: var(--color-fog);
+  --tw-prose-hr: var(--color-line);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: var(--color-accent);
+  --tw-prose-captions: var(--color-muted);
+  --tw-prose-code: var(--color-ink);
+  --tw-prose-pre-code: var(--color-paper);
+  --tw-prose-pre-bg: var(--color-ink);
+  --tw-prose-th-borders: var(--color-line);
+  --tw-prose-td-borders: var(--color-line);
+  font-family: var(--font-sans);
+}
+.prose-zl :where(h2, h3, h4):not(.not-prose *) { letter-spacing: -0.025em; font-weight: 800; }
+.prose-zl :where(h2):not(.not-prose *) { font-size: 1.6em; margin-top: 2em; margin-bottom: 0.7em; line-height: 1.1; }
+.prose-zl :where(h3):not(.not-prose *) { font-size: 1.2em; margin-top: 1.7em; }
+.prose-zl :where(a):not(.not-prose *) { text-decoration-color: var(--color-accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.prose-zl :where(a):not(.not-prose *):hover { color: var(--color-accent); }
+.prose-zl :where(blockquote):not(.not-prose *) { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 1.15em; }
+.prose-zl :where(blockquote p:first-of-type)::before, .prose-zl :where(blockquote p:last-of-type)::after { content: none; }
+.prose-zl :where(code):not(pre code):not(.not-prose *) { font-family: var(--font-mono); font-weight: 500; font-size: 0.85em; background: rgb(14 14 16 / 0.06); padding: 0.1em 0.4em; border-radius: 0.3em; }
+.prose-zl :where(code)::before, .prose-zl :where(code)::after { content: none; }
+.prose-zl :where(pre):not(.not-prose *) { font-family: var(--font-mono); border-radius: 1rem; font-size: 0.85em; }
+.prose-zl :where(table):not(.not-prose *) { font-size: 0.9em; }
+.prose-zl :where(thead th):not(.not-prose *) { font-family: var(--font-mono); font-size: 0.75em; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-muted); font-weight: 500; }
+.prose-zl :where(img):not(.not-prose *) { border-radius: 1rem; }
+.prose-zl :where(strong):not(.not-prose *) { font-weight: 700; }
+/* Inline evidence marks ([S1, HIGH]) never break across lines awkwardly and never inherit the link underline */
+.prose-zl .cite a { text-decoration: none; }
