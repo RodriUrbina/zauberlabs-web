@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CONTACT_EMAIL, dictionaries, E46_URL, isLocale } from "@/lib/i18n";
+import { dictionaries, E46_LIVE, E46_URL, isLocale } from "@/lib/i18n";
 import { Arrow, ArrowUpRight, Wordmark } from "@/components/Icons";
 import VoteCard from "@/components/VoteCard";
 import SuggestForm from "@/components/SuggestForm";
 import HeroDeck from "@/components/HeroDeck";
+import SiteFooter from "@/components/SiteFooter";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
 
@@ -13,7 +14,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   const t = dictionaries[lang];
-  const other = lang === "de" ? "en" : "de";
 
   return (
     <>
@@ -28,6 +28,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <a href="#how" className="hover:opacity-70">{t.nav.how}</a>
             <a href="#principles" className="hover:opacity-70">{t.nav.principles}</a>
             <a href="#suggest" className="hover:opacity-70">{t.nav.suggest}</a>
+            <Link href={`/${lang}/blog`} className="hover:opacity-70">{t.nav.blog}</Link>
           </nav>
           <div className="flex items-center gap-4">
             <div className="font-mono text-xs tracking-[0.08em] text-muted">
@@ -35,9 +36,13 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               {" / "}
               {lang === "de" ? <span className="text-ink">DE</span> : <Link href="/de" hrefLang="de" className="px-1 py-3 hover:text-ink">DE</Link>}
             </div>
-            <a href={E46_URL} className="hidden h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-paper hover:bg-black sm:flex">
-              {t.nav.open} <Arrow />
-            </a>
+            {E46_LIVE ? (
+              <a href={E46_URL} className="hidden h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-paper hover:bg-black sm:flex">
+                {t.nav.open} <Arrow />
+              </a>
+            ) : (
+              <span className="hidden h-11 items-center rounded-full border border-line px-5 text-sm font-semibold text-muted sm:flex">{t.nav.comingSoon}</span>
+            )}
           </div>
         </div>
       </header>
@@ -65,8 +70,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
 
           <HeroDeck
-            href={E46_URL}
-            live={t.hero.live}
+            href={E46_LIVE ? E46_URL : undefined}
+            live={E46_LIVE ? t.hero.live : `${t.hero.soon} · 01`}
             soon={t.hero.soon}
             e46Line={t.hero.cardLine}
             e46Alt={t.hero.heroAlt}
@@ -79,11 +84,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <div className="bg-ink text-fog">
           <div className={`${wrap} eyebrow flex min-h-[60px] flex-wrap items-center justify-between gap-x-10 gap-y-2 py-4 text-[11px] md:text-xs`}>
             <div className="flex flex-wrap gap-x-10 gap-y-2">
-              {t.ticker.map((item, i) => (
+              {t.ticker.map((raw, i) => {
+                const item = i === 0 && !E46_LIVE ? t.tickerSoon : raw;
+                return (
                 <span key={item}>
                   <span className={i === 0 ? "text-e46" : "text-accent-dark"}>0{i + 1}</span>&nbsp;&nbsp;{item}
                 </span>
-              ))}
+                );
+              })}
             </div>
             <span className="hidden md:block">{t.tickerRight}</span>
           </div>
@@ -110,15 +118,19 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <div className="flex flex-col gap-7 p-6 md:p-8">
                 <div className="flex flex-col justify-between gap-5 md:flex-row md:items-start">
                   <div className="flex flex-col gap-2.5">
-                    <span className="eyebrow text-[11px] text-e46">{t.garage.e46Label}</span>
+                    <span className="eyebrow text-[11px] text-e46">{E46_LIVE ? t.garage.e46Label : t.garage.e46LabelSoon}</span>
                     <span className="text-3xl font-extrabold tracking-tight md:text-4xl">
                       E46<span className="text-e46">BUILD</span>
                     </span>
                     <p className="max-w-[460px] text-[15px] leading-relaxed text-fog">{t.garage.e46Body}</p>
                   </div>
-                  <a href={E46_URL} className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-paper px-6 text-[15px] font-semibold text-ink hover:bg-white">
-                    {t.garage.open} <ArrowUpRight />
-                  </a>
+                  {E46_LIVE ? (
+                    <a href={E46_URL} className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-paper px-6 text-[15px] font-semibold text-ink hover:bg-white">
+                      {t.garage.open} <ArrowUpRight />
+                    </a>
+                  ) : (
+                    <span className="flex h-12 shrink-0 items-center justify-center rounded-full border border-[#3A3A40] px-6 text-[15px] font-semibold text-fog">{t.nav.comingSoon}</span>
+                  )}
                 </div>
                 <div className="grid gap-3 sm:grid-cols-3">
                   {t.garage.bodies.map((b) => (
@@ -230,39 +242,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </section>
       </main>
 
-      {/* FOOTER */}
-      <footer className="bg-ink text-fog">
-        <div className={`${wrap} flex flex-col gap-14 pt-14 pb-10 md:pt-[72px]`}>
-          <div className="grid grid-cols-2 gap-10 md:grid-cols-[minmax(0,2fr)_repeat(3,minmax(0,1fr))]">
-            <div className="col-span-2 flex flex-col gap-4 text-paper md:col-span-1">
-              <Wordmark dark />
-              <p className="max-w-[340px] text-sm leading-relaxed text-fog">{t.footer.tagline}</p>
-            </div>
-            <div className="flex flex-col gap-3 text-sm">
-              <span className="eyebrow text-[11px] text-[#8A877F]">{t.footer.configurators}</span>
-              <a href={E46_URL} className="text-paper hover:opacity-80">E46BUILD</a>
-              <span>{t.footer.next}</span>
-            </div>
-            <div className="flex flex-col gap-3 text-sm">
-              <span className="eyebrow text-[11px] text-[#8A877F]">{t.footer.studio}</span>
-              <a href="#principles" className="hover:text-paper">{t.footer.about}</a>
-              <a href="#suggest" className="hover:text-paper">{t.nav.suggest}</a>
-              <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-paper">{CONTACT_EMAIL}</a>
-            </div>
-            <div className="flex flex-col gap-3 text-sm">
-              <span className="eyebrow text-[11px] text-[#8A877F]">{t.footer.legal}</span>
-              <Link href={`/${lang}/impressum`} className="hover:text-paper">{t.footer.impressum}</Link>
-              <Link href={`/${lang}/datenschutz`} className="hover:text-paper">{t.footer.privacy}</Link>
-            </div>
-          </div>
-          <div className="flex flex-col justify-between gap-3 border-t border-ink-3 pt-6 text-xs text-[#8A877F] md:flex-row">
-            <span>© {new Date().getFullYear()} Zauberlabs. {t.footer.disclaimer}</span>
-            <Link href={`/${other}`} hrefLang={other} className="font-mono tracking-[0.1em] hover:text-paper">
-              ZAUBERLABS.DE · {other.toUpperCase()}
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter lang={lang} />
     </>
   );
 }

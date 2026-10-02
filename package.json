@@ -2,23 +2,36 @@
   "name": "zauberlabs-web",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.mts",
+    "smoke": "node scripts/smoke.mjs",
+    "check": "npm run typecheck && npm test && npm run smoke"
   },
   "dependencies": {
     "@upstash/redis": "^1.39.0",
+    "gray-matter": "^4.0.3",
     "next": "^16.3.6",
+    "next-mdx-remote": "^6.0.0",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react-dom": "^19.3.0",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@mdx-js/mdx": "^3.1.1",
     "@tailwindcss/postcss": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.20",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.0"
   }
 }
