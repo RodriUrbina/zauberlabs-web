@@ -1,0 +1,165 @@
+---
+# BL-015 — Writer draft, English (revision 2 after Editor review). Body is plain Markdown (no JSX).
+# The layout (BL-001) renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "The SMART airbag line and BMW's own button retrofit kit: E46 steering-wheel swaps explained"
+description: "An E46 steering wheel is the driver airbag. What decides fit: airbag generation, wiring for buttons and paddles, wheel family. From BMW's own documents."
+date: 2026-10-02
+updated: 2026-10-06
+publishAt: "2026-10-06"
+lang: en
+slug: e46-steering-wheel-swaps
+card: BL-015
+author: "Zauberlabs"
+tags:
+  - E46
+  - steering wheel
+  - airbag
+  - retrofit
+  - BMW
+configurator: E46
+cta:
+  label: "E46 configurator: coming soon"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts; layout shows "coming soon" until the configurator opens
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "Driver's-seat view of a BMW E46 three-spoke sport steering wheel with multifunction buttons on the spokes"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: interior, driver's-seat view of an E46 three-spoke sports steering wheel with multifunction buttons on the spokes, hands off the wheel, dashboard soft-focus. Must not show: legible BMW roundel or M badge on the hub, any text on buttons or airbag cover, part numbers, a face."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW Parts and Accessories Installation Instructions — Multi-functional steering wheel (MFL) retrofit kit / Cruise control (GRA), EBA no. 01 29 0 016 107, dated 11.2001"
+    type: BMW-authored; full text read; hosted on a third-party mirror (bmw.etk.club), PDF not archived
+    path: "t029-evidence/raw/bmw-eba-284-mfl-retrofit-kit.txt"
+    confidence: HIGH
+    note: "HIGH for what the document states; full text read; hosted on a third-party mirror, PDF not archived. Both kit generations it names are independently listed on the catalogue mirror."
+  - id: S2
+    title: "BMW Group UK press kit, 26 Oct 2001: The new BMW 3 Series Saloon and Touring, plus model specification lists"
+    type: BMW-authored
+    path: "t029-evidence/raw/bmw-press-uk-2001-steering-extract.txt"
+    confidence: HIGH
+    note: "UK market, model year 2002 only."
+  - id: S3
+    title: "BMW parts-catalogue mirror (eStore-Central), steering-wheel groups for Sedan, Touring, Coupé, Convertible, Compact and M3, fetched 2026-10-01"
+    type: ETK mirror (catalogue-grade, no stated data version)
+    path: "t029-evidence/raw/estore-steering-matrix.md; t029-evidence/raw/estore-steering-groups.json"
+    confidence: MEDIUM
+    note: "Capped at MEDIUM by project policy: one mirror, no dates, no provenance. See s33-etk-evidence-validation.md."
+  - id: S4
+    title: "Forum and enthusiast-site statements (search-result summaries; the main E46 forum is paywalled and was not read)"
+    type: forum / enthusiast
+    path: "t029-evidence/T-029-findings.md (attributed in the text)"
+    confidence: LOW
+    note: "Never decides alone. Shown only where marked LOW."
+  - id: S5
+    title: "T-029 research findings — Steering wheel: what decides fit (2026-10-01); T-027 bumper findings for the 'M-Tech' naming"
+    type: internal synthesis of S1–S4
+    path: "t029-evidence/T-029-findings.md; t027-evidence/T-027-findings.md"
+    confidence: n/a
+    note: "The grading of every claim in the body follows these files."
+  - id: S6
+    title: "T-040 research — Do E46 steering-wheel and seat swaps affect TÜV/HU or registration? (2026-10-02): HU-Richtlinie defect catalogue and Directive 2014/45/EU Annex I via the umwelt-online mirror, §19 and §35a StVZO, Anlage VIII, TÜV Rheinland and KBA publications"
+    type: legal texts and official publications via mirror; internal synthesis
+    path: "t040-steering-wheel-inspection/T-040-findings.md"
+    confidence: HIGH
+    note: "HIGH for the HU defect classes (HU-Richtlinie text via the umwelt-online mirror; same items 'major' in Directive 2014/45/EU). The 'genuine wheel needs no entry' question is MEDIUM-LOW (inferred) and is presented as unresolved. Germany only; not legal advice."
+  - id: S7
+    title: "T-047 research — second source for the E46 SMART airbag start date (2026-10-02): catalogue date columns for the steering-wheel groups on bmwfans.info, Europe trees, Saloon/Touring/Coupé/Convertible/Compact/M3"
+    type: ETK mirror (one mirror prints the date columns); internal synthesis
+    path: "t047-smart-airbag-date/T-047-findings.md"
+    confidence: MEDIUM
+    note: "MEDIUM: one mirror's date columns put the change to the Smart wheel groups at 06–07/2000 on Saloon, Touring and Coupé; Convertible, Compact and M3 show Smart groups only. Conflicts with the instruction's 06/99 sentence (S1); catalogue Smart = instruction SMART not established."
+---
+
+Of all the parts people swap on an E46, the steering wheel looks like the easiest. Four bolts, one plug, done. It is also one of the few parts in the cabin that is, in effect, a pyrotechnic device: the wheel carries the driver airbag and plugs into the car's airbag system. So before this article gets to looks, buttons and paddles, it starts where BMW's own documents start: with the airbag.
+
+## The short version
+
+- An E46 steering wheel is three things in one: the **driver airbag**, a **control interface** (buttons, cruise control, gear paddles), and a **wheel family** (four-spoke, sport, M sport, sequential-gearbox). Rim, leather, stitching and the colour of the trim cover are cosmetic. [S5]
+- Only cars with the **SMART airbag wheel** are covered by BMW's retrofit instruction. The catalogue dates the change to SMART wheels at **June 2000** on Saloon, Touring and Coupé (Convertible, Compact and M3 from the start); BMW's instruction says June 1999. The month is disputed between BMW's own sources; we use June 2000, the safer reading. [S7, MEDIUM; S1, HIGH that the document says so]
+- Adding **buttons** to a car that never had them is a **BMW-documented retrofit**: a wiring harness plus a switch unit in the wheel, about an hour of work, by trained personnel, and BMW states that the car must **not** be coded. [S1, HIGH]
+- **Paddle wheels** belong to the sequential gearbox. Putting one on a car without that gearbox is not a wheel-only job. [S2, HIGH for what the paddles are; S4, LOW for the retrofit consequences]
+- "**M-Tech**" is not the name of any BMW steering wheel. BMW's catalogue calls them the **sports steering wheel** and the **M sports steering wheel**. [S3, MEDIUM]
+
+## What a steering wheel actually is on an E46
+
+The parts catalogue does not sell "a steering wheel". Each wheel sits in a group that bundles the wheel itself, the airbag hub cap, the fixing screw and a short **connecting lead between the airbag and the column's slip ring** (the clock spring). [S3, MEDIUM]
+
+That lead comes in two versions: one for the standard four-spoke wheel, one shared by every sport, M sport and sequential-gearbox wheel. Each version carries the same number on every body style where that family is listed. In other words, the airbag connection is **wheel-family specific, not body specific**. [S3, MEDIUM]
+
+The slip ring itself, in the steering column, did not appear in the catalogue groups we read: a gap in the evidence, not a finding. [S3]
+
+## The SMART airbag line: June 2000, or June 1999?
+
+BMW's installation instruction for the multifunction-wheel retrofit kit opens with a restriction:
+
+> "The installation instructions are only valid for vehicles with SMART airbag sports steering wheel. These are E46 coupé, touring, saloon as from 06/99 and convertible from start of series." [S1, HIGH]
+
+"SMART" is the name BMW's document uses; owners describe it as the two-stage airbag. [S4, LOW] The catalogue agrees in its own way: every airbag-wheel group we found is a "Smart" group, and the earlier single-stage wheel appears nowhere in the mirror. [S3, MEDIUM; absence in one mirror is not proof that the earlier wheel was never sold as a part]
+
+The date is **disputed between BMW's own sources**. The parts catalogue's date columns end the older airbag-wheel groups "to Jun '00" (some rows "to Jul '00") and start the "Smart" groups "from Jun/Jul '00" on the Saloon, Touring and Coupé; the Convertible, Compact and M3 show Smart groups only, from the start. [S7, MEDIUM: one mirror prints the dates] That agrees with the instruction's cover page ("identical to standard equipment until 6/00") and contradicts its body sentence ("as from 06/99"). [S1, HIGH that both phrases are in the document] Both are BMW-origin data and nothing we found decides between them; whether the catalogue's "Smart" and the instruction's "SMART" name the same airbag generation is not established. [S7] The risk runs one way: a car built between **June 1999 and June 2000** may have the older airbag, and a SMART wheel on it would not match. So this article, and the configurator when it opens, treat **June 2000** as the line and the twelve months before it as uncertain. **Older cars are not covered** by the BMW kit or any SMART wheel group. [S1 scope, HIGH; S3, S7 absence, MEDIUM]
+
+Whether a wheel is SMART or not cannot be seen from the driver's seat. It depends on the build date of the car and on the history of the wheel in your hands. A used wheel of unknown origin is a used airbag of unknown origin.
+
+## Buttons: BMW's own retrofit kit
+
+Multifunction buttons on the spokes (radio, telephone, cruise control) are the retrofit BMW wrote the instruction for. What the document says the job involves: [S1, HIGH]
+
+- A **retrofit wiring harness with six branches** to three connection points: the steering-column switch cluster, the central light-switch control unit, and the engine control unit in the E-box.
+- A **switch unit and connecting cable** fitted into the wheel's covering cap; the wheel is tightened to BMW's specified torque; then **"Fit existing airbag unit."** Your airbag stays; the kit adds the buttons around it.
+- **"Coding of the vehicle must not be carried out."** About **one hour** of installation time. Target group: "technical personnel who have received training on BMW vehicles"; the kit is "intended only for use in the BMW trading organisation". Preparatory steps: observe the airbag-system safety regulations, run a short test, disconnect the battery, remove the airbag unit before the wheel comes off.
+
+Owners sometimes report coding when swapping wheels [S4, LOW]; for this specific retrofit, BMW says no.
+
+One kit, two jobs: the same document covers the **multifunction wheel and cruise control** together, and the catalogue lists the same kit under both headings. [S1, HIGH; S3, MEDIUM] The catalogue also sells wheels **with** and **without** buttons as separate items. [S3, MEDIUM] A wheel that looks like it has buttons is not the same as a car that is wired for them; if your car never had buttons, the harness is the part of the job that matters.
+
+## Paddles: the sequential-gearbox wheels
+
+BMW's 2001 press material describes the Sequential Sports Gearbox (SSG) as an automated manual shifted "with a flick of the gear lever" or "via paddles behind the steering wheel", offered on the 325i and 330i Saloon and Coupé; the M3 had its own SMG gearbox earlier. [S2, HIGH]
+
+The catalogue lists dedicated **sports steering wheels "for sequential gearbox"** on Sedan, Touring, Coupé and Convertible, and two M sports versions on the M3 (leather and Alcantara). [S3, MEDIUM]
+
+What the evidence does not support is the idea that a paddle wheel is a bolt-on upgrade. Owners report that it needs a slip ring with extra contacts and the gearbox side to talk to; conversely, a plain wheel on an SSG or SMG car loses the paddles. [S4, LOW] We found no BMW document either way. Treat a paddle wheel as part of a gearbox, not as a steering wheel.
+
+## The families, by their real names
+
+The catalogue groups wheels like this: [S3, MEDIUM]
+
+| Family (catalogue wording) | Buttons | Where the catalogue lists it |
+| --- | --- | --- |
+| Standard **four-spoke** leather wheel | with or without | Sedan, Touring, Compact only |
+| **Sports steering wheel** (three-spoke), many trim-cover colours and wood rims | with or without | all body styles; the M3 tree lists M wheels only |
+| **M sports steering wheel**, leather or Alcantara | with or without | all body styles; the M3 has its own numbers |
+| Sports / M sports wheel **for sequential gearbox** (paddles) | not established | Sedan, Touring, Coupé, Convertible; M3 separately |
+
+The four-spoke wheel is absent from the Coupé, Convertible and M3 listings we read: absence in one mirror, not proof. [S3, MEDIUM] The catalogue pairs each family with an option code; MEDIUM that the codes exist, LOW for what each means. [S3, S4]
+
+**BMW treats these swaps as expected.** The catalogue contains dedicated "Modification" groups: four-spoke to sports, four-spoke to M sports, sports to M sports, each also in a multifunction version. [S3, MEDIUM] That is the strongest catalogue-grade sign that moving between families within the SMART generation is a supported path; what the conversion groups contain was not extracted.
+
+**"M-Tech" is not a steering wheel.** "M-Tech" is the common name for BMW's M Aerodynamics bumper packages, not for any wheel. [S5, T-027, MEDIUM] The wheel forums call "M-Tech" is, in BMW's words, an M sports steering wheel; the differences owners describe between M sports, M3 and later versions (thumb rests, rim thickness) are forum-level and unverified. [S4, LOW] The naming question has [its own article](/en/blog/e46-m-tech-is-not-a-steering-wheel).
+
+## Before you buy a wheel
+
+1. **Check the build date of your car.** Saloon, Touring, Coupé: June 2000 is the line (catalogue); BMW's instruction says June 1999. A car built between the two dates: have a BMW specialist confirm the airbag type, or treat it as uncovered. Convertible, Compact and M3: SMART from the start. [S7, MEDIUM; S1, HIGH for what the instruction says]
+2. **Know what you cannot see.** The airbag generation sits inside the hub, and whether the car is actually wired for buttons is not visible from the wheel. Neither can be judged from a photo or the driver's seat. [S1, S3]
+3. **Decide whether you are buying buttons.** If your car has none, budget for the BMW retrofit harness and a trained fitter, and expect roughly an hour of work. No coding, per BMW. [S1, HIGH]
+4. **Do not buy paddles unless you have the gearbox.** [S2, S4]
+5. **Treat the airbag as the part.** Disconnect the battery, follow the airbag safety procedure, run the short test afterwards: BMW's own steps for a wheel job. [S1, HIGH]
+6. **Know the history of a used wheel.** It contains an airbag. If the seller cannot say what car it came from and when, that is the answer.
+
+## Inspection and registration (Germany)
+
+The German main inspection (HU) does not care whether your wheel is a sport or an M wheel. It cares about the airbag. The inspection catalogue rates an airbag that is missing or **"not suitable for the vehicle"**, a fault reported on the airbag system's interface, or an **airbag warning lamp that stays on** as a **significant defect** ("erheblicher Mangel"): no inspection sticker, fix it and present the car again within one month. A steering wheel that is loose, broken or **"not an approved version"** is rated the same way. The EU inspection directive lists the same items as "major". [S6, HIGH for the defect classes, read through a mirror of the official text] So a wheel of the wrong airbag generation, or a swap that leaves the lamp lit, is not a cosmetic problem at inspection time.
+
+Whether a **genuine BMW wheel with the matching airbag** also needs an entry in the vehicle papers is **not answered by any official text** the research found. The law ends a car's operating permission only for changes that alter the vehicle type, endanger others or worsen emissions, and exempts parts covered by the vehicle's own approval; BMW catalogues these wheel changes and sells a retrofit kit, which points one way, but that is an inference, not a ruling. [S6, MEDIUM-LOW] A **non-genuine wheel without an approval** is different: it can end the operating permission, and the inspection can then rate the car as having a dangerous defect. [S6, HIGH for the mechanism] Insurance consequences were not found in any official source. This covers Germany only, it is not legal advice, and the person to ask is your inspector.
+
+## Notes on the evidence
+
+**Conflicts recorded.** (1) SMART start: the BMW instruction's body says 06/1999 for Saloon, Touring and Coupé; its cover page says "until 6/00"; the catalogue's date columns say 06–07/2000; owners say 06/2000. Not resolved; the later date is used as the safer reading. (2) The BMW document's two tables label the same three harness pins differently; irrelevant to fit, relevant if anyone quotes pin assignments. (3) "M-Tech" as a wheel name exists in forums and in the configurator's own early labels, not in BMW's catalogue.
+
+**Not established (open).** Slip-ring variants and which wheels need which; what fits cars built before the SMART line; whether the catalogue's "Smart" and the instruction's "SMART" are the same airbag generation; the exact contents of BMW's conversion and retrofit kits beyond harness and switch unit; the sequential-gearbox retrofit path; inspection and registration rules outside Germany, and the E46 type-approval variant list that would settle the entry question; US-market wheels; archiving the BMW installation instruction PDF or locating it on a BMW host (the text was read in full from a third-party mirror).
+
+## What comes next
+
+Our E46 configurator is coming soon. When it opens it will show the steering wheels for your body style and build date and link to sellers for the exact part; this page will link to it then.
