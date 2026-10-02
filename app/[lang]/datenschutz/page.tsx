@@ -11,13 +11,14 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
 const C = {
-  name: "Rodrigo Urbina",
+  name: "Alvaro Hernandez",
   street: "Anton-Wilhelm-Amo-Straße 50",
   city: "10117 Berlin",
   email: "hello@zauberlabs.de",
+  vatId: "DE452363836",
   // Supervisory authority of YOUR federal state, e.g. Hessen → "Der Hessische Beauftragte für Datenschutz und Informationsfreiheit"
   authority: "Berliner Beauftragte für Datenschutz und Informationsfreiheit, Alt-Moabit 59–61, 10555 Berlin (www.datenschutz-berlin.de)",
-  updated: "September 2026",
+  updated: "Oktober 2026",
 };
 
 export default async function Datenschutz({ params }: { params: Promise<{ lang: string }> }) {
@@ -31,6 +32,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         {C.name}, {C.street}, {C.city}, Deutschland
         <br />
         E-Mail: <a className="underline" href={`mailto:${C.email}`}>{C.email}</a>
+        <br />
+        Umsatzsteuer-Identifikationsnummer: {C.vatId}
       </p>
 
       <h2>2. Überblick</h2>
@@ -41,7 +44,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
 
       <h2>3. Hosting und Server-Logfiles</h2>
       <p>
-        Diese Website wird bei Vercel Inc. (USA) gehostet. Beim Aufruf der Seiten verarbeitet Vercel
+        Diese Website wird bei Vercel Inc. (USA) gehostet. Die Serverfunktionen dieser Website (Abstimmung, Vorschläge) laufen in Frankfurt am Main
+        (Vercel-Region „fra1“); statische Seiten liefert Vercel über sein weltweites Netz aus Zwischenspeichern aus. Beim Aufruf der Seiten verarbeitet Vercel
         technisch notwendige Daten, insbesondere IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Referrer sowie Browser- und
         Betriebssysteminformationen. Dies ist erforderlich, um die Website auszuliefern, ihre Sicherheit zu gewährleisten und Missbrauch
         abzuwehren. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und stabilen Betrieb).
@@ -59,7 +63,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Du kannst abstimmen, welches Auto wir als Nächstes umsetzen. Damit jede Person pro Auto nur einmal abstimmen kann, setzen wir beim
         Abstimmen ein Cookie namens „zl_vid“ mit einer zufälligen Kennung (Speicherdauer: 12 Monate). Es enthält keine Angaben zu deiner Person
         und wird nicht für Tracking verwendet. Das Cookie ist für die von dir ausdrücklich gewünschte Abstimmfunktion unbedingt erforderlich
-        (§ 25 Abs. 2 Nr. 2 TDDDG); die weitere Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.
+        (§ 25 Abs. 2 Nr. 2 TDDDG); die weitere Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Dieselbe zufällige Kennung
+        speichern wir außerdem auf unserem Server zu jedem Auto, für das du abgestimmt hast, ohne Ablaufdatum – nur so können wir Doppelstimmen
+        verhindern; deiner Person lässt sie sich nicht zuordnen.
       </p>
       <p>
         Zum Schutz vor Missbrauch (z. B. automatisierten Massenabstimmungen) wird deine IP-Adresse ausschließlich in gehashter (unkenntlich gemachter) Form
@@ -70,7 +76,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <h2>6. Autovorschläge</h2>
       <p>
         Wenn du uns über das Formular ein Auto vorschlägst, speichern wir deinen Text und – nur falls du sie angibst – deine E-Mail-Adresse, um
-        dich zu informieren, wenn wir dieses Auto umsetzen. Die Angabe der E-Mail-Adresse ist freiwillig; Rechtsgrundlage ist deine Einwilligung
+        dich zu informieren, wenn wir dieses Auto umsetzen. Zusammen mit dem Vorschlag speichern wir außerdem die Sprache der Seite (Deutsch oder
+        Englisch) und den Zeitpunkt des Vorschlags. Die Angabe der E-Mail-Adresse ist freiwillig; Rechtsgrundlage ist deine Einwilligung
         (Art. 6 Abs. 1 lit. a DSGVO). Du kannst sie jederzeit per E-Mail an {C.email} widerrufen; wir löschen deine Adresse dann umgehend,
         spätestens jedoch, wenn der Zweck entfallen ist.
       </p>
