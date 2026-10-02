@@ -27,6 +27,8 @@ export type Resolved = {
   fallback: boolean;
   /** Languages the article actually exists in. */
   available: Locale[];
+  /** true when the publish moment is still in the future (only ever true on previews / local dev). */
+  scheduled: boolean;
 };
 
 export type Tag = { slug: string; name: string; count: number };
@@ -34,12 +36,23 @@ export type Tag = { slug: string; name: string; count: number };
 export type BlogOptions = {
   dir?: string;
   includeDrafts?: boolean;
+  /** Show articles whose publish moment is in the future (previews / local dev). Production: false. */
+  includeScheduled?: boolean;
+  /** Clock, evaluated on every query so ISR re-renders see the current time. Tests inject it. */
+  now?: () => number;
 };
 
 /** Drafts are hidden on the live site only; previews (Vercel "preview") and local runs show them. */
 export function shouldShowDrafts(env: Record<string, string | undefined> = process.env): boolean {
   if (env.BLOG_SHOW_DRAFTS === "1") return true;
   if (env.BLOG_SHOW_DRAFTS === "0") return false;
+  return env.VERCEL_ENV !== "production";
+}
+
+/** Scheduled (future) articles are hidden on the live site only, like drafts. */
+export function shouldShowScheduled(env: Record<string, string | undefined> = process.env): boolean {
+  if (env.BLOG_SHOW_SCHEDULED === "1") return true;
+  if (env.BLOG_SHOW_SCHEDULED === "0") return false;
   return env.VERCEL_ENV !== "production";
 }
 
@@ -105,9 +118,12 @@ function loadPosts(dir: string): Map<string, Partial<Record<Locale, Post>>> {
 export function createBlog(opts: BlogOptions = {}) {
   const dir = opts.dir ?? CONTENT_DIR;
   const includeDrafts = opts.includeDrafts ?? shouldShowDrafts();
+  const includeScheduled = opts.includeScheduled ?? shouldShowScheduled();
+  const now = opts.now ?? (() => Date.now());
   const all = loadPosts(dir);
 
-  const visible = (p: Post | undefined): p is Post => !!p && (includeDrafts || !p.meta.draft);
+  const isScheduled = (p: Post) => p.meta.publishAtMs !== null && p.meta.publishAtMs > now();
+  const visible = (p: Post | undefined): p is Post => !!p && (includeDrafts || !p.meta.draft) && (includeScheduled || !isScheduled(p));
 
   /** Resolves an article for a language, falling back to the other language. null = does not exist at all. */
   function getPost(slug: string, lang: Locale): Resolved | null {
@@ -116,9 +132,9 @@ export function createBlog(opts: BlogOptions = {}) {
     const available = LOCALES.filter((l) => visible(byLang[l]));
     if (!available.length) return null;
     const own = byLang[lang];
-    if (visible(own)) return { post: own, fallback: false, available };
+    if (visible(own)) return { post: own, fallback: false, available, scheduled: isScheduled(own) };
     const other = byLang[otherLocale(lang)];
-    if (visible(other)) return { post: other, fallback: true, available };
+    if (visible(other)) return { post: other, fallback: true, available, scheduled: isScheduled(other) };
     return null;
   }
 
@@ -222,7 +238,7 @@ export function createBlog(opts: BlogOptions = {}) {
     ].join("\n");
   }
 
-  return { getPost, listPosts, listTags, getTag, slugs, sitemapEntries, rss, includeDrafts };
+  return { getPost, listPosts, listTags, getTag, slugs, sitemapEntries, rss, includeDrafts, includeScheduled };
 }
 
 export type Blog = ReturnType<typeof createBlog>;
