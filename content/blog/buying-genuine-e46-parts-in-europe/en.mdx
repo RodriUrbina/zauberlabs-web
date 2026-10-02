@@ -1,0 +1,140 @@
+---
+# BL-019 — Writer draft, English. Body is plain Markdown (no JSX).
+# PO decision 2026-10-02: NO seller names, no seller links, no affiliate links. General buying guide only.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Buying genuine E46 parts in Europe: how to read a listing before you pay"
+description: "A general guide to buying genuine BMW E46 parts in Europe: what a listing must show, why a headlight needs both sides, new versus used, VAT and shipping."
+date: 2026-10-02
+updated: 2026-10-02
+lang: en
+slug: buying-genuine-e46-parts-in-europe
+card: BL-019
+author: "Zauberlabs"
+tags:
+  - E46
+  - buying guide
+  - headlights
+  - wheels
+  - BMW
+configurator: E46
+cta:
+  label: "E46 configurator: coming soon"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts; layout shows "coming soon" until the configurator opens
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "A laptop on a workbench showing a generic parts listing with blurred text, next to a boxed BMW E46 headlight unit"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: laptop on a workbench showing an unbranded online listing with blurred text and a price field, a boxed headlight unit beside it; neutral light. Must not show: any real shop name or logo, readable part numbers or prices, legible BMW roundel, a person."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-031 — European seller research: 658 listings from eleven mainland-European sellers (BMW dealers, specialists, OE-supplier retailers, used-parts marketplaces) read on 2026-10-01; per-offer price, VAT wording, availability, shipping and fitment text recorded; 801 pages saved"
+    type: retailer listings (provenance only; never decide fitment)
+    path: "t031-evidence/README.md; t031-evidence/RULES.md; t031-evidence/*.json"
+    confidence: HIGH
+    note: "HIGH that each listing said what is recorded, at the fetch date (2026-10-01). Listings change; used listings vanish. No seller is named in this article by PO decision."
+  - id: S2
+    title: "T-031 offer pack — the PO's filters applied: 266 listings kept, 392 excluded with reasons; coverage per headlight set and wheel style; seller-level ships-to and VAT notes; price ranges new genuine / OE-supplier / used"
+    type: internal synthesis of S1 against the catalogue
+    path: "t031-offer-pack/REPORT.md; t031-offer-pack/coverage.json; t031-offer-pack/vendors.json; t031-offer-pack/excluded.json"
+    confidence: HIGH
+    note: "HIGH for what the listings showed at the fetch date; the catalogue mapping behind 'complete pair' is MEDIUM (ETK mirror)."
+  - id: S3
+    title: "T-036 — further European public-page sources for factory wheels: new genuine rims found for most styles at two BMW dealers; catalogue 'discontinued' flags versus dealer 'in stock'; shipping reach unconfirmed"
+    type: retailer listings
+    path: "t036-evidence/T-036-findings.md"
+    confidence: HIGH
+    note: "HIGH for the listings at fetch date; the conflict between catalogue 'delivery discontinued' and dealer 'in stock' is recorded, not resolved."
+  - id: S4
+    title: "T-039 — headlight supersession chains: old numbers in used listings, exchangeability flags, the 2004 renumbering"
+    type: ETK mirror part pages
+    path: "t039-supersession-map/REPORT.md"
+    confidence: MEDIUM
+    note: "Used for the 'old number' advice; see the supersession article for the detail."
+  - id: S5
+    title: "T-030 and T-024 part c — headlight part numbers are market- and side-specific (US vs Europe; LHD vs RHD); Compact and diesels Europe-only"
+    type: ETK mirror
+    path: "t030-evidence/sedan-touring-markets.json; t024-partc-evidence/headlight-table.md"
+    confidence: HIGH
+    note: "HIGH for the Europe numbers (two mirrors); MEDIUM for US rows."
+---
+
+Buying a genuine BMW part for an E46 in Europe is easier than it was ten years ago and harder than it looks. The part is usually available somewhere; the listing describing it often is not what it seems. Our research read 658 listings from eleven mainland-European sellers in one day, kept 266 that met the rules and threw out 392 with a reason attached. The reasons are the useful part. This is a general guide built from them: no seller is named, no link is given, and nothing here is a recommendation of where to buy. It is a checklist for reading whatever listing is in front of you.
+
+## The short version
+
+- **Match the BMW number to your car first, then shop.** A listing's "fits E46 1998–2005" text is the seller's claim; the catalogue decides. [S1, S5]
+- **Headlights are bought as a pair.** A set is complete only when one seller lists both sides at the same trim level; in the research every European headlight set had at least one such seller, mostly BMW dealers. [S2, HIGH at fetch date]
+- **Wheels are the gap.** Several factory wheel styles had no new-genuine listing at all, and single rims only, no sets. [S2, S3, HIGH at fetch date]
+- **New genuine, OE-supplier and used are three different products** with price ratios of roughly four to two to one, and different risks. [S2, HIGH at fetch date]
+- **VAT is included in European prices by law, but the rate and the wording differ by country**, and used parts are often sold under a margin scheme with no deductible VAT. [S2]
+- **"Ships to" is a seller-level fact that many pages do not state.** Two dealers in the research shipped to two countries only, or to one country for rims. [S2, S3]
+- **A used listing can disappear tomorrow**; a dealer listing marked "in stock" is the dealer's claim at that moment. [S1, S3]
+
+## Step one: the number, not the description
+
+Every genuine BMW part has an eleven-digit number, and for the E46 that number encodes things a description does not: left or right, European or US market, pre- or post-facelift, halogen or xenon, the trim finish. Two headlights that look identical in a photo and share the same description can be different parts. [S5, HIGH for the Europe numbers]
+
+So the first thing to find on any listing is the **BMW number the seller is actually selling**, and the first thing to do is to check it against the catalogue entry for your car's body, production month and equipment. Our research rule is blunt: a seller's fitment text is **provenance, never fitment**. When the text contradicted the catalogue, the research recorded a conflict and did not resolve it in the seller's favour. [S1, RULES] A listing that gives no BMW number at all cannot be checked and was excluded. [S2]
+
+Three number traps the research met repeatedly:
+
+1. **Two numbers in one field.** Several marketplace listings printed two BMW numbers for one part; the research excluded them as ambiguous. If you cannot tell which number you are buying, neither can the seller. [S2]
+2. **An old number.** BMW renumbered most E46 headlights up to three times. A superseded number is fine when BMW marks it exchangeable with the current one, and wrong when the supersession crosses the September 2001 facelift. [S4, MEDIUM] The supersession article explains how to tell.
+3. **A seller's "replaces" note.** Some dealers add replacement remarks; the research found notes that contradicted the catalogue's own chains. Treat them as a lead, not a fact. [S4]
+
+## Step two: one side is half a part
+
+Headlights are listed per side. A pair is complete only when **one seller lists both the left and the right unit at the same trim level**: a black-trim left and a TITAN right from the same shop are two singles, not a pair. [S2] In the research, every one of the nine European headlight sets had a complete pair from at least one seller, and for most sets from several, but the sellers that covered every set were BMW dealers; marketplaces covered the common Sedan and Touring sets well and the rarer Coupé sets barely. [S2, HIGH at fetch date]
+
+Two things follow. If a listing shows one side, ask the same seller for the other before you buy either, or budget for two shipments and two sellers. And if you are replacing one damaged unit, the catalogue number tells you whether the surviving unit is the same trim, which decides what to match. [S5]
+
+Right-hand-drive units, which exist for most sets, are a separate number again; a seller in a left-hand-drive country can still be selling one. [S5]
+
+## Step three: what kind of part is it?
+
+The research sorted every kept listing into three kinds, and the price gaps are large enough to tell them apart at a glance. For the common Sedan and Touring headlights at the fetch date: [S2, HIGH at fetch date]
+
+| Kind | What it is | Typical price per headlight unit (Oct 2026, EUR) |
+| --- | --- | --- |
+| **New genuine** | BMW-boxed part from a BMW dealer, current catalogue number | halogen about 400 to 440; bi-xenon about 1,070 to 1,160 |
+| **OE-supplier** | the same manufacturer's part sold under its own brand (the research found two such brands), via parts retailers | halogen about 240; bi-xenon about 810 |
+| **Used** | removed from a dismantled car, sold by a dismantler or on a used-parts marketplace, often under an old number | from about 30 for a halogen unit to about 400 for a bi-xenon |
+
+Two cautions on the OE-supplier kind. Its fitment lists sometimes merge several BMW numbers into one supplier part; the research excluded listings where one supplier number was said to replace both a pre-facelift and a facelift BMW unit, because the catalogue keeps those apart. [S2] And **aftermarket** replacement parts, a fourth kind, were excluded entirely: the research is about genuine fit, and an aftermarket unit's "fits E46" cannot be checked against a BMW number. [S2]
+
+Used parts carry the obvious risks: condition, one-off listings that vanish, and old numbers. They also carried, in the research, the most ambiguous data: unclear numbers, wheel remarks that contradicted the stated size, sets without a count. [S2] A used marketplace listing is worth exactly as much as the number and the photo on it.
+
+## Wheels: single rims, and gaps
+
+Factory wheels behave differently from headlights. The catalogue number is the same in every market, but new-genuine supply is thin: at the fetch date, of six factory styles, one had no new-genuine listing anywhere, two had a rear but no front, and all were sold as **single rims**, never as a set of four. [S2, S3, HIGH at fetch date] BMW's own catalogue marks several of the rims "delivery discontinued by the factory", while dealers still listed some of them as in stock; the research recorded that conflict without resolving it. [S3]
+
+For a buyer: count on assembling a set from single rims, confirm with the seller that "in stock" means orderable now, and check the size on the listing against the catalogue size for that number, because one style exists in 17-inch and 18-inch versions under the same name. [S3]
+
+## VAT, shipping and where a seller will send
+
+European prices to private buyers include VAT, but the **rate and the wording differ by country**: German shops print prices "inkl. MwSt." at 19 percent, Dutch shops "incl. btw" at 21 percent. Used parts sold by dismantlers are often priced under a margin scheme, with no VAT shown separately. For a private buyer the price is the price; for a business buyer the difference matters. [S2, HIGH at fetch date]
+
+**Shipping is the hidden variable.** In the research one BMW dealer shipped to most of Europe for headlights but named one country only for rims; another shipped to two countries only; a used-parts marketplace shipped within one country. Several pages did not state their delivery countries at all, and the research could not resolve them without placing an order. [S2, S3] Shipping cost was free for headlights at some dealers and extra for rims almost everywhere. [S2] Before you compare prices across borders, confirm the seller delivers to yours.
+
+## A listing checklist
+
+1. **BMW number shown, and only one.** No number, or two numbers, means walk away or ask. [S2]
+2. **The number matches your car** in the catalogue: body, production month, side, market, trim. [S5]
+3. **For headlights, the other side is available** from the same seller at the same trim. [S2]
+4. **The kind is clear**: new genuine, OE-supplier or used. Price tells you which; the listing should say so. [S2]
+5. **An old number is exchangeable** with the current one, not a cross-facelift supersession. [S4]
+6. **"In stock" is current**, especially for rims the catalogue calls discontinued. [S3]
+7. **The seller ships to your country**, and the price includes VAT at the seller's rate. [S2]
+8. **For used parts, the photo shows the number sticker** and the condition; the listing may be gone next week. [S1, S2]
+
+## Notes on the evidence
+
+**Conflicts recorded.** (1) Seller fitment text versus the catalogue: recorded, never resolved in the seller's favour. (2) One dealer's prices for three TITAN units were about a quarter of another dealer's for the same numbers at the fetch date; shown in the research as a flag, not explained. (3) Catalogue "delivery discontinued" versus dealer "in stock" for several rims. (4) One dealer's shipping page listed most of Europe while its product data named one country for rims.
+
+**Not established (open).** Which countries each seller actually delivers to (no order was placed); whether dealers' "in stock" matches orderable stock for catalogue-discontinued rims; seller terms on linking and automated price refresh; prices and availability after the fetch date (2026-10-01). Which sellers this site will name or link to is a separate decision not made here.
+
+## What comes next
+
+Our E46 configurator is coming soon. When it opens it will show the headlights for your body style and build date and link to sellers for the exact part; this page will link to it then.
