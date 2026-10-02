@@ -12,7 +12,8 @@ type Side = {
 };
 
 type Props = {
-  href: string;
+  /** Link to the configurator; undefined = not live yet (card is not clickable, status dot is hollow). */
+  href?: string;
   live: string;
   soon: string;
   e46Line: readonly string[];
@@ -50,6 +51,18 @@ function SideCard({ side, soon, pos }: { side: Side; soon: string; pos: "left" |
   );
 }
 
+function Centre({ href, label, children }: { href?: string; label: string; children: React.ReactNode }) {
+  return href ? (
+    <a href={href} className="deck-card deck-center group" aria-label={label}>
+      {children}
+    </a>
+  ) : (
+    <div className="deck-card deck-center" aria-label={label} role="img">
+      {children}
+    </div>
+  );
+}
+
 export default function HeroDeck({ href, live, soon, e46Line, e46Alt, left, right }: Props) {
   return (
     <div className="deck-wrap">
@@ -57,7 +70,7 @@ export default function HeroDeck({ href, live, soon, e46Line, e46Alt, left, righ
       <SideCard side={left} soon={soon} pos="left" />
       <SideCard side={right} soon={soon} pos="right" />
 
-      <a href={href} className="deck-card deck-center group" aria-label={`E46BUILD — ${live}`}>
+      <Centre href={href} label={`E46BUILD — ${live}`}>
         <div className="deck-photo">
           <Image
             src="/images/hero.jpg"
@@ -71,7 +84,7 @@ export default function HeroDeck({ href, live, soon, e46Line, e46Alt, left, righ
         <div className="deck-photo-fade" />
         <div className="deck-top">
           <span className="deck-status">
-            <span className="deck-dot deck-dot-live" />
+            <span className={`deck-dot ${href ? "deck-dot-live" : "deck-dot-soon"}`} />
             {live}
           </span>
           <span className="deck-make">BMW · 1998–2006</span>
@@ -85,10 +98,12 @@ export default function HeroDeck({ href, live, soon, e46Line, e46Alt, left, righ
             <span className="accent-serif deck-serif">{e46Line[1]}</span>
           </span>
         </div>
-        <span className="deck-arrow">
-          <ArrowUpRight className="size-[1.25em]" />
-        </span>
-      </a>
+        {href && (
+          <span className="deck-arrow">
+            <ArrowUpRight className="size-[1.25em]" />
+          </span>
+        )}
+      </Centre>
     </div>
     </div>
   );
