@@ -47,9 +47,26 @@ sources:                           # at least one; rendered as the "Sources & co
     confidence: HIGH               # HIGH | MEDIUM | LOW | n/a
     note: "HIGH for what the document itself states."   # optional
 canonical: https://www.zauberlabs.de/en/blog/e46-steering-wheel-swaps   # optional, rarely needed
+publishAt: "2026-10-05"            # optional, in quotes: live from 07:00 Europe/Berlin that day (see Scheduled publishing)
 draft: true                        # optional, default false
 ---
 ```
+
+## Scheduled publishing (`publishAt`)
+
+One approved article per day at **07:00 Europe/Berlin** (summer and winter time handled automatically). Set `publishAt` and merge in advance; the live site hides the article until the moment and shows it by itself afterwards (pages re-render at most every 5 minutes; no deploy, cron or agent needed).
+
+```yaml
+publishAt: "2026-10-05"                 # the day → 07:00 Berlin
+publishAt: "2026-10-05T12:30"           # a Berlin wall-clock time, if ever needed
+publishAt: "2026-10-05T12:30:00+02:00"  # an exact moment with offset (or Z)
+```
+
+- Write it **in quotes**. Unquoted, YAML turns it into a timestamp; a plain date still works, but quoting avoids surprises.
+- Without `publishAt` the article is live as soon as it is on `main` (as before).
+- Before the moment, on the live site: not in the listing, tag pages, sitemap or feed; the article URL and its German fallback URL return 404. Previews and local dev show it with a "Scheduled for …" banner and badge.
+- The date readers see (listing, article header, feed, JSON-LD, sitemap) becomes the publish day in Berlin time; `publishAt` wins over `date` for display and sorting.
+- `draft: true` still hides the article everywhere on the live site, whatever `publishAt` says.
 
 ## Confidence
 

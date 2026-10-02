@@ -4,6 +4,9 @@ import { getBlog } from "@/lib/blog";
 const BASE = "https://www.zauberlabs.de";
 
 // Served at /sitemap.xml — submit this URL in Google Search Console.
+// Scheduled publishing (BL-004): re-rendered on Vercel at most every 5 minutes, so an article whose
+// publish moment has passed appears by itself; no deploy, cron or agent needed.
+export const revalidate = 300;
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const page = (path: string, priority: number) => ({
