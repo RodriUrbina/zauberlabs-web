@@ -9,11 +9,11 @@ export const metadata = { title: "Impressum — Zauberlabs", robots: { index: fa
  */
 const OWNER = {
   name: "Alvaro Hernandez", // or company name incl. legal form, e.g. "Zauberlabs UG (haftungsbeschränkt)"
-  street: "Anton-Wilhelm-Amo-Straße 50, 10117 Berlin, Germany",
-  city: "10117, Berlin",
+  street: "Anton-Wilhelm-Amo-Straße 50",
+  city: "10117 Berlin",
   country: "Deutschland",
   email: "hello@zauberlabs.de",
-  phone: "[+49 151 67067 413]", // § 5 DDG: a second fast contact channel besides email
+  phone: "+49 151 67067 413", // § 5 DDG: a second fast contact channel besides email
   vatId: "DE452363836", // optional: "DE123456789" — leave empty if you have none
   register: "", // optional, only for registered companies: "Amtsgericht [ORT], HRB [NUMMER]"
   representative: "", // optional, only for companies: "Geschäftsführer: [NAME]"

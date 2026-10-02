@@ -22,6 +22,16 @@ Votes and suggestions work without any setup (kept in memory). For persistence, 
 - `app/api/vote` — GET counts, POST `{ car, on }` (one vote per car per visitor, cookie `zl_vid`, rate-limited by hashed IP)
 - `app/api/suggest` — POST `{ car, email? }` → Redis list `suggestions`
 - `app/[lang]/impressum`, `app/[lang]/datenschutz` — **drafts, fill in before launch**
+- `app/[lang]/blog` — blog: listing, `tag/<tag>`, `<slug>` (de/en with fallback), `feed.xml`. Articles are MDX files in `content/blog/<slug>/{en,de}.mdx`; see `content/blog/README.md` for the front matter. Drafts (`draft: true`) are hidden on production only.
+- `lib/i18n.ts` → `E46_LIVE`: while the E46 configurator is offline every E46 button shows "coming soon"; set `NEXT_PUBLIC_E46_LIVE=1` to go live.
+
+## Checks
+
+```bash
+npm run typecheck   # tsc
+npm test            # node:test — blog schema/loader/RSS/sitemap, every article compiles
+npm run smoke       # next build + next start on port 3010 + request every blog route
+```
 
 ## Deploy
 
