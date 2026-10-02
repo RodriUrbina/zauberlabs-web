@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { createBlog, readingMinutes, shouldShowDrafts, tagSlug } from "../lib/blog";
+import { createBlog, readingMinutes, shouldShowDrafts, shouldShowScheduled, tagSlug } from "../lib/blog";
 import { parseFrontMatter } from "../lib/blog-schema";
 
 // ─── fixtures ────────────────────────────────────────────────────────────────
@@ -33,8 +33,13 @@ function fixtureDir() {
   write(dir, "beta", "en", { ...base, title: "Beta EN", date: "2026-02-01", tags: ["E46", "Bumpers"] });
   write(dir, "beta", "de", { ...base, title: "Beta DE", date: "2026-02-01", updated: "2026-02-10", tags: ["E46", "Stoßstangen"] });
   write(dir, "gamma", "en", { ...base, title: "Gamma draft", date: "2026-03-01", draft: true });
+  // Scheduled: written 2026-04-01, goes live 07:00 Berlin on 2026-04-10 (CEST → 05:00Z); tagged with a tag no other article has.
+  write(dir, "delta", "en", { ...base, title: "Delta scheduled", date: "2026-04-01", publishAt: "2026-04-10", tags: ["E46", "Scheduled-only"] });
   return dir;
 }
+
+const BEFORE = () => Date.UTC(2026, 3, 10, 4, 59); // 06:59 Berlin on the publish day
+const AFTER = () => Date.UTC(2026, 3, 10, 5, 0); // 07:00 Berlin
 
 // ─── schema ──────────────────────────────────────────────────────────────────
 
@@ -151,7 +156,7 @@ describe("blog loader", () => {
   const dir = fixtureDir();
 
   test("lists newest first, includes other-language fallbacks, hides drafts when asked", () => {
-    const blog = createBlog({ dir, includeDrafts: false });
+    const blog = createBlog({ dir, includeDrafts: false, includeScheduled: false, now: BEFORE });
     const en = blog.listPosts("en");
     assert.deepEqual(
       en.map((r) => r.post.slug),
@@ -168,7 +173,7 @@ describe("blog loader", () => {
   });
 
   test("shows drafts when includeDrafts is true", () => {
-    const blog = createBlog({ dir, includeDrafts: true });
+    const blog = createBlog({ dir, includeDrafts: true, includeScheduled: false, now: BEFORE });
     assert.deepEqual(
       blog.listPosts("en").map((r) => r.post.slug),
       ["gamma", "beta", "alpha"]
@@ -176,7 +181,7 @@ describe("blog loader", () => {
   });
 
   test("resolves an article in the other language with fallback=true and never 404s", () => {
-    const blog = createBlog({ dir, includeDrafts: false });
+    const blog = createBlog({ dir, includeDrafts: false, includeScheduled: false, now: BEFORE });
     const r = blog.getPost("alpha", "de");
     assert.ok(r);
     assert.equal(r.fallback, true);
@@ -187,7 +192,7 @@ describe("blog loader", () => {
   });
 
   test("tag filter and tag collection", () => {
-    const blog = createBlog({ dir, includeDrafts: false });
+    const blog = createBlog({ dir, includeDrafts: false, includeScheduled: false, now: BEFORE });
     assert.deepEqual(
       blog.listPosts("en", { tag: "Bumpers" }).map((r) => r.post.slug),
       ["beta"]
@@ -207,7 +212,7 @@ describe("blog loader", () => {
   });
 
   test("sitemap entries: index + tags + articles in existing languages only", () => {
-    const blog = createBlog({ dir, includeDrafts: false });
+    const blog = createBlog({ dir, includeDrafts: false, includeScheduled: false, now: BEFORE });
     const urls = blog.sitemapEntries().map((e) => e.url);
     assert.ok(urls.includes("https://www.zauberlabs.de/en/blog"));
     assert.ok(urls.includes("https://www.zauberlabs.de/de/blog"));
@@ -221,7 +226,7 @@ describe("blog loader", () => {
   });
 
   test("rss is well-formed, per language, escapes XML, excludes fallbacks and drafts", () => {
-    const blog = createBlog({ dir, includeDrafts: false });
+    const blog = createBlog({ dir, includeDrafts: false, includeScheduled: false, now: BEFORE });
     const xml = blog.rss("de", { title: "Zauberlabs Blog", description: "a & b" });
     assert.ok(xml.startsWith('<?xml version="1.0" encoding="UTF-8"?>'));
     assert.ok(xml.includes("<description>a &amp; b</description>"));
@@ -229,6 +234,75 @@ describe("blog loader", () => {
     assert.ok(!xml.includes("/de/blog/alpha"), "english-only article is not in the german feed");
     assert.equal((xml.match(/<item>/g) ?? []).length, 1);
     assert.equal((blog.rss("en", { title: "t", description: "d" }).match(/<item>/g) ?? []).length, 2);
+  });
+});
+
+// ─── scheduled publishing (BL-004) ───────────────────────────────────────────
+
+describe("scheduled publishing", () => {
+  const dir = fixtureDir();
+  const prod = (now: () => number) => createBlog({ dir, includeDrafts: false, includeScheduled: false, now });
+
+  test("before the moment, production hides it everywhere: listing, tag pages, sitemap, feed, article URL, de fallback", () => {
+    const blog = prod(BEFORE);
+    assert.ok(!blog.listPosts("en").some((r) => r.post.slug === "delta"));
+    assert.ok(!blog.slugs().includes("delta"));
+    assert.equal(blog.getTag("en", "scheduled-only"), null, "a tag only the scheduled article has is unknown → 404");
+    assert.ok(!blog.sitemapEntries().some((e) => e.url.includes("delta") || e.url.includes("scheduled-only")));
+    assert.ok(!blog.rss("en", { title: "t", description: "d" }).includes("delta"));
+    assert.equal(blog.getPost("delta", "en"), null, "article URL → 404");
+    assert.equal(blog.getPost("delta", "de"), null, "German fallback URL → 404 too");
+  });
+
+  test("from the moment on, it is live by itself with the publish day as its date", () => {
+    const blog = prod(AFTER);
+    const r = blog.getPost("delta", "en");
+    assert.ok(r);
+    assert.equal(r.scheduled, false);
+    assert.equal(r.post.meta.date, "2026-04-10", "readers see the publish day, not the writing day");
+    assert.equal(blog.listPosts("en")[0].post.slug, "delta", "newest first by publish day");
+    assert.equal(blog.getTag("en", "scheduled-only")?.count, 1);
+    assert.ok(blog.sitemapEntries().some((e) => e.url.endsWith("/en/blog/delta") && e.lastModified.toISOString().startsWith("2026-04-10")));
+    assert.ok(blog.rss("en", { title: "t", description: "d" }).includes("/en/blog/delta"));
+    assert.ok(blog.getPost("delta", "de")?.fallback);
+  });
+
+  test("the clock is read on every query, so a long-lived process flips at the moment without reloading", () => {
+    let t = BEFORE();
+    const blog = createBlog({ dir, includeDrafts: false, includeScheduled: false, now: () => t });
+    assert.equal(blog.getPost("delta", "en"), null);
+    t = AFTER();
+    assert.ok(blog.getPost("delta", "en"));
+  });
+
+  test("previews show it early, flagged as scheduled", () => {
+    const blog = createBlog({ dir, includeDrafts: false, includeScheduled: true, now: BEFORE });
+    const r = blog.getPost("delta", "en");
+    assert.ok(r);
+    assert.equal(r.scheduled, true);
+    assert.ok(blog.listPosts("en").some((x) => x.post.slug === "delta" && x.scheduled));
+  });
+
+  test("draft wins over publishAt", () => {
+    const d2 = fs.mkdtempSync(path.join(os.tmpdir(), "zl-blog-"));
+    write(d2, "eps", "en", { ...base, publishAt: "2026-04-10", draft: true });
+    assert.equal(createBlog({ dir: d2, includeDrafts: false, includeScheduled: true, now: AFTER }).getPost("eps", "en"), null);
+  });
+
+  test("schema: publishAt forms, incl. unquoted YAML dates arriving as Date objects", () => {
+    assert.equal(parseFrontMatter({ ...base, publishAt: "2026-04-10" }, "x").publishAtMs, Date.UTC(2026, 3, 10, 5, 0));
+    assert.equal(parseFrontMatter({ ...base, publishAt: "2026-01-10" }, "x").publishAtMs, Date.UTC(2026, 0, 10, 6, 0));
+    assert.equal(parseFrontMatter({ ...base, publishAt: new Date("2026-04-10T00:00:00Z") }, "x").publishAtMs, Date.UTC(2026, 3, 10, 5, 0), "unquoted date → 07:00 Berlin");
+    assert.equal(parseFrontMatter({ ...base, publishAt: new Date("2026-04-10T05:00:00Z") }, "x").publishAtMs, Date.UTC(2026, 3, 10, 5, 0), "unquoted timestamp → exact instant");
+    assert.equal(parseFrontMatter({ ...base }, "x").publishAtMs, null);
+    assert.throws(() => parseFrontMatter({ ...base, publishAt: "next monday" }, "file.mdx"), /Invalid front matter in file\.mdx/);
+  });
+
+  test("shouldShowScheduled follows the production rule", () => {
+    assert.equal(shouldShowScheduled({ VERCEL_ENV: "production" }), false);
+    assert.equal(shouldShowScheduled({ VERCEL_ENV: "preview" }), true);
+    assert.equal(shouldShowScheduled({}), true);
+    assert.equal(shouldShowScheduled({ VERCEL_ENV: "production", BLOG_SHOW_SCHEDULED: "1" }), true);
   });
 });
 
