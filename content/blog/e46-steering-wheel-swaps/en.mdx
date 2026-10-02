@@ -51,6 +51,12 @@ sources:
     path: "t029-evidence/T-029-findings.md (attributed in the text)"
     confidence: LOW
     note: "Never decides alone. Shown only where marked LOW."
+  - id: S6
+    title: "T-040 research — Do E46 steering-wheel and seat swaps affect TÜV/HU or registration? (2026-10-02): HU-Richtlinie defect catalogue and Directive 2014/45/EU Annex I via the umwelt-online mirror, §19 and §35a StVZO, Anlage VIII, TÜV Rheinland and KBA publications"
+    type: legal texts and official publications via mirror; internal synthesis
+    path: "docs/research/t040-steering-wheel-inspection/T-040-findings.md"
+    confidence: HIGH
+    note: "HIGH for the HU defect classes (HU-Richtlinie text via the umwelt-online mirror; same items 'major' in Directive 2014/45/EU). The 'genuine wheel needs no entry' question is MEDIUM-LOW (inferred) and is presented as unresolved. Germany only; not legal advice. Not on e46build master yet: branch agent-6/T-040-steering-wheel-inspection, commit 97cb1de; the Editor checks it is on master before publishing."
   - id: S5
     title: "T-029 research findings — Steering wheel: what decides fit (2026-10-01); T-027 bumper findings for the 'M-Tech' naming"
     type: internal synthesis of S1–S4
@@ -135,11 +141,17 @@ The four-spoke wheel is absent from the Coupé, Convertible and M3 listings we r
 5. **Treat the airbag as the part.** Disconnect the battery, follow the airbag safety procedure, run the short test afterwards: BMW's own steps for a wheel job. [S1, HIGH]
 6. **Know the history of a used wheel.** It contains an airbag. If the seller cannot say what car it came from and when, that is the answer.
 
+## Inspection and registration (Germany)
+
+The German main inspection (HU) does not care whether your wheel is a sport or an M wheel. It cares about the airbag. The inspection catalogue rates an airbag that is missing or **"not suitable for the vehicle"**, a fault reported on the airbag system's interface, or an **airbag warning lamp that stays on** as a **significant defect** ("erheblicher Mangel"): no inspection sticker, fix it and present the car again within one month. A steering wheel that is loose, broken or **"not an approved version"** is rated the same way. The EU inspection directive lists the same items as "major". [S6, HIGH for the defect classes, read through a mirror of the official text] So a wheel of the wrong airbag generation, or a swap that leaves the lamp lit, is not a cosmetic problem at inspection time.
+
+Whether a **genuine BMW wheel with the matching airbag** also needs an entry in the vehicle papers is **not answered by any official text** the research found. The law ends a car's operating permission only for changes that alter the vehicle type, endanger others or worsen emissions, and exempts parts covered by the vehicle's own approval; BMW catalogues these wheel changes and sells a retrofit kit, which points one way, but that is an inference, not a ruling. [S6, MEDIUM-LOW] A **non-genuine wheel without an approval** is different: it can end the operating permission, and the inspection can then rate the car as having a dangerous defect. [S6, HIGH for the mechanism] Insurance consequences were not found in any official source. This covers Germany only, it is not legal advice, and the person to ask is your inspector.
+
 ## Notes on the evidence
 
 **Conflicts recorded.** (1) SMART start: BMW document 06/1999 vs forum 06/2000; BMW decides, with the cover-page caveat noted above. (2) The BMW document's two tables label the same three harness pins differently; irrelevant to fit, relevant if anyone quotes pin assignments. (3) "M-Tech" as a wheel name exists in forums and in the configurator's own early labels, not in BMW's catalogue.
 
-**Not established (open).** Slip-ring variants and which wheels need which; what fits cars built before June 1999; the exact contents of BMW's conversion and retrofit kits beyond harness and switch unit; the sequential-gearbox retrofit path; legal and inspection rules by country; US-market wheels; archiving the BMW installation instruction PDF or locating it on a BMW host (the text was read in full from a third-party mirror).
+**Not established (open).** Slip-ring variants and which wheels need which; what fits cars built before June 1999; the exact contents of BMW's conversion and retrofit kits beyond harness and switch unit; the sequential-gearbox retrofit path; inspection and registration rules outside Germany, and the E46 type-approval variant list that would settle the entry question; US-market wheels; archiving the BMW installation instruction PDF or locating it on a BMW host (the text was read in full from a third-party mirror).
 
 ## What comes next
 
