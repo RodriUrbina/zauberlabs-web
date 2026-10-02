@@ -1,0 +1,143 @@
+---
+# BL-011 — Writer draft, English (revision 2 after Editor review). Body is plain Markdown (no JSX).
+# The layout (BL-001) renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Which E46 got which headlight: the 09/2001 and 03/2003 changeovers"
+description: "BMW splits E46 headlights by body and two dates: 09/2001 (Sedan, Touring) and 03/2003 (Coupé, Convertible). The owner's table, and why 2001 is the hard case."
+date: 2026-10-02
+updated: 2026-10-02
+lang: en
+slug: e46-headlight-changeovers
+card: BL-011
+author: "Zauberlabs"
+tags:
+  - E46
+  - headlights
+  - facelift
+  - xenon
+  - bi-xenon
+  - halogen
+  - BMW
+configurator: E46
+cta:
+  label: "E46 configurator: coming soon"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts; layout shows "coming soon" until the configurator opens
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "Two BMW E46 front ends side by side, a pre-facelift and a facelift Sedan, headlights on, in a neutral studio"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: two E46 Sedan fronts side by side (pre-2001 and post-2001), low beams on, neutral studio; no legible roundel or badges, no readable plate or part numbers."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-024 part c — Coupé/Convertible headlight table from the saved BMW parts-catalogue mirror pages (bmwfans.info USA and Europe trees incl. month views; eStore-Central Europe diagrams; part pages)"
+    type: ETK mirror (catalogue-grade), two mirrors for Europe
+    path: "t024-partc-evidence/headlight-table.md; t024-partc-evidence/REPORT.md; t024-t025-evidence/raw/coupe-*.html"
+    confidence: HIGH
+    note: "Europe numbers and era grouping HIGH (both mirrors); every date MEDIUM (only one mirror prints dates); US numbers MEDIUM (one mirror). The 03/2003 cut-over month is HIGH via the front bumper evidence of the same pack."
+  - id: S2
+    title: "T-030 — Sedan/Touring headlight numbers per band, US vs Europe (bmwfans.info USA and Europe trees, month views, part pages; eStore-Central Europe)"
+    type: ETK mirror (catalogue-grade), two mirrors for Europe
+    path: "t030-evidence/sedan-touring-markets.json; t030-evidence/raw/st-*.html"
+    confidence: HIGH
+    note: "Europe LHD rows HIGH (both mirrors); US rows MEDIUM; dates MEDIUM (one mirror)."
+  - id: S3
+    title: "BMW Group press kits, model year 2002: UK 'The new BMW 3 Series Saloon and Touring' (26 Oct 2001) and BMW USA MY2002 3 Series"
+    type: BMW-authored
+    path: "t032-evidence/raw/bmw-press-uk-2001-3series-page.html; t032-evidence/raw/bmw-press-us-my2002-3series-page.html; t032-evidence/T-032-findings.md (Q1, Q4)"
+    confidence: HIGH
+    note: "HIGH for: xenon was optional; bi-xenon was a new option for MY2002 (Sedan/Touring). Says nothing about lens appearance."
+  - id: S4
+    title: "Owner-forum and retailer cues for telling halogen from xenon (PistonHeads, E46Zone threads; retrofit retailer page)"
+    type: forum / retailer
+    path: "t032-evidence/T-032-findings.md (Q1); t032-evidence/raw/forum-and-secondary-quotes.md"
+    confidence: LOW
+    note: "Never decides alone. Lens cue contradicted for facelift Coupé/Convertible."
+  - id: S5
+    title: "T-025 — Compact headlights (no running change)"
+    type: ETK mirror
+    path: "t024-t025-evidence/compact.json"
+    confidence: MEDIUM
+  - id: S6
+    title: "T-038 — adaptive headlights (Coupé/Convertible facelift only)"
+    type: BMW training text via reproduction; catalogue
+    path: "t038-akl-interchangeability/REPORT.md"
+    confidence: MEDIUM
+---
+
+Ask three E46 owners what headlights their car has and you will hear "facelift", "pre-facelift", "xenons", "angel eyes" and a year. None of those is what the BMW parts catalogue uses. The catalogue sorts E46 headlights by **body**, by **two production dates**, and by **technology**, and it adds two cosmetic variants that confuse used-parts buyers more than anything else. This article is the owner's table, built from the catalogue pages our research saved, with no part numbers in it.
+
+One thing to know before the table: only one of the two catalogue mirrors our research could read prints production dates, so **every date in this article is MEDIUM** even where the part numbers themselves are HIGH.
+
+## The short version
+
+- **Sedan and Touring** headlights change at **September 2001**. Every headlight number before that date is replaced after it, and **bi-xenon arrives**, replacing the single-xenon unit. [S2, numbers HIGH for Europe; date MEDIUM; S3, HIGH that bi-xenon was new for model year 2002]
+- **Coupé and Convertible** change twice: a quiet renumbering at **September 2001** (bi-xenon replaces xenon, halogen gets new numbers) and the visible facelift at **March 2003**, when the indicator moves into the headlight. [S1, Europe numbers HIGH; dates MEDIUM; the March 2003 month HIGH via the bumper evidence]
+- **Compact**: no changeover at all. [S5, MEDIUM]
+- **M3**: follows the Coupé until September 2001, then keeps its own bi-xenon pair open-ended; there is **no M3 facelift headlight** in the catalogue. [S1, MEDIUM]
+- Three technologies: **halogen** (the standard fit, inferred from xenon being the option: MEDIUM), **xenon** (single low-beam xenon, before the changeover only), **bi-xenon** (from the changeover). [S1, S2 HIGH for the families; S3 HIGH that xenon was an option]
+- Two cosmetic variants: **TITAN** (a different inner finish) and, on the facelift Coupé/Convertible, **white indicator lenses**. Both are cosmetic by our reading: the catalogue lists them as alternatives within the same body, period and technology. [S1, S2, MEDIUM]
+- A car built in **2001** cannot be placed on the right side of the September 2001 line from its year alone, and on the Coupé the two halogen units either side of that line cannot be told apart from outside. [S1, MEDIUM]
+
+## The owner's table
+
+| Body | Period (catalogue date) | Halogen | Xenon (single) | Bi-xenon | Cosmetic variants | Confidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| Sedan, Touring | to 09/2001 | yes, two suppliers' versions | yes | no | TITAN (330i only) | numbers HIGH (EU), dates MEDIUM |
+| Sedan, Touring | from 09/2001 | yes | no | yes | TITAN (320i, 325i, 330i trees) | same |
+| Coupé, Convertible | to 09/2001 | yes | yes | no | TITAN (330Ci only) | same |
+| Coupé, Convertible | 09/2001 to 03/2003 | yes (renumbered) | no | yes | TITAN (330Ci only) | same |
+| Coupé, Convertible | from 03/2003 (facelift) | yes, indicator in the headlight | no | yes, plus adaptive | TITAN (Europe only); white indicator | same; cut-over month HIGH |
+| M3 Coupé, Convertible | to 09/2001 | as Coupé | as Coupé | no | — | MEDIUM |
+| M3 Coupé, Convertible | from 09/2001, open-ended | as Coupé | no | own left unit, shared right unit | — | MEDIUM |
+| Compact | whole production | yes | no | yes | — | HIGH for the families, MEDIUM for "no change" |
+
+"Yes" means the catalogue lists the unit for that body and period: the part is *applicable*, not a count of cars built with it. [S1, S2, S5]
+
+## Sedan and Touring: September 2001
+
+On the catalogue, the Sedan and Touring headlight diagram has one break: rows marked **"to Sep '01"** and rows marked **"from Sep '01"**. The month views on the mirror confirm it: before September 2001 only the early numbers are shown, after it only the later ones. [S2, numbers HIGH for Europe, dates MEDIUM]
+
+**Before September 2001** there were a halogen unit (in two suppliers' versions, Bosch and ZKW), a single-xenon unit, and, on the 330i only, TITAN versions of both. **From September 2001** the halogen unit is new, the single-xenon unit is gone, and a **bi-xenon** unit takes its place; TITAN versions now appear on the 320i, 325i and 330i trees, not just the 330i. [S2, HIGH/MEDIUM as above]
+
+BMW's own press kit of October 2001 introduces the car as "the new BMW 3 Series Saloon and Touring" and lists **bi-xenon headlights among the new options**; the US press kit describes it as "upgrading of the optional Xenon headlights to Bi-xenon lights, which include both low and high beams". [S3, HIGH] So the technology change is BMW's own word; the exact production month is the catalogue's.
+
+One footnote: the six-cylinder 323i and 328i (the older M52 engine) end before the facelift, so there is no "from September 2001" headlight for them. [S2, HIGH]
+
+## Coupé and Convertible: September 2001 and March 2003
+
+The Coupé and Convertible share identical headlight diagrams in every catalogue tree we read. [S1] They have **three** periods, not two.
+
+**Launch to September 2001.** Halogen and single xenon; on the 330Ci only, TITAN versions of both. No bi-xenon. [S1, Europe numbers HIGH, dates MEDIUM]
+
+**September 2001 to March 2003.** This is the quiet one. The halogen unit gets a new number, and the single-xenon unit is replaced by bi-xenon, exactly as on the Sedan. On the US bi-xenon left unit's part page, the old xenon unit is named as predecessor and the change is marked **"non-exchangeable retrospectively"**: a design change, not a renumbering. [S1, MEDIUM: one mirror, US part page; Europe by analogy] From outside, however, a pre- and a post-September 2001 Coupé halogen headlight are not distinguishable, so even standing in front of the car you cannot tell which one you need; the catalogue change is real but not owner-visible. [S1, MEDIUM, the research's own conclusion]
+
+**From March 2003: the facelift.** The indicator moves into the headlight (the catalogue rows are literally named "turn indicator yellow" and "white turn indicator"), the halogen unit is new again, and bi-xenon now exists in plain, white-indicator and **adaptive** forms. The month is well evidenced: the facelift diagram is empty in the February 2003 view and populated in the March 2003 view, and the front bumper's own catalogue dates agree. [S1, cut-over month HIGH; dates on rows MEDIUM]
+
+Adaptive headlights are a story of their own, and not a simple swap in either direction; we cover them in a separate article. [S6]
+
+The **M3** rides along until September 2001, then takes its own bi-xenon left unit (the right unit is shared with the 325Ci/330Ci) with no end date, and **never gets a facelift headlight**: the M3 trees show no March 2003 unit at all. [S1, MEDIUM]
+
+## TITAN and white indicators: cosmetic, and a used-parts trap
+
+**TITAN** appears as a suffix on halogen, xenon and bi-xenon rows alike. The catalogue does not define it; "titanium-coloured trim inside the lamp, versus the standard black" is an unconfirmed reading. [S1, S2] Where it was offered is clear: before the changeovers only on the 330i and 330Ci; after September 2001 on the 320i, 325i and 330i Sedan and Touring trees; on the facelift Coupé/Convertible in Europe only, never on the US facelift diagrams. [S1, S2, MEDIUM] A TITAN unit is listed as an alternative to its black twin of the same body, period and technology. The trap is the reverse: two units that look alike from the outside can be from different periods and not fit.
+
+**White indicator lenses** exist only on the facelift Coupé/Convertible, as a factory option, in halogen and bi-xenon versions. They are listed for the Europe region, so they are type-approved and must emit amber light; how the bulb achieves that is not recorded, and no technical dependency is recorded. [S1, MEDIUM] Choose by taste; match the technology.
+
+## Why a 2001 car is the hard case
+
+A Sedan built in May 2001 and one built in November 2001 have no headlight in common. A year alone cannot place a 2001 car; the **production month** can. It is on the manufacturer's plate in the driver's door frame (general knowledge, not from our evidence); the first-registration date on your papers is a later date and does not help.
+
+## Telling halogen from xenon on your own car
+
+The safe answer is the build data: xenon and bi-xenon were factory options. [S3, HIGH]
+
+Owners' cues, all **LOW** and none from BMW: factory xenon cars have no manual headlight-height dial on the dashboard because the beam levels itself; xenon light is whiter and bluer, halogen warmer. [S4, LOW] One cue we recommend **against**: "a round lens inside the headlight means xenon". That holds, loosely, for the Sedan and Touring, but the facelift Coupé and Convertible have **halogen units with a projector lens**, so on those cars a lens proves nothing. [S4, LOW, but concordant across four independent threads]
+
+## Notes on the evidence
+
+**Open cells.** Supplier is not shown for any Coupé/Convertible unit. The option code of pre-facelift xenon and bi-xenon units is not printed. The meaning of TITAN is not defined by the catalogue. Whether the diesel Coupé/Convertible is in the facelift halogen usage list could not be read (saved page truncated). US numbers rest on one mirror. Several Europe supersessions are inferred from adjacency, not from part pages.
+
+## What comes next
+
+Our E46 configurator is coming soon. When it opens it will show the headlights for your body style and build date and link to sellers for the exact part; this page will link to it then.

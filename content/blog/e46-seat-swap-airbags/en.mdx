@@ -1,0 +1,144 @@
+---
+# BL-013 — Writer draft, English. Body is plain Markdown (no JSX).
+# The layout (BL-001) renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Side airbags are in the doors, not the seats: what makes an E46 seat swap safety-sensitive"
+description: "The E46's side airbags live in the doors, so a seat swap never touches them. What it does touch is the belt tensioner and the passenger occupancy sensor."
+date: 2026-10-02
+updated: 2026-10-04
+publishAt: "2026-10-04"
+lang: en
+slug: e46-seat-swap-airbags
+card: BL-013
+author: "Zauberlabs"
+tags:
+  - E46
+  - seats
+  - airbag
+  - safety
+  - retrofit
+  - BMW
+configurator: E46
+cta:
+  label: "E46 configurator: coming soon"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts; layout shows "coming soon" until the configurator opens
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "Open front door of a BMW E46 Sedan showing the door card and a front sport seat, seen from outside"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: an E46 Sedan with the driver's door open, door card and sport seat visible from outside, neutral workshop light. Must not show: legible BMW roundel or badges, airbag warning labels with readable text, part numbers, a person."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW parts-catalogue mirror (eStore-Central): Seats, Restraint System and seat wiring groups for 330i Sedan, 330i Touring, 330Ci Coupé, 330Ci Convertible, 316ti Compact and M3 Coupé, fetched 2026-10-01"
+    type: ETK mirror (catalogue-grade, one mirror, no stated data version)
+    path: "t028-evidence/raw/estore-seat-groups.json; t028-evidence/raw/estore-seat-wiring-groups.json; t028-evidence/scrape_estore_seats.py"
+    confidence: MEDIUM
+    note: "Capped at MEDIUM by project policy: one mirror, no dates, almost no equipment notes. The door-airbag finding is consistent across all six vehicles read."
+  - id: S2
+    title: "BMW Group UK press kit, 26 Oct 2001: The new BMW 3 Series Saloon and Touring, with model specification lists"
+    type: BMW-authored
+    path: "t028-evidence/raw/bmw-press-uk-2001-seat-extract.txt"
+    confidence: HIGH
+    note: "HIGH for what it states: six airbags standard (driver, passenger, front side, ITS head), automatic belt tensioners for the front seats, seat height adjustment, ISOFIX preparation. UK, model year 2002, Saloon and Touring only; it does not give airbag locations."
+  - id: S3
+    title: "Owner-forum statements on E46 seat swaps (search-result summaries; the main E46 forum is paywalled and was not read)"
+    type: forum
+    path: "t028-evidence/T-028-findings.md (attributed in the text)"
+    confidence: LOW
+    note: "Never decides alone. Used for the consequences of a mismatch and for cross-body fitting, marked LOW."
+  - id: S4
+    title: "T-028 research findings — Seats: what decides fit (2026-10-01)"
+    type: internal synthesis of S1–S3, S5
+    path: "t028-evidence/T-028-findings.md"
+    confidence: n/a
+    note: "The grading of every claim in the body follows this file. One generated-content web page on occupancy-sensor connector generations was recorded as unverified and is not used here."
+  - id: S5
+    title: "BMW Parts and Accessories Installation Instructions — Multi-functional steering wheel retrofit kit, EBA no. 01 29 0 016 107 (11.2001); cited here only for BMW's airbag-system precautions"
+    type: BMW-authored; full text read; hosted on a third-party mirror (bmw.etk.club), PDF not archived
+    path: "t029-evidence/raw/bmw-eba-284-mfl-retrofit-kit.txt"
+    confidence: HIGH
+    note: "HIGH for what it states: observe the airbag-system safety regulations, carry out a short test, disconnect the battery before airbag work. Written for a steering-wheel job; the precautions are the airbag system's, not the wheel's."
+  - id: S6
+    title: "T-040 research — Do E46 steering-wheel and seat swaps affect TÜV/HU or registration? (2026-10-02): HU-Richtlinie defect catalogue and Directive 2014/45/EU Annex I via the umwelt-online mirror, §19 and §35a StVZO, Anlage VIII, TÜV Rheinland and KBA publications"
+    type: legal texts and official publications via mirror; internal synthesis
+    path: "t040-steering-wheel-inspection/T-040-findings.md"
+    confidence: HIGH
+    note: "HIGH for the HU defect classes (HU-Richtlinie text via the umwelt-online mirror; same items 'major' in Directive 2014/45/EU). 'Same body group is covered by the car's approval' is MEDIUM-LOW (inferred) and presented as such; whether an occupancy-sensor bypass is detected at HU is unknown. Germany only; not legal advice."
+---
+
+Ask around about swapping seats in an E46 and someone will warn you about "the airbags in the seats". It is a reasonable worry, and on some cars it is. On the E46 it is wrong in an instructive way: the side airbags are in the **doors**, and a seat swap does not touch them. What a seat swap does touch is less visible and more important: the **seat-belt tensioner** and, on the passenger side, the **occupancy sensor**. Both are part of the airbag system. This article is about that interface, and about what to check before and after you fit a seat.
+
+## The short version
+
+- The BMW parts catalogue lists the E46's side airbags as **front and rear door airbag modules**, under the restraint-system group, on every body style we read: Sedan, Touring, Coupé, Convertible, Compact and M3. No airbag appears in any seat group. [S1, MEDIUM, consistent across six vehicles]
+- BMW's own press material confirms the equipment, not the location: **six airbags standard** (driver, front passenger, front side airbags, head airbags) and **automatic seat-belt tensioners for the front seats**. [S2, HIGH for the UK Saloon and Touring, model year 2002]
+- The parts that connect a front seat to the airbag system are the **lower belt with its pyrotechnic tensioner**, its **cable to the seat connector**, and the **wiring set for seat-occupancy detection**. The catalogue lists the same wiring items across the body styles. [S1, MEDIUM]
+- Owners report that a mismatched or disconnected occupancy sensor leaves the **airbag warning light on** and can **disable the passenger airbag**. [S3, LOW, several concordant reports]
+- Mechanically, the seat is a body-group question: Sedan and Touring share seat rails, Coupé and Compact share theirs. [S1, MEDIUM]
+
+## Where the airbags actually are
+
+The catalogue's restraint-system group for the E46 has a sub-group literally called "Side airbag". Its rows are door airbag modules, front and rear, left and right (the Compact's front rows read "airbag module, left door / right door", the others "front door air bag module"). That is the pattern on the 330i Sedan and Touring, the 330Ci Coupé and Convertible, the 316ti Compact and the M3 Coupé. The head airbags are listed separately as "ITS head air bag" left and right (not on the Convertible, whose group lists the passenger module only), and the passenger airbag as a module on its own. [S1, MEDIUM: one mirror, but the same structure on all six vehicles]
+
+The seat groups, by contrast, list frames, rails, controls, head restraints and upholstery by colour. **No airbag module appears in any seat group** we read. [S1, MEDIUM, absence in one mirror]
+
+BMW's press kit for the 2001 facelift puts "six airbags as standard" and lists them as driver and front passenger airbags, front side airbags and ITS head airbags, without saying where the side airbags sit. [S2, HIGH for the list; silent on location] The catalogue supplies the location, the press kit the count. Together they settle the common belief: on an E46, taking a seat out does not remove, disturb or disconnect a side airbag.
+
+## What a seat swap *does* connect to
+
+Under every E46 front seat there is a plug. Behind it, the catalogue shows three things that belong to the airbag system: [S1, MEDIUM]
+
+1. **The lower belt with the belt tensioner.** The buckle side of the front belt is listed as "lower belt with left (or right) belt tensioner", a pyrotechnic unit that pulls the belt tight in a crash and is part of the airbag system. The catalogue lists three different lower-belt-with-tensioner numbers per side without saying which car gets which. [S1, MEDIUM; the reason for the three variants is NOT ESTABLISHED]
+2. **The tensioner cable.** A "cable, seat-belt tensioner / seat connector" and a "cable buckle tensioner" sit in the seat wiring set. The seat-connector cable appears on Sedan, Coupé, Compact and M3; the buckle-tensioner cable on all but the Compact. (Touring and Convertible wiring groups were not read.) [S1, MEDIUM]
+3. **The occupancy-detection wiring.** A "wiring set, seat occupancy identification" is listed in the seat wiring group of the Sedan, Coupé, Compact and M3. It serves the sensor mat in the passenger cushion that tells the airbag control unit whether the seat is occupied. The catalogue does not say which cars have which sensor generation, and the mat itself is not identified. [S1, MEDIUM; sensor variants NOT ESTABLISHED]
+
+BMW's press kit confirms that automatic belt tensioners were standard on the front seats of the facelift Saloon and Touring. [S2, HIGH] So on any E46 you are likely to be handling at least one pyrotechnic device when you unplug a front seat, and on the passenger side also the sensor that decides whether the passenger airbag arms. That, not a hidden airbag in the backrest, is why a seat swap is safety-sensitive.
+
+## What goes wrong when it goes wrong
+
+The evidence for the consequences is owners' reports, so it is LOW, but the reports agree with each other and with the catalogue's structure: [S3, LOW]
+
+- A **belt tensioner left unplugged**, or plugged into a seat with a different connector, registers as a fault in the airbag control unit and leaves the **airbag warning light on**.
+- A **missing or mismatched occupancy sensor** on the passenger side does the same, and can **disable the passenger airbag**, because the control unit cannot confirm the seat is occupied. Bypass emulators and coding changes are sold and discussed for exactly this problem; the catalogue does not list any such part. [S3, LOW; S1 for the absence]
+- Swaps **across body groups** (a Coupé seat into a Sedan, for instance) and swaps between seats with **different electrical equipment** (electric adjustment, heating, memory) are the cases owners report most trouble with, because the harness under the seat differs. [S3, LOW]
+
+We found no BMW document describing the consequences, so treat the above as what owners say, not as a BMW statement.
+
+## The mechanical side is the easy side
+
+For the bolt-in part, the catalogue is clearer. Seat rails and mechanisms come in two families: one shared by **Sedan and Touring**, one shared by **Coupé and Compact**. The Convertible has its own frame groups. [S1, MEDIUM] Within a family, the catalogue separates **basic seats** from **BMW sports seats**, and mechanical from electric adjustment, as distinct groups. [S1, MEDIUM]
+
+Owners add detail the catalogue does not: the Sedan's outer rail carries the belt-buckle anchor while the Coupé's belt mounts on the pillar, and Coupé seats recline at a different angle; Sedan seat brackets changed at the 2001 facelift; sport seats drop into a basic car of the same body group with the same bolts. All of that is forum-level and LOW. [S3, LOW] The pattern is consistent, though: within a body group, the mechanical swap is routine, and the work is in the wiring.
+
+Two more things the catalogue makes clear. **Heated-seat installation sets carry the same numbers on Sedan, Touring, Coupé and Compact**, so heating is a body-independent retrofit. [S1, MEDIUM] And for the Sedan, Touring, Coupé and Compact, **BMW's catalogue lists no complete front seat**: those pages show placeholders, a few unnamed numbers and the first-aid-kit parts, and what you can order is frames, rails, controls and covers by colour. Only the Convertible and the M3 list complete seats by upholstery and colour. [S1, MEDIUM] What you buy as "a seat" on the other four bodies is a used pair, a re-trim or an aftermarket seat.
+
+## Before you fit a seat
+
+1. **Know your body group.** Sedan and Touring seats interchange mechanically; so do Coupé and Compact. Anything across those lines needs rails and belt-anchor changes and is a job for a specialist. [S1, MEDIUM; S3, LOW]
+2. **Compare the plugs before you buy.** The seat you are buying should carry the same connectors under the cushion as the seat you are removing: tensioner lead, and on the passenger side the occupancy wiring. If it does not, you are buying a wiring job, not a seat. [S1, MEDIUM for what the connectors are]
+3. **Match the electrical equipment.** Manual to manual, electric to electric, heated to heated, unless you are prepared to add the harness. [S1, MEDIUM for the kits; S3, LOW for the swaps]
+4. **Treat the tensioner as live.** It is a pyrotechnic unit. Disconnect the battery before unplugging anything under the seat, observe the airbag-system safety regulations, and run a short test afterwards: these are BMW's own precautions for airbag work. Do not cut, bridge or extend airbag-circuit wiring. [S5, HIGH for the precautions; S4, the wiring rule is general practice, ungraded]
+5. **Do not buy a seat that comes with "an airbag emulator".** It means the previous owner had the fault described above and masked it. [S3, LOW]
+
+## After you fit a seat
+
+- **The airbag warning light must go out** after the ignition cycle. If it stays on, the control unit has stored a fault: tensioner, occupancy sensor or both. Have it read out; the inspection consequences are in the section below. [S3, LOW for the typical causes]
+- **On the passenger side, have the occupancy detection tested**, not just the light checked. A disabled passenger airbag may not show in a way an owner notices. [S3, LOW]
+- **Keep the old seat's tensioner cable and buckle** until the new seat is confirmed working; they are the parts most often needed to make a used seat match the car. [S1, MEDIUM for the parts; S3, LOW for the advice]
+
+## Inspection and registration (Germany)
+
+The German main inspection (HU) turns the interface described above into a pass or a fail. The inspection catalogue rates an **airbag warning lamp that stays on** as a **significant defect** ("erheblicher Mangel"): no inspection sticker, fix it and present the car again within one month. A belt tensioner that is **missing, "not suitable for the vehicle" or reporting a fault** on the system's interface is rated the same, and so is an airbag system fault, which is exactly what a mismatched tensioner connector or passenger occupancy sensor produces. Seats that are **"impermissibly modified"** and belt anchorages that are **not as prescribed** are also significant defects; a seat that is merely **mounted not as prescribed** is a minor one. The EU inspection directive lists the same items as "major". [S6, HIGH for the defect classes, read through a mirror of the official text]
+
+Whether a genuine BMW seat from the **same body group** is covered by the car's own approval, and so needs no entry in the papers, is **not stated in any official text** the research found; it follows from how the law exempts parts covered by the vehicle's approval, and is an inference. A swap **between body groups** changes rails and belt anchorage and is where the questions start. [S6, MEDIUM-LOW] TÜV Rheinland advises that converting seats with integrated airbags should be done by experts only. [S6, HIGH for the advice] Whether an occupancy-sensor bypass that keeps the lamp off is detected at inspection is **unknown**; only the lamp and the interface fault are evidenced. [S6] BMW published nothing we could find on seat swaps and the airbag system. This covers Germany only, it is not legal advice, and the person to ask is your inspector.
+
+## Notes on the evidence
+
+**Conflicts recorded.** (1) The common belief that E46 side airbags are in the seats, versus the catalogue's door airbag modules on every body style; the catalogue decides. (2) One web page describing occupancy-sensor connector generations (a four-pin analogue version before 2002, a six-pin digital one after) reads like generated content and contradicts the single occupancy wiring-set number the catalogue lists across bodies; it is recorded as unverified and not used. (3) Owners' "bolt-in" reports versus the wiring and airbag interface: not a contradiction, the electrical side is the caveat.
+
+**Not established (open).** Why the catalogue lists three lower-belt-with-tensioner variants per side and which car gets which; occupancy-sensor generations and whether more than one wiring set exists; Convertible and M3 rail families; the pre- and post-facelift seat-bracket split; which cars had electric, heated, lumbar or memory seats as standard; inspection and registration rules outside Germany, and the E46 type-approval variant list that would settle the entry question. BMW's own parts and workshop systems were not accessible; the catalogue was read through one mirror, which is why its facts are MEDIUM.
+
+## What comes next
+
+Our E46 configurator is coming soon. When it opens it will show the seats for your body style and build date and link to sellers for the exact part; this page will link to it then.

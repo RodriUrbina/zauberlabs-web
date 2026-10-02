@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { formatDate, tagSlug, type Resolved } from "@/lib/blog";
+import { formatPublishMoment } from "@/lib/publish-time";
 import { dictionaries, type Locale } from "@/lib/i18n";
 import { Arrow } from "@/components/Icons";
 import HeroImage from "./HeroImage";
@@ -7,7 +8,7 @@ import HeroImage from "./HeroImage";
 /** One article in the listing. `lang` is the page language; the article may be in the other one (fallback). */
 export default function PostCard({ lang, item, featured = false }: { lang: Locale; item: Resolved; featured?: boolean }) {
   const t = dictionaries[lang].blog;
-  const { post, fallback } = item;
+  const { post, fallback, scheduled } = item;
   const href = `/${lang}/blog/${post.slug}`;
   const langNote = fallback ? (post.lang === "en" ? t.englishOnly : t.germanOnly) : null;
   const hero = { ...post.meta.hero, credit: null, licence: null }; // credit is shown on the article, not on cards
@@ -34,6 +35,12 @@ export default function PostCard({ lang, item, featured = false }: { lang: Local
             <>
               <span aria-hidden="true">·</span>
               <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] text-paper">{t.draft}</span>
+            </>
+          )}
+          {scheduled && post.meta.publishAtMs !== null && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span className="rounded-full bg-e46 px-2 py-0.5 text-[10px] text-ink">{t.scheduledBadge(formatPublishMoment(post.meta.publishAtMs, lang))}</span>
             </>
           )}
         </div>
