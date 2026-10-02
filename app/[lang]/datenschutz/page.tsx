@@ -64,16 +64,15 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <h2>5. Reichweitenmessung (Vercel Web Analytics)</h2>
       <p>
         Um zu verstehen, welche Seiten gelesen werden, nutzen wir Vercel Web Analytics, einen Dienst der Vercel Inc. (USA), die auch unsere Website
-        hostet. Der Dienst arbeitet ohne Cookies und speichert nichts auf deinem Gerät. Bei jedem Seitenaufruf werden erfasst: Zeitpunkt, aufgerufene
-        Seite und verweisende Seite (Referrer), gekürzte URL-Parameter, ungefährer Standort (Land, Region, Stadt), Betriebssystem, Browser und
-        Gerätetyp (Desktop, Tablet oder Mobil). Mehrere Aufrufe desselben Besuchs werden über einen aus der Anfrage gebildeten Hash-Wert
-        zusammengefasst, der nach 24 Stunden verworfen wird; deine IP-Adresse wird dabei nicht gespeichert, und eine Wiedererkennung über andere
+        hostet. Der Dienst setzt keine Cookies. Bei jedem Seitenaufruf werden erfasst: Zeitpunkt, aufgerufene
+        Seite und verweisende Seite (Referrer), gefilterte URL-Parameter, ungefährer Standort (Land, Region, Stadt), Betriebssystem und Browser
+        jeweils mit Version, Gerätetyp (Desktop, Tablet oder Mobil) sowie die Version des Analyse-Skripts. Mehrere Aufrufe desselben Besuchs werden über einen aus der Anfrage gebildeten Hash-Wert
+        zusammengefasst, der nach 24 Stunden verworfen wird; deine IP-Adresse wird nicht zusammen mit diesen Daten gespeichert, und eine Wiedererkennung über andere
         Websites hinweg oder eine Zuordnung zu deiner Person ist nicht möglich. Wir sehen ausschließlich zusammengefasste Statistiken.
       </p>
       <p>
         Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse, die Nutzung unserer Website zu verstehen und sie zu verbessern). Da
-        weder Cookies gesetzt noch Informationen auf deinem Endgerät gespeichert oder ausgelesen werden, ist dafür keine Einwilligung nach § 25 TDDDG
-        erforderlich. Es gilt der mit Vercel geschlossene Vertrag zur Auftragsverarbeitung (siehe Abschnitt 3). Weitere Informationen:
+        der Dienst keine Cookies setzt, ist dafür keine Einwilligung nach § 25 TDDDG erforderlich. Es gilt der mit Vercel geschlossene Vertrag zur Auftragsverarbeitung (siehe Abschnitt 3). Weitere Informationen:
         https://vercel.com/docs/analytics/privacy-policy
       </p>
 
