@@ -5,6 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { createBlog, readingMinutes, shouldShowDrafts, shouldShowScheduled, tagSlug } from "../lib/blog";
 import { parseFrontMatter } from "../lib/blog-schema";
+import { articleOgImage } from "../lib/blog-og";
 
 // ─── fixtures ────────────────────────────────────────────────────────────────
 
@@ -303,6 +304,26 @@ describe("scheduled publishing", () => {
     assert.equal(shouldShowScheduled({ VERCEL_ENV: "preview" }), true);
     assert.equal(shouldShowScheduled({}), true);
     assert.equal(shouldShowScheduled({ VERCEL_ENV: "production", BLOG_SHOW_SCHEDULED: "1" }), true);
+  });
+});
+
+// ─── social-share image (BL-005) ─────────────────────────────────────────────
+
+describe("articleOgImage", () => {
+  test("article with a hero image: that image and its alt", () => {
+    assert.deepEqual(articleOgImage({ src: "/blog/x/hero.jpg", alt: "E46 headlight", credit: "Z", licence: "own" }, "en"), {
+      url: "https://www.zauberlabs.de/blog/x/hero.jpg",
+      alt: "E46 headlight",
+    });
+  });
+  test("article without a hero image: the site hero with the site's own alt, never the article's placeholder alt", () => {
+    const hero = { src: null, alt: "No image", credit: null, licence: null, placeholder: "brief" };
+    const en = articleOgImage(hero, "en");
+    const de = articleOgImage(hero, "de");
+    assert.equal(en.url, "https://www.zauberlabs.de/images/hero.jpg");
+    assert.equal(en.alt, "Silver BMW E46 M3 Touring in a dark studio");
+    assert.equal(de.alt, "Silberner BMW E46 M3 Touring im dunklen Studio");
+    assert.ok(!en.alt.includes("No image") && !de.alt.includes("No image"));
   });
 });
 

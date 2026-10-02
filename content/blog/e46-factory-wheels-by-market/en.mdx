@@ -1,0 +1,128 @@
+---
+# BL-018 — Writer draft, English. Body is plain Markdown (no JSX).
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Factory wheels by market: same part numbers, different cars"
+description: "BMW's catalogue gives an E46 wheel the same number in the US and Europe but lists it for different cars. Why \"fits an E46\" depends on where the car was sold."
+date: 2026-10-02
+updated: 2026-10-08
+publishAt: "2026-10-08"
+lang: en
+slug: e46-factory-wheels-by-market
+card: BL-018
+author: "Zauberlabs"
+tags:
+  - E46
+  - wheels
+  - imports
+  - US market
+  - BMW
+configurator: E46
+cta:
+  label: "E46 configurator: coming soon"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts; layout shows "coming soon" until the configurator opens
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "A single BMW E46 alloy wheel leaning against a garage wall, with two small flags, US and EU, chalked on the floor beside it"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: one E46-era multi-spoke alloy wheel leaning against a plain garage wall, two small chalk outlines on the floor suggesting a US and an EU flag; neutral light. Must not show: legible BMW roundel or centre cap text, readable part numbers or tyre markings, a person."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-035.1 — factory wheel applicability by market: bmwfans.info part-page usage tables and model-tree diagrams for six wheel styles, USA and Europe LHD trees; live Europe rules cross-checked against eStore-Central"
+    type: ETK mirror (US side one mirror; Europe side two mirrors agree)
+    path: "t035-evidence/REPORT.md; t035-evidence/applicability-by-market.md; t035-evidence/bmwfans-part-usage-e46.json"
+    confidence: MEDIUM
+    note: "MEDIUM throughout: the US tables rest on one mirror; the Europe tables are corroborated by the second mirror, but both mirrors derive from the same BMW data and no BMW-hosted catalogue was reachable. Rim rows carry no date bands."
+  - id: S2
+    title: "T-030 — wheel part numbers compared across the USA and Europe trees (nine numbers, six styles); Compact listed for Europe only"
+    type: ETK mirror (one mirror)
+    path: "t030-evidence/wheels-compact-markets.json"
+    confidence: MEDIUM
+  - id: S3
+    title: "E46 wheel knowledge (research note on enthusiast and reseller sources: style tables, the US-only ZHP package)"
+    type: enthusiast and press sources
+    path: "e46-wheel-knowledge.md"
+    confidence: LOW
+    note: "Never decides. Used only for the statement that the performance package behind one wheel's factory record was a US-market package."
+  - id: S4
+    title: "T-036 — European dealer listings for the six wheel styles (availability flags; no seller named in the article)"
+    type: retailer
+    path: "t036-evidence/T-036-findings.md"
+    confidence: LOW
+    note: "Used only for the aside that some catalogue-discontinued rims are still listed new by dealers; listings are a dealer's claim at fetch date."
+---
+
+A BMW wheel has one part number wherever it is sold. For the six E46 factory wheel styles our research checked, the US catalogue and the European catalogue agree on every number, front and rear. What they do not agree on is **which cars the wheel is listed for**. The same rim is catalogued for most of the European range and for one US model; another is listed for every European car and missing from one US model. For a European owner this is a curiosity; for the owner of an import, or anyone reading a US forum for fitment advice, it is the reason "fits an E46" is not a complete sentence.
+
+## The short version
+
+- **Nine part numbers, six wheel styles, identical in both markets.** No style has a US-only or Europe-only number, front or rear. [S1, S2, MEDIUM]
+- **Applicability differs.** The US catalogue lists one 18-inch staggered style for the **330Ci Coupé and Convertible only**; the European catalogue lists it for Sedan, Touring, Coupé, Convertible and Compact across the model range. [S1, MEDIUM]
+- One 17-inch style is listed for every European car but **not for the US 330xi Sedan**. [S1, MEDIUM]
+- The 16-inch style is listed for **no 330 model in either market**. [S1, MEDIUM]
+- A catalogue listing means **applicability, not factory fitment**: two styles released in March 2003 are listed for cars whose engines went out of production years earlier. [S1, MEDIUM]
+- The catalogue draws **no era line** for wheels: no rim row carries a production-date band in either market. [S1, MEDIUM]
+- **Diesels and the Compact exist in the European catalogue only**, so for them the question never arises. [S1, S2, MEDIUM]
+
+## Same number, both sides of the Atlantic
+
+The research compared the catalogue mirror's USA and Europe trees for the same body and engine, wheel by wheel, for six styles: a 17-inch square style, a second 17-inch square style released in 2003, a 16-inch square style, a 17-inch staggered M style, an 18-inch staggered style, and an 18-inch staggered M style released in 2003. For all nine part numbers (the staggered styles have a front and a rear) the US and European trees show the **same number, the same width, diameter and offset**. There is no market-specific rim for any of them. [S1, S2, MEDIUM]
+
+That is different from headlights, where every US number has a separate European twin. Wheels are market-neutral parts. What varies is the list of cars underneath each number.
+
+## Where the lists differ
+
+The catalogue's part pages carry a "usage" table: the models, bodies and regions a part is listed for. Read for the US region and for Europe, the six styles come out like this: [S1, MEDIUM]
+
+| Style (as the catalogue groups it) | US catalogue | European catalogue |
+| --- | --- | --- |
+| 17" square, 1998 | Sedan, Touring, Coupé, Convertible, all US petrol models | the same bodies plus the Compact, all petrol and diesel models |
+| 17" square, released 2003 | as above, **except the 330xi Sedan** | as the 1998 style |
+| 16" square | all US models **except any 330** | all European models **except any 330** |
+| 17" staggered M | as the 1998 17" | as the 1998 17" |
+| **18" staggered** | **330Ci Coupé and 330Ci Convertible only** | Sedan, Touring, Coupé, Convertible **and Compact** |
+| 18" staggered M, released 2003 | as the 1998 17" | as the 1998 17" |
+
+Two cells carry the story. The **18-inch staggered style** is, in the US catalogue, a 330Ci wheel and nothing else: its group does not appear in the US Sedan, Touring or smaller-Coupé trees at all. In Europe the same rim is listed for a 316i Sedan, a 320d Touring and a 325ti Compact. [S1, S2, MEDIUM] And the **2003 17-inch style** is missing from one US tree, the 330xi Sedan, while Europe lists it for every Sedan including the 330xi. [S1, MEDIUM]
+
+Why BMW's catalogue draws the lines differently is not something the catalogue says. The research found no BMW text explaining it. [S1]
+
+## What a catalogue listing is, and is not
+
+The research base keeps three kinds of fact apart, and the catalogue gives only one of them. **Factory application** means the car left the factory on this wheel. **Physical fitment** means the wheel bolts on and clears. **Catalogue applicability** means BMW's parts system lists the wheel for this car, which is what a dealer could order for it. [S3 for the distinction; S1]
+
+Two details show that the catalogue lists are applicability, not factory fitment. The 2003 17-inch and the 2003 18-inch M styles were **released in March 2003**, yet both are listed for the 323i and 328i, whose six-cylinder engines ended before the facelift. Nobody ordered a 1999 323i with a wheel that did not exist yet; the catalogue lists it because it can be fitted. [S1, MEDIUM] And **no rim row carries a date band** in either market, so the catalogue draws no "before/after" line for wheels at all. [S1, MEDIUM]
+
+One further wrinkle. The factory record behind the 18-inch M style on the 330i Sedan and 330Ci comes from a **US-market performance package**; a European 330i could have had the same wheel, but the catalogue, not that package, is the reason it is listed. [S3, LOW for the package; S1]
+
+## Europe-only sizes under a familiar name
+
+The 18-inch staggered style has a longer entry in the European catalogue than in the US one. Alongside the 18-inch pair, the European diagram lists a **second 18-inch pair** (both marked "delivery discontinued by the factory") and a **17-inch family** of the same style: a staggered pair and a square set. None of these appears on the US diagram. [S1, MEDIUM] Whether the second 18-inch pair is a predecessor or a finish variant of the first is not established; no part page prints an old number for it. [S1]
+
+For a buyer the 17-inch family matters more than the catalogue detail: it carries the **same style name** and the **same spoke design**, but a 17-inch wheel with a taller tyre is not the look of the 18-inch wheel, and the 17-inch sizes happen to match the 17-inch staggered M style and the 17-inch square style. [S1, MEDIUM] A listing that says only the style name does not tell you which of the three sizes you are buying.
+
+A smaller oddity: a group named for a "parallel spoke" style appears in every European tree and in no US tree, and its numbers were not captured. Whether that is what owners mean by an "M Parallel" wheel is not established; the catalogue lists that name for other BMW models, not the E46. [S1]
+
+## Discontinued in the catalogue, in stock at the dealer
+
+The 18-inch staggered pair is marked "delivery discontinued by the factory" in both markets, and so are some of the Europe-only alternatives. European dealers nevertheless list some of these rims as new and in stock. [S1, MEDIUM for the flag; S4, LOW for the listings] Read a dealer's "in stock" as the dealer's claim at that date, not as the catalogue's. The styles with no new-genuine source at all in the research were the 2003 17-inch style, the front of the 18-inch M style and the front of the 18-inch style. [S4, LOW, at fetch date]
+
+## What this means for an import
+
+1. **The part number is not the problem.** A European rim is a US rim; buy by number and size. [S1, S2, MEDIUM]
+2. **US forum fitment lists describe US cars.** "Only came on the 330Ci" is a true statement about the US catalogue and a false one about Europe. [S1, MEDIUM]
+3. **Catalogue listing is not factory fitment.** If you want originality, the listing cannot tell you what your car left the factory on; the build sheet can. [S1, S3]
+4. **Check the size, not the style name.** The 18-inch style exists in 17-inch sizes in Europe under the same name. [S1, MEDIUM]
+5. **Diesel or Compact: Europe only.** No US list applies to your car. [S1, S2, MEDIUM]
+6. **Bolt pattern, offset and brake clearance are a separate question** from all of the above; the catalogue list says a wheel is applicable, not that it clears a given brake package. [S3]
+
+## Notes on the evidence
+
+**Conflicts recorded.** (1) The US Touring list on the mirror includes a 323i the US never sold; US lists are used as evidence of absence, not presence. (2) The second European 18-inch pair's part pages list eight US Sedan variants in their usage table although no US Sedan tree carries the style's group; recorded, not resolved. (3) Catalogue "delivery discontinued" versus dealer "in stock" for the same rims; the dealer's claim is not adopted.
+
+**Not established (open).** Why the US and European applicability lists differ; the relationship between the two European 18-inch pairs; the numbers and identity of the European "parallel spoke" group; which market the catalogue's rim applicability follows for cars with no US-catalogue variant (316i, 318i, diesels); any US-catalogue second mirror (none was reachable). Both mirrors derive from the same BMW data, so the Europe corroboration confirms consistent parsing, not an independent source.
+
+## What comes next
+
+Our E46 configurator is coming soon. When it opens it will show the wheels for your body style and build date and link to sellers for the exact part; this page will link to it then.
