@@ -20,7 +20,7 @@ export function mdxComponents(lang: Locale, configuratorUrl?: string): MDXCompon
     ),
     Callout,
     Figure,
-    Cite,
+    Cite: ({ groups }: { groups: string }) => <Cite groups={groups} lang={lang} />,
     ConfiguratorLink: ({ href, children }: { href?: string; children: React.ReactNode }) => (
       <ConfiguratorLink href={href ?? configuratorUrl} lang={lang}>{children}</ConfiguratorLink>
     ),
