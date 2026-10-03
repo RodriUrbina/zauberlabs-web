@@ -78,7 +78,7 @@ HIGH / MEDIUM / LOW follow the e46build evidence index (`docs/research/research-
 
 Plain Markdown (headings from `##` down, lists, tables, links, bold, quotes). Keep part numbers out of the body; link to the configurator instead.
 
-**Inline evidence marks** in plain text are rendered as chips that link to the matching source:
+**Inline evidence marks** in plain text are rendered as superscript source numbers (⁴ or ⁹,¹¹) that link to the matching source; the grade and any qualifier appear in the link's tooltip, not in the text (the grade is shown in the Sources box):
 
 ```
 BMW's instruction applies from June 1999. [S1, HIGH]
@@ -86,7 +86,7 @@ The exact month is disputed. [S1, HIGH that the document says so; S4, LOW]
 Paddles need the gearbox. [S2, S4]   or   [S5, open item]
 ```
 
-Text after a `;` without a source id is kept as a caveat on the preceding chip (`[S1, HIGH for the scope; the month itself MEDIUM]` → chip "S1 · HIGH", caveat "for the scope; the month itself MEDIUM"). A compound grade inline (`LOW–MEDIUM`) shows the lower grade on the chip and keeps the full wording as the caveat. A leading colon after the grade is fine (`[S1, HIGH: both mirrors]`).
+Text after a `;` without a source id is kept as a caveat in the preceding number's tooltip (`[S1, HIGH for the scope; the month itself MEDIUM]` → ¹ with tooltip "S1 · HIGH — for the scope; the month itself MEDIUM"). A compound grade inline (`LOW–MEDIUM`) is kept in the tooltip wording. A leading colon after the grade is fine (`[S1, HIGH: both mirrors]`).
 
 Optional building blocks (nothing else is available):
 

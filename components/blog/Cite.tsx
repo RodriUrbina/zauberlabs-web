@@ -1,35 +1,47 @@
+import { Fragment } from "react";
 import type { CiteGroup } from "@/lib/remark-cite";
+import type { Locale } from "@/lib/i18n";
 
-const tone: Record<NonNullable<CiteGroup["level"]> | "none", string> = {
-  HIGH: "border-[#1F7A45]/40 bg-[#1F7A45]/10 text-[#1F7A45]",
-  MEDIUM: "border-accent/40 bg-accent/10 text-accent",
-  LOW: "border-accent/60 bg-accent/15 text-accent",
-  none: "border-line bg-paper text-muted",
-};
-
-/** Inline evidence mark ([S1, HIGH] in the article) linking to the entry in the Sources box. */
-export default function Cite({ groups }: { groups: string | CiteGroup[] }) {
+/**
+ * Inline evidence mark ([S4, HIGH] / [S9, MEDIUM; S11, MEDIUM for …] in the article), rendered Wikipedia-style
+ * (BL-023, PO decision 2026-10-03): superscript source numbers only — "⁴" or "⁹,¹¹" — each linking to the entry in
+ * the Sources box. No grade, no colour, no qualifier in the text; ids, grade and qualifier live in the link's tooltip.
+ * The MDX mark syntax, the front matter and the Sources box are unchanged.
+ */
+export default function Cite({ groups, lang = "en" }: { groups: string | CiteGroup[]; lang?: Locale }) {
   const list: CiteGroup[] = typeof groups === "string" ? safeParse(groups) : groups;
-  if (!list.length) return null;
+  const refs = flatten(list);
+  if (!refs.length) return null;
+  const word = lang === "de" ? "Quelle" : "Source";
   return (
-    <span className="cite whitespace-nowrap">
-      {list.map((g, i) => (
-        <span key={i}>
-          {i > 0 && <span className="text-muted">; </span>}
-          <a
-            href={`#src-${g.ids[0].toLowerCase()}`}
-            className={`inline-flex items-center gap-1 rounded-full border px-1.5 py-[1px] align-baseline font-mono text-[10px] font-medium tracking-[0.08em] no-underline ${tone[g.level ?? "none"]}`}
-            title={g.qualifier ? `${g.ids.join(", ")}${g.level ? ` · ${g.level}` : ""} — ${g.qualifier}` : undefined}
-          >
-            {g.ids.join(", ")}
-            {g.level && <span aria-hidden="true">·</span>}
-            {g.level && <span>{g.level}</span>}
+    <sup className="cite">
+      {refs.map((r, i) => (
+        <Fragment key={r.id}>
+          {i > 0 && ","}
+          <a href={`#src-${r.id.toLowerCase()}`} title={r.tooltip} aria-label={`${word} ${r.number}${r.tooltip ? `: ${r.tooltip}` : ""}`}>
+            {r.number}
           </a>
-          {g.qualifier && <span className="ml-1 text-[0.8em] text-muted">({g.qualifier})</span>}
-        </span>
+        </Fragment>
       ))}
-    </span>
+    </sup>
   );
+}
+
+type Ref = { id: string; number: string; tooltip: string };
+
+/** One reference per source id, in order of appearance, deduplicated; the tooltip carries the whole group's information. */
+function flatten(groups: CiteGroup[]): Ref[] {
+  const out: Ref[] = [];
+  const seen = new Set<string>();
+  for (const g of groups) {
+    const tooltip = [g.ids.join(", "), g.level].filter(Boolean).join(" · ") + (g.qualifier ? ` — ${g.qualifier}` : "");
+    for (const id of g.ids) {
+      if (seen.has(id)) continue;
+      seen.add(id);
+      out.push({ id, number: id.replace(/^S/i, "") || id, tooltip });
+    }
+  }
+  return out;
 }
 
 function safeParse(s: string): CiteGroup[] {
