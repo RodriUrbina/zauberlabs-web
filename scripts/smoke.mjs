@@ -56,13 +56,13 @@ await waitFor(`${BASE}/robots.txt`, 60_000);
 const checks = [
   { path: "/en/blog", status: 200, markers: ['rel="canonical" href="https://www.zauberlabs.de/en/blog"', 'hrefLang="de"', 'hrefLang="en"', "application/rss+xml", '"@type":"CollectionPage"'] },
   { path: "/de/blog", status: 200, markers: ['rel="canonical" href="https://www.zauberlabs.de/de/blog"', 'hrefLang="en"'] },
-  { path: `/en/blog/${slug}`, status: 200, markers: ['"@type":"Article"', '"@type":"BreadcrumbList"', 'property="og:type" content="article"', 'rel="canonical"', "Sources", "cta-title"] },
+  { path: `/en/blog/${slug}`, status: 200, markers: ['"@type":"Article"', '"@type":"BreadcrumbList"', 'property="og:type" content="article"', 'rel="canonical"', "Sources", "cta-title", ...(slug === "sample-not-for-publication" ? ["<figure", "<figcaption"] : [])] },
   {
     path: `/de/blog/${slug}`,
     status: 200,
     markers: hasDe
       ? ['rel="canonical" href="https://www.zauberlabs.de/de/blog/']
-      : ["Dieser Artikel ist bisher nur auf Englisch verfügbar.", `rel="canonical" href="https://www.zauberlabs.de/en/blog/${slug}"`],
+      : ["Dieser Artikel ist bisher nur auf Englisch verfügbar.", `rel="canonical" href="https://www.zauberlabs.de/en/blog/${slug}"`, ...(slug === "sample-not-for-publication" ? ["<figure", "<figcaption"] : [])],
   },
   { path: "/en/blog/tag/e46", status: 200, markers: ['rel="canonical" href="https://www.zauberlabs.de/en/blog/tag/e46"', 'aria-current="page"'] },
   { path: "/en/blog/tag/does-not-exist", status: 404, markers: [] },
