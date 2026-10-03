@@ -158,5 +158,7 @@ body {
 .prose-zl :where(thead th):not(.not-prose *) { font-family: var(--font-mono); font-size: 0.75em; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-muted); font-weight: 500; }
 .prose-zl :where(img):not(.not-prose *) { border-radius: 1rem; }
 .prose-zl :where(strong):not(.not-prose *) { font-weight: 700; }
-/* Inline evidence marks ([S1, HIGH]) never break across lines awkwardly and never inherit the link underline */
-.prose-zl .cite a { text-decoration: none; }
+/* Inline evidence marks ([S1, HIGH]) render as superscript source numbers (BL-023): no underline, no colour by grade */
+.prose-zl sup.cite { font-size: 0.68em; line-height: 0; vertical-align: super; margin-left: 0.08em; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; }
+.prose-zl sup.cite a { color: var(--color-ink); text-decoration: none; padding: 0 0.1em; }
+.prose-zl sup.cite a:hover, .prose-zl sup.cite a:focus-visible { color: var(--color-accent); }
