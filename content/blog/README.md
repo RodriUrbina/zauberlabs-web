@@ -102,13 +102,15 @@ Do your low beams swivel when you steer?
 <ConfiguratorLink>Find the right headlight for your production date</ConfiguratorLink>
 ```
 
+`Figure` takes `src`, `alt`, optional `caption` and `credit`, and optional `width`/`height` (pixels of the file; avoids the page jumping while the image loads). Landscape images fill the column; portrait images are capped at 75 % of the screen height and centred. SVG drawings work too, e.g. the Eisenach map `/images/map-germany-eisenach.svg` (own drawing, no licence needed). The same figure renders on the German fallback page.
+
 **Rendered by the layout, never written by hand:** the "Try it on your car" box, the "Sources & confidence" box and its legend. Keep your "Recorded conflicts / Not established / Method note" prose in the body under a heading such as `## Notes on the evidence`.
 
 While the E46 configurator is offline (`E46_LIVE` false in `lib/i18n.ts`), every configurator button shows "coming soon" with no link.
 
 ## Images
 
-Own photos, licensed images with recorded provenance, or AI-generated images labelled as such (BL-000 rule 3). Record credit and licence in the front matter. Put files under `public/blog/<slug>/`. Hero images render at 16:9; aim for 1600×900 JPEG, under 300 KB. No image yet? Use `src: null` and a `placeholder` brief.
+Own photos, licensed images with recorded provenance (e.g. Wikimedia Commons CC BY / CC BY-SA or public domain, with the exact credit line in `credit`), or AI-generated images labelled as such (BL-000 rule 3). Record credit and licence in the front matter or the Figure's `credit`. Put files under `public/blog/<slug>/`. Hero images render at 16:9; aim for 1600×900. **Size guard (tested): every image ≤ 400 KB; WebP preferred for photos, SVG for drawings** (`npm test` fails on a larger file and lists other formats as a note). No hero image yet? Use `src: null`.
 
 ## Checks
 
