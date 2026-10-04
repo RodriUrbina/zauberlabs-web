@@ -24,15 +24,15 @@ export default function SourcesBox({ lang, sources, evidenceRoot }: { lang: Loca
           </>
         )}
       </p>
-      <ol className="mt-5 flex flex-col divide-y divide-line border-y border-line">
+      <ol className="mt-5 flex min-w-0 flex-col divide-y divide-line border-y border-line">
         {sources.map((s) => (
-          <li key={s.id} id={`src-${s.id.toLowerCase()}`} className="grid scroll-mt-24 gap-1.5 py-4 sm:grid-cols-[40px_minmax(0,1fr)_auto] sm:items-start sm:gap-4">
+          <li key={s.id} id={`src-${s.id.toLowerCase()}`} className="grid min-w-0 scroll-mt-24 gap-1.5 py-4 sm:grid-cols-[40px_minmax(0,1fr)_auto] sm:items-start sm:gap-4">
             <span className="font-mono text-[13px] text-muted">{s.id}</span>
             <div className="min-w-0">
-              <p className="text-[15px] font-semibold text-ink">{s.label}</p>
-              {s.type && <p className="mt-0.5 text-[13px] text-muted">{s.type}</p>}
+              <p className="text-[15px] font-semibold break-words text-ink [overflow-wrap:anywhere]">{s.label}</p>
+              {s.type && <p className="mt-0.5 text-[13px] break-words text-muted [overflow-wrap:anywhere]">{s.type}</p>}
               <p className="mt-1 font-mono text-[12px] break-all text-muted">{s.path}</p>
-              {s.note && <p className="mt-1.5 text-[13px] leading-relaxed text-body">{s.note}</p>}
+              {s.note && <p className="mt-1.5 text-[13px] leading-relaxed break-words text-body [overflow-wrap:anywhere]">{s.note}</p>}
             </div>
             <ConfidenceBadge level={s.confidence} lang={lang} className="justify-self-start sm:justify-self-end" />
           </li>
