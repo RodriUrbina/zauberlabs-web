@@ -174,7 +174,7 @@ const de: Dict = {
       { name: "Touring", years: "1999–2005", img: "/images/touring.jpg" },
       { name: "Coupé", years: "1999–2006", img: "/images/coupe.jpg" },
     ],
-    e46CardAlt: "Silberne BMW-E46-Limousine von vorn mit M-Stoßstange und Angel-Eye-Scheinwerfern",
+    e46CardAlt: "Silberne BMW-E46-Limousine von vorn mit M-Stoßstange und Angel-Eyes-Scheinwerfern",
     nextLabel: "03 · Freier Platz",
     nextTitle: "Dein Auto könnte das nächste sein.",
     nextCta: "Anderes Modell vorschlagen",
