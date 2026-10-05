@@ -113,11 +113,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <div className="grid gap-6 lg:grid-cols-3">
             <div className="flex flex-col overflow-hidden rounded-3xl bg-ink text-paper lg:col-span-2">
               <div className="relative h-[240px] md:h-[400px]">
-                {/* BL-003: AI-generated image made by the PO (Rodrigo Urbina), 2026-09-28, source doubleCar_HighFi.png.
-                    Shown without a visible "AI-generated" label by explicit PO decision (exception to BL-000 rule 3, logged on BL-003).
-                    object-position centres the crop on the two headlights and the split line at phone and desktop widths;
-                    on phones a 3% zoom keeps both the top labels and the round split handle just outside the 240px-high frame. */}
-                <Image src="/images/e46-halogen-bixenon.jpg" alt={t.garage.e46CardAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover object-[50%_44%] max-md:scale-[1.03] md:object-[50%_60%]" />
+                {/* BL-026: photo supplied by the PO (Rodrigo Urbina), 2026-10-05, dark-background variant of
+                    front_Preface_halo_lights.jpg; PO confirmed he holds the rights to use it. Not AI-generated.
+                    Source "e46 black background.png" (1254×1254), exported as WebP (85 KB). PO chose the dark variant
+                    (option C) so the photo's black blends into the ink card. Square source in a wide frame: the
+                    object-position keeps headlights, grille and roundel centred at phone (240 px) and desktop (400 px) heights. */}
+                <Image src="/images/e46-front-halo-dark.webp" alt={t.garage.e46CardAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover object-[50%_52%]" />
               </div>
               <div className="flex flex-col gap-7 p-6 md:p-8">
                 <div className="flex flex-col justify-between gap-5 md:flex-row md:items-start">
