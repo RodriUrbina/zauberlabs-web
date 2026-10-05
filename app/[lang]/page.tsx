@@ -119,7 +119,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                     trimmed (24 px kept), no other pixel editing; exported as WebP. BL-027 (PO): the WHOLE car at every
                     width, no cropping — object-contain inside a pure-black area (the photo's background is #000), so the
                     letterbox bars are invisible; the car is height-limited in both frames (240 px phone, 400 px desktop). */}
-                <Image src="/images/e46-front-halo-dark.webp" alt={t.garage.e46CardAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-contain" />
+                <Image src="/images/e46-front-halo-dark.webp" alt={t.garage.e46CardAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-contain pb-6" />
+                {/* BL-027 (PO-approved fade): the lowest 24 px blend from the photo's black into the card's ink, hiding the
+                    straight line between image area and card body. The image keeps 24 px bottom padding, so the fade
+                    never covers the car's lower bumper. */}
+                <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-b from-black to-ink" />
               </div>
               <div className="flex flex-col gap-7 p-6 md:p-8">
                 <div className="flex flex-col justify-between gap-5 md:flex-row md:items-start">
