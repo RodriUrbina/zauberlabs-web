@@ -112,13 +112,18 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
           <div className="grid gap-6 lg:grid-cols-3">
             <div className="flex flex-col overflow-hidden rounded-3xl bg-ink text-paper lg:col-span-2">
-              <div className="relative h-[240px] md:h-[400px]">
-                {/* BL-026: photo supplied by the PO (Rodrigo Urbina), 2026-10-05, dark-background variant of
+              <div className="relative h-[240px] bg-black md:h-[400px]">
+                {/* BL-026/BL-027: photo supplied by the PO (Rodrigo Urbina), 2026-10-05, dark-background variant of
                     front_Preface_halo_lights.jpg; PO confirmed he holds the rights to use it. Not AI-generated.
-                    Source "e46 black background.png" (1254×1254), exported as WebP (85 KB). PO chose the dark variant
-                    (option C) so the photo's black blends into the ink card. Square source in a wide frame: the
-                    object-position keeps headlights, grille and roundel centred at phone (240 px) and desktop (400 px) heights. */}
-                <Image src="/images/e46-front-halo-dark.webp" alt={t.garage.e46CardAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover object-[50%_52%]" />
+                    Source "e46 black background.png" (1254×1254); the uniform black margin above and below the car is
+                    trimmed (24 px kept), no other pixel editing; exported as WebP. BL-027 (PO): the WHOLE car at every
+                    width, no cropping — object-contain inside a pure-black area (the photo's background is #000), so the
+                    letterbox bars are invisible; the car is height-limited in both frames (240 px phone, 400 px desktop). */}
+                <Image src="/images/e46-front-halo-dark.webp" alt={t.garage.e46CardAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-contain pb-6" />
+                {/* BL-027 (PO-approved fade): the lowest 24 px blend from the photo's black into the card's ink, hiding the
+                    straight line between image area and card body. The image keeps 24 px bottom padding, so the fade
+                    never covers the car's lower bumper. */}
+                <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-b from-black to-ink" />
               </div>
               <div className="flex flex-col gap-7 p-6 md:p-8">
                 <div className="flex flex-col justify-between gap-5 md:flex-row md:items-start">
