@@ -9,7 +9,8 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * vote cookie, cookieless Vercel Web Analytics (Abschnitt 5, BL-008), no other tracking, no newsletter tool.
  * E46BUILD configurator at e46.zauberlabs.de (BL-031 draft): website + API on Vercel (functions fra1, edge delivery),
  * Neon Postgres via the Vercel Marketplace (Frankfurt, AWS eu-central-1), server-side builds without accounts,
- * no Neon Auth, no tracking added by E46BUILD, self-hosted fonts, links to external sellers.
+ * no Neon Auth, Vercel Web Analytics (as on zauberlabs.de, see Abschnitt 5), no other tracking, self-hosted fonts,
+ * links to external sellers.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -128,9 +129,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         (berechtigtes Interesse am Betrieb und an der Verbesserung des Konfigurators). Speicherdauer der Konfigurationen: [PO to confirm].
       </p>
       <p>
-        E46BUILD verwendet keine Nutzerkonten und keinen Anmeldedienst und setzt selbst keine Tracking- oder Analyse-Tools ein [PO to confirm: läuft
-        Vercel Web Analytics (Abschnitt 5) auch auf e46.zauberlabs.de?]. Schriftarten werden lokal ausgeliefert; es findet keine Verbindung zu Google
-        Fonts statt. Angebote im Konfigurator verlinken auf die Websites externer Händler; sobald du einem solchen Link folgst, gelten deren
+        E46BUILD verwendet keine Nutzerkonten und keinen Anmeldedienst. Zur Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics –
+        ohne Cookies, nur zusammengefasste Seitenaufrufe und Besucherzahlen; es gilt Abschnitt 5. Darüber hinaus setzt E46BUILD keine Tracking- oder
+        Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet keine Verbindung zu Google Fonts statt. Angebote im Konfigurator verlinken auf die Websites externer Händler; sobald du einem solchen Link folgst, gelten deren
         Datenschutzbestimmungen (Abschnitt 12).
       </p>
 
