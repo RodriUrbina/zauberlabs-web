@@ -27,7 +27,7 @@ const en = {
   tickerRight: "“Exact fit” means confirmed. Never a guess.",
   garage: {
     eyebrow: "The garage",
-    title: ["One car. ", "Done properly."],
+    title: ["Your car, ", "to its full potential."],
     body: "Each configurator is a standalone site, built around a single model and every body style it came in. We only open the next one when the last one fits.",
     e46Label: "01 · Live · BMW 3 Series (E46)",
     e46LabelSoon: "01 · Coming soon · BMW 3 Series (E46)",
@@ -55,7 +55,7 @@ const en = {
   },
   how: {
     eyebrow: "How every configurator works",
-    title: ["Different cars. ", "Same promise."],
+    title: ["Same ride. ", "Renovated promise."],
     body: "No catalogue codes, no forum archaeology. You pick by picture; the fitment engine does the paperwork.",
     steps: [
       { k: "01 — Describe it", t: "Talk like an owner.", b: "Model, year, body, colour — typed the way you’d tell a friend. We work out the rest and only ask what we need.", sample: "330d Touring, 2003, M Sport" },
@@ -163,7 +163,7 @@ const de: Dict = {
   tickerRight: "„Passgenau“ heißt bestätigt. Nie geraten.",
   garage: {
     eyebrow: "Die Garage",
-    title: ["Ein Auto. ", "Richtig gemacht."],
+    title: ["Dein Auto, ", "voll ausgeschöpft."],
     body: "Jeder Konfigurator ist eine eigene Website – gebaut um ein einziges Modell und jede Karosserievariante, die es gab. Den nächsten starten wir erst, wenn der letzte passt.",
     e46Label: "01 · Live · BMW 3er (E46)",
     e46LabelSoon: "01 · Bald verfügbar · BMW 3er (E46)",
@@ -191,7 +191,7 @@ const de: Dict = {
   },
   how: {
     eyebrow: "So funktioniert jeder Konfigurator",
-    title: ["Andere Autos. ", "Dasselbe Versprechen."],
+    title: ["Gleicher Wagen. ", "Erneuertes Versprechen."],
     body: "Keine Katalogcodes, keine Forums-Archäologie. Du wählst nach Bild – die Passform-Engine erledigt den Papierkram.",
     steps: [
       { k: "01 — Beschreiben", t: "Sprich wie ein Schrauber.", b: "Modell, Baujahr, Karosserie, Farbe – so, wie du es einem Kumpel erzählen würdest. Den Rest ermitteln wir und fragen nur, was wir wirklich brauchen.", sample: "330d Touring, 2003, M-Paket" },
