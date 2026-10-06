@@ -66,8 +66,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <p>
         Die Programmierschnittstelle (API) von E46BUILD schreibt zusätzlich ein eigenes Zugriffsprotokoll: je Anfrage Methode, aufgerufene Adresse
         (einschließlich der zufälligen Kennung einer Konfiguration), Host sowie IP-Adresse und Port des Aufrufers – ohne Browserkennung. Diese
-        Protokolle liegen in den Laufzeit-Logs von Vercel; die Aufbewahrungsdauer richtet sich nach dem Vercel-Tarif [PO to confirm: Dauer].
-        Rechtsgrundlage ist auch hier Art. 6 Abs. 1 lit. f DSGVO (Sicherheit und Betrieb).
+        technischen Zugriffsprotokolle (Methode, Pfad, IP-Adresse, Zeitpunkt) verarbeitet Vercel für uns und speichert sie für die Dauer der
+        Log-Aufbewahrung von Vercel (derzeit höchstens 1 Tag) [PO to confirm: Tarif Pro ohne Observability Plus? Mit Observability Plus wären es
+        30 Tage]. Rechtsgrundlage ist auch hier Art. 6 Abs. 1 lit. f DSGVO (Sicherheit und Betrieb).
       </p>
 
       <h2>4. Schriftarten</h2>
@@ -126,7 +127,10 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       </p>
 
       {/* BL-031 DRAFT — E46BUILD configurator. Facts from the e46 code (master 63cf51e) and Neon/Databricks legal pages (2026-10-06).
-          Items marked [PO to confirm] are not asserted; the PO verifies them before merge. */}
+          Items marked [PO to confirm] are not asserted; the PO verifies them before merge.
+          RELEASE GATE: the 30-day deletion sentence in Abschnitt 9 depends on the E46 cleanup job (E46 card T-066), not yet released —
+          this page goes live only once T-066 is released. Vercel runtime-log retention per https://vercel.com/docs/logs/runtime
+          (2026-08-28): Hobby 1 h, Pro 1 day, Pro + Observability Plus 30 days, Enterprise 3 days. */}
       <h2>9. E46BUILD-Konfigurator (e46.zauberlabs.de)</h2>
       <p>
         Unser Konfigurator E46BUILD läuft unter e46.zauberlabs.de. Ohne Konto und ohne Anmeldung kannst du dort dein Auto beschreiben und eine
@@ -140,8 +144,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <p>
         Mit der Konfiguration werden kein Konto, kein Name, keine E-Mail-Adresse, keine IP-Adresse, keine Cookie-Kennung und kein Freigabelink
         gespeichert; die zufällige Kennung existiert nur im Speicher deiner geöffneten Seite. Ein Bezug zu deiner Person entsteht dadurch nicht, es sei
-        denn, du trägst selbst personenbezogene Angaben in die Bezeichnung ein. Die Konfigurationen liegen in unserer Datenbank (Abschnitt 10) und
-        werden gespeichert, bis sie gelöscht werden; sie sind nicht mit einer Person verknüpft [PO to confirm: Formulierung und Löschkonzept].
+        denn, du trägst selbst personenbezogene Angaben in die Bezeichnung ein. Die Konfigurationen liegen in unserer Datenbank (Abschnitt 10); sie sind nicht
+        mit einer Person verknüpft. Gespeicherte Fahrzeuge und Konfigurationen werden nach 30 Tagen ohne Aktivität gelöscht.
         Technische Zugriffsdaten fallen beim Hosting an (Abschnitt 3). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am
         Betrieb und an der Verbesserung des Konfigurators).
       </p>
