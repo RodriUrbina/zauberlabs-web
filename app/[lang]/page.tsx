@@ -112,18 +112,31 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
           <div className="grid gap-6 lg:grid-cols-3">
             <div className="flex flex-col overflow-hidden rounded-3xl bg-ink text-paper lg:col-span-2">
-              <div className="relative h-[240px] bg-black md:h-[400px]">
-                {/* BL-026/BL-027: photo supplied by the PO (Rodrigo Urbina), 2026-10-05, dark-background variant of
-                    front_Preface_halo_lights.jpg; PO confirmed he holds the rights to use it. Not AI-generated.
-                    Source "e46 black background.png" (1254×1254); the uniform black margin above and below the car is
-                    trimmed (24 px kept), no other pixel editing; exported as WebP. BL-027 (PO): the WHOLE car at every
-                    width, no cropping — object-contain inside a pure-black area (the photo's background is #000), so the
-                    letterbox bars are invisible; the car is height-limited in both frames (240 px phone, 400 px desktop). */}
-                <Image src="/images/e46-front-halo-dark.webp" alt={t.garage.e46CardAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-contain pb-6" />
-                {/* BL-027 (PO-approved fade): the lowest 24 px blend from the photo's black into the card's ink, hiding the
-                    straight line between image area and card body. The image keeps 24 px bottom padding, so the fade
-                    never covers the car's lower bumper. */}
-                <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-b from-black to-ink" />
+              <div className="relative h-[240px] bg-ink md:h-[400px]">
+                {/* BL-029: loop supplied by the PO (Rodrigo Urbina), 2026-10-06, own material (E46BUILD configurator loop v7).
+                    Source e46_build_configurator_loop-v7.gif (960×540, ~12 s), converted to MP4 (H.264) + WebM with a WebP
+                    poster frame; the poster is the LCP candidate (priority image), the muted autoplay loop sits above it and is
+                    hidden under prefers-reduced-motion (poster only). object-cover at every width: the 16:9 source nearly
+                    matches the 1.85:1 desktop frame; on phones (1.46:1) the sides are cropped ~9 % each, which keeps the search
+                    bar (middle 80 % of the width) just inside the frame. Letterboxing was rejected because the video's edge
+                    colours vary from frame to frame, so no band colour could match. The bottom fade runs transparent → ink so
+                    the card body joins without a seam whatever the video's bottom colour is. */}
+                <Image src="/images/e46-configurator-loop-poster.webp" alt={t.garage.e46CardAlt} fill priority sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover" />
+                <video
+                  className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  poster="/images/e46-configurator-loop-poster.webp"
+                  aria-hidden="true"
+                  tabIndex={-1}
+                >
+                  <source src="/media/e46-configurator-loop.webm" type="video/webm" />
+                  <source src="/media/e46-configurator-loop.mp4" type="video/mp4" />
+                </video>
+                <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-b from-transparent to-ink" />
               </div>
               <div className="flex flex-col gap-7 p-6 md:p-8">
                 <div className="flex flex-col justify-between gap-5 md:flex-row md:items-start">
