@@ -67,8 +67,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Die Programmierschnittstelle (API) von E46BUILD schreibt zusätzlich ein eigenes Zugriffsprotokoll: je Anfrage Methode, aufgerufene Adresse
         (einschließlich der zufälligen Kennung einer Konfiguration), Host sowie IP-Adresse und Port des Aufrufers – ohne Browserkennung. Diese
         technischen Zugriffsprotokolle (Methode, Pfad, IP-Adresse, Zeitpunkt) verarbeitet Vercel für uns und speichert sie für die Dauer der
-        Log-Aufbewahrung von Vercel (derzeit höchstens 1 Tag) [PO to confirm: Tarif Pro ohne Observability Plus? Mit Observability Plus wären es
-        30 Tage]. Rechtsgrundlage ist auch hier Art. 6 Abs. 1 lit. f DSGVO (Sicherheit und Betrieb).
+        Log-Aufbewahrung von Vercel (derzeit höchstens 1 Tag). Rechtsgrundlage ist auch hier Art. 6 Abs. 1 lit. f DSGVO (Sicherheit und Betrieb).
       </p>
 
       <h2>4. Schriftarten</h2>
@@ -126,8 +125,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Weitere Informationen: https://upstash.com
       </p>
 
-      {/* BL-031 DRAFT — E46BUILD configurator. Facts from the e46 code (master 63cf51e) and Neon/Databricks legal pages (2026-10-06).
-          Items marked [PO to confirm] are not asserted; the PO verifies them before merge.
+      {/* BL-031 — E46BUILD configurator. Facts from the e46 code (master 63cf51e) and Neon/Databricks legal pages (2026-10-06);
+          wording approved by the PO 2026-10-06 (Vercel plan Pro without Observability Plus → log retention 1 day; Neon DPA with SCCs accepted).
           RELEASE GATE: the 30-day deletion sentence in Abschnitt 9 depends on the E46 cleanup job (E46 card T-066), not yet released —
           this page goes live only once T-066 is released. Vercel runtime-log retention per https://vercel.com/docs/logs/runtime
           (2026-08-28): Hobby 1 h, Pro 1 day, Pro + Observability Plus 30 days, Enterprise 3 days. */}
@@ -160,9 +159,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <h2>10. Datenbank-Dienstleister für E46BUILD (Neon)</h2>
       <p>
         Die Daten des Konfigurators (Abschnitt 9) werden bei Neon, LLC (USA; ein Unternehmen von Databricks, Inc.) gespeichert, eingerichtet über den
-        Vercel Marketplace, in einem Rechenzentrum in Frankfurt am Main (AWS-Region eu-central-1). Databricks, Inc. und Neon, LLC sind nach dem EU-US
-        Data Privacy Framework zertifiziert; für Kunden bietet Databricks einen Vertrag zur Auftragsverarbeitung mit EU-Standardvertragsklauseln an
-        [PO to confirm: Annahme des AVV für unser Konto – automatisch über den Vercel Marketplace oder in der Neon-Konsole]. Weitere Informationen:
+        Vercel Marketplace, in einem Rechenzentrum in Frankfurt am Main (AWS-Region eu-central-1). Mit Neon besteht ein Vertrag zur Auftragsverarbeitung
+        einschließlich der EU-Standardvertragsklauseln; Databricks, Inc. und Neon, LLC sind zudem nach dem EU-US Data Privacy Framework zertifiziert.
+        Weitere Informationen:
         https://www.databricks.com/legal/privacynotice
       </p>
 
