@@ -7,10 +7,12 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * Replace every [PLACEHOLDER]. Written for what this site actually does today:
  * Vercel hosting, self-hosted fonts, Upstash Redis for votes/suggestions, one
  * vote cookie, cookieless Vercel Web Analytics (Abschnitt 5, BL-008), no other tracking, no newsletter tool.
- * E46BUILD configurator at e46.zauberlabs.de (BL-031 draft): website + API on Vercel (functions fra1, edge delivery),
- * Neon Postgres via the Vercel Marketplace (Frankfurt, AWS eu-central-1), server-side builds without accounts,
- * no Neon Auth, Vercel Web Analytics (as on zauberlabs.de, see Abschnitt 5), no other tracking, self-hosted fonts,
- * links to external sellers.
+ * E46BUILD configurator at e46.zauberlabs.de (BL-031 draft, facts from e46 master 63cf51e): website + API on Vercel
+ * (functions fra1, edge delivery; API request log = method, URL incl. random car ID, host, client IP + port, no UA, in
+ * Vercel runtime logs), Neon Postgres (Neon, LLC — a Databricks company) via the Vercel Marketplace (Frankfurt, AWS
+ * eu-central-1): car record with random ID + optional label, attributes/answers, build items with seller-offer snapshot;
+ * free-text box parsed in memory, not stored; no account/name/email/IP/cookie ID stored; no cookies, no web storage;
+ * Vercel Web Analytics (see Abschnitt 5), no other tracking; self-hosted fonts; links to external sellers.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -60,6 +62,12 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <p>
         Mit Vercel besteht ein Vertrag zur Auftragsverarbeitung. Eine Übermittlung in die USA ist möglich; sie erfolgt auf Grundlage des
         EU-US Data Privacy Framework bzw. der EU-Standardvertragsklauseln. Weitere Informationen: https://vercel.com/legal/privacy-policy
+      </p>
+      <p>
+        Die Programmierschnittstelle (API) von E46BUILD schreibt zusätzlich ein eigenes Zugriffsprotokoll: je Anfrage Methode, aufgerufene Adresse
+        (einschließlich der zufälligen Kennung einer Konfiguration), Host sowie IP-Adresse und Port des Aufrufers – ohne Browserkennung. Diese
+        Protokolle liegen in den Laufzeit-Logs von Vercel; die Aufbewahrungsdauer richtet sich nach dem Vercel-Tarif [PO to confirm: Dauer].
+        Rechtsgrundlage ist auch hier Art. 6 Abs. 1 lit. f DSGVO (Sicherheit und Betrieb).
       </p>
 
       <h2>4. Schriftarten</h2>
@@ -117,31 +125,41 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Weitere Informationen: https://upstash.com
       </p>
 
-      {/* BL-031 DRAFT — E46BUILD configurator. Items marked [PO to confirm] are not asserted; the PO verifies them before merge. */}
+      {/* BL-031 DRAFT — E46BUILD configurator. Facts from the e46 code (master 63cf51e) and Neon/Databricks legal pages (2026-10-06).
+          Items marked [PO to confirm] are not asserted; the PO verifies them before merge. */}
       <h2>9. E46BUILD-Konfigurator (e46.zauberlabs.de)</h2>
       <p>
         Unser Konfigurator E46BUILD läuft unter e46.zauberlabs.de. Ohne Konto und ohne Anmeldung kannst du dort dein Auto beschreiben und eine
-        Konfiguration zusammenstellen. Dabei verarbeiten wir die Angaben, die du eingibst oder auswählst – Karosserieform, Baujahr, Modell und
-        deine Antworten auf Passform-Fragen – sowie die daraus entstehende Konfiguration (deine Auswahl). Diese Daten speichern wir serverseitig in
-        unserer Datenbank (Abschnitt 10), damit deine Konfiguration erhalten bleibt und wir die Passform-Logik verbessern können. Ein Bezug zu deiner
-        Person entsteht dabei nicht, es sei denn, du trägst selbst personenbezogene Angaben in ein Freitextfeld ein [PO to confirm: gibt es
-        Freitextfelder?]. Technische Zugriffsdaten fallen beim Hosting an (Abschnitt 3). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO
-        (berechtigtes Interesse am Betrieb und an der Verbesserung des Konfigurators). Speicherdauer der Konfigurationen: [PO to confirm].
+        Konfiguration zusammenstellen. Im Feld „Beschreibe dein Auto“ kannst du frei tippen (z. B. „2001 325i Touring“); dieser Text wird an unseren
+        Server geschickt, dort nur im Arbeitsspeicher in Vorschläge für Karosserie, Modell und Baujahr zerlegt und nicht gespeichert. Gespeichert
+        werden nur die Angaben, die du bestätigst oder aus Listen auswählst: Karosserieform, Modell, Baujahr und deine Antworten auf Passform-Fragen
+        (z. B. die Scheinwerferform), sowie die Teile, die du in deine Konfiguration legst – je Teil das Produkt und ein Abbild des gewählten
+        Händlerangebots (Händlername, Link zum Angebot, Preis). Jede Konfiguration erhält dafür eine zufällige Kennung und optional eine Bezeichnung,
+        die du selbst vergibst.
       </p>
       <p>
-        E46BUILD verwendet keine Nutzerkonten und keinen Anmeldedienst. Zur Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics –
-        ohne Cookies, nur zusammengefasste Seitenaufrufe und Besucherzahlen; es gilt Abschnitt 5. Darüber hinaus setzt E46BUILD keine Tracking- oder
-        Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet keine Verbindung zu Google Fonts statt. Angebote im Konfigurator verlinken auf die Websites externer Händler; sobald du einem solchen Link folgst, gelten deren
-        Datenschutzbestimmungen (Abschnitt 12).
+        Mit der Konfiguration werden kein Konto, kein Name, keine E-Mail-Adresse, keine IP-Adresse, keine Cookie-Kennung und kein Freigabelink
+        gespeichert; die zufällige Kennung existiert nur im Speicher deiner geöffneten Seite. Ein Bezug zu deiner Person entsteht dadurch nicht, es sei
+        denn, du trägst selbst personenbezogene Angaben in die Bezeichnung ein. Die Konfigurationen liegen in unserer Datenbank (Abschnitt 10) und
+        werden gespeichert, bis sie gelöscht werden; sie sind nicht mit einer Person verknüpft [PO to confirm: Formulierung und Löschkonzept].
+        Technische Zugriffsdaten fallen beim Hosting an (Abschnitt 3). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am
+        Betrieb und an der Verbesserung des Konfigurators).
+      </p>
+      <p>
+        E46BUILD verwendet keine Nutzerkonten und keinen Anmeldedienst, setzt keine Cookies und legt nichts im lokalen Speicher deines Browsers ab. Zur
+        Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics – ohne Cookies, nur zusammengefasste Seitenaufrufe und Besucherzahlen;
+        es gilt Abschnitt 5. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet
+        keine Verbindung zu Google Fonts statt. Angebote im Konfigurator verlinken auf die Websites externer Händler; sobald du einem solchen Link
+        folgst, gelten deren Datenschutzbestimmungen (Abschnitt 12).
       </p>
 
       <h2>10. Datenbank-Dienstleister für E46BUILD (Neon)</h2>
       <p>
-        Die Daten des Konfigurators (Abschnitt 9) werden bei Neon Inc. (USA) gespeichert, bezogen über den Vercel Marketplace, in einem Rechenzentrum
-        in Frankfurt am Main (AWS-Region eu-central-1). Mit Neon besteht ein Vertrag zur Auftragsverarbeitung [PO to confirm: Neon-AVV bzw. über die
-        Vercel-Marketplace-Bedingungen]; soweit ein Zugriff aus den USA möglich ist, erfolgt er auf Grundlage der EU-Standardvertragsklauseln bzw. des
-        EU-US Data Privacy Framework [PO to confirm: ist Neon DPF-zertifiziert?]. Weitere Informationen: https://neon.tech/privacy-policy [PO to
-        confirm URL]
+        Die Daten des Konfigurators (Abschnitt 9) werden bei Neon, LLC (USA; ein Unternehmen von Databricks, Inc.) gespeichert, eingerichtet über den
+        Vercel Marketplace, in einem Rechenzentrum in Frankfurt am Main (AWS-Region eu-central-1). Databricks, Inc. und Neon, LLC sind nach dem EU-US
+        Data Privacy Framework zertifiziert; für Kunden bietet Databricks einen Vertrag zur Auftragsverarbeitung mit EU-Standardvertragsklauseln an
+        [PO to confirm: Annahme des AVV für unser Konto – automatisch über den Vercel Marketplace oder in der Neon-Konsole]. Weitere Informationen:
+        https://www.databricks.com/legal/privacynotice
       </p>
 
       <h2>11. Kontakt per E-Mail</h2>
