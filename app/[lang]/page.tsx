@@ -104,7 +104,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <p className="eyebrow text-muted">{t.garage.eyebrow}</p>
               <h2 className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]">
                 {t.garage.title[0]}
-                <span className="accent-serif">{t.garage.title[1]}</span>
+                <span className="accent-serif lg:block">{t.garage.title[1]}</span>
               </h2>
             </div>
             <p className="max-w-[400px] text-base leading-relaxed text-body">{t.garage.body}</p>
@@ -112,7 +112,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
           <div className="grid gap-6 lg:grid-cols-3">
             <div className="flex flex-col overflow-hidden rounded-3xl bg-ink text-paper lg:col-span-2">
-              <div className="relative h-[240px] bg-ink md:h-[400px]">
+              <div className="relative aspect-[960/512] bg-ink md:aspect-auto md:h-[400px]">
                 {/* BL-029: loop supplied by the PO (Rodrigo Urbina), 2026-10-06, own material (E46BUILD configurator loop v7).
                     AI-assisted (made or edited with Google Gemini tools, per the watermark in the source); shown without a
                     visible "AI-generated" label by explicit PO decision — a logged exception to BL-000 rule 3, like BL-003.
@@ -121,8 +121,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                     search-bar frames), giving 960×512 (1.875:1), converted to MP4 (H.264) + WebM with a WebP poster frame
                     (frame 45, "BMW E46 330Ci Coupe" typed). The poster is the LCP candidate (priority image); the muted
                     autoplay loop sits above it and is hidden under prefers-reduced-motion (poster only). object-cover at every
-                    width: 1.875:1 matches the 1.85:1 desktop frame almost exactly; on phones (1.46:1) the sides are cropped
-                    ~10 % each, which keeps the search bar (middle 80 % of the width) just inside the frame. Letterboxing was
+                    width: 1.875:1 matches the 1.85:1 desktop frame almost exactly; on phones the image area takes the video's own
+                    ratio (aspect 960/512, ≈187 px at 350 px wide — BL-030, PO decision), so nothing is cropped there. Letterboxing was
                     rejected because the video's edge colours vary from frame to frame, so no band colour could match. The
                     bottom fade runs transparent → ink so the card body joins without a seam whatever the video shows. */}
                 <Image src="/images/e46-configurator-loop-poster.webp" alt={t.garage.e46CardAlt} fill priority sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover" />
@@ -194,7 +194,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 <p className="eyebrow text-[#A9A6A0]">{t.how.eyebrow}</p>
                 <h2 className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]">
                   {t.how.title[0]}
-                  <span className="accent-serif text-accent-dark">{t.how.title[1]}</span>
+                  <span className="accent-serif text-accent-dark lg:block">{t.how.title[1]}</span>
                 </h2>
               </div>
               <p className="max-w-[400px] text-base leading-relaxed text-fog">{t.how.body}</p>
