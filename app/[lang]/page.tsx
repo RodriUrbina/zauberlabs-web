@@ -114,13 +114,17 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <div className="flex flex-col overflow-hidden rounded-3xl bg-ink text-paper lg:col-span-2">
               <div className="relative h-[240px] bg-ink md:h-[400px]">
                 {/* BL-029: loop supplied by the PO (Rodrigo Urbina), 2026-10-06, own material (E46BUILD configurator loop v7).
-                    Source e46_build_configurator_loop-v7.gif (960×540, ~12 s), converted to MP4 (H.264) + WebM with a WebP
-                    poster frame; the poster is the LCP candidate (priority image), the muted autoplay loop sits above it and is
-                    hidden under prefers-reduced-motion (poster only). object-cover at every width: the 16:9 source nearly
-                    matches the 1.85:1 desktop frame; on phones (1.46:1) the sides are cropped ~9 % each, which keeps the search
-                    bar (middle 80 % of the width) just inside the frame. Letterboxing was rejected because the video's edge
-                    colours vary from frame to frame, so no band colour could match. The bottom fade runs transparent → ink so
-                    the card body joins without a seam whatever the video's bottom colour is. */}
+                    AI-assisted (made or edited with Google Gemini tools, per the watermark in the source); shown without a
+                    visible "AI-generated" label by explicit PO decision — a logged exception to BL-000 rule 3, like BL-003.
+                    Source e46_build_configurator_loop-v7.gif (960×540, ~12 s); the bottom 28 px are cropped on every frame
+                    (removes the "Gemini Notebook" watermark and its backing box; costs ~10 px of the front tyre in the
+                    search-bar frames), giving 960×512 (1.875:1), converted to MP4 (H.264) + WebM with a WebP poster frame
+                    (frame 45, "BMW E46 330Ci Coupe" typed). The poster is the LCP candidate (priority image); the muted
+                    autoplay loop sits above it and is hidden under prefers-reduced-motion (poster only). object-cover at every
+                    width: 1.875:1 matches the 1.85:1 desktop frame almost exactly; on phones (1.46:1) the sides are cropped
+                    ~10 % each, which keeps the search bar (middle 80 % of the width) just inside the frame. Letterboxing was
+                    rejected because the video's edge colours vary from frame to frame, so no band colour could match. The
+                    bottom fade runs transparent → ink so the card body joins without a seam whatever the video shows. */}
                 <Image src="/images/e46-configurator-loop-poster.webp" alt={t.garage.e46CardAlt} fill priority sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover" />
                 <video
                   className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
