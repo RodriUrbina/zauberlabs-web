@@ -7,6 +7,9 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * Replace every [PLACEHOLDER]. Written for what this site actually does today:
  * Vercel hosting, self-hosted fonts, Upstash Redis for votes/suggestions, one
  * vote cookie, cookieless Vercel Web Analytics (Abschnitt 5, BL-008), no other tracking, no newsletter tool.
+ * E46BUILD configurator at e46.zauberlabs.de (BL-031 draft): website + API on Vercel (functions fra1, edge delivery),
+ * Neon Postgres via the Vercel Marketplace (Frankfurt, AWS eu-central-1), server-side builds without accounts,
+ * no Neon Auth, no tracking added by E46BUILD, self-hosted fonts, links to external sellers.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -46,7 +49,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <h2>3. Hosting und Server-Logfiles</h2>
       <p>
         Diese Website wird bei Vercel Inc. (USA) gehostet. Die Serverfunktionen dieser Website (Abstimmung, Vorschläge) laufen in Frankfurt am Main
-        (Vercel-Region „fra1“); statische Seiten liefert Vercel über sein weltweites Netz aus Zwischenspeichern aus. Beim Aufruf der Seiten verarbeitet Vercel
+        (Vercel-Region „fra1“); statische Seiten liefert Vercel über sein weltweites Netz aus Zwischenspeichern aus. Dasselbe gilt für unseren
+        Konfigurator E46BUILD unter e46.zauberlabs.de: Website und Programmierschnittstelle (API) laufen ebenfalls bei Vercel, die Serverfunktionen
+        in Frankfurt am Main (Region „fra1“), die Auslieferung über Vercels weltweites Netz. Beim Aufruf der Seiten verarbeitet Vercel
         technisch notwendige Daten, insbesondere IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Referrer sowie Browser- und
         Betriebssysteminformationen. Dies ist erforderlich, um die Website auszuliefern, ihre Sicherheit zu gewährleisten und Missbrauch
         abzuwehren. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und stabilen Betrieb).
@@ -111,19 +116,46 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Weitere Informationen: https://upstash.com
       </p>
 
-      <h2>9. Kontakt per E-Mail</h2>
+      {/* BL-031 DRAFT — E46BUILD configurator. Items marked [PO to confirm] are not asserted; the PO verifies them before merge. */}
+      <h2>9. E46BUILD-Konfigurator (e46.zauberlabs.de)</h2>
+      <p>
+        Unser Konfigurator E46BUILD läuft unter e46.zauberlabs.de. Ohne Konto und ohne Anmeldung kannst du dort dein Auto beschreiben und eine
+        Konfiguration zusammenstellen. Dabei verarbeiten wir die Angaben, die du eingibst oder auswählst – Karosserieform, Baujahr, Modell und
+        deine Antworten auf Passform-Fragen – sowie die daraus entstehende Konfiguration (deine Auswahl). Diese Daten speichern wir serverseitig in
+        unserer Datenbank (Abschnitt 10), damit deine Konfiguration erhalten bleibt und wir die Passform-Logik verbessern können. Ein Bezug zu deiner
+        Person entsteht dabei nicht, es sei denn, du trägst selbst personenbezogene Angaben in ein Freitextfeld ein [PO to confirm: gibt es
+        Freitextfelder?]. Technische Zugriffsdaten fallen beim Hosting an (Abschnitt 3). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO
+        (berechtigtes Interesse am Betrieb und an der Verbesserung des Konfigurators). Speicherdauer der Konfigurationen: [PO to confirm].
+      </p>
+      <p>
+        E46BUILD verwendet keine Nutzerkonten und keinen Anmeldedienst und setzt selbst keine Tracking- oder Analyse-Tools ein [PO to confirm: läuft
+        Vercel Web Analytics (Abschnitt 5) auch auf e46.zauberlabs.de?]. Schriftarten werden lokal ausgeliefert; es findet keine Verbindung zu Google
+        Fonts statt. Angebote im Konfigurator verlinken auf die Websites externer Händler; sobald du einem solchen Link folgst, gelten deren
+        Datenschutzbestimmungen (Abschnitt 12).
+      </p>
+
+      <h2>10. Datenbank-Dienstleister für E46BUILD (Neon)</h2>
+      <p>
+        Die Daten des Konfigurators (Abschnitt 9) werden bei Neon Inc. (USA) gespeichert, bezogen über den Vercel Marketplace, in einem Rechenzentrum
+        in Frankfurt am Main (AWS-Region eu-central-1). Mit Neon besteht ein Vertrag zur Auftragsverarbeitung [PO to confirm: Neon-AVV bzw. über die
+        Vercel-Marketplace-Bedingungen]; soweit ein Zugriff aus den USA möglich ist, erfolgt er auf Grundlage der EU-Standardvertragsklauseln bzw. des
+        EU-US Data Privacy Framework [PO to confirm: ist Neon DPF-zertifiziert?]. Weitere Informationen: https://neon.tech/privacy-policy [PO to
+        confirm URL]
+      </p>
+
+      <h2>11. Kontakt per E-Mail</h2>
       <p>
         Wenn du uns per E-Mail kontaktierst, verarbeiten wir deine Angaben zur Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. b bzw. f DSGVO)
         und löschen sie, sobald sie nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten bestehen.
       </p>
 
-      <h2>10. Externe Links</h2>
+      <h2>12. Externe Links</h2>
       <p>
         Unsere Konfiguratoren verlinken auf externe Händler und Plattformen. Erst wenn du einen solchen Link anklickst, verlässt du unsere
         Website; ab dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
       </p>
 
-      <h2>11. Deine Rechte</h2>
+      <h2>13. Deine Rechte</h2>
       <p>
         Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
         Datenübertragbarkeit (Art. 20) sowie auf Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21). Eine erteilte
@@ -133,7 +165,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, zum Beispiel bei: {C.authority}.
       </p>
 
-      <h2>12. Aktualität</h2>
+      <h2>14. Aktualität</h2>
       <p>Stand: {C.updated}. Wir passen diese Erklärung an, wenn sich unsere Website oder die Rechtslage ändert.</p>
     </LegalPage>
   );
