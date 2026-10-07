@@ -7,7 +7,7 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * Replace every [PLACEHOLDER]. Written for what this site actually does today:
  * Vercel hosting, self-hosted fonts, Upstash Redis for votes/suggestions, one
  * vote cookie, cookieless Vercel Web Analytics (Abschnitt 5, BL-008), no other tracking, no newsletter tool.
- * E46BUILD configurator at e46.zauberlabs.de (BL-031 draft, facts from e46 master 63cf51e): website + API on Vercel
+ * E46BUILD configurator at e46.zauberlabs.de (BL-031, PO-approved 2026-10-07; facts from e46 master 63cf51e): website + API on Vercel
  * (functions fra1, edge delivery; API request log = method, URL incl. random car ID, host, client IP + port, no UA, in
  * Vercel runtime logs), Neon Postgres (Neon, LLC — a Databricks company) via the Vercel Marketplace (Frankfurt, AWS
  * eu-central-1): car record with random ID + optional label, attributes/answers, build items with seller-offer snapshot;
@@ -66,8 +66,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <p>
         Die Programmierschnittstelle (API) von E46BUILD schreibt zusätzlich ein eigenes Zugriffsprotokoll: je Anfrage Methode, aufgerufene Adresse
         (einschließlich der zufälligen Kennung einer Konfiguration), Host sowie IP-Adresse und Port des Aufrufers – ohne Browserkennung. Diese
-        technischen Zugriffsprotokolle (Methode, Pfad, IP-Adresse, Zeitpunkt) verarbeitet Vercel für uns und speichert sie für die Dauer der
-        Log-Aufbewahrung von Vercel (derzeit höchstens 1 Tag). Rechtsgrundlage ist auch hier Art. 6 Abs. 1 lit. f DSGVO (Sicherheit und Betrieb).
+        technischen Zugriffsprotokolle verarbeitet Vercel für uns und speichert sie für die Dauer der Log-Aufbewahrung von Vercel (derzeit
+        höchstens 1 Tag). Rechtsgrundlage ist auch hier Art. 6 Abs. 1 lit. f DSGVO (Sicherheit und Betrieb).
       </p>
 
       <h2>4. Schriftarten</h2>
@@ -125,11 +125,11 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Weitere Informationen: https://upstash.com
       </p>
 
-      {/* BL-031 — E46BUILD configurator. Facts from the e46 code (master 63cf51e) and Neon/Databricks legal pages (2026-10-06);
-          Vercel plan Pro without Observability Plus → runtime-log retention 1 day (https://vercel.com/docs/logs/runtime, 2026-08-28:
-          Hobby 1 h, Pro 1 day, Pro + Observability Plus 30 days, Enterprise 3 days); Neon DPA with SCCs accepted.
-          2026-10-07: the 30-day cleanup (E46 T-066) was CANCELLED by the PO — records are kept indefinitely without personal reference;
-          the retention paragraph in Abschnitt 9 reflects that and awaits the PO's re-approval. */}
+      {/* BL-031 — E46BUILD configurator. Facts from the e46 code (master 63cf51e) and the Neon/Databricks privacy notice (2026-10-06).
+          Wording approved by the PO 2026-10-07: Vercel plan Pro without Observability Plus → runtime-log retention 1 day
+          (https://vercel.com/docs/logs/runtime, 2026-08-28: Hobby 1 h, Pro 1 day, Pro + Observability Plus 30 days, Enterprise 3 days);
+          Neon DPA with SCCs accepted; records kept indefinitely without personal reference (the planned 30-day cleanup, E46 T-066, was
+          cancelled by the PO). */}
       <h2>9. E46BUILD-Konfigurator (e46.zauberlabs.de)</h2>
       <p>
         Unser Konfigurator E46BUILD läuft unter e46.zauberlabs.de. Ohne Konto und ohne Anmeldung kannst du dort dein Auto beschreiben und eine
