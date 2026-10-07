@@ -126,10 +126,10 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       </p>
 
       {/* BL-031 — E46BUILD configurator. Facts from the e46 code (master 63cf51e) and Neon/Databricks legal pages (2026-10-06);
-          wording approved by the PO 2026-10-06 (Vercel plan Pro without Observability Plus → log retention 1 day; Neon DPA with SCCs accepted).
-          RELEASE GATE: the 30-day deletion sentence in Abschnitt 9 depends on the E46 cleanup job (E46 card T-066), not yet released —
-          this page goes live only once T-066 is released. Vercel runtime-log retention per https://vercel.com/docs/logs/runtime
-          (2026-08-28): Hobby 1 h, Pro 1 day, Pro + Observability Plus 30 days, Enterprise 3 days. */}
+          Vercel plan Pro without Observability Plus → runtime-log retention 1 day (https://vercel.com/docs/logs/runtime, 2026-08-28:
+          Hobby 1 h, Pro 1 day, Pro + Observability Plus 30 days, Enterprise 3 days); Neon DPA with SCCs accepted.
+          2026-10-07: the 30-day cleanup (E46 T-066) was CANCELLED by the PO — records are kept indefinitely without personal reference;
+          the retention paragraph in Abschnitt 9 reflects that and awaits the PO's re-approval. */}
       <h2>9. E46BUILD-Konfigurator (e46.zauberlabs.de)</h2>
       <p>
         Unser Konfigurator E46BUILD läuft unter e46.zauberlabs.de. Ohne Konto und ohne Anmeldung kannst du dort dein Auto beschreiben und eine
@@ -142,11 +142,13 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       </p>
       <p>
         Mit der Konfiguration werden kein Konto, kein Name, keine E-Mail-Adresse, keine IP-Adresse, keine Cookie-Kennung und kein Freigabelink
-        gespeichert; die zufällige Kennung existiert nur im Speicher deiner geöffneten Seite. Ein Bezug zu deiner Person entsteht dadurch nicht, es sei
-        denn, du trägst selbst personenbezogene Angaben in die Bezeichnung ein. Die Konfigurationen liegen in unserer Datenbank (Abschnitt 10); sie sind nicht
-        mit einer Person verknüpft. Gespeicherte Fahrzeuge und Konfigurationen werden nach 30 Tagen ohne Aktivität gelöscht.
-        Technische Zugriffsdaten fallen beim Hosting an (Abschnitt 3). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am
-        Betrieb und an der Verbesserung des Konfigurators).
+        gespeichert; die zufällige Kennung existiert nur im Speicher deiner geöffneten Seite. Die gespeicherten Fahrzeugangaben, Passform-Antworten
+        und Konfigurationen bewahren wir ohne Personenbezug auf, um zu verstehen, was Besitzer konfigurieren und kaufen möchten, und um den Dienst zu
+        verbessern – so lange, wie sie für diesen Zweck erforderlich sind. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am
+        Betrieb und an der Verbesserung des Konfigurators). Ein Bezug zu deiner Person ist nur vorübergehend möglich: Für höchstens einen Tag enthält
+        das Zugriffsprotokoll des Hostings (Abschnitt 3) deine IP-Adresse zusammen mit der zufälligen Kennung in der aufgerufenen Adresse; nach Ablauf
+        dieser Log-Aufbewahrung lassen sich die Datensätze keiner Person mehr zuordnen – es sei denn, du trägst selbst personenbezogene Angaben in die
+        Bezeichnung ein. Die Konfigurationen liegen in unserer Datenbank (Abschnitt 10).
       </p>
       <p>
         E46BUILD verwendet keine Nutzerkonten und keinen Anmeldedienst, setzt keine Cookies und legt nichts im lokalen Speicher deines Browsers ab. Zur
