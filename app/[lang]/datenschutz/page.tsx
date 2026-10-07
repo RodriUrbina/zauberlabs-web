@@ -7,6 +7,12 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * Replace every [PLACEHOLDER]. Written for what this site actually does today:
  * Vercel hosting, self-hosted fonts, Upstash Redis for votes/suggestions, one
  * vote cookie, cookieless Vercel Web Analytics (Abschnitt 5, BL-008), no other tracking, no newsletter tool.
+ * E46BUILD configurator at e46.zauberlabs.de (BL-031, PO-approved 2026-10-07; facts from e46 master 63cf51e): website + API on Vercel
+ * (functions fra1, edge delivery; API request log = method, URL incl. random car ID, host, client IP + port, no UA, in
+ * Vercel runtime logs), Neon Postgres (Neon, LLC — a Databricks company) via the Vercel Marketplace (Frankfurt, AWS
+ * eu-central-1): car record with random ID + optional label, attributes/answers, build items with seller-offer snapshot;
+ * free-text box parsed in memory, not stored; no account/name/email/IP/cookie ID stored; no cookies, no web storage;
+ * Vercel Web Analytics (see Abschnitt 5), no other tracking; self-hosted fonts; links to external sellers.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -46,7 +52,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <h2>3. Hosting und Server-Logfiles</h2>
       <p>
         Diese Website wird bei Vercel Inc. (USA) gehostet. Die Serverfunktionen dieser Website (Abstimmung, Vorschläge) laufen in Frankfurt am Main
-        (Vercel-Region „fra1“); statische Seiten liefert Vercel über sein weltweites Netz aus Zwischenspeichern aus. Beim Aufruf der Seiten verarbeitet Vercel
+        (Vercel-Region „fra1“); statische Seiten liefert Vercel über sein weltweites Netz aus Zwischenspeichern aus. Dasselbe gilt für unseren
+        Konfigurator E46BUILD unter e46.zauberlabs.de: Website und Programmierschnittstelle (API) laufen ebenfalls bei Vercel, die Serverfunktionen
+        in Frankfurt am Main (Region „fra1“), die Auslieferung über Vercels weltweites Netz. Beim Aufruf der Seiten verarbeitet Vercel
         technisch notwendige Daten, insbesondere IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Referrer sowie Browser- und
         Betriebssysteminformationen. Dies ist erforderlich, um die Website auszuliefern, ihre Sicherheit zu gewährleisten und Missbrauch
         abzuwehren. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und stabilen Betrieb).
@@ -54,6 +62,12 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <p>
         Mit Vercel besteht ein Vertrag zur Auftragsverarbeitung. Eine Übermittlung in die USA ist möglich; sie erfolgt auf Grundlage des
         EU-US Data Privacy Framework bzw. der EU-Standardvertragsklauseln. Weitere Informationen: https://vercel.com/legal/privacy-policy
+      </p>
+      <p>
+        Die Programmierschnittstelle (API) von E46BUILD schreibt zusätzlich ein eigenes Zugriffsprotokoll: je Anfrage Methode, aufgerufene Adresse
+        (einschließlich der zufälligen Kennung einer Konfiguration), Host sowie IP-Adresse und Port des Aufrufers – ohne Browserkennung. Diese
+        technischen Zugriffsprotokolle verarbeitet Vercel für uns und speichert sie für die Dauer der Log-Aufbewahrung von Vercel (derzeit
+        höchstens 1 Tag). Rechtsgrundlage ist auch hier Art. 6 Abs. 1 lit. f DSGVO (Sicherheit und Betrieb).
       </p>
 
       <h2>4. Schriftarten</h2>
@@ -111,19 +125,61 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Weitere Informationen: https://upstash.com
       </p>
 
-      <h2>9. Kontakt per E-Mail</h2>
+      {/* BL-031 — E46BUILD configurator. Facts from the e46 code (master 63cf51e) and the Neon/Databricks privacy notice (2026-10-06).
+          Wording approved by the PO 2026-10-07: Vercel plan Pro without Observability Plus → runtime-log retention 1 day
+          (https://vercel.com/docs/logs/runtime, 2026-08-28: Hobby 1 h, Pro 1 day, Pro + Observability Plus 30 days, Enterprise 3 days);
+          Neon DPA with SCCs accepted; records kept indefinitely without personal reference (the planned 30-day cleanup, E46 T-066, was
+          cancelled by the PO). */}
+      <h2>9. E46BUILD-Konfigurator (e46.zauberlabs.de)</h2>
+      <p>
+        Unser Konfigurator E46BUILD läuft unter e46.zauberlabs.de. Ohne Konto und ohne Anmeldung kannst du dort dein Auto beschreiben und eine
+        Konfiguration zusammenstellen. Im Feld „Beschreibe dein Auto“ kannst du frei tippen (z. B. „2001 325i Touring“); dieser Text wird an unseren
+        Server geschickt, dort nur im Arbeitsspeicher in Vorschläge für Karosserie, Modell und Baujahr zerlegt und nicht gespeichert. Gespeichert
+        werden nur die Angaben, die du bestätigst oder aus Listen auswählst: Karosserieform, Modell, Baujahr und deine Antworten auf Passform-Fragen
+        (z. B. die Scheinwerferform), sowie die Teile, die du in deine Konfiguration legst – je Teil das Produkt und ein Abbild des gewählten
+        Händlerangebots (Händlername, Link zum Angebot, Preis). Jede Konfiguration erhält dafür eine zufällige Kennung und optional eine Bezeichnung,
+        die du selbst vergibst.
+      </p>
+      <p>
+        Mit der Konfiguration werden kein Konto, kein Name, keine E-Mail-Adresse, keine IP-Adresse, keine Cookie-Kennung und kein Freigabelink
+        gespeichert; die zufällige Kennung existiert nur im Speicher deiner geöffneten Seite. Die gespeicherten Fahrzeugangaben, Passform-Antworten
+        und Konfigurationen bewahren wir ohne Personenbezug auf, um zu verstehen, was Besitzer konfigurieren und kaufen möchten, und um den Dienst zu
+        verbessern – so lange, wie sie für diesen Zweck erforderlich sind. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am
+        Betrieb und an der Verbesserung des Konfigurators). Ein Bezug zu deiner Person ist nur vorübergehend möglich: Für höchstens einen Tag enthält
+        das Zugriffsprotokoll des Hostings (Abschnitt 3) deine IP-Adresse zusammen mit der zufälligen Kennung in der aufgerufenen Adresse; nach Ablauf
+        dieser Log-Aufbewahrung lassen sich die Datensätze keiner Person mehr zuordnen – es sei denn, du trägst selbst personenbezogene Angaben in die
+        Bezeichnung ein. Die Konfigurationen liegen in unserer Datenbank (Abschnitt 10).
+      </p>
+      <p>
+        E46BUILD verwendet keine Nutzerkonten und keinen Anmeldedienst, setzt keine Cookies und legt nichts im lokalen Speicher deines Browsers ab. Zur
+        Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics – ohne Cookies, nur zusammengefasste Seitenaufrufe und Besucherzahlen;
+        es gilt Abschnitt 5. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet
+        keine Verbindung zu Google Fonts statt. Angebote im Konfigurator verlinken auf die Websites externer Händler; sobald du einem solchen Link
+        folgst, gelten deren Datenschutzbestimmungen (Abschnitt 12).
+      </p>
+
+      <h2>10. Datenbank-Dienstleister für E46BUILD (Neon)</h2>
+      <p>
+        Die Daten des Konfigurators (Abschnitt 9) werden bei Neon, LLC (USA; ein Unternehmen von Databricks, Inc.) gespeichert, eingerichtet über den
+        Vercel Marketplace, in einem Rechenzentrum in Frankfurt am Main (AWS-Region eu-central-1). Mit Neon besteht ein Vertrag zur Auftragsverarbeitung
+        einschließlich der EU-Standardvertragsklauseln; Databricks, Inc. und Neon, LLC sind zudem nach dem EU-US Data Privacy Framework zertifiziert.
+        Weitere Informationen:
+        https://www.databricks.com/legal/privacynotice
+      </p>
+
+      <h2>11. Kontakt per E-Mail</h2>
       <p>
         Wenn du uns per E-Mail kontaktierst, verarbeiten wir deine Angaben zur Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. b bzw. f DSGVO)
         und löschen sie, sobald sie nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten bestehen.
       </p>
 
-      <h2>10. Externe Links</h2>
+      <h2>12. Externe Links</h2>
       <p>
         Unsere Konfiguratoren verlinken auf externe Händler und Plattformen. Erst wenn du einen solchen Link anklickst, verlässt du unsere
         Website; ab dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
       </p>
 
-      <h2>11. Deine Rechte</h2>
+      <h2>13. Deine Rechte</h2>
       <p>
         Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
         Datenübertragbarkeit (Art. 20) sowie auf Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21). Eine erteilte
@@ -133,7 +189,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, zum Beispiel bei: {C.authority}.
       </p>
 
-      <h2>12. Aktualität</h2>
+      <h2>14. Aktualität</h2>
       <p>Stand: {C.updated}. Wir passen diese Erklärung an, wenn sich unsere Website oder die Rechtslage ändert.</p>
     </LegalPage>
   );
