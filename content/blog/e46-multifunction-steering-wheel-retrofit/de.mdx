@@ -1,0 +1,155 @@
+---
+# BL-034 — Writer draft, German. Same slug and sources as en.mdx.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Tasten ohne Kabel: Warum ein E46-Multifunktionslenkrad BMWs Nachrüstsatz braucht"
+description: "Die Tasten am E46-Lenkrad funktionieren nur, wenn das Auto dafür verkabelt ist. Was BMWs Nachrüstsatz ergänzt, für welche Autos er gilt und was du kaufst."
+date: 2026-10-08
+updated: 2026-10-14
+publishAt: "2026-10-14"
+lang: de
+slug: e46-multifunction-steering-wheel-retrofit
+card: BL-034
+author: "Zauberlabs"
+tags:
+  - E46
+  - steering wheels
+  - retrofit
+  - BMW
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "Nahaufnahme der Speiche eines Dreispeichen-Lenkrads mit einer kleinen Tastengruppe, darunter ein loser Kabelbaum auf dem Sitz"
+  credit: "KI-generierte Illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: close-up of one spoke of an early-2000s three-spoke leather steering wheel with a small cluster of round buttons; out of focus on the seat below, a short loose wiring loom with connectors; warm workshop light. Must not show: legible BMW roundel or M badge, symbols or text on the buttons, part numbers, a person's face."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW Einbauanleitung Teile und Zubehör — Nachrüstsatz Multifunktionslenkrad (MFL) / Geschwindigkeitsregelung (GRA), EBA-Nr. 01 29 0 016 107, Stand 11.2001 (Textteil der Ausgabe 04.2000)"
+    type: von BMW verfasst; vollständig gelesen; auf einem Drittanbieter-Spiegel (bmw.etk.club) gehostet, PDF nicht archiviert
+    path: "t029-evidence/raw/bmw-eba-284-mfl-retrofit-kit.txt"
+    confidence: HIGH
+    note: "HIGH für das, was das Dokument sagt. Deckblatt und Textteil beschreiben die passenden Autos unterschiedlich; beides wird zitiert, der Unterschied erfasst, nicht aufgelöst."
+  - id: S2
+    title: "Teilekatalog-Spiegel (eStore-Central): E46-Gruppen Lenkung, Multifunktion und Nachrüstsatz für Limousine, Touring, Coupé, Cabrio, Compact und M3"
+    type: ETK-Spiegel (ein Spiegel)
+    path: "t029-evidence/raw/estore-steering-matrix.md; t029-evidence/raw/estore-steering-groups.json"
+    confidence: MEDIUM
+    note: "Nur Gruppen- und Teilebezeichnungen; der Spiegel enthält keine Daten und kaum Ausstattungshinweise."
+  - id: S3
+    title: "BMW Group UK Pressemappe, 26.10.2001: The new BMW 3 Series Saloon and Touring, mit Ausstattungslisten"
+    type: von BMW verfasst
+    path: "t029-evidence/raw/bmw-press-uk-2001-steering-extract.txt"
+    confidence: HIGH
+    note: "HIGH für das beschriebene britische Modelljahr; kein Beleg für andere Märkte."
+  - id: S4
+    title: "T-029 — Recherche zur Kategorie Lenkrad (Zusammenfassungen aus Foren und Enthusiastenseiten zu Codierung und Schaltwippen-Lenkrädern)"
+    type: Recherchenotiz zu Forenquellen
+    path: "t029-evidence/T-029-findings.md"
+    confidence: LOW
+    note: "Entscheidet nie. Nur genutzt, um neben BMWs Aussage zu zeigen, was Besitzer berichten."
+---
+
+Ein E46-Lenkrad mit Tasten auf den Speichen gehört zu den beliebtesten Nachrüstungen im Innenraum, und zu den am häufigsten missverstandenen. Die Tasten sehen aus wie ein Teil des Lenkrads, also wirkt ein Lenkrad mit Tasten wie ein einfacher Tausch. Das ist es nicht. Die Tasten sind Schalter; was sie schalten, sitzt anderswo im Auto, und ein Auto, das ohne sie gebaut wurde, hat keine Leitungen, die darauf warten. BMW hat für genau diese Aufgabe einen Nachrüstsatz verkauft und eine Einbauanleitung dazu geschrieben. Dieser Artikel geht durch, was das Dokument über den Satz sagt, für welche Autos er geschrieben wurde und was das für deinen Lenkradkauf heißt.
+
+## Kurz gesagt
+
+- **Tasten brauchen Kabel.** BMWs Nachrüstsatz bringt einen Kabelbaum von der Lenksäule zu zwei Steuergeräten, dazu eine Schaltereinheit und ein Kabel im Lenkrad. [S1, HIGH]
+- **Ein Satz, zwei Funktionen.** Derselbe Satz und dieselbe Anleitung decken die Multifunktionstasten und die Geschwindigkeitsregelung ab. [S1, HIGH; S2, MEDIUM]
+- **Keine Codierung.** Laut BMWs Anleitung darf das Auto nach der Nachrüstung nicht codiert werden. Etwa eine Stunde Arbeit, durch geschultes Fachpersonal. [S1, HIGH]
+- **Nur für Autos mit SMART-Airbag-Lenkrad**, und das Deckblatt des Dokuments nennt bestimmte Karosserien und Motoren. [S1, HIGH]
+- **Der Katalog verkauft Lenkräder mit und ohne Tasten getrennt**, mit unterschiedlichen Pralltopfabdeckungen, und führt zwei Generationen des Nachrüstsatzes. [S2, MEDIUM]
+
+## Womit die Tasten eigentlich sprechen
+
+Am E46 trägt das Multifunktionslenkrad Tasten für Funktionen wie Radio und Geschwindigkeitsregelung; für die Bedienung verweist BMWs Anleitung auf die Betriebsanleitung des Autos oder des Radios. [S1, HIGH] Ein Tastendruck bewirkt im Lenkrad selbst nichts; er schickt ein Signal durch die Lenksäule in die Elektronik des Autos.
+
+BMWs Anleitung zeigt, wohin diese Signale gehen. Der Nachrüst-Kabelbaum hat **sechs Abzweige** und drei Ziele: [S1, HIGH]
+
+- den **Lenkstockschalter** an der Lenksäule, an dem das Lenkrad angesteckt wird;
+- das **Lichtschaltzentrum**, wo der Satz an die Datenleitung des Autos (den K-Bus) und an die Zündungsplus-Versorgung angeschlossen wird;
+- das **Motorsteuergerät** in der E-Box, beim Benziner wie beim Diesel.
+
+Der Schaltplan am Ende des Dokuments heißt "Schaltplan Geschwindigkeitsregelung E46", und der dritte Abzweig führt zum Motorsteuergerät. [S1, HIGH] Das erklärt, warum ein Satz beide Aufgaben übernimmt: Die Signale der Tasten laufen über die Datenleitung, und die Geschwindigkeitsregelung braucht den Motor. Ein Auto ohne Tasten und ohne Geschwindigkeitsregelung hat keine dieser Verbindungen an der Lenksäule. [S1, HIGH für die Verkabelung; dass sie in nicht ausgestatteten Autos fehlt, ist unsere Lesart der Anleitung, die den Monteur diese Abzweige ergänzen lässt]
+
+## Was in BMWs Satz steckt
+
+Liest man die Anleitung Schritt für Schritt, bringt der Satz drei Dinge mit: [S1, HIGH]
+
+1. **Den Nachrüst-Kabelbaum** mit sechs Abzweigen, verlegt entlang der Lenksäule, hinter dem Armaturenbrett und in die E-Box. Bei Rechtslenkern wird ein Abzweig geöffnet und quer durchs Auto geführt; das Dokument ist für Linkslenker gezeichnet und sagt, spiegelbildlich zu arbeiten.
+2. **Eine Schaltereinheit**, die mit Torx-Schrauben in die Abdeckung des Lenkrads gesetzt wird.
+3. **Ein Verbindungskabel** von der Schaltereinheit, im Lenkrad befestigt und eingesteckt, wenn die Abdeckung wieder montiert wird.
+
+Der Airbag ist **nicht** Teil des Satzes. Der letzte Schritt am Lenkrad lautet: "Vorhandene Airbageinheit montieren." Dein Airbag bleibt; der Satz kommt um ihn herum. [S1, HIGH]
+
+Der Teilekatalog passt dazu. Er führt den Satz unter zwei Bezeichnungen, einmal für das **Sportlenkrad** und einmal für das normale **Lenkrad**, und in zwei Generationen: ein früheres und ein späteres Paar. [S2, MEDIUM] Das Dokument selbst trägt die Nummern beider Generationen, ein Deckblatt von 11.2001 auf einem Textteil von 04.2000. [S1, HIGH] Was die beiden Generationen unterscheidet, steht in keiner unserer Quellen.
+
+## Die Vorbereitung ist die eigentliche Arbeit
+
+Mehr als ein Lenkradtausch wird es durch die Liste der Teile, die zuerst herauskommen. Bevor ein Kabel verlegt wird, lässt BMWs Anleitung den Techniker: [S1, HIGH]
+
+- die **Sicherheitsvorschriften für Airbag-Bauteile** beachten;
+- einen **Kurztest** der Systeme des Autos durchführen;
+- die **Batterie abklemmen**;
+- die **Airbageinheit** und dann das **Lenkrad** ausbauen;
+- beide Hälften der **Lenksäulenverkleidung**, das **Handschuhfach auf der Fahrerseite**, die **Fußraumverkleidung**, die **Blende und Einheit des Lichtschalters** und den **Deckel der E-Box** ausbauen.
+
+Dann wird der Kabelbaum eingezogen, zwei Leitungen am Lichtschaltzentrum werden aufgetrennt und mit neuen Kontakten verbunden, das Lenkrad mit BMWs vorgeschriebenem Drehmoment montiert, der Airbag wieder eingesetzt und das Auto zusammengebaut. Die letzten Schritte: erneut Kurztest, **"Eine Codierung des Fahrzeugs darf nicht durchgeführt werden"**, und eine Funktionsprüfung nach der Betriebsanleitung des Autos oder des Radios. [S1, HIGH]
+
+BMW setzt etwa **eine Stunde** an, "je nach Zustand und Ausstattung des Fahrzeugs", und zur Werkzeugliste gehören BMW-Crimpzangen und eine Abisolierzange. Der Satz ist "nur für die Verwendung in der BMW Handelsorganisation" bestimmt, und die Anleitung richtet sich an "technisches Personal, das an BMW Fahrzeugen geschult ist und Fachwissen zur Karosserieelektrik hat". [S1, HIGH] Am klarsten liest man das so: eine Werkstattarbeit, bei der der Airbag eine Zeit lang ausgebaut ist.
+
+In Foren ist manchmal von Codierung nach einem Lenkradtausch die Rede. [S4, LOW] Für diese Nachrüstung sagt BMWs eigenes Dokument: nein.
+
+## Für welche Autos die Anleitung gilt
+
+Die Anleitung beginnt mit einer Einschränkung (aus der englischen Ausgabe übersetzt):
+
+> "Die Einbauanleitung gilt nur für Fahrzeuge mit SMART-Airbag-Sportlenkrad. Das sind E46 Coupé, Touring, Limousine ab 06/99 und Cabrio ab Serienbeginn." [S1, HIGH]
+
+Die SMART-Airbag-Grenze ist ein eigenes Thema, und das Datum ist zwischen BMWs Quellen umstritten; mehr dazu in unserem Artikel "Your E46 steering wheel is an airbag". Kurz: Bei einem Auto, das vor Mitte 2000 gebaut wurde, lohnt ein genauer Blick, bevor ein Lenkrad mit Tasten montiert wird.
+
+Das **Deckblatt** desselben Dokuments ist enger gefasst. Es nennt den Satz einen "Nachrüstsatz für BMW 3er, identisch mit Serienausstattung bis 6/00" und listet: [S1, HIGH, dass das Deckblatt das sagt]
+
+- **Coupé** mit dem Vierzylinder N42 oder dem Sechszylinder M54;
+- **Touring** mit dem Diesel M47 oder M57 oder dem Benziner M54;
+- **Limousine** mit dem Diesel M47 oder M57 und dem Benziner M54 ab 09/98.
+
+Das Deckblatt nennt kein Cabrio, keinen Compact, keinen M3 und keine frühe Sechszylinder- oder Vierzylinder-Benzin-Limousine, während der Textteil das Cabrio einschließt. Ob die übrigen Autos ausgeschlossen sind oder nur nicht in dieser Ausgabe stehen, sagt das Dokument nicht. Wir erfassen den Unterschied und lösen ihn nicht auf. Steht dein Auto nicht auf der Liste des Deckblatts, ist das eine Frage an eine BMW-Werkstatt vor dem Kauf, kein Grund anzunehmen, dass der Satz passt.
+
+## Ein Lenkrad kaufen: was du wirklich bekommst
+
+Der Katalog verkauft Multifunktions- und normale Lenkräder als **getrennte Teile**, beim Sport- wie beim M-Sportlenkrad, mit **unterschiedlichen Pralltopfabdeckungen**, und die Vierspeichen-Multifunktionsgruppe enthält einen eigenen **Schalter für die Geschwindigkeitsregelung**. [S2, MEDIUM] Ein "Lenkrad mit Tasten" in einer Anzeige kann also Verschiedenes heißen:
+
+- **Ein komplettes Multifunktionslenkrad aus einem Auto mit Tasten.** Es bringt seine eigenen Schalter mit, aber nicht den Kabelbaum, der in Lenksäule und Armaturenbrett des Spenderautos bleibt. [S1, HIGH für den Verlauf des Kabelbaums]
+- **Ein normales Lenkrad plus separater Nachrüstsatz.** Das ist die Konfiguration, die BMWs Anleitung beschreibt: Die Schaltereinheit kommt in die Abdeckung des normalen Lenkrads. [S1, HIGH]
+- **Nur die Tasten**, ohne Kabelbaum. Die allein bewirken an einem Auto ohne Verkabelung nichts.
+
+Was du auch kaufst: Das Lenkrad ist die Halterung des Airbags. Ein gebrauchtes Lenkrad unbekannter Herkunft ist eine gebrauchte Airbag-Halterung unbekannter Herkunft, und der Airbag selbst muss zum Auto passen. Das behandelt unser Airbag-Artikel; es gilt hier vollständig.
+
+**Schaltwippen sind ein anderes Thema.** Lenkräder mit Schaltwippen gehören zum sequenziellen Getriebe und sind im Katalog getrennt geführt. [S2, MEDIUM] Sie sind nicht Teil dieses Satzes, und Besitzer berichten, dass ein solches Lenkrad an einem Auto ohne dieses Getriebe mehr braucht als nur das Lenkrad. [S4, LOW]
+
+**Bei manchen Autos waren die Tasten Serie.** BMWs britische Ausstattungsliste für die Limousine 2001 nennt das Sport-Multifunktionslenkrad und die Geschwindigkeitsregelung als Serie beim 318i SE. [S3, HIGH für das britische Modelljahr] Hat das Auto schon funktionierende Tasten, ist es verkabelt, und ein Tausch zwischen Multifunktionslenkrädern derselben Airbag-Generation ist eine andere, kleinere Arbeit.
+
+## Checkliste vor dem Kauf
+
+1. **Hat dein Auto jetzt funktionierende Tasten?** Wenn ja, ist es verkabelt; offen sind nur Lenkrad und Airbag. Wenn nein, plane BMWs Satz und eine Werkstatt ein. [S1, HIGH]
+2. **Prüf zuerst die Airbag-Grenze.** Die Anleitung gilt nur für Autos mit SMART-Airbag-Lenkrad. [S1, HIGH]
+3. **Prüf die Liste auf dem Deckblatt.** Karosserie-Motor-Kombinationen außerhalb davon behandelt dieses Dokument nicht. [S1, HIGH]
+4. **Kläre, was die Anzeige enthält.** Lenkrad, Schalter, Kabelbaum, Abdeckung: Der Katalog verkauft sie getrennt. [S2, MEDIUM]
+5. **Plane geschultes Fachpersonal ein.** Airbag raus, Batterie ab, Verkleidungen ab, danach keine Codierung, am Ende Kurztest und Funktionsprüfung. [S1, HIGH]
+6. **Kauf keine Schaltwippen für ein Auto ohne das passende Getriebe.** [S2, MEDIUM; S4, LOW]
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Die Einbauanleitung ist BMWs eigenes Dokument, vollständig gelesen; sie liegt auf einer Drittanbieter-Seite, das PDF ist nicht archiviert. Wir zitieren sie aus der englischen Ausgabe und haben die Zitate übersetzt. Katalogaussagen stammen aus einem Spiegel des Teilekatalogs ohne Daten. Die britische Ausstattungsliste ist von BMW und gilt nur für diesen Markt und dieses Jahr. Forenmaterial erscheint nur dort, wo es BMW gegenübergestellt wird.
+
+**Erfasste Widersprüche.** (1) Das Deckblatt der Anleitung nennt bestimmte Karosserien und Motoren; der Textteil sagt Coupé, Touring und Limousine ab 06/99 und Cabrio ab Serienbeginn. (2) "bis 6/00" auf dem Deckblatt gegen "ab 06/99" im Textteil, behandelt in unserem Airbag-Artikel. (3) Die beiden Kabelbaum-Tabellen des Dokuments bezeichnen dieselben drei Pins an der Lenksäule unterschiedlich; für die Frage, an welches Auto der Satz passt, unerheblich, wichtig, falls jemand Pinbelegungen zitiert.
+
+**Nicht geklärt.** Was die beiden Generationen des Satzes unterscheidet; ob die auf dem Deckblatt fehlenden Autos einen anderen Satz brauchen oder es keinen gibt; ob ein Auto mit Geschwindigkeitsregelung, aber ohne Tasten den ganzen Kabelbaum braucht; was die Katalog-Umbaugruppen zwischen den Lenkradfamilien genau enthalten.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Lenkräder an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben.
