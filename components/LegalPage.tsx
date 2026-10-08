@@ -15,7 +15,7 @@ export default function LegalPage({ lang, title, children }: { lang: string; tit
         </div>
       </header>
       <main className="mx-auto flex max-w-3xl flex-col gap-6 px-5 py-14 text-body [&_h2]:mt-6 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-ink">
-        <h1 className="text-4xl font-extrabold tracking-tight text-ink md:text-5xl">{title}</h1>
+        <h1 lang="de" className="text-[28px] leading-tight font-extrabold tracking-tight break-words text-ink hyphens-auto sm:text-4xl md:text-5xl">{title}</h1>
         {children}
       </main>
     </div>
