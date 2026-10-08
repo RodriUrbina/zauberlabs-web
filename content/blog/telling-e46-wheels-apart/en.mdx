@@ -1,0 +1,160 @@
+---
+# BL-033 — Writer draft, English. Body is Markdown plus Figure blocks.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Six wheels, three families: how to tell E46 factory wheels apart"
+description: "Style 44, 45, 68M, 71, 119 and 135M: spoke pattern, size, square or staggered, and what BMW's European catalogue lists each for. For used-set buyers."
+date: 2026-10-08
+updated: 2026-10-12
+publishAt: "2026-10-12"
+lang: en
+slug: telling-e46-wheels-apart
+card: BL-033
+author: "Zauberlabs"
+tags:
+  - E46
+  - wheels
+  - buying guide
+  - BMW
+configurator: E46
+cta:
+  label: "E46 configurator: coming soon"
+  href: "https://e46.zauberlabs.de" # Builder: source from E46_URL in lib/i18n.ts; layout shows "coming soon" until the configurator opens
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "Six BMW alloy wheels of different spoke patterns standing in a row against a plain workshop wall"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: six silver alloy wheels of clearly different spoke designs (seven-spoke, five-spoke, double-spoke) leaning in a row against a plain workshop wall, soft daylight, no car. Must not show: a legible BMW roundel or centre-cap text, readable part numbers or tyre markings, a person."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-035.1 — factory wheel applicability by market: bmwfans.info part pages (sizes, offsets, release spans, option codes) and model-tree diagrams for six wheel styles; Europe rules cross-checked against a second mirror"
+    type: ETK mirror (Europe side two mirrors agree)
+    path: "t035-evidence/REPORT.md; t035-evidence/applicability-by-market.md"
+    confidence: MEDIUM
+    note: "MEDIUM throughout: both mirrors derive from the same BMW data and no BMW-hosted catalogue was reachable. Sizes and offsets are the mirror's transcription of the catalogue row; release spans are part-number availability, not vehicle dates."
+  - id: S2
+    title: "T-030 — the six wheel styles in the USA and Europe catalogue trees (diagram rows with sizes and quantities)"
+    type: ETK mirror (one mirror)
+    path: "t030-evidence/wheels-compact-markets.json"
+    confidence: MEDIUM
+  - id: S3
+    title: "E46 wheel knowledge (research note on enthusiast and reseller sources: style names, US sport-package context, the US-only ZHP package, recorded conflicts)"
+    type: enthusiast and reseller sources
+    path: "e46-wheel-knowledge.md"
+    confidence: LOW
+    note: "Never decides. Used for style names in common use and for the statement that one wheel's factory package was US-only; sizes in the body come from S1, not from here."
+  - id: S4
+    title: "E46 wheel physical fitment (research note: bolt pattern, hub bore, brake-disc sizes per model, M3 as a separate class)"
+    type: research note on manufacturer specifications and specialist sources
+    path: "e46-wheel-physical-fitment.md"
+    confidence: MEDIUM
+    note: "The note itself grades the bolt pattern and hub bore HIGH and the bolt thread MEDIUM; graded MEDIUM here as one source. Brake clearance figures are specialist statements, not BMW's."
+  - id: S5
+    title: "T-036 — European dealer listings for the six wheel styles (availability flags at fetch date; no seller named in the article)"
+    type: retailer
+    path: "t036-evidence/T-036-findings.md"
+    confidence: LOW
+    note: "Used only for the aside that some catalogue-discontinued rims are still listed new; a listing is a dealer's claim at fetch date."
+  - id: S6
+    title: "T-069 — the six wheel images in this article: Zauberlabs' own canonical set, confirmed by the owner against forums and Wikipedia; originals and SHA-256 recorded"
+    type: project record (image provenance)
+    path: "t069-wheel-photos/README.md"
+    confidence: n/a
+    note: "Provenance only. The pictures show the design; they are not evidence of size or fitment."
+---
+
+Six wheel designs account for most of the "is this the right wheel?" questions we see for the E46: three star spokes, one double spoke and two M double spokes. All of them bolt to any E46, which is exactly why used sets get mixed up: a 16-inch and a 17-inch seven-spoke look alike in a photo, and three of the six come as front and rear pairs that must not be swapped. This guide shows each wheel, gives its size as BMW's European catalogue records it, and lists what to check before you pay.
+
+## The short version
+
+- **Three families.** Star spoke: Style 44 (17-inch, seven spokes), Style 45 (16-inch, seven spokes) and Style 119 (17-inch, five spokes). Double spoke: Style 71 (18-inch, with 17-inch versions in Europe). M double spoke: Style 68M (17-inch) and Style 135M (18-inch). [S1, MEDIUM]
+- **Four of the six are square**, the same wheel at every corner: 44, 45, 119 and the 17-inch square Style 71. **Three are staggered**, with a wider rear: 68M, 135M and the 18-inch Style 71. [S1, MEDIUM]
+- **The European catalogue lists five of the six for the whole range**, Sedan, Touring, Coupé, Convertible and Compact, petrol and diesel. The exception is Style 45, which is listed for no 330 model. [S1, MEDIUM]
+- **A catalogue listing is not a factory-fit record.** Style 119 and Style 135M were released in 2003 and are still listed for cars built before that. [S1, MEDIUM]
+- **Everything here is the European catalogue.** US applicability differs for two styles, covered in "The wheel that fits an E46, unless the E46 is American". [S1, MEDIUM]
+
+## Style 44 and Style 45: the seven-spoke pair
+
+<Figure src="/blog/telling-e46-wheels-apart/style-44.webp" alt="BMW Style 44 alloy wheel: seven straight spokes, seen face on" width={1000} height={1000} caption="Style 44, 17-inch star spoke: seven spokes, the same wheel at all four corners." credit="Image: Zauberlabs" />
+
+These two are the ones most often confused: both are seven-spoke "star spoke" designs from the start of E46 production, and the difference is an inch. **Style 44 is 17-inch, 8 inches wide, 47 mm offset, fitted in fours. Style 45 is 16-inch, 7 inches wide, same offset, also in fours.** Both were released in February 1998, before the first E46 reached customers. [S1, MEDIUM]
+
+<Figure src="/blog/telling-e46-wheels-apart/style-45.webp" alt="BMW Style 45 alloy wheel: seven spokes that widen towards the rim, seen face on" width={1000} height={1000} caption="Style 45, 16-inch star spoke: seven spokes again, one inch smaller." credit="Image: Zauberlabs" />
+
+In the pictures, the 44's spokes are slimmer and parallel-sided to a flat rim edge; the 45's broaden towards the rim on a more rounded face. With a tyre fitted, do not rely on that: read the rim diameter off the sidewall, or the size cast into the back of the rim.
+
+Where they go differs more than their looks. The European catalogue lists the 44 for every E46 body and engine, 316i to 330xd, Compact included. The 45 is listed for every body too, but **for no 330-badged car**: no 330i, 330xi, 330d, 330xd, 330Ci or 330Cd. [S1, MEDIUM] The catalogue gives no reason; the 330 models carry larger front brakes than the other cars, and a 16-inch rim is the one size here the specialist sources treat as doubtful for them. [S4, MEDIUM] A set of 45s "from a 330i" deserves a question about the story, not necessarily about the wheels.
+
+## Style 119: the five-spoke latecomer
+
+<Figure src="/blog/telling-e46-wheels-apart/style-119.webp" alt="BMW Style 119 alloy wheel: five broad spokes, seen face on" width={1000} height={1000} caption="Style 119, 17-inch star spoke: five spokes, released in 2003." credit="Image: Zauberlabs" />
+
+The third star spoke has **five** broad spokes, not seven. Its size matches the Style 44, 8 by 17 inches with a 47 mm offset, in fours, but it was released in March 2003, with the facelift. [S1, MEDIUM]
+
+Despite that date, the European catalogue lists the 119 for every E46 body and engine, including the 1998 cars. That is the clearest example of a rule that applies to every wheel on this page: **the catalogue draws no era line for wheels.** No rim row carries a production-date band, so "listed for" means BMW considered the wheel applicable, not that any car left the factory on it. [S1, MEDIUM] A 1999 323i on 119s is a retrofit, and nothing wrong with it.
+
+## Style 68M and Style 135M: the M double spokes
+
+<Figure src="/blog/telling-e46-wheels-apart/style-68m.webp" alt="BMW Style 68M alloy wheel: five pairs of thin double spokes, seen face on" width={1000} height={1000} caption="Style 68M, 17-inch M double spoke: five pairs of spokes, front and rear wheels differ." credit="Image: Zauberlabs" />
+
+Neither of these is an M3 wheel: both were catalogued for ordinary E46s, and the M3 has its own styles with different offsets and must be treated as a separate car. [S4, MEDIUM]
+
+**Style 68M is 17-inch and staggered**: 7.5 inches wide with a 41 mm offset in front, 8.5 inches with a 50 mm offset at the rear, from September 1999. [S1, MEDIUM] Visually it is five pairs of narrow spokes with a slot between each pair, and an M badge on the cap.
+
+<Figure src="/blog/telling-e46-wheels-apart/style-135m.webp" alt="BMW Style 135M alloy wheel: seven pairs of thin double spokes, seen face on" width={1000} height={1000} caption="Style 135M, 18-inch M double spoke: seven pairs of spokes, released in 2003." credit="Image: Zauberlabs" />
+
+**Style 135M is 18-inch and staggered**: 8 inches with a 47 mm offset in front, 8.5 inches with a 50 mm offset at the rear, from March 2003. [S1, MEDIUM] It has **seven** pairs of finer spokes to the 68M's five. Count the pairs and you cannot mix them up.
+
+Both are listed in the European catalogue for the whole range, Compact included. [S1, MEDIUM] US sources tie the 135M to a US-only performance package; in Europe that package never existed and the catalogue listing is the only factory connection. [S3, LOW]
+
+A used set of either is only complete with **two fronts and two rears**: the 68M's differ by a full inch of width, the 135M's by half an inch. Four identical 68Ms are not a set, however good the price.
+
+## Style 71: one design, two diameters
+
+<Figure src="/blog/telling-e46-wheels-apart/style-71.webp" alt="BMW Style 71 alloy wheel: ten double spokes and a polished rim lip with a ring of bolt heads, seen face on" width={1000} height={1000} caption="Style 71, double spoke: the same design was catalogued in 18-inch and, in Europe, 17-inch sizes." credit="Image: Zauberlabs" />
+
+Style 71 is the one wheel here catalogued in more than one diameter. The version most people mean is **18-inch and staggered**, 8 inches in front and 8.5 at the rear with the 135M's offsets, from March 1999; the catalogue now marks it discontinued by the factory. [S1, MEDIUM] The design is easy to spot: ten spokes in pairs, a wide polished lip and a ring of bolt heads around the rim that gives it a two-piece look.
+
+In Europe the same style diagram also carries **17-inch versions**: a staggered pair with the 68M's sizes from April 2000, and a square 8 by 17 wheel from May 2002. None of them appears on the US side of the catalogue, which lists the 18-inch wheel for the 330Ci Coupé and Convertible only; the European catalogue lists the style for every body and engine. [S1, MEDIUM] All diameters share the design, so a photo will not tell you which one you are looking at; the stamped size will.
+
+## Square or staggered: why it matters when you buy
+
+The six wheels split cleanly:
+
+| Style | Diameter | Layout | Front | Rear |
+| --- | --- | --- | --- | --- |
+| 44 | 17 | square | 8J, 47 mm | same |
+| 45 | 16 | square | 7J, 47 mm | same |
+| 119 | 17 | square | 8J, 47 mm | same |
+| 68M | 17 | staggered | 7.5J, 41 mm | 8.5J, 50 mm |
+| 71 | 18 | staggered | 8J, 47 mm | 8.5J, 50 mm |
+| 71 (Europe) | 17 | staggered or square | 7.5J, 41 mm or 8J, 47 mm | 8.5J, 50 mm or same |
+| 135M | 18 | staggered | 8J, 47 mm | 8.5J, 50 mm |
+
+All sizes from the catalogue mirror's part pages. [S1, MEDIUM]
+
+A square set can be rotated front to rear; a staggered set cannot, and its tyres differ in size too. When a seller lists "4 x Style 68M", ask which two are fronts, and ask for a picture of the size cast into the back of each rim.
+
+Two more catalogue habits explain most contradictions you will meet online. The lists carry **no engine logic** beyond the Style 45's missing 330s: petrol and diesel, four and six cylinders, two- and four-wheel drive are listed alike. [S1, MEDIUM] And **"discontinued" and "in stock" coexist**: the mirror marks the 18-inch Style 71 discontinued while a dealer page we checked listed one of its rims as new and in stock; for the 119 and the 135M front, the same dealer said discontinued. A listing is a dealer's claim on the day it was fetched; the catalogue flag describes BMW's supply, not whether a wheel exists. [S5, LOW]
+
+## Checking a used set
+
+1. **Count the spokes.** Seven: 44 or 45. Five: 119. Five pairs: 68M. Seven pairs: 135M. Ten in pairs with a bolted-looking lip: 71.
+2. **Read the size on the back of the rim**, not the listing. It settles 44 versus 45 and the diameters of the Style 71 in one look.
+3. **For 68M, 71 and 135M, make sure you get two fronts and two rears.** [S1, MEDIUM]
+4. **Bolt pattern and hub bore are the same on every E46**, so any of these wheels mounts on any E46. [S4, MEDIUM] Mounting is not clearance: the 330 models carry larger front brakes, and whether a rim clears them depends on its design, not its diameter alone. The catalogue's "no 330" on the Style 45 is the one documented case.
+5. **An M badge on the cap proves nothing.** Caps are sold separately; spoke count and stamped size identify a 68M or 135M.
+6. **An M3's wheels are a different subject.** Different offsets, wider body, bigger brakes; nothing here applies to it. [S4, MEDIUM]
+
+## Notes on the evidence
+
+**Confidence.** Every size, offset, release date and applicability statement comes from a parts-catalogue mirror, corroborated on the European side by a second mirror derived from the same BMW data; no BMW-hosted catalogue was reachable, so nothing here is graded above MEDIUM. Enthusiast and reseller sources supply only common style names and US context, graded LOW. Brake sizes and the clearance remark come from a research note quoting manufacturer specifications and specialist retailers, not a BMW document.
+
+**Conflicts recorded.** (1) One enthusiast source swaps the 68M's front and rear numbers; two independent listings agree with the catalogue, which is used here. (2) A second, discontinued 18-inch Style 71 pair exists in the European catalogue with no stated relation to the one above; it is left out. (3) Dealer "in stock" against catalogue "discontinued"; the dealer's claim is not adopted.
+
+**Not established.** Which wheel was standard or optional on which European model and year; the catalogue does not say and the forum tables are US model years. Whether any 16-inch rim clears a 330's front brakes, and why the Style 45 is missing from the 330 models. The pictures are Zauberlabs' own canonical images of each design, shown for the spoke pattern only. [S6]
+
+## What comes next
+
+Our E46 configurator is coming soon. When it opens it will show the wheels for your body style and build date and link to sellers for the exact part; this page will link to it then.
