@@ -1,0 +1,155 @@
+---
+# BL-034 — Writer draft, English. Body is plain Markdown.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Buttons without wires: why an E46 multifunction wheel needs BMW's retrofit kit"
+description: "The buttons on an E46 steering wheel only work if the car is wired for them. What BMW's retrofit kit adds, which cars it was written for, and what to buy."
+date: 2026-10-08
+updated: 2026-10-14
+publishAt: "2026-10-14"
+lang: en
+slug: e46-multifunction-steering-wheel-retrofit
+card: BL-034
+author: "Zauberlabs"
+tags:
+  - E46
+  - steering wheels
+  - retrofit
+  - BMW
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "Close-up of the spoke of a three-spoke steering wheel with a small cluster of buttons, a loose wiring loom lying on the seat below"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: close-up of one spoke of an early-2000s three-spoke leather steering wheel with a small cluster of round buttons; out of focus on the seat below, a short loose wiring loom with connectors; warm workshop light. Must not show: legible BMW roundel or M badge, symbols or text on the buttons, part numbers, a person's face."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW Parts and Accessories Installation Instructions — Multi-functional steering wheel (MFL) retrofit kit / Cruise control (GRA), EBA no. 01 29 0 016 107, dated 11.2001 (body text of the 04.2000 edition)"
+    type: BMW-authored; full text read; hosted on a third-party mirror (bmw.etk.club), PDF not archived
+    path: "t029-evidence/raw/bmw-eba-284-mfl-retrofit-kit.txt"
+    confidence: HIGH
+    note: "HIGH for what the document states. Its cover page and its body text describe the applicable cars differently; both are quoted and the difference is recorded, not resolved."
+  - id: S2
+    title: "Parts-catalogue mirror (eStore-Central): E46 steering, multifunction and retrofit groups for Sedan, Touring, Coupé, Convertible, Compact and M3"
+    type: ETK mirror (one mirror)
+    path: "t029-evidence/raw/estore-steering-matrix.md; t029-evidence/raw/estore-steering-groups.json"
+    confidence: MEDIUM
+    note: "Group names and item names only; the mirror carries no dates and almost no equipment notes."
+  - id: S3
+    title: "BMW Group UK press kit, 26 Oct 2001: The new BMW 3 Series Saloon and Touring, plus model specification lists"
+    type: BMW-authored
+    path: "t029-evidence/raw/bmw-press-uk-2001-steering-extract.txt"
+    confidence: HIGH
+    note: "HIGH for the UK model year it describes; not evidence for other markets."
+  - id: S4
+    title: "T-029 — steering-wheel category research (forum and enthusiast summaries on coding and on wheels with paddles)"
+    type: research note on forum sources
+    path: "t029-evidence/T-029-findings.md"
+    confidence: LOW
+    note: "Never decides. Used only to show what owners report, next to what BMW says."
+---
+
+An E46 steering wheel with buttons on the spokes is one of the most popular interior upgrades, and one of the most misunderstood. The buttons look like part of the wheel, so a buttoned wheel looks like a straight swap. It is not. The buttons are switches; what they switch lives elsewhere in the car, and a car built without them has no wires waiting. BMW sold a kit for exactly this job and wrote an installation instruction for it. This article walks through what that document says the kit adds, which cars it was written for, and what that means when you shop for a wheel.
+
+## The short version
+
+- **Buttons need wiring.** BMW's retrofit kit adds a harness from the steering column to two control units, plus a switch unit and cable in the wheel. [S1, HIGH]
+- **One kit, two functions.** The same kit and the same instruction cover the multifunction buttons and cruise control. [S1, HIGH; S2, MEDIUM]
+- **No coding.** BMW's instruction says the car must not be coded after the retrofit. About an hour of work, by a trained technician. [S1, HIGH]
+- **Only for cars with the SMART airbag wheel**, and the document's cover lists specific bodies and engines. [S1, HIGH]
+- **The catalogue sells buttoned and plain wheels separately**, with different hub caps, and lists two generations of retrofit kit. [S2, MEDIUM]
+
+## What the buttons actually talk to
+
+On the E46 the multifunction wheel carries buttons for functions such as the radio and cruise control; BMW's instruction sends the owner to the car's or the radio's manual for how they work. [S1, HIGH] Pressing one does nothing inside the wheel; it sends a signal down through the steering column to the car's electronics.
+
+BMW's instruction shows where those signals go. The retrofit harness has **six branches** and three destinations: [S1, HIGH]
+
+- the **steering-column switch cluster**, where the wheel plugs in;
+- the **central light-switch control unit**, where the kit joins the car's data line (the K-Bus) and the ignition-switched supply;
+- the **engine control unit** in the electronics box, petrol or diesel.
+
+The circuit diagram at the end of the document is titled "cruise control system E46", and it is the engine control unit that the third branch reaches. [S1, HIGH] That explains why the one kit serves both jobs: the buttons' signals travel on the data line, and cruise control needs the engine. A car built without buttons and without cruise control has neither connection made at the column. [S1, HIGH for the wiring; the absence in unequipped cars is our reading of the instruction, which tells the fitter to add these branches]
+
+## What BMW's kit contains
+
+Reading the instruction step by step, the kit brings three things: [S1, HIGH]
+
+1. **The retrofit wiring harness** with its six branches, routed along the steering column, behind the dashboard and into the electronics box. On a right-hand-drive car one branch is opened up and routed across the car; the document is drawn for left-hand drive and says to work in mirror image.
+2. **A switch unit**, fitted into the wheel's covering cap with Torx screws.
+3. **A connecting cable** from the switch unit, clipped into the wheel and plugged in when the cap goes back on.
+
+The airbag is **not** in the kit. The instruction's last step on the wheel is "Fit existing airbag unit." Your airbag stays; the kit fits around it. [S1, HIGH]
+
+The parts catalogue matches this. It lists the kit under two names, one for the **sports** steering wheel and one for the plain **steering wheel**, and in two generations: an earlier pair and a later pair. [S2, MEDIUM] The document itself carries both generations' numbers, an 11.2001 cover on a 04.2000 body text. [S1, HIGH] What separates the two generations is not stated anywhere in our sources.
+
+## The preparation is the real job
+
+What makes this more than a wheel swap is the list of things that come off first. Before any wire is laid, BMW's instruction has the technician: [S1, HIGH]
+
+- **observe the safety regulations for airbag components**;
+- run a **short test** of the car's systems;
+- **disconnect the battery**;
+- remove the **airbag unit**, then the **steering wheel**;
+- remove both halves of the **steering-column shroud**, the **driver's-side glove box**, the **footwell trim**, the **light-switch trim and switch unit**, and the **electronics-box cover**.
+
+Then the harness goes in, two leads at the light-switch control unit are cut and joined with new contacts, the wheel is fitted to BMW's specified torque, the airbag goes back, and the car is reassembled. The finishing steps are: short test again, **"Coding of the vehicle must not be carried out,"** and a function test as described in the car's or the radio's manual. [S1, HIGH]
+
+BMW puts the job at **about one hour**, "according to the condition and fittings of the vehicle", and the tool list includes BMW crimping tools and a wire stripper. The kit is "intended only for use in the BMW trading organisation", and the instruction is written for "technical personnel who have received training on BMW vehicles and who have specialist knowledge of the body electrical system". [S1, HIGH] That is the plainest way to read it: a workshop job, with the airbag out of the car for part of it.
+
+Forum threads sometimes describe coding after a wheel swap. [S4, LOW] For this retrofit, BMW's own document says no.
+
+## Which cars the instruction covers
+
+The instruction opens with a restriction:
+
+> "The installation instructions are only valid for vehicles with SMART airbag sports steering wheel. These are E46 coupé, touring, saloon as from 06/99 and convertible from start of series." [S1, HIGH]
+
+The SMART airbag line is its own subject, and the date is disputed between BMW's sources; we covered it in "Your E46 steering wheel is an airbag". In short: a car built before mid-2000 needs a closer look before any buttoned wheel goes on.
+
+The **cover page** of the same document is narrower. It calls the kit a "retrofit kit for BMW 3 Series identical to standard equipment until 6/00" and lists: [S1, HIGH that the cover says so]
+
+- **Coupé** with the four-cylinder N42 or the six-cylinder M54 engine;
+- **Touring** with the M47 or M57 diesel or the M54 petrol engine;
+- **Saloon** with the M47 or M57 diesel, and the M54 petrol engine from 09/98.
+
+The cover names no Convertible, no Compact, no M3, and no early six-cylinder or four-cylinder petrol Saloon, while the body text includes the Convertible. The document does not say whether the other cars are excluded or simply outside this edition. We record the difference and do not resolve it. If your car is not on the cover list, that is a question for a BMW workshop before you buy, not a reason to assume the kit fits.
+
+## Buying a wheel: what you are actually getting
+
+The catalogue sells multifunction wheels and plain wheels as **separate items**, sport and M sport alike, with **different hub caps** for the two, and the four-spoke multifunction group includes a **cruise-control switch** of its own. [S2, MEDIUM] So a "wheel with buttons" in a listing can mean different things:
+
+- **A complete multifunction wheel from a car that had buttons.** It brings its own switches. It does not bring the harness, which stays in the donor car's column and dashboard. [S1, HIGH for where the harness runs]
+- **A plain wheel plus a separate retrofit kit.** This is the configuration BMW's instruction describes: the switch unit goes into the plain wheel's cap. [S1, HIGH]
+- **Buttons only**, without a harness. These alone do nothing on a car that was not wired for them.
+
+Whatever you buy, the steering wheel is the airbag's mounting. A used wheel of unknown history is a used airbag mount of unknown history, and the airbag itself must match the car. That part is covered in our airbag article; it applies here in full.
+
+**Paddles are a separate story.** Wheels with gearshift paddles belong to the sequential gearbox and are listed separately in the catalogue. [S2, MEDIUM] They are not part of this kit, and owners report that fitting one to a car without that gearbox needs more than a wheel. [S4, LOW]
+
+**On some cars the buttons were standard.** BMW's UK specification for the 2001 Saloon lists the sports multifunction wheel and cruise control as standard on the 318i SE. [S3, HIGH for the UK model year] If the car already has working buttons, it is wired, and a swap between multifunction wheels of the same airbag generation is a different, smaller job.
+
+## A checklist before you buy
+
+1. **Does your car have working buttons now?** If yes, it is wired; the question is only the wheel and its airbag. If no, budget for BMW's kit and a workshop. [S1, HIGH]
+2. **Check the airbag line first.** The instruction applies only to cars with the SMART airbag wheel. [S1, HIGH]
+3. **Check the cover list.** Body and engine combinations outside it are not addressed by this document. [S1, HIGH]
+4. **Know what the listing includes.** Wheel, switches, harness, cap: the catalogue sells them separately. [S2, MEDIUM]
+5. **Plan for a trained technician.** Airbag out, battery off, dashboard trim off, no coding afterwards, short test and function test at the end. [S1, HIGH]
+6. **Do not buy paddles for a car without the gearbox.** [S2, MEDIUM; S4, LOW]
+
+## Notes on the evidence
+
+**Confidence.** The installation instruction is BMW's own document, read in full; it is hosted on a third-party site and the PDF is not archived. Catalogue statements come from one parts-catalogue mirror with no dates. The UK specification is BMW's own and applies to that market and year only. Forum material appears only where it contrasts with BMW.
+
+**Conflicts recorded.** (1) The instruction's cover lists specific bodies and engines; its body text says Coupé, Touring and Saloon from 06/99 and the Convertible from the start of series. (2) The cover's "until 6/00" against the body text's "from 06/99", discussed in our airbag article. (3) The document's two harness tables label the same three column pins differently; irrelevant to which car it fits, relevant if anyone quotes pin assignments.
+
+**Not established.** What separates the two kit generations; whether the cars missing from the cover list need a different kit or none exists; whether a car built with cruise control but without buttons needs the whole harness; the exact contents of the catalogue's conversion groups between wheel families.
+
+## What comes next
+
+Our E46 configurator is live: it shows which steering wheels fit your car and links to sellers where we've found one.
