@@ -1,0 +1,160 @@
+---
+# BL-033 — Writer draft, German. Same slug, sources and images as en.mdx.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Sechs Felgen, drei Familien: So unterscheidest du die Werksfelgen des E46"
+description: "Style 44, 45, 68M, 71, 119 und 135M: Speichenbild, Größe, Mischbereifung oder nicht und wofür BMWs europäischer Katalog sie listet. Für Gebrauchtkäufer."
+date: 2026-10-08
+updated: 2026-10-12
+publishAt: "2026-10-12"
+lang: de
+slug: telling-e46-wheels-apart
+card: BL-033
+author: "Zauberlabs"
+tags:
+  - E46
+  - wheels
+  - buying guide
+  - BMW
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "Sechs BMW-Leichtmetallfelgen mit unterschiedlichen Speichenbildern, nebeneinander an eine schlichte Werkstattwand gelehnt"
+  credit: "KI-generierte Illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: six silver alloy wheels of clearly different spoke designs (seven-spoke, five-spoke, double-spoke) leaning in a row against a plain workshop wall, soft daylight, no car. Must not show: a legible BMW roundel or centre-cap text, readable part numbers or tyre markings, a person."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-035.1 — Verwendbarkeit der Werksfelgen nach Markt: Teileseiten von bmwfans.info (Größen, Einpresstiefen, Lieferzeiträume, Optionscodes) und Modellbaum-Diagramme für sechs Felgendesigns; Europa-Regeln mit einem zweiten Spiegel abgeglichen"
+    type: ETK-Spiegel (Europa-Seite: zwei Spiegel stimmen überein)
+    path: "t035-evidence/REPORT.md; t035-evidence/applicability-by-market.md"
+    confidence: MEDIUM
+    note: "Durchgehend MEDIUM: Beide Spiegel stammen aus denselben BMW-Daten, ein von BMW selbst gehosteter Katalog war nicht erreichbar. Größen und Einpresstiefen sind die Abschrift der Katalogzeile durch den Spiegel; Lieferzeiträume betreffen die Teilenummer, nicht das Baudatum eines Autos."
+  - id: S2
+    title: "T-030 — die sechs Felgendesigns in den Katalogbäumen USA und Europa (Diagrammzeilen mit Größen und Stückzahlen)"
+    type: ETK-Spiegel (ein Spiegel)
+    path: "t030-evidence/wheels-compact-markets.json"
+    confidence: MEDIUM
+  - id: S3
+    title: "E46-Felgenwissen (Recherchenotiz zu Enthusiasten- und Händlerquellen: Style-Namen, US-Sportpaket, das nur in den USA angebotene ZHP-Paket, erfasste Widersprüche)"
+    type: Enthusiasten- und Händlerquellen
+    path: "e46-wheel-knowledge.md"
+    confidence: LOW
+    note: "Entscheidet nie. Genutzt für gebräuchliche Style-Namen und für die Aussage, dass das Werkspaket einer Felge nur in den USA angeboten wurde; die Größen im Text stammen aus S1."
+  - id: S4
+    title: "Physische Passform der E46-Felgen (Recherchenotiz: Lochkreis, Mittenbohrung, Bremsscheibengrößen je Modell, M3 als eigene Klasse)"
+    type: Recherchenotiz zu Herstellerangaben und Fachquellen
+    path: "e46-wheel-physical-fitment.md"
+    confidence: MEDIUM
+    note: "Die Notiz selbst bewertet Lochkreis und Mittenbohrung mit HIGH und das Schraubengewinde mit MEDIUM; hier als eine Quelle mit MEDIUM bewertet. Aussagen zum Bremsenfreigang stammen von Fachhändlern, nicht von BMW."
+  - id: S5
+    title: "T-036 — europäische Händlerangebote für die sechs Felgendesigns (Verfügbarkeit zum Abrufzeitpunkt; im Artikel wird kein Händler genannt)"
+    type: Händler
+    path: "t036-evidence/T-036-findings.md"
+    confidence: LOW
+    note: "Nur für den Hinweis genutzt, dass einige im Katalog eingestellte Felgen noch neu angeboten werden; ein Angebot ist eine Aussage des Händlers zum Abrufzeitpunkt."
+  - id: S6
+    title: "T-069 — die sechs Felgenbilder in diesem Artikel: eigener Referenzsatz von Zauberlabs, vom Inhaber mit Foren und Wikipedia abgeglichen; Originale und SHA-256 erfasst"
+    type: Projektnachweis (Bildherkunft)
+    path: "t069-wheel-photos/README.md"
+    confidence: n/a
+    note: "Nur Herkunftsnachweis. Die Bilder zeigen das Design; sie belegen weder Größe noch Passform."
+---
+
+Sechs Felgendesigns stecken hinter den meisten "Ist das die richtige Felge?"-Fragen zum E46: drei Sternspeichen, eine Doppelspeiche und zwei M-Doppelspeichen. Alle passen an jeden E46, und genau deshalb werden gebrauchte Sätze so oft verwechselt: Eine 16- und eine 17-Zoll-Siebenspeiche sehen auf einem Foto gleich aus, und drei der sechs kommen als Vorder- und Hinterachspaar, das man nicht tauschen darf. Dieser Ratgeber zeigt jede Felge, nennt ihre Größe so, wie BMWs europäischer Katalog sie führt, und sagt, was du vor dem Bezahlen prüfen solltest.
+
+## Kurz gesagt
+
+- **Drei Familien.** Sternspeiche: Style 44 (17 Zoll, sieben Speichen), Style 45 (16 Zoll, sieben Speichen) und Style 119 (17 Zoll, fünf Speichen). Doppelspeiche: Style 71 (18 Zoll, in Europa auch in 17 Zoll). M-Doppelspeiche: Style 68M (17 Zoll) und Style 135M (18 Zoll). [S1, MEDIUM]
+- **Vier der sechs sind rundum gleich**, also an allen vier Ecken dieselbe Felge: 44, 45, 119 und die 17-Zoll-Style-71 mit gleicher Breite. **Drei sind Mischbereifung** mit breiterer Hinterachse: 68M, 135M und die 18-Zoll-Style-71. [S1, MEDIUM]
+- **Der europäische Katalog listet fünf der sechs für die ganze Baureihe**: Limousine, Touring, Coupé, Cabrio und Compact, Benziner und Diesel. Die Ausnahme ist Style 45, die für kein 330er-Modell gelistet ist. [S1, MEDIUM]
+- **Ein Katalogeintrag ist kein Nachweis der Werksausstattung.** Style 119 und Style 135M kamen 2003 und sind trotzdem für ältere Autos gelistet. [S1, MEDIUM]
+- **Alles hier bezieht sich auf den europäischen Katalog.** In den USA weicht die Verwendbarkeit bei zwei Designs ab; dazu unser Artikel "The wheel that fits an E46, unless the E46 is American". [S1, MEDIUM]
+
+## Style 44 und Style 45: das Siebenspeichen-Paar
+
+<Figure src="/blog/telling-e46-wheels-apart/style-44.webp" alt="BMW-Felge Style 44: sieben gerade Speichen, frontal gesehen" width={1000} height={1000} caption="Style 44, 17 Zoll Sternspeiche: sieben Speichen, an allen vier Ecken dieselbe Felge." credit="Bild: Zauberlabs" />
+
+Diese beiden werden am häufigsten verwechselt: Beide sind Siebenspeichen-Sternspeichen vom Produktionsbeginn des E46, und der Unterschied ist ein Zoll. **Style 44 hat 17 Zoll, 8 Zoll Breite, 47 mm Einpresstiefe, viermal gleich. Style 45 hat 16 Zoll, 7 Zoll Breite, gleiche Einpresstiefe, ebenfalls viermal gleich.** Beide Teilenummern gibt es seit Februar 1998, also schon bevor der erste E46 ausgeliefert wurde. [S1, MEDIUM]
+
+<Figure src="/blog/telling-e46-wheels-apart/style-45.webp" alt="BMW-Felge Style 45: sieben Speichen, die zum Felgenrand breiter werden, frontal gesehen" width={1000} height={1000} caption="Style 45, 16 Zoll Sternspeiche: wieder sieben Speichen, einen Zoll kleiner." credit="Bild: Zauberlabs" />
+
+Auf den Bildern sind die Speichen der 44 schlanker und laufen parallel auf einen flachen Rand zu; die der 45 werden zum Rand hin breiter, die Front ist runder. Mit montiertem Reifen verlass dich nicht darauf: Lies den Felgendurchmesser auf der Reifenflanke ab oder die Größe, die hinten in die Felge gegossen ist.
+
+Wo sie passen, unterscheidet sich stärker als ihr Aussehen. Der europäische Katalog listet die 44 für jede E46-Karosserie und jeden Motor, vom 316i bis zum 330xd, Compact eingeschlossen. Die 45 ist ebenfalls für jede Karosserie gelistet, aber **für kein Auto mit 330 im Namen**: kein 330i, 330xi, 330d, 330xd, 330Ci oder 330Cd. [S1, MEDIUM] Einen Grund nennt der Katalog nicht; die 330er haben größere Vorderradbremsen als die übrigen Modelle, und eine 16-Zoll-Felge ist die einzige Größe hier, die Fachquellen für sie als fraglich behandeln. [S4, MEDIUM] Bei einem Satz 45er "vom 330i" lohnt eine Frage nach der Geschichte, nicht unbedingt nach den Felgen.
+
+## Style 119: der Fünfspeichen-Nachzügler
+
+<Figure src="/blog/telling-e46-wheels-apart/style-119.webp" alt="BMW-Felge Style 119: fünf breite Speichen, frontal gesehen" width={1000} height={1000} caption="Style 119, 17 Zoll Sternspeiche: fünf Speichen, eingeführt 2003." credit="Bild: Zauberlabs" />
+
+Die dritte Sternspeiche hat **fünf** breite Speichen, nicht sieben. Die Größe entspricht der Style 44, 8 mal 17 Zoll mit 47 mm Einpresstiefe, viermal gleich, aber die Teilenummer kam erst im März 2003, mit dem Facelift. [S1, MEDIUM]
+
+Trotz dieses Datums listet der europäische Katalog die 119 für jede E46-Karosserie und jeden Motor, auch für die Autos von 1998. Das ist das deutlichste Beispiel für eine Regel, die für jede Felge auf dieser Seite gilt: **Der Katalog zieht bei Felgen keine Baujahresgrenze.** Keine Felgenzeile hat einen Produktionszeitraum, "gelistet für" heißt also, dass BMW die Felge für verwendbar hielt, nicht dass ein Auto damit das Werk verlassen hat. [S1, MEDIUM] Ein 323i von 1999 auf 119ern ist eine Nachrüstung, und daran ist nichts falsch.
+
+## Style 68M und Style 135M: die M-Doppelspeichen
+
+<Figure src="/blog/telling-e46-wheels-apart/style-68m.webp" alt="BMW-Felge Style 68M: fünf Paare schmaler Doppelspeichen, frontal gesehen" width={1000} height={1000} caption="Style 68M, 17 Zoll M-Doppelspeiche: fünf Speichenpaare, Vorder- und Hinterachse unterschiedlich." credit="Bild: Zauberlabs" />
+
+Keine der beiden ist eine M3-Felge: Beide sind für normale E46 gelistet. Der M3 hat eigene Designs mit anderen Einpresstiefen und ist als eigenes Auto zu behandeln. [S4, MEDIUM]
+
+**Style 68M hat 17 Zoll und Mischbereifung**: vorne 7,5 Zoll breit mit 41 mm Einpresstiefe, hinten 8,5 Zoll mit 50 mm, seit September 1999. [S1, MEDIUM] Optisch sind es fünf Paare schmaler Speichen mit einem Schlitz in jedem Paar und ein M-Logo auf der Nabe.
+
+<Figure src="/blog/telling-e46-wheels-apart/style-135m.webp" alt="BMW-Felge Style 135M: sieben Paare schmaler Doppelspeichen, frontal gesehen" width={1000} height={1000} caption="Style 135M, 18 Zoll M-Doppelspeiche: sieben Speichenpaare, eingeführt 2003." credit="Bild: Zauberlabs" />
+
+**Style 135M hat 18 Zoll und Mischbereifung**: vorne 8 Zoll mit 47 mm Einpresstiefe, hinten 8,5 Zoll mit 50 mm, seit März 2003. [S1, MEDIUM] Sie hat **sieben** Paare feinerer Speichen, die 68M fünf. Zähl die Paare, dann verwechselst du sie nicht.
+
+Beide sind im europäischen Katalog für die ganze Baureihe gelistet, Compact eingeschlossen. [S1, MEDIUM] US-Quellen verbinden die 135M mit einem Leistungspaket, das es nur in den USA gab; in Europa existierte dieses Paket nie, und der Katalogeintrag ist die einzige Verbindung zum Werk. [S3, LOW]
+
+Ein gebrauchter Satz ist bei beiden nur mit **zwei Vorder- und zwei Hinterrädern** vollständig: Bei der 68M unterscheiden sie sich um einen ganzen Zoll Breite, bei der 135M um einen halben. Vier gleiche 68M sind kein Satz, egal wie gut der Preis ist.
+
+## Style 71: ein Design, zwei Durchmesser
+
+<Figure src="/blog/telling-e46-wheels-apart/style-71.webp" alt="BMW-Felge Style 71: zehn Doppelspeichen und ein polierter Felgenrand mit einem Kranz aus Schraubenköpfen, frontal gesehen" width={1000} height={1000} caption="Style 71, Doppelspeiche: dasselbe Design ist in 18 Zoll und in Europa auch in 17 Zoll katalogisiert." credit="Bild: Zauberlabs" />
+
+Style 71 ist die einzige Felge hier, die in mehr als einem Durchmesser katalogisiert ist. Gemeint ist meist die **18-Zoll-Version mit Mischbereifung**, vorne 8 und hinten 8,5 Zoll mit den Einpresstiefen der 135M, seit März 1999; der Katalog führt sie inzwischen als vom Werk eingestellt. [S1, MEDIUM] Das Design ist leicht zu erkennen: zehn Speichen in Paaren, ein breiter polierter Rand und ein Kranz aus Schraubenköpfen, der ihr ein zweiteiliges Aussehen gibt.
+
+In Europa führt dasselbe Diagramm auch **17-Zoll-Versionen**: ein Mischpaar mit den Größen der 68M seit April 2000 und eine rundum gleiche 8 mal 17 Zoll seit Mai 2002. Keine davon erscheint auf der US-Seite des Katalogs, die die 18-Zoll-Felge nur für 330Ci Coupé und Cabrio listet; der europäische Katalog listet das Design für jede Karosserie und jeden Motor. [S1, MEDIUM] Alle Durchmesser teilen das Design, ein Foto verrät also nicht, welche du vor dir hast; die eingegossene Größe schon.
+
+## Rundum gleich oder Mischbereifung: warum das beim Kauf zählt
+
+Die sechs Felgen teilen sich klar auf:
+
+| Style | Durchmesser | Aufteilung | Vorne | Hinten |
+| --- | --- | --- | --- | --- |
+| 44 | 17 | rundum gleich | 8J, 47 mm | gleich |
+| 45 | 16 | rundum gleich | 7J, 47 mm | gleich |
+| 119 | 17 | rundum gleich | 8J, 47 mm | gleich |
+| 68M | 17 | Mischbereifung | 7,5J, 41 mm | 8,5J, 50 mm |
+| 71 | 18 | Mischbereifung | 8J, 47 mm | 8,5J, 50 mm |
+| 71 (Europa) | 17 | Mischbereifung oder rundum gleich | 7,5J, 41 mm oder 8J, 47 mm | 8,5J, 50 mm oder gleich |
+| 135M | 18 | Mischbereifung | 8J, 47 mm | 8,5J, 50 mm |
+
+Alle Größen aus den Teileseiten des Katalogspiegels. [S1, MEDIUM]
+
+Einen rundum gleichen Satz kannst du zwischen den Achsen tauschen; einen Mischsatz nicht, und auch die Reifengrößen unterscheiden sich. Wenn ein Verkäufer "4 x Style 68M" anbietet, frag, welche zwei die Vorderräder sind, und bitte um ein Foto der eingegossenen Größe auf der Rückseite jeder Felge.
+
+Zwei weitere Eigenheiten des Katalogs erklären die meisten Widersprüche, die du online findest. Die Listen haben **keine Motorlogik** außer den fehlenden 330ern bei der Style 45: Benziner und Diesel, Vier- und Sechszylinder, Hinterrad- und Allradantrieb sind gleich gelistet. [S1, MEDIUM] Und **"eingestellt" und "auf Lager" gibt es gleichzeitig**: Der Spiegel führt die 18-Zoll-Style-71 als eingestellt, während eine von uns geprüfte Händlerseite eine ihrer Felgen neu und auf Lager anbot; bei der 119 und der vorderen 135M schrieb derselbe Händler "eingestellt". Ein Angebot ist eine Aussage des Händlers am Tag des Abrufs; die Katalogmarkierung beschreibt BMWs Lieferfähigkeit, nicht ob es die Felge noch gibt. [S5, LOW]
+
+## Einen gebrauchten Satz prüfen
+
+1. **Zähl die Speichen.** Sieben: 44 oder 45. Fünf: 119. Fünf Paare: 68M. Sieben Paare: 135M. Zehn in Paaren mit verschraubt wirkendem Rand: 71.
+2. **Lies die Größe auf der Rückseite der Felge**, nicht in der Anzeige. Sie klärt 44 gegen 45 und den Durchmesser der Style 71 auf einen Blick.
+3. **Bei 68M, 71 und 135M: Achte auf zwei Vorder- und zwei Hinterräder.** [S1, MEDIUM]
+4. **Lochkreis und Mittenbohrung sind an jedem E46 gleich**, also lässt sich jede dieser Felgen an jedem E46 montieren. [S4, MEDIUM] Montierbar heißt nicht freigängig: Die 330er haben größere Vorderradbremsen, und ob eine Felge darüber passt, hängt von ihrem Design ab, nicht allein vom Durchmesser. Das "kein 330" bei der Style 45 ist der einzige dokumentierte Fall.
+5. **Ein M-Logo auf der Nabenkappe beweist nichts.** Kappen werden einzeln verkauft; Speichenzahl und eingegossene Größe erkennen eine 68M oder 135M.
+6. **Die Felgen des M3 sind ein anderes Thema.** Andere Einpresstiefen, breitere Karosserie, größere Bremsen; nichts hier gilt für ihn. [S4, MEDIUM]
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Jede Größe, Einpresstiefe, jedes Datum und jede Aussage zur Verwendbarkeit stammt aus einem Spiegel des Teilekatalogs, auf der europäischen Seite bestätigt durch einen zweiten Spiegel aus denselben BMW-Daten; ein von BMW gehosteter Katalog war nicht erreichbar, daher ist nichts hier höher als MEDIUM bewertet. Enthusiasten- und Händlerquellen liefern nur gebräuchliche Style-Namen und US-Kontext, bewertet mit LOW. Bremsengrößen und der Hinweis zum Freigang stammen aus einer Recherchenotiz zu Herstellerangaben und Fachhändlern, nicht aus einem BMW-Dokument.
+
+**Erfasste Widersprüche.** (1) Eine Enthusiastenquelle vertauscht die vordere und hintere Teilenummer der 68M; zwei unabhängige Angebote bestätigen den Katalog, der hier verwendet wird. (2) Im europäischen Katalog gibt es ein zweites, eingestelltes 18-Zoll-Paar der Style 71 ohne angegebene Beziehung zum oben beschriebenen; es bleibt außen vor. (3) Händler "auf Lager" gegen Katalog "eingestellt"; die Händleraussage wird nicht übernommen.
+
+**Nicht geklärt.** Welche Felge an welchem europäischen Modell und Baujahr Serie oder Sonderausstattung war; der Katalog sagt es nicht, und die Forentabellen beziehen sich auf US-Modelljahre. Ob eine 16-Zoll-Felge über die Vorderradbremse eines 330ers passt und warum die Style 45 bei den 330ern fehlt. Die Bilder sind eigene Referenzbilder von Zauberlabs zu jedem Design und zeigen nur das Speichenbild. [S6]
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Felgen an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben.
