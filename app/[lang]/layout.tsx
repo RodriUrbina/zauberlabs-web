@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import localFont from "next/font/local";
-import { Analytics } from "@vercel/analytics/next";
+import SiteAnalytics from "@/components/SiteAnalytics";
 import { dictionaries, isLocale, LOCALES } from "@/lib/i18n";
 import "../globals.css";
 
@@ -60,8 +60,9 @@ export default async function RootLayout({ children, params }: { children: React
         {children}
         {/* Vercel Web Analytics (BL-008, PO decision 2026-10-02): cookieless page-view counting by Vercel; no cookies,
             no cross-site tracking, visitor hash reset daily. Described in app/[lang]/datenschutz (Abschnitt "Reichweitenmessung").
-            Collects nothing until Web Analytics is enabled in the Vercel dashboard (project → Analytics → Enable). */}
-        <Analytics />
+            Collects nothing until Web Analytics is enabled in the Vercel dashboard (project → Analytics → Enable).
+            BL-039: devices carrying the zl_internal marker (the PO's own) are excluded — see components/SiteAnalytics.tsx. */}
+        <SiteAnalytics />
       </body>
     </html>
   );
