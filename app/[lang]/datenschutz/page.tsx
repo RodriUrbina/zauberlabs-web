@@ -13,7 +13,7 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * eu-central-1): car record with random ID + optional label, attributes/answers, build items with seller-offer snapshot;
  * free-text box parsed in memory, not stored; no account/name/email/IP/cookie ID stored; no cookies, no web storage;
  * Vercel Web Analytics (see Abschnitt 5), no other tracking; self-hosted fonts; links to external sellers.
- * BL-043 draft (E46 T-078): optional E46BUILD owner accounts — email, passwordless sign-in link (15 min), session cookie
+ * BL-043 (E46 T-078, PO-approved 2026-10-12): optional E46BUILD owner accounts — email, passwordless sign-in link (15 min), session cookie
  * (60 days, no IP/UA stored), keyed-hash rate limits, sign-in emails via Brevo (Abschnitt 11). Accounts off until this text is live.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
@@ -160,9 +160,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         folgst, gelten deren Datenschutzbestimmungen (Abschnitt 13).
       </p>
 
-      {/* BL-043 DRAFT — owner accounts (E46 card T-078). Text from e46build docs/legal/t078-lawyer-review.md § 6, adjusted per the
-          Coordinator's brief of 2026-10-12. Accounts stay switched off in production until this text is live. [PO to confirm] items are
-          open in the brief itself and are not asserted. */}
+      {/* BL-043 — owner accounts (E46 card T-078). Text from e46build docs/legal/t078-lawyer-review.md § 6, adjusted per the
+          Coordinator's brief and approved by the PO on 2026-10-12 (T-078.6b live in production a5ad73d; Brevo DPA in place).
+          E46BUILD accounts are switched on in production only once this text is live. */}
       <p>
         <strong>Konto (optional): Konfigurationen speichern.</strong> Den Konfigurator kannst du ohne Konto nutzen. Nur wenn du eine Konfiguration
         speichern möchtest („Meinen Build speichern“), legst du ein Konto an. Dafür verarbeiten wir deine E-Mail-Adresse: Wir senden dir einen
@@ -174,8 +174,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Für die Anmeldung setzen wir ein technisch notwendiges Cookie, das dich bis zu 60 Tage angemeldet hält (bei Nutzung verlängert) und beim
         Abmelden oder Löschen des Kontos entfernt wird. Zu deinem Konto und zur Anmeldung speichern wir weder IP-Adresse noch Browserkennung. Um
         Missbrauch der Anmelde-E-Mails zu verhindern, zählen wir Anfragen je E-Mail-Adresse und je IP-Adresse; dabei speichern wir nur einen mit einem
-        geheimen Schlüssel gebildeten Prüfwert (Hash), nicht die Adresse selbst, und löschen ihn in der Regel nach etwa einem Tag [PO to confirm: setzt
-        die ausstehende Code-Änderung T-078.6b voraus].
+        geheimen Schlüssel gebildeten Prüfwert (Hash), nicht die Adresse selbst, und löschen ihn in der Regel nach etwa einem Tag.
       </p>
       <p>
         Die Anmelde-E-Mails versenden wir über Brevo als Auftragsverarbeiter (Abschnitt 11); Absender ist hello@zauberlabs.de. Sie enthalten nur den
@@ -201,9 +200,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
 
       <h2>11. E-Mail-Versand für E46BUILD (Brevo)</h2>
       <p>
-        Die Anmelde-E-Mails für E46BUILD-Konten (Abschnitt 9) versenden wir über Brevo [PO to confirm: Firmenname] als Auftragsverarbeiter, mit Sitz
-        in Frankreich [PO to confirm: Datenstandort für unser Konto]. Dabei verarbeitet Brevo deine E-Mail-Adresse, den Betreff und den Anmeldelink.
-        Mit Brevo besteht ein Vertrag zur Auftragsverarbeitung [PO to confirm: AVV für unser Konto angenommen].
+        Die Anmelde-E-Mails für E46BUILD-Konten (Abschnitt 9) versenden wir über Brevo (Paris, Frankreich) als Auftragsverarbeiter. Dabei verarbeitet
+        Brevo deine E-Mail-Adresse, den Betreff und den Anmeldelink. Mit Brevo besteht ein Vertrag zur Auftragsverarbeitung.
       </p>
 
       <h2>12. Kontakt per E-Mail</h2>
