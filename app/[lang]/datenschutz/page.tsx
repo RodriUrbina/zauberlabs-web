@@ -13,6 +13,8 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * eu-central-1): car record with random ID + optional label, attributes/answers, build items with seller-offer snapshot;
  * free-text box parsed in memory, not stored; no account/name/email/IP/cookie ID stored; no cookies, no web storage;
  * Vercel Web Analytics (see Abschnitt 5), no other tracking; self-hosted fonts; links to external sellers.
+ * BL-043 draft (E46 T-078): optional E46BUILD owner accounts — email, passwordless sign-in link (15 min), session cookie
+ * (60 days, no IP/UA stored), keyed-hash rate limits, sign-in emails via Brevo (Abschnitt 11). Accounts off until this text is live.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -141,7 +143,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         die du selbst vergibst.
       </p>
       <p>
-        Mit der Konfiguration werden kein Konto, kein Name, keine E-Mail-Adresse, keine IP-Adresse, keine Cookie-Kennung und kein Freigabelink
+        Bei Konfigurationen ohne Konto werden kein Name, keine E-Mail-Adresse, keine IP-Adresse, keine Cookie-Kennung und kein Freigabelink
         gespeichert; die zufällige Kennung existiert nur im Speicher deiner geöffneten Seite. Die gespeicherten Fahrzeugangaben, Passform-Antworten
         und Konfigurationen bewahren wir ohne Personenbezug auf, um zu verstehen, was Besitzer konfigurieren und kaufen möchten, und um den Dienst zu
         verbessern – so lange, wie sie für diesen Zweck erforderlich sind. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am
@@ -151,11 +153,41 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Bezeichnung ein. Die Konfigurationen liegen in unserer Datenbank (Abschnitt 10).
       </p>
       <p>
-        E46BUILD verwendet keine Nutzerkonten und keinen Anmeldedienst, setzt keine Cookies und legt nichts im lokalen Speicher deines Browsers ab. Zur
+        Ohne Konto setzt E46BUILD keine Cookies und legt nichts im lokalen Speicher deines Browsers ab; für ein Konto siehe den folgenden Absatz. Zur
         Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics – ohne Cookies, nur zusammengefasste Seitenaufrufe und Besucherzahlen;
         es gilt Abschnitt 5. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet
         keine Verbindung zu Google Fonts statt. Angebote im Konfigurator verlinken auf die Websites externer Händler; sobald du einem solchen Link
-        folgst, gelten deren Datenschutzbestimmungen (Abschnitt 12).
+        folgst, gelten deren Datenschutzbestimmungen (Abschnitt 13).
+      </p>
+
+      {/* BL-043 DRAFT — owner accounts (E46 card T-078). Text from e46build docs/legal/t078-lawyer-review.md § 6, adjusted per the
+          Coordinator's brief of 2026-10-12. Accounts stay switched off in production until this text is live. [PO to confirm] items are
+          open in the brief itself and are not asserted. */}
+      <p>
+        <strong>Konto (optional): Konfigurationen speichern.</strong> Den Konfigurator kannst du ohne Konto nutzen. Nur wenn du eine Konfiguration
+        speichern möchtest („Meinen Build speichern“), legst du ein Konto an. Dafür verarbeiten wir deine E-Mail-Adresse: Wir senden dir einen
+        einmaligen Anmeldelink (gültig 15 Minuten) und verknüpfen deine gespeicherten Konfigurationen mit deinem Konto, damit du sie auf jedem Gerät
+        wieder öffnen kannst. Ein Passwort gibt es nicht. Solange du angemeldet bist, werden neue Konfigurationen automatisch in deinem Konto
+        gespeichert.
+      </p>
+      <p>
+        Für die Anmeldung setzen wir ein technisch notwendiges Cookie, das dich bis zu 60 Tage angemeldet hält (bei Nutzung verlängert) und beim
+        Abmelden oder Löschen des Kontos entfernt wird. Zu deinem Konto und zur Anmeldung speichern wir weder IP-Adresse noch Browserkennung. Um
+        Missbrauch der Anmelde-E-Mails zu verhindern, zählen wir Anfragen je E-Mail-Adresse und je IP-Adresse; dabei speichern wir nur einen mit einem
+        geheimen Schlüssel gebildeten Prüfwert (Hash), nicht die Adresse selbst, und löschen ihn in der Regel nach etwa einem Tag [PO to confirm: setzt
+        die ausstehende Code-Änderung T-078.6b voraus].
+      </p>
+      <p>
+        Die Anmelde-E-Mails versenden wir über Brevo als Auftragsverarbeiter (Abschnitt 11); Absender ist hello@zauberlabs.de. Sie enthalten nur den
+        Anmeldelink – keine Werbung. Brevo kann technisch erfassen, ob eine Anmelde-E-Mail geöffnet und ob der Link darin angeklickt wurde; diese
+        Angaben nutzen wir nicht.
+      </p>
+      <p>
+        Rechtsgrundlage für Konto, Anmeldung und gespeicherte Konfigurationen ist Art. 6 Abs. 1 lit. b DSGVO, für den Missbrauchsschutz Art. 6 Abs. 1
+        lit. f DSGVO. Deine Daten bleiben gespeichert, bis du dein Konto löschst. Auf der Seite „Meine Builds“ kannst du jederzeit deine Daten
+        herunterladen, einzelne Konfigurationen aus deinem Konto entfernen oder dein Konto löschen. Beim Löschen entfernen wir deine E-Mail-Adresse und
+        alle Anmeldedaten; deine Konfigurationen bleiben ohne Bezug zu dir und ohne von dir eingegebene Freitexte erhalten (siehe oben). Die Daten liegen
+        in unserer Datenbank (Abschnitt 10).
       </p>
 
       <h2>10. Datenbank-Dienstleister für E46BUILD (Neon)</h2>
@@ -167,29 +199,38 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         https://www.databricks.com/legal/privacynotice
       </p>
 
-      <h2>11. Kontakt per E-Mail</h2>
+      <h2>11. E-Mail-Versand für E46BUILD (Brevo)</h2>
+      <p>
+        Die Anmelde-E-Mails für E46BUILD-Konten (Abschnitt 9) versenden wir über Brevo [PO to confirm: Firmenname] als Auftragsverarbeiter, mit Sitz
+        in Frankreich [PO to confirm: Datenstandort für unser Konto]. Dabei verarbeitet Brevo deine E-Mail-Adresse, den Betreff und den Anmeldelink.
+        Mit Brevo besteht ein Vertrag zur Auftragsverarbeitung [PO to confirm: AVV für unser Konto angenommen].
+      </p>
+
+      <h2>12. Kontakt per E-Mail</h2>
       <p>
         Wenn du uns per E-Mail kontaktierst, verarbeiten wir deine Angaben zur Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. b bzw. f DSGVO)
         und löschen sie, sobald sie nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten bestehen.
       </p>
 
-      <h2>12. Externe Links</h2>
+      <h2>13. Externe Links</h2>
       <p>
         Unsere Konfiguratoren verlinken auf externe Händler und Plattformen. Erst wenn du einen solchen Link anklickst, verlässt du unsere
         Website; ab dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
       </p>
 
-      <h2>13. Deine Rechte</h2>
+      <h2>14. Deine Rechte</h2>
       <p>
         Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
         Datenübertragbarkeit (Art. 20) sowie auf Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21). Eine erteilte
-        Einwilligung kannst du jederzeit mit Wirkung für die Zukunft widerrufen. Schreib uns dazu einfach an {C.email}.
+        Einwilligung kannst du jederzeit mit Wirkung für die Zukunft widerrufen. Schreib uns dazu einfach an {C.email}. Hast du ein E46BUILD-Konto,
+        kannst du auf der Seite „Meine Builds“ jederzeit selbst deine Daten herunterladen, einzelne Konfigurationen aus deinem Konto entfernen oder dein
+        Konto löschen (Abschnitt 9).
       </p>
       <p>
         Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, zum Beispiel bei: {C.authority}.
       </p>
 
-      <h2>14. Aktualität</h2>
+      <h2>15. Aktualität</h2>
       <p>Stand: {C.updated}. Wir passen diese Erklärung an, wenn sich unsere Website oder die Rechtslage ändert.</p>
     </LegalPage>
   );
