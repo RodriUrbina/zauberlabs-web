@@ -144,10 +144,10 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       </p>
       <p>
         Bei Konfigurationen ohne Konto werden kein Name, keine E-Mail-Adresse, keine IP-Adresse, keine Cookie-Kennung und kein Freigabelink
-        gespeichert; die zufällige Kennung existiert nur im Speicher deiner geöffneten Seite. Die gespeicherten Fahrzeugangaben, Passform-Antworten
-        und Konfigurationen bewahren wir ohne Personenbezug auf, um zu verstehen, was Besitzer konfigurieren und kaufen möchten, und um den Dienst zu
+        gespeichert; die zufällige Kennung existiert nur im Speicher deiner geöffneten Seite. Konfigurationen ohne Konto bewahren wir ohne
+        Personenbezug auf, um zu verstehen, was Besitzer konfigurieren und kaufen möchten, und um den Dienst zu
         verbessern – so lange, wie sie für diesen Zweck erforderlich sind. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am
-        Betrieb und an der Verbesserung des Konfigurators). Ein Bezug zu deiner Person ist nur vorübergehend möglich: Für höchstens einen Tag enthält
+        Betrieb und an der Verbesserung des Konfigurators). Ohne Konto ist ein Bezug zu deiner Person nur vorübergehend möglich: Für höchstens einen Tag enthält
         das Zugriffsprotokoll des Hostings (Abschnitt 3) deine IP-Adresse zusammen mit der zufälligen Kennung in der aufgerufenen Adresse; nach Ablauf
         dieser Log-Aufbewahrung lassen sich die Datensätze keiner Person mehr zuordnen – es sei denn, du trägst selbst personenbezogene Angaben in die
         Bezeichnung ein. Die Konfigurationen liegen in unserer Datenbank (Abschnitt 10).
