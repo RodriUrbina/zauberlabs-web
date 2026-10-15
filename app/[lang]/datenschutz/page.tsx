@@ -15,6 +15,8 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * Vercel Web Analytics (see Abschnitt 5), no other tracking; self-hosted fonts; links to external sellers.
  * BL-043 (E46 T-078, PO-approved 2026-10-12): optional E46BUILD owner accounts — email, passwordless sign-in link (15 min), session cookie
  * (60 days, no IP/UA stored), keyed-hash rate limits, sign-in emails via Brevo (Abschnitt 11). Accounts off until this text is live.
+ * BL-044 (PO decision 2026-10-14): E46BUILD reads the visitor's country from Vercel's x-vercel-ip-country header to show which
+ * sellers deliver there; not stored (Abschnitt 9). Must be live before the next e46build production promotion.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -140,7 +142,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         werden nur die Angaben, die du bestätigst oder aus Listen auswählst: Karosserieform, Modell, Baujahr und deine Antworten auf Passform-Fragen
         (z. B. die Scheinwerferform), sowie die Teile, die du in deine Konfiguration legst – je Teil das Produkt und ein Abbild des gewählten
         Händlerangebots (Händlername, Link zum Angebot, Preis). Jede Konfiguration erhält dafür eine zufällige Kennung und optional eine Bezeichnung,
-        die du selbst vergibst.
+        die du selbst vergibst. Wir verwenden dein ungefähres Land, das unser Hoster aus deiner IP-Adresse ableitet, nur um anzuzeigen, welche
+        Verkäufer zu dir liefern. Deine IP-Adresse und dein Land speichern wir nicht.
       </p>
       <p>
         Bei Konfigurationen ohne Konto werden kein Name, keine E-Mail-Adresse, keine IP-Adresse, keine Cookie-Kennung und kein Freigabelink
