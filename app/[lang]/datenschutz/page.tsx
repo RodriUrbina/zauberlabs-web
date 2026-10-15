@@ -143,7 +143,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         (z. B. die Scheinwerferform), sowie die Teile, die du in deine Konfiguration legst – je Teil das Produkt und ein Abbild des gewählten
         Händlerangebots (Händlername, Link zum Angebot, Preis). Jede Konfiguration erhält dafür eine zufällige Kennung und optional eine Bezeichnung,
         die du selbst vergibst. Wir verwenden dein ungefähres Land, das unser Hoster aus deiner IP-Adresse ableitet, nur um anzuzeigen, welche
-        Verkäufer zu dir liefern. Deine IP-Adresse und dein Land speichern wir nicht.
+        Verkäufer zu dir liefern. Dafür speichern wir weder deine IP-Adresse noch dein Land.
       </p>
       <p>
         Bei Konfigurationen ohne Konto werden kein Name, keine E-Mail-Adresse, keine IP-Adresse, keine Cookie-Kennung und kein Freigabelink
