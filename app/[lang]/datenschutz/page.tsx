@@ -17,6 +17,7 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * (60 days, no IP/UA stored), keyed-hash rate limits, sign-in emails via Brevo (Abschnitt 11). Accounts off until this text is live.
  * BL-044 (PO decision 2026-10-14): E46BUILD reads the visitor's country from Vercel's x-vercel-ip-country header to show which
  * sellers deliver there; not stored (Abschnitt 9). Must be live before the next e46build production promotion.
+ * BL-050: one Vercel Web Analytics custom event, "configurator_click" with only { configurator }, described in Abschnitt 5.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -87,6 +88,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         jeweils mit Version, Gerätetyp (Desktop, Tablet oder Mobil) sowie die Version des Analyse-Skripts. Mehrere Aufrufe desselben Besuchs werden über einen aus der Anfrage gebildeten Hash-Wert
         zusammengefasst, der nach 24 Stunden verworfen wird; deine IP-Adresse wird nicht zusammen mit diesen Daten gespeichert, und eine Wiedererkennung über andere
         Websites hinweg oder eine Zuordnung zu deiner Person ist nicht möglich. Wir sehen ausschließlich zusammengefasste Statistiken.
+        Außerdem zählen wir, wie oft ein Link zu einem unserer Konfiguratoren (z. B. E46BUILD) angeklickt wird: Dabei wird ein Ereignis an Vercel Web
+        Analytics übermittelt, das nur den Namen des Konfigurators enthält, zusammen mit denselben Angaben wie bei einem Seitenaufruf.
       </p>
       <p>
         Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse, die Nutzung unserer Website zu verstehen und sie zu verbessern). Da
