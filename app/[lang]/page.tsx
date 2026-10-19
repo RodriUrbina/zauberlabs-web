@@ -84,33 +84,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <div className="grid gap-6 lg:grid-cols-3">
             <div className="flex flex-col overflow-hidden rounded-3xl bg-ink text-paper lg:col-span-2">
               <div className="relative aspect-[960/512] bg-ink md:aspect-auto md:h-[400px]">
-                {/* BL-029: loop supplied by the PO (Rodrigo Urbina), 2026-10-06, own material (E46BUILD configurator loop v7).
-                    AI-assisted (made or edited with Google Gemini tools, per the watermark in the source); shown without a
-                    visible "AI-generated" label by explicit PO decision — a logged exception to BL-000 rule 3, like BL-003.
-                    Source e46_build_configurator_loop-v7.gif (960×540, ~12 s); the bottom 28 px are cropped on every frame
-                    (removes the "Gemini Notebook" watermark and its backing box; costs ~10 px of the front tyre in the
-                    search-bar frames), giving 960×512 (1.875:1), converted to MP4 (H.264) + WebM with a WebP poster frame
-                    (frame 45, "BMW E46 330Ci Coupe" typed). The poster is the LCP candidate (priority image); the muted
-                    autoplay loop sits above it and is hidden under prefers-reduced-motion (poster only). object-cover at every
-                    width: 1.875:1 matches the 1.85:1 desktop frame almost exactly; on phones the image area takes the video's own
-                    ratio (aspect 960/512, ≈187 px at 350 px wide — BL-030, PO decision), so nothing is cropped there. Letterboxing was
-                    rejected because the video's edge colours vary from frame to frame, so no band colour could match. The
-                    bottom fade runs transparent → ink so the card body joins without a seam whatever the video shows. */}
-                <Image src="/images/e46-configurator-loop-poster.webp" alt={t.garage.e46CardAlt} fill priority sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover" />
-                <video
-                  className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  poster="/images/e46-configurator-loop-poster.webp"
-                  aria-hidden="true"
-                  tabIndex={-1}
-                >
-                  <source src="/media/e46-configurator-loop.webm" type="video/webm" />
-                  <source src="/media/e46-configurator-loop.mp4" type="video/mp4" />
-                </video>
+                {/* BL-053.1 (PO decision 2026-10-19): the configurator loop now plays in the hero only (components/HomeHero.tsx).
+                    This card shows the E46BUILD site's hero image, the silver E46 M3 Touring "dream build" (AI render by the PO;
+                    see public/images/README.md). Source 1774×887 from e46build apps/web/public/images/hero/, scaled to 1400×700.
+                    The car fills the left ~60 % against a dark studio, so object-left keeps it whole at every card ratio
+                    (≈1.7:1 to 2.4:1 on desktop, 1.875:1 on phones); only empty background is cropped. */}
+                <Image src="/images/e46-m3-touring-garage.webp" alt={t.garage.e46CardAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover object-left" />
                 <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-b from-transparent to-ink" />
               </div>
               <div className="flex flex-col gap-7 p-6 md:p-8">

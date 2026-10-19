@@ -8,10 +8,16 @@ import { SITE_OG_IMAGE } from "../lib/blog-og";
 const pub = (p: string) => path.join(process.cwd(), "public", p);
 
 describe("home page (BL-053)", () => {
-  test("garage: five bodies in both languages, in order, each image present", () => {
+  test("garage card: the M3 Touring image (BL-053.1), no second video on the page", () => {
+    assert.ok(fs.existsSync(pub("/images/e46-m3-touring-garage.webp")));
+    const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
+    assert.ok(!page.includes("<video"), "the loop plays in the hero only");
+    assert.match(dictionaries.en.garage.e46CardAlt, /never sold/);
+  });
+  test("garage: five bodies plus the M3 in both languages, in order, each image present", () => {
     for (const lang of LOCALES) {
       const bodies = dictionaries[lang].garage.bodies;
-      assert.deepEqual(bodies.map((b) => b.img), ["/images/sedan.jpg", "/images/touring.jpg", "/images/coupe.jpg", "/images/convertible.jpg", "/images/compact.jpg"]);
+      assert.deepEqual(bodies.map((b) => b.img), ["/images/sedan.jpg", "/images/touring.jpg", "/images/coupe.jpg", "/images/convertible.jpg", "/images/compact.jpg", "/images/m3.jpg"]);
       for (const b of bodies) assert.ok(fs.existsSync(pub(b.img)), b.img);
     }
   });
