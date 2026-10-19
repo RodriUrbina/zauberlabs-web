@@ -19,7 +19,7 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * sellers deliver there; not stored (Abschnitt 10). Must be live before the next e46build production promotion.
  * BL-050: one Vercel Web Analytics custom event, "configurator_click" with only { configurator }, described in Abschnitt 5.
  * BL-051: own anonymous statistics (Abschnitt 6): daily counters in Upstash, salted daily hash only inside a HyperLogLog.
- * BL-052 (E46 T-106): optional seller notices for signed-in owners — part, build, confirmed delivery country, date; one Brevo email;
+ * BL-052 (E46 T-106): optional seller notices for signed-in owners — part, build, delivery country (detected from the IP, not confirmed by the owner), date; one Brevo email;
  * 12-month expiry, closed ones deleted after 30 days (Abschnitt 10, 12).
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
@@ -226,7 +226,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <p>
         <strong>Benachrichtigung, wenn ein Verkäufer gefunden ist (optional).</strong> Gibt es für ein passendes Teil noch keinen Verkäufer, kannst
         du dich mit deinem Konto benachrichtigen lassen. Dafür speichern wir zu deinem Konto, für welche Konfiguration und welches Teil du
-        benachrichtigt werden möchtest, das Land, in das geliefert werden soll (das du dabei bestätigst), und das Datum. Einmal täglich prüfen wir, ob
+        benachrichtigt werden möchtest, das Land, in das geliefert werden soll (wie oben beschrieben aus deiner IP-Adresse abgeleitet), und das Datum. Einmal täglich prüfen wir, ob
         ein Verkäufer das Teil anbietet und in dieses Land liefert. Ist das der Fall, senden wir dir genau eine E-Mail von hello@zauberlabs.de über
         Brevo (Abschnitt 12) und beenden die Benachrichtigung. Die E-Mail enthält keine Werbung und keine Verkäuferlinks, nur einen Link zum Teil in
         deiner Konfiguration und einen Link, mit dem du mit einem Klick alle Benachrichtigungen beendest; Öffnungen und Klicks werten wir nicht aus.
