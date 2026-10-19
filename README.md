@@ -48,3 +48,13 @@ Rules for every agent working in this repository (Builder, Writer, Editor, Coord
 4. Settings → Domains: add `zauberlabs.de` and `www.zauberlabs.de`, then create the A/CNAME records Vercel shows in the whois.com DNS panel.
 
 Read suggestions: `LRANGE suggestions 0 -1` in the Upstash console.
+
+## Statistics (BL-051)
+
+Our own anonymous reading statistics, shown under "Reading statistics" on `/de/admin` (same password). Described in the Datenschutz, Abschnitt 6.
+
+- **What is counted:** article views per article and language, unique readers per day, referrer domain only, country (`x-vercel-ip-country`, counted on its own), engaged reading time in buckets, read-to-end, and configurator clicks. Article pages send a beacon to `app/api/m` (`components/blog/ReadBeacon.tsx`); configurator clicks come from `components/ConfiguratorClickTracker.tsx`.
+- **What is stored:** daily counters only, in the existing Upstash Redis (`lib/metrics-store.ts`). No IP, no cookies, nothing in the browser, no record per visitor. Unique readers: a SHA-256 of a daily random salt + IP + User-Agent goes only into a HyperLogLog. The salt expires 24 h after it's created. The next day the HyperLogLog is rolled up into a plain number and deleted. Daily keys expire after 400 days (about 13 months).
+- **Keys:** production writes `m:*`. Preview and local builds write `m:test:*`, so test clicks never mix with real numbers.
+- **Not counted:** bots (User-Agent), devices in internal mode (BL-039), drafts and scheduled previews, slugs that aren't published articles.
+- **Upstash region:** Frankfurt am Main (AWS eu-central-1), as stated in the Datenschutz (Abschnitt 9). That's our own text, not a config value. Confirm in the Upstash console (database → Details → Region) or in Vercel (project → Storage).
