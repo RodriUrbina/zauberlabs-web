@@ -85,7 +85,7 @@ export default async function Impressum({ params }: { params: Promise<{ lang: st
 
       <h2>Marken</h2>
       <p>
-        Zauberlabs ist ein unabhängiges Angebot und steht in keiner Verbindung zur BMW AG oder einem anderen Fahrzeughersteller. Alle genannten
+        zauberlabs ist ein unabhängiges Angebot und steht in keiner Verbindung zur BMW AG oder einem anderen Fahrzeughersteller. Alle genannten
         Marken, Modellbezeichnungen und Logos sind Eigentum ihrer jeweiligen Inhaber und werden nur zur Beschreibung der Fahrzeuge verwendet.
       </p>
 
