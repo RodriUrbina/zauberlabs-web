@@ -14,10 +14,10 @@ describe("home page (BL-053)", () => {
     assert.ok(!page.includes("<video"), "the loop plays in the hero only");
     assert.match(dictionaries.en.garage.e46CardAlt, /never sold/);
   });
-  test("garage: five bodies in both languages, in order, each image present", () => {
+  test("garage: five bodies plus the M3 in both languages, in order, each image present", () => {
     for (const lang of LOCALES) {
       const bodies = dictionaries[lang].garage.bodies;
-      assert.deepEqual(bodies.map((b) => b.img), ["/images/sedan.jpg", "/images/touring.jpg", "/images/coupe.jpg", "/images/convertible.jpg", "/images/compact.jpg"]);
+      assert.deepEqual(bodies.map((b) => b.img), ["/images/sedan.jpg", "/images/touring.jpg", "/images/coupe.jpg", "/images/convertible.jpg", "/images/compact.jpg", "/images/m3.jpg"]);
       for (const b of bodies) assert.ok(fs.existsSync(pub(b.img)), b.img);
     }
   });
