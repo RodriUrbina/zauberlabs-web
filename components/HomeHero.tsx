@@ -5,7 +5,9 @@ import { dictionaries, E46_LIVE, E46_URL, type Locale } from "@/lib/i18n";
 /**
  * BL-053 (PO decision 2026-10-19) — home hero, concept C "Headline on paper" (Agent 3's mockup): the headline on the page
  * background, below it the E46BUILD configurator loop in one rounded frame with the line and the one button.
- * Desktop: 1200:600 frame (never wider than 1200 px), line left and button right over a bottom gradient.
+ * Desktop: 1200:600 frame (never wider than 1200 px), line left and button right over a bottom gradient. BL-053.2: on md+
+ * the headline and the frame also scale with the viewport HEIGHT so the whole hero fits the first screen (app/globals.css,
+ * ".home-hero").
  * ≤ md: the video at its own ratio (960:512, nothing cropped), line and full-width button in a dark panel below it.
  * Video: same loop and rules as the garage card (BL-029): poster first (LCP, carries the alt), muted autoplay loop on top,
  * hidden under prefers-reduced-motion. Text inside the frame uses fixed colours (it always sits on ink).
@@ -13,7 +15,7 @@ import { dictionaries, E46_LIVE, E46_URL, type Locale } from "@/lib/i18n";
 export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string }) {
   const t = dictionaries[lang].hero;
   return (
-    <section className={`${wrap} flex flex-col gap-4 pt-8 md:gap-6 md:pt-12`}>
+    <section className={`${wrap} home-hero flex flex-col gap-4 pt-8 md:gap-6 md:pt-12`}>
       <p className="flex items-center gap-2 font-mono text-[11px] tracking-[0.14em] text-body uppercase md:text-xs">
         <span aria-hidden="true" className={`size-2 rounded-full ${E46_LIVE ? "bg-[#1f9d63]" : "border border-muted"}`} />
         {E46_LIVE ? t.live : t.liveSoon}
@@ -24,7 +26,7 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
         {t.title[2]}
       </h1>
 
-      <div className="relative w-full max-w-[1200px] overflow-hidden rounded-[20px] bg-ink text-paper md:rounded-3xl">
+      <div className="hero-frame relative w-full max-w-[1200px] overflow-hidden rounded-[20px] bg-ink text-paper md:rounded-3xl">
         <div className="relative aspect-[960/512] md:aspect-[1200/600]">
           <Image src="/images/e46-configurator-loop-poster.webp" alt={t.videoAlt} fill priority sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" />
           <video
@@ -57,7 +59,7 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
         </div>
       </div>
 
-      <div className="flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-3 pt-1 pb-12 md:pb-14">
+      <div className="hero-below flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-3 pt-1 pb-12 md:pb-14">
         <p className="text-[15px] text-body md:text-[17px]">
           {t.cardLine[0]}
           <span className="accent-serif text-accent">{t.cardLine[1]}</span>
