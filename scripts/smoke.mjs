@@ -56,7 +56,7 @@ await waitFor(`${BASE}/robots.txt`, 60_000);
 const checks = [
   { path: "/en/blog", status: 200, markers: ['rel="canonical" href="https://www.zauberlabs.de/en/blog"', 'hrefLang="de"', 'hrefLang="en"', "application/rss+xml", '"@type":"CollectionPage"'] },
   { path: "/de/blog", status: 200, markers: ['rel="canonical" href="https://www.zauberlabs.de/de/blog"', 'hrefLang="en"'] },
-  { path: `/en/blog/${slug}`, status: 200, markers: ['"@type":"Article"', '"@type":"BreadcrumbList"', 'property="og:type" content="article"', 'rel="canonical"', "Sources", "cta-title", ...(slug === "sample-not-for-publication" ? ["<figure", "<figcaption"] : [])] },
+  { path: `/en/blog/${slug}`, status: 200, markers: ['"@type":"Article"', '"@type":"BreadcrumbList"', 'property="og:type" content="article"', 'rel="canonical"', "Sources", "cta-title", "/en/blog/sources#", ...(slug === "sample-not-for-publication" ? ["<figure", "<figcaption"] : [])] },
   {
     path: `/de/blog/${slug}`,
     status: 200,
@@ -65,9 +65,11 @@ const checks = [
       : ["Dieser Artikel ist bisher nur auf Englisch verfügbar.", `rel="canonical" href="https://www.zauberlabs.de/en/blog/${slug}"`, ...(slug === "sample-not-for-publication" ? ["<figure", "<figcaption"] : [])],
   },
   { path: "/en/blog/tag/e46", status: 200, markers: ['rel="canonical" href="https://www.zauberlabs.de/en/blog/tag/e46"', 'aria-current="page"'] },
+  { path: "/en/blog/sources", status: 200, markers: ['rel="canonical" href="https://www.zauberlabs.de/en/blog/sources"', `id="${slug}"`, "How sure we are"] },
+  { path: "/de/blog/sources", status: 200, markers: ["Quellen &amp; Belastbarkeit", "Wie sicher wir sind"] },
   { path: "/en/blog/tag/does-not-exist", status: 404, markers: [] },
   { path: "/en/blog/does-not-exist", status: 404, markers: [] },
-  { path: "/en/blog/feed.xml", status: 200, markers: ["<rss", "<channel>", "Zauberlabs Blog"], contentType: "application/rss+xml" },
+  { path: "/en/blog/feed.xml", status: 200, markers: ["<rss", "<channel>", "zauberlabs Blog"], contentType: "application/rss+xml" },
   { path: "/de/blog/feed.xml", status: 200, markers: ["<rss", "<language>de</language>"], contentType: "application/rss+xml" },
   { path: "/sitemap.xml", status: 200, markers: ["https://www.zauberlabs.de/en/blog</loc>", "https://www.zauberlabs.de/en/blog/tag/e46</loc>", `https://www.zauberlabs.de/en/blog/${slug}</loc>`] },
   { path: "/robots.txt", status: 200, markers: ["Sitemap: https://www.zauberlabs.de/sitemap.xml"] },

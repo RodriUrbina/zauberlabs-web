@@ -42,7 +42,7 @@ export default function SiteFooter({ lang, otherHref, homePath = "" }: Props) {
           </div>
         </div>
         <div className="flex flex-col justify-between gap-3 border-t border-ink-3 pt-6 text-xs text-[#8A877F] md:flex-row">
-          <span>© {new Date().getFullYear()} Zauberlabs. {t.footer.disclaimer}</span>
+          <span>© {new Date().getFullYear()} zauberlabs. {t.footer.disclaimer}</span>
           <Link href={otherHref ?? `/${other}`} hrefLang={other} className="font-mono tracking-[0.1em] hover:text-paper">
             ZAUBERLABS.DE · {other.toUpperCase()}
           </Link>

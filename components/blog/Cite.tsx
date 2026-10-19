@@ -6,9 +6,11 @@ import type { Locale } from "@/lib/i18n";
  * Inline evidence mark ([S4, HIGH] / [S9, MEDIUM; S11, MEDIUM for …] in the article), rendered Wikipedia-style
  * (BL-023, PO decision 2026-10-03): superscript source numbers only — "⁴" or "⁹,¹¹" — each linking to the entry in
  * the Sources box. No grade, no colour, no qualifier in the text; ids, grade and qualifier live in the link's tooltip.
- * The MDX mark syntax, the front matter and the Sources box are unchanged.
+ * The MDX mark syntax and the front matter are unchanged.
+ * BL-055: with `href` (the article's section on the sources page, e.g. "/de/blog/sources#some-slug"), each number links to
+ * "<href>-s4" there; without it, to "#src-s4" on the same page.
  */
-export default function Cite({ groups, lang = "en" }: { groups: string | CiteGroup[]; lang?: Locale }) {
+export default function Cite({ groups, lang = "en", href }: { groups: string | CiteGroup[]; lang?: Locale; href?: string }) {
   const list: CiteGroup[] = typeof groups === "string" ? safeParse(groups) : groups;
   const refs = flatten(list);
   if (!refs.length) return null;
@@ -18,7 +20,7 @@ export default function Cite({ groups, lang = "en" }: { groups: string | CiteGro
       {refs.map((r, i) => (
         <Fragment key={r.id}>
           {i > 0 && ","}
-          <a href={`#src-${r.id.toLowerCase()}`} title={r.tooltip} aria-label={`${word} ${r.number}${r.tooltip ? `: ${r.tooltip}` : ""}`}>
+          <a href={href ? `${href}-${r.id.toLowerCase()}` : `#src-${r.id.toLowerCase()}`} title={r.tooltip} aria-label={`${word} ${r.number}${r.tooltip ? `: ${r.tooltip}` : ""}`}>
             {r.number}
           </a>
         </Fragment>

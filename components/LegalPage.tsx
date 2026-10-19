@@ -6,7 +6,7 @@ export default function LegalPage({ lang, title, children }: { lang: string; tit
     <div className="min-h-screen">
       <header className="border-b border-[#D8D3CA]">
         <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-5">
-          <Link href={`/${lang}`} aria-label="Zauberlabs">
+          <Link href={`/${lang}`} aria-label="zauberlabs">
             <Wordmark />
           </Link>
           <Link href={`/${lang}`} className="text-sm font-semibold hover:opacity-70">

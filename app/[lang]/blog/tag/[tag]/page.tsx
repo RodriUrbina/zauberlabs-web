@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const tag = getBlog().getTag(lang, slug);
   if (!tag) return {};
   const t = dictionaries[lang].blog;
-  const title = `${t.tagTitle(tag.name)} — Zauberlabs`;
+  const title = `${t.tagTitle(tag.name)} — zauberlabs`;
   return {
     metadataBase: new URL(SITE_URL),
     title,

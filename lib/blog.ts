@@ -82,6 +82,11 @@ export const blogUrl = (lang: Locale) => `${SITE_URL}/${lang}/blog`;
 export const postUrl = (lang: Locale, slug: string) => `${SITE_URL}/${lang}/blog/${slug}`;
 export const tagUrl = (lang: Locale, tag: string) => `${SITE_URL}/${lang}/blog/tag/${tagSlug(tag)}`;
 export const feedUrl = (lang: Locale) => `${SITE_URL}/${lang}/blog/feed.xml`;
+/** BL-055 — the one sources page, and the anchors on it: #<slug> per article, #<slug>-s4 per source. */
+export const SOURCES_SLUG = "sources";
+export const sourcesPath = (lang: Locale) => `/${lang}/blog/${SOURCES_SLUG}`;
+export const sourcesUrl = (lang: Locale) => `${SITE_URL}${sourcesPath(lang)}`;
+export const sourceAnchor = (slug: string, sourceId?: string) => (sourceId ? `${slug}-${sourceId.toLowerCase()}` : slug);
 
 function loadPosts(dir: string): Map<string, Partial<Record<Locale, Post>>> {
   const out = new Map<string, Partial<Record<Locale, Post>>>();
@@ -150,6 +155,25 @@ export function createBlog(opts: BlogOptions = {}) {
     const wanted = filter.tag ? tagSlug(filter.tag) : null;
     const filtered = wanted ? items.filter((r) => r.post.meta.tags.some((t) => tagSlug(t) === wanted)) : items;
     return filtered.sort((a, b) => (a.post.meta.date < b.post.meta.date ? 1 : a.post.meta.date > b.post.meta.date ? -1 : a.post.slug.localeCompare(b.post.slug)));
+  }
+
+  /**
+   * BL-054 — the published articles right before and after this one, by publish date, among the articles that exist
+   * in `lang` (fallback pages from the other language are skipped). Same visibility rules as the listing.
+   * `previous` is the older one, `next` the newer one.
+   */
+  function adjacent(slug: string, lang: Locale): { previous: Resolved | null; next: Resolved | null } {
+    const own = listPosts(lang).filter((r) => !r.fallback); // newest first
+    const i = own.findIndex((r) => r.post.slug === slug);
+    if (i < 0) {
+      // The current page is itself a fallback: place it by its date among this language's articles.
+      const cur = getPost(slug, lang);
+      if (!cur) return { previous: null, next: null };
+      const at = own.findIndex((r) => r.post.meta.date < cur.post.meta.date);
+      const pos = at < 0 ? own.length : at;
+      return { previous: own[pos] ?? null, next: own[pos - 1] ?? null };
+    }
+    return { previous: own[i + 1] ?? null, next: own[i - 1] ?? null };
   }
 
   function listTags(lang: Locale): Tag[] {
@@ -238,7 +262,7 @@ export function createBlog(opts: BlogOptions = {}) {
     ].join("\n");
   }
 
-  return { getPost, listPosts, listTags, getTag, slugs, sitemapEntries, rss, includeDrafts, includeScheduled };
+  return { getPost, listPosts, adjacent, listTags, getTag, slugs, sitemapEntries, rss, includeDrafts, includeScheduled };
 }
 
 export type Blog = ReturnType<typeof createBlog>;

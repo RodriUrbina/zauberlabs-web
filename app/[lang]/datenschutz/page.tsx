@@ -1,6 +1,6 @@
 import LegalPage from "@/components/LegalPage";
 
-export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: false } };
+export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: false } };
 
 /*
  * ─── FILL IN BEFORE PUBLISHING ────────────────────────────────────────────

@@ -20,7 +20,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       {/* NAV */}
       <header className="border-b border-[#D8D3CA]">
         <div className={`${wrap} flex h-16 items-center justify-between md:h-[84px]`}>
-          <Link href={`/${lang}`} aria-label="Zauberlabs">
+          <Link href={`/${lang}`} aria-label="zauberlabs">
             <Wordmark />
           </Link>
           <nav className="hidden gap-9 text-sm font-medium lg:flex">

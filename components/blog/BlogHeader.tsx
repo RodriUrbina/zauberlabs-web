@@ -12,7 +12,7 @@ export default function BlogHeader({ lang, otherHref }: { lang: Locale; otherHre
     <header className="border-b border-[#D8D3CA]">
       <div className={`${wrap} flex h-16 items-center justify-between md:h-[84px]`}>
         <div className="flex items-center gap-4 md:gap-6">
-          <Link href={`/${lang}`} aria-label="Zauberlabs">
+          <Link href={`/${lang}`} aria-label="zauberlabs">
             <Wordmark />
           </Link>
           <span aria-hidden="true" className="hidden h-5 w-px bg-line sm:block" />
