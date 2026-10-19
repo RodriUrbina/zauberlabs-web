@@ -35,7 +35,7 @@ export default async function SourcesPage({ params }: { params: Promise<{ lang: 
   if (!isLocale(lang)) notFound();
   const t = dictionaries[lang as Locale].blog;
   const other: Locale = lang === "de" ? "en" : "de";
-  const items = getBlog().listPosts(lang).filter((r) => r.post.meta.sources.length > 0);
+  const items = getBlog().sourcesEntries(lang); // same visibility rule as the blog index and previous/next
 
   return (
     <div className="min-h-screen">

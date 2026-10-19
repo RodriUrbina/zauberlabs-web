@@ -176,6 +176,11 @@ export function createBlog(opts: BlogOptions = {}) {
     return { previous: own[i + 1] ?? null, next: own[i - 1] ?? null };
   }
 
+  /** BL-055 — the articles on the sources page: exactly the blog index's list (same visibility), those with sources. */
+  function sourcesEntries(lang: Locale): Resolved[] {
+    return listPosts(lang).filter((r) => r.post.meta.sources.length > 0);
+  }
+
   function listTags(lang: Locale): Tag[] {
     const map = new Map<string, Tag>();
     for (const { post } of listPosts(lang)) {
@@ -262,7 +267,7 @@ export function createBlog(opts: BlogOptions = {}) {
     ].join("\n");
   }
 
-  return { getPost, listPosts, adjacent, listTags, getTag, slugs, sitemapEntries, rss, includeDrafts, includeScheduled };
+  return { getPost, listPosts, adjacent, sourcesEntries, listTags, getTag, slugs, sitemapEntries, rss, includeDrafts, includeScheduled };
 }
 
 export type Blog = ReturnType<typeof createBlog>;

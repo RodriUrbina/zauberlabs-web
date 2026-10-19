@@ -43,6 +43,19 @@ describe("previous / next (BL-054)", () => {
 });
 
 describe("sources page (BL-055)", () => {
+  test("lists exactly the blog index's articles: no drafts, no scheduled ones on the live site", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "zl-src-"));
+    write(dir, "live", "en", { title: "Live", date: "2026-01-01" });
+    write(dir, "draft", "en", { title: "Draft", date: "2026-01-02", draft: true });
+    write(dir, "later", "en", { title: "Later", date: "2026-01-03", publishAt: "2099-01-01" });
+    const live = createBlog({ dir, includeDrafts: false, includeScheduled: false });
+    const slugs = (b: ReturnType<typeof createBlog>) => b.sourcesEntries("en").map((r) => r.post.slug);
+    assert.deepEqual(slugs(live), ["live"]);
+    assert.deepEqual(slugs(live), live.listPosts("en").map((r) => r.post.slug));
+    // Previews show everything, like the index does there.
+    const preview = createBlog({ dir, includeDrafts: true, includeScheduled: true });
+    assert.deepEqual(slugs(preview).sort(), ["draft", "later", "live"]);
+  });
   test("no article may use the reserved slug 'sources'", () => {
     assert.ok(!fs.existsSync(path.join(CONTENT_DIR, SOURCES_SLUG)));
   });
