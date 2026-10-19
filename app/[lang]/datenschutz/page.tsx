@@ -114,7 +114,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         einzelner Besucher legen wir nicht ab, und wir setzen keine Cookies und speichern nichts in deinem Browser. Um mehrfache Aufrufe desselben
         Lesers an einem Tag nur einmal zu zählen, bilden wir aus deiner IP-Adresse, der Kennung deines Browsers und einem täglich wechselnden
         Zufallswert einen Hash-Wert. Er fließt nur in eine statistische Zählstruktur ein, aus der er sich nicht zurückgewinnen lässt; der
-        Zufallswert wird nach 24 Stunden gelöscht. Deine IP-Adresse speichern wir nicht. Die Tageszähler löschen wir nach 13 Monaten.
+        Zufallswert wird nach 24 Stunden gelöscht. Dafür speichern wir deine IP-Adresse nicht. Die Tageszähler löschen wir nach 13 Monaten.
         Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse, zu verstehen, welche Artikel gelesen werden, und sie zu
         verbessern).
       </p>
