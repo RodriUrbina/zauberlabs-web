@@ -1,6 +1,6 @@
 import LegalPage from "@/components/LegalPage";
 
-export const metadata = { title: "Impressum — Zauberlabs", robots: { index: false } };
+export const metadata = { title: "Impressum — zauberlabs", robots: { index: false } };
 
 /*
  * ─── FILL IN BEFORE PUBLISHING ────────────────────────────────────────────

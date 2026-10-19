@@ -5,7 +5,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import remarkCite from "@/lib/remark-cite";
-import { blogUrl, feedUrl, formatDate, getBlog, postUrl, SITE_URL, tagSlug } from "@/lib/blog";
+import { blogUrl, feedUrl, formatDate, getBlog, postUrl, SITE_URL, sourceAnchor, sourcesPath, tagSlug } from "@/lib/blog";
 import { formatPublishMoment } from "@/lib/publish-time";
 import { articleOgImage } from "@/lib/blog-og";
 import { dictionaries, isLocale, LOCALES, type Locale } from "@/lib/i18n";
@@ -14,8 +14,9 @@ import ConfiguratorCta from "@/components/blog/ConfiguratorCta";
 import HeroImage from "@/components/blog/HeroImage";
 import JsonLd from "@/components/blog/JsonLd";
 import LanguageNote from "@/components/blog/LanguageNote";
+import PrevNext, { PrevNextCompact } from "@/components/blog/PrevNext";
 import ReadBeacon from "@/components/blog/ReadBeacon";
-import SourcesBox from "@/components/blog/SourcesBox";
+import SourcesLine from "@/components/blog/SourcesLine";
 import { mdxComponents } from "@/components/blog/mdx-components";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const og = articleOgImage(m.hero, lang); // site hero + site alt when the article has no image (BL-005)
   return {
     metadataBase: new URL(SITE_URL),
-    title: `${m.title} — Zauberlabs`,
+    title: `${m.title} — zauberlabs`,
     description: m.description,
     authors: [{ name: m.author }],
     alternates: { canonical, languages, types: { "application/rss+xml": feedUrl(lang) } },
@@ -71,16 +72,19 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 export default async function ArticlePage({ params }: { params: Params }) {
   const { lang, slug } = await params;
   if (!isLocale(lang)) notFound();
-  const resolved = getBlog().getPost(slug, lang);
+  const blog = getBlog();
+  const resolved = blog.getPost(slug, lang);
   if (!resolved) notFound();
   const { post, fallback, scheduled } = resolved;
+  const { previous, next } = blog.adjacent(slug, lang); // BL-054
   const m = post.meta;
   const t = dictionaries[lang].blog;
   const other: Locale = lang === "de" ? "en" : "de";
 
   const { content } = await compileMDX({
     source: post.body,
-    components: mdxComponents(lang, m.configurator.url),
+    // BL-055: the superscript source numbers link to this article's entries on the one sources page.
+    components: mdxComponents(lang, m.configurator.url, `${sourcesPath(lang)}#${sourceAnchor(slug)}`),
     options: { mdxOptions: { remarkPlugins: [remarkGfm, remarkCite], rehypePlugins: [rehypeSlug] } },
   });
 
@@ -92,11 +96,14 @@ export default async function ArticlePage({ params }: { params: Params }) {
       <main className="mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20">
         <article className="mx-auto flex w-full max-w-[760px] flex-col gap-8 py-10 md:py-16" lang={fallback ? post.lang : undefined}>
           <header className="flex flex-col gap-6">
-            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 font-mono text-[12px] tracking-[0.08em] text-muted" lang={lang}>
-              <Link href={`/${lang}/blog`} className="hover:text-ink">
-                {t.backToBlog}
-              </Link>
-            </nav>
+            <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[12px] tracking-[0.08em] text-muted" lang={lang}>
+              <nav aria-label="Breadcrumb">
+                <Link href={`/${lang}/blog`} className="hover:text-ink">
+                  {t.backToBlog}
+                </Link>
+              </nav>
+              <PrevNextCompact lang={lang} previous={previous} next={next} />
+            </div>
             {m.draft && (
               <p className="self-start rounded-full bg-accent px-3 py-1 font-mono text-[11px] tracking-[0.1em] text-paper uppercase" lang={lang}>
                 {t.draft}
@@ -152,7 +159,8 @@ export default async function ArticlePage({ params }: { params: Params }) {
 
           <div className="mt-4 flex flex-col gap-6" lang={lang}>
             <ConfiguratorCta lang={lang} tag={m.configurator.tag} url={m.configurator.url} label={m.ctaLabel} />
-            <SourcesBox lang={lang} sources={m.sources} evidenceRoot={m.evidenceRoot} />
+            <SourcesLine lang={lang} slug={slug} sources={m.sources} />
+            <PrevNext lang={lang} previous={previous} next={next} />
           </div>
         </article>
       </main>
@@ -168,8 +176,8 @@ export default async function ArticlePage({ params }: { params: Params }) {
           image: [image],
           datePublished: m.date,
           dateModified: m.updated ?? m.date,
-          author: { "@type": m.author === "Zauberlabs" ? "Organization" : "Person", name: m.author },
-          publisher: { "@type": "Organization", name: "Zauberlabs", url: SITE_URL },
+          author: { "@type": m.author === "zauberlabs" ? "Organization" : "Person", name: m.author },
+          publisher: { "@type": "Organization", name: "zauberlabs", url: SITE_URL },
           inLanguage: post.lang,
           keywords: m.tags.join(", "),
           mainEntityOfPage: postUrl(lang, slug),

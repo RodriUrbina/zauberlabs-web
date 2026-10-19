@@ -68,7 +68,7 @@ export default function BlogListing({ lang, items, tags, activeTag }: { lang: Lo
           description: activeTag ? t.tagMetaDescription(activeTag.name) : t.metaDescription,
           url,
           inLanguage: lang,
-          isPartOf: { "@type": "WebSite", name: "Zauberlabs", url: "https://www.zauberlabs.de" },
+          isPartOf: { "@type": "WebSite", name: "zauberlabs", url: "https://www.zauberlabs.de" },
         }}
       />
     </div>

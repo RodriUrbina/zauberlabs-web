@@ -12,7 +12,7 @@ import { ConfiguratorLink, NEW_TAB } from "./ConfiguratorCta";
  * The whitelist of building blocks available inside article bodies (see content/blog/README.md).
  * `Cite` is not written by hand: remark-cite creates it from [S1, HIGH] marks in plain Markdown.
  */
-export function mdxComponents(lang: Locale, configuratorUrl?: string): MDXComponents {
+export function mdxComponents(lang: Locale, configuratorUrl?: string, sourcesHref?: string): MDXComponents {
   return {
     Confidence: ({ level, children }: { level: Level; children: React.ReactNode }) => (
       <Confidence level={level} lang={lang}>
@@ -21,7 +21,7 @@ export function mdxComponents(lang: Locale, configuratorUrl?: string): MDXCompon
     ),
     Callout,
     Figure,
-    Cite: ({ groups }: { groups: string }) => <Cite groups={groups} lang={lang} />,
+    Cite: ({ groups }: { groups: string }) => <Cite groups={groups} lang={lang} href={sourcesHref} />,
     ConfiguratorLink: ({ href, children }: { href?: string; children: React.ReactNode }) => (
       <ConfiguratorLink href={href ?? configuratorUrl} lang={lang}>{children}</ConfiguratorLink>
     ),

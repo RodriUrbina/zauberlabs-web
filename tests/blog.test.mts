@@ -47,7 +47,7 @@ const AFTER = () => Date.UTC(2026, 3, 10, 5, 0); // 07:00 Berlin
 describe("front matter schema", () => {
   test("accepts the Builder form and applies defaults", () => {
     const fm = parseFrontMatter(base, "x");
-    assert.equal(fm.author, "Zauberlabs");
+    assert.equal(fm.author, "zauberlabs");
     assert.equal(fm.draft, false);
     assert.equal(fm.sources[0].id, "S1");
     assert.equal(fm.sources[0].label, "Catalogue");

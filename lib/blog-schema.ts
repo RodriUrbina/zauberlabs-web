@@ -94,7 +94,8 @@ const base = z.strictObject({
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
   /** Trello card the article comes from, e.g. BL-015. */
   card: z.string().regex(/^BL-\d{3}(?:\.\d+)?$/, "card must look like BL-015").optional(),
-  author: z.string().min(1).max(80).default("Zauberlabs"),
+  // The brand is always written lowercase (PO decision 2026-10-19), whatever the front matter says.
+  author: z.preprocess((v) => (typeof v === "string" && /^zauberlabs$/i.test(v.trim()) ? "zauberlabs" : v), z.string().min(1).max(80).default("zauberlabs")),
   /** 1–8 tags; must include the configurator tag. Each tag gets its own page. */
   tags: z.array(z.string().min(1).max(40)).min(1).max(8),
   configurator: configuratorInput,

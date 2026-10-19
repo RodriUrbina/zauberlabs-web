@@ -1,4 +1,4 @@
-export const metadata = { title: "Admin — Zauberlabs", robots: { index: false, follow: false } };
+export const metadata = { title: "Admin — zauberlabs", robots: { index: false, follow: false } };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return children;
