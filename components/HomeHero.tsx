@@ -14,7 +14,7 @@ import { dictionaries, E46_LIVE, E46_URL, type Locale } from "@/lib/i18n";
 export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string }) {
   const t = dictionaries[lang].hero;
   return (
-    <section className={`${wrap} home-hero flex flex-col gap-4 pt-8 md:gap-6 md:pt-12`}>
+    <section className={`${wrap} home-hero flex flex-col gap-4 pt-8 pb-12 md:gap-6 md:pt-12 md:pb-14`}>
       <p className="flex items-center gap-2 font-mono text-[11px] tracking-[0.14em] text-body uppercase md:text-xs">
         <span aria-hidden="true" className={`size-2 rounded-full ${E46_LIVE ? "bg-[#1f9d63]" : "border border-muted"}`} />
         {E46_LIVE ? t.live : t.liveSoon}
@@ -58,15 +58,6 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
         </div>
       </div>
 
-      <div className="hero-below flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-3 pt-1 pb-12 md:pb-14">
-        <p className="text-[15px] text-body md:text-[17px]">
-          {t.cardLine[0]}
-          <span className="accent-serif text-accent">{t.cardLine[1]}</span>
-        </p>
-        <p className="text-[15px] font-extrabold tracking-[-0.02em]">
-          {t.endorse[0]} <i className="accent-serif text-[17px] font-normal tracking-normal text-muted">{t.endorse[1]}</i> {t.endorse[2]}
-        </p>
-      </div>
     </section>
   );
 }
