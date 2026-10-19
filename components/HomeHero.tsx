@@ -27,21 +27,27 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
 
       <div className="hero-frame relative w-full max-w-[1200px] overflow-hidden rounded-[20px] bg-ink text-paper md:rounded-3xl">
         <div className="relative aspect-[960/512] md:aspect-[1200/600]">
-          <Image src="/images/e46-configurator-loop-poster.webp" alt={t.videoAlt} fill priority sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" />
-          <video
-            className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/images/e46-configurator-loop-poster.webp"
-            aria-hidden="true"
-            tabIndex={-1}
-          >
-            <source src="/media/e46-configurator-loop.webm" type="video/webm" />
-            <source src="/media/e46-configurator-loop.mp4" type="video/mp4" />
-          </video>
+          {/* BL-053.5: the loop's own fake browser bar (top ≈ 40 of 512 px) is pushed out of the frame. Poster and video sit in
+              a box 8.7 % taller than the frame, anchored to the bottom, so exactly the top 8 % of the picture (the bar) is hidden
+              at every width; the bottom is not cropped. A deeper crop would cut the status pills some frames show right under
+              the bar. */}
+          <div className="absolute inset-x-0 bottom-0 h-[108.7%]">
+            <Image src="/images/e46-configurator-loop-poster.webp" alt={t.videoAlt} fill priority sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" />
+            <video
+              className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/images/e46-configurator-loop-poster.webp"
+              aria-hidden="true"
+              tabIndex={-1}
+            >
+              <source src="/media/e46-configurator-loop.webm" type="video/webm" />
+              <source src="/media/e46-configurator-loop.mp4" type="video/mp4" />
+            </video>
+          </div>
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(0deg,rgba(14,14,16,0.92)_0%,rgba(14,14,16,0.6)_26%,rgba(14,14,16,0)_52%)] md:block" />
         </div>
         <div className="flex flex-col items-stretch gap-4 p-5 md:absolute md:inset-x-9 md:bottom-7 md:flex-row md:items-end md:justify-between md:gap-6 md:p-0">

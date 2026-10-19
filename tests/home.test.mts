@@ -9,7 +9,7 @@ const pub = (p: string) => path.join(process.cwd(), "public", p);
 
 describe("home page (BL-053)", () => {
   test("garage card: the M3 Touring image (BL-053.1), no second video on the page", () => {
-    assert.ok(fs.existsSync(pub("/images/e46-m3-touring-garage.webp")));
+    assert.ok(fs.existsSync(pub("/images/e46-m3-touring-garage-centred.webp")));
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
     assert.ok(!page.includes("<video"), "the loop plays in the hero only");
     assert.match(dictionaries.en.garage.e46CardAlt, /never sold/);

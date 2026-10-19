@@ -86,10 +86,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <div className="relative aspect-[960/512] bg-ink md:aspect-auto md:h-[400px]">
                 {/* BL-053.1 (PO decision 2026-10-19): the configurator loop now plays in the hero only (components/HomeHero.tsx).
                     This card shows the E46BUILD site's hero image, the silver E46 M3 Touring "dream build" (AI render by the PO;
-                    see public/images/README.md). Source 1774×887 from e46build apps/web/public/images/hero/, scaled to 1400×700.
-                    The car fills the left ~60 % against a dark studio, so object-left keeps it whole at every card ratio
-                    (≈1.7:1 to 2.4:1 on desktop, 1.875:1 on phones); only empty background is cropped. */}
-                <Image src="/images/e46-m3-touring-garage.webp" alt={t.garage.e46CardAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover object-left" />
+                    see public/images/README.md). BL-053.5 (PO: "a bit more to the center"): source 1774×887 from e46build
+                    apps/web/public/images/hero/, cropped to x 0–1150 at full height so the car (≈ x 30–1050, y 230–700) sits near
+                    the middle (a slight zoom compared with BL-053.1). object-position 50% 56% keeps the whole car visible at every
+                    card ratio (≈1.7:1 to 2.4:1 on desktop, 1.875:1 on phones). */}
+                <Image src="/images/e46-m3-touring-garage-centred.webp" alt={t.garage.e46CardAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover object-[50%_56%]" />
                 <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-b from-transparent to-ink" />
               </div>
               <div className="flex flex-col gap-7 p-6 md:p-8">
