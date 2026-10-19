@@ -39,6 +39,20 @@ body {
   letter-spacing: -0.01em;
 }
 
+/* ---------- Home hero fits the first screen (BL-053.2, PO feedback 2026-10-19) ----------
+   md+ only; phones keep the stacked layout. The frame keeps its 2:1 ratio; its HEIGHT is what is left of the viewport
+   after the header (84) + top padding (48) + live tag (~18) + two gaps (48) + headline (two lines of --hero-f) + ~24 px
+   of air below = 222 px + 2 × --hero-f. Its width follows (×2), capped at the column and at 1200 px. The headline scales
+   with the viewport height between 44 and 72 px. svh where supported, vh otherwise. */
+@media (min-width: 768px) {
+  .home-hero { --hero-vh: 100vh; --hero-f: clamp(44px, 7vh, 72px); }
+  @supports (height: 100svh) { .home-hero { --hero-vh: 100svh; --hero-f: clamp(44px, 7svh, 72px); } }
+  .home-hero { --hero-h: max(280px, calc(var(--hero-vh) - 222px - 2 * var(--hero-f))); }
+  .home-hero h1 { font-size: var(--hero-f); }
+  .home-hero .hero-frame,
+  .home-hero .hero-below { width: min(100%, 1200px, calc(var(--hero-h) * 2)); }
+}
+
 /* ---------- Blog article typography (Tailwind typography plugin themed to the brand tokens) ---------- */
 .prose-zl {
   --tw-prose-body: var(--color-body);
