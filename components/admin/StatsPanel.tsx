@@ -65,6 +65,7 @@ export default function StatsPanel({ password }: { password: string }) {
   }, [days, password]);
 
   const maxDaily = Math.max(0, ...(stats?.daily.map((d) => d.views) ?? []));
+  const maxVotes = Math.max(0, ...(stats?.daily.map((d) => d.votes ?? 0) ?? []));
 
   return (
     <section className="flex flex-col gap-5">
@@ -166,6 +167,35 @@ export default function StatsPanel({ password }: { password: string }) {
             <Ranked title="Came from" rows={stats.referrers.map((r) => ({ label: r.domain, value: r.views }))} empty="No views yet." />
             <Ranked title="Countries" rows={stats.countries.map((c) => ({ label: c.code === "XX" ? "unknown" : c.code, value: c.views }))} empty="No views yet." />
             <Ranked title="Configurator clicks" rows={stats.clicks.map((c) => ({ label: c.configurator.toUpperCase(), value: c.clicks }))} empty="No clicks yet." />
+          </div>
+
+          {/* BL-051.2 — vote sources */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-lg font-extrabold tracking-tight">
+              Votes <span className="font-mono text-base text-muted">({nf.format(stats.votes?.total ?? 0)})</span>
+            </h3>
+            <p className="text-sm text-body">
+              New votes only (taking a vote back is not subtracted here). “Came from” is the site the visitor arrived from; “internal” means
+              another of our pages, “direct” means no referrer.
+            </p>
+            <div className="flex flex-col gap-2 rounded-2xl border border-line bg-white p-4">
+              <h4 className="eyebrow text-muted">Votes per day</h4>
+              <div className="flex h-16 items-end gap-px" role="img" aria-label="Votes per day">
+                {stats.daily.map((d) => (
+                  <span
+                    key={d.day}
+                    title={`${d.day}: ${d.votes ?? 0} votes`}
+                    className="flex-1 rounded-t-sm bg-accent"
+                    style={{ height: `${maxVotes ? Math.max(1, ((d.votes ?? 0) / maxVotes) * 100) : 0}%` }}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="grid gap-3 md:grid-cols-3">
+              <Ranked title="By car" rows={(stats.votes?.cars ?? []).map((c) => ({ label: c.car, value: c.votes }))} empty="No votes yet." />
+              <Ranked title="Came from" rows={(stats.votes?.referrers ?? []).map((r) => ({ label: r.domain, value: r.votes }))} empty="No votes yet." />
+              <Ranked title="Countries" rows={(stats.votes?.countries ?? []).map((c) => ({ label: c.code === "XX" ? "unknown" : c.code, value: c.votes }))} empty="No votes yet." />
+            </div>
           </div>
         </>
       )}

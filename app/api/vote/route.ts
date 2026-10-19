@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { looksLikeCarId } from "@/lib/cars";
 import { allow, getCars, getCounts, getVotedBy, hashIp, isVotableCar, setVote } from "@/lib/store";
+import { hasInternalMarker } from "@/lib/internal-mode-client";
+import { countryCode, isBot, referrerDomain } from "@/lib/metrics";
+import { recordVote } from "@/lib/metrics-store";
 
 export const dynamic = "force-dynamic";
 const COOKIE = "zl_vid";
@@ -37,7 +40,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Bad request" }, { status: 400 });
   }
   const id = voterId(req) ?? crypto.randomUUID();
-  await setVote(body.car, id, body.on);
+  const { changed } = await setVote(body.car, id, body.on);
+  // BL-051.2: anonymous vote sources for the admin statistics. Totals only, never linked to the voter id or cookie;
+  // a statistics error never affects the vote.
+  if (body.on && changed && !isBot(req.headers.get("user-agent")) && !hasInternalMarker(req.headers.get("cookie") ?? "")) {
+    try {
+      await recordVote({
+        car: body.car,
+        ref: referrerDomain(typeof body.r === "string" ? body.r.slice(0, 200) : "", undefined, "internal"),
+        country: countryCode(req.headers.get("x-vercel-ip-country")),
+      });
+    } catch (err) {
+      console.error("vote statistics failed", err instanceof Error ? err.message : "unknown error");
+    }
+  }
   const cars = await getCars();
   const [counts, voted] = await Promise.all([getCounts(cars), getVotedBy(id, cars)]);
   return withVoterCookie(NextResponse.json({ cars, counts, voted }), id);
