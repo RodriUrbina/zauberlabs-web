@@ -19,6 +19,8 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * sellers deliver there; not stored (Abschnitt 10). Must be live before the next e46build production promotion.
  * BL-050: one Vercel Web Analytics custom event, "configurator_click" with only { configurator }, described in Abschnitt 5.
  * BL-051: own anonymous statistics (Abschnitt 6): daily counters in Upstash, salted daily hash only inside a HyperLogLog.
+ * BL-052 (E46 T-106): optional seller notices for signed-in owners — part, build, confirmed delivery country, date; one Brevo email;
+ * 12-month expiry, closed ones deleted after 30 days (Abschnitt 10, 12).
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -170,7 +172,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         (z. B. die Scheinwerferform), sowie die Teile, die du in deine Konfiguration legst – je Teil das Produkt und ein Abbild des gewählten
         Händlerangebots (Händlername, Link zum Angebot, Preis). Jede Konfiguration erhält dafür eine zufällige Kennung und optional eine Bezeichnung,
         die du selbst vergibst. Wir verwenden dein ungefähres Land, das unser Hoster aus deiner IP-Adresse ableitet, nur um anzuzeigen, welche
-        Verkäufer zu dir liefern. Dafür speichern wir weder deine IP-Adresse noch dein Land.
+        Verkäufer zu dir liefern. Dafür speichern wir deine IP-Adresse nicht, und dein Land nur, wenn du eine Benachrichtigung über einen
+        Verkäufer anforderst (siehe unten).
       </p>
       <p>
         Bei Konfigurationen ohne Konto werden kein Name, keine E-Mail-Adresse, keine IP-Adresse, keine Cookie-Kennung und kein Freigabelink
@@ -218,6 +221,20 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         alle Anmeldedaten; deine Konfigurationen bleiben ohne Bezug zu dir und ohne von dir eingegebene Freitexte erhalten (siehe oben). Die Daten liegen
         in unserer Datenbank (Abschnitt 11).
       </p>
+      {/* BL-052 — E46 T-106 "Notify me when a seller is found". Based on the draft in e46build docs/plans/t106-notify-when-seller-found.md § 6
+          (master 889252d), shortened, with the PO's facts of 2026-10-19. Lawyer question Q17 (service message vs. advertising) is open. */}
+      <p>
+        <strong>Benachrichtigung, wenn ein Verkäufer gefunden ist (optional).</strong> Gibt es für ein passendes Teil noch keinen Verkäufer, kannst
+        du dich mit deinem Konto benachrichtigen lassen. Dafür speichern wir zu deinem Konto, für welche Konfiguration und welches Teil du
+        benachrichtigt werden möchtest, das Land, in das geliefert werden soll (das du dabei bestätigst), und das Datum. Einmal täglich prüfen wir, ob
+        ein Verkäufer das Teil anbietet und in dieses Land liefert. Ist das der Fall, senden wir dir genau eine E-Mail von hello@zauberlabs.de über
+        Brevo (Abschnitt 12) und beenden die Benachrichtigung. Die E-Mail enthält keine Werbung und keine Verkäuferlinks, nur einen Link zum Teil in
+        deiner Konfiguration und einen Link, mit dem du mit einem Klick alle Benachrichtigungen beendest; Öffnungen und Klicks werten wir nicht aus.
+        Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Du kannst Benachrichtigungen jederzeit über diesen Link oder auf „Meine Builds“ beenden.
+        Offene Benachrichtigungen enden nach 12 Monaten, beendete löschen wir nach 30 Tagen, beim Löschen deines Kontos oder beim Entfernen der
+        Konfiguration aus deinem Konto sofort. Es bleibt nur eine anonyme Zählung ohne Bezug zu dir. Deine Benachrichtigungen sind Teil deines
+        Datenexports.
+      </p>
 
       <h2>11. Datenbank-Dienstleister für E46BUILD (Neon)</h2>
       <p>
@@ -230,8 +247,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
 
       <h2>12. E-Mail-Versand für E46BUILD (Brevo)</h2>
       <p>
-        Die Anmelde-E-Mails für E46BUILD-Konten (Abschnitt 10) versenden wir über Brevo (Paris, Frankreich) als Auftragsverarbeiter. Dabei verarbeitet
-        Brevo deine E-Mail-Adresse, den Betreff und den Anmeldelink. Mit Brevo besteht ein Vertrag zur Auftragsverarbeitung.
+        Die Anmelde-E-Mails und die Benachrichtigungen über gefundene Verkäufer für E46BUILD-Konten (Abschnitt 10) versenden wir über Brevo (Paris,
+        Frankreich) als Auftragsverarbeiter. Dabei verarbeitet Brevo deine E-Mail-Adresse, den Betreff und den Anmeldelink bzw. den Inhalt der
+        Benachrichtigung. Mit Brevo besteht ein Vertrag zur Auftragsverarbeitung.
       </p>
 
       <h2>13. Kontakt per E-Mail</h2>
