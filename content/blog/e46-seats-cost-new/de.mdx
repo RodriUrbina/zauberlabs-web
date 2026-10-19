@@ -1,0 +1,142 @@
+---
+# BL-047 — Writer draft, German. Same slug and sources as en.mdx.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Was die Sitze deines E46 neu kosteten: Serie und Sonderausstattung in BMWs deutschen Preislisten"
+description: "Stoff, Sportsitze, Lordose, Sitzheizung, Memory-Sitze und Leder: was jede E46-Karosserie serienmäßig hatte, was extra kostete und was das Käufern sagt."
+date: 2026-10-19
+updated: 2026-10-24
+publishAt: "2026-10-24"
+lang: de
+slug: e46-seats-cost-new
+card: BL-047
+author: "Zauberlabs"
+tags:
+  - E46
+  - seats
+  - buying guide
+  - BMW
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: "/blog/e46-seats-cost-new/hero.webp"
+  alt: "KI-Illustration eines E46-Innenraums von der Beifahrerseite: Vordersitze in Stoff, Mittelkonsole mit Schalthebel und Armaturenbrett"
+  credit: "KI-generierte Illustration"
+  licence: "Zauberlabs, own AI illustration (PO)"
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW Preislisten Deutschland für den E46 3er, 2002–2006, alle Karosserien und der M3: Sitzausstattung je Modell, ausgewertet in T-084 (Quellenregister SR-0067; die Touring-Liste vom September 2004 auch SR-0066)"
+    type: "von BMW verfasst (Preislisten), vom PO bereitgestellt; privat, nur Fakten, nicht zitiert"
+    path: "t084-seat-options/README.md §1a, §1b; t084-seat-options/pricelists-de-seat-matrix.json; t084-seat-options/pricelist-2004-09-touring-de.json"
+    confidence: HIGH
+    note: "HIGH für den Inhalt der Listen, zitiert nach Liste und Seite (Locator <YYYY-MM>_<body>); Touring-Liste September 2004 S. 5 (Serie), S. 16 (Polster), S. 19 (Sitzoptionen), S. 22 (Individual). Nur Deutschland."
+  - id: S2
+    title: "BMW Preislisten Deutschland vom September 1998 (Limousine) und September 2000 (Cabrio), nur als schlechte Scans vorhanden"
+    type: "von BMW verfasst (Preislisten), aus Scans gelesen"
+    path: "t084-seat-options/README.md §1b"
+    confidence: LOW
+    note: "Auf diesen Scans lassen sich Serien- und Sonderausstattungszeichen nicht unterscheiden; wie in der Recherche werden nur Optionscodes, Preise und der Serienstoff genutzt, mit LOW."
+  - id: S3
+    title: "Teilekatalog-Spiegel (bmwfans.info, Europa-Bäume): Sitz-Optionscodes und Polsterfamilien mit ihren Zeitfenstern, ein Modell je Karosserie (T-084, T-050)"
+    type: ETK-Spiegel (ein Spiegel)
+    path: "t084-seat-options/README.md §1, §2; t084-seat-options/upholstery-matrix.json; t050-steering-seat-pairs/T-050-findings.md"
+    confidence: MEDIUM
+---
+
+Jeder gebrauchte E46-Sitzsatz kommt mit einer Behauptung: "Sportsitze", "Vollleder", "elektrisch mit Memory", "beheizt". Ob das Werksausstattung ist, eine seltene Option oder ein späterer Umbau, kann die Preisliste des Autos beantworten. BMWs deutsche Preislisten von 2002 bis 2006 zeigen Modell für Modell, welche Sitzausstattung Serie war und was jede Option kostete. Dieser Artikel legt die Listen nebeneinander, Karosserie für Karosserie, damit du eine Sitzanzeige oder ein gebrauchtes Auto mit dem vergleichen kannst, was BMW tatsächlich verkauft hat.
+
+## Kurz gesagt
+
+- **Der Grundsitz war aus Stoff, höhenverstellbar und manuell** bei den meisten Limousinen und Tourings; Coupé, Cabrio und M3 hatten serienmäßig mehr. [S1, HIGH]
+- **Vier Sitzoptionen decken die meisten Behauptungen ab:** Sportsitze (Code 481), elektrische Lordosenstütze (488), Sitzheizung (494) und elektrische Sitzverstellung mit Memory für den Fahrer (459). [S1, HIGH]
+- **Elektrische Sitze ohne Memory gab es in diesen Listen nie als Option.** Sie erscheinen nur als Serienausstattung bei den kleineren Cabrios. [S1, HIGH]
+- **Manche Modelle hatten Sitzoptionen serienmäßig:** Sportsitze beim 325ti Compact, elektrische Sitze mit Memory beim 325Ci und 330Ci Coupé und bei den größeren Cabrios. [S1, HIGH]
+- **Leder enthielt in diesen Listen die Sitzheizung**, und BMWs Alcantara-Polster gab es nur mit Sportsitzen. [S1, HIGH]
+
+## Was Serie war
+
+Die deutschen Listen kennzeichnen jedes Modell mit einem Zeichen für Serie, Option oder Teil einer Edition. Modell für Modell gelesen war die Serien-Sitzausstattung: [S1, HIGH]
+
+| Karosserie | Serien-Sitzausstattung |
+| --- | --- |
+| Limousine, Touring | Stoff Jacquard; Höhenverstellung für Fahrer und Beifahrer |
+| Coupé | Stoff Tex 2000; **elektrische Sitze mit Memory beim 325Ci und 330Ci**, ab 2003 auch beim 330Cd |
+| Cabrio | Stoff Tex 2000; **elektrische Sitze bei jedem Modell**: ohne Memory bei 318Ci, 320Ci und 320Cd (Memory gegen 300 € Aufpreis), mit Memory bei 325Ci, 330Ci und 330Cd |
+| Compact | Stoff Flachgewebe; **Sportsitze mit Sitzneigungsverstellung beim 325ti** |
+| M3 Coupé und Cabrio | M Sportsitze und elektrische Sitze mit Memory; das Cabrio auch Sitzheizung serienmäßig |
+
+Alles aus den deutschen Listen 2002 bis 2006. [S1, HIGH] "Elektrische Memory-Sitze" sind bei einem 330Ci Coupé also normale Ausstattung; bei einer 318i Limousine sind sie eine Option, nach der man fragen sollte. Ebenso sind Sportsitze beim 325ti Compact Serie, während sie beim 316ti oder 318ti entweder die Option oder das M Sportpaket II bedeuten. [S1, HIGH]
+
+Der M3 hatte eine Sitzoption, die kein anderer E46 bot: eine verstellbare Lehnenbreite, Code 490, für 620 und später 650 Euro, einschließlich Lordosenstütze. [S1, HIGH]
+
+## Die vier Sitzoptionen und was sie kosteten
+
+Preise in Euro inklusive Mehrwertsteuer, wie die Listen sie nennen; "alle" heißt, die Option war für jedes Modell dieser Karosserie gelistet. [S1, HIGH]
+
+| Option | Code | Limousine und Touring | Coupé | Cabrio | Compact |
+| --- | --- | --- | --- | --- | --- |
+| Sportsitze für Fahrer und Beifahrer | 481 | alle; 420 € (Limousine 05/2002), 450 €, ab 03/2003 500 € | alle; 450 €, dann 500 € | alle; 500 € | Serie beim 325ti; sonst 450 €, dann 500 € |
+| Lordosenstütze, elektrisch | 488 | alle; 270 € | alle; 270 € | alle; 270 € | alle; 270 € |
+| Sitzheizung für Fahrer und Beifahrer | 494 | alle; 320 €, dann 340 € | alle; 320 €, dann 340 € | alle; 340 € | alle; 320 €, dann 340 € |
+| Elektrische Sitzverstellung mit Memory für den Fahrer | 459 | alle; 1.100 € (Limousine 05/2002), 1.150 €, dann 1.200 € | Serie bei 325Ci, 330Ci, 330Cd; sonst 1.150 €, dann 1.200 € | Serie bei 325Ci, 330Ci, 330Cd; sonst: Memory-Aufpreis 300 € | alle; 1.150 €, dann 1.200 € |
+
+Drei Dinge fallen auf.
+
+**Elektrische Sitze hießen Memory.** Bei Limousine, Touring, Coupé und Compact ist die einzige elektrische Sitzoption in diesen Listen die mit Memory für den Fahrer, für deutlich über 1.000 Euro. Elektrische Verstellung ohne Memory wird nie als Option angeboten; sie erscheint nur als Serienausstattung bei den drei kleineren Cabrios. [S1, HIGH]
+
+**Sportsitze und Lordosenstütze waren getrennte Optionen.** Die Touring-Liste vom September 2004 bietet beide bei allen acht Modellen an und nennt keinen Ausschluss; in Deutschland ließen sie sich 2004 also höchstwahrscheinlich zusammen bestellen. Das ist das Fehlen einer Regel, keine genannte Regel. [S1, HIGH für die Optionen; MEDIUM für "zusammen"] Der Teilekatalog stützt das: Die Lehnengruppe des Sportsitzes führt dieselben Lordose-Teile wie der Grundsitz. [S3, MEDIUM]
+
+**Pakete und Editionen enthielten einige davon.** Sportsitze kamen mit dem M Sportpaket II und der Edition Sport, beim Coupé auch mit dem Clubsport; die Lordosenstütze mit der Edition Exclusive; die Sitzheizung mit den Lederpolstern und den Editionen. [S1, HIGH] Ein Auto mit Sportsitzen beweist also kein M-Paket, während ein Auto mit M-Paket ab Werk Sportsitze hatte.
+
+## Leder und die anderen Polster
+
+Die Touring-Liste vom September 2004 nennt für die Polster diese Preise. [S1, HIGH]
+
+| Polster | Preis | Bedingung in der Liste |
+| --- | --- | --- |
+| Stoff Jacquard | Serie | — |
+| Stoff Tex 2000 | 100 € | nicht mit M Sportpaket II oder den Editionen |
+| Stoff-/Lederkombination Scritto | 310 € | nur mit Edition Lifestyle |
+| Leder Montana, mit Sitzheizung | 1.990 € | günstiger mit M Sportpaket II oder Edition Sport |
+| Exklusivleder Nappa, mit Sitzheizung | 2.790 € | wie oben |
+| BMW Individual Alcantara | 2.800 € (2.600 € mit M-Paket) | **nur mit Sportsitzen** |
+
+Leder zu kaufen hieß 2004 also, beheizte Sitze mitzukaufen, und ein Auto mit Individual-Alcantara sollte Sportsitze haben. [S1, HIGH]
+
+Zusammengerechnet machten die Sitzoptionen einen großen Teil des Preises aus. In der Touring-Liste vom September 2004 zahlte, wer Leder Montana, Sportsitze und elektrische Sitze mit Memory wollte, 1.990, 500 und 1.200 Euro: 3.690 Euro allein für die Sitze, zusätzlich zum Auto. Wer stattdessen das M Sportpaket II wählte, bekam Sportsitze in Stoff Laser mit Alcantara als Teil eines Pakets für 3.150 bis 3.950 Euro. [S1, HIGH für die Preise; die Summen sind unsere]
+
+Die anderen Karosserien hatten eigene Stoffe: Gran Turismo, Maglia und Bianco Nero in den Listen von 2002, Finolino bei Coupé und Cabrio ab September 2004, California und Monza beim Compact und durchgehend Leder Montana. [S1, HIGH]
+
+BMWs Teilekatalog ergänzt Daten, die die Preislisten nicht haben: Der Velours "Raute" und das Leder Mosaico enden im September 2001, Leder Chameleon und Stoff/Leder Scritto beginnen bei Limousine und Touring im März 2003. [S3, MEDIUM] Ein Polster außerhalb seines Zeitfensters für das Auto vor dir ist ein Hinweis, dass die Sitze aus einem anderen Auto stammen.
+
+## Vor 2002: was die Scans zeigen
+
+Zwischen September 1998 und Mai 2002 gibt es in unserem Satz keine deutsche Liste für Limousine, Touring oder Coupé. Zwei frühere Listen existieren nur als schlechte Scans, auf denen Serie und Option nicht zu unterscheiden sind. [S2, LOW]
+
+- **September 1998, Limousine:** Sportsitze, elektrische Lordosenstütze, Sitzheizung und elektrische Sitze mit Memory stehen schon als Optionen mit Preis da, für 800, 500, 610 und 1.900 DM; der Serienstoff ist ein Velours. [S2, LOW]
+- **September 2000, Cabrio:** dieselben vier Optionen mit Preis, und elektrische Sitze stehen bei der Serienausstattung. [S2, LOW]
+
+Die Recherche liest daraus, dass eine Limousine oder ein Touring vor dem Facelift aus 2001 höchstwahrscheinlich dieselben vier Sitzoptionen hatte wie die späteren Autos; das ist aber eine Folgerung: Nur eine Liste von 2000 oder 2001 würde es klären. [S2, LOW]
+
+## Einen gebrauchten Sitzsatz oder ein Auto an den Listen prüfen
+
+1. **Kenne Karosserie und Modell.** Dieselbe Ausstattung ist beim einen Modell Serie und beim nächsten eine Option für 1.200 Euro. [S1, HIGH]
+2. **"Elektrisch, ohne Memory" ist bei Limousine, Touring, Coupé oder Compact ungewöhnlich** in Deutschland, wo die Listen nur die Memory-Variante anboten. Frag, woher die Sitze stammen. [S1, HIGH]
+3. **Werksleder sollte beheizt sein.** In diesen Listen kam Lederpolster mit Sitzheizung. [S1, HIGH]
+4. **Alcantara heißt Sportsitze.** [S1, HIGH]
+5. **Prüf das Zeitfenster des Polsters** gegen das Baudatum des Autos. [S3, MEDIUM]
+6. **Sportsitze allein beweisen kein M-Paket**; sie waren eine Option für 500 Euro. [S1, HIGH] Woran man auf Fotos einen Sportsitz vom Grundsitz unterscheidet, steht in ["Sport, elektrisch oder ALPINA?"](/de/blog/e46-sedan-touring-seat-listings).
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Die Preislisten sind BMWs eigene Dokumente, vom Inhaber privat bereitgestellt und nur für Fakten gelesen; nichts wird zitiert. Es sind deutsche Listen, sie sagen nichts über andere Märkte. Die beiden ältesten Listen sind schlechte Scans und mit LOW bewertet. Die Zeitfenster der Polster stammen aus einem Spiegel des Teilekatalogs und einem Modell je Karosserie.
+
+**Erfasste Widersprüche.** (1) Eine Forenaussage zum früheren 3er, die Lordosenstütze habe es nicht mit Sportsitzen gegeben, gilt für die E46-Touring-Liste von 2004 nicht.
+
+**Nicht geklärt.** Serien- und Sonderausstattung 1999 bis 2001 bei Limousine, Touring und Coupé; Preise und Regeln in anderen Märkten als Deutschland; ob jede Kombination, die die Listen nicht ausschließen, tatsächlich gebaut wurde.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Sitze an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben.
