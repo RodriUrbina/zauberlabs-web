@@ -5,9 +5,8 @@ import { dictionaries, E46_LIVE, E46_URL, type Locale } from "@/lib/i18n";
 /**
  * BL-053 (PO decision 2026-10-19) — home hero, concept C "Headline on paper" (Agent 3's mockup): the headline on the page
  * background, below it the E46BUILD configurator loop in one rounded frame with the line and the one button.
- * Desktop: 1200:600 frame (never wider than 1200 px), line left and button right over a bottom gradient. BL-053.2: on md+
- * the headline and the frame also scale with the viewport HEIGHT so the whole hero fits the first screen (app/globals.css,
- * ".home-hero").
+ * Desktop: 1200:600 frame (never wider than 1200 px), line left and button right over a bottom gradient. BL-053.3: on md+ only
+ * the frame shrinks (and is centred) so it fits the first screen; the headline stays 72 px (app/globals.css, ".home-hero").
  * ≤ md: the video at its own ratio (960:512, nothing cropped), line and full-width button in a dark panel below it.
  * Video: same loop and rules as the garage card (BL-029): poster first (LCP, carries the alt), muted autoplay loop on top,
  * hidden under prefers-reduced-motion. Text inside the frame uses fixed colours (it always sits on ink).

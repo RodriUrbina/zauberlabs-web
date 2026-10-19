@@ -39,18 +39,16 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* ---------- Home hero fits the first screen (BL-053.2, PO feedback 2026-10-19) ----------
-   md+ only; phones keep the stacked layout. The frame keeps its 2:1 ratio; its HEIGHT is what is left of the viewport
-   after the header (84) + top padding (48) + live tag (~18) + two gaps (48) + headline (two lines of --hero-f) + ~24 px
-   of air below = 222 px + 2 × --hero-f. Its width follows (×2), capped at the column and at 1200 px. The headline scales
-   with the viewport height between 44 and 72 px. svh where supported, vh otherwise. */
+/* ---------- Home hero frame fits the first screen (BL-053.3, PO decision 2026-10-19; replaces BL-053.2) ----------
+   md+ only; phones keep the stacked layout. Headline, tag, nav and spacing are fixed (72 px headline). ONLY the video
+   frame shrinks: its height is what is left of the viewport after the header (84) + top padding (48) + live tag (~18)
+   + two gaps (48) + the two-line 72 px headline (144) + ~24 px of air = 366 px; the width follows the 2:1 ratio,
+   capped at the column and at 1200 px. The frame and the line under it are centred in the column. svh where supported. */
 @media (min-width: 768px) {
-  .home-hero { --hero-vh: 100vh; --hero-f: clamp(44px, 7vh, 72px); }
-  @supports (height: 100svh) { .home-hero { --hero-vh: 100svh; --hero-f: clamp(44px, 7svh, 72px); } }
-  .home-hero { --hero-h: max(280px, calc(var(--hero-vh) - 222px - 2 * var(--hero-f))); }
-  .home-hero h1 { font-size: var(--hero-f); }
+  .home-hero { --hero-h: max(280px, calc(100vh - 366px)); }
+  @supports (height: 100svh) { .home-hero { --hero-h: max(280px, calc(100svh - 366px)); } }
   .home-hero .hero-frame,
-  .home-hero .hero-below { width: min(100%, 1200px, calc(var(--hero-h) * 2)); }
+  .home-hero .hero-below { width: min(100%, 1200px, calc(var(--hero-h) * 2)); margin-inline: auto; }
 }
 
 /* ---------- Blog article typography (Tailwind typography plugin themed to the brand tokens) ---------- */
