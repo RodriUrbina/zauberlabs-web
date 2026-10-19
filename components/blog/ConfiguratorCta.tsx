@@ -5,6 +5,14 @@ export function configuratorHref(url?: string) {
   return url ?? E46_URL;
 }
 
+/**
+ * BL-056 (PO decision 2026-10-19): configurator links inside the blog open in a new tab, so the article stays open.
+ * rel="noopener" without "noreferrer", so E46BUILD still sees where the visitor came from. Home cards, header and footer
+ * keep opening in the same tab. Counting (components/ConfiguratorClickTracker.tsx) runs on the click itself, so new-tab
+ * and middle clicks are counted too.
+ */
+export const NEW_TAB = { target: "_blank", rel: "noopener" } as const;
+
 type Props = { lang: Locale; tag: string; url?: string; label?: string; compact?: boolean };
 
 /**
@@ -22,8 +30,9 @@ export default function ConfiguratorCta({ lang, tag, url, label, compact = false
       </h2>
       <p className="mt-4 max-w-[520px] text-[15px] leading-relaxed text-fog">{t.blog.ctaBody}</p>
       {E46_LIVE ? (
-        <a href={configuratorHref(url)} className="mt-6 inline-flex h-12 items-center gap-2 rounded-full bg-paper px-6 text-[15px] font-semibold text-ink hover:bg-white">
+        <a href={configuratorHref(url)} {...NEW_TAB} className="mt-6 inline-flex h-12 items-center gap-2 rounded-full bg-paper px-6 text-[15px] font-semibold text-ink hover:bg-white">
           {label ?? t.blog.ctaButton(tag.toUpperCase())} <ArrowUpRight />
+          <span className="sr-only">{t.blog.opensNewTab}</span>
         </a>
       ) : (
         <span className="mt-6 inline-flex h-12 items-center rounded-full border border-[#3A3A40] px-6 text-[15px] font-semibold text-fog">{t.nav.comingSoon}</span>
@@ -42,8 +51,9 @@ export function ConfiguratorLink({ href, children, lang }: { href?: string; chil
     );
   }
   return (
-    <a href={configuratorHref(href)} className="inline-flex items-center gap-1.5 font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">
+    <a href={configuratorHref(href)} {...NEW_TAB} className="inline-flex items-center gap-1.5 font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">
       {children} <ArrowUpRight className="size-3.5" />
+      <span className="sr-only">{dictionaries[lang].blog.opensNewTab}</span>
     </a>
   );
 }
