@@ -121,6 +121,7 @@ const en = {
     feedLabel: "RSS feed",
     breadcrumbHome: "Home",
     backToBlog: "← All articles",
+    opensNewTab: "(opens in a new tab)",
   },
   footer: {
     tagline: "Independent configurators for modern classics. Made by owners, for owners.",
@@ -257,6 +258,7 @@ const de: Dict = {
     feedLabel: "RSS-Feed",
     breadcrumbHome: "Start",
     backToBlog: "← Alle Artikel",
+    opensNewTab: "(öffnet in neuem Tab)",
   },
   footer: {
     tagline: "Unabhängige Konfiguratoren für Youngtimer. Von Besitzern, für Besitzer.",

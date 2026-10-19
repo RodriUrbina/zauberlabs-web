@@ -1,11 +1,12 @@
 import type { MDXComponents } from "mdx/types";
 import type { Confidence as Level } from "@/lib/blog-schema";
-import type { Locale } from "@/lib/i18n";
+import { dictionaries, E46_URL, type Locale } from "@/lib/i18n";
+import { configuratorFor, configuratorHosts } from "@/lib/configurator-click";
 import Callout from "./Callout";
 import Figure from "./Figure";
 import Cite from "./Cite";
 import { Confidence } from "./Confidence";
-import { ConfiguratorLink } from "./ConfiguratorCta";
+import { ConfiguratorLink, NEW_TAB } from "./ConfiguratorCta";
 
 /**
  * The whitelist of building blocks available inside article bodies (see content/blog/README.md).
@@ -26,6 +27,15 @@ export function mdxComponents(lang: Locale, configuratorUrl?: string): MDXCompon
     ),
     // External links open in a new tab; internal ones stay.
     a: ({ href = "", children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+      // BL-056: a plain link to a configurator opens in a new tab but keeps the referrer, like <ConfiguratorLink>.
+      if (configuratorFor(href, configuratorHosts(E46_URL))) {
+        return (
+          <a href={href} {...rest} {...NEW_TAB}>
+            {children}
+            <span className="sr-only"> {dictionaries[lang].blog.opensNewTab}</span>
+          </a>
+        );
+      }
       const external = /^https?:\/\//.test(href) && !href.startsWith("https://www.zauberlabs.de");
       return (
         <a href={href} {...rest} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
