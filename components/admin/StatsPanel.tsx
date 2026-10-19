@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import type { Stats } from "@/lib/metrics-store";
 
+type Budget = { month: string; used: number; budget: number; paused: boolean };
+
 const RANGES = [7, 30, 90] as const;
 
 const nf = new Intl.NumberFormat("de-DE");
@@ -43,7 +45,7 @@ function Ranked({ title, rows, empty }: { title: string; rows: { label: string; 
  */
 export default function StatsPanel({ password }: { password: string }) {
   const [days, setDays] = useState<(typeof RANGES)[number]>(30);
-  const [stats, setStats] = useState<Stats | null>(null);
+  const [stats, setStats] = useState<(Stats & { budget?: Budget }) | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -88,6 +90,12 @@ export default function StatsPanel({ password }: { password: string }) {
         are not counted.
       </p>
       {error && <p className="text-sm text-accent" role="alert">{error}</p>}
+      {stats?.budget && (
+        <p className={`text-sm ${stats.budget.paused ? "text-accent" : "text-muted"}`} role={stats.budget.paused ? "alert" : undefined}>
+          {stats.budget.paused ? "Counting is paused until the end of the month: " : "Redis budget for statistics this month: "}
+          {nf.format(stats.budget.used)} of {nf.format(stats.budget.budget)} commands ({stats.budget.month}). Votes and suggestions are not affected.
+        </p>
+      )}
 
       {stats && (
         <>

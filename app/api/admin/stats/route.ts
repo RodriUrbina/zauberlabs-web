@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminGuard } from "@/lib/admin-guard";
 import { lastDays } from "@/lib/metrics";
-import { getStats } from "@/lib/metrics-store";
+import { getBudget, getStats } from "@/lib/metrics-store";
 
 export const dynamic = "force-dynamic";
 
@@ -11,5 +11,6 @@ export async function GET(req: NextRequest) {
   if (denied) return denied;
   const n = Number(req.nextUrl.searchParams.get("days"));
   const days = [7, 30, 90].includes(n) ? n : 30;
-  return NextResponse.json(await getStats(lastDays(days)), { headers: { "Cache-Control": "no-store" } });
+  const [stats, budget] = await Promise.all([getStats(lastDays(days)), getBudget()]);
+  return NextResponse.json({ ...stats, budget }, { headers: { "Cache-Control": "no-store" } });
 }

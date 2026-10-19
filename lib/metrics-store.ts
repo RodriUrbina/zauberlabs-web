@@ -27,7 +27,38 @@ const key = {
   clicks: (d: string) => `${P}k:${d}`,
   time: (d: string) => `${P}t:${d}`,
   salt: (d: string) => `${P}salt:${d}`,
+  budget: (month: string) => `${P}budget:${month}`,
 };
+
+/*
+ * Guard for the shared free Upstash database (votes and suggestions live there too). Counting stops for the rest of the
+ * Berlin month when the statistics have used STATS_MONTHLY_COMMAND_BUDGET commands, or as soon as Redis reports a limit
+ * error. Every write adds its own command count to budget:{month} in the same request; each server instance keeps the
+ * "stopped" flag in memory, so a stopped month costs no Redis commands at all.
+ */
+const BUDGET = Number(process.env.STATS_MONTHLY_COMMAND_BUDGET) || 250_000;
+let stoppedFor: string | null = null;
+const thisMonth = () => berlinDay().slice(0, 7);
+const counting = () => stoppedFor !== thisMonth();
+const LIMIT_ERROR = /limit|quota|exceeded|too many/i;
+
+/** Runs a stats write; adds `n` (+1 for the budget itself) to this month's budget and stops counting when it is used up. */
+async function write(build: (tx: ReturnType<NonNullable<ReturnType<typeof getRedis>>["pipeline"]>) => number, extra = 0): Promise<void> {
+  const redis = getRedis();
+  if (!redis || !counting()) return;
+  const month = thisMonth();
+  const tx = redis.pipeline();
+  const n = build(tx) + extra + 2;
+  tx.incrby(key.budget(month), n);
+  tx.expire(key.budget(month), 40 * 86_400);
+  try {
+    const res = (await tx.exec()) as unknown[];
+    if (Number(res[res.length - 2]) >= BUDGET) stoppedFor = month;
+  } catch (err) {
+    if (err instanceof Error && LIMIT_ERROR.test(err.message)) stoppedFor = month;
+    throw err;
+  }
+}
 
 async function sha256(s: string): Promise<string> {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
@@ -38,7 +69,13 @@ async function sha256(s: string): Promise<string> {
 async function daySalt(day: string): Promise<string | null> {
   const redis = getRedis();
   if (!redis) return null;
-  const existing = await redis.get<string>(key.salt(day));
+  let existing: string | null;
+  try {
+    existing = await redis.get<string>(key.salt(day));
+  } catch (err) {
+    if (err instanceof Error && LIMIT_ERROR.test(err.message)) stoppedFor = thisMonth();
+    throw err;
+  }
   if (existing) return String(existing);
   const fresh = crypto.randomUUID();
   const created = await redis.set(key.salt(day), fresh, { nx: true, ex: 86_400 });
@@ -62,46 +99,53 @@ export async function rollupUniques(day: string): Promise<void> {
   tx.hset(key.uniques(day), Object.fromEntries(found));
   tx.expire(key.uniques(day), TTL);
   for (const [p] of found) tx.del(key.hll(day, p));
+  tx.incrby(key.budget(thisMonth()), 2 * pages.length + found.length + 3); // this rollup's own commands
   await tx.exec();
 }
 
 export async function recordView(input: { page: PageId; ref: string; country: string; ip: string; userAgent: string }): Promise<void> {
-  const redis = getRedis();
-  if (!redis) return;
+  if (!getRedis() || !counting()) return;
   const day = berlinDay();
   const salt = await daySalt(day);
   const reader = await sha256(`${salt}|${input.ip}|${input.userAgent}`);
-  const tx = redis.pipeline();
-  tx.hincrby(key.views(day), input.page, 1);
-  tx.expire(key.views(day), TTL);
-  tx.pfadd(key.hll(day, input.page), reader);
-  tx.expire(key.hll(day, input.page), HLL_TTL);
-  tx.hincrby(key.refs(day), input.ref, 1);
-  tx.expire(key.refs(day), TTL);
-  tx.hincrby(key.countries(day), input.country, 1);
-  tx.expire(key.countries(day), TTL);
-  await tx.exec();
+  await write((tx) => {
+    tx.hincrby(key.views(day), input.page, 1);
+    tx.expire(key.views(day), TTL);
+    tx.pfadd(key.hll(day, input.page), reader);
+    tx.expire(key.hll(day, input.page), HLL_TTL);
+    tx.hincrby(key.refs(day), input.ref, 1);
+    tx.expire(key.refs(day), TTL);
+    tx.hincrby(key.countries(day), input.country, 1);
+    tx.expire(key.countries(day), TTL);
+    return 8;
+  }, 1 /* the salt read */);
 }
 
 export async function recordEngagement(input: { page: PageId; bucket: TimeBucket; end: boolean }): Promise<void> {
-  const redis = getRedis();
-  if (!redis) return;
   const day = berlinDay();
-  const tx = redis.pipeline();
-  tx.hincrby(key.time(day), `${input.page}|${input.bucket}`, 1);
-  if (input.end) tx.hincrby(key.time(day), `${input.page}|end`, 1);
-  tx.expire(key.time(day), TTL);
-  await tx.exec();
+  await write((tx) => {
+    tx.hincrby(key.time(day), `${input.page}|${input.bucket}`, 1);
+    if (input.end) tx.hincrby(key.time(day), `${input.page}|end`, 1);
+    tx.expire(key.time(day), TTL);
+    return input.end ? 3 : 2;
+  });
 }
 
 export async function recordClick(configurator: string): Promise<void> {
-  const redis = getRedis();
-  if (!redis) return;
   const day = berlinDay();
-  const tx = redis.pipeline();
-  tx.hincrby(key.clicks(day), configurator, 1);
-  tx.expire(key.clicks(day), TTL);
-  await tx.exec();
+  await write((tx) => {
+    tx.hincrby(key.clicks(day), configurator, 1);
+    tx.expire(key.clicks(day), TTL);
+    return 2;
+  });
+}
+
+/** For the admin panel: commands the statistics used this month, the budget, and whether counting is paused. */
+export async function getBudget(): Promise<{ month: string; used: number; budget: number; paused: boolean }> {
+  const redis = getRedis();
+  const month = thisMonth();
+  const used = redis ? Number((await redis.get(key.budget(month))) ?? 0) : 0;
+  return { month, used, budget: BUDGET, paused: used >= BUDGET || !counting() };
 }
 
 // ─── Admin: read the counters ───────────────────────────────────────────────
