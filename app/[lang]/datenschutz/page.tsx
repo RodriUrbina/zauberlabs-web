@@ -226,9 +226,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <p>
         <strong>Benachrichtigung, wenn ein Verkäufer gefunden ist (optional).</strong> Gibt es für ein passendes Teil noch keinen Verkäufer, kannst
         du dich mit deinem Konto benachrichtigen lassen. Dafür speichern wir zu deinem Konto, für welche Konfiguration und welches Teil du
-        benachrichtigt werden möchtest, das Land, in das geliefert werden soll (wie oben beschrieben aus deiner IP-Adresse abgeleitet), und das Datum. Einmal täglich prüfen wir, ob
-        ein Verkäufer das Teil anbietet und in dieses Land liefert. Ist das der Fall, senden wir dir genau eine E-Mail von hello@zauberlabs.de über
-        Brevo (Abschnitt 12) und beenden die Benachrichtigung. Die E-Mail enthält keine Werbung und keine Verkäuferlinks, nur einen Link zum Teil in
+        benachrichtigt werden möchtest, das Land, in das geliefert werden soll (wie oben beschrieben aus deiner IP-Adresse abgeleitet), und das Datum. Finden wir einen
+        Verkäufer, der das Teil anbietet und in dieses Land liefert, senden wir dir genau eine E-Mail von hello@zauberlabs.de über Brevo
+        (Abschnitt 12) und beenden die Benachrichtigung. Die E-Mail enthält keine Werbung und keine Verkäuferlinks, nur einen Link zum Teil in
         deiner Konfiguration und einen Link, mit dem du mit einem Klick alle Benachrichtigungen beendest; Öffnungen und Klicks werten wir nicht aus.
         Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Du kannst Benachrichtigungen jederzeit über diesen Link oder auf „Meine Builds“ beenden.
         Offene Benachrichtigungen enden nach 12 Monaten, beendete löschen wir nach 30 Tagen, beim Löschen deines Kontos oder beim Entfernen der
