@@ -33,6 +33,13 @@ npm test            # node:test — blog schema/loader/RSS/sitemap, every articl
 npm run smoke       # next build + next start on port 3010 + request every blog route
 ```
 
+## Agent rules
+
+Rules for every agent working in this repository (Builder, Writer, Editor, Coordinator); the full operating agreement is Trello card BL-000 on the "ZAUBERLABS — Blog" board.
+
+- **No personal data in outbound requests (PO decision 2026-10-11, BL-042).** Never send personal data — the PO's email address, names, tokens — in a User-Agent, header, URL or request body to an outside host. Check helper and subagent briefs for the same before handing them out.
+- **Neutral User-Agent for outside fetches.** Scripts and tools that fetch from outside hosts identify as a research tool with a neutral User-Agent, for example `zauberlabs-research/1.0`, and carry no personal data.
+
 ## Deploy
 
 1. Import this repo in Vercel (Add New → Project).
