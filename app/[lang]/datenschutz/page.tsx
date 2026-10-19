@@ -14,10 +14,11 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * free-text box parsed in memory, not stored; no account/name/email/IP/cookie ID stored; no cookies, no web storage;
  * Vercel Web Analytics (see Abschnitt 5), no other tracking; self-hosted fonts; links to external sellers.
  * BL-043 (E46 T-078, PO-approved 2026-10-12): optional E46BUILD owner accounts — email, passwordless sign-in link (15 min), session cookie
- * (60 days, no IP/UA stored), keyed-hash rate limits, sign-in emails via Brevo (Abschnitt 11). Accounts off until this text is live.
+ * (60 days, no IP/UA stored), keyed-hash rate limits, sign-in emails via Brevo (Abschnitt 12). Accounts off until this text is live.
  * BL-044 (PO decision 2026-10-14): E46BUILD reads the visitor's country from Vercel's x-vercel-ip-country header to show which
- * sellers deliver there; not stored (Abschnitt 9). Must be live before the next e46build production promotion.
+ * sellers deliver there; not stored (Abschnitt 10). Must be live before the next e46build production promotion.
  * BL-050: one Vercel Web Analytics custom event, "configurator_click" with only { configurator }, described in Abschnitt 5.
+ * BL-051: own anonymous statistics (Abschnitt 6): daily counters in Upstash, salted daily hash only inside a HyperLogLog.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -50,7 +51,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <h2>2. Überblick</h2>
       <p>
         Wir verarbeiten personenbezogene Daten nur, soweit es für den Betrieb dieser Website und ihrer Funktionen nötig ist. Zur Reichweitenmessung
-        nutzen wir ausschließlich Vercel Web Analytics, das ohne Cookies arbeitet (Abschnitt 5). Darüber hinaus setzen wir keine Tracking- oder
+        nutzen wir Vercel Web Analytics (Abschnitt 5) und eine eigene Zählung (Abschnitt 6); beide arbeiten ohne Cookies. Darüber hinaus setzen wir keine Tracking- oder
         Werbe-Tools ein und verkaufen keine Daten.
       </p>
 
@@ -97,7 +98,28 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         https://vercel.com/docs/analytics/privacy-policy
       </p>
 
-      <h2>6. Community-Voting</h2>
+      {/* BL-051 — own anonymous statistics (PO decision 2026-10-19, option A: daily salted hash in a HyperLogLog, salt deleted
+          after 24 h, 13-month retention). Text as drafted by the Builder and approved in principle by the PO; the § 25 TDDDG
+          question is with the lawyer brief and deliberately not stated here. Code: app/api/m, lib/metrics*.ts. */}
+      <h2>6. Eigene Reichweitenmessung</h2>
+      <p>
+        Zusätzlich zu Vercel Web Analytics zählen wir selbst, wie unsere Artikel gelesen werden. Beim Aufruf eines Artikels sendet dein Browser
+        eine kurze Meldung an unseren Server: welcher Artikel in welcher Sprache aufgerufen wurde und von welcher Website du kamst – nur deren
+        Domainname, z. B. google.com. Beim Verlassen der Seite meldet er, wie lange der Artikel ungefähr aktiv angezeigt wurde und ob du bis zum
+        Ende gelesen hast. Klicks auf Links zu unseren Konfiguratoren zählen wir ebenso. Dein ungefähres Land, das unser Hoster aus deiner
+        IP-Adresse ableitet, zählen wir getrennt von allen anderen Angaben.
+      </p>
+      <p>
+        Gespeichert werden ausschließlich Tageszähler (z. B. „Artikel X: 42 Aufrufe“) bei unserem Datenbank-Dienstleister (Abschnitt 9); Daten
+        einzelner Besucher legen wir nicht ab, und wir setzen keine Cookies und speichern nichts in deinem Browser. Um mehrfache Aufrufe desselben
+        Lesers an einem Tag nur einmal zu zählen, bilden wir aus deiner IP-Adresse, der Kennung deines Browsers und einem täglich wechselnden
+        Zufallswert einen Hash-Wert. Er fließt nur in eine statistische Zählstruktur ein, aus der er sich nicht zurückgewinnen lässt; der
+        Zufallswert wird nach 24 Stunden gelöscht. Deine IP-Adresse speichern wir nicht. Die Tageszähler löschen wir nach 13 Monaten.
+        Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse, zu verstehen, welche Artikel gelesen werden, und sie zu
+        verbessern).
+      </p>
+
+      <h2>7. Community-Voting</h2>
       <p>
         Du kannst abstimmen, welches Auto wir als Nächstes umsetzen. Damit jede Person pro Auto nur einmal abstimmen kann, setzen wir beim
         Abstimmen ein Cookie namens „zl_vid“ mit einer zufälligen Kennung (Speicherdauer: 12 Monate). Es enthält keine Angaben zu deiner Person
@@ -112,7 +134,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Art. 6 Abs. 1 lit. f DSGVO.
       </p>
 
-      <h2>7. Autovorschläge</h2>
+      <h2>8. Autovorschläge</h2>
       <p>
         Wenn du uns über das Formular ein Auto vorschlägst, speichern wir deinen Text und – nur falls du sie angibst – deine E-Mail-Adresse, um
         dich zu informieren, wenn wir dieses Auto umsetzen. Zusammen mit dem Vorschlag speichern wir außerdem die Sprache der Seite (Deutsch oder
@@ -125,9 +147,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Bezug zu deiner Person und niemals zusammen mit deiner E-Mail-Adresse.
       </p>
 
-      <h2>8. Datenbank-Dienstleister</h2>
+      <h2>9. Datenbank-Dienstleister</h2>
       <p>
-        Abstimmungen und Vorschläge werden bei Upstash, Inc. (USA) in einem Rechenzentrum in Frankfurt am Main gespeichert. Mit Upstash besteht
+        Abstimmungen, Vorschläge und die Tageszähler unserer eigenen Reichweitenmessung (Abschnitt 6) werden bei Upstash, Inc. (USA) in einem Rechenzentrum in Frankfurt am Main gespeichert. Mit Upstash besteht
         ein Vertrag zur Auftragsverarbeitung; soweit ein Zugriff aus den USA möglich ist, erfolgt er auf Grundlage der EU-Standardvertragsklauseln.
         Weitere Informationen: https://upstash.com
       </p>
@@ -137,7 +159,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
           (https://vercel.com/docs/logs/runtime, 2026-08-28: Hobby 1 h, Pro 1 day, Pro + Observability Plus 30 days, Enterprise 3 days);
           Neon DPA with SCCs accepted; records kept indefinitely without personal reference (the planned 30-day cleanup, E46 T-066, was
           cancelled by the PO). */}
-      <h2>9. E46BUILD-Konfigurator (e46.zauberlabs.de)</h2>
+      <h2>10. E46BUILD-Konfigurator (e46.zauberlabs.de)</h2>
       <p>
         Unser Konfigurator E46BUILD läuft unter e46.zauberlabs.de. Ohne Konto und ohne Anmeldung kannst du dort dein Auto beschreiben und eine
         Konfiguration zusammenstellen. Im Feld „Beschreibe dein Auto“ kannst du frei tippen (z. B. „2001 325i Touring“); dieser Text wird an unseren
@@ -156,14 +178,14 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Betrieb und an der Verbesserung des Konfigurators). Ohne Konto ist ein Bezug zu deiner Person nur vorübergehend möglich: Für höchstens einen Tag enthält
         das Zugriffsprotokoll des Hostings (Abschnitt 3) deine IP-Adresse zusammen mit der zufälligen Kennung in der aufgerufenen Adresse; nach Ablauf
         dieser Log-Aufbewahrung lassen sich die Datensätze keiner Person mehr zuordnen – es sei denn, du trägst selbst personenbezogene Angaben in die
-        Bezeichnung ein. Die Konfigurationen liegen in unserer Datenbank (Abschnitt 10).
+        Bezeichnung ein. Die Konfigurationen liegen in unserer Datenbank (Abschnitt 11).
       </p>
       <p>
         Ohne Konto setzt E46BUILD keine Cookies und legt nichts im lokalen Speicher deines Browsers ab; für ein Konto siehe den folgenden Absatz. Zur
         Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics – ohne Cookies, nur zusammengefasste Seitenaufrufe und Besucherzahlen;
         es gilt Abschnitt 5. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet
         keine Verbindung zu Google Fonts statt. Angebote im Konfigurator verlinken auf die Websites externer Händler; sobald du einem solchen Link
-        folgst, gelten deren Datenschutzbestimmungen (Abschnitt 13).
+        folgst, gelten deren Datenschutzbestimmungen (Abschnitt 14).
       </p>
 
       {/* BL-043 — owner accounts (E46 card T-078). Text from e46build docs/legal/t078-lawyer-review.md § 6, adjusted per the
@@ -183,7 +205,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         geheimen Schlüssel gebildeten Prüfwert (Hash), nicht die Adresse selbst, und löschen ihn in der Regel nach etwa einem Tag.
       </p>
       <p>
-        Die Anmelde-E-Mails versenden wir über Brevo als Auftragsverarbeiter (Abschnitt 11); Absender ist hello@zauberlabs.de. Sie enthalten nur den
+        Die Anmelde-E-Mails versenden wir über Brevo als Auftragsverarbeiter (Abschnitt 12); Absender ist hello@zauberlabs.de. Sie enthalten nur den
         Anmeldelink – keine Werbung. Brevo kann technisch erfassen, ob eine Anmelde-E-Mail geöffnet und ob der Link darin angeklickt wurde; diese
         Angaben nutzen wir nicht.
       </p>
@@ -192,49 +214,49 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         lit. f DSGVO. Deine Daten bleiben gespeichert, bis du dein Konto löschst. Auf der Seite „Meine Builds“ kannst du jederzeit deine Daten
         herunterladen, einzelne Konfigurationen aus deinem Konto entfernen oder dein Konto löschen. Beim Löschen entfernen wir deine E-Mail-Adresse und
         alle Anmeldedaten; deine Konfigurationen bleiben ohne Bezug zu dir und ohne von dir eingegebene Freitexte erhalten (siehe oben). Die Daten liegen
-        in unserer Datenbank (Abschnitt 10).
+        in unserer Datenbank (Abschnitt 11).
       </p>
 
-      <h2>10. Datenbank-Dienstleister für E46BUILD (Neon)</h2>
+      <h2>11. Datenbank-Dienstleister für E46BUILD (Neon)</h2>
       <p>
-        Die Daten des Konfigurators (Abschnitt 9) werden bei Neon, LLC (USA; ein Unternehmen von Databricks, Inc.) gespeichert, eingerichtet über den
+        Die Daten des Konfigurators (Abschnitt 10) werden bei Neon, LLC (USA; ein Unternehmen von Databricks, Inc.) gespeichert, eingerichtet über den
         Vercel Marketplace, in einem Rechenzentrum in Frankfurt am Main (AWS-Region eu-central-1). Mit Neon besteht ein Vertrag zur Auftragsverarbeitung
         einschließlich der EU-Standardvertragsklauseln; Databricks, Inc. und Neon, LLC sind zudem nach dem EU-US Data Privacy Framework zertifiziert.
         Weitere Informationen:
         https://www.databricks.com/legal/privacynotice
       </p>
 
-      <h2>11. E-Mail-Versand für E46BUILD (Brevo)</h2>
+      <h2>12. E-Mail-Versand für E46BUILD (Brevo)</h2>
       <p>
-        Die Anmelde-E-Mails für E46BUILD-Konten (Abschnitt 9) versenden wir über Brevo (Paris, Frankreich) als Auftragsverarbeiter. Dabei verarbeitet
+        Die Anmelde-E-Mails für E46BUILD-Konten (Abschnitt 10) versenden wir über Brevo (Paris, Frankreich) als Auftragsverarbeiter. Dabei verarbeitet
         Brevo deine E-Mail-Adresse, den Betreff und den Anmeldelink. Mit Brevo besteht ein Vertrag zur Auftragsverarbeitung.
       </p>
 
-      <h2>12. Kontakt per E-Mail</h2>
+      <h2>13. Kontakt per E-Mail</h2>
       <p>
         Wenn du uns per E-Mail kontaktierst, verarbeiten wir deine Angaben zur Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. b bzw. f DSGVO)
         und löschen sie, sobald sie nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten bestehen.
       </p>
 
-      <h2>13. Externe Links</h2>
+      <h2>14. Externe Links</h2>
       <p>
         Unsere Konfiguratoren verlinken auf externe Händler und Plattformen. Erst wenn du einen solchen Link anklickst, verlässt du unsere
         Website; ab dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
       </p>
 
-      <h2>14. Deine Rechte</h2>
+      <h2>15. Deine Rechte</h2>
       <p>
         Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
         Datenübertragbarkeit (Art. 20) sowie auf Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21). Eine erteilte
         Einwilligung kannst du jederzeit mit Wirkung für die Zukunft widerrufen. Schreib uns dazu einfach an {C.email}. Hast du ein E46BUILD-Konto,
         kannst du auf der Seite „Meine Builds“ jederzeit selbst deine Daten herunterladen, einzelne Konfigurationen aus deinem Konto entfernen oder dein
-        Konto löschen (Abschnitt 9).
+        Konto löschen (Abschnitt 10).
       </p>
       <p>
         Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, zum Beispiel bei: {C.authority}.
       </p>
 
-      <h2>15. Aktualität</h2>
+      <h2>16. Aktualität</h2>
       <p>Stand: {C.updated}. Wir passen diese Erklärung an, wenn sich unsere Website oder die Rechtslage ändert.</p>
     </LegalPage>
   );
