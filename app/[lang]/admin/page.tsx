@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Wordmark } from "@/components/Icons";
+import StatsPanel from "@/components/admin/StatsPanel";
 
 type Suggestion = { raw: string; car: string; email: string | null; lang: string; at: string };
 type Car = { id: string; name: string; votes: number };
@@ -175,6 +176,8 @@ export default function Admin() {
                 ))}
               </ul>
             </section>
+
+            <StatsPanel password={pw} />
 
             <button
               type="button"

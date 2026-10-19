@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { track } from "@vercel/analytics";
 import { E46_URL } from "@/lib/i18n";
 import { CONFIGURATOR_CLICK_EVENT, configuratorFor, configuratorHosts } from "@/lib/configurator-click";
+import { sendStat } from "@/lib/beacon-client";
 
 /**
  * BL-050 — counts clicks on configurator links as a Vercel Web Analytics custom event:
@@ -19,7 +20,9 @@ export default function ConfiguratorClickTracker() {
       const a = e.target instanceof Element ? e.target.closest("a[href]") : null;
       if (!(a instanceof HTMLAnchorElement)) return;
       const configurator = configuratorFor(a.href, hosts);
-      if (configurator) track(CONFIGURATOR_CLICK_EVENT, { configurator });
+      if (!configurator) return;
+      track(CONFIGURATOR_CLICK_EVENT, { configurator });
+      sendStat({ t: "k", c: configurator }); // BL-051: our own daily click counter
     };
     document.addEventListener("click", onClick, true);
     document.addEventListener("auxclick", onClick, true);

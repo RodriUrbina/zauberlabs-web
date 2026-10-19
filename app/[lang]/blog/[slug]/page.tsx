@@ -14,6 +14,7 @@ import ConfiguratorCta from "@/components/blog/ConfiguratorCta";
 import HeroImage from "@/components/blog/HeroImage";
 import JsonLd from "@/components/blog/JsonLd";
 import LanguageNote from "@/components/blog/LanguageNote";
+import ReadBeacon from "@/components/blog/ReadBeacon";
 import SourcesBox from "@/components/blog/SourcesBox";
 import { mdxComponents } from "@/components/blog/mdx-components";
 import SiteFooter from "@/components/SiteFooter";
@@ -146,6 +147,8 @@ export default async function ArticlePage({ params }: { params: Params }) {
           <HeroImage hero={m.hero} lang={lang} priority />
 
           <div className="prose prose-zl prose-lg max-w-none">{content}</div>
+          {/* BL-051: end of the article text, for "read to the end" in our own statistics. */}
+          <div id="article-end" aria-hidden="true" />
 
           <div className="mt-4 flex flex-col gap-6" lang={lang}>
             <ConfiguratorCta lang={lang} tag={m.configurator.tag} url={m.configurator.url} label={m.ctaLabel} />
@@ -154,6 +157,8 @@ export default async function ArticlePage({ params }: { params: Params }) {
         </article>
       </main>
       <SiteFooter lang={lang} otherHref={`/${other}/blog/${slug}`} homePath={`/${lang}`} />
+      {/* BL-051: own anonymous reading statistics; not counted for drafts and scheduled previews. */}
+      {!m.draft && !scheduled && <ReadBeacon lang={lang} slug={slug} />}
       <JsonLd
         data={{
           "@context": "https://schema.org",

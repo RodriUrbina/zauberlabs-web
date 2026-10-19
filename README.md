@@ -48,3 +48,14 @@ Rules for every agent working in this repository (Builder, Writer, Editor, Coord
 4. Settings → Domains: add `zauberlabs.de` and `www.zauberlabs.de`, then create the A/CNAME records Vercel shows in the whois.com DNS panel.
 
 Read suggestions: `LRANGE suggestions 0 -1` in the Upstash console.
+
+## Statistics (BL-051)
+
+Our own anonymous reading statistics, shown under "Reading statistics" on `/de/admin` (same password). Described in the Datenschutz, Abschnitt 6.
+
+- **What is counted:** article views per article and language, unique readers per day, referrer domain only, country (`x-vercel-ip-country`, counted on its own), engaged reading time in buckets, read-to-end, and configurator clicks. Article pages send a beacon to `app/api/m` (`components/blog/ReadBeacon.tsx`); configurator clicks come from `components/ConfiguratorClickTracker.tsx`.
+- **What is stored:** daily counters only, in the existing Upstash Redis (`lib/metrics-store.ts`). No IP, no cookies, nothing in the browser, no record per visitor. Unique readers: a SHA-256 of a daily random salt + IP + User-Agent goes only into a HyperLogLog. The salt expires 24 h after it's created. The next day the HyperLogLog is rolled up into a plain number and deleted. Daily keys expire after 400 days (about 13 months).
+- **Keys:** production writes `m:*`. Preview and local builds write `m:test:*`, so test clicks never mix with real numbers.
+- **Not counted:** bots (User-Agent), devices in internal mode (BL-039), drafts and scheduled previews, slugs that aren't published articles.
+- **Upstash region:** database "zauberlabs-votes", AWS Frankfurt (eu-central-1), free tier (500k commands a month, 250 MB). Verified by the PO in the Upstash console on 2026-10-19.
+- **Monthly budget:** the votes and suggestions share this free database, so the statistics stop counting for the rest of the Berlin month once they've used `STATS_MONTHLY_COMMAND_BUDGET` commands (default 250,000), or as soon as Redis reports a limit error. Usage is tracked in `m:budget:{YYYY-MM}` and shown on the admin panel. Stats errors never reach the reader: `/api/m` always answers 204 and article pages don't wait for it.

@@ -19,7 +19,7 @@ const redisClient = hasRedis
 // The in-memory store below is for local development only.
 // Checked on first use (not at import) so `next build`, which evaluates route
 // modules, still works in environments without Redis credentials.
-function getRedis(): Redis | null {
+export function getRedis(): Redis | null {
   if (process.env.NODE_ENV === "production" && !redisClient) {
     throw new Error(
       "Redis storage is not configured. Set KV_REST_API_URL/KV_REST_API_TOKEN or UPSTASH_REDIS_REST_URL/UPSTASH_REDIS_REST_TOKEN."
