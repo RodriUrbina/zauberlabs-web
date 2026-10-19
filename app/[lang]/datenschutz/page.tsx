@@ -20,7 +20,7 @@ export const metadata = { title: "Datenschutz — Zauberlabs", robots: { index: 
  * BL-050: one Vercel Web Analytics custom event, "configurator_click" with only { configurator }, described in Abschnitt 5.
  * BL-051: own anonymous statistics (Abschnitt 6): daily counters in Upstash, salted daily hash only inside a HyperLogLog.
  * BL-052 (E46 T-106): optional seller notices for signed-in owners — part, build, delivery country (detected from the IP, not confirmed by the owner), date; the PO emails owners by hand
- * from hello@zauberlabs.de (no automatic notifier, no Brevo); 12-month expiry, closed ones deleted after 30 days (Abschnitt 10).
+ * from hello@zauberlabs.de (no automatic notifier, no Brevo); stopped ones deleted at once, open ones after 12 months (Abschnitt 10).
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -227,11 +227,10 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         <strong>Benachrichtigung, wenn ein Verkäufer gefunden ist (optional).</strong> Gibt es für ein passendes Teil noch keinen Verkäufer, kannst
         du dich mit deinem Konto benachrichtigen lassen. Dafür speichern wir zu deinem Konto, für welche Konfiguration und welches Teil du
         benachrichtigt werden möchtest, das Land, in das geliefert werden soll (wie oben beschrieben aus deiner IP-Adresse abgeleitet, falls erkannt), und das Datum. Finden wir einen
-        Verkäufer, der das Teil anbietet und in dieses Land liefert, schreiben wir dir eine E-Mail von hello@zauberlabs.de und beenden die
-        Benachrichtigung.
+        Verkäufer, der das Teil anbietet und in dieses Land liefert, schreiben wir dir eine E-Mail von hello@zauberlabs.de.
         Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Du kannst Benachrichtigungen jederzeit auf „Meine Builds“ beenden.
-        Offene Benachrichtigungen enden nach 12 Monaten, beendete löschen wir nach 30 Tagen, beim Löschen deines Kontos oder beim Entfernen der
-        Konfiguration aus deinem Konto sofort. Es bleibt nur eine anonyme Zählung ohne Bezug zu dir. Deine Benachrichtigungen sind Teil deines
+        Beendest du eine Benachrichtigung, löschen wir sie sofort; offene Benachrichtigungen enden nach 12 Monaten und werden dann gelöscht, beim
+        Löschen deines Kontos oder beim Entfernen der Konfiguration aus deinem Konto sofort. Es bleibt nur eine anonyme Zählung ohne Bezug zu dir. Deine Benachrichtigungen sind Teil deines
         Datenexports.
       </p>
 
