@@ -5,7 +5,7 @@ import { dictionaries, E46_LIVE, E46_URL, isLocale } from "@/lib/i18n";
 import { Arrow, ArrowUpRight, Wordmark } from "@/components/Icons";
 import VoteCard from "@/components/VoteCard";
 import SuggestForm from "@/components/SuggestForm";
-import HeroDeck from "@/components/HeroDeck";
+import HomeHero from "@/components/HomeHero";
 import SiteFooter from "@/components/SiteFooter";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
@@ -48,37 +48,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </header>
 
       <main>
-        {/* HERO */}
-        <section className={`${wrap} grid gap-10 py-12 md:py-20 lg:grid-cols-[minmax(0,620px)_minmax(0,1fr)] lg:gap-16 lg:py-24`}>
-          <div className="flex flex-col justify-between gap-10">
-            <div className="flex flex-col gap-6 md:gap-7">
-              <p className="eyebrow text-[11px] text-muted md:text-xs">{t.hero.eyebrow}</p>
-              <h1 className={`font-extrabold tracking-[-0.04em] ${lang === "de" ? "text-[40px] leading-[1.02] sm:text-6xl lg:text-[72px] lg:leading-none" : "text-5xl leading-[0.98] sm:text-7xl lg:text-[92px] lg:leading-[0.96]"}`}>
-                {t.hero.title[0]}
-                <span className="accent-serif text-accent">{t.hero.title[1]}</span>
-              </h1>
-              <p className="max-w-[520px] text-base leading-relaxed text-body md:text-[19px]">{t.hero.body}</p>
-            </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <a href="#garage" className="flex h-14 items-center justify-center gap-2.5 rounded-full bg-ink px-7 text-base font-semibold text-paper hover:bg-black">
-                {t.hero.ctaPrimary} <Arrow className="size-[18px]" />
-              </a>
-              <a href="#suggest" className="flex h-14 items-center justify-center rounded-full border border-ink px-7 text-base font-semibold hover:bg-ink/5">
-                {t.hero.ctaSecondary}
-              </a>
-            </div>
-          </div>
-
-          <HeroDeck
-            href={E46_LIVE ? E46_URL : undefined}
-            live={E46_LIVE ? t.hero.live : `${t.hero.soon} · 01`}
-            soon={t.hero.soon}
-            e46Line={t.hero.cardLine}
-            e46Alt={t.hero.heroAlt}
-            left={{ num: "02", make: "Mercedes-Benz · 1984–1997", model: "W124", accent: "#6fd3c1", line: t.hero.w124Line, img: "/images/w124.svg", alt: "" }}
-            right={{ num: "03", make: "Audi · 1994–2001", model: "B5", accent: "#e8553d", line: t.hero.b5Line, img: "/images/b5-rs4.svg", alt: "" }}
-          />
-        </section>
+        {/* HERO — BL-053 concept C */}
+        <HomeHero lang={lang} wrap={wrap} />
 
         {/* TICKER */}
         <div className="bg-ink text-fog">

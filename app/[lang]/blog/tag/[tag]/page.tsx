@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { feedUrl, getBlog, SITE_URL, tagUrl } from "@/lib/blog";
 import { dictionaries, isLocale, LOCALES, type Locale } from "@/lib/i18n";
+import { SITE_OG_IMAGE } from "@/lib/blog-og";
 import BlogListing from "@/components/blog/BlogListing";
 
 // Scheduled publishing (BL-004): re-rendered on Vercel at most every 5 minutes, so an article whose
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       languages: { ...Object.fromEntries(LOCALES.map((l) => [l, tagUrl(l, tag.name)])), "x-default": tagUrl("en", tag.name) },
       types: { "application/rss+xml": feedUrl(lang) },
     },
-    openGraph: { title, description: t.tagMetaDescription(tag.name), url: tagUrl(lang, tag.name), type: "website", locale: lang === "de" ? "de_DE" : "en_US", images: ["/images/hero.jpg"] },
+    openGraph: { title, description: t.tagMetaDescription(tag.name), url: tagUrl(lang, tag.name), type: "website", locale: lang === "de" ? "de_DE" : "en_US", images: [{ url: SITE_OG_IMAGE, width: 1200, height: 630, alt: dictionaries[lang as Locale].hero.ogAlt }] },
     twitter: { card: "summary_large_image" },
   };
 }

@@ -2,7 +2,8 @@ import type { Hero } from "./blog-schema";
 import { dictionaries, type Locale } from "./i18n";
 import { SITE_URL } from "./blog";
 
-export const SITE_OG_IMAGE = "/images/hero.jpg";
+// BL-053: the configurator loop's poster frame at 1200×630 (replaces the old hero.jpg).
+export const SITE_OG_IMAGE = "/images/og-e46build.jpg";
 
 /**
  * The social-share image of an article (og:image / twitter:image).
@@ -11,5 +12,5 @@ export const SITE_OG_IMAGE = "/images/hero.jpg";
  */
 export function articleOgImage(hero: Hero, lang: Locale): { url: string; alt: string } {
   if (hero.src) return { url: `${SITE_URL}${hero.src}`, alt: hero.alt };
-  return { url: `${SITE_URL}${SITE_OG_IMAGE}`, alt: dictionaries[lang].hero.heroAlt };
+  return { url: `${SITE_URL}${SITE_OG_IMAGE}`, alt: dictionaries[lang].hero.ogAlt };
 }
