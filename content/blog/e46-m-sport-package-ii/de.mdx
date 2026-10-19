@@ -1,0 +1,149 @@
+---
+# BL-046 — Writer draft, German. Same slug and sources as en.mdx.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Ein Kreuz auf der Bestellung, vier Umbauten: Was das M Sportpaket II an jeden E46 brachte"
+description: "Stoßfänger, Felgen, Sitze, Lenkrad: was im M Sportpaket II steckte, je Karosserie und Jahr, nach BMWs eigener Pressemitteilung und den deutschen Preislisten."
+date: 2026-10-19
+updated: 2026-10-22
+publishAt: "2026-10-22"
+lang: de
+slug: e46-m-sport-package-ii
+card: BL-046
+author: "Zauberlabs"
+tags:
+  - E46
+  - M Sport package
+  - bumpers
+  - wheels
+  - seats
+  - steering wheels
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # PO generates the AI illustration from this brief; labelled "AI-generated"
+  alt: "Eine silberne E46 Limousine mit M-Aerodynamik-Frontschürze und Doppelspeichenfelgen, schräg von vorn im Studio"
+  credit: "KI-generierte Illustration"
+  licence: null
+  placeholder: "AI-generated illustration, labelled as such. Brief: a silver early-2000s BMW 3 Series saloon with a sporty front apron with large air intakes, side sills and 17-inch double-spoke wheels, front three-quarter view, plain studio background, soft light. Must not show: legible BMW roundel or M badges, number plate text, part numbers, people."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW AG Presse-Information, 14. Mai 2001: 'Eine gelungene Mischung aus Styling und Dynamik: neues M Sportpaket für die BMW 3er Reihe' — https://www.press.bmwgroup.com/deutschland/article/detail/T0005828DE"
+    type: "von BMW verfasst (Pressemitteilung), vollständig gelesen"
+    path: "t071-factory-packages/raw/press-de-2001-05-m-sportpaket-22321.txt"
+    confidence: HIGH
+  - id: S2
+    title: "BMW Preislisten Deutschland für den E46 3er, 2002–2006, alle fünf Karosserien, ausgewertet für Pakete und Editionen in T-071 Schritt 2 und T-084 (Quellenregister SR-0067; die Touring-Liste vom September 2004 auch SR-0066)"
+    type: "von BMW verfasst (Preislisten), vom PO bereitgestellt; privat, nur Fakten, nicht zitiert"
+    path: "t071-factory-packages/pricelists-de-packages.json; t071-factory-packages/README.md (Step 2); t084-seat-options/README.md §1a"
+    confidence: HIGH
+    note: "HIGH für den Inhalt der Listen, zitiert nach Liste und Seite, z. B. Paket 338 in 2002-09 Limousine S. 6, Touring S. 5, Coupé S. 11, Compact S. 6; 2004-03 Cabrio S. 10; Clubsport 768 in 2004-09 Coupé S. 12. Nur Deutschland."
+  - id: S3
+    title: "BMW AG Pressemappe 'Die 3er Baureihe im Modelljahr 2003', 18. Februar 2003 (Editionen für Limousine und Touring)"
+    type: "von BMW verfasst (Pressemappe), vollständig gelesen"
+    path: "t071-factory-packages/raw/press-de-my2003-pressemappe-23207.txt"
+    confidence: HIGH
+  - id: S4
+    title: "BMW (GB) Ltd Pressemitteilung, 22. Februar 2002: 330Ci Clubsport Coupé"
+    type: "von BMW verfasst (Pressemitteilung), vollständig gelesen"
+    path: "t071-factory-packages/raw/press-uk-2002-02-330ci-clubsport-32187.txt"
+    confidence: HIGH
+    note: "Nur britischer Markt."
+  - id: S5
+    title: "Teilekatalog-Spiegel (bmwfans.info, Europa-Bäume): Optionscodes P337A, S338A, S715A, S716A und die M-Verkleidungsgruppen (T-071 Schritt A, T-027)"
+    type: ETK-Spiegel (ein Spiegel)
+    path: "t071-factory-packages/README.md; t071-factory-packages/conflicts.md; t027-evidence/T-027-findings.md; t101-front-m-bumper/README.md"
+    confidence: MEDIUM
+  - id: S6
+    title: "BMW Preislisten Deutschland vom September 1998 (Limousine) und September 2000 (Cabrio), nur als Scan vorhanden und in T-071 Schritt 2 von Hand zusammengefasst"
+    type: "von BMW verfasst (Preislisten), aus Scans gelesen"
+    path: "t071-factory-packages/README.md (Step 2)"
+    confidence: LOW
+    note: "Die Recherche bewertet ihre eigene Zusammenfassung der beiden Scans mit LOW; nur für die zwei im Text zugeordneten, datierten Beobachtungen genutzt."
+---
+
+"M Sportpaket" gehört zu den meistgenannten Begriffen in E46-Anzeigen und zu den ungenauesten. Besitzer meinen damit einen Stoßfänger, einen Satz Felgen, ein Lenkrad oder ein ganzes Auto. BMW meinte damit eine Sache: eine Option, die man auf dem Bestellschein ankreuzte und die vier der Teile, die Besitzer heute am häufigsten tauschen, auf einmal veränderte. Dieser Artikel zeigt, was in dieser Option steckte, nach BMWs eigener Pressemitteilung zum Start und den deutschen Preislisten von 2002 bis 2006, Karosserie für Karosserie.
+
+## Kurz gesagt
+
+- **Eine Option, viele Teile.** BMWs M Sportpaket der zweiten Generation brachte ein M Aerodynamikpaket, 17-Zoll-M-Doppelspeichenfelgen mit Mischbereifung, ein tiefergelegtes Sportfahrwerk, ein M Sport-Lederlenkrad und Sportsitze, dazu Details an Ausstattung und Leuchten. [S1, HIGH]
+- **Start im Mai 2001 für alle 3er außer dem compact.** Die deutschen Preislisten nennen es Sportpaket M II, Code 338, und führen es später auch beim Compact. [S1, HIGH; S2, HIGH]
+- **Die Felge hängt von der Karosserie ab.** Die Listen nennen die 68M für Limousine, Touring, Coupé und Cabrio und die 97M für den Compact; ab März 2004 ist bei den vier größeren Karosserien statt der 68M auch die 135M möglich. [S2, HIGH]
+- **Die Edition Sport ist das Paket plus Extras**, mit BMWs eigenen Worten. [S3, HIGH; S2, HIGH]
+- **Jedes Teil gab es im Katalog auch einzeln**, ein Auto mit M-Teilen beweist also kein Werkspaket. [S5, MEDIUM]
+
+## Was BMW im Mai 2001 vorstellte
+
+Am 14. Mai 2001 kündigte BMW "das neue M Sportpaket" als Sonderausstattung für alle Modelle der 3er Reihe außer dem compact an, entwickelt von BMW M. Die Pressemitteilung nennt es das M Sportpaket "der zweiten Generation" und zählt seinen Inhalt auf: [S1, HIGH]
+
+- **Außen:** das M Aerodynamikpaket mit eigener Frontschürze, geänderter Heckschürze und Seitenschwellern. Bei **Limousine und Coupé** gehört ein kleiner Spoiler auf der Kofferraumklappe dazu. Alle Varianten bekommen Türgriffe und Stoßfänger in Wagenfarbe, Nebelscheinwerfer und weiße Blinkergläser vorn und hinten.
+- **Räder und Fahrwerk:** 17-Zoll-M-Leichtmetallräder im Doppelspeichen-Styling mit Mischbereifung, vorn 225/45 R 17, hinten 245/40 R 17, und ein Sportfahrwerk mit Tieferlegung.
+- **Innen:** ein neues M Sport-Lederlenkrad, Sportsitze für Fahrer und Beifahrer in Stoff "Laser" mit Alcantara, eigens für das Paket entwickelte Interieurleisten "Alu Black Cube" und M Einstiegsleisten.
+
+Welches Felgendesign es ist, sagt die Pressemitteilung nicht. BMWs deutsche Preislisten sagen es. [S2, HIGH]
+
+## Was die deutschen Preislisten nennen, je Karosserie
+
+Ab den Listen vom September 2002 steht das Paket als **Sportpaket M II**, Code **338**, als Option bei jedem Modell jeder Karosserie, mit Preis je Modell. [S2, HIGH] In der Touring-Liste vom September 2004 etwa kostet es je nach Modell zwischen 3.150 und 3.950 Euro. [S2, HIGH]
+
+Die Listen beschreiben den Inhalt mit eigenen Worten, und die Formulierung schwankt etwas von Liste zu Liste. Die Tabelle zeigt, was die Listen nennen; was eine Liste nicht nennt, ist kein Beleg dafür, dass es fehlte. [S2, HIGH]
+
+| Karosserie | Genannte Felge | Außerdem in den Listen genannt |
+| --- | --- | --- |
+| Limousine | 17" Doppelspeiche 68M | M Aerodynamikpaket, Heckspoiler, Sportfahrwerk, Sportsitze "Laser", M Lederlenkrad, Shadow Line, weiße Blinker, Dachhimmel anthrazit, Aluminium-Leisten, M Einstiegsleisten und Fußstütze |
+| Touring | 17" Doppelspeiche 68M | wie die Limousine, ohne Heckspoiler |
+| Coupé | 17" Doppelspeiche 68M | M Aerodynamikpaket, Heckspoiler, Nebelscheinwerfer, Sportsitze, M Lederlenkrad, Shadow Line; das Sportfahrwerk wird in den Coupé-Listen nicht genannt |
+| Cabrio | 17" Doppelspeiche 68M | M Aerodynamikpaket, Nebelscheinwerfer, Sportsitze, M Lederlenkrad, Shadow Line, Sportfahrwerk (genannt ab 2004-09) |
+| Compact | 17" Doppelspeiche **97M** | M Aerodynamikpaket, Sportsitze, M Lederlenkrad, Sportfahrwerk, Außenteile in Wagenfarbe; keine Shadow Line genannt |
+
+Alles aus den deutschen Preislisten 2002-09 bis 2006-03. [S2, HIGH]
+
+Zwei Daten verlangen Vorsicht. Die Pressemitteilung vom Mai 2001 schließt den compact aus, und die früheste Compact-Liste, die wir haben, ist vom September 2002; wann das Paket beim Compact begann, ist nicht geklärt. [S1, HIGH; S2, HIGH] Und ein von Hand zusammengefasster Scan der Cabrio-Liste vom September 2000 zeigt das Paket schon acht Monate vor der Pressemitteilung; dieser Scan ist mit LOW bewertet, und wir erfassen das als Widerspruch, nicht als Datum. [S6, LOW]
+
+## Die Felgen
+
+Die nützlichste Angabe in den Listen ist die Felge. Für Limousine, Touring, Coupé und Cabrio nennt jede Liste die **68M**, eine 17-Zoll-M-Doppelspeiche mit Mischbereifung. Für den Compact ist es die **97M**. [S2, HIGH] Ab den Listen vom März 2004 lässt sich das Paket bei diesen vier Karosserien wahlweise mit der 68M oder der **135M** bestellen; der Compact behält die 97M. [S2, HIGH]
+
+Das zählt, wenn ein Verkäufer "original M-Sport-Felgen" schreibt. Bei einer Limousine von vor 2004 ist die ehrliche Antwort die 68M; eine 135M an so einem Auto kam später dazu. Wie man die Designs unterscheidet und welche Größen sie haben, steht in ["Sechs Felgen, drei Familien"](/de/blog/telling-e46-wheels-apart).
+
+## Stoßfänger, Sitze und Lenkrad
+
+**Stoßfänger.** BMWs Teilekatalog führt zwei M-Aerodynamik-Frontgruppen unter den Optionscodes S715A und S716A; die frühere Ausführung S715A ist für die Limousine gelistet, die spätere S716A für Limousine und Touring. [S5, MEDIUM] Der Katalog nennt das Paket S338A "M Sportpaket II". Dass dieser Code zur Pressemitteilung über die "zweite Generation" von 2001 gehört, ist unsere Folgerung aus den beiden Namen; kein Dokument, das wir haben, nennt beides zusammen. [S5, MEDIUM] Warum Besitzer das Aerodynamikpaket "M-Tech" nennen, steht in ["'M-Tech' is not a steering wheel"](/de/blog/e46-m-tech-is-not-a-steering-wheel).
+
+**Sitze.** Die Sportsitze des Pakets gehören zu der Klasse, die BMW als "BMW Sportsitz" führt, in Stoff "Laser" mit Alcantara. [S1, HIGH; S2, HIGH] In der Touring-Liste vom September 2004 gab es Sportsitze auch als eigene Option, Code 481, für 500 Euro; das Paket ist einer von zwei Wegen zu ihnen. [S2, HIGH]
+
+**Lenkrad.** Pressemitteilung und Listen nennen das M Sport-Lederlenkrad. [S1, HIGH; S2, HIGH] Es gehört zum Paket, nicht zu einer eigenen Ausstattungslinie.
+
+## Die Editionen und der Clubsport
+
+**Edition Sport (724).** BMWs Pressemappe von 2003 sagt, die Edition Sport für Limousine und Touring "entspricht im Wesentlichen dem bekannten M-Sportpaket mit zusätzlichen Sonderausstattungen". [S3, HIGH] Die deutschen Preislisten bestätigen das: Die Edition Sport enthält das Paket 338, dazu Sitzheizung, Regensensor und Aluminium-Leisten; bei Coupé und Cabrio ab September 2004 außerdem Xenonlicht, Scheinwerfer-Reinigungsanlage und das Multifunktionslenkrad. [S2, HIGH]
+
+**Edition Lifestyle und Edition Exclusive (722, 723)** sind anders: Sie bringen eigene Polster, Leisten und Felgen, nicht das M-Paket. [S3, HIGH; S2, HIGH]
+
+**Clubsport.** In Großbritannien ergänzte BMW im Mai 2002 ein 330Ci Clubsport Coupé für 31.380 Pfund, mit M-Heckspoiler, sportlicher Fahrwerksabstimmung, 18-Zoll-Doppelspeichenfelgen und Sportsitzen in Leder/Alcantara. [S4, HIGH, nur Großbritannien] In Deutschland erscheint der Clubsport als Option 768 beim Coupé ab der Liste vom September 2004, für die meisten Coupé-Modelle, zu 4.200 Euro, und nennt die Felge 135M in seinem Inhalt. [S2, HIGH]
+
+## Vor dem Facelift: die erste Generation
+
+BMW nannte das Paket von 2001 die zweite Generation, es gab also eine erste. Der Katalog führt einen früheren Code "M Sportpaket", P337A, zusammen mit dem Aerodynamikpaket S715A. [S5, MEDIUM] Die einzige frühere deutsche Liste, die wir haben, September 1998 für die Limousine, zeigt nur das M Aerodynamikpaket, kein vollständiges M-Paket. [S6, LOW] Was ein M-Paket der ersten Generation enthielt, ist nicht geklärt.
+
+## Was das für ein Auto heißt, das heute angeboten wird
+
+- **"M-Sport" in einer Anzeige ist eine Aussage über ein Kreuz auf einem Bestellschein.** Die Teile gibt es im Katalog einzeln, und viele wurden seitdem getauscht; prüf also jedes Teil statt der Bezeichnung. [S5, MEDIUM]
+- **Prüf die Felge gegen Karosserie und Datum.** Eine 68M an Limousine, Touring, Coupé oder Cabrio, eine 97M am Compact, eine 135M erst ab 2004. [S2, HIGH]
+- **Sportsitze sind kein Beweis.** Es gab sie auch als eigene Option. [S2, HIGH]
+- **Autos mit Edition Sport haben das Paket**, dazu Heizung, Regensensor und Leisten. [S2, HIGH; S3, HIGH]
+- **Außerhalb Deutschlands gelten die örtlichen Listen.** Dieser Artikel behandelt die deutschen Preislisten; andere Märkte haben das Paket womöglich anders angeboten.
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Die Pressemitteilung von 2001, die Pressemappe von 2003, die britische Clubsport-Mitteilung und die deutschen Preislisten sind BMWs eigene Dokumente, vollständig gelesen; die Preislisten sind private Kopien vom Inhaber, nur für Fakten genutzt und nie zitiert. Optionscodes stammen aus einem Spiegel des Teilekatalogs. Die beiden frühesten deutschen Listen gibt es nur als Scan, bewertet mit LOW.
+
+**Erfasste Widersprüche.** (1) Der Cabrio-Scan vom September 2000 zeigt das Paket vor der Pressemitteilung vom Mai 2001. (2) Forenquellen sagen, die zweite Generation habe mit dem Facelift 2001 begonnen; BMWs Pressemitteilung sagt Mai 2001, und sie gilt. (3) Der Code S338A ist dem Paket von 2001 nur über den Namen zugeordnet.
+
+**Nicht geklärt.** Der Start des Pakets beim Compact; der Inhalt des Pakets der ersten Generation; ob alles, was eine Liste nicht nennt, wirklich fehlte; Optionscodes in anderen Märkten als Deutschland.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Stoßfänger, Felgen, Sitze und Lenkräder an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben.
