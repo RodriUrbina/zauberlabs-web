@@ -16,6 +16,11 @@ describe("own statistics (BL-051)", () => {
     assert.equal(referrerDomain("not a domain"), "direct");
     assert.equal(referrerDomain("http://192.168.0.1/"), "192.168.0.1"); // a dotted host is still only a host
   });
+  test("votes label our own pages as internal, everything else as for reads (BL-051.2)", () => {
+    assert.equal(referrerDomain("www.zauberlabs.de", undefined, "internal"), "internal");
+    assert.equal(referrerDomain("https://www.google.de/", undefined, "internal"), "google.de");
+    assert.equal(referrerDomain("", undefined, "internal"), "direct");
+  });
   test("country code is two letters or XX", () => {
     assert.equal(countryCode("de"), "DE");
     assert.equal(countryCode(null), "XX");

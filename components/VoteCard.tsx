@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { VOTE_CARS, type Car, type CarId } from "@/lib/cars";
 import { dictionaries, type Locale } from "@/lib/i18n";
+import { referrerHost } from "@/lib/beacon-client";
 
 type State = { cars?: Car[]; counts: Record<string, number>; voted: string[] };
 const POLL_MS = 7000;
@@ -42,7 +43,8 @@ export default function VoteCard({ lang }: { lang: Locale }) {
       const res = await fetch("/api/vote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ car, on }),
+        // BL-051.2: host of the page the visitor arrived from (the browser's own document.referrer, nothing stored).
+        body: JSON.stringify(on ? { car, on, r: referrerHost(document.referrer) } : { car, on }),
       });
       if (res.ok) setState(await res.json());
       else load();

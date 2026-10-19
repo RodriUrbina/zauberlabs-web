@@ -44,10 +44,11 @@ export function previousDay(day: string): string {
 const DOMAIN = /^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/;
 
 /**
- * Referrer → domain only ("google.com", "chatgpt.com"). Our own sites, an empty or invalid referrer → "direct".
+ * Referrer → domain only ("google.com", "chatgpt.com"). An empty or invalid referrer → "direct"; our own sites → `ownLabel`
+ * ("direct" for article reads; votes use "internal", since a voter who came from another of our pages did not arrive directly).
  * Path and query are never kept. "www." is dropped so google.com and www.google.com count together.
  */
-export function referrerDomain(referrer: string | null | undefined, ownHosts: readonly string[] = ["zauberlabs.de"]): string {
+export function referrerDomain(referrer: string | null | undefined, ownHosts: readonly string[] = ["zauberlabs.de"], ownLabel = "direct"): string {
   if (!referrer) return "direct";
   let host: string;
   try {
@@ -61,7 +62,7 @@ export function referrerDomain(referrer: string | null | undefined, ownHosts: re
   }
   host = host.replace(/^www\./, "");
   if (host.length > 60 || !DOMAIN.test(host)) return "direct";
-  if (ownHosts.some((own) => host === own || host.endsWith(`.${own}`))) return "direct";
+  if (ownHosts.some((own) => host === own || host.endsWith(`.${own}`))) return ownLabel;
   return host;
 }
 

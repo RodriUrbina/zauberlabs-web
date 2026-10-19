@@ -10,6 +10,9 @@ import { RETENTION_DAYS, TIME_BUCKETS, berlinDay, medianBucket, previousDay, typ
  *   c:{day}          hash  country → views (never stored together with anything else)
  *   k:{day}          hash  configurator → clicks
  *   t:{day}          hash  "page|bucket" → readings, "page|end" → read to the end
+ *   vk:{day}         hash  car → votes cast (BL-051.2; new votes only, never linked to the voter id or cookie)
+ *   vr:{day}         hash  referrer domain of the visit → votes
+ *   vc:{day}         hash  country → votes (never stored together with anything else)
  *   salt:{day}       random value for that day's hash; expires 24 h after it is created
  * Daily keys expire after RETENTION_DAYS. No IP, no User-Agent, no hash is stored outside the HyperLogLog.
  * Preview and local builds write under "m:test:" so tests never mix with production numbers.
@@ -27,6 +30,9 @@ const key = {
   clicks: (d: string) => `${P}k:${d}`,
   time: (d: string) => `${P}t:${d}`,
   salt: (d: string) => `${P}salt:${d}`,
+  votes: (d: string) => `${P}vk:${d}`,
+  voteRefs: (d: string) => `${P}vr:${d}`,
+  voteCountries: (d: string) => `${P}vc:${d}`,
   budget: (month: string) => `${P}budget:${month}`,
 };
 
@@ -140,6 +146,20 @@ export async function recordClick(configurator: string): Promise<void> {
   });
 }
 
+/** BL-051.2 — one new vote: totals per car, per referrer domain and per country, each in its own counter. */
+export async function recordVote(input: { car: string; ref: string; country: string }): Promise<void> {
+  const day = berlinDay();
+  await write((tx) => {
+    tx.hincrby(key.votes(day), input.car, 1);
+    tx.expire(key.votes(day), TTL);
+    tx.hincrby(key.voteRefs(day), input.ref, 1);
+    tx.expire(key.voteRefs(day), TTL);
+    tx.hincrby(key.voteCountries(day), input.country, 1);
+    tx.expire(key.voteCountries(day), TTL);
+    return 6;
+  });
+}
+
 /** For the admin panel: commands the statistics used this month, the budget, and whether counting is paused. */
 export async function getBudget(): Promise<{ month: string; used: number; budget: number; paused: boolean }> {
   const redis = getRedis();
@@ -162,11 +182,12 @@ export type ArticleStats = {
 export type Stats = {
   days: string[];
   totals: { views: number; uniques: number; clicks: number };
-  daily: { day: string; views: number; clicks: number }[];
+  daily: { day: string; views: number; clicks: number; votes: number }[];
   articles: ArticleStats[];
   referrers: { domain: string; views: number }[];
   countries: { code: string; views: number }[];
   clicks: { configurator: string; clicks: number }[];
+  votes: { total: number; cars: { car: string; votes: number }[]; referrers: { domain: string; votes: number }[]; countries: { code: string; votes: number }[] };
 };
 
 type Hash = Record<string, number | string> | null;
@@ -179,7 +200,16 @@ const sorted = (m: Map<string, number>) => [...m.entries()].sort((a, b) => b[1] 
 
 /** Sums the daily counters for the given days. Unique readers are summed per day (a reader on two days counts twice). */
 export async function getStats(days: string[]): Promise<Stats> {
-  const empty: Stats = { days, totals: { views: 0, uniques: 0, clicks: 0 }, daily: [], articles: [], referrers: [], countries: [], clicks: [] };
+  const empty: Stats = {
+    days,
+    totals: { views: 0, uniques: 0, clicks: 0 },
+    daily: [],
+    articles: [],
+    referrers: [],
+    countries: [],
+    clicks: [],
+    votes: { total: 0, cars: [], referrers: [], countries: [] },
+  };
   const redis = getRedis();
   if (!redis) return empty;
   const today = berlinDay();
@@ -193,7 +223,11 @@ export async function getStats(days: string[]): Promise<Stats> {
     tx.hgetall(key.countries(d));
     tx.hgetall(key.clicks(d));
     tx.hgetall(key.time(d));
+    tx.hgetall(key.votes(d));
+    tx.hgetall(key.voteRefs(d));
+    tx.hgetall(key.voteCountries(d));
   }
+  const PER_DAY = 9;
   const res = (await tx.exec()) as Hash[];
 
   const views = new Map<string, number>();
@@ -202,21 +236,28 @@ export async function getStats(days: string[]): Promise<Stats> {
   const countries = new Map<string, number>();
   const clicks = new Map<string, number>();
   const time = new Map<string, number>();
+  const voteCars = new Map<string, number>();
+  const voteRefs = new Map<string, number>();
+  const voteCountries = new Map<string, number>();
   const daily: Stats["daily"] = [];
   let todayPages: string[] = [];
 
   days.forEach((d, i) => {
-    const [v, u, r, c, k, t] = res.slice(i * 6, i * 6 + 6);
+    const [v, u, r, c, k, t, vk, vr, vc] = res.slice(i * PER_DAY, (i + 1) * PER_DAY);
     addInto(views, v);
     addInto(uniques, u);
     addInto(refs, r);
     addInto(countries, c);
     addInto(clicks, k);
     addInto(time, t);
+    addInto(voteCars, vk);
+    addInto(voteRefs, vr);
+    addInto(voteCountries, vc);
     daily.push({
       day: d,
       views: Object.values(v ?? {}).reduce<number>((s, n) => s + num(n), 0),
       clicks: Object.values(k ?? {}).reduce<number>((s, n) => s + num(n), 0),
+      votes: Object.values(vk ?? {}).reduce<number>((s, n) => s + num(n), 0),
     });
     if (d === today) todayPages = Object.keys(v ?? {});
   });
@@ -252,5 +293,11 @@ export async function getStats(days: string[]): Promise<Stats> {
     referrers: sorted(refs).map(([domain, n]) => ({ domain, views: n })),
     countries: sorted(countries).map(([code, n]) => ({ code, views: n })),
     clicks: sorted(clicks).map(([configurator, n]) => ({ configurator, clicks: n })),
+    votes: {
+      total: [...voteCars.values()].reduce((s, n) => s + n, 0),
+      cars: sorted(voteCars).map(([car, n]) => ({ car, votes: n })),
+      referrers: sorted(voteRefs).map(([domain, n]) => ({ domain, votes: n })),
+      countries: sorted(voteCountries).map(([code, n]) => ({ code, votes: n })),
+    },
   };
 }

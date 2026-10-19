@@ -68,14 +68,14 @@ export async function getCounts(cars?: Car[]): Promise<Record<CarId, number>> {
   return out;
 }
 
-/** Adds or removes one voter's vote for a car. Returns the new count. */
-export async function setVote(car: CarId, voter: string, on: boolean): Promise<number> {
+/** Adds or removes one voter's vote for a car. Returns the new count and whether the vote actually changed. */
+export async function setVote(car: CarId, voter: string, on: boolean): Promise<{ count: number; changed: boolean }> {
   const redis = getRedis();
   const key = `voters:${car}`;
   if (redis) {
     const changed = on ? await redis.sadd(key, voter) : await redis.srem(key, voter);
-    if (changed) return redis.hincrby("votes", car, on ? 1 : -1);
-    return Number((await redis.hget<number>("votes", car)) ?? 0);
+    if (changed) return { count: await redis.hincrby("votes", car, on ? 1 : -1), changed: true };
+    return { count: Number((await redis.hget<number>("votes", car)) ?? 0), changed: false };
   }
   const set = mem.voters.get(key) ?? new Set<string>();
   mem.voters.set(key, set);
@@ -84,7 +84,7 @@ export async function setVote(car: CarId, voter: string, on: boolean): Promise<n
   if (!on && had) set.delete(voter);
   const n = (mem.counts.get(car) ?? 0) + (on && !had ? 1 : !on && had ? -1 : 0);
   mem.counts.set(car, n);
-  return n;
+  return { count: n, changed: on !== had };
 }
 
 export async function getVotedBy(voter: string, cars?: Car[]): Promise<CarId[]> {
