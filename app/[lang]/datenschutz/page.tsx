@@ -107,7 +107,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         eine kurze Meldung an unseren Server: welcher Artikel in welcher Sprache aufgerufen wurde und von welcher Website du kamst – nur deren
         Domainname, z. B. google.com. Beim Verlassen der Seite meldet er, wie lange der Artikel ungefähr aktiv angezeigt wurde und ob du bis zum
         Ende gelesen hast. Klicks auf Links zu unseren Konfiguratoren zählen wir ebenso. Dein ungefähres Land, das unser Hoster aus deiner
-        IP-Adresse ableitet, zählen wir getrennt von allen anderen Angaben.
+        IP-Adresse ableitet, zählen wir getrennt von allen anderen Angaben. Gibst du eine Stimme im Community-Voting ab, zählen wir außerdem pro
+        Tag, für welches Auto abgestimmt wurde, von welcher Website du auf unsere Seite gekommen bist (nur der Domainname) und – getrennt davon –
+        dein ungefähres Land; diese Zähler sind nicht mit der zufälligen Kennung aus Abschnitt 7 verknüpft.
       </p>
       <p>
         Gespeichert werden ausschließlich Tageszähler (z. B. „Artikel X: 42 Aufrufe“) bei unserem Datenbank-Dienstleister (Abschnitt 9); Daten
