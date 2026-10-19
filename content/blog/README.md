@@ -26,7 +26,7 @@ updated: 2026-10-07                # optional, not before date
 lang: en                           # optional; must match the file name
 slug: e46-steering-wheel-swaps     # optional; must match the folder name
 card: BL-015                       # optional; the Trello card
-author: Zauberlabs                 # optional, default "Zauberlabs"; a person's name is allowed
+author: zauberlabs                 # optional, default "zauberlabs"; a person's name is allowed
 tags: [E46, Steering wheels, Safety]   # 1–8; MUST include the configurator tag; each tag gets its own page
 configurator: E46                  # or  configurator: { tag: E46, url: https://e46.zauberlabs.de/steering-wheels }
 cta:                               # optional override of the "Try it on your car" button
@@ -35,7 +35,7 @@ cta:                               # optional override of the "Try it on your ca
 hero:
   src: /blog/e46-steering-wheel-swaps/hero.jpg   # file under public/; `null` while no licensed image exists → labelled placeholder
   alt: "E46 steering wheel with multifunction buttons, studio shot"
-  credit: "AI-generated (Zauberlabs)"            # required when src is set
+  credit: "AI-generated (zauberlabs)"            # required when src is set
   licence: "AI-generated, labelled"              # required when src is set
   placeholder: "Brief for the image still to be made"   # optional
 evidenceRoot: "e46build master docs/research/"  # optional; shown as "Paths are relative to …"
@@ -97,7 +97,7 @@ Optional building blocks (nothing else is available):
 Do your low beams swivel when you steer?
 </Callout>
 
-<Figure src="/blog/<slug>/levelling-unit.jpg" alt="…" caption="…" credit="Zauberlabs" />
+<Figure src="/blog/<slug>/levelling-unit.jpg" alt="…" caption="…" credit="zauberlabs" />
 
 <ConfiguratorLink>Find the right headlight for your production date</ConfiguratorLink>
 ```
