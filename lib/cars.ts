@@ -4,7 +4,6 @@ export const VOTE_CARS = [
   { id: "golf", name: "VW Golf" },
   { id: "a4", name: "Audi A4" },
   { id: "w203", name: "Mercedes W203" },
-  { id: "is200", name: "Lexus IS200" },
 ] as const;
 
 /** A car id: one of the built-in ids above, or a slug of an approved suggestion. */

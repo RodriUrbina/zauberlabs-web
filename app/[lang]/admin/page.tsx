@@ -8,7 +8,7 @@ type Car = { id: string; name: string; votes: number };
 type State = { suggestions: Suggestion[]; cars: Car[] };
 
 const KEY = "zl_admin_pw";
-const BUILT_IN = new Set(["golf", "a4", "w203", "is200"]);
+const BUILT_IN = new Set(["golf", "a4", "w203"]);
 
 export default function Admin() {
   const [pw, setPw] = useState("");
