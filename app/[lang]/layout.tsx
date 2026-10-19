@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import localFont from "next/font/local";
 import SiteAnalytics from "@/components/SiteAnalytics";
+import ConfiguratorClickTracker from "@/components/ConfiguratorClickTracker";
 import { dictionaries, isLocale, LOCALES } from "@/lib/i18n";
 import "../globals.css";
 
@@ -63,6 +64,8 @@ export default async function RootLayout({ children, params }: { children: React
             Collects nothing until Web Analytics is enabled in the Vercel dashboard (project → Analytics → Enable).
             BL-039: devices carrying the zl_internal marker (the PO's own) are excluded — see components/SiteAnalytics.tsx. */}
         <SiteAnalytics />
+        {/* BL-050: "configurator_click" custom event ({ configurator: "e46" } only) — needs Vercel Pro to show up. */}
+        <ConfiguratorClickTracker />
       </body>
     </html>
   );
