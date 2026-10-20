@@ -5,6 +5,10 @@ import type { Stats } from "@/lib/metrics-store";
 
 type Budget = { month: string; used: number; budget: number; paused: boolean };
 
+/** "2026-10-21" → "21 Oct 2026" */
+const sinceLabel = (day: string) =>
+  new Date(`${day}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+
 const RANGES = [7, 30, 90] as const;
 
 const nf = new Intl.NumberFormat("de-DE");
@@ -45,7 +49,7 @@ function Ranked({ title, rows, empty }: { title: string; rows: { label: string; 
  */
 export default function StatsPanel({ password }: { password: string }) {
   const [days, setDays] = useState<(typeof RANGES)[number]>(30);
-  const [stats, setStats] = useState<(Stats & { budget?: Budget }) | null>(null);
+  const [stats, setStats] = useState<(Stats & { budget?: Budget; since?: string }) | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -91,6 +95,7 @@ export default function StatsPanel({ password }: { password: string }) {
         are not counted.
       </p>
       {error && <p className="text-sm text-accent" role="alert">{error}</p>}
+      {stats?.since && <p className="text-sm font-semibold text-ink">Counting since {sinceLabel(stats.since)}.</p>}
       {stats?.budget && (
         <p className={`text-sm ${stats.budget.paused ? "text-accent" : "text-muted"}`} role={stats.budget.paused ? "alert" : undefined}>
           {stats.budget.paused ? "Counting is paused until the end of the month: " : "Redis budget for statistics this month: "}
