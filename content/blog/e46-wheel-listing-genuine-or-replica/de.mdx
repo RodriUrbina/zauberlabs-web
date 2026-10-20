@@ -1,0 +1,120 @@
+---
+# BL-062.3 — Writer draft, German. Same slug and sources as en.mdx.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+# No seller, guide publisher or replica brand is named.
+title: "Original oder Nachbau? So liest du eine E46-Felgenanzeige"
+description: "\"Style 68\", \"OEM-Optik\", \"4er-Satz\": was eine E46-Felgenanzeige verrät, warum Ratgeber mehr Designs nennen als BMWs Katalog und welches Detail entscheidet."
+date: 2026-10-20
+updated: 2026-11-06
+publishAt: "2026-11-06"
+lang: de
+slug: e46-wheel-listing-genuine-or-replica
+card: BL-062
+author: "zauberlabs"
+tags:
+  - E46
+  - wheels
+  - buying guide
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # PO decides
+  alt: "Eine gebrauchte Leichtmetallfelge liegt mit der Vorderseite nach oben auf einer Werkbank, daneben ein Maßband"
+  credit: "KI-generierte Illustration"
+  licence: null
+  placeholder: "Proposal: reuse one of the PO's canonical wheel images (T-069) or a new AI image: one used silver alloy wheel face up on a workbench, a tape measure beside it, the back of a second wheel visible. Must not show: legible brand names or part numbers, people."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-079 — Werksfelgen des E46: in T-030 gespeicherte Seiten eines BMW-Teilekatalog-Spiegels (17 Felgengruppen-Indizes, 98 Design-Seiten für 325 und 330) im Vergleich mit dem Online-Felgenratgeber eines Teilehändlers"
+    type: ETK-Spiegel (ein Spiegel), mit einem Händlerratgeber als Vergleich
+    path: "t079-e46-wheel-styles/README.md; t079-e46-wheel-styles/inventory.json"
+    confidence: MEDIUM
+    note: "MEDIUM für das, was die gespeicherten Katalogseiten führen; nur 325 und 330 wurden gelesen, 'nicht gelistet' heißt also 'nicht in dem, was wir haben'. Die Aussagen des Ratgebers selbst sind LOW und zugeordnet."
+  - id: S2
+    title: "T-035.1 — Größen, Einpresstiefen und Teilenummern der wichtigsten Werksfelgen (bmwfans.info, Europa-Bäume, von einem zweiten Spiegel bestätigt)"
+    type: ETK-Spiegel
+    path: "t035-evidence/REPORT.md; t035-evidence/applicability-by-market.md"
+    confidence: MEDIUM
+  - id: S3
+    title: "T-096 — wo E46-Felgensätze in Europa gehandelt werden, Oktober 2026: Fachhändler, Verwerter-Marktplätze, Kleinanzeigen und Auktionsseiten; Nachbau-Sätze mit BMW-Designnamen beschrieben"
+    type: Marktbeobachtung (Suchergebnisse und Shopseiten, hier kein Verkäufer genannt)
+    path: "t096-wheel-sets/README.md"
+    confidence: LOW
+  - id: S4
+    title: "T-087 — die Projektregel, dass es einen Felgensatz nur gibt, wenn ein Verkäufer ihn anbietet, und dass nur eine angegebene BMW-Teilenummer ein Angebot einer Katalogfelge zuordnet"
+    type: Projektnachweis
+    path: "t087-wheel-sets/README.md; t096-wheel-sets/README.md"
+    confidence: n/a
+  - id: S5
+    title: "BMW Preislisten Deutschland 2004–2006 (SR-0067): die Felgendesigns, die für die Editionen Lifestyle und Exclusive genannt werden"
+    type: "von BMW verfasst (Preislisten), vom PO bereitgestellt; privat, nur Fakten"
+    path: "t071-factory-packages/pricelists-de-packages.json; t071-factory-packages/README.md (Step 2)"
+    confidence: HIGH
+---
+
+Wer nach einem Satz E46-Felgen sucht, findet Anzeigen mit BMWs eigenen Begriffen: "Style 68", "M-Doppelspeiche", "Original-Optik", "passt an alle E46". Manche sind Original-BMW-Felgen. Viele nicht, und ein paar sind Originalfelgen eines anderen BMW. Die Worte einer Anzeige sind geschrieben, um gefunden zu werden, nicht um genau zu sein. Dieser Artikel zeigt, was eine Felgenanzeige verraten kann, warum selbst sorgfältig wirkende Felgenratgeber mehr "E46-Designs" nennen, als BMWs Katalog kennt, und welches Detail entscheidet, ob eine Felge die ist, die du willst.
+
+## Kurz gesagt
+
+- **Ein Designname ist kein Beweis.** Nachbau-Sätze werden mit BMW-Designnamen und Worten wie "kompatibel" oder "Optik" angeboten. [S3, LOW]
+- **Die BMW-Teilenummer entscheidet**, mit der zugehörigen Größe und Einpresstiefe. Sie ist das einzige Detail, mit dem E46BUILD ein Angebot einer Werksfelge zuordnet. [S4; S2, MEDIUM]
+- **Felgenratgeber nennen mehr Designs als der Katalog.** Der Ratgeber eines bekannten Händlers nennt 54 E46-Designs; die Katalogseiten, die wir für 325 und 330 haben, führen 42 davon und nennen für 23 die Größen. [S1, MEDIUM]
+- **Ratgeber und Katalog können bei der Größe abweichen.** Bei zwei Designs nennt der Ratgeber eine 17-Zoll-Ausführung, die die Katalogseiten nicht zeigen. [S1, MEDIUM; der Ratgeber LOW]
+- **Sätze werden meist privat gehandelt.** Fachhändler für gebrauchte Originalfelgen hatten bei unserer Prüfung keine E46-Sätze mehr; die meisten Sätze laufen über Kleinanzeigen und Auktionsseiten. [S3, LOW]
+
+## Was die Worte in einer Anzeige bedeuten
+
+**"Style 68", "M-Doppelspeiche", "Style 135M".** Das sind BMWs Designnummern und -namen. Richtig verwendet bezeichnen sie ein Original-BMW-Design; in einer Nachbau-Anzeige beschreiben sie, was die Kopie nachahmt. Unsere Recherche fand auf europäischen Marktplätzen Nachbau-Sätze, die mit einer BMW-Designnummer und Worten wie "kompatibel" beschrieben waren. [S3, LOW]
+
+**"OEM", "original", "Original-BMW".** Das sind Behauptungen. Eine Anzeige, die "original" sagt und eine BMW-Teilenummer nennt, lässt sich prüfen; eine, die "Original-Optik" sagt, sagt dir, dass sie es nicht ist.
+
+**"Passt an alle E46".** Lochkreis und Mittenbohrung sind an jedem E46 gleich, fast jede Felge mit 5×120 lässt sich also montieren. Ob sie eine Werksfelge ist und ob sie über Bremse und Radhaus passt, ist eine andere Frage. [S2, MEDIUM]
+
+**"4er-Satz".** Bei einem Design mit Mischbereifung besteht ein Satz aus zwei Vorder- und zwei Hinterrädern unterschiedlicher Breite und Einpresstiefe, jedes mit eigener BMW-Nummer. Vier gleiche Felgen als Mischsatz verkauft sind keiner. [S2, MEDIUM]
+
+## Das Detail, das entscheidet: die BMW-Teilenummer
+
+Jede Werksfelge des E46 hat eine BMW-Teilenummer, und der Teilekatalog ordnet jeder Nummer eine Größe und eine Einpresstiefe zu. Style 44 zum Beispiel ist eine Nummer für alle vier Ecken, 8×17 mit 47 mm Einpresstiefe; Style 68M hat eine Nummer für das 7,5×17-Vorderrad und eine andere für das 8,5×17-Hinterrad. [S2, MEDIUM] E46BUILD ordnet das Angebot eines Verkäufers nur dann einer Werksfelge zu, wenn es eine BMW-Nummer nennt, die der Katalog kennt. [S4]
+
+Die Fragen an einen Verkäufer sind also einfach: Welche BMW-Nummer steht auf jeder Felge, und welche Größe und Einpresstiefe? Passen die Antworten zum Katalog, ist die Felge das, was die Anzeige sagt. Kann der Verkäufer keine Nummer nennen, beschreibt die Anzeige eine Optik.
+
+## Warum Ratgeber mehr Designs nennen als BMW
+
+Felgenratgeber helfen, Designs zu erkennen. Als Beleg dafür, womit ein E46 das Werk verließ, sind sie schwächer, als sie wirken. Unsere Recherche hat einen viel gelesenen Ratgeber eines Teilehändlers mit den Katalogseiten verglichen, die wir haben. [S1, MEDIUM]
+
+- **Umfang.** Der Ratgeber nennt 54 Designs als E46-Designs. Die Katalog-Indizes, die wir für 325 und 330 in Europa haben, führen 42 davon. Zwölf sind nicht in dem, was wir haben; einige davon sind M3-Designs, die wir nicht gelesen haben, "nicht gelistet" heißt hier also nie "passt nicht". [S1, MEDIUM]
+- **Größen.** Der Ratgeber nennt nur Durchmesser, und viele Einträge sagen einfach "auch an" einem anderen BMW. Nur 23 der 54 Designs haben eine gespeicherte Katalogseite mit Breite, Einpresstiefe und Teilenummer. [S1, MEDIUM]
+- **Abweichungen.** Für Style 43 nennt der Ratgeber 16 und 17 Zoll; die Katalogseite zeigt eine 7×16-Felge. Für Style 169 sagt der Ratgeber 17 Zoll; die Katalogseite nennt 7×16. [S1, MEDIUM; der Ratgeber LOW]
+- **Lücken in die andere Richtung.** Der Katalog führt Designs, die der Ratgeber auslässt, darunter Style 170 und 171, die BMWs deutsche Preislisten für die Editionen von Coupé und Cabrio nennen, und ein Design, das der Katalog selbst als BMW-Performance-Zubehör statt als Werksfelge bezeichnet. [S1, MEDIUM; S5, HIGH]
+
+Das macht den Ratgeber nicht wertlos. Es heißt, dass ein Ratgeber-Eintrag oder eine Anzeige, die einen abschreibt, ein Hinweis ist. Der Beleg ist die Teilenummer.
+
+## Einzelfelgen und Sätze
+
+Neue Original-BMW-Felgen werden meist einzeln verkauft, und E46BUILD zeigt einen Satz nur, wenn ein Verkäufer ihn anbietet. [S4] Bei unserer Suche nach E46-Sätzen im Oktober 2026 hatten Fachhändler für gebrauchte Originalfelgen nur noch spätere BMW-Modelle statt E46-Felgen, Verwerter-Marktplätze verkauften Einzelfelgen, und die meisten E46-Sätze wechselten über Kleinanzeigen und Auktionsseiten den Besitzer, oft von privat. [S3, LOW] Dort sind auch die meisten Nachbau-Sätze. [S3, LOW]
+
+Bei einem Mischsatz prüf, ob ein gebrauchter Satz wirklich zwei Vorder- und zwei Hinterräder enthält und ob die Vordernummern untereinander und die Hinternummern untereinander übereinstimmen. Ein Satz aus Felgen verschiedener Autos ist häufig und kein Problem, solange die Nummern zusammenpassen. [S2, MEDIUM]
+
+## Checkliste für eine Felgenanzeige
+
+1. **Frag nach der BMW-Teilenummer auf jeder Felge.** Keine Nummer, kein Beweis. [S4]
+2. **Prüf Größe und Einpresstiefe gegen den Katalog**, vorn und hinten bei Mischbereifung. [S2, MEDIUM]
+3. **Gleich das Design mit der Nummer ab.** Unser Ratgeber ["Sechs Felgen, drei Familien"](/de/blog/telling-e46-wheels-apart) zeigt die wichtigsten Werksdesigns.
+4. **Nimm "Optik", "Style", "kompatibel" und "OEM-Design" als Worte eines Nachbaus**, bis eine Nummer etwas anderes sagt. [S3, LOW]
+5. **Zähl den Satz:** vier gleiche Felgen bei einem rundum gleichen Design, zwei plus zwei bei Mischbereifung. [S2, MEDIUM]
+6. **Nutz den Preis als Plausibilitätsprüfung.** Was neue Originalfelgen kosten, Design für Design, steht in ["Was vier originale E46-Felgen 2026 wirklich kosten"](/de/blog/e46-four-genuine-wheels-cost); ein "originaler" Satz weit darunter verdient eine Nachfrage.
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Die Katalogfakten stammen aus einem Spiegel des Teilekatalogs, gelesen nur für 325 und 330, und für die wichtigsten Designs aus einem zweiten Spiegel. Der Felgenratgeber ist eine Veröffentlichung eines Händlers und dient nur als Vergleichsgegenstand; seine Aussagen sind LOW. Das Marktbild ist eine datierte Suche, bewertet mit LOW. Die Regel, dass nur eine BMW-Nummer ein Angebot zuordnet, ist E46BUILDs eigene.
+
+**Erfasste Widersprüche.** (1) Style 43 und Style 169: die 17-Zoll-Größen des Ratgebers gegen die 7×16 des Katalogs. (2) Zwölf Ratgeber-Designs sind nicht in den Katalogseiten, die wir haben, teils weil wir den M3 und die kleineren Motoren nicht gelesen haben.
+
+**Nicht geklärt.** Welche Designs 316, 318, 320 und die Diesel führen; ob jede Ratgeber-Größe falsch ist oder nur in unseren Seiten fehlt; wie die eigenen Designs des M3 im Katalog erscheinen.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Felgen an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben.
