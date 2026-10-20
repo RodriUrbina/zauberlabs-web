@@ -47,7 +47,8 @@ body {
 @media (min-width: 768px) {
   .home-hero { --hero-h: max(280px, calc(100vh - 366px)); }
   @supports (height: 100svh) { .home-hero { --hero-h: max(280px, calc(100svh - 366px)); } }
-  .home-hero .hero-frame { width: min(100%, 1200px, calc(var(--hero-h) * 2)); margin-inline: auto; }
+  .home-hero .hero-frame,
+  .home-hero .hero-picks { width: min(100%, 1200px, calc(var(--hero-h) * 2)); margin-inline: auto; } /* BL-064: picks line up with the frame */
 }
 
 /* ---------- Blog article typography (Tailwind typography plugin themed to the brand tokens) ---------- */

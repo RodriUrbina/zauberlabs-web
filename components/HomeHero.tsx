@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Arrow } from "@/components/Icons";
-import { dictionaries, E46_LIVE, E46_URL, type Locale } from "@/lib/i18n";
+import { dictionaries, E46_LIVE, E46_URL, e46StartUrl, type Locale } from "@/lib/i18n";
 
 /**
  * BL-053 (PO decision 2026-10-19) — home hero, concept C "Headline on paper" (Agent 3's mockup): the headline on the page
@@ -64,6 +64,23 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
         </div>
       </div>
 
+      {/* BL-064 (PO pick 2026-10-20): one quiet row of body buttons under the frame; each opens E46BUILD with that body
+          pre-chosen (same tab, like the other home links). Outline pills, so the hero button stays the one primary action. */}
+      {E46_LIVE && (
+        <nav aria-label={t.pickLead} className="hero-picks flex flex-wrap items-center justify-center gap-x-3 gap-y-2.5 md:justify-start">
+          <span className="w-full text-center text-[15px] text-body md:mr-1 md:w-auto md:text-left">{t.pickLead}</span>
+          {dictionaries[lang].garage.bodies.map((b) => (
+            <a
+              key={b.start}
+              href={e46StartUrl(b.start)}
+              rel="nofollow" // each load creates a build on E46BUILD; crawlers should not follow these
+              className="inline-flex h-9 items-center rounded-full border border-line px-4 text-sm font-semibold text-ink hover:border-ink"
+            >
+              {b.name}
+            </a>
+          ))}
+        </nav>
+      )}
     </section>
   );
 }

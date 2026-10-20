@@ -2,12 +2,21 @@ import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { dictionaries, LOCALES } from "../lib/i18n";
+import { dictionaries, e46StartUrl, LOCALES } from "../lib/i18n";
 import { SITE_OG_IMAGE } from "../lib/blog-og";
 
 const pub = (p: string) => path.join(process.cwd(), "public", p);
 
 describe("home page (BL-053)", () => {
+  test("body buttons use the agreed E46BUILD start values, same in EN and DE (BL-064)", () => {
+    for (const lang of LOCALES) {
+      assert.deepEqual(dictionaries[lang].garage.bodies.map((b) => b.start), ["sedan", "touring", "coupe", "convertible", "compact", "m3"]);
+    }
+    assert.equal(e46StartUrl("coupe"), "https://e46.zauberlabs.de/?start=coupe");
+    const hero = fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8");
+    assert.match(hero, /href=\{e46StartUrl\(b\.start\)\}\s+rel="nofollow"/, "start links carry rel=nofollow");
+    assert.ok(!/e46StartUrl[\s\S]{0,200}target=/.test(hero), "start links stay in the same tab");
+  });
   test("garage card: the M3 Touring image (BL-053.1), no second video on the page", () => {
     assert.ok(fs.existsSync(pub("/images/e46-m3-touring-garage-centred.webp")));
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");

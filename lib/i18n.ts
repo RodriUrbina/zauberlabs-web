@@ -18,6 +18,7 @@ const en = {
     cta: "Start with your E46",
     videoAlt: "E46BUILD in use: a silver BMW E46 Coupé while the search types “BMW E46 330Ci Coupe” and the parts that fit appear",
     ogAlt: "E46BUILD: a silver BMW E46 Coupé with the search bar reading “BMW E46 330Ci Coupe”",
+    pickLead: "Which E46 do you drive?",
   },
   ticker: ["E46BUILD — live", "Community vote — live", "Your car? Suggest it"],
   tickerSoon: "E46BUILD — coming soon",
@@ -31,12 +32,12 @@ const en = {
     e46Body: "Headlights, bumpers, wheels, seats and steering wheels — shown on your E46, matched to its production date, with OEM part numbers and offers side by side.",
     open: "Open configurator",
     bodies: [
-      { name: "Sedan", years: "1998–2005", img: "/images/sedan.jpg" },
-      { name: "Touring", years: "1999–2005", img: "/images/touring.jpg" },
-      { name: "Coupé", years: "1999–2006", img: "/images/coupe.jpg" },
-      { name: "Convertible", years: "2000–2006", img: "/images/convertible.jpg" },
-      { name: "Compact", years: "2001–2004", img: "/images/compact.jpg" },
-      { name: "M3", years: "2000–2006", img: "/images/m3.jpg" },
+      { name: "Sedan", years: "1998–2005", img: "/images/sedan.jpg", start: "sedan" },
+      { name: "Touring", years: "1999–2005", img: "/images/touring.jpg", start: "touring" },
+      { name: "Coupé", years: "1999–2006", img: "/images/coupe.jpg", start: "coupe" },
+      { name: "Convertible", years: "2000–2006", img: "/images/convertible.jpg", start: "convertible" },
+      { name: "Compact", years: "2001–2004", img: "/images/compact.jpg", start: "compact" },
+      { name: "M3", years: "2000–2006", img: "/images/m3.jpg", start: "m3" },
     ],
     e46CardAlt: "E46 M3 Touring, the one-off prototype BMW built but never sold: a dream build",
     nextLabel: "03 · Open slot",
@@ -164,6 +165,7 @@ const de: Dict = {
     cta: "Starte mit deinem E46",
     videoAlt: "E46BUILD im Einsatz: ein silbernes BMW E46 Coupé, während die Suche „BMW E46 330Ci Coupe“ tippt und die passenden Teile erscheinen",
     ogAlt: "E46BUILD: ein silbernes BMW E46 Coupé, in der Suchleiste steht „BMW E46 330Ci Coupe“",
+    pickLead: "Welchen E46 fährst du?",
   },
   ticker: ["E46BUILD — live", "Community-Voting — live", "Dein Auto? Schlag es vor"],
   tickerSoon: "E46BUILD — bald verfügbar",
@@ -177,12 +179,12 @@ const de: Dict = {
     e46Body: "Scheinwerfer, Stoßstangen, Felgen, Sitze und Lenkräder – direkt an deinem E46 gezeigt, abgestimmt aufs Produktionsdatum, mit OE-Teilenummern und Angeboten im Vergleich.",
     open: "Konfigurator öffnen",
     bodies: [
-      { name: "Limousine", years: "1998–2005", img: "/images/sedan.jpg" },
-      { name: "Touring", years: "1999–2005", img: "/images/touring.jpg" },
-      { name: "Coupé", years: "1999–2006", img: "/images/coupe.jpg" },
-      { name: "Cabrio", years: "2000–2006", img: "/images/convertible.jpg" },
-      { name: "Compact", years: "2001–2004", img: "/images/compact.jpg" },
-      { name: "M3", years: "2000–2006", img: "/images/m3.jpg" },
+      { name: "Limousine", years: "1998–2005", img: "/images/sedan.jpg", start: "sedan" },
+      { name: "Touring", years: "1999–2005", img: "/images/touring.jpg", start: "touring" },
+      { name: "Coupé", years: "1999–2006", img: "/images/coupe.jpg", start: "coupe" },
+      { name: "Cabrio", years: "2000–2006", img: "/images/convertible.jpg", start: "convertible" },
+      { name: "Compact", years: "2001–2004", img: "/images/compact.jpg", start: "compact" },
+      { name: "M3", years: "2000–2006", img: "/images/m3.jpg", start: "m3" },
     ],
     e46CardAlt: "E46 M3 Touring: der Einzelprototyp, den BMW gebaut, aber nie verkauft hat – ein Traum-Build",
     nextLabel: "03 · Freier Platz",
@@ -297,6 +299,11 @@ export const dictionaries: Record<Locale, Dict> = { en, de };
 
 // Where the E46 configurator lives. Change once the subdomain is set up.
 export const E46_URL = process.env.NEXT_PUBLIC_E46_URL ?? "https://e46.zauberlabs.de";
+/**
+ * BL-064: open E46BUILD with a body pre-chosen. Contract with Agent 3 (E46BUILD entry param): `/?start=<value>`, values as in
+ * garage.bodies[].start (sedan, touring, coupe, convertible, compact, m3).
+ */
+export const e46StartUrl = (start: string) => `${E46_URL.replace(/\/+$/, "")}/?start=${encodeURIComponent(start)}`;
 // THE E46 SWITCH (PO decision 2026-10-02, BL-001): the configurator is not online yet, so every
 // E46 button on the site and the article CTA show "coming soon" with no link.
 // Going live is a one-line change: set NEXT_PUBLIC_E46_LIVE=1 on Vercel (or flip the fallback to true).
