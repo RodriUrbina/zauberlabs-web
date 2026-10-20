@@ -80,7 +80,7 @@ export default async function Impressum({ params }: { params: Promise<{ lang: st
       <h2>Hinweis zu Partnerlinks</h2>
       <p>
         Einige Links zu externen Händlern können sogenannte Affiliate-Links sein. Kaufst du über einen solchen Link, erhalten wir unter Umständen
-        eine Provision. Für dich ändert sich der Preis dadurch nicht.
+        eine Provision. Für dich ändert sich der Preis dadurch nicht. Als Partner im eBay Partner Network verdienen wir an qualifizierten Käufen.
       </p>
 
       <h2>Marken</h2>
