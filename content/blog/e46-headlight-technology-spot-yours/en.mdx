@@ -1,0 +1,152 @@
+---
+# BL-062.2 — Writer draft, English. Body is Markdown plus Figure blocks.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+# Figures: the PO's AI headlight illustrations (T-022 originals); four PO images left out (two combinations the catalogue does not have; two facelift pictures that do not show the units correctly).
+title: "Halogen, xenon, bi-xenon or adaptive? How to tell which E46 headlight you have"
+description: "Which headlight technology your E46 can have depends on body and build date. What each looks like lit, which cues are reliable, and which ones mislead."
+date: 2026-10-20
+updated: 2026-11-03
+publishAt: "2026-11-03"
+lang: en
+slug: e46-headlight-technology-spot-yours
+card: BL-062
+author: "zauberlabs"
+tags:
+  - E46
+  - headlights
+  - xenon
+  - buying guide
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: "/blog/e46-headlight-technology-spot-yours/pre-xenon.webp"
+  alt: "AI illustration of the headlight of a silver pre-facelift E46 Sedan with the xenon headlight lit"
+  credit: "AI-generated illustration"
+  licence: "zauberlabs, own AI illustration (PO)"
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-024 part c — Coupé/Convertible headlight table from saved BMW parts-catalogue mirror pages (bmwfans.info and eStore-Central), incl. month views and option codes"
+    type: ETK mirrors (two mirrors for Europe)
+    path: "t024-partc-evidence/headlight-table.md; t024-partc-evidence/REPORT.md"
+    confidence: HIGH
+    note: "HIGH for the Europe part families per band; dates MEDIUM; option codes MEDIUM (one mirror)."
+  - id: S2
+    title: "T-030 — Sedan/Touring headlight numbers per production band (bmwfans.info Europe and USA trees, month views; eStore-Central Europe)"
+    type: ETK mirrors (two mirrors for Europe)
+    path: "t030-evidence/sedan-touring-markets.json"
+    confidence: HIGH
+    note: "HIGH for the families per band in Europe; the September 2001 month MEDIUM."
+  - id: S3
+    title: "BMW Group press kits, model year 2002: UK 'The new BMW 3 Series Saloon and Touring' (26 Oct 2001) and BMW USA MY2002 3 Series"
+    type: BMW-authored (press kits)
+    path: "t032-evidence/raw/bmw-press-uk-2001-3series-page.html; t032-evidence/raw/bmw-press-us-my2002-3series-page.html"
+    confidence: HIGH
+  - id: S4
+    title: "T-032 Q1 — owner-forum and retailer cues for telling halogen from xenon (PistonHeads, E46Zone threads; a retrofit retailer's page)"
+    type: forum and retailer
+    path: "t032-evidence/T-032-findings.md (Q1); t032-evidence/raw/forum-and-secondary-quotes.md"
+    confidence: LOW
+    note: "Never decides. No BMW source describes how the units look."
+  - id: S5
+    title: "T-025 — Compact headlights on two catalogue mirrors (halogen and bi-xenon only, no running change)"
+    type: ETK mirrors
+    path: "t024-t025-evidence/compact.json"
+    confidence: HIGH
+  - id: S6
+    title: "T-038 — adaptive headlights on the facelift Coupé and Convertible: catalogue groups and BMW's system description (via a reproduction)"
+    type: ETK mirror; BMW text via a third party
+    path: "t038-akl-interchangeability/REPORT.md; t038-akl-interchangeability/evidence.md"
+    confidence: MEDIUM
+  - id: S7
+    title: "T-022 — the PO's AI headlight illustrations used in this article: originals, SHA-256 and provenance (C2PA manifests on the pre-facelift files)"
+    type: project record (image provenance)
+    path: "t022-headlight-images/README.md"
+    confidence: n/a
+    note: "Provenance only. The pictures are AI illustrations, not photographs, and show how each light reads, not the exact unit."
+---
+
+"Is mine xenon?" is the headlight question every E46 owner asks once, usually when a lamp needs replacing or a used pair is on offer. The answer matters, because halogen, xenon and bi-xenon units are not interchangeable without other parts, and on some cars an adaptive unit hides inside a normal-looking housing. The good news is that the possibilities are few once you know your body and build date. This article shows what each technology looks like switched on, which cues owners use, and which ones mislead.
+
+## The short version
+
+- **Body and build date narrow it to two choices.** A Sedan or Touring built before September 2001 has halogen or xenon; from September 2001, halogen or bi-xenon. [S2, HIGH; date MEDIUM]
+- **The Coupé and Convertible change twice:** halogen or xenon to September 2001, halogen or bi-xenon after it, and from March 2003 the facelift units, with adaptive headlights as a further option. [S1, HIGH; dates MEDIUM; S6, MEDIUM]
+- **The Compact has halogen or bi-xenon, and nothing else.** [S5, HIGH]
+- **Xenon and bi-xenon were factory options** [S3, HIGH], so the car's equipment list, with option 522 for xenon, answers it. [S1, MEDIUM]
+- **Lit, xenon reads whiter and bluer than halogen.** Owners agree on that; it is the cue most people use, but it is not proof. [S4, LOW]
+
+## What your car can have
+
+The parts catalogue sorts E46 headlights by body and production band. For Europe, two catalogue mirrors agree on the families. [S1, HIGH; S2, HIGH]
+
+| Body | Built | Possible units |
+| --- | --- | --- |
+| Sedan, Touring | to September 2001 | halogen, xenon |
+| Sedan, Touring | from September 2001 | halogen, bi-xenon |
+| Coupé, Convertible | to September 2001 | halogen, xenon |
+| Coupé, Convertible | September 2001 to March 2003 | halogen, bi-xenon |
+| Coupé, Convertible | from March 2003 | halogen, bi-xenon, adaptive bi-xenon |
+| Compact | whole production | halogen, bi-xenon |
+
+The months are the catalogue's production breaks, MEDIUM; the families are HIGH. [S1, S2] BMW's own press kits for model year 2002 confirm the change on the Sedan and Touring: they list bi-xenon among the new options, and the US kit describes it as an upgrade of the optional xenon "to Bi-xenon lights, which include both low and high beams". [S3, HIGH] So "xenon" on an early car and "bi-xenon" on a later one are different units, not two names for one.
+
+Two combinations do not exist in the catalogue at all: a plain (single-beam) xenon unit on a facelift Sedan or Touring, and a plain (single-beam) xenon unit on a Compact. [S2, HIGH; S5, HIGH] If a listing offers one, it is either mislabelled or from another body.
+
+## What each looks like switched on
+
+The pictures below are AI illustrations made for zauberlabs, not photographs of real cars; they show how each light reads, not the exact unit. [S7]
+
+<Figure src="/blog/e46-headlight-technology-spot-yours/pre-halogen.webp" alt="AI illustration of the headlight of a silver pre-facelift E46 Sedan with the halogen headlight lit, glowing warm yellow" width={1200} height={800} caption="Pre-facelift Sedan, halogen: a warm, yellowish light." credit="AI-generated illustration, zauberlabs" />
+
+<Figure src="/blog/e46-headlight-technology-spot-yours/pre-xenon.webp" alt="AI illustration of the headlight of a silver pre-facelift E46 Sedan with the xenon headlight lit, glowing bluish white" width={1200} height={800} caption="Pre-facelift Sedan, xenon: a whiter, bluer light." credit="AI-generated illustration, zauberlabs" />
+
+Owners describe the difference the same way: xenon light is whiter and bluer, halogen warmer and yellower. [S4, LOW] It is the easiest cue on a running car, but it is not proof.
+
+After September 2001 the Sedan and Touring units changed shape, and the xenon unit gave way to bi-xenon. [S2, HIGH]
+
+## Pre-facelift or facelift: the shape
+
+For the Sedan and Touring, the shape tells you which band you are in, and therefore which pair of technologies to choose between. The illustrations show the two housings side by side. [S7]
+
+<Figure src="/blog/e46-headlight-technology-spot-yours/shape-pre.webp" alt="AI illustration close-up of a pre-facelift E46 Sedan headlight with an amber indicator section at the outer corner" width={1200} height={599} caption="Pre-facelift Sedan headlight (to September 2001)." credit="AI-generated illustration, zauberlabs" />
+
+<Figure src="/blog/e46-headlight-technology-spot-yours/shape-post.webp" alt="AI illustration close-up of a facelift E46 Sedan headlight with a clear indicator section at the outer corner" width={1200} height={699} caption="Facelift Sedan headlight (from September 2001)." credit="AI-generated illustration, zauberlabs" />
+
+The Coupé and Convertible are trickier. Their visible facelift came in March 2003, when the catalogue's units gain an integrated indicator, but the change from xenon to bi-xenon came earlier, in September 2001, under the old shape. [S1, HIGH; months MEDIUM] So a 2002 Coupé looks early but can have bi-xenon. And a car built in 2001 cannot be placed on either side of the September line from its year alone. [S1, MEDIUM; S2, MEDIUM]
+
+## Cues that work, and cues that mislead
+
+**The build data.** Xenon and bi-xenon were factory options, so the car's equipment list answers the question directly. [S3, HIGH] The catalogue ties xenon to option code 522 and adaptive headlights to 524. [S1, MEDIUM]
+
+**The label on the unit.** If the unit carries its BMW part number on a label, that number identifies it in the catalogue.
+
+**The headlight-height dial.** Owners report that cars with factory xenon have no manual headlight-height dial on the dashboard, because the beam levels itself. [S4, LOW] A useful hint, not proof.
+
+**A round lens inside the headlight: unreliable.** A common forum rule says a projector lens means xenon. Owners report that the facelift Coupé and Convertible have halogen units with a projector lens too, so on those cars a lens proves nothing. [S4, LOW] No BMW source describes how the units look. [S4]
+
+**Adaptive: not visible from outside.** An adaptive unit on a facelift Coupé or Convertible turns its beam into a bend, and its control electronics also run the automatic levelling. [S6, MEDIUM] We found no source that describes how to tell an adaptive unit from a plain bi-xenon unit from the outside. If a used pair is offered as adaptive, ask for the part number.
+
+## Before you buy a headlight
+
+1. **Start with body and build date** and use the table above to narrow it to two choices. [S1, S2]
+2. **Check the build data** if you can get it. [S3, HIGH]
+3. **Read the label on your own unit** and on the one on offer.
+4. **Treat light colour and the dial as hints,** and a lens as no evidence at all on a facelift Coupé or Convertible. [S4, LOW]
+5. **Don't mix technologies across a swap** without the parts that go with them; our article on adaptive units explains why. See ["The E46 headlight that works, until it doesn't"](/en/blog/e46-adaptive-headlights-not-a-simple-swap).
+
+The exact changeover dates per body are in ["Two dates decide every E46 headlight"](/en/blog/e46-headlight-changeovers), and the Compact's units in ["The loner"](/en/blog/e46-compact-headlights).
+
+## Notes on the evidence
+
+**Confidence.** Technology per body and band comes from two catalogue mirrors (HIGH for the families, MEDIUM for the months) and from BMW's own press kits. Every visual cue is from owners and a retailer, LOW: no BMW document describes how the units look. The pictures are AI illustrations from zauberlabs' image set; two images in that set were left out, a facelift Sedan with plain xenon and a pre-facelift Sedan with bi-xenon, because the catalogue has no such Sedan, and so were the two facelift Sedan pictures, because they do not show the units correctly; we show no picture where we do not have a correct one.
+
+**Conflicts recorded.** The forum rule "lens means xenon" is contradicted by owners' reports for the facelift Coupé and Convertible halogen units.
+
+**Not established.** What separates TITAN from standard units visually; the exact production month of each change per model; how each unit looks in other markets.
+
+## What comes next
+
+Our E46 configurator is live: it shows which headlights fit your car and links to sellers where we've found one.
