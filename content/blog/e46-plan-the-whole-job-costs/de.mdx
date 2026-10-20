@@ -1,0 +1,130 @@
+---
+# BL-062.4 — Writer draft, German. Same slug and sources as en.mdx.
+title: "Den ganzen Umbau planen: was Felgen, Scheinwerfer, Sitze und Stoßfänger am E46 ungefähr kosten"
+description: "Wie 'My E46 plan' bei E46BUILD aus Teilen Umbauten macht, was seine ungefähren Spannen enthalten und weglassen, und ein Beispielplan für einen Touring von 2001."
+date: 2026-10-20
+updated: 2026-11-09
+publishAt: "2026-11-09"
+lang: de
+slug: e46-plan-the-whole-job-costs
+card: BL-062
+author: "zauberlabs"
+tags:
+  - E46
+  - buying guide
+  - prices
+  - configurator
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # PO decides; a "buy the look" image fits
+  alt: "Ein E46 Touring in einer Werkstatt, daneben seine neuen Teile ausgelegt"
+  credit: "KI-generierte Illustration"
+  licence: null
+  placeholder: "Proposal: the PO's buy_the_look_touring.png (AI, M Sport II Touring). Labelled AI-generated."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-112 — 'The Build is the job': wie 'My E46 plan' jeden Umbau zählt und seine ungefähre Spanne berechnet (nur angezeigte Angebote; Verkäufer nicht ausgeblendet; Angebote höchstens 30 Tage alt; Lieferung in das Land des Besitzers; komplette Sätze zum eigenen Preis; gebrauchte Angebote eingeschlossen)"
+    type: "Projektnachweis (seit 20.10.2026 in Produktion)"
+    path: "docs/plans/t112-build-as-job.md (e46build); live code at production 3239418"
+    confidence: n/a
+  - id: S2
+    title: "Beispielplan: die Spannen, die 'My E46 plan' für einen 325i Touring von 2001 mit Besitzer in Deutschland angibt, berechnet mit dem Produktionscode (3239418) und den Angebotsdaten vom 20. Oktober 2026 (kein Verkäufer genannt)"
+    type: Konfigurator-Ausgabe aus Verkäuferangeboten, datierte Beobachtung
+    path: "e46build production 3239418; run by the E46 team (Agent 1) on 2026-10-20 at the Writer's request"
+    confidence: LOW
+  - id: S3
+    title: "E46BUILD-Angebotsdaten und T-092: wie Angebote neu gelesen und entfernt werden, wenn sie veraltet oder verkauft sind"
+    type: Recherchenotiz zu Händleranzeigen
+    path: "t092-freshness/README.md"
+    confidence: LOW
+---
+
+Die meisten E46-Projekte sind nicht ein Teil. Sie sind ein Look: Felgen, ein Frontstoßfänger, Sitze, vielleicht Scheinwerfer und ein Lenkrad. Die Frage, die Besitzer stellen, ist nicht "Was kostet dieses Teil?", sondern "Was kostet das Ganze ungefähr an meinem Auto?". Genau dafür ist "My E46 plan" bei E46BUILD gebaut. Dieser Artikel erklärt, wie er jeden Umbau zählt, was seine ungefähren Spannen enthalten und was sie weglassen, und geht einen Beispielplan für einen Touring von 2001 durch.
+
+## Wie der Plan einen Umbau zählt
+
+Wählst du "Put it on my car", fügt der Plan das Teil hinzu, und der Konfigurator entscheidet, wie viele dein Auto braucht. Eine Menge gibst du nie ein. [S1]
+
+| Kategorie | Ein Umbau ist |
+| --- | --- |
+| Felgen, rundum gleich | vier Felgen |
+| Felgen, Mischbereifung | zwei Vorder- und zwei Hinterräder |
+| Scheinwerfer | eine linke und eine rechte Einheit |
+| Vordersitze | Fahrer- und Beifahrersitz |
+| Stoßfänger | eine Verkleidung, vorn oder hinten |
+| Lenkrad | ein Lenkrad |
+
+Nach den Regeln des Konfigurators. [S1]
+
+## Was die Spanne enthält
+
+Jede Zeile im Plan zeigt eine ungefähre Spanne, "≈ €low–€high", und die Zahl der Verkäufer dahinter. [S1] Sie wird aus denselben Angeboten berechnet, die du im Konfigurator siehst, mit denselben Regeln:
+
+- **Nur Verkäufer, die dir angezeigt werden**, deren Angebote höchstens 30 Tage alt sind und die in dein Land liefern. [S1]
+- **Komplette Sätze zu ihrem eigenen Preis.** Bietet ein Verkäufer ein Scheinwerferpaar, einen Satz aus vier Felgen oder einen Zwei-plus-zwei-Satz an, ist das ein Weg für den Umbau, zu seinem Preis. [S1]
+- **Einzelteile mal Umbau.** Sonst ist das untere Ende das günstigste Einzelteil mal Anzahl, das obere das teuerste. Ein Paar oder Satz eines Verkäufers wird nie geteilt. [S1]
+- **Neu und gebraucht.** Gebrauchte Angebote zählen, so wie sie in der Angebotsliste stehen. Ein gebrauchtes Einzelstück zählt nur einmal; es füllt allein nie einen Satz aus vier. [S1]
+
+Das untere Ende ist also der günstigste Weg, den Umbau mit dem heutigen Angebot zu machen, das obere der teuerste. Die Preise werden berechnet, wenn du den Plan öffnest, nicht eingefroren, wenn du das Teil hinzugefügt hast. [S1]
+
+## Was sie weglässt
+
+Die Spanne sind die Teile. Sie enthält nicht:
+
+- **Versand**, der bei sperrigen Teilen wie Stoßfängern und Felgen hoch sein kann;
+- **Einbau, Lackierung und Codierung**, wo ein Umbau sie braucht;
+- **Reifen** für neue Felgen;
+- **Teile, die zu einem Umbau gehören**, etwa Halter für einen Stoßfänger oder den Nachrüstsatz für ein Lenkrad mit Tasten, außer der Konfigurator führt sie in der Zeile auf.
+
+## Wenn eine Zeile "no price yet" sagt
+
+Hat kein Verkäufer, der dir angezeigt wird und in dein Land liefert, das Teil oder genug davon für den Umbau, sagt die Zeile "no price yet", und die Summe nennt, wie viele Teile keinen Preis haben. [S1] Das ist bei eingestellten Teilen häufig. Es ist kein Fehler: Der Konfigurator hat heute keinen Verkäufer gefunden, den er dir für diesen Umbau zeigen kann.
+
+## Ein Beispielplan
+
+Hier ist ein echter Plan, berechnet mit dem eigenen Code des Konfigurators aus den Angeboten, die er am 20. Oktober 2026 hatte. Das Auto ist ein 325i Touring vor dem Facelift, gebaut im Mai 2001, der Besitzer wohnt in Deutschland, und der Plan ist ein M-Sportpaket-II-Look: Felgen und Frontstoßfänger des Pakets, Xenon-Scheinwerfer, Sportsitze und ein M-Lenkrad. [S2, LOW]
+
+| Umbau | Was der Plan zählt | Ungefähre Spanne | Verkäufer |
+| --- | --- | --- | --- |
+| Felgen, Style 68M M-Doppelspeiche | zwei vorn + zwei hinten | ≈ 529 €, inkl. gebraucht | 1 |
+| Frontstoßfänger, M-Paket-Verkleidung | ein Stoßfänger | ≈ 611 € | 1 |
+| Scheinwerfer, Xenon (vor dem Facelift) | links + rechts | ≈ 1.380–1.793 € | 2 |
+| Vordersitze, Sportsitze (manuell) | Fahrer + Beifahrer | ≈ 1.199–1.999 €, inkl. gebraucht | 1 |
+| Lenkrad, M-Sport (ohne Tasten) | ein Lenkrad | ≈ 841 € | 1 |
+| **Summe** | | **≈ 4.560–5.773 €** | |
+
+Ganze Euro, wie der Plan sie zeigt; Angebote vom 20. Oktober 2026. [S2, LOW]
+
+Drei Dinge in diesem Plan lohnen einen genauen Blick.
+
+- **Einzelpreise sind einzelne Wege.** Wo der Plan einen Preis statt einer Spanne zeigt, fand er an dem Tag nur einen Weg für den Umbau. Bei den Felgen war das ein gebrauchter Satz aus vier Felgen von einem Verkäufer. [S2, LOW]
+- **"Inkl. gebraucht" kann das untere Ende senken.** Die Felgenzeile ist ein gebrauchter Satz. Die Spanne der Sitzzeile enthält komplette Innenausstattungen mit Rücksitzen, die ein Verkäufer als einen Satz anbietet. [S2, LOW]
+- **Manche Teile brauchen eine Angabe mehr.** Die Lenkradzeile ist das M-Sport-Lenkrad ohne Tasten; für die Ausführung mit Tasten fragt der Konfigurator zuerst noch eine Sache zu deinem Auto. [S2, LOW]
+
+Die Summe, etwa 4.600 bis 5.800 Euro, sind nur die Teile. Dazu kommen Versand, Einbau, Lackierung des Stoßfängers und Reifen, wenn die Felgen ohne kommen.
+
+## Warum sich die Spannen bewegen
+
+Angebote werden neu gelesen, und der Plan folgt ihnen. Bei einer Aktualisierung im Oktober wurden verkaufte oder nicht mehr bestellbare Angebote entfernt und geänderte Preise übernommen. [S3, LOW] Ein Angebot, das älter als 30 Tage ist, zählt nicht mehr. [S1] Derselbe Plan kann also nächsten Monat eine andere Spanne zeigen, oder "no price yet", wo es einen Preis gab. Nimm ihn als heutige Schätzung und prüf vor dem Kauf die Seite des Verkäufers.
+
+## Tipps für die Planung
+
+1. **Fang mit dem Look an, den du willst, und leg dann jedes Teil auf dein Auto.** Das Zählen erledigt der Plan. [S1]
+2. **Lies die Zahl der Verkäufer.** Eine Spanne von einem Verkäufer ist ein Preis, kein Markt. [S1]
+3. **Achte auf "incl. used".** Ein unteres Ende aus einem gebrauchten Satz kann weit unter den Neupreisen liegen.
+4. **Rechne Versand, Einbau, Lack und Reifen** zur Summe des Plans dazu.
+5. **Öffne den Plan vor dem Kauf noch einmal.** Die Spanne wird aus den heutigen Angeboten berechnet. [S1]
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Wie der Plan zählt und rechnet, stammt aus den eigenen Regeln des Konfigurators (T-112), seit dem 20. Oktober 2026 online. Die Beispielzahlen sind, was der Plan an einem Tag zeigte, berechnet aus Verkäuferangeboten, und mit LOW bewertet.
+
+**Nicht geklärt.** Versandkosten je Verkäufer und Land; Kosten für Einbau und Lackierung.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Teile an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben. Leg ein Teil auf dein Auto, und "My E46 plan" zeigt die ungefähre Spanne für den ganzen Umbau.
