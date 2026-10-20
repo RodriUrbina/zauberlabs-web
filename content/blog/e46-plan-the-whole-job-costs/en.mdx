@@ -1,0 +1,130 @@
+---
+# BL-062.4 — Writer draft, English. Body is Markdown.
+title: "Planning the whole job: what wheels, headlights, seats and bumpers roughly cost on an E46"
+description: "How E46BUILD's 'My E46 plan' turns parts into jobs, what its approximate ranges include and leave out, and an example plan for a 2001 Touring."
+date: 2026-10-20
+updated: 2026-11-09
+publishAt: "2026-11-09"
+lang: en
+slug: e46-plan-the-whole-job-costs
+card: BL-062
+author: "zauberlabs"
+tags:
+  - E46
+  - buying guide
+  - prices
+  - configurator
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # no hero: no correct image (Coordinator 2026-10-20)
+  alt: "An E46 Touring in a workshop with its new parts laid out beside it"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "No hero (PO rule: no correct image, no image). If one is made later: AI-generated illustration, labelled as such, of a PRE-facelift E46 Touring (before 09/2001) with Style 68M M double-spoke wheels, M front bumper and xenon headlights; no legible badges, part numbers or number-plate text."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-112 — 'The Build is the job': how 'My E46 plan' counts each job and computes its approximate range (shown offers only; sellers not hidden; offers at most 30 days old; delivering to the owner's country; complete sets at their own price; used offers included)"
+    type: project record (live in production since 2026-10-20)
+    path: "docs/plans/t112-build-as-job.md (e46build); live code at production 3239418"
+    confidence: n/a
+  - id: S2
+    title: "Example plan: the ranges 'My E46 plan' gives for a 2001 325i Touring, owner country Germany, computed from the production code (3239418) with the offer data of 20 October 2026 (no seller named)"
+    type: configurator output from seller listings, dated observation
+    path: "e46build production 3239418; run by the E46 team (Agent 1) on 2026-10-20 at the Writer's request"
+    confidence: LOW
+  - id: S3
+    title: "E46BUILD offer data and T-092: how offers are re-read and dropped when stale or sold"
+    type: research note on retailer listings
+    path: "t092-freshness/README.md"
+    confidence: LOW
+---
+
+Most E46 projects are not one part. They are a look: wheels, a front bumper, seats, perhaps headlights and a steering wheel. The question owners ask is not "what does this part cost?" but "roughly what will the whole thing cost on my car?". E46BUILD's "My E46 plan" is built to answer that. This article explains how it counts each job, what its approximate ranges include and what they leave out, and walks through an example plan for a 2001 Touring.
+
+## How the plan counts a job
+
+When you choose "Put it on my car", the plan adds the part, and the configurator decides how many your car needs. You never type a quantity. [S1]
+
+| Category | One job is |
+| --- | --- |
+| Wheels, square style | four wheels |
+| Wheels, staggered style | two front and two rear wheels |
+| Headlights | a left and a right unit |
+| Front seats | driver and passenger seat |
+| Bumper | one cover, front or rear |
+| Steering wheel | one wheel |
+
+From the configurator's rules. [S1]
+
+## What the range includes
+
+Each line in the plan shows an approximate range, "≈ €low–€high", and the number of sellers behind it. [S1] It is worked out from the same offers you see in the configurator, with the same rules:
+
+- **Only sellers shown to you**, whose offers are at most 30 days old, and who deliver to your country. [S1]
+- **Complete sets at their own price.** If a seller lists a pair of headlights, a set of four wheels or a two-plus-two set, that is one way to do the job, at its price. [S1]
+- **Single parts times the job.** Otherwise the low end is the cheapest single part times the count, and the high end the dearest. A seller's pair or set is never split. [S1]
+- **New and used.** Used offers count, as they appear in the offer list. A used one-off single counts only once; it never fills a set of four on its own. [S1]
+
+The low end is therefore the cheapest way to do the job with what is on offer today, and the high end the dearest. Prices are worked out when you open the plan, not frozen when you added the part. [S1]
+
+## What it leaves out
+
+The range is the parts. It does not include:
+
+- **Shipping**, which for bulky parts such as bumpers and wheels can be large;
+- **fitting, painting and coding**, where a job needs them;
+- **tyres** for new wheels;
+- **parts that come with a job**, such as brackets for a bumper or the retrofit kit for a steering wheel with buttons, unless the configurator lists them on the line.
+
+## When a line says "no price yet"
+
+If no seller shown to you, delivering to your country, has the part or enough of it to do the job, the line says "no price yet", and the total tells you how many parts have no price. [S1] That is common for discontinued parts. It is not an error: it means the configurator has not found a seller it can show you for that job today.
+
+## An example plan
+
+Here is a real plan, worked out with the configurator's own code from the offers it held on 20 October 2026. The car is a pre-facelift 325i Touring built in May 2001, the owner is in Germany, and the plan is an M Sport II look: the package's wheels and front bumper, xenon headlights, sport seats and an M steering wheel. [S2, LOW]
+
+| Job | What the plan counts | Approximate range | Sellers |
+| --- | --- | --- | --- |
+| Wheels, Style 68M M double spoke | two front + two rear | ≈ €529, incl. used | 1 |
+| Front bumper, M package cover | one bumper | ≈ €611 | 1 |
+| Headlights, xenon (pre-facelift) | left + right | ≈ €1,380–€1,793 | 2 |
+| Front seats, sport seats (manual) | driver + passenger | ≈ €1,199–€1,999, incl. used | 1 |
+| Steering wheel, M sport (without buttons) | one wheel | ≈ €841 | 1 |
+| **Total** | | **≈ €4,560–€5,773** | |
+
+Whole euros, as the plan shows them; offers as of 20 October 2026. [S2, LOW]
+
+Three things in that plan are worth reading closely.
+
+- **Single prices are single options.** Where the plan shows one price instead of a range, it found only one way to do the job that day. For the wheels, that was one used set of four from one seller. [S2, LOW]
+- **"Incl. used" can pull the low end down.** The wheel line is a used set. The seat line's range includes complete interiors with the rear seats, which a seller sells as one set. [S2, LOW]
+- **Some parts need one more detail.** The steering wheel line is the M sport wheel without buttons; for the version with buttons, the configurator first asks one more question about your car. [S2, LOW]
+
+The total, about €4,600 to €5,800, is the parts only. Add shipping, fitting, paint for the bumper, and tyres if the wheels come without.
+
+## Why the ranges move
+
+Offers are re-read, and the plan follows them. In one October refresh, offers that were sold or no longer orderable were dropped, and prices that changed were updated. [S3, LOW] An offer older than 30 days is no longer counted. [S1] So the same plan can show a different range next month, or "no price yet" where there was a price. Treat it as today's estimate, and check the seller's own page before you buy.
+
+## Planning tips
+
+1. **Start with the look you want, then put each part on your car.** The plan does the counting. [S1]
+2. **Read the seller count.** A range from one seller is one price, not a market. [S1]
+3. **Watch for "incl. used".** A low end that comes from a used set can be far below new prices.
+4. **Add shipping, fitting, paint and tyres** to the plan's total.
+5. **Re-open the plan before buying.** The range is worked out from today's offers. [S1]
+
+## Notes on the evidence
+
+**Confidence.** How the plan counts and computes comes from the configurator's own rules (T-112), live since 20 October 2026. The example figures are what the plan showed on one day, worked out from seller listings, and graded LOW.
+
+**Not established.** Shipping costs per seller and country; fitting and paint costs.
+
+## What comes next
+
+Our E46 configurator is live: it shows which parts fit your car and links to sellers where we've found one. Put a part on your car and "My E46 plan" shows the approximate range for the whole job.
