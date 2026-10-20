@@ -1,0 +1,157 @@
+---
+# BL-062.2 — Writer draft, German. Same slug, sources and figures as en.mdx.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+# Figures: the PO's AI headlight illustrations (T-022 originals); two PO images left out because they show combinations the catalogue does not have.
+title: "Halogen, Xenon, Bi-Xenon oder Kurvenlicht? So erkennst du, welchen E46-Scheinwerfer du hast"
+description: "Welche Scheinwerfer-Technik dein E46 haben kann, hängt von Karosserie und Baudatum ab. Wie jede leuchtet, welche Hinweise taugen und welche täuschen."
+date: 2026-10-20
+updated: 2026-11-03
+publishAt: "2026-11-03"
+lang: de
+slug: e46-headlight-technology-spot-yours
+card: BL-062
+author: "zauberlabs"
+tags:
+  - E46
+  - headlights
+  - xenon
+  - buying guide
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # PO decides; candidates are the figures below
+  alt: "Der Scheinwerfer eines silbernen E46 mit eingeschaltetem Abblendlicht"
+  credit: "KI-generierte Illustration"
+  licence: null
+  placeholder: "Proposal: reuse the PO's pre-facelift xenon illustration (also used as a figure) or a new AI image of an E46 front at dusk with low beams on. Labelled AI-generated."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-024 Teil c — Scheinwerfertabelle Coupé/Cabrio aus gespeicherten Seiten der Teilekatalog-Spiegel (bmwfans.info und eStore-Central), mit Monatsansichten und Optionscodes"
+    type: "ETK-Spiegel (zwei Spiegel für Europa)"
+    path: "t024-partc-evidence/headlight-table.md; t024-partc-evidence/REPORT.md"
+    confidence: HIGH
+    note: "HIGH für die Europa-Teilefamilien je Zeitraum; Daten MEDIUM; Optionscodes MEDIUM (ein Spiegel)."
+  - id: S2
+    title: "T-030 — Scheinwerfernummern Limousine/Touring je Produktionszeitraum (bmwfans.info Europa- und USA-Bäume, Monatsansichten; eStore-Central Europa)"
+    type: "ETK-Spiegel (zwei Spiegel für Europa)"
+    path: "t030-evidence/sedan-touring-markets.json"
+    confidence: HIGH
+    note: "HIGH für die Familien je Zeitraum in Europa; der Monat September 2001 MEDIUM."
+  - id: S3
+    title: "BMW Group Pressemappen Modelljahr 2002: UK 'The new BMW 3 Series Saloon and Touring' (26.10.2001) und BMW USA MY2002 3 Series"
+    type: "von BMW verfasst (Pressemappen)"
+    path: "t032-evidence/raw/bmw-press-uk-2001-3series-page.html; t032-evidence/raw/bmw-press-us-my2002-3series-page.html"
+    confidence: HIGH
+  - id: S4
+    title: "T-032 Q1 — Hinweise aus Besitzerforen und von einem Händler, wie man Halogen von Xenon unterscheidet (PistonHeads, E46Zone; Seite eines Nachrüst-Händlers)"
+    type: Forum und Händler
+    path: "t032-evidence/T-032-findings.md (Q1); t032-evidence/raw/forum-and-secondary-quotes.md"
+    confidence: LOW
+    note: "Entscheidet nie. Keine BMW-Quelle beschreibt, wie die Einheiten aussehen."
+  - id: S5
+    title: "T-025 — Compact-Scheinwerfer in zwei Katalogspiegeln (nur Halogen und Bi-Xenon, keine laufende Änderung)"
+    type: ETK-Spiegel
+    path: "t024-t025-evidence/compact.json"
+    confidence: MEDIUM
+  - id: S6
+    title: "T-038 — Kurvenlicht an Coupé und Cabrio nach dem Facelift: Katalog-Gruppen und BMWs Systembeschreibung (über eine Wiedergabe)"
+    type: "ETK-Spiegel; BMW-Text über einen Dritten"
+    path: "t038-akl-interchangeability/REPORT.md; t038-akl-interchangeability/evidence.md"
+    confidence: MEDIUM
+  - id: S7
+    title: "T-022 — die KI-Scheinwerfer-Illustrationen des PO in diesem Artikel: Originale, SHA-256 und Herkunft (C2PA-Manifeste bei den Vor-Facelift-Dateien)"
+    type: Projektnachweis (Bildherkunft)
+    path: "t022-headlight-images/README.md"
+    confidence: n/a
+    note: "Nur Herkunftsnachweis. Die Bilder sind KI-Illustrationen, keine Fotos, und zeigen, wie jedes Licht wirkt, nicht die genaue Einheit."
+---
+
+"Ist meiner Xenon?" ist die Scheinwerferfrage, die jeder E46-Besitzer einmal stellt, meist wenn eine Leuchte ersetzt werden muss oder ein gebrauchtes Paar angeboten wird. Die Antwort zählt, denn Halogen-, Xenon- und Bi-Xenon-Einheiten sind ohne weitere Teile nicht tauschbar, und bei manchen Autos steckt eine Kurvenlicht-Einheit in einem normal aussehenden Gehäuse. Die gute Nachricht: Wer Karosserie und Baudatum kennt, hat nur wenige Möglichkeiten. Dieser Artikel zeigt, wie jede Technik eingeschaltet aussieht, welche Hinweise Besitzer nutzen und welche täuschen.
+
+## Kurz gesagt
+
+- **Karosserie und Baudatum lassen zwei Möglichkeiten übrig.** Eine Limousine oder ein Touring bis September 2001 hat Halogen oder Xenon; ab September 2001 Halogen oder Bi-Xenon. [S2, HIGH; Datum MEDIUM]
+- **Coupé und Cabrio wechseln zweimal:** Halogen oder Xenon bis September 2001, danach Halogen oder Bi-Xenon, und ab März 2003 die Facelift-Einheiten, mit Kurvenlicht als weiterer Option. [S1, HIGH; Daten MEDIUM; S6, MEDIUM]
+- **Der Compact hat Halogen oder Bi-Xenon, sonst nichts.** [S5, MEDIUM]
+- **Xenon und Bi-Xenon waren Sonderausstattungen.** Die Ausstattungsdaten des Autos klären es. [S3, HIGH]
+- **Eingeschaltet wirkt Xenon weißer und blauer als Halogen.** Darin sind sich Besitzer einig; es ist der Hinweis, den die meisten nutzen, aber kein Beweis. [S4, LOW]
+
+## Was dein Auto haben kann
+
+Der Teilekatalog ordnet E46-Scheinwerfer nach Karosserie und Produktionszeitraum. Für Europa stimmen zwei Katalogspiegel bei den Familien überein. [S1, HIGH; S2, HIGH]
+
+| Karosserie | Gebaut | Mögliche Einheiten |
+| --- | --- | --- |
+| Limousine, Touring | bis September 2001 | Halogen, Xenon |
+| Limousine, Touring | ab September 2001 | Halogen, Bi-Xenon |
+| Coupé, Cabrio | bis September 2001 | Halogen, Xenon |
+| Coupé, Cabrio | September 2001 bis März 2003 | Halogen, Bi-Xenon |
+| Coupé, Cabrio | ab März 2003 | Halogen, Bi-Xenon, Bi-Xenon mit Kurvenlicht |
+| Compact | ganze Bauzeit | Halogen, Bi-Xenon |
+
+Die Monate sind die Produktionsgrenzen des Katalogs, MEDIUM; die Familien sind HIGH. [S1, S2] BMWs eigene Pressemappen zum Modelljahr 2002 bestätigen den Wechsel bei Limousine und Touring: Sie nennen Bi-Xenon unter den neuen Optionen, und die US-Mappe beschreibt es als Aufwertung des optionalen Xenons zu Bi-Xenon, das Abblend- und Fernlicht umfasst. [S3, HIGH] "Xenon" an einem frühen Auto und "Bi-Xenon" an einem späteren sind also verschiedene Einheiten, nicht zwei Namen für eine.
+
+Zwei Kombinationen gibt es im Katalog gar nicht: eine einfache Xenon-Einheit an einer Limousine oder einem Touring nach dem Facelift und Xenon jeglicher Art am Compact. [S2, HIGH; S5, MEDIUM] Bietet eine Anzeige so etwas an, ist sie falsch beschriftet oder stammt von einer anderen Karosserie.
+
+## Wie jede Technik eingeschaltet aussieht
+
+Die Bilder unten sind KI-Illustrationen für zauberlabs, keine Fotos echter Autos; sie zeigen, wie jedes Licht wirkt, nicht die genaue Einheit. [S7]
+
+<Figure src="/blog/e46-headlight-technology-spot-yours/pre-halogen.webp" alt="KI-Illustration des Scheinwerfers einer silbernen E46 Limousine vor dem Facelift mit eingeschaltetem Halogen-Abblendlicht, warm gelb leuchtend" width={1200} height={800} caption="Limousine vor dem Facelift, Halogen: ein warmes, gelbliches Abblendlicht." credit="KI-generierte Illustration, zauberlabs" />
+
+<Figure src="/blog/e46-headlight-technology-spot-yours/pre-xenon.webp" alt="KI-Illustration des Scheinwerfers einer silbernen E46 Limousine vor dem Facelift mit eingeschaltetem Xenon-Abblendlicht, bläulich weiß leuchtend" width={1200} height={800} caption="Limousine vor dem Facelift, Xenon: ein weißeres, blaueres Abblendlicht." credit="KI-generierte Illustration, zauberlabs" />
+
+Besitzer beschreiben den Unterschied genauso: Xenon-Licht ist weißer und blauer, Halogen wärmer und gelber. [S4, LOW] Am laufenden Auto ist das der einfachste Hinweis, aber kein Beweis. Ein gealterter Xenon-Brenner kann anders aussehen, und ein falsches Leuchtmittel in der falschen Einheit ändert die Farbe ebenfalls.
+
+Nach September 2001 änderten die Einheiten von Limousine und Touring ihre Form, und die Xenon-Einheit wich dem Bi-Xenon. [S2, HIGH]
+
+<Figure src="/blog/e46-headlight-technology-spot-yours/post-halogen.webp" alt="KI-Illustration des Scheinwerfers einer silbernen E46 Limousine nach dem Facelift mit eingeschaltetem Halogen-Abblendlicht" width={427} height={362} caption="Limousine nach dem Facelift, Halogen." credit="KI-generierte Illustration, zauberlabs" />
+
+<Figure src="/blog/e46-headlight-technology-spot-yours/post-bixenon.webp" alt="KI-Illustration des Scheinwerfers einer silbernen E46 Limousine nach dem Facelift mit eingeschaltetem Bi-Xenon-Abblendlicht, bläulich weiß" width={425} height={361} caption="Limousine nach dem Facelift, Bi-Xenon: dasselbe bläulich-weiße Licht, jetzt aus einer Einheit, die auch das Fernlicht macht." credit="KI-generierte Illustration, zauberlabs" />
+
+## Vor oder nach dem Facelift: die Form
+
+Bei Limousine und Touring verrät die Form den Zeitraum und damit, zwischen welchen zwei Techniken du wählst. Die Illustrationen zeigen die beiden Gehäuse nebeneinander. [S7]
+
+<Figure src="/blog/e46-headlight-technology-spot-yours/shape-pre.webp" alt="KI-Illustration, Nahaufnahme eines Limousinen-Scheinwerfers des E46 vor dem Facelift mit orangem Blinkerteil an der äußeren Ecke" width={1200} height={599} caption="Limousinen-Scheinwerfer vor dem Facelift (bis September 2001)." credit="KI-generierte Illustration, zauberlabs" />
+
+<Figure src="/blog/e46-headlight-technology-spot-yours/shape-post.webp" alt="KI-Illustration, Nahaufnahme eines Limousinen-Scheinwerfers des E46 nach dem Facelift mit eingekerbter Oberkante" width={1200} height={699} caption="Limousinen-Scheinwerfer nach dem Facelift (ab September 2001)." credit="KI-generierte Illustration, zauberlabs" />
+
+Coupé und Cabrio sind schwieriger. Ihr sichtbares Facelift kam im März 2003, als die Einheiten im Katalog einen integrierten Blinker bekommen, der Wechsel von Xenon zu Bi-Xenon kam aber früher, im September 2001, noch in der alten Form. [S1, HIGH; Monate MEDIUM] Ein Coupé von 2002 sieht also früh aus, kann aber Bi-Xenon haben. Und ein 2001 gebautes Auto lässt sich allein nach dem Baujahr keiner Seite der September-Grenze zuordnen. [S1, MEDIUM; S2, MEDIUM]
+
+## Hinweise, die taugen, und Hinweise, die täuschen
+
+**Die Ausstattungsdaten.** Xenon und Bi-Xenon waren Sonderausstattungen, die Ausstattungsliste des Autos beantwortet die Frage also direkt. [S3, HIGH] Der Katalog verbindet Xenon mit Optionscode 522 und Kurvenlicht mit 524. [S1, MEDIUM]
+
+**Das Etikett an der Einheit.** Die Teilenummer auf dem Etikett des Scheinwerfers bestimmt die Einheit genau; den Rest erledigt der Katalog.
+
+**Das Rädchen für die Leuchtweite.** Besitzer berichten, dass Autos mit Werks-Xenon kein manuelles Leuchtweiten-Rädchen am Armaturenbrett haben, weil sich der Lichtkegel selbst regelt. [S4, LOW] Ein nützlicher Hinweis, kein Beweis.
+
+**Eine runde Linse im Scheinwerfer: unzuverlässig.** Eine verbreitete Forenregel sagt, eine Projektionslinse bedeute Xenon. Besitzer berichten, dass Coupé und Cabrio nach dem Facelift auch Halogen-Einheiten mit Projektionslinse haben, an diesen Autos beweist eine Linse also nichts. [S4, LOW] Keine BMW-Quelle beschreibt, wie die Einheiten aussehen. [S4]
+
+**Kurvenlicht: von außen nicht zu sehen.** Eine Kurvenlicht-Einheit an Coupé oder Cabrio nach dem Facelift schwenkt ihren Lichtkegel in die Kurve, und ihre Steuerelektronik regelt auch die automatische Leuchtweite. [S6, MEDIUM] Von außen kann sie wie eine einfache Bi-Xenon-Einheit aussehen. Wird ein gebrauchtes Paar als Kurvenlicht angeboten, frag nach der Teilenummer.
+
+## Bevor du einen Scheinwerfer kaufst
+
+1. **Fang mit Karosserie und Baudatum an** und grenze mit der Tabelle oben auf zwei Möglichkeiten ein. [S1, S2]
+2. **Prüf die Ausstattungsdaten**, wenn du sie bekommst. [S3, HIGH]
+3. **Lies das Etikett an deiner eigenen Einheit** und an der angebotenen.
+4. **Nimm Lichtfarbe und Rädchen als Hinweise**, und eine Linse an Coupé oder Cabrio nach dem Facelift gar nicht als Beleg. [S4, LOW]
+5. **Misch bei einem Tausch keine Techniken** ohne die zugehörigen Teile; warum, erklärt unser Artikel über Kurvenlicht-Einheiten. Siehe ["The E46 headlight that works, until it doesn't"](/de/blog/e46-adaptive-headlights-not-a-simple-swap).
+
+Die genauen Wechseldaten je Karosserie stehen in ["Two dates decide every E46 headlight"](/de/blog/e46-headlight-changeovers), die Einheiten des Compact in ["The loner"](/de/blog/e46-compact-headlights).
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Die Technik je Karosserie und Zeitraum stammt aus zwei Katalogspiegeln (HIGH für die Familien, MEDIUM für die Monate) und aus BMWs eigenen Pressemappen. Jeder optische Hinweis stammt von Besitzern und einem Händler, LOW: Kein BMW-Dokument beschreibt, wie die Einheiten aussehen. Die Bilder sind KI-Illustrationen aus dem Bildersatz von zauberlabs; zwei Bilder daraus blieben außen vor, eine Limousine nach dem Facelift mit einfachem Xenon und eine Limousine vor dem Facelift mit Bi-Xenon, weil der Katalog keine solche Limousine kennt.
+
+**Erfasste Widersprüche.** Die Forenregel "Linse heißt Xenon" widerlegen Besitzerberichte für die Halogen-Einheiten von Coupé und Cabrio nach dem Facelift.
+
+**Nicht geklärt.** Was TITAN- und Standard-Einheiten optisch unterscheidet; der genaue Produktionsmonat jedes Wechsels je Modell; wie die Einheiten in anderen Märkten aussehen.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Scheinwerfer an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben.
