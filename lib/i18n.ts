@@ -11,10 +11,10 @@ const en = {
   nav: { configurators: "Configurators", how: "How it works", principles: "Principles", suggest: "Suggest a car", blog: "Blog", open: "Open E46BUILD", comingSoon: "E46 configurator: coming soon", menu: "Menu" },
   // BL-053 (PO decision 2026-10-19): hero concept C "Headline on paper". Only title[1] gets the serif accent.
   hero: {
-    live: "Live · BMW 3 Series (E46)",
+    live: "New · E46 configurator now live",
     liveSoon: "Coming soon · BMW 3 Series (E46)",
     title: ["A little ", "magic", " for the car you already own."],
-    line: "See what your car could be — and buy only what fits it.",
+    line: "Play with the art of the possible — for your daily drive.",
     cta: "Start with your E46",
     videoAlt: "E46BUILD in use: a silver BMW E46 Coupé while the search types “BMW E46 330Ci Coupe” and the parts that fit appear",
     ogAlt: "E46BUILD: a silver BMW E46 Coupé with the search bar reading “BMW E46 330Ci Coupe”",
@@ -157,10 +157,10 @@ const de: Dict = {
   },
   nav: { configurators: "Konfiguratoren", how: "So funktioniert’s", principles: "Prinzipien", suggest: "Auto vorschlagen", blog: "Blog", open: "E46BUILD öffnen", comingSoon: "E46-Konfigurator: bald verfügbar", menu: "Menü" },
   hero: {
-    live: "Live · BMW 3er (E46)",
+    live: "Neu · E46-Konfigurator jetzt live",
     liveSoon: "Demnächst · BMW 3er (E46)",
     title: ["Ein bisschen ", "Zauber", " für das Auto, das du schon hast."],
-    line: "Sieh, was aus deinem Auto werden kann – und kauf nur, was passt.",
+    line: "Spiel mit der Kunst des Möglichen – für dein Alltagsauto.",
     cta: "Starte mit deinem E46",
     videoAlt: "E46BUILD im Einsatz: ein silbernes BMW E46 Coupé, während die Suche „BMW E46 330Ci Coupe“ tippt und die passenden Teile erscheinen",
     ogAlt: "E46BUILD: ein silbernes BMW E46 Coupé, in der Suchleiste steht „BMW E46 330Ci Coupe“",
