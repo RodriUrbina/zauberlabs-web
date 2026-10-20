@@ -1,6 +1,5 @@
 ---
 # BL-062.4 — Writer draft, English. Body is Markdown.
-# DRAFT IN PROGRESS: the example-plan table waits for the real "My E46 plan" ranges from the E46 team.
 title: "Planning the whole job: what wheels, headlights, seats and bumpers roughly cost on an E46"
 description: "How E46BUILD's 'My E46 plan' turns parts into jobs, what its approximate ranges include and leave out, and an example plan for a 2001 Touring."
 date: 2026-10-20
@@ -33,9 +32,9 @@ sources:
     path: "docs/plans/t112-build-as-job.md (e46build); live code at production 3239418"
     confidence: n/a
   - id: S2
-    title: "Example plan: the ranges 'My E46 plan' showed for the example car on [DATE], computed by the E46 team at production 3239418 (no seller named)"
+    title: "Example plan: the ranges 'My E46 plan' gives for a 2001 325i Touring, owner country Germany, computed from the production code (3239418) with the offer data of 20 October 2026 (no seller named)"
     type: configurator output from seller listings, dated observation
-    path: "TBD (E46 team export)"
+    path: "e46build production 3239418; run by the E46 team (Agent 1) on 2026-10-20 at the Writer's request"
     confidence: LOW
   - id: S3
     title: "E46BUILD offer data and T-092: how offers are re-read and dropped when stale or sold"
@@ -87,7 +86,26 @@ If no seller shown to you, delivering to your country, has the part or enough of
 
 ## An example plan
 
-[TABLE AND PARAGRAPH TO FILL FROM THE E46 TEAM'S EXPORT: example car 2001 pre-facelift 325i Touring, owner country DE; jobs: wheels 68M, M front bumper, xenon headlight pair, front sport seats, M sports steering wheel; each line ≈ range, sellers, used included or not; total; date.] [S2, LOW]
+Here is a real plan, worked out with the configurator's own code from the offers it held on 20 October 2026. The car is a pre-facelift 325i Touring built in May 2001, the owner is in Germany, and the plan is an M Sport II look: the package's wheels and front bumper, xenon headlights, sport seats and an M steering wheel. [S2, LOW]
+
+| Job | What the plan counts | Approximate range | Sellers |
+| --- | --- | --- | --- |
+| Wheels, Style 68M M double spoke | two front + two rear | ≈ €529, incl. used | 1 |
+| Front bumper, M package cover | one bumper | ≈ €611 | 1 |
+| Headlights, xenon (pre-facelift) | left + right | ≈ €1,380–€1,793 | 2 |
+| Front seats, sport seats (manual) | driver + passenger | ≈ €1,199–€1,999, incl. used | 1 |
+| Steering wheel, M sport (without buttons) | one wheel | ≈ €841 | 1 |
+| **Total** | | **≈ €4,560–€5,773** | |
+
+Whole euros, as the plan shows them; offers as of 20 October 2026. [S2, LOW]
+
+Three things in that plan are worth reading closely.
+
+- **Single prices are single options.** Where the plan shows one price instead of a range, it found only one way to do the job that day. For the wheels, that was one used set of four from one seller. [S2, LOW]
+- **"Incl. used" can pull the low end down.** The wheel line is a used set. The seat line's range includes complete interiors with the rear seats, which a seller sells as one set. [S2, LOW]
+- **Some parts need one more detail.** The steering wheel line is the M sport wheel without buttons; for the version with buttons, the configurator first asks one more question about your car. [S2, LOW]
+
+The total, about €4,600 to €5,800, is the parts only. Add shipping, fitting, paint for the bumper, and tyres if the wheels come without.
 
 ## Why the ranges move
 
