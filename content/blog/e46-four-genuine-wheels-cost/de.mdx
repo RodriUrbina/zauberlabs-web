@@ -1,0 +1,138 @@
+---
+# BL-062.1 — Writer draft, German. Same slug and sources as en.mdx.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+title: "Was vier originale E46-Felgen 2026 wirklich kosten"
+description: "Neue Original-BMW-Felgen für den E46, je Felge und als Satz aus vier oder 2+2, nach Händlerangeboten im Oktober 2026, und warum es manche nicht mehr neu gibt."
+date: 2026-10-20
+updated: 2026-10-31
+publishAt: "2026-10-31"
+lang: de
+slug: e46-four-genuine-wheels-cost
+card: BL-062
+author: "zauberlabs"
+tags:
+  - E46
+  - wheels
+  - buying guide
+  - prices
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: "/blog/e46-four-genuine-wheels-cost/hero.webp"
+  alt: "KI-Illustration des Vorderrads eines silbernen E46: eine Fünfspeichen-Leichtmetallfelge, Seitenansicht"
+  credit: "KI-generierte Illustration"
+  licence: "zauberlabs, own AI illustration (PO)"
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "E46BUILD-Angebotsdaten, gelesen am 20. Oktober 2026: jedes Angebot für neue Original-BMW-Felgen im Konfigurator, mit Preis und dem Datum der letzten Prüfung (8. bis 13. Oktober 2026); hier kein Verkäufer genannt"
+    type: Händleranzeigen, datierte Beobachtung
+    path: "packages/marketplace-data/src/e46-eu-offers.data.ts (e46build master 3239418), built from t031-offer-pack, t079-batch1, t087-ovoko-set and refreshed by t092-freshness"
+    confidence: LOW
+    note: "Was die Seiten der Verkäufer an den Prüfdaten zeigten. Preise ändern sich; Angebote entscheiden nie über die Passform. Angebote eines Verkäufers, den die Seite ausblendet, fehlen hier."
+  - id: S2
+    title: "T-036 — europäische Händlerangebote für die Werksfelgen: auf Lager gegen im Katalog eingestellt, Designs mit nur einem Verkäufer, ungeklärt niedrige Preise"
+    type: Händleranzeigen, datierte Beobachtung
+    path: "t036-evidence/T-036-findings.md"
+    confidence: LOW
+  - id: S3
+    title: "T-092 — Aktualisierung der Angebote vom 13. Oktober 2026: Felgenangebote neu gelesen (keine Preisänderung), und ein starker Preisrückgang bei Scheinwerfern und Stoßfängern eines Verkäufers"
+    type: Recherchenotiz zu Händleranzeigen
+    path: "t092-freshness/README.md"
+    confidence: LOW
+  - id: S4
+    title: "T-035.1 — Größen, Einpresstiefen und Katalogvermerke der Werksfelgen (bmwfans.info, Europa-Bäume, von einem zweiten Spiegel bestätigt)"
+    type: ETK-Spiegel
+    path: "t035-evidence/REPORT.md; t035-evidence/applicability-by-market.md"
+    confidence: MEDIUM
+  - id: S5
+    title: "T-096 und T-087 — wo E46-Felgensätze gehandelt werden, und die Regel, dass es einen Satz nur gibt, wenn ein Verkäufer ihn anbietet"
+    type: Recherchenotiz (Marktbeobachtung und Projektregel)
+    path: "t096-wheel-sets/README.md; t087-wheel-sets/README.md"
+    confidence: LOW
+  - id: S6
+    title: "T-112 — 'My E46 plan': wie der Konfigurator einen Umbau zählt (vier Felgen oder zwei vorn und zwei hinten) und seine ungefähre Spanne berechnet (neue und gebrauchte Angebote, eigene Sätze der Verkäufer, Verkäufer, die zu dir liefern)"
+    type: Projektnachweis
+    path: "docs/plans/t112-build-as-job.md (e46build)"
+    confidence: n/a
+---
+
+"Was kosten vier originale Felgen?" gehört zu den ersten Fragen eines E46-Besitzers und zu den schwersten, die eine einzelne Anzeige beantworten kann. Die meisten Original-BMW-Felgen werden einzeln verkauft, manche Designs haben unterschiedliche Vorder- und Hinterräder, und einige werden nicht mehr gefertigt. Dieser Artikel stellt zusammen, was europäische Verkäufer neuer Original-BMW-Felgen im Oktober 2026 anboten, Design für Design, und rechnet daraus, was ein ganzer Satz kostet: vier Felgen oder zwei vorn und zwei hinten.
+
+Jeder Preis hier ist eine datierte Beobachtung. Es ist, was die Seiten der Verkäufer an dem Tag zeigten, an dem das jeweilige Angebot zuletzt geprüft wurde, zwischen dem 8. und 13. Oktober 2026, inklusive Mehrwertsteuer und ohne Versand. [S1, LOW] Kein Verkäufer wird genannt.
+
+## Kurz gesagt
+
+- **Ein ganzer Satz neuer Originalfelgen kostet im Oktober 2026 etwa 420 bis 2.350 Euro**, je nach Design. [S1, LOW]
+- **Die 17-Zoll-M-Doppelspeiche Style 68M ist der teuerste Satz, den wir berechnen konnten:** etwa 2.250 bis 2.350 Euro für zwei Vorder- und zwei Hinterräder. [S1, LOW]
+- **Manche beliebten Sätze gibt es neu gar nicht.** Kein Verkäufer in unseren Daten bot eine neue Style 119, ein neues 135M-Vorderrad oder eine neue 18-Zoll-Style-71 an, weder vorn noch hinten. [S1, LOW; S2, LOW; S3, LOW]
+- **Mischbereifte Designs werden je Achse bepreist.** Ein Satz sind zwei Vorder- und zwei Hinterräder, und beide können unterschiedlich viel kosten. [S4, MEDIUM; S1, LOW]
+- **Preise ändern sich zwischen zwei Prüfungen.** Im Oktober halbierten sich die Scheinwerfer- und Stoßfängerpreise eines Verkäufers von einer Prüfung zur nächsten; die Felgenpreise in diesem Artikel änderten sich bei dieser Prüfung nicht. [S3, LOW]
+
+## Wie wir einen Satz gezählt haben
+
+Ein Felgensatz sind vier Felgen bei einem rundum gleichen Design oder zwei Vorder- und zwei Hinterräder bei Mischbereifung. [S4, MEDIUM] "My E46 plan" bei E46BUILD zählt den Umbau genauso, seine ungefähre Spanne ist aber weiter als die dieses Artikels: Sie zählt auch gebrauchte Angebote und den eigenen Komplettsatz eines Verkäufers zum Satzpreis, und nur Verkäufer, die dir angezeigt werden und in dein Land liefern. [S6] Bei der 68M kann sie zum Beispiel bei einem gebrauchten Satz beginnen. Unten zählen wir nur neue Einzelfelgen: Der Satzpreis der Preis je Felge mal vier oder zwei Vorder- plus zwei Hinterräder; wo mehrere Verkäufer dieselbe Felge anboten, nennen wir den niedrigsten und den höchsten. [S1, LOW]
+
+Komplette Sätze neuer Felgen bieten Verkäufer selten an, und E46BUILD zeigt einen Satz nur, wenn ein Verkäufer ihn anbietet. [S5, LOW] Die Rechnung hier ist unsere, als Schätzung; es ist kein Satz, den jemand so verkauft.
+
+## Neue Originalfelgen, je Felge und je Satz
+
+| Design | Größe (vorn / hinten) | Je Felge, neu | Satz | Verkäufer |
+| --- | --- | --- | --- | --- |
+| 54 V-Speiche | 16x7, rundum gleich | 106 bis 115 € | etwa 424 bis 461 € | 3 |
+| 169 Sternspeiche | 16x7, rundum gleich | 108 bis 118 € | etwa 433 bis 471 € | 3 |
+| 136 Spinnenspeiche | 16x7, rundum gleich | 112 € | etwa 448 € | 1 |
+| 44 Sternspeiche | 17x8, rundum gleich | 128 € | etwa 512 € | 1 |
+| 46 Ellipsoid | 16x7, rundum gleich | 251 bis 273 € | etwa 1.003 bis 1.091 € | 3 |
+| 88 Doppelspeiche | 16x7, rundum gleich | 272 € | etwa 1.088 € | 1 |
+| 45 Sternspeiche | 16x7, rundum gleich | 274 bis 298 € | etwa 1.097 bis 1.193 € | 3 |
+| 97M M-Doppelspeiche (Compact) | 17x7,5 / 17x8,5 | 245 bis 267 € vorn und hinten | etwa 981 bis 1.067 € | 3 |
+| 68M M-Doppelspeiche | 17x7,5 / 17x8,5 | 551 bis 599 € vorn, 572 € hinten | etwa 2.246 bis 2.342 € | 2 |
+
+Preise auf den Euro gerundet, inklusive Mehrwertsteuer, ohne Versand; Angebote geprüft vom 8. bis 13. Oktober 2026. [S1, LOW] Größen aus dem Teilekatalog. [S4, MEDIUM]
+
+Zwei Dinge fallen auf. Die günstigsten Sätze sind drei schlichte 16-Zoll-Designs, 54, 169 und 136, um 110 Euro je Felge. Und die M-Doppelspeichen kosten das Zwei- bis Fünffache: Ein neuer Satz 68M kostet etwa so viel wie fünf Sätze Style 54.
+
+## Die Sätze, die es neu nicht gibt
+
+Für drei Felgen, nach denen Besitzer oft fragen, hatten unsere Daten an den Prüftagen gar kein neues Originalangebot. [S1, LOW]
+
+- **Style 119**, die 17-Zoll-Fünfspeiche. Die Seite eines Händlers führte sie als eingestellt. [S2, LOW]
+- **Style 135M, Vorderrad.** Das Hinterrad gab es neu für 449 bis 488 Euro, das Vorderrad aber bei keinem Verkäufer in unseren Daten, ein neuer Satz ließ sich also nicht vervollständigen. [S1, LOW; S2, LOW]
+- **Style 71, 18 Zoll, vorn oder hinten.** BMWs Katalog führt die 18-Zoll-Zeilen der Style 71 als vom Werk eingestellt, und das letzte neue 18-Zoll-Hinterrad in unseren Daten verschwand bei der Prüfung am 13. Oktober von der Seite seines Verkäufers. Ein 17-Zoll-Vorderrad der Style 71, eine andere Größe desselben Designs, gab es neu für 249 Euro. [S4, MEDIUM; S1, LOW; S3, LOW]
+
+Für diese sind gebrauchte Felgen der realistische Weg. In unseren Daten bot ein europäischer Marktplatz einen gebrauchten Satz aus vier Style-68M-Felgen für etwa 529 Euro an, zwei vorn und zwei hinten. [S1, LOW] Gebrauchte Sätze werden meist über Kleinanzeigen und Auktionsseiten gehandelt, nicht in Shops. [S5, LOW]
+
+## Warum ein einzelner Preis täuschen kann
+
+**Einzelne Verkäufer.** Für Style 44, 136 und 88 sowie das 68M-Hinterrad bot in unseren Daten nur ein Verkäufer eine neue Felge an. Ein Preis ist ein Datenpunkt, kein Markt. [S1, LOW]
+
+**Preise, die sich zwischen Prüfungen ändern.** Bei der Prüfung am 13. Oktober fielen die Preise eines Verkäufers für viele Scheinwerfer und Stoßfänger auf weniger als die Hälfte dessen, was dieselben Seiten zwei Wochen vorher zeigten, ohne Hinweis auf eine Aktion; der Konfigurator zeigt solche Preise mit einem Hinweis. Keiner der Felgenpreise in diesem Artikel änderte sich bei dieser Prüfung, und keiner trägt den Hinweis. [S3, LOW] Ein Grund, jeden Preis vor der Bestellung zu bestätigen, ist es trotzdem. Schon eine frühere Recherche hatte den Preis der Style 44 als deutlich niedriger als bei anderen Felgen vermerkt, ohne Erklärung. [S2, LOW]
+
+**Bestand gegen Katalog.** Ein Händler kann eine Felge als neu und auf Lager anbieten, die BMWs Katalog als eingestellt führt. Das Angebot ist die Aussage des Händlers an dem Tag. [S2, LOW]
+
+**Versand.** Felgen sind sperrig, und manche Verkäufer liefern nur in wenige Länder. Die Preise oben sind ohne Versand, und nicht jeder Verkäufer liefert in jedes Land. [S1, LOW]
+
+## Was das für die Planung heißt
+
+1. **Plane nach Design, nicht nach "einem Satz Felgen".** Derselbe Umbau kostet mit einem schlichten 16-Zoll-Design etwa 450 Euro und mit der 68M etwa 2.300 Euro. [S1, LOW]
+2. **Bei Mischbereifung beide Achsen prüfen.** Ein Satz braucht zwei Vorder- und zwei Hinterräder, und jede davon kann die fehlende sein. [S4, MEDIUM; S1, LOW]
+3. **Fehlt eine neue Felge, plane gebraucht.** Das ist in unseren Daten beim 135M-Vorderrad und bei der 18-Zoll-Style-71 der Fall. [S1, LOW]
+4. **Bestätige den Preis vor der Bestellung**, besonders wenn er weit unter den anderen liegt. [S3, LOW]
+5. **Rechne Reifen, Montage und Versand dazu.** Nichts davon ist in diesen Preisen enthalten.
+
+Wie man jedes Design erkennt und welches an deine Karosserie passt, steht in ["Sechs Felgen, drei Familien"](/de/blog/telling-e46-wheels-apart).
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Jeder Preis ist ein Angebot eines Verkäufers an einem genannten Datum, bewertet mit LOW und als Beobachtung angegeben, nicht als Marktpreis. Größen und Katalogvermerke stammen aus Spiegeln des Teilekatalogs (MEDIUM). Angebote eines Verkäufers, den der Konfigurator nicht anzeigt, fehlen. Die Satzsummen sind unsere Rechnung.
+
+**Erfasste Widersprüche.** (1) Ein Händler bot Felgen als neu und auf Lager an, die der Katalog als eingestellt führt; die Händleraussage wird nicht übernommen.
+
+**Nicht geklärt.** Preise in anderen Märkten; die Kosten für Reifen und Montage; ob eingestellte Felgen wiederkommen; Gebrauchtpreise über den einen angebotenen Satz hinaus.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Felgen an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben. Leg eine Felge in "My E46 plan" auf dein Auto, und er zeigt eine ungefähre Spanne für den ganzen Satz von den Verkäufern, die zu dir liefern, gebrauchte Angebote und eigene Sätze der Verkäufer eingeschlossen; sie kann daher von den reinen Neupreisen hier abweichen.
