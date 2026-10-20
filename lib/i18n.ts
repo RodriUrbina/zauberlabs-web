@@ -25,7 +25,7 @@ const en = {
   garage: {
     eyebrow: "The garage",
     title: ["Your car, ", "to its full potential."],
-    body: "Each car gets its own configurator as a standalone site, built around a single model and every body style it came in. We display auto parts that only fit your car and tell you where to buy them.",
+    body: "We’ve recreated the modern car configurator but for your daily drive. Pick your car’s body style, see what mods are possible, try out new parts and learn where to buy them.",
     e46Label: "01 · Live · BMW 3 Series (E46)",
     e46LabelSoon: "01 · Coming soon · BMW 3 Series (E46)",
     e46Body: "Headlights, bumpers, wheels, seats and steering wheels — shown on your E46, matched to its production date, with OEM part numbers and offers side by side.",
@@ -171,7 +171,7 @@ const de: Dict = {
   garage: {
     eyebrow: "Die Garage",
     title: ["Dein Auto, ", "voll ausgeschöpft."],
-    body: "Jedes Auto bekommt seinen eigenen Konfigurator als eigenständige Website – gebaut um ein einziges Modell und jede Karosserievariante, die es gab. Wir zeigen nur Teile, die an dein Auto passen, und sagen dir, wo du sie kaufen kannst.",
+    body: "Wir haben den modernen Autokonfigurator nachgebaut – für dein Alltagsauto. Wähle die Karosserie deines Autos, sieh, welche Umbauten möglich sind, probier neue Teile aus und erfahre, wo du sie kaufen kannst.",
     e46Label: "01 · Live · BMW 3er (E46)",
     e46LabelSoon: "01 · Bald verfügbar · BMW 3er (E46)",
     e46Body: "Scheinwerfer, Stoßstangen, Felgen, Sitze und Lenkräder – direkt an deinem E46 gezeigt, abgestimmt aufs Produktionsdatum, mit OE-Teilenummern und Angeboten im Vergleich.",
