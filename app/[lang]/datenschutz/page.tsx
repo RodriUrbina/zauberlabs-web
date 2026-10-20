@@ -234,7 +234,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         zu schreiben. Dafür erheben wir keine weiteren Daten; nichts davon wird kopiert, zwischengespeichert, protokolliert oder an Dritte weitergegeben.
         Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Du kannst Benachrichtigungen jederzeit auf „Meine Builds“ beenden.
         Beendest du eine Benachrichtigung, löschen wir sie sofort. Offene Benachrichtigungen enden nach 12 Monaten und werden dann gelöscht. Nachdem wir dir
-        geschrieben haben, bleibt die Benachrichtigung noch 30 Tage gespeichert, damit du siehst, dass ein Verkäufer gefunden wurde, und wird dann gelöscht.
+        geschrieben haben, bleibt die Benachrichtigung noch 30 Tage gespeichert, damit du auf „Meine Builds“ siehst, dass ein Verkäufer gefunden wurde, und wird dann gelöscht.
         Beim Löschen deines Kontos oder beim Entfernen der Konfiguration aus deinem Konto löschen wir sie sofort. Es bleibt nur eine anonyme Zählung ohne
         Bezug zu dir. Deine Benachrichtigungen sind Teil deines Datenexports.
       </p>
