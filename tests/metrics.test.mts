@@ -1,6 +1,6 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
-import { berlinDay, countryCode, isBot, lastDays, medianBucket, parseBeacon, previousDay, referrerDomain, timeBucket } from "../lib/metrics";
+import { berlinDay, countryCode, isBot, lastDays, statsDays, STATS_START_DAY, medianBucket, parseBeacon, previousDay, referrerDomain, timeBucket } from "../lib/metrics";
 
 describe("own statistics (BL-051)", () => {
   test("referrer is reduced to the domain; own sites and junk count as direct", () => {
@@ -50,6 +50,13 @@ describe("own statistics (BL-051)", () => {
     assert.equal(parseBeacon("not json"), null);
     assert.equal(parseBeacon("x".repeat(600)), null);
     assert.equal(parseBeacon('{"t":"e","l":"de","s":"a","n":99999999}')?.t, "e");
+  });
+  test("the periods never reach before the start day (BL-060)", () => {
+    assert.equal(STATS_START_DAY, "2026-10-21");
+    assert.deepEqual(statsDays(30, new Date("2026-10-20T12:00:00Z")), []);
+    assert.deepEqual(statsDays(7, new Date("2026-10-23T12:00:00Z")), ["2026-10-21", "2026-10-22", "2026-10-23"]);
+    assert.equal(statsDays(90, new Date("2027-03-01T12:00:00Z")).length, 90);
+    assert.deepEqual(statsDays(3, new Date("2026-10-21T00:30:00+02:00")), ["2026-10-21"]); // 00:30 Berlin on the start day
   });
   test("days roll over at midnight in Berlin", () => {
     assert.equal(berlinDay(new Date("2026-10-19T21:59:00Z")), "2026-10-19");

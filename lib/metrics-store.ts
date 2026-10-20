@@ -212,6 +212,7 @@ export async function getStats(days: string[]): Promise<Stats> {
   };
   const redis = getRedis();
   if (!redis) return empty;
+  if (!days.length) return empty; // BL-060.1: before STATS_START_DAY there is no day to read, and Upstash rejects an empty pipeline
   const today = berlinDay();
   await Promise.all(days.filter((d) => d < today).map((d) => rollupUniques(d)));
 

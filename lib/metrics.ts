@@ -28,6 +28,17 @@ export function berlinDay(at: Date = new Date()): string {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin", year: "numeric", month: "2-digit", day: "2-digit" }).format(at);
 }
 
+/**
+ * BL-060 (PO decision 2026-10-20): the statistics count from this Berlin day on. A START DATE, not a deletion: older daily
+ * keys stay in Redis until their normal expiry, they are just never shown. One constant, deliberately no env var.
+ */
+export const STATS_START_DAY = "2026-10-21";
+
+/** The `n` Berlin days ending today, oldest first, never before STATS_START_DAY (may be empty before that day). */
+export function statsDays(n: number, at: Date = new Date(), start: string = STATS_START_DAY): string[] {
+  return lastDays(n, at).filter((d) => d >= start);
+}
+
 /** The `n` Berlin days ending today, oldest first. */
 export function lastDays(n: number, at: Date = new Date()): string[] {
   const out: string[] = [];
