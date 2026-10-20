@@ -21,6 +21,8 @@ export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: 
  * BL-051: own anonymous statistics (Abschnitt 6): daily counters in Upstash, salted daily hash only inside a HyperLogLog.
  * BL-052 (E46 T-106): optional seller notices for signed-in owners — part, build, delivery country (detected from the IP, not confirmed by the owner), date; the PO emails owners by hand
  * from hello@zauberlabs.de (no automatic notifier, no Brevo); stopped ones deleted at once, open ones after 12 months (Abschnitt 10).
+ * T-108.1 (E46 API 367d665): the operator sees email, part, build label, request day and country on a protected admin page, only
+ * where a seller now delivers there; nothing new collected, copied, cached, logged or shared; emailed + marked → kept 30 days, then deleted.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -226,12 +228,15 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <p>
         <strong>Benachrichtigung, wenn ein Verkäufer gefunden ist (optional).</strong> Gibt es für ein passendes Teil noch keinen Verkäufer, kannst
         du dich mit deinem Konto benachrichtigen lassen. Dafür speichern wir zu deinem Konto, für welche Konfiguration und welches Teil du
-        benachrichtigt werden möchtest, das Land, in das geliefert werden soll (wie oben beschrieben aus deiner IP-Adresse abgeleitet, falls erkannt), und das Datum. Finden wir einen
-        Verkäufer, der das Teil anbietet und in dieses Land liefert, schreiben wir dir eine E-Mail von hello@zauberlabs.de.
+        benachrichtigt werden möchtest, das Land, in das geliefert werden soll (wie oben beschrieben aus deiner IP-Adresse abgeleitet, falls erkannt), und das Datum.
+        Gibt es einen Verkäufer, der das Teil anbietet und in dieses Land liefert, sehen nur wir als Betreiber auf einer geschützten Admin-Seite deine
+        E-Mail-Adresse, das Teil, die Bezeichnung deiner Konfiguration, den Tag deiner Anfrage und das Land, um dir von hello@zauberlabs.de eine E-Mail
+        zu schreiben. Dafür erheben wir keine weiteren Daten; nichts davon wird kopiert, zwischengespeichert, protokolliert oder an Dritte weitergegeben.
         Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Du kannst Benachrichtigungen jederzeit auf „Meine Builds“ beenden.
-        Beendest du eine Benachrichtigung, löschen wir sie sofort; offene Benachrichtigungen enden nach 12 Monaten und werden dann gelöscht, beim
-        Löschen deines Kontos oder beim Entfernen der Konfiguration aus deinem Konto sofort. Es bleibt nur eine anonyme Zählung ohne Bezug zu dir. Deine Benachrichtigungen sind Teil deines
-        Datenexports.
+        Beendest du eine Benachrichtigung, löschen wir sie sofort. Offene Benachrichtigungen enden nach 12 Monaten und werden dann gelöscht. Nachdem wir dir
+        geschrieben haben, bleibt die Benachrichtigung noch 30 Tage gespeichert, damit du siehst, dass ein Verkäufer gefunden wurde, und wird dann gelöscht.
+        Beim Löschen deines Kontos oder beim Entfernen der Konfiguration aus deinem Konto löschen wir sie sofort. Es bleibt nur eine anonyme Zählung ohne
+        Bezug zu dir. Deine Benachrichtigungen sind Teil deines Datenexports.
       </p>
 
       <h2>11. Datenbank-Dienstleister für E46BUILD (Neon)</h2>
