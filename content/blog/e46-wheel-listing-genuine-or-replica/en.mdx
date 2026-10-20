@@ -1,0 +1,120 @@
+---
+# BL-062.3 — Writer draft, English. Body is Markdown.
+# The layout renders the evidence legend, the Sources & confidence box and the CTA from front matter.
+# No seller, guide publisher or replica brand is named.
+title: "Genuine or replica? How to read an E46 wheel listing"
+description: "\"Style 68\", \"OEM look\", \"set of four\": what an E46 wheel listing tells you, why guides list more styles than BMW's catalogue, and the detail that settles it."
+date: 2026-10-20
+updated: 2026-11-06
+publishAt: "2026-11-06"
+lang: en
+slug: e46-wheel-listing-genuine-or-replica
+card: BL-062
+author: "zauberlabs"
+tags:
+  - E46
+  - wheels
+  - buying guide
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # PO decides
+  alt: "A used alloy wheel lying face up on a workshop bench next to a tape measure"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "Proposal: reuse one of the PO's canonical wheel images (T-069) or a new AI image: one used silver alloy wheel face up on a workbench, a tape measure beside it, the back of a second wheel visible. Must not show: legible brand names or part numbers, people."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-079 — E46 factory wheel styles: BMW parts-catalogue mirror pages saved in T-030 (17 wheel-group indexes, 98 style pages for the 325 and 330 models) compared with a parts retailer's online wheel guide"
+    type: ETK mirror (one mirror), with a retailer guide as the comparison
+    path: "t079-e46-wheel-styles/README.md; t079-e46-wheel-styles/inventory.json"
+    confidence: MEDIUM
+    note: "MEDIUM for what the saved catalogue pages list; only the 325 and 330 models were read, so 'not listed' means 'not in what we hold'. The guide's own claims are LOW and attributed."
+  - id: S2
+    title: "T-035.1 — sizes, offsets and part numbers of the main factory styles (bmwfans.info, Europe trees corroborated by a second mirror)"
+    type: ETK mirror
+    path: "t035-evidence/REPORT.md; t035-evidence/applicability-by-market.md"
+    confidence: MEDIUM
+  - id: S3
+    title: "T-096 — where E46 wheel sets trade in Europe, October 2026: specialist shops, dismantler marketplaces, classifieds and auction sites; replica sets described with BMW style names"
+    type: market observation (search results and shop pages, no seller named here)
+    path: "t096-wheel-sets/README.md"
+    confidence: LOW
+  - id: S4
+    title: "T-087 — the project rule that a wheel set exists only when a seller lists one, and that only a stated BMW part number maps a listing to a catalogue wheel"
+    type: project record
+    path: "t087-wheel-sets/README.md; t096-wheel-sets/README.md"
+    confidence: n/a
+  - id: S5
+    title: "BMW Germany price lists 2004–2006 (SR-0067): the wheel designs named for the Lifestyle and Exclusive Editions"
+    type: BMW-authored (price lists), PO-supplied; private, facts only
+    path: "t071-factory-packages/pricelists-de-packages.json; t071-factory-packages/README.md (Step 2)"
+    confidence: HIGH
+---
+
+Search for a set of E46 wheels and the listings will use BMW's own words: "Style 68", "M double spoke", "original look", "fits all E46". Some are genuine BMW wheels. Many are not, and a few are genuine wheels from another BMW. The listing's words are written to be found, not to be precise. This article sets out what a wheel listing can tell you, why even careful-looking wheel guides list more "E46 styles" than BMW's catalogue knows, and the one detail that settles whether a wheel is the one you want.
+
+## The short version
+
+- **A style name is not proof.** Replica sets are offered with BMW style names and words like "compatible" or "look". [S3, LOW]
+- **The BMW part number decides,** with the size and offset that go with it. It is the only detail E46BUILD uses to match a listing to a factory wheel. [S4; S2, MEDIUM]
+- **Wheel guides list more styles than the catalogue.** A popular retailer's guide names 54 E46 styles; the catalogue pages we hold for the 325 and 330 models list 42 of them, and give sizes for 23. [S1, MEDIUM]
+- **Guides and the catalogue can disagree on size.** For two styles the guide gives a 17-inch version the catalogue pages do not show. [S1, MEDIUM; the guide LOW]
+- **Sets mostly trade privately.** Specialist used-wheel shops in our check no longer carried E46 sets; most sets are on classifieds and auction sites. [S3, LOW]
+
+## What the words in a listing mean
+
+**"Style 68", "M double spoke", "Style 135M".** These are BMW's design numbers and names. Used correctly, they identify a genuine BMW design; used in a replica listing, they describe what the copy imitates. Our research found replica sets on European marketplaces described with a BMW style number and words such as "compatible". [S3, LOW]
+
+**"OEM", "original", "genuine".** These are claims. A listing that says "original" and gives a BMW part number can be checked; one that says "original look" is telling you it is not.
+
+**"Fits all E46".** Bolt pattern and hub bore are the same on every E46, so almost any 5×120 wheel bolts on. Whether it is a factory wheel, and whether it clears your brakes and arches, is a different question. [S2, MEDIUM]
+
+**"Set of four".** On a staggered style, a set is two front and two rear wheels of different widths and offsets, each with its own BMW number. Four identical wheels sold as a staggered "set" are not one. [S2, MEDIUM]
+
+## The detail that settles it: the BMW part number
+
+Every factory E46 wheel has a BMW part number, and the parts catalogue ties each number to a size and an offset. Style 44, for example, is one number for all four corners, 8×17 with a 47 mm offset; Style 68M has one number for the 7.5×17 front and another for the 8.5×17 rear. [S2, MEDIUM] E46BUILD maps a seller's listing to a factory wheel only when the listing states a BMW number that the catalogue knows. [S4]
+
+So the questions to ask a seller are simple: which BMW number is on each wheel, and what size and offset? If the answers match the catalogue, the wheel is what the listing says. If the seller cannot give a number, the listing is a description of a look.
+
+## Why guides list more styles than BMW does
+
+Wheel guides are useful for recognising designs. As evidence of what an E46 left the factory on, they are weaker than they look. Our research compared one widely read guide, published by a parts retailer, with the catalogue pages we hold. [S1, MEDIUM]
+
+- **Coverage.** The guide names 54 styles as E46 styles. The catalogue indexes we hold, for the 325 and 330 models in Europe, list 42 of them. Twelve are not in what we hold; some are M3 styles, which we did not read, so "not listed" here never means "doesn't fit". [S1, MEDIUM]
+- **Sizes.** The guide gives diameters only, and many entries simply say "also fitted on" another BMW. Only 23 of the 54 styles have a saved catalogue page with width, offset and part number. [S1, MEDIUM]
+- **Disagreements.** For Style 43 the guide lists 16 and 17 inches; the catalogue page shows one 7×16 wheel. For Style 169 the guide says 17 inches; the catalogue page gives 7×16. [S1, MEDIUM; the guide LOW]
+- **Gaps the other way.** The catalogue lists designs the guide leaves out, among them Styles 170 and 171, which BMW's German price lists name for the Coupé and Convertible Editions, and one style the catalogue itself names as a BMW Performance accessory rather than a factory wheel. [S1, MEDIUM; S5, HIGH]
+
+None of this makes the guide useless. It means that a guide entry, or a listing that copies one, is a lead. The part number is the evidence.
+
+## Single wheels and sets
+
+New genuine BMW wheels are mostly sold one at a time, and E46BUILD shows a set only when a seller lists one. [S4] Our search for E46 sets in October 2026 found that specialist used-original wheel shops now stock later BMW models rather than E46 wheels, dismantler marketplaces sell single rims, and most E46 sets change hands on classifieds and auction sites, often from private sellers. [S3, LOW] That is also where most replica sets are. [S3, LOW]
+
+For a staggered style, check that a used set really contains two fronts and two rears, and that the front numbers match each other, as do the rear ones. A set made up of wheels from different cars is common, and nothing wrong with it as long as the numbers fit together. [S2, MEDIUM]
+
+## Checklist for a wheel listing
+
+1. **Ask for the BMW part number on each wheel.** No number, no proof. [S4]
+2. **Check size and offset against the catalogue,** front and rear for staggered styles. [S2, MEDIUM]
+3. **Match the design to the number.** Our guide ["Six wheels, three families"](/en/blog/telling-e46-wheels-apart) shows the main factory styles.
+4. **Treat "look", "style", "compatible" and "OEM design" as the words of a replica** until a number says otherwise. [S3, LOW]
+5. **Count the set:** four identical wheels for a square style, two plus two for a staggered one. [S2, MEDIUM]
+6. **Use price as a sanity check.** What new genuine wheels cost, style by style, is in ["What four genuine E46 wheels really cost"](/en/blog/e46-four-genuine-wheels-cost); a "genuine" set far below that deserves a question.
+
+## Notes on the evidence
+
+**Confidence.** Catalogue facts come from one parts-catalogue mirror, read for the 325 and 330 models only, and from a second mirror for the main styles. The wheel guide is a retailer's publication and is used only as the thing being compared; its claims are LOW. The market picture is a dated search, graded LOW. The rule that only a BMW number maps a listing is E46BUILD's own.
+
+**Conflicts recorded.** (1) Style 43 and Style 169: the guide's 17-inch sizes against the catalogue's 7×16. (2) Twelve guide styles are not in the catalogue pages we hold, partly because we did not read the M3 and the smaller engines.
+
+**Not established.** Which styles the 316, 318, 320 and diesel models list; whether every guide size is wrong or only absent from our pages; how the M3's own styles appear in the catalogue.
+
+## What comes next
+
+Our E46 configurator is live: it shows which wheels fit your car and links to sellers where we've found one.
