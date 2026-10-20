@@ -73,6 +73,7 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
             <a
               key={b.start}
               href={e46StartUrl(b.start)}
+              rel="nofollow" // each load creates a build on E46BUILD; crawlers should not follow these
               className="inline-flex h-9 items-center rounded-full border border-line px-4 text-sm font-semibold text-ink hover:border-ink"
             >
               {b.name}
