@@ -40,6 +40,15 @@ Rules for every agent working in this repository (Builder, Writer, Editor, Coord
 - **No personal data in outbound requests (PO decision 2026-10-11, BL-042).** Never send personal data — the PO's email address, names, tokens — in a User-Agent, header, URL or request body to an outside host. Check helper and subagent briefs for the same before handing them out.
 - **Neutral User-Agent for outside fetches.** Scripts and tools that fetch from outside hosts identify as a research tool with a neutral User-Agent, for example `zauberlabs-research/1.0`, and carry no personal data.
 
+## Agent rules: production checks
+
+Coordinator rule since 2026-10-20 (BL-058). zauberlabs.de's statistics must not count the PO or the agents.
+
+- **(a) Internal mode first.** Before opening www.zauberlabs.de in any browser, set the cookie `zl_internal=1` for that host (BL-039). Vercel Web Analytics and our own statistics then drop the visit. No secret is needed; the secret only gates the PO's `/api/internal-mode?k=…` link.
+- **(b) Keep the headless User-Agent.** Don't replace Chromium's default "HeadlessChrome" UA. Our statistics also drop that UA, as a second safety net. Vercel Web Analytics doesn't.
+- **(c) Preview and curl where possible.** Do visual checks on the Vercel preview (its statistics go to separate `m:test:*` keys). Do "is it live" checks with curl: no JavaScript, so nothing is counted anywhere.
+- **The tool:** `node scripts/prod-check.mjs [-v WxH]... [--out DIR] [--full] URL...` does (a) and (b) for you. It sets the cookie for every host before the first navigation, and refuses to run if the cookie isn't in place or the UA isn't the headless default. It also stops if any analytics or statistics request leaves the page, then saves one screenshot per URL and viewport (default 1440×900 and 390×844, into the git-ignored `prod-check-shots/`). No dependencies; it uses `$CHROME_PATH` or Playwright's cached Chromium.
+
 ## Deploy
 
 1. Import this repo in Vercel (Add New → Project).
