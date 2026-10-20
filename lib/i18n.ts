@@ -13,7 +13,7 @@ const en = {
   hero: {
     live: "New · E46 configurator now live",
     liveSoon: "Coming soon · BMW 3 Series (E46)",
-    title: ["A little ", "magic", " for the car you already own."],
+    title: ["A little bit of ", "magic", " for your daily driver."],
     line: "Play with the art of the possible — for your daily drive.",
     cta: "Start with your E46",
     videoAlt: "E46BUILD in use: a silver BMW E46 Coupé while the search types “BMW E46 330Ci Coupe” and the parts that fit appear",
@@ -159,7 +159,7 @@ const de: Dict = {
   hero: {
     live: "Neu · E46-Konfigurator jetzt live",
     liveSoon: "Demnächst · BMW 3er (E46)",
-    title: ["Ein bisschen ", "Zauber", " für das Auto, das du schon hast."],
+    title: ["Ein bisschen ", "Zauber", " für deinen Alltagswagen."],
     line: "Spiel mit der Kunst des Möglichen – für dein Alltagsauto.",
     cta: "Starte mit deinem E46",
     videoAlt: "E46BUILD im Einsatz: ein silbernes BMW E46 Coupé, während die Suche „BMW E46 330Ci Coupe“ tippt und die passenden Teile erscheinen",
