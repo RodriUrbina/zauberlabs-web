@@ -23,6 +23,7 @@ export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: 
  * from hello@zauberlabs.de (no automatic notifier, no Brevo); stopped ones deleted at once, open ones after 12 months (Abschnitt 10).
  * T-108.1 (E46 API 367d665): the operator sees email, part, build label, request day and country on a protected admin page, only
  * where a seller now delivers there; nothing new collected, copied, cached, logged or shared; emailed + marked → kept 30 days, then deleted.
+ * BL-061 (DRAFT): eBay Partner Network links in E46BUILD (Abschnitt 14); we set no cookies and store no clicks for them.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -264,6 +265,19 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <p>
         Unsere Konfiguratoren verlinken auf externe Händler und Plattformen. Erst wenn du einen solchen Link anklickst, verlässt du unsere
         Website; ab dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
+      </p>
+      {/* BL-061 (DRAFT; release together with E46BUILD T-123) — adapted from e46build
+          docs/plans/t091-6-epn-phase1.md § 6 (branch agent-2/T-091.6-epn-plan, 0c7b09e), du form; updated 2026-10-21 for T-123 (eBay
+          SEARCH links on part pages). EPN privacy-notice URL supplied by the PO (agents may not open eBay pages). The consent question is in
+          the lawyer brief. */}
+      <p>
+        <strong>eBay Partner Network.</strong> Auf den Teile-Seiten von E46BUILD führen einige Links zu einer passenden Suche auf eBay. Diese Links
+        enthalten eine Kennung des eBay Partner Network (eBay Partner Network, Inc., USA), damit eBay einen Kauf unserem Angebot zuordnen kann; wir
+        erhalten dafür unter Umständen eine Provision, der Preis ändert sich für dich nicht. Wir selbst setzen dafür keine Cookies und speichern keine
+        Klicks auf diese Links. Erst wenn du einen solchen Link anklickst, verarbeitet eBay auf seinen Seiten Daten (z. B. Cookies, Klick- und
+        Kaufdaten) nach seinen eigenen Bestimmungen; siehe den Datenschutzhinweis des eBay Partner Network:
+        https://partnernetwork.ebay.com/page/network-agreement#privacy-notice. Informationen zum Widerspruch findest du im Datenschutzhinweis des eBay
+        Partner Network (Link oben).
       </p>
 
       <h2>15. Deine Rechte</h2>
