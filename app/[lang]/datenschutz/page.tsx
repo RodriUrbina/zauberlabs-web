@@ -266,16 +266,18 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Unsere Konfiguratoren verlinken auf externe Händler und Plattformen. Erst wenn du einen solchen Link anklickst, verlässt du unsere
         Website; ab dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
       </p>
-      {/* BL-061 (DRAFT; release together with E46BUILD's first eBay link, T-091.6) — adapted from e46build
-          docs/plans/t091-6-epn-phase1.md § 6 (branch agent-2/T-091.6-epn-plan, 0c7b09e), du form. The two [ … ] placeholders
-          are filled by the PO from the EPN portal: agents may not open eBay pages. The consent question is in the lawyer brief. */}
+      {/* BL-061 (DRAFT; release together with E46BUILD T-123) — adapted from e46build
+          docs/plans/t091-6-epn-phase1.md § 6 (branch agent-2/T-091.6-epn-plan, 0c7b09e), du form; updated 2026-10-21 for T-123 (eBay
+          SEARCH links on part pages). EPN privacy-notice URL supplied by the PO (agents may not open eBay pages). The consent question is in
+          the lawyer brief. */}
       <p>
-        <strong>eBay Partner Network.</strong> In E46BUILD führen einige Verkäuferlinks zu eBay. Diese Links enthalten eine Kennung des eBay
-        Partner Network (eBay Partner Network, Inc., USA), damit eBay einen Kauf unserem Angebot zuordnen kann; wir erhalten dafür unter Umständen
-        eine Provision, der Preis ändert sich für dich nicht. Wir selbst setzen dafür keine Cookies und speichern keine Klicks auf diese Links. Erst
-        wenn du einen solchen Link anklickst, verarbeitet eBay auf seinen Seiten Daten (z. B. Cookies, Klick- und Kaufdaten) nach seinen eigenen
-        Datenschutzbestimmungen ([LINK ZUR EBAY-DATENSCHUTZERKLÄRUNG – PO trägt ein]). Widerspruch: [OPT-OUT-WEG LAUT EPN-DATENSCHUTZHINWEIS – PO trägt
-        ein]. Informationen zum eBay Partner Network: https://partnernetwork.ebay.com/
+        <strong>eBay Partner Network.</strong> Auf den Teile-Seiten von E46BUILD führen einige Links zu einer passenden Suche auf eBay. Diese Links
+        enthalten eine Kennung des eBay Partner Network (eBay Partner Network, Inc., USA), damit eBay einen Kauf unserem Angebot zuordnen kann; wir
+        erhalten dafür unter Umständen eine Provision, der Preis ändert sich für dich nicht. Wir selbst setzen dafür keine Cookies und speichern keine
+        Klicks auf diese Links. Erst wenn du einen solchen Link anklickst, verarbeitet eBay auf seinen Seiten Daten (z. B. Cookies, Klick- und
+        Kaufdaten) nach seinen eigenen Bestimmungen; siehe den Datenschutzhinweis des eBay Partner Network:
+        https://partnernetwork.ebay.com/page/network-agreement#privacy-notice. Informationen zum Widerspruch findest du im Datenschutzhinweis des eBay
+        Partner Network (Link oben).
       </p>
 
       <h2>15. Deine Rechte</h2>
