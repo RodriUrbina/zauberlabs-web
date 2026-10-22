@@ -283,14 +283,15 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       {/* BL-062 (Coordinator 2026-10-22; e46build T-102.5, apps/api/src/ebay/browse.ts on master 4392b212, read-only): live eBay
           listings via the Browse API, server-side; part numbers + delivery country only; in-memory cache (re-fetched after 3 h, never
           shown after 6 h, no age sweep: entries are replaced, pushed out by the 500-entry cap or lost on restart — Editor review of
-          151dbd5); images via our proxy; affiliate links. */}
+          151dbd5); images via our proxy; affiliate links. Categories and the seller-name use (repeat listings: same seller + same
+          title are dropped) per e46build agent-1/T-128-ebay-more-categories 5d5edfeb (T-127/T-128). */}
       <p>
         <strong>eBay-Angebote in E46BUILD.</strong> Für manche Teile (Felgen, Scheinwerfer, Stoßstangen und Lenkräder) zeigt E46BUILD zusätzlich aktuelle Angebote von eBay, die zu
         deinem Auto passen. Dafür fragt unser Server – nicht dein Browser – die Programmierschnittstelle von eBay ab und übermittelt dabei nur unsere
         BMW-Teilenummern und das Lieferland. Das Land leitet unser Hoster aus deiner IP-Adresse ab (siehe Abschnitt 10); deine IP-Adresse selbst,
         Cookies oder Kontodaten werden nicht an eBay übermittelt. Die Ergebnisse halten wir nur im Arbeitsspeicher unseres Servers vor: Nach 3
         Stunden fragen wir eBay neu ab, und Angebote, die älter als 6 Stunden sind, zeigen wir nie an. Ältere Einträge werden überschrieben oder beim
-        nächsten Neustart verworfen. Den Namen des Verkäufers zeigen wir so an, wie eBay ihn liefert; darüber hinaus verwenden wir ihn nicht. Die Bilder der Angebote laden wir über
+        nächsten Neustart verworfen. Den Namen des Verkäufers zeigen wir so an, wie eBay ihn liefert, und nutzen ihn sonst nur, um doppelte Angebote desselben Verkäufers auszublenden. Die Bilder der Angebote laden wir über
         unseren eigenen Server, sodass dein Browser beim Ansehen der Seite keine Verbindung zu eBay aufnimmt. Jedes Angebot verlinkt mit einem Link des
         eBay Partner Network zu eBay; erst wenn du ihn anklickst, setzt eBay eigene Cookies (siehe oben).
       </p>
