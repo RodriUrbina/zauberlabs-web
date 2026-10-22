@@ -24,7 +24,7 @@ export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: 
  * T-108.1 (E46 API 367d665): the operator sees email, part, build label, request day and country on a protected admin page, only
  * where a seller now delivers there; nothing new collected, copied, cached, logged or shared; emailed + marked → kept 30 days, then deleted.
  * BL-061 (DRAFT): eBay Partner Network links in E46BUILD (Abschnitt 14); we set no cookies and store no clicks for them.
- * BL-062 (eBay listings, T-102.5): server-side Browse API with part numbers + delivery country only; cache ≤ 3 h; images via our proxy (Abschnitt 14).
+ * BL-062 (eBay listings, T-102.5): server-side Browse API with part numbers + delivery country only; in-memory cache, re-fetched after 3 h, never shown after 6 h; images via our proxy (Abschnitt 14).
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -281,14 +281,16 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Partner Network (Link oben).
       </p>
       {/* BL-062 (Coordinator 2026-10-22; e46build T-102.5, apps/api/src/ebay/browse.ts on master 4392b212, read-only): live eBay
-          listings via the Browse API, server-side; part numbers + delivery country only; cache ≤ 3 h, never shown after 6 h;
-          images via our proxy; affiliate links. */}
+          listings via the Browse API, server-side; part numbers + delivery country only; in-memory cache (re-fetched after 3 h, never
+          shown after 6 h, no age sweep: entries are replaced, pushed out by the 500-entry cap or lost on restart — Editor review of
+          151dbd5); images via our proxy; affiliate links. */}
       <p>
         <strong>eBay-Angebote in E46BUILD.</strong> Für manche Teile (zunächst Felgen) zeigt E46BUILD zusätzlich aktuelle Angebote von eBay, die zu
         deinem Auto passen. Dafür fragt unser Server – nicht dein Browser – die Programmierschnittstelle von eBay ab und übermittelt dabei nur unsere
         BMW-Teilenummern und das Lieferland. Das Land leitet unser Hoster aus deiner IP-Adresse ab (siehe Abschnitt 10); deine IP-Adresse selbst,
-        Cookies oder Kontodaten werden nicht an eBay übermittelt. Die Ergebnisse speichern wir auf unserem Server höchstens 3 Stunden zwischen, und
-        Angebote, die älter als 6 Stunden sind, zeigen wir nie an. Den Namen des Verkäufers zeigen wir nur an. Die Bilder der Angebote laden wir über
+        Cookies oder Kontodaten werden nicht an eBay übermittelt. Die Ergebnisse halten wir nur im Arbeitsspeicher unseres Servers vor: Nach 3
+        Stunden fragen wir eBay neu ab, und Angebote, die älter als 6 Stunden sind, zeigen wir nie an. Ältere Einträge werden überschrieben oder beim
+        nächsten Neustart verworfen. Den Namen des Verkäufers zeigen wir so an, wie eBay ihn liefert; darüber hinaus verwenden wir ihn nicht. Die Bilder der Angebote laden wir über
         unseren eigenen Server, sodass dein Browser beim Ansehen der Seite keine Verbindung zu eBay aufnimmt. Jedes Angebot verlinkt mit einem Link des
         eBay Partner Network zu eBay; erst wenn du ihn anklickst, setzt eBay eigene Cookies (siehe oben).
       </p>
