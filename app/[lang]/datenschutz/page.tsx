@@ -285,7 +285,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
           shown after 6 h, no age sweep: entries are replaced, pushed out by the 500-entry cap or lost on restart — Editor review of
           151dbd5); images via our proxy; affiliate links. */}
       <p>
-        <strong>eBay-Angebote in E46BUILD.</strong> Für manche Teile (zunächst Felgen) zeigt E46BUILD zusätzlich aktuelle Angebote von eBay, die zu
+        <strong>eBay-Angebote in E46BUILD.</strong> Für manche Teile (Felgen, Scheinwerfer, Stoßstangen und Lenkräder) zeigt E46BUILD zusätzlich aktuelle Angebote von eBay, die zu
         deinem Auto passen. Dafür fragt unser Server – nicht dein Browser – die Programmierschnittstelle von eBay ab und übermittelt dabei nur unsere
         BMW-Teilenummern und das Lieferland. Das Land leitet unser Hoster aus deiner IP-Adresse ab (siehe Abschnitt 10); deine IP-Adresse selbst,
         Cookies oder Kontodaten werden nicht an eBay übermittelt. Die Ergebnisse halten wir nur im Arbeitsspeicher unseres Servers vor: Nach 3
