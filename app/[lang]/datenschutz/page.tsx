@@ -288,7 +288,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
           BL-069: eBay picks in the plan per e46build agent-1/T-133-ebay-in-plan 6c27f870 — the plan stores buyingOption
           { id: "ebay:<itemId>", kind: our unit type, label: our fixed label } only; getItem sends item id + country + EPN context;
           itemFor keeps the row in memory (≤ 3 h fresh, never > 6 h); removeItem/removeLine delete it; account deletion keeps the
-          plan without the user (Abschnitt 10). */}
+          plan without the user (Abschnitt 10).
+          T-134 (e46build agent-1/T-134-ebay-us d1eec47d/00847848): EBAY_US + USD and ebay.com EPN links for a US delivery country,
+          EBAY_DE + EUR otherwise (ebayMarketplaceFor); same request data; the US is now a recognised owner country. */}
       <p>
         <strong>eBay-Angebote in E46BUILD.</strong> Für manche Teile (Felgen, Scheinwerfer, Stoßstangen und Lenkräder) zeigt E46BUILD zusätzlich aktuelle Angebote von eBay, die zu
         deinem Auto passen. Dafür fragt unser Server – nicht dein Browser – die Programmierschnittstelle von eBay ab und übermittelt dabei nur unsere
@@ -303,6 +305,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         wir die Artikelnummer. Den Namen des Verkäufers zeigen wir so an, wie eBay ihn liefert, und nutzen ihn sonst nur, um doppelte Angebote desselben Verkäufers auszublenden. Die Bilder der Angebote laden wir über
         unseren eigenen Server, sodass dein Browser beim Ansehen der Seite keine Verbindung zu eBay aufnimmt. Jedes Angebot verlinkt mit einem Link des
         eBay Partner Network zu eBay; erst wenn du ihn anklickst, setzt eBay eigene Cookies (siehe oben).
+        Liegt dein Lieferland in den USA, nutzen wir für die Angebote, die Suchlinks und die Links eBay USA (ebay.com), sonst eBay Deutschland
+        (ebay.de); übermittelt werden in beiden Fällen dieselben Angaben.
       </p>
 
       <h2>15. Deine Rechte</h2>
