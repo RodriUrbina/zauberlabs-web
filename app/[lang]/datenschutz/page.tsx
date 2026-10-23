@@ -284,14 +284,23 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
           listings via the Browse API, server-side; part numbers + delivery country only; in-memory cache (re-fetched after 3 h, never
           shown after 6 h, no age sweep: entries are replaced, pushed out by the 500-entry cap or lost on restart — Editor review of
           151dbd5); images via our proxy; affiliate links. Categories and the seller-name use (repeat listings: same seller + same
-          title are dropped) per e46build agent-1/T-128-ebay-more-categories 5d5edfeb (T-127/T-128). */}
+          title are dropped) per e46build agent-1/T-128-ebay-more-categories 5d5edfeb (T-127/T-128). 
+          BL-069: eBay picks in the plan per e46build agent-1/T-133-ebay-in-plan 6c27f870 — the plan stores buyingOption
+          { id: "ebay:<itemId>", kind: our unit type, label: our fixed label } only; getItem sends item id + country + EPN context;
+          itemFor keeps the row in memory (≤ 3 h fresh, never > 6 h); removeItem/removeLine delete it; account deletion keeps the
+          plan without the user (Abschnitt 10). */}
       <p>
         <strong>eBay-Angebote in E46BUILD.</strong> Für manche Teile (Felgen, Scheinwerfer, Stoßstangen und Lenkräder) zeigt E46BUILD zusätzlich aktuelle Angebote von eBay, die zu
         deinem Auto passen. Dafür fragt unser Server – nicht dein Browser – die Programmierschnittstelle von eBay ab und übermittelt dabei nur unsere
         BMW-Teilenummern und das Lieferland. Das Land leitet unser Hoster aus deiner IP-Adresse ab (siehe Abschnitt 10); deine IP-Adresse selbst,
         Cookies oder Kontodaten werden nicht an eBay übermittelt. Die Ergebnisse halten wir nur im Arbeitsspeicher unseres Servers vor: Nach 3
         Stunden fragen wir eBay neu ab, und Angebote, die älter als 6 Stunden sind, zeigen wir nie an. Ältere Einträge werden überschrieben oder beim
-        nächsten Neustart verworfen. Den Namen des Verkäufers zeigen wir so an, wie eBay ihn liefert, und nutzen ihn sonst nur, um doppelte Angebote desselben Verkäufers auszublenden. Die Bilder der Angebote laden wir über
+        nächsten Neustart verworfen. Fügst du ein eBay-Angebot zu deinem Plan hinzu, speichern wir bei deinem Plan nur das Teil und die
+        eBay-Artikelnummer – keinen Titel, Preis, Verkäufer, kein Bild und keinen Link. Zeigen wir den Plan an, fragt unser Server dieses eine Angebot
+        bei eBay ab und übermittelt dabei nur die Artikelnummer, das Lieferland und unsere Partner-Kennung; die Antwort halten wir wie oben beschrieben
+        nur im Arbeitsspeicher. Ist das Angebot beendet, zeigt der Plan das an. Die Artikelnummer bleibt gespeichert, solange der Plan besteht; Pläne
+        bewahren wir wie in Abschnitt 10 beschrieben auf, auch ohne Konto und ohne Bezug zu deiner Person. Entfernst du das Teil aus deinem Plan, löschen
+        wir die Artikelnummer. Den Namen des Verkäufers zeigen wir so an, wie eBay ihn liefert, und nutzen ihn sonst nur, um doppelte Angebote desselben Verkäufers auszublenden. Die Bilder der Angebote laden wir über
         unseren eigenen Server, sodass dein Browser beim Ansehen der Seite keine Verbindung zu eBay aufnimmt. Jedes Angebot verlinkt mit einem Link des
         eBay Partner Network zu eBay; erst wenn du ihn anklickst, setzt eBay eigene Cookies (siehe oben).
       </p>
