@@ -295,8 +295,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         BMW-Teilenummern und das Lieferland. Das Land leitet unser Hoster aus deiner IP-Adresse ab (siehe Abschnitt 10); deine IP-Adresse selbst,
         Cookies oder Kontodaten werden nicht an eBay übermittelt. Die Ergebnisse halten wir nur im Arbeitsspeicher unseres Servers vor: Nach 3
         Stunden fragen wir eBay neu ab, und Angebote, die älter als 6 Stunden sind, zeigen wir nie an. Ältere Einträge werden überschrieben oder beim
-        nächsten Neustart verworfen. Fügst du ein eBay-Angebot zu deinem Plan hinzu, speichern wir bei deinem Plan nur das Teil und die
-        eBay-Artikelnummer – keinen Titel, Preis, Verkäufer, kein Bild und keinen Link. Zeigen wir den Plan an, fragt unser Server dieses eine Angebot
+        nächsten Neustart verworfen. Fügst du ein eBay-Angebot zu deinem Plan hinzu, speichern wir bei deinem Plan nur das Teil, die
+        eBay-Artikelnummer und unsere Einordnung (Satz, Paar, einzeln) – keinen Titel, Preis, Verkäufer, kein Bild und keinen Link. Zeigen wir den Plan an, fragt unser Server dieses eine Angebot
         bei eBay ab und übermittelt dabei nur die Artikelnummer, das Lieferland und unsere Partner-Kennung; die Antwort halten wir wie oben beschrieben
         nur im Arbeitsspeicher. Ist das Angebot beendet, zeigt der Plan das an. Die Artikelnummer bleibt gespeichert, solange der Plan besteht; Pläne
         bewahren wir wie in Abschnitt 10 beschrieben auf, auch ohne Konto und ohne Bezug zu deiner Person. Entfernst du das Teil aus deinem Plan, löschen
