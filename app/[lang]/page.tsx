@@ -167,9 +167,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                         </div>
                       )}
                       {"part" in s && s.part && (
-                        <div className="flex h-11 items-center justify-between rounded-[10px] border border-ink px-4.5 font-mono text-[13px]">
-                          <span>{s.part}</span>
-                          <span className="text-[#1F7A45]">{s.fit}</span>
+                        <div className="flex min-h-11 flex-wrap items-center justify-between gap-x-2 gap-y-1 rounded-[10px] border border-ink px-4.5 py-2.5 font-mono text-[12px] md:text-[13px]">
+                          <span className="whitespace-nowrap">
+                            {s.part} → {s.car}
+                          </span>
+                          <span className="whitespace-nowrap text-[#1F7A45]">{s.fit}</span>
                         </div>
                       )}
                     </div>
