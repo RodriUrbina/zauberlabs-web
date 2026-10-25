@@ -211,6 +211,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <h2 className="text-[34px] leading-[1.02] font-extrabold tracking-[-0.035em] md:text-[56px]">
                 {t.suggest.title[0]}
                 <span className="accent-serif text-accent-dark">{t.suggest.title[1]}</span>
+                {t.suggest.title[2]}
               </h2>
               <p className="max-w-[460px] text-base leading-relaxed text-fog">{t.suggest.body}</p>
             </div>
