@@ -47,8 +47,8 @@ const en = {
   vote: {
     label: "02 · Community vote",
     live: "Live",
-    title: ["Which car is ", "next?"],
-    body: "Tap a car to vote. The one with the most fans gets built next.",
+    title: ["Which car configurator is ", "next?"],
+    body: "Tap a car to vote. The car with the most fans gets its configurator built next.",
     total: "votes so far",
     add: "+ Add a car",
     aria: (name: string, n: number) => `Vote for ${name}, ${n} votes`,
@@ -194,8 +194,8 @@ const de: Dict = {
   vote: {
     label: "02 · Community-Voting",
     live: "Live",
-    title: ["Welches Auto kommt ", "als Nächstes?"],
-    body: "Tippe auf ein Auto, um abzustimmen. Das mit den meisten Fans bauen wir als Nächstes.",
+    title: ["Welcher Konfigurator kommt ", "als Nächstes?"],
+    body: "Tippe auf ein Auto, um abzustimmen. Das Auto mit den meisten Fans bekommt als Nächstes seinen Konfigurator.",
     total: "Stimmen bisher",
     add: "+ Auto hinzufügen",
     aria: (name: string, n: number) => `Für ${name} abstimmen, ${n} Stimmen`,
