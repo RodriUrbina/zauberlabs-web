@@ -55,11 +55,11 @@ const en = {
     numberLocale: "en-US",
   },
   how: {
-    eyebrow: "How every configurator works",
+    eyebrow: "How our configurators work",
     title: ["Same ride. ", "Renewed promise."],
     body: "No catalogue codes, no forum archaeology. You pick by picture; the fitment engine does the paperwork.",
     steps: [
-      { k: "01 — Describe it", t: "Talk like an owner.", b: "Model, year, body, colour — typed the way you’d tell a friend. We work out the rest and only ask what we need.", sample: "330d Touring, 2003, M Sport" },
+      { k: "01 — Pick it", t: "Pick your car’s body style.", b: "Start with one tap on your body style. After that we only ask what a part needs to know, like the year, to show what fits your car.", chips: ["Sedan", "Touring", "Coupé", "Convertible", "Compact", "M3"] },
       { k: "02 — See it", t: "Choose with your eyes.", b: "Headlights, bumpers, wheels, interiors — every option shown on your body style before you spend a cent.", chips: ["Headlights", "Bumpers", "Wheels", "Seats"] },
       { k: "03 — Fit it", t: "Buy the exact part — elsewhere.", b: "You get the OEM part number for your car and offers from external sellers, side by side. We never sell or stock parts.", part: "[OEM part no.]", fit: "✓ Exact fit" },
     ],
@@ -202,11 +202,11 @@ const de: Dict = {
     numberLocale: "de-DE",
   },
   how: {
-    eyebrow: "So funktioniert jeder Konfigurator",
+    eyebrow: "So funktionieren unsere Konfiguratoren",
     title: ["Derselbe Wagen. ", "Erneuertes Versprechen."],
     body: "Keine Katalogcodes, keine Forums-Archäologie. Du wählst nach Bild – die Passform-Engine erledigt den Papierkram.",
     steps: [
-      { k: "01 — Beschreiben", t: "Sprich wie ein Schrauber.", b: "Modell, Baujahr, Karosserie, Farbe – so, wie du es einem Kumpel erzählen würdest. Den Rest ermitteln wir und fragen nur, was wir wirklich brauchen.", sample: "330d Touring, 2003, M-Paket" },
+      { k: "01 — Auswählen", t: "Wähle deine Karosserieform.", b: "Du tippst deine Karosserie an. Danach fragen wir nur, was ein Teil wissen muss, etwa das Baujahr, um zu zeigen, was an dein Auto passt.", chips: ["Limousine", "Touring", "Coupé", "Cabrio", "Compact", "M3"] },
       { k: "02 — Ansehen", t: "Wähle mit den Augen.", b: "Scheinwerfer, Stoßstangen, Felgen, Innenraum – jede Option an deiner Karosserie, bevor du einen Cent ausgibst.", chips: ["Scheinwerfer", "Stoßstangen", "Felgen", "Sitze"] },
       { k: "03 — Verbauen", t: "Das exakte Teil kaufen – woanders.", b: "Du bekommst die OE-Teilenummer für dein Auto und Angebote externer Händler im Vergleich. Wir verkaufen und lagern keine Teile.", part: "[OE-Teilenr.]", fit: "✓ Passgenau" },
     ],
