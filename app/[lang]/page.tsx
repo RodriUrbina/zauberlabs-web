@@ -159,9 +159,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                     <span className="text-[22px] font-bold tracking-tight md:text-[26px]">{s.t}</span>
                     <p className={`text-[15px] leading-relaxed ${light ? "text-body" : "text-fog"}`}>{s.b}</p>
                     <div className="mt-auto">
-                      {"sample" in s && s.sample && (
-                        <div className="flex h-11 items-center rounded-full bg-ink-3 px-4.5 text-sm text-fog">{s.sample}</div>
-                      )}
                       {"chips" in s && s.chips && (
                         <div className="flex flex-wrap gap-2">
                           {s.chips.map((c) => (
