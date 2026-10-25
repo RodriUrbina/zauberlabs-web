@@ -68,7 +68,7 @@ const en = {
     eyebrow: "Why zauberlabs",
     title: ["A little ", "Zauber", " instead of VINs, model codes and catalogues."],
     items: [
-      { t: "Exact fit, or we ask.", b: "Our fit engine matches parts to your car’s build date, trim and side. If it can’t confirm, we say so." },
+      { t: "Exact fit.", b: "Our fit engine matches parts to your car’s build date, trim and side." },
       { t: "Configure, don’t decode.", b: "Build your car the way you’d spec a new one: pick what you like, we work out what fits." },
       { t: "Sellers that have it.", b: "We link sellers with a current offer for your part, side by side, and say when there’s none yet." },
     ],
@@ -215,7 +215,7 @@ const de: Dict = {
     eyebrow: "Warum zauberlabs",
     title: ["Ein bisschen ", "Zauber", " statt Fahrgestellnummer, Typcodes und Katalog."],
     items: [
-      { t: "Passgenau – oder wir fragen nach.", b: "Unsere Fit-Engine gleicht Teile mit Baudatum, Ausstattung und Einbauseite ab. Kann sie es nicht bestätigen, sagen wir es." },
+      { t: "Passgenau.", b: "Unsere Fit-Engine gleicht Teile mit Baudatum, Ausstattung und Einbauseite ab." },
       { t: "Konfigurieren statt entschlüsseln.", b: "Stell dein Auto zusammen wie einen Neuwagen: Du wählst, was dir gefällt, wir klären, was passt." },
       { t: "Händler, die es haben.", b: "Wir verlinken Händler mit aktuellem Angebot für dein Teil, nebeneinander – und sagen es, wenn es noch keins gibt." },
     ],
