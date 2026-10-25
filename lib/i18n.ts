@@ -66,11 +66,11 @@ const en = {
   },
   principles: {
     eyebrow: "Why zauberlabs",
-    title: ["A little ", "Zauber", ", a lot of part numbers."],
+    title: ["A little ", "Zauber", " instead of VINs, model codes and catalogues."],
     items: [
-      { t: "Exact fit, or we ask.", b: "Matched to production date, trim and side. If we can’t confirm it, we say so — never a guess." },
-      { t: "Part numbers, not “universal”.", b: "Every recommendation carries a real OEM or manufacturer reference you can check anywhere." },
-      { t: "Independent by design.", b: "Not affiliated with any manufacturer. We link to the sellers you already trust and compare them openly." },
+      { t: "Exact fit, or we ask.", b: "Our fit engine matches parts to your car’s build date, trim and side. If it can’t confirm, we say so." },
+      { t: "Configure, don’t decode.", b: "Build your car the way you’d spec a new one: pick what you like, we work out what fits." },
+      { t: "Sellers that have it.", b: "We link sellers with a current offer for your part, side by side, and say when there’s none yet." },
     ],
   },
   suggest: {
@@ -213,11 +213,11 @@ const de: Dict = {
   },
   principles: {
     eyebrow: "Warum zauberlabs",
-    title: ["Ein bisschen ", "Zauber", ", jede Menge Teilenummern."],
+    title: ["Ein bisschen ", "Zauber", " statt Fahrgestellnummer, Typcodes und Katalog."],
     items: [
-      { t: "Passgenau – oder wir fragen nach.", b: "Abgestimmt auf Produktionsdatum, Ausstattung und Einbauseite. Können wir es nicht bestätigen, sagen wir es – geraten wird nie." },
-      { t: "Teilenummern statt „universal“.", b: "Jede Empfehlung hat eine echte OE- oder Herstellernummer, die du überall prüfen kannst." },
-      { t: "Unabhängig aus Prinzip.", b: "Mit keinem Hersteller verbunden. Wir verlinken Händler, denen du schon vertraust, und vergleichen sie offen." },
+      { t: "Passgenau – oder wir fragen nach.", b: "Unsere Fit-Engine gleicht Teile mit Baudatum, Ausstattung und Einbauseite ab. Kann sie es nicht bestätigen, sagen wir es." },
+      { t: "Konfigurieren statt entschlüsseln.", b: "Stell dein Auto zusammen wie einen Neuwagen: Du wählst, was dir gefällt, wir klären, was passt." },
+      { t: "Händler, die es haben.", b: "Wir verlinken Händler mit aktuellem Angebot für dein Teil, nebeneinander – und sagen es, wenn es noch keins gibt." },
     ],
   },
   suggest: {
