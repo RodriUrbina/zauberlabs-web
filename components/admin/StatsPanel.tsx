@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { Stats } from "@/lib/metrics-store";
 
 type Budget = { month: string; used: number; budget: number; paused: boolean };
+type Standing = { car: string; name: string; votes: number }[];
 
 /** "2026-10-21" → "21 Oct 2026" */
 const sinceLabel = (day: string) =>
@@ -49,7 +50,7 @@ function Ranked({ title, rows, empty }: { title: string; rows: { label: string; 
  */
 export default function StatsPanel({ password }: { password: string }) {
   const [days, setDays] = useState<(typeof RANGES)[number]>(30);
-  const [stats, setStats] = useState<(Stats & { budget?: Budget; since?: string }) | null>(null);
+  const [stats, setStats] = useState<(Stats & { budget?: Budget; since?: string; standing?: Standing }) | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -70,6 +71,7 @@ export default function StatsPanel({ password }: { password: string }) {
 
   const maxDaily = Math.max(0, ...(stats?.daily.map((d) => d.views) ?? []));
   const maxVotes = Math.max(0, ...(stats?.daily.map((d) => d.votes ?? 0) ?? []));
+  const carName = (id: string) => stats?.standing?.find((c) => c.car === id)?.name ?? id;
 
   return (
     <section className="flex flex-col gap-5">
@@ -174,32 +176,36 @@ export default function StatsPanel({ password }: { password: string }) {
             <Ranked title="Configurator clicks" rows={stats.clicks.map((c) => ({ label: c.configurator.toUpperCase(), value: c.clicks }))} empty="No clicks yet." />
           </div>
 
-          {/* BL-051.2 — vote sources */}
+          {/* BL-051.2 — vote sources; BL-078 — standing totals and net votes */}
           <div className="flex flex-col gap-3">
-            <h3 className="text-lg font-extrabold tracking-tight">
-              Votes <span className="font-mono text-base text-muted">({nf.format(stats.votes?.total ?? 0)})</span>
-            </h3>
+            <h3 className="text-lg font-extrabold tracking-tight">Votes</h3>
+            {stats.standing && (
+              <Ranked title="Votes now" rows={stats.standing.map((c) => ({ label: c.name, value: c.votes }))} empty="No cars in the vote." />
+            )}
             <p className="text-sm text-body">
-              New votes only (taking a vote back is not subtracted here). “Came from” is the site the visitor arrived from; “internal” means
-              another of our pages, “direct” means no referrer.
+              “Votes now” is what the vote card shows. Below, for this period: net votes, that is new votes minus votes taken back (
+              {nf.format(stats.votes?.cast ?? 0)} new, {nf.format(stats.votes?.withdrawn ?? 0)} taken back, net{" "}
+              {nf.format(stats.votes?.total ?? 0)}). “Came from” and “Countries” count new votes only: the site the visitor arrived from
+              (“internal” means another of our pages, “direct” means no referrer). Votes from your own devices in internal mode are not
+              counted anywhere.
             </p>
             <div className="flex flex-col gap-2 rounded-2xl border border-line bg-white p-4">
-              <h4 className="eyebrow text-muted">Votes per day</h4>
+              <h4 className="eyebrow text-muted">Net votes per day</h4>
               <div className="flex h-16 items-end gap-px" role="img" aria-label="Votes per day">
                 {stats.daily.map((d) => (
                   <span
                     key={d.day}
-                    title={`${d.day}: ${d.votes ?? 0} votes`}
+                    title={`${d.day}: ${d.votes ?? 0} net votes`}
                     className="flex-1 rounded-t-sm bg-accent"
-                    style={{ height: `${maxVotes ? Math.max(1, ((d.votes ?? 0) / maxVotes) * 100) : 0}%` }}
+                    style={{ height: `${maxVotes ? Math.max(1, (Math.max(0, d.votes ?? 0) / maxVotes) * 100) : 0}%` }}
                   />
                 ))}
               </div>
             </div>
             <div className="grid gap-3 md:grid-cols-3">
-              <Ranked title="By car" rows={(stats.votes?.cars ?? []).map((c) => ({ label: c.car, value: c.votes }))} empty="No votes yet." />
-              <Ranked title="Came from" rows={(stats.votes?.referrers ?? []).map((r) => ({ label: r.domain, value: r.votes }))} empty="No votes yet." />
-              <Ranked title="Countries" rows={(stats.votes?.countries ?? []).map((c) => ({ label: c.code === "XX" ? "unknown" : c.code, value: c.votes }))} empty="No votes yet." />
+              <Ranked title="Net votes by car" rows={(stats.votes?.cars ?? []).map((c) => ({ label: carName(c.car), value: c.votes }))} empty="No votes yet." />
+              <Ranked title="New votes came from" rows={(stats.votes?.referrers ?? []).map((r) => ({ label: r.domain, value: r.votes }))} empty="No votes yet." />
+              <Ranked title="New votes by country" rows={(stats.votes?.countries ?? []).map((c) => ({ label: c.code === "XX" ? "unknown" : c.code, value: c.votes }))} empty="No votes yet." />
             </div>
           </div>
         </>

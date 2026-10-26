@@ -3,7 +3,7 @@ import { looksLikeCarId } from "@/lib/cars";
 import { allow, getCars, getCounts, getVotedBy, hashIp, isVotableCar, setVote } from "@/lib/store";
 import { hasInternalMarker } from "@/lib/internal-mode-client";
 import { countryCode, isBot, referrerDomain } from "@/lib/metrics";
-import { recordVote } from "@/lib/metrics-store";
+import { recordVote, recordWithdrawal } from "@/lib/metrics-store";
 
 export const dynamic = "force-dynamic";
 const COOKIE = "zl_vid";
@@ -40,16 +40,22 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Bad request" }, { status: 400 });
   }
   const id = voterId(req) ?? crypto.randomUUID();
-  const { changed } = await setVote(body.car, id, body.on);
+  // BL-078: a browser with the internal marker (cookie zl_internal=1) votes without changing the count.
+  const internal = hasInternalMarker(req.headers.get("cookie") ?? "");
+  const { counted } = await setVote(body.car, id, body.on, internal);
   // BL-051.2: anonymous vote sources for the admin statistics. Totals only, never linked to the voter id or cookie;
-  // a statistics error never affects the vote.
-  if (body.on && changed && !isBot(req.headers.get("user-agent")) && !hasInternalMarker(req.headers.get("cookie") ?? "")) {
+  // a statistics error never affects the vote. BL-078: only votes that changed the count, and votes taken back too.
+  if (counted && !isBot(req.headers.get("user-agent"))) {
     try {
-      await recordVote({
-        car: body.car,
-        ref: referrerDomain(typeof body.r === "string" ? body.r.slice(0, 200) : "", undefined, "internal"),
-        country: countryCode(req.headers.get("x-vercel-ip-country")),
-      });
+      if (body.on) {
+        await recordVote({
+          car: body.car,
+          ref: referrerDomain(typeof body.r === "string" ? body.r.slice(0, 200) : "", undefined, "internal"),
+          country: countryCode(req.headers.get("x-vercel-ip-country")),
+        });
+      } else {
+        await recordWithdrawal(body.car);
+      }
     } catch (err) {
       console.error("vote statistics failed", err instanceof Error ? err.message : "unknown error");
     }
