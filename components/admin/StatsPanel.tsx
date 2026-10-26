@@ -187,7 +187,7 @@ export default function StatsPanel({ password }: { password: string }) {
               {nf.format(stats.votes?.cast ?? 0)} new, {nf.format(stats.votes?.withdrawn ?? 0)} taken back, net{" "}
               {nf.format(stats.votes?.total ?? 0)}). “Came from” and “Countries” count new votes only: the site the visitor arrived from
               (“internal” means another of our pages, “direct” means no referrer). Votes from your own devices in internal mode are not
-              counted anywhere.
+              counted from 26 Oct 2026 on; earlier ones stay in the totals.
             </p>
             <div className="flex flex-col gap-2 rounded-2xl border border-line bg-white p-4">
               <h4 className="eyebrow text-muted">Net votes per day</h4>
