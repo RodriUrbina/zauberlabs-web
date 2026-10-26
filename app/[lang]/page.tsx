@@ -191,22 +191,26 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </div>
             <div className="flex flex-col gap-5">
               <ul className="flex flex-col border-b border-line">
-                {posts.map(({ post }) => (
-                  <li key={post.slug} className="grid gap-1.5 border-t border-line py-[18px] md:grid-cols-[180px_minmax(0,1fr)_auto] md:items-baseline md:gap-6 md:py-6">
-                    <span className="eyebrow text-[11px] text-muted">
-                      {shortDate(post.meta.date, lang)}
-                      {post.meta.tags[0] ? ` · ${post.meta.tags[0]}` : ""}
-                    </span>
-                    <Link href={`/${lang}/blog/${post.slug}`} className="text-lg leading-[1.25] font-semibold tracking-[-0.015em] hover:underline md:text-[22px]">
-                      {post.meta.title}
-                    </Link>
-                    {E46_LIVE && (
-                      <a href={E46_URL} className="text-sm font-semibold whitespace-nowrap text-accent hover:opacity-80">
-                        {t.teaser.open} →
-                      </a>
-                    )}
-                  </li>
-                ))}
+                {posts.map(({ post }) => {
+                  // The topic: the first tag that isn't the car itself ("E46" is on every article).
+                  const topic = post.meta.tags.find((tag) => tag !== post.meta.configurator.tag);
+                  return (
+                    <li key={post.slug} className="grid gap-1.5 border-t border-line py-[18px] md:grid-cols-[180px_minmax(0,1fr)_auto] md:items-baseline md:gap-6 md:py-6">
+                      <span className="eyebrow text-[11px] text-muted">
+                        {shortDate(post.meta.date, lang)}
+                        {topic ? ` · ${topic}` : ""}
+                      </span>
+                      <Link href={`/${lang}/blog/${post.slug}`} className="text-lg leading-[1.25] font-semibold tracking-[-0.015em] hover:underline md:text-[22px]">
+                        {post.meta.title}
+                      </Link>
+                      {E46_LIVE && (
+                        <a href={E46_URL} className="text-sm font-semibold whitespace-nowrap text-accent hover:opacity-80">
+                          {t.teaser.open} →
+                        </a>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
               <Link href={`/${lang}/blog`} className="self-start font-semibold hover:opacity-70">
                 {t.teaser.all} →
