@@ -8,7 +8,7 @@ type Props = {
   lang: Locale;
   /** Where the language switch goes; defaults to the other language's home page. */
   otherHref?: string;
-  /** Anchor links (#principles, #suggest) only work on the landing page; elsewhere they point back to it. */
+  /** Anchor links (#next) only work on the landing page; elsewhere they point back to it. */
   homePath?: string;
 };
 
@@ -26,12 +26,16 @@ export default function SiteFooter({ lang, otherHref, homePath = "" }: Props) {
           <div className="flex flex-col gap-3 text-sm">
             <span className="eyebrow text-[11px] text-[#8A877F]">{t.footer.configurators}</span>
             {E46_LIVE ? <a href={E46_URL} className="text-paper hover:opacity-80">E46BUILD</a> : <span>{t.footer.e46Soon}</span>}
-            <span>{t.footer.next}</span>
+            {/* BL-081: replaces the "[Next model] — soon" placeholder; names no car. */}
+            <a href={`${homePath}#next`} className="text-paper hover:opacity-80">
+              {t.footer.next[0]}
+              <span className="text-accent-dark">{t.footer.next[1]}</span>
+            </a>
           </div>
           <div className="flex flex-col gap-3 text-sm">
             <span className="eyebrow text-[11px] text-[#8A877F]">{t.footer.studio}</span>
             <Link href={`/${lang}/blog`} className="hover:text-paper">{t.nav.blog}</Link>
-            <a href={`${homePath}#principles`} className="hover:text-paper">{t.footer.about}</a>
+            <a href={`${homePath}#garage`} className="hover:text-paper">{t.footer.about}</a>
             <a href={`${homePath}#suggest`} className="hover:text-paper">{t.nav.suggest}</a>
             <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-paper">{CONTACT_EMAIL}</a>
           </div>
