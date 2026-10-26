@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { dictionaries, E46_LIVE, E46_URL, isLocale } from "@/lib/i18n";
+import { dictionaries, E46_LIVE, E46_URL, e46StartUrl, isLocale } from "@/lib/i18n";
 import { Arrow, ArrowUpRight, Wordmark } from "@/components/Icons";
 import VoteCard from "@/components/VoteCard";
 import SuggestForm from "@/components/SuggestForm";
 import HomeHero from "@/components/HomeHero";
 import SiteFooter from "@/components/SiteFooter";
+import StickyStartBar from "@/components/StickyStartBar";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
 
@@ -30,16 +31,23 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <a href="#suggest" className="hover:opacity-70">{t.nav.suggest}</a>
             <Link href={`/${lang}/blog`} className="hover:opacity-70">{t.nav.blog}</Link>
           </nav>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* BL-079: phones get "Blog" and a compact E46BUILD button (the nav and the full button start at sm/lg). */}
+            <Link href={`/${lang}/blog`} className="py-3 text-sm font-medium hover:opacity-70 sm:hidden">{t.nav.blog}</Link>
             <div className="font-mono text-xs tracking-[0.08em] text-muted">
               {lang === "en" ? <span className="text-ink">EN</span> : <Link href="/en" hrefLang="en" className="px-1 py-3 hover:text-ink">EN</Link>}
               {" / "}
               {lang === "de" ? <span className="text-ink">DE</span> : <Link href="/de" hrefLang="de" className="px-1 py-3 hover:text-ink">DE</Link>}
             </div>
             {E46_LIVE ? (
-              <a href={E46_URL} className="hidden h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-paper hover:bg-black sm:flex">
-                {t.nav.open} <Arrow />
-              </a>
+              <>
+                <a href={E46_URL} aria-label={t.nav.open} className="flex h-10 items-center gap-1.5 rounded-full bg-ink px-3.5 text-[13px] font-semibold text-paper hover:bg-black sm:hidden">
+                  E46BUILD <Arrow className="size-3.5" />
+                </a>
+                <a href={E46_URL} className="hidden h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-paper hover:bg-black sm:flex">
+                  {t.nav.open} <Arrow />
+                </a>
+              </>
             ) : (
               <span className="hidden h-11 items-center rounded-full border border-line px-5 text-sm font-semibold text-muted sm:flex">{t.nav.comingSoon}</span>
             )}
@@ -111,15 +119,35 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                   )}
                 </div>
                 <div className="grid gap-3 sm:grid-cols-3">
-                  {t.garage.bodies.map((b) => (
-                    <div key={b.name} className="flex items-center gap-3 rounded-2xl bg-[#1A1A1E] p-2">
-                      <Image src={b.img} alt={`E46 ${b.name}`} width={88} height={56} className="h-14 w-[88px] rounded-lg object-cover" />
-                      <div className="flex flex-col">
-                        <span className="text-[15px] font-semibold">{b.name}</span>
-                        <span className="text-xs text-[#A9A6A0]">{b.years}</span>
+                  {/* BL-079 (PO 2026-10-26): each body tile opens E46BUILD with that body pre-chosen, like the hero pills (BL-064).
+                      Counted as configurator_click by the page-wide tracker (BL-050). */}
+                  {t.garage.bodies.map((b) => {
+                    const inner = (
+                      <>
+                        <Image src={b.img} alt={E46_LIVE ? "" : `E46 ${b.name}`} width={88} height={56} className="h-14 w-[88px] rounded-lg object-cover" />
+                        <div className="flex flex-col">
+                          <span className="text-[15px] font-semibold">{b.name}</span>
+                          <span className="text-xs text-[#A9A6A0]">{b.years}</span>
+                        </div>
+                      </>
+                    );
+                    return E46_LIVE ? (
+                      <a
+                        key={b.name}
+                        href={e46StartUrl(b.start)}
+                        rel="nofollow" // each load creates a build on E46BUILD; crawlers should not follow these
+                        aria-label={t.garage.configure(b.name)}
+                        className="group flex items-center gap-3 rounded-2xl bg-[#1A1A1E] p-2 pr-4 ring-1 ring-transparent transition-colors hover:bg-[#26262B] hover:ring-[#3A3A40] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper active:bg-[#2E2E34]"
+                      >
+                        {inner}
+                        <Arrow className="ml-auto size-4 shrink-0 text-[#A9A6A0] transition-transform group-hover:translate-x-0.5 group-hover:text-paper" />
+                      </a>
+                    ) : (
+                      <div key={b.name} className="flex items-center gap-3 rounded-2xl bg-[#1A1A1E] p-2">
+                        {inner}
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -204,7 +232,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </section>
 
         {/* SUGGEST */}
-        <section id="suggest" className={`${wrap} scroll-mt-4 pb-16 md:pb-28`}>
+        <section id="suggest" data-sticky-cta-hide className={`${wrap} scroll-mt-4 pb-16 md:pb-28`}>
           <div className="grid items-center gap-10 rounded-[28px] bg-ink p-6 text-paper md:p-12 lg:grid-cols-[minmax(0,1fr)_520px] lg:gap-16 lg:p-[72px]">
             <div className="flex flex-col gap-4">
               <p className="eyebrow text-[#A9A6A0]">{t.suggest.eyebrow}</p>
@@ -221,6 +249,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </main>
 
       <SiteFooter lang={lang} />
+      {E46_LIVE && <StickyStartBar href={E46_URL} label={t.hero.cta} />}
     </>
   );
 }

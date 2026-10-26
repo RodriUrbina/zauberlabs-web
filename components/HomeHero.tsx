@@ -53,7 +53,7 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
         <div className="flex flex-col items-stretch gap-4 p-5 md:absolute md:inset-x-9 md:bottom-7 md:flex-row md:items-end md:justify-between md:gap-6 md:p-0">
           <p className="max-w-[30em] text-base leading-normal text-[#e6e2dc] [text-wrap:pretty] md:text-[19px]">{t.line}</p>
           {E46_LIVE ? (
-            <a href={E46_URL} className="flex h-[54px] shrink-0 items-center justify-center gap-2 rounded-full bg-paper px-[26px] text-base font-semibold whitespace-nowrap text-ink hover:bg-white">
+            <a href={E46_URL} data-hero-cta className="flex h-[54px] shrink-0 items-center justify-center gap-2 rounded-full bg-paper px-[26px] text-base font-semibold whitespace-nowrap text-ink hover:bg-white">
               {t.cta} <Arrow className="size-[18px]" />
             </a>
           ) : (

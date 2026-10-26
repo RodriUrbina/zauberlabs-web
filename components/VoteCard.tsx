@@ -59,7 +59,7 @@ export default function VoteCard({ lang }: { lang: Locale }) {
   const total = Object.values(state.counts).reduce((a, b) => a + b, 0);
 
   return (
-    <div className="flex flex-1 flex-col gap-5 rounded-3xl border-[1.5px] border-dashed border-[#A9A399] p-6 md:p-8">
+    <div data-sticky-cta-hide className="flex flex-1 flex-col gap-5 rounded-3xl border-[1.5px] border-dashed border-[#A9A399] p-6 md:p-8">
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <span className="eyebrow text-[11px] text-muted">{t.label}</span>

@@ -31,6 +31,7 @@ const en = {
     e46LabelSoon: "01 · Coming soon · BMW 3 Series (E46)",
     e46Body: "Headlights, bumpers, wheels, seats and steering wheels — shown on your E46, matched to its production date, with OEM part numbers and offers side by side.",
     open: "Open configurator",
+    configure: (name: string) => `Configure the ${name}`, // BL-079: accessible name of a garage body tile
     bodies: [
       { name: "Sedan", years: "1998–2005", img: "/images/sedan.jpg", start: "sedan" },
       { name: "Touring", years: "1999–2005", img: "/images/touring.jpg", start: "touring" },
@@ -178,6 +179,7 @@ const de: Dict = {
     e46LabelSoon: "01 · Bald verfügbar · BMW 3er (E46)",
     e46Body: "Scheinwerfer, Stoßstangen, Felgen, Sitze und Lenkräder – direkt an deinem E46 gezeigt, abgestimmt aufs Produktionsdatum, mit OE-Teilenummern und Angeboten im Vergleich.",
     open: "Konfigurator öffnen",
+    configure: (name: string) => `${name} konfigurieren`,
     bodies: [
       { name: "Limousine", years: "1998–2005", img: "/images/sedan.jpg", start: "sedan" },
       { name: "Touring", years: "1999–2005", img: "/images/touring.jpg", start: "touring" },
