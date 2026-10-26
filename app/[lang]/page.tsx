@@ -31,18 +31,19 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <a href="#suggest" className="hover:opacity-70">{t.nav.suggest}</a>
             <Link href={`/${lang}/blog`} className="hover:opacity-70">{t.nav.blog}</Link>
           </nav>
-          <div className="flex items-center gap-3 sm:gap-4">
-            {/* BL-079: phones get "Blog" and a compact E46BUILD button (the nav and the full button start at sm/lg). */}
-            <Link href={`/${lang}/blog`} className="py-3 text-sm font-medium hover:opacity-70 sm:hidden">{t.nav.blog}</Link>
-            <div className="font-mono text-xs tracking-[0.08em] text-muted">
+          <div className="flex items-center gap-2.5 sm:gap-4">
+            {/* BL-079: phones get "Blog" and a compact E46BUILD button (the nav and the full button start at sm/lg). Below 375 px
+                there is no room for "Blog" next to the wordmark; the sticky bar still leads into E46BUILD there. */}
+            <Link href={`/${lang}/blog`} className="py-3 text-sm font-medium hover:opacity-70 max-[374px]:hidden sm:hidden">{t.nav.blog}</Link>
+            <div className="font-mono text-xs tracking-[0.08em] whitespace-nowrap text-muted">
               {lang === "en" ? <span className="text-ink">EN</span> : <Link href="/en" hrefLang="en" className="px-1 py-3 hover:text-ink">EN</Link>}
               {" / "}
               {lang === "de" ? <span className="text-ink">DE</span> : <Link href="/de" hrefLang="de" className="px-1 py-3 hover:text-ink">DE</Link>}
             </div>
             {E46_LIVE ? (
               <>
-                <a href={E46_URL} aria-label={t.nav.open} className="flex h-10 items-center gap-1.5 rounded-full bg-ink px-3.5 text-[13px] font-semibold text-paper hover:bg-black sm:hidden">
-                  E46BUILD <Arrow className="size-3.5" />
+                <a href={E46_URL} aria-label={t.nav.open} className="flex h-10 items-center rounded-full bg-ink px-3 text-[13px] font-semibold text-paper hover:bg-black sm:hidden">
+                  E46BUILD
                 </a>
                 <a href={E46_URL} className="hidden h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-paper hover:bg-black sm:flex">
                   {t.nav.open} <Arrow />
@@ -137,7 +138,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                         href={e46StartUrl(b.start)}
                         rel="nofollow" // each load creates a build on E46BUILD; crawlers should not follow these
                         aria-label={t.garage.configure(b.name)}
-                        className="group flex items-center gap-3 rounded-2xl bg-[#1A1A1E] p-2 pr-4 ring-1 ring-transparent transition-colors hover:bg-[#26262B] hover:ring-[#3A3A40] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper active:bg-[#2E2E34]"
+                        className="group flex items-center gap-3 rounded-2xl bg-[#1A1A1E] p-2 pr-4 ring-1 ring-transparent transition-colors hover:bg-[#2C2C32] hover:ring-[#4A4A52] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper active:bg-[#2E2E34]"
                       >
                         {inner}
                         <Arrow className="ml-auto size-4 shrink-0 text-[#A9A6A0] transition-transform group-hover:translate-x-0.5 group-hover:text-paper" />

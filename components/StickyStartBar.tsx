@@ -54,7 +54,7 @@ export default function StickyStartBar({ href, label }: { href: string; label: s
     >
       <a
         href={href}
-        className="flex h-12 items-center justify-center gap-2 rounded-full bg-ink text-[15px] font-semibold text-paper shadow-[0_6px_24px_rgba(14,14,16,0.28)] active:bg-black"
+        className="flex h-12 items-center justify-center gap-2 rounded-full bg-ink text-[15px] font-semibold text-paper shadow-[0_6px_24px_rgba(14,14,16,0.28)] ring-1 ring-white/20 active:bg-black"
       >
         {label} <Arrow className="size-[18px]" />
       </a>
