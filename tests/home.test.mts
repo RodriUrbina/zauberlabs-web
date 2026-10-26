@@ -17,6 +17,26 @@ describe("home page (BL-053)", () => {
     assert.match(hero, /href=\{e46StartUrl\(b\.start\)\}\s+rel="nofollow"/, "start links carry rel=nofollow");
     assert.ok(!/e46StartUrl[\s\S]{0,200}target=/.test(hero), "start links stay in the same tab");
   });
+  test("garage tiles link to E46BUILD with the body pre-chosen, nofollow, same tab, with an accessible name (BL-079)", () => {
+    const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
+    assert.match(page, /href=\{e46StartUrl\(b\.start\)\}\s+rel="nofollow"/);
+    assert.match(page, /aria-label=\{t\.garage\.configure\(b\.name\)\}/);
+    assert.ok(!/e46StartUrl[\s\S]{0,300}target=/.test(page), "tile links stay in the same tab");
+    assert.equal(dictionaries.en.garage.configure("Sedan"), "Configure the Sedan");
+    assert.equal(dictionaries.de.garage.configure("Limousine"), "Limousine konfigurieren");
+  });
+  test("phone sticky bar reuses the hero CTA copy and watches the hero button and the vote/suggest/footer (BL-079)", () => {
+    const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
+    assert.match(page, /<StickyStartBar href=\{E46_URL\} label=\{t\.hero\.cta\} \/>/);
+    assert.equal(dictionaries.de.hero.cta, "Starte mit deinem E46");
+    const bar = fs.readFileSync(path.join(process.cwd(), "components", "StickyStartBar.tsx"), "utf8");
+    assert.match(bar, /sm:hidden/, "phones only");
+    assert.match(bar, /safe-area-inset-bottom/);
+    assert.match(bar, /\[data-sticky-cta-hide\], footer/);
+    assert.match(fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8"), /data-hero-cta/);
+    assert.match(fs.readFileSync(path.join(process.cwd(), "components", "VoteCard.tsx"), "utf8"), /data-sticky-cta-hide/);
+    assert.match(page, /id="suggest" data-sticky-cta-hide/);
+  });
   test("garage card: the M3 Touring image (BL-053.1), no second video on the page", () => {
     assert.ok(fs.existsSync(pub("/images/e46-m3-touring-garage-centred.webp")));
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
