@@ -115,7 +115,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Ende gelesen hast. Klicks auf Links zu unseren Konfiguratoren zählen wir ebenso. Dein ungefähres Land, das unser Hoster aus deiner
         IP-Adresse ableitet, zählen wir getrennt von allen anderen Angaben. Gibst du eine Stimme im Community-Voting ab, zählen wir außerdem pro
         Tag, für welches Auto abgestimmt wurde, von welcher Website du auf unsere Seite gekommen bist (nur der Domainname) und – getrennt davon –
-        dein ungefähres Land; diese Zähler sind nicht mit der zufälligen Kennung aus Abschnitt 7 verknüpft.
+        dein ungefähres Land; nimmst du eine Stimme zurück, zählen wir pro Tag nur, für welches Auto. Diese Zähler sind nicht mit der
+        zufälligen Kennung aus Abschnitt 7 verknüpft.
       </p>
       <p>
         Gespeichert werden ausschließlich Tageszähler (z. B. „Artikel X: 42 Aufrufe“) bei unserem Datenbank-Dienstleister (Abschnitt 9); Daten
@@ -134,7 +135,11 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         und wird nicht für Tracking verwendet. Das Cookie ist für die von dir ausdrücklich gewünschte Abstimmfunktion unbedingt erforderlich
         (§ 25 Abs. 2 Nr. 2 TDDDG); die weitere Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Dieselbe zufällige Kennung
         speichern wir außerdem auf unserem Server zu jedem Auto, für das du abgestimmt hast, ohne Ablaufdatum – nur so können wir Doppelstimmen
-        verhindern; deiner Person lässt sie sich nicht zuordnen.
+        verhindern; deiner Person lässt sie sich nicht zuordnen. Stimmen aus Browsern, in denen wir selbst unsere interne Markierung gesetzt
+        haben (ein Cookie „zl_internal“, das es nur auf unseren eigenen Geräten gibt), zählen wir nicht mit; dafür lesen wir beim Abstimmen nur
+        diese Markierung.
+        {/* BL-078: app/api/vote/route.ts reads the zl_internal cookie (lib/internal-mode-client.ts hasInternalMarker); such votes go to
+            voters-internal:{car} and never change the count. Withdrawals: vw:{day} in lib/metrics-store.ts. */}
       </p>
       <p>
         Zum Schutz vor Missbrauch (z. B. automatisierten Massenabstimmungen) wird deine IP-Adresse ausschließlich in gehashter (unkenntlich gemachter) Form
