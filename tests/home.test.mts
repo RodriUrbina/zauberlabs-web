@@ -25,7 +25,7 @@ describe("home page (BL-053)", () => {
     assert.equal(dictionaries.en.garage.configure("Sedan"), "Configure the Sedan");
     assert.equal(dictionaries.de.garage.configure("Limousine"), "Limousine konfigurieren");
   });
-  test("phone sticky bar reuses the hero CTA copy and watches the hero button and the vote/suggest/footer (BL-079)", () => {
+  test("phone sticky bar reuses the hero CTA copy and watches the hero button, the What's next block and the footer (BL-079, BL-081)", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
     assert.match(page, /<StickyStartBar href=\{E46_URL\} label=\{t\.hero\.cta\} \/>/);
     assert.equal(dictionaries.de.hero.cta, "Starte mit deinem E46");
@@ -34,14 +34,30 @@ describe("home page (BL-053)", () => {
     assert.match(bar, /safe-area-inset-bottom/);
     assert.match(bar, /\[data-sticky-cta-hide\], footer/);
     assert.match(fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8"), /data-hero-cta/);
-    assert.match(fs.readFileSync(path.join(process.cwd(), "components", "VoteCard.tsx"), "utf8"), /data-sticky-cta-hide/);
-    assert.match(page, /id="suggest" data-sticky-cta-hide/);
+    assert.match(page, /id="next" data-sticky-cta-hide/);
   });
-  test("garage card: the M3 Touring image (BL-053.1), no second video on the page", () => {
+  test("hero and garage card show the M3 Touring photo, no video anywhere on the page, alt says never sold (BL-081)", () => {
     assert.ok(fs.existsSync(pub("/images/e46-m3-touring-garage-centred.webp")));
+    assert.ok(fs.existsSync(pub("/images/e46-m3-touring-hero.webp")));
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
-    assert.ok(!page.includes("<video"), "the loop plays in the hero only");
+    const hero = fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8");
+    assert.ok(!page.includes("<video") && !hero.includes("<video"), "no loop on the home page");
+    assert.match(hero, /alt=\{d\.garage\.e46CardAlt\}/);
     assert.match(dictionaries.en.garage.e46CardAlt, /never sold/);
+    assert.match(dictionaries.de.garage.e46CardAlt, /nie verkauft/);
+  });
+  test("trimmed page (BL-081): only hero, garage, What's next, blog teaser; nav and footer point at sections that exist", () => {
+    const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
+    const footer = fs.readFileSync(path.join(process.cwd(), "components", "SiteFooter.tsx"), "utf8");
+    const ids = [...page.matchAll(/id="([a-z]+)"/g)].map((m) => m[1]);
+    assert.deepEqual(ids, ["garage", "next", "suggest", "blog"]);
+    const anchors = [...(page + footer).matchAll(/href=\{?[`"](?:\$\{homePath\})?#([a-z]+)/g)].map((m) => m[1]);
+    for (const a of anchors) assert.ok(ids.includes(a), `#${a} exists`);
+    assert.ok(!/ticker|t\.how|principles/.test(page), "ticker, how it works and principles are gone");
+    assert.deepEqual(dictionaries.en.footer.next, ["Next: you decide", " → vote"]);
+    assert.deepEqual(dictionaries.de.footer.next, ["Als Nächstes: du entscheidest", " → abstimmen"]);
+    assert.match(page, /export const revalidate = 300/, "the blog teaser follows the publish schedule");
+    assert.match(page, /getBlog\(\)\.listPosts\(lang\)/, "same visibility rules as /blog");
   });
   test("garage: five bodies plus the M3 in both languages, in order, each image present", () => {
     for (const lang of LOCALES) {
@@ -51,11 +67,11 @@ describe("home page (BL-053)", () => {
     }
   });
   test("hero copy: three-part headline with the accent word in the middle, no brand capital", () => {
-    assert.deepEqual(dictionaries.en.hero.title[1], "magic");
-    assert.deepEqual(dictionaries.de.hero.title[1], "Zauber");
+    assert.deepEqual(dictionaries.en.hero.title, ["See what your ", "E46 could be.", ""]);
+    assert.deepEqual(dictionaries.de.hero.title, ["Sieh, was dein ", "E46 sein kann.", ""]);
     for (const lang of LOCALES) {
       const d = dictionaries[lang];
-      assert.ok(!JSON.stringify([d.hero, d.principles, d.garage]).includes("Zauberlabs"), lang);
+      assert.ok(!JSON.stringify([d.hero, d.next, d.vote, d.garage, d.teaser, d.footer]).includes("Zauberlabs"), lang);
     }
   });
   test("link-preview image exists and is a JPEG (1200×630, BL-053)", () => {
