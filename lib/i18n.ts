@@ -31,7 +31,7 @@ const en = {
     soon: "coming soon",
     title: ["Take a ", "closer look."],
     cats: [
-      { key: "headlights", label: "Headlights", line: "Halogen, xenon or bi-xenon, matched to your car’s build date.", img: "/images/closer-look/e46-headlight-stage-front.webp", alt: "Silver E46 head-on, with its headlights" },
+      { key: "headlights", label: "Headlights", line: "Halogen, xenon or bi-xenon, matched to your car’s build date.", img: "/images/closer-look/e46-headlight-stage-front-closeup.webp", alt: "Headlight of a silver E46, close-up" },
       { key: "bumpers", label: "Bumpers", line: "Standard, M package or M3 bumpers, front and rear, on your body style.", img: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", alt: "E46 sedan with the M package front bumper" },
       { key: "wheels", label: "Wheels", line: "BMW factory wheels, swapped onto an E46 seen from the side.", img: "/images/closer-look/e46-wheel-stage-side.webp", alt: "Front wheel of a silver E46, seen from the side" },
       { key: "seats", label: "Seats", line: "Basic, sport or M3 seats, for your E46.", img: "/images/closer-look/e46-seat-stage-interior.webp", alt: "E46 interior with the front seats" },
@@ -181,7 +181,7 @@ const de: Dict = {
     title: ["Sieh ", "genauer hin."],
     // BL-083: DE copy by the Writer (2026-10-27); alt texts drafted by the Builder.
     cats: [
-      { key: "headlights", label: "Scheinwerfer", line: "Halogen, Xenon oder Bi-Xenon, passend zum Baudatum deines E46.", img: "/images/closer-look/e46-headlight-stage-front.webp", alt: "Silberner E46 von vorn, mit seinen Scheinwerfern" },
+      { key: "headlights", label: "Scheinwerfer", line: "Halogen, Xenon oder Bi-Xenon, passend zum Baudatum deines E46.", img: "/images/closer-look/e46-headlight-stage-front-closeup.webp", alt: "Scheinwerfer eines silbernen E46, Nahaufnahme" },
       { key: "bumpers", label: "Stoßstangen", line: "Serie, M-Paket oder M3, vorne und hinten, passend zu deiner Karosserie.", img: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", alt: "E46-Limousine mit M-Paket-Frontstoßstange" },
       { key: "wheels", label: "Felgen", line: "BMW-Werksfelgen, direkt an einem E46 in der Seitenansicht.", img: "/images/closer-look/e46-wheel-stage-side.webp", alt: "Vorderrad eines silbernen E46 in der Seitenansicht" },
       { key: "seats", label: "Sitze", line: "Serie, Sport oder M3, für deinen E46.", img: "/images/closer-look/e46-seat-stage-interior.webp", alt: "E46-Innenraum mit den Vordersitzen" },

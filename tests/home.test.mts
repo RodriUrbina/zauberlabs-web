@@ -94,7 +94,7 @@ describe("home page (BL-053)", () => {
     for (const c of dictionaries.en.garage.cats.filter((c) => ["wheels", "seats"].includes(c.key))) assert.ok(!/your (car|interior|cockpit)/.test(c.line), c.line);
     // PO 2026-10-27: every picture shows the part mounted on the car (E46BUILD's stage pictures, or the steering composite).
     const onCar: Record<string, string> = {
-      headlights: "/images/closer-look/e46-headlight-stage-front.webp", // HEADLIGHT_FRONT_VIEW
+      headlights: "/images/closer-look/e46-headlight-stage-front-closeup.webp", // crop of HEADLIGHT_FRONT_VIEW (BL-083.2)
       bumpers: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", // bumper look, on the car
       wheels: "/images/closer-look/e46-wheel-stage-side.webp", // WHEEL_STAGE_SRC
       seats: "/images/closer-look/e46-seat-stage-interior.webp", // SEAT_STAGE_SRC
@@ -103,6 +103,8 @@ describe("home page (BL-053)", () => {
     for (const lang of LOCALES) for (const c of dictionaries[lang].garage.cats) assert.equal(c.img, onCar[c.key], `${lang} ${c.key}`);
     assert.deepEqual(fs.readdirSync(pub("/images/closer-look")).sort(), Object.values(onCar).map((p) => path.basename(p)).sort(), "no part-only pictures left");
     assert.match(fs.readFileSync(path.join(process.cwd(), "scripts", "make-closer-look-steering.mjs"), "utf8"), /747 \/ 1672[\s\S]*413 \/ 1200[\s\S]*0\.98/, "T-170 geometry");
+    // BL-083.2: the headlight close-up is a recorded crop of the front stage (3:2, the source's own pixels).
+    assert.match(fs.readFileSync(path.join(process.cwd(), "scripts", "make-closer-look-headlight.mjs"), "utf8"), /BOX = \{ left: 10, top: 360, width: 540, height: 360 \}/);
     assert.equal(dictionaries.de.garage.title.join(""), "Sieh genauer hin.");
     assert.equal(dictionaries.de.garage.cta, "Probier es an deinem E46 aus");
   });
