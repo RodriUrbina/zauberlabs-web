@@ -27,7 +27,7 @@ export default async function VertragWiderrufen({ params }: { params: Promise<{ 
         sofort eine Eingangsbestätigung per E-Mail mit dem Inhalt deiner Erklärung sowie Datum und Uhrzeit des Eingangs. Die Einzelheiten stehen in der{" "}
         <Link href={`/${lang}/widerrufsbelehrung`} className="underline">Widerrufsbelehrung</Link>.
       </p>
-      <WithdrawalForm contact={OWNER.email} />
+      <WithdrawalForm contact={OWNER.email} lang={lang} />
     </LegalPage>
   );
 }

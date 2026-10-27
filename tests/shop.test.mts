@@ -129,7 +129,7 @@ describe("fan shop (BL-084)", () => {
       assert.deepEqual(sent[0].body.to, [{ email: "erika@example.org", name: "Erika Muster" }]);
       assert.deepEqual(sent[0].body.bcc, [{ email: "hello@zauberlabs.de" }]);
       const text = String(sent[0].body.textContent);
-      for (const part of ["§ 356a BGB", "Eingegangen am:", "Erika Muster", "1234-5678", "2026-10-27", "M3 Gelb"]) assert.ok(text.includes(part), part);
+      for (const part of ["§ 356a BGB", "Eingegangen am:", "Erika Muster", "1234-5678", "Bestellt am: 27.10.2026", "M3 Gelb"]) assert.ok(text.includes(part), part);
       assert.equal((await call("zl_internal=1", { ...valid, website: "spam" })).status, 200, "honeypot answers ok");
       assert.equal(sent.length, 1, "...but sends nothing");
       globalThis.fetch = (async () => new Response("{}", { status: 400 })) as typeof fetch;

@@ -8,7 +8,7 @@ import { useState } from "react";
  * once; the page shows the time of receipt. If the e-mail cannot be sent, the form says so and gives our address, so a
  * withdrawal is never lost silently.
  */
-export default function WithdrawalForm({ contact }: { contact: string }) {
+export default function WithdrawalForm({ contact, lang }: { contact: string; lang: string }) {
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [receivedAt, setReceivedAt] = useState("");
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -51,8 +51,14 @@ export default function WithdrawalForm({ contact }: { contact: string }) {
       </button>
       {state === "error" && (
         <p role="alert" className="text-sm text-accent">
-          Die Eingangsbestätigung konnte gerade nicht verschickt werden. Bitte schick deinen Widerruf per E-Mail an{" "}
-          <a href={`mailto:${contact}`} className="underline">{contact}</a>; das ist genauso gültig.
+          {/* Never suggest the withdrawal arrived when it did not (Editor 2026-10-27). */}
+          Dein Widerruf konnte gerade nicht übermittelt werden. Bitte schick ihn per E-Mail an{" "}
+          <a href={`mailto:${contact}`} className="underline">{contact}</a> – das ist genauso gültig.
+          {lang === "en" && (
+            <span className="mt-1 block" lang="en">
+              Your withdrawal could not be sent just now. Please send it by e-mail to {contact}; that is just as valid.
+            </span>
+          )}
         </p>
       )}
     </form>
