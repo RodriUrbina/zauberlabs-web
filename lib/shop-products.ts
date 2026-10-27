@@ -61,7 +61,12 @@ export const isShipCountry = (c: string): c is ShipCountry => (SHIP_COUNTRIES as
  */
 export const GPSR = {
   manufacturer: { name: `${OWNER.name} (zauberlabs)`, address: `${OWNER.street}, ${OWNER.city}, ${OWNER.country}`, email: OWNER.email },
-  material: { en: "Die-cut outdoor vinyl, UV and weather resistant, about 12 × 8 cm. Printed in Germany.", de: "Konturgeschnittenes Outdoor-Vinyl, UV- und wetterbeständig, ca. 12 × 8 cm. Gedruckt in Deutschland." },
+  // BL-085: measured on the shop images at 12 cm wide (die-cut outline incl. the white border): 5.2–7.5 cm high (Coupé 7.5);
+  // per-design sizes may follow after the PO's printer test run.
+  material: {
+    en: "Die-cut outdoor vinyl, UV and weather resistant, 12 cm wide; height depends on the design, about 5–7.5 cm. Printed in Germany.",
+    de: "Konturgeschnittenes Outdoor-Vinyl, UV- und wetterbeständig, 12 cm breit; die Höhe hängt vom Motiv ab, ca. 5–7,5 cm. Gedruckt in Deutschland.",
+  },
   care: {
     en: "Apply to a clean, dry, grease-free and smooth surface at 10–30 °C. Not suitable for children under 3: small parts. Not a toy.",
     de: "Auf eine saubere, trockene, fettfreie und glatte Fläche bei 10–30 °C kleben. Nicht für Kinder unter 3 Jahren geeignet: Kleinteile. Kein Spielzeug.",
