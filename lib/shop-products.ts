@@ -29,18 +29,31 @@ export type Product = {
   variant: Record<Locale, string>;
   available: boolean;
   size?: { w: number; h: number };
+  /** BL-089: the BMW paint name, shown on the card, in the details and on the Stripe receipt. */
+  colour?: Record<Locale, string>;
 };
+
+/**
+ * BL-089 (PO 2026-10-27) — BMW colour names of the designs on sale, in ONE place so a corrected spelling is a one-line change.
+ * Provisional until the Writer confirms them from BMW sources (the PO wrote „Phoenixgelb" / „Laguna-Seca-Blau").
+ */
+const COLOURS = {
+  japanRed: { en: "Japan Red", de: "Japanrot" },
+  lagunaSecaBlue: { en: "Laguna Seca Blue", de: "Laguna Seca Blau" },
+  jetBlack: { en: "Jet Black", de: "Jetschwarz" },
+  phoenixYellow: { en: "Phoenix Yellow", de: "Phönixgelb" },
+} satisfies Record<string, Record<Locale, string>>;
 
 export const PRODUCTS: readonly Product[] = [
   { id: "sedan-silver", sku: "ZL-E46-01", image: "/shop/sedan-silver.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Silver", de: "Silber" }, available: false },
-  { id: "sedan-red", sku: "ZL-E46-02", image: "/shop/sedan-red.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Red", de: "Rot" }, available: true, size: { w: 5.2, h: 2.5 } },
+  { id: "sedan-red", sku: "ZL-E46-02", image: "/shop/sedan-red.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Red", de: "Rot" }, available: true, size: { w: 5.2, h: 2.5 }, colour: COLOURS.japanRed },
   { id: "sedan-red-no-m", sku: "ZL-E46-03", image: "/shop/sedan-red-no-m.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Red, standard bumper", de: "Rot, Serienstoßstange" }, available: false },
   { id: "touring-blue-stripes", sku: "ZL-E46-04", image: "/shop/touring-blue-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue, with stripes", de: "Blau, mit Streifen" }, available: false },
-  { id: "touring-blue-no-stripes", sku: "ZL-E46-05", image: "/shop/touring-blue-no-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue", de: "Blau" }, available: true, size: { w: 5.1, h: 2.5 } },
+  { id: "touring-blue-no-stripes", sku: "ZL-E46-05", image: "/shop/touring-blue-no-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue", de: "Blau" }, available: true, size: { w: 5.1, h: 2.5 }, colour: COLOURS.lagunaSecaBlue },
   { id: "coupe-blue", sku: "ZL-E46-06", image: "/shop/coupe-blue.webp", name: { en: "Coupé", de: "Coupé" }, variant: { en: "Blue, big e46 logo", de: "Blau, großes e46-Logo" }, available: false },
   { id: "convertible-grey", sku: "ZL-E46-07", image: "/shop/convertible-grey.webp", name: { en: "Convertible", de: "Cabrio" }, variant: { en: "Grey", de: "Grau" }, available: false },
-  { id: "convertible-black", sku: "ZL-E46-08", image: "/shop/convertible-black.webp", name: { en: "Convertible", de: "Cabrio" }, variant: { en: "Black", de: "Schwarz" }, available: true, size: { w: 5.2, h: 2.5 } },
-  { id: "m3-yellow", sku: "ZL-E46-09", image: "/shop/m3-yellow.webp", name: { en: "M3", de: "M3" }, variant: { en: "Yellow", de: "Gelb" }, available: true, size: { w: 5.4, h: 2.5 } },
+  { id: "convertible-black", sku: "ZL-E46-08", image: "/shop/convertible-black.webp", name: { en: "Convertible", de: "Cabrio" }, variant: { en: "Black", de: "Schwarz" }, available: true, size: { w: 5.2, h: 2.5 }, colour: COLOURS.jetBlack },
+  { id: "m3-yellow", sku: "ZL-E46-09", image: "/shop/m3-yellow.webp", name: { en: "M3", de: "M3" }, variant: { en: "Yellow", de: "Gelb" }, available: true, size: { w: 5.4, h: 2.5 }, colour: COLOURS.phoenixYellow },
 ];
 
 export const productById = (id: string): Product | undefined => PRODUCTS.find((p) => p.id === id);
