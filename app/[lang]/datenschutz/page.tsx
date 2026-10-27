@@ -1,5 +1,4 @@
 import LegalPage from "@/components/LegalPage";
-import ProviderPlaceholder from "@/components/shop/ProviderPlaceholder";
 import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 
 export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: false } };
@@ -28,9 +27,10 @@ export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: 
  * where a seller now delivers there; nothing new collected, copied, cached, logged or shared; emailed + marked → kept 30 days, then deleted.
  * BL-061 (DRAFT): eBay Partner Network links in E46BUILD (Abschnitt 14); we set no cookies and store no clicks for them.
  * BL-062 (eBay listings, T-102.5): server-side Browse API with part numbers + delivery country only; in-memory cache, re-fetched after 3 h, never shown after 6 h; images via our proxy (Abschnitt 14).
- * BL-084 (PREPARED, rendered only with SHOP_LAUNCHED=1): § 2 line and section 15 "Bestellungen und Zahlungen" for the fan shop
- * (Stripe, PayPal/Klarna if switched on, Deutsche Post/DHL, 10-year tax retention, the cart in localStorage); placeholder for
- * the legal-text provider's module. With the flag on, "Deine Rechte" and "Aktualität" become 16 and 17.
+ * BL-084/BL-085 (rendered only with SHOP_LAUNCHED=1): § 2 line and section 15 "Bestellungen und Zahlungen" for the fan shop
+ * (cart in localStorage, Stripe, PayPal/Klarna, Deutsche Post/DHL, withdrawal confirmations via Brevo, retention), and § 12
+ * renamed "E-Mail-Versand (Brevo)" with the withdrawal mails. Self-drafted, not lawyer-reviewed. With the flag on, "Deine
+ * Rechte" and "Aktualität" become 16 and 17.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -278,10 +278,13 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         https://www.databricks.com/legal/privacynotice
       </p>
 
-      <h2>12. E-Mail-Versand für E46BUILD (Brevo)</h2>
+      {/* BL-085: with the shop launched, Brevo also sends the withdrawal confirmations (§ 15); the title loses "für E46BUILD". */}
+      <h2>12. {SHOP_LAUNCHED ? "E-Mail-Versand (Brevo)" : "E-Mail-Versand für E46BUILD (Brevo)"}</h2>
       <p>
         Die Anmelde-E-Mails für E46BUILD-Konten (Abschnitt 10) versenden wir über Brevo (Paris, Frankreich) als Auftragsverarbeiter. Dabei verarbeitet
         Brevo deine E-Mail-Adresse, den Betreff und den Anmeldelink. Mit Brevo besteht ein Vertrag zur Auftragsverarbeitung.
+        {SHOP_LAUNCHED &&
+          " Ebenfalls über Brevo versenden wir die Eingangsbestätigungen für Widerrufe aus unserem Fan-Shop und eine Kopie an uns; dabei verarbeitet Brevo deine E-Mail-Adresse und den Inhalt der Bestätigung (Abschnitt 15)."}
       </p>
 
       <h2>13. Kontakt per E-Mail</h2>
@@ -338,30 +341,49 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         (ebay.de); übermittelt werden in beiden Fällen dieselben Angaben.
       </p>
 
+      {/* BL-085: § 15 as drafted by the Writer (e46 docs/copy/bl085-shop-legal-texts.md § 4) with the Editor's resolutions; the
+          withdrawal paragraph matches app/api/withdrawal (Brevo, nothing stored beyond the two e-mails). Not lawyer-reviewed. */}
       {SHOP_LAUNCHED && (
         <>
           <h2>15. Bestellungen und Zahlungen (Fan-Shop)</h2>
-          <ProviderPlaceholder>
-            <p>
-              Entwurf, wird durch das Datenschutz-Modul des Rechtstexte-Anbieters ersetzt. <strong>Warenkorb:</strong> Was du in den Warenkorb legst,
-              und das gewählte Lieferland speichern wir nur im lokalen Speicher deines Browsers („localStorage“, Einträge „zl_shop_cart“ und
-              „zl_shop_country“), nicht in einem Cookie und nicht auf unserem Server. Du kannst sie jederzeit über die Einstellungen deines Browsers
-              löschen; nach einer erfolgreichen Bestellung leeren wir den Warenkorb selbst. Das ist für den von dir gewünschten Warenkorb unbedingt
-              erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG).
-            </p>
-            <p className="mt-2">
-              <strong>Bestellung und Zahlung:</strong> Wenn du auf „Weiter zur Zahlung“ tippst, schickt dein Browser den Warenkorb und das Lieferland
-              an unseren Server, der damit eine Bezahlsitzung bei Stripe (Stripe Payments Europe, Ltd., Dublin, Irland) anlegt. Name, E-Mail-Adresse,
-              Lieferadresse und Zahlungsdaten gibst du direkt auf der Zahlungsseite von Stripe ein; Stripe verarbeitet sie zur Abwicklung der Zahlung,
-              Kartendaten erreichen uns nicht. Wählst du PayPal oder Klarna (sofern angeboten), verarbeiten auch PayPal (Europe) S.à r.l. et Cie, S.C.A.
-              bzw. Klarna Bank AB deine Zahlungsdaten. Die Bestelldaten liegen in unserem Stripe-Konto; eine eigene Bestelldatenbank führen wir nicht.
-            </p>
-            <p className="mt-2">
-              <strong>Versand:</strong> Für den Versand geben wir Name und Lieferadresse an die Deutsche Post AG bzw. DHL weiter.{" "}
-              <strong>Aufbewahrung:</strong> Buchungsbelege bewahren wir nach § 147 AO und § 257 HGB zehn Jahre auf.{" "}
-              <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Vertrag) und lit. c (gesetzliche Aufbewahrungspflichten).
-            </p>
-          </ProviderPlaceholder>
+          <p>
+            <strong>Warenkorb.</strong> Was du in den Warenkorb legst und welches Lieferland du wählst, speichern wir nur im lokalen Speicher deines Browsers
+            („localStorage“, Einträge „zl_shop_cart“ und „zl_shop_country“). Wir verwenden dafür kein Cookie und speichern es nicht auf unserem Server. Du kannst die
+            Einträge jederzeit über die Einstellungen deines Browsers löschen; nach einer erfolgreichen Bestellung leeren wir den Warenkorb selbst. Diese Speicherung
+            ist für den von dir gewünschten Warenkorb unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG).
+          </p>
+          <p>
+            <strong>Bestellung und Zahlung.</strong> Wenn du auf „Weiter zur Zahlung“ klickst, schickt dein Browser den Warenkorb (Artikel und Mengen), das Lieferland
+            und die Sprache der Seite an unseren Server. Unser Server berechnet daraus die Preise und legt bei Stripe eine Bezahlsitzung an. Dabei übermittelt er die
+            Bestellpositionen (Bezeichnung, Menge, Preis), die Versandkosten, das Lieferland und die Sprache. Name, E-Mail-Adresse, Lieferadresse und Zahlungsdaten
+            gibst du direkt auf der Zahlungsseite von Stripe ein; Kartendaten erreichen uns nicht. Zahlungsdienstleister ist die Stripe Payments Europe, Ltd.,
+            Dublin, Irland („Stripe“). Stripe verarbeitet diese Daten zur Abwicklung der Zahlung; für eigene Zwecke wie Betrugsprävention und gesetzliche Pflichten
+            ist Stripe selbst verantwortlich. Stripe kann Daten auch an die Stripe, Inc. in den USA übermitteln; die Übermittlung stützt sich auf die Zertifizierung
+            nach dem EU-US Data Privacy Framework bzw. auf EU-Standardvertragsklauseln (Einzelheiten: https://stripe.com/de/privacy). Auf der Zahlungsseite gelten
+            zusätzlich die Datenschutzhinweise von Stripe. Nutzt du Stripe Link, um Zahlungsdaten bei Stripe zu speichern, ist das ein eigener Dienst von Stripe, für
+            den Stripe selbst verantwortlich ist. Wählst du PayPal oder Klarna, verarbeiten auch die PayPal (Europe) S.à r.l. et Cie, S.C.A. bzw. die Klarna Bank AB
+            deine Zahlungsdaten nach ihren eigenen Datenschutzhinweisen.
+          </p>
+          <p>
+            Die Bestelldaten (Artikel, Name, E-Mail-Adresse, Lieferadresse, Zahlungsstatus) liegen in unserem Stripe-Konto; eine eigene Bestelldatenbank führen wir
+            nicht. Stripe schickt dir einen Beleg per E-Mail.
+          </p>
+          <p>
+            <strong>Versand.</strong> Für den Versand übergeben wir deine Sendung mit Name und Lieferadresse an die Deutsche Post AG bzw. an DHL.
+          </p>
+          <p>
+            <strong>Widerruf über „Vertrag widerrufen“.</strong> Nutzt du unsere Widerrufsfunktion, verarbeiten wir deinen Namen, deine E-Mail-Adresse, die
+            Bestellnummer, das Bestelldatum und die widerrufenen Artikel, um den Widerruf zu bearbeiten und dir die gesetzlich vorgeschriebene Eingangsbestätigung zu
+            senden. Die Eingangsbestätigung und eine Kopie an uns versenden wir über Brevo (Paris, Frankreich) als Auftragsverarbeiter; Brevo verarbeitet dafür deine
+            E-Mail-Adresse und den Inhalt der Bestätigung (siehe Abschnitt 12). Auf unserem Server speichern wir die Erklärung nicht; als Nachweis bewahren wir nur die
+            Kopie dieser E-Mail in unserem Postfach auf, solange Ansprüche aus dem Vertrag geltend gemacht werden können, längstens bis zum Ende der gesetzlichen
+            Aufbewahrungsfristen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. c DSGVO (§ 356a BGB) und lit. b DSGVO.
+          </p>
+          <p>
+            <strong>Rechtsgrundlage und Speicherdauer.</strong> Rechtsgrundlage für Bestellung, Zahlung und Versand ist Art. 6 Abs. 1 lit. b DSGVO (Vertrag). Bestell-
+            und Buchungsunterlagen bewahren wir auf, solange gesetzliche Aufbewahrungspflichten bestehen (Art. 6 Abs. 1 lit. c DSGVO): Buchungsbelege und Rechnungen
+            zehn Jahre, Handels- und Geschäftsbriefe sechs Jahre (§ 147 AO, § 257 HGB). Danach löschen wir sie.
+          </p>
         </>
       )}
 

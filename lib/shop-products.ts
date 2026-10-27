@@ -4,6 +4,8 @@ import { OWNER } from "./legal-entity";
 /**
  * BL-084 — the fan shop's catalogue (plan: e46 docs/plans/fan-shop.md § 5). Nine die-cut E46 decals, the PO's AI designs
  * (e46 docs/GTM/, made web-ready by scripts/make-shop-images.mjs). Prices are gross in euro cents, incl. 19 % MwSt.
+ * BL-085 (PO 2026-10-27, launch): only four designs are on sale (`available`); the other five stay here, switched off, and
+ * are left out of the page, the cart, the pricing and the checkout. `size` is the printed sticker in cm (width × height).
  */
 
 export type ProductId =
@@ -24,24 +26,29 @@ export type Product = {
   image: string;
   name: Record<Locale, string>;
   variant: Record<Locale, string>;
+  available: boolean;
+  size?: { w: number; h: number };
 };
 
 export const PRODUCTS: readonly Product[] = [
-  { id: "sedan-silver", sku: "ZL-E46-01", image: "/shop/sedan-silver.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Silver", de: "Silber" } },
-  { id: "sedan-red", sku: "ZL-E46-02", image: "/shop/sedan-red.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Red", de: "Rot" } },
-  { id: "sedan-red-no-m", sku: "ZL-E46-03", image: "/shop/sedan-red-no-m.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Red, standard bumper", de: "Rot, Serienstoßstange" } },
-  { id: "touring-blue-stripes", sku: "ZL-E46-04", image: "/shop/touring-blue-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue, with stripes", de: "Blau, mit Streifen" } },
-  { id: "touring-blue-no-stripes", sku: "ZL-E46-05", image: "/shop/touring-blue-no-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue, no stripes", de: "Blau, ohne Streifen" } },
-  { id: "coupe-blue", sku: "ZL-E46-06", image: "/shop/coupe-blue.webp", name: { en: "Coupé", de: "Coupé" }, variant: { en: "Blue, big e46 logo", de: "Blau, großes e46-Logo" } },
-  { id: "convertible-grey", sku: "ZL-E46-07", image: "/shop/convertible-grey.webp", name: { en: "Convertible", de: "Cabrio" }, variant: { en: "Grey", de: "Grau" } },
-  { id: "convertible-black", sku: "ZL-E46-08", image: "/shop/convertible-black.webp", name: { en: "Convertible", de: "Cabrio" }, variant: { en: "Black", de: "Schwarz" } },
-  { id: "m3-yellow", sku: "ZL-E46-09", image: "/shop/m3-yellow.webp", name: { en: "M3", de: "M3" }, variant: { en: "Yellow", de: "Gelb" } },
+  { id: "sedan-silver", sku: "ZL-E46-01", image: "/shop/sedan-silver.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Silver", de: "Silber" }, available: false },
+  { id: "sedan-red", sku: "ZL-E46-02", image: "/shop/sedan-red.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Red", de: "Rot" }, available: true, size: { w: 5.2, h: 2.5 } },
+  { id: "sedan-red-no-m", sku: "ZL-E46-03", image: "/shop/sedan-red-no-m.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Red, standard bumper", de: "Rot, Serienstoßstange" }, available: false },
+  { id: "touring-blue-stripes", sku: "ZL-E46-04", image: "/shop/touring-blue-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue, with stripes", de: "Blau, mit Streifen" }, available: true, size: { w: 5.1, h: 2.5 } },
+  { id: "touring-blue-no-stripes", sku: "ZL-E46-05", image: "/shop/touring-blue-no-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue, no stripes", de: "Blau, ohne Streifen" }, available: false },
+  { id: "coupe-blue", sku: "ZL-E46-06", image: "/shop/coupe-blue.webp", name: { en: "Coupé", de: "Coupé" }, variant: { en: "Blue, big e46 logo", de: "Blau, großes e46-Logo" }, available: false },
+  { id: "convertible-grey", sku: "ZL-E46-07", image: "/shop/convertible-grey.webp", name: { en: "Convertible", de: "Cabrio" }, variant: { en: "Grey", de: "Grau" }, available: false },
+  { id: "convertible-black", sku: "ZL-E46-08", image: "/shop/convertible-black.webp", name: { en: "Convertible", de: "Cabrio" }, variant: { en: "Black", de: "Schwarz" }, available: true, size: { w: 5.2, h: 2.5 } },
+  { id: "m3-yellow", sku: "ZL-E46-09", image: "/shop/m3-yellow.webp", name: { en: "M3", de: "M3" }, variant: { en: "Yellow", de: "Gelb" }, available: true, size: { w: 5.4, h: 2.5 } },
 ];
 
 export const productById = (id: string): Product | undefined => PRODUCTS.find((p) => p.id === id);
+/** The designs on sale; everything customer-facing uses this list. */
+export const AVAILABLE: readonly Product[] = PRODUCTS.filter((p) => p.available);
+export const availableById = (id: string): Product | undefined => AVAILABLE.find((p) => p.id === id);
 
-/** Prices in cents, gross (incl. 19 % MwSt.). */
-export const PRICES = { single: 490, three: 1290, all: 2990 } as const;
+/** Prices in cents, gross. `all` = one of each available design (BL-085: 4 designs, €16.90). */
+export const PRICES = { single: 490, three: 1290, all: 1690 } as const;
 
 /** Shipping in cents, gross. Germany: letter, free from €15 of goods. Other EU countries: small parcel. No US (phase 1). */
 export const SHIPPING = { de: 190, deFreeFrom: 1500, eu: 690 } as const;
@@ -56,12 +63,13 @@ export const isShipCountry = (c: string): c is ShipCountry => (SHIP_COUNTRIES as
 
 /**
  * GPSR product information (plan § 3 #8): manufacturer (we sell under our own name, so that is us), postal address, e-mail,
- * the product identifier (SKU) and warnings. Material and size are the plan's phase-1 values; the PO confirms them with the
- * printer before launch.
+ * the product identifier (SKU) and warnings. BL-085: material from the printer order (glossy vinyl, die-cut); the size is per
+ * product (`size`), as printed.
  */
 export const GPSR = {
   manufacturer: { name: `${OWNER.name} (zauberlabs)`, address: `${OWNER.street}, ${OWNER.city}, ${OWNER.country}`, email: OWNER.email },
-  material: { en: "Die-cut outdoor vinyl, UV and weather resistant, about 12 × 8 cm. Printed in Germany.", de: "Konturgeschnittenes Outdoor-Vinyl, UV- und wetterbeständig, ca. 12 × 8 cm. Gedruckt in Deutschland." },
+  material: { en: "Glossy vinyl sticker, die-cut", de: "Glänzender Vinyl-Sticker, konturgeschnitten" },
+  printed: { en: "Printed in Germany.", de: "Gedruckt in Deutschland." },
   care: {
     en: "Apply to a clean, dry, grease-free and smooth surface at 10–30 °C. Not suitable for children under 3: small parts. Not a toy.",
     de: "Auf eine saubere, trockene, fettfreie und glatte Fläche bei 10–30 °C kleben. Nicht für Kinder unter 3 Jahren geeignet: Kleinteile. Kein Spielzeug.",
