@@ -9,6 +9,7 @@ import HomeHero from "@/components/HomeHero";
 import SiteFooter from "@/components/SiteFooter";
 import { getBlog } from "@/lib/blog";
 import StickyStartBar from "@/components/StickyStartBar";
+import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 import CloserLook from "@/components/CloserLook";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
@@ -38,6 +39,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <a href="#garage" className="hover:opacity-70">{t.nav.configurators}</a>
             <a href="#next" className="hover:opacity-70">{t.nav.next}</a>
             <Link href={`/${lang}/blog`} className="hover:opacity-70">{t.nav.blog}</Link>
+            {/* BL-086 (PO 2026-10-27): the shop in the desktop nav, only once it is launched (lib/shop-flag.ts). Phones: see the
+                card; there is no room next to "Blog" and the E46BUILD button at 390 px, so it is not shown there for now. */}
+            {SHOP_LAUNCHED && <Link href={`/${lang}/shop`} className="hover:opacity-70">{t.nav.shop}</Link>}
           </nav>
           <div className="flex items-center gap-2.5 sm:gap-4">
             {/* BL-079: phones get "Blog" and a compact E46BUILD button (the nav and the full button start at sm/lg). Below 375 px
