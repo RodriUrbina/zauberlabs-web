@@ -18,7 +18,7 @@ const en = {
     all: ["All 4", "One of each design."],
     addAll: "Add all 4",
   },
-  facts: "Shipping DE €1.90 · free from €15 · EU €6.90 — Card · PayPal · Klarna · Apple Pay",
+  facts: "Shipping DE €1.90 · free from €15 · EU €6.90 — Card · PayPal · Klarna · Apple Pay · Google Pay",
   cart: {
     open: "Cart",
     stickers: (n: number) => (n === 1 ? "1 sticker" : `${n} stickers`),
@@ -62,7 +62,7 @@ const de: typeof en = {
     all: ["Alle 4", "Jedes Motiv einmal."],
     addAll: "Alle 4 hinzufügen",
   },
-  facts: "Versand DE 1,90 € · frei ab 15 € · EU 6,90 € — Karte · PayPal · Klarna · Apple Pay",
+  facts: "Versand DE 1,90 € · frei ab 15 € · EU 6,90 € — Karte · PayPal · Klarna · Apple Pay · Google Pay",
   cart: {
     open: "Warenkorb",
     stickers: (n: number) => (n === 1 ? "1 Sticker" : `${n} Sticker`),
