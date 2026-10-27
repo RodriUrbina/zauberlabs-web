@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { dictionaries, E46_LIVE, E46_URL, e46StartUrl, isLocale, type Locale } from "@/lib/i18n";
-import { Arrow, ArrowUpRight, Wordmark } from "@/components/Icons";
+import { Arrow, Wordmark } from "@/components/Icons";
 import VoteCard from "@/components/VoteCard";
 import SuggestForm from "@/components/SuggestForm";
 import HomeHero from "@/components/HomeHero";
 import SiteFooter from "@/components/SiteFooter";
 import { getBlog } from "@/lib/blog";
 import StickyStartBar from "@/components/StickyStartBar";
+import CloserLook from "@/components/CloserLook";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
 
@@ -67,83 +68,78 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         {/* HERO — BL-081 (Rivian-style, static photo) */}
         <HomeHero lang={lang} wrap={wrap} />
 
-        {/* GARAGE */}
-        {/* BL-081: the intro paragraph is gone and the card is full width (the vote moved to What's next). */}
-        <section id="garage" className={`${wrap} flex scroll-mt-4 flex-col gap-8 py-16 md:gap-14 md:py-28`}>
+        {/* GARAGE — BL-083 (PO 2026-10-27, option C "Take a closer look"): the five E46BUILD categories with E46BUILD's own
+            pictures, then the six body tiles (BL-079) and the three value chips. The M3 Touring photo stays in the hero only. */}
+        <section id="garage" className={`${wrap} flex scroll-mt-4 flex-col py-16 md:py-28`}>
           <div className="flex flex-col gap-4">
-            <p className="eyebrow text-muted">{t.garage.eyebrow}</p>
+            <p className="eyebrow flex items-center gap-2 text-muted">
+              <span aria-hidden="true" className={`size-2 rounded-full ${E46_LIVE ? "bg-[#1f9d63]" : "border border-muted"}`} />
+              <span className="font-bold text-ink">
+                E46<span className="text-[#5d6fd6]">BUILD</span>
+              </span>
+              <span aria-hidden="true">·</span>
+              {E46_LIVE ? t.garage.live : t.garage.soon}
+            </p>
             <h2 className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]">
               {t.garage.title[0]}
-              <span className="accent-serif">{t.garage.title[1]}</span>
+              <span className="accent-serif text-accent">{t.garage.title[1]}</span>
             </h2>
           </div>
 
-          <div className="flex flex-col overflow-hidden rounded-3xl bg-ink text-paper">
-            <div className="relative aspect-[960/512] bg-ink md:aspect-auto md:h-[400px]">
-              {/* BL-053.1 (PO decision 2026-10-19): the configurator loop now plays in the hero only (components/HomeHero.tsx).
-                  This card shows the E46BUILD site's hero image, the silver E46 M3 Touring "dream build" (AI render by the PO;
-                  see public/images/README.md). BL-053.5 (PO: "a bit more to the center"): source 1774×887 from e46build
-                  apps/web/public/images/hero/, cropped to x 0–1150 at full height so the car (≈ x 30–1050, y 230–700) sits near
-                  the middle (a slight zoom compared with BL-053.1). object-position 50% 56% keeps the whole car visible at every
-                  card ratio (≈1.7:1 to 2.4:1 on desktop, 1.875:1 on phones). */}
-              <Image src="/images/e46-m3-touring-garage-centred.webp" alt={t.garage.e46CardAlt} fill sizes="(min-width: 1440px) 1280px, 100vw" className="object-cover object-[50%_56%]" />
-              <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-b from-transparent to-ink" />
-            </div>
-            <div className="flex flex-col gap-7 p-6 md:p-8">
-              <div className="flex flex-col justify-between gap-5 md:flex-row md:items-start">
-                <div className="flex flex-col gap-2.5">
-                  <span className="eyebrow text-[11px] text-e46">{E46_LIVE ? t.garage.e46Label : t.garage.e46LabelSoon}</span>
-                  <span className="text-3xl font-extrabold tracking-tight md:text-4xl">
-                    E46<span className="text-e46">BUILD</span>
-                  </span>
-                  <p className="max-w-[460px] text-[15px] leading-relaxed text-fog">{t.garage.e46Body}</p>
-                </div>
-                {E46_LIVE ? (
-                  <a href={E46_URL} className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-paper px-6 text-[15px] font-semibold text-ink hover:bg-white">
-                    {t.garage.open} <ArrowUpRight />
+          <div className="mt-7 md:mt-10">
+            <CloserLook cats={t.garage.cats} pick={t.garage.pick} cta={t.garage.cta} href={E46_LIVE ? E46_URL : null} soon={t.nav.comingSoon} />
+          </div>
+
+          <div className="mt-7 grid items-center gap-3.5 border-t border-line pt-7 md:mt-10 md:grid-cols-[200px_1fr] md:gap-6">
+            <h3 className="text-lg font-bold tracking-[-0.01em]">{t.garage.startLabel}</h3>
+            <div className="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-2.5">
+              {/* BL-079 (PO 2026-10-26): each body tile opens E46BUILD with that body pre-chosen, like the hero pills (BL-064).
+                  Counted as configurator_click by the page-wide tracker (BL-050). */}
+              {t.garage.bodies.map((b) => {
+                const inner = (
+                  <>
+                    <Image src={b.img} alt={E46_LIVE ? "" : `E46 ${b.name}`} width={240} height={150} sizes="(min-width: 768px) 200px, 33vw" className="aspect-[1.6] w-full object-cover" />
+                    <span className="flex items-center justify-between gap-1 px-2 py-1.5 md:px-2.5 md:py-2">
+                      <span className="flex flex-col">
+                        <span className="text-[13px] font-semibold md:text-sm">{b.name}</span>
+                        <span className="text-[11px] text-muted">{b.years}</span>
+                      </span>
+                      {E46_LIVE && <Arrow className="hidden size-4 shrink-0 text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-ink md:block" />}
+                    </span>
+                  </>
+                );
+                const box = "flex flex-col overflow-hidden rounded-[14px] border border-[#e3ddd3] bg-white";
+                return E46_LIVE ? (
+                  <a
+                    key={b.name}
+                    href={e46StartUrl(b.start)}
+                    rel="nofollow" // each load creates a build on E46BUILD; crawlers should not follow these
+                    aria-label={t.garage.configure(b.name)}
+                    className={`group ${box} transition-colors hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink active:bg-[#f4f1ec]`}
+                  >
+                    {inner}
                   </a>
                 ) : (
-                  <span className="flex h-12 shrink-0 items-center justify-center rounded-full border border-[#3A3A40] px-6 text-[15px] font-semibold text-fog">{t.nav.comingSoon}</span>
-                )}
-              </div>
-              {/* BL-081: the three "Why zauberlabs" titles as chips (the long values text is gone). */}
-              <ul className="flex flex-wrap gap-2">
-                {t.garage.values.map((v) => (
-                  <li key={v} className="rounded-full border border-[#3A3A40] px-3.5 py-[7px] text-[13px] font-semibold text-paper">{v}</li>
-                ))}
-              </ul>
-              <div className="grid gap-3 sm:grid-cols-3">
-                {/* BL-079 (PO 2026-10-26): each body tile opens E46BUILD with that body pre-chosen, like the hero pills (BL-064).
-                    Counted as configurator_click by the page-wide tracker (BL-050). */}
-                {t.garage.bodies.map((b) => {
-                  const inner = (
-                    <>
-                      <Image src={b.img} alt={E46_LIVE ? "" : `E46 ${b.name}`} width={88} height={56} className="h-14 w-[88px] rounded-lg object-cover" />
-                      <div className="flex flex-col">
-                        <span className="text-[15px] font-semibold">{b.name}</span>
-                        <span className="text-xs text-[#A9A6A0]">{b.years}</span>
-                      </div>
-                    </>
-                  );
-                  return E46_LIVE ? (
-                    <a
-                      key={b.name}
-                      href={e46StartUrl(b.start)}
-                      rel="nofollow" // each load creates a build on E46BUILD; crawlers should not follow these
-                      aria-label={t.garage.configure(b.name)}
-                      className="group flex items-center gap-3 rounded-2xl bg-[#1A1A1E] p-2 pr-4 ring-1 ring-transparent transition-colors hover:bg-[#2C2C32] hover:ring-[#4A4A52] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper active:bg-[#2E2E34]"
-                    >
-                      {inner}
-                      <Arrow className="ml-auto size-4 shrink-0 text-[#A9A6A0] transition-transform group-hover:translate-x-0.5 group-hover:text-paper" />
-                    </a>
-                  ) : (
-                    <div key={b.name} className="flex items-center gap-3 rounded-2xl bg-[#1A1A1E] p-2">
-                      {inner}
-                    </div>
-                  );
-                })}
-              </div>
+                  <div key={b.name} className={box}>
+                    {inner}
+                  </div>
+                );
+              })}
             </div>
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
+            {/* BL-081: the three "Why zauberlabs" titles as chips (the long values text is gone). */}
+            <ul className="flex flex-wrap gap-2">
+              {t.garage.values.map((v) => (
+                <li key={v} className="rounded-full border border-line px-3.5 py-[7px] text-[13px] font-semibold">{v}</li>
+              ))}
+            </ul>
+            {E46_LIVE && (
+              <a href={E46_URL} className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-ink px-6 text-[15px] font-semibold text-paper hover:bg-black sm:w-auto">
+                {t.garage.open} <Arrow className="size-[18px]" />
+              </a>
+            )}
           </div>
         </section>
 
