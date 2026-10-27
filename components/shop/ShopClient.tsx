@@ -47,8 +47,18 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
   const [details, setDetails] = useState<ProductId | null>(null);
   const [state, setState] = useState<"idle" | "paying" | "error">("idle");
 
+  const [removed, setRemoved] = useState(false);
+
   useEffect(() => {
-    setCart(cleanCart(load(CART_KEY, {})));
+    // BL-085.1: a saved cart may hold a design that is no longer on sale; it is dropped here (and saved back), with a short
+    // note, so the checkout never receives it.
+    const saved = load<Record<string, unknown>>(CART_KEY, {});
+    const clean = cleanCart(saved);
+    setCart(clean);
+    if (saved && typeof saved === "object" && Object.keys(saved).length !== Object.keys(clean).length) {
+      save(CART_KEY, clean);
+      setRemoved(true);
+    }
     const c = load(COUNTRY_KEY, "DE");
     if (typeof c === "string" && isShipCountry(c)) setCountry(c);
   }, []);
@@ -200,6 +210,7 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
               <h2 id="cart-title" className="text-2xl font-extrabold tracking-tight">{t.cart.title}</h2>
               <button type="button" onClick={() => setOpen(false)} className="cursor-pointer text-sm font-semibold underline underline-offset-2">{t.cart.close}</button>
             </div>
+            {removed && <p role="status" className="text-sm text-muted">{t.cart.removed}</p>}
             {count === 0 ? (
               <p className="text-body">{t.cart.empty}</p>
             ) : (

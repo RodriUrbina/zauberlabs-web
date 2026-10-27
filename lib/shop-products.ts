@@ -6,6 +6,7 @@ import { OWNER } from "./legal-entity";
  * (e46 docs/GTM/, made web-ready by scripts/make-shop-images.mjs). Prices are gross in euro cents, incl. 19 % MwSt.
  * BL-085 (PO 2026-10-27, launch): only four designs are on sale (`available`); the other five stay here, switched off, and
  * are left out of the page, the cart, the pricing and the checkout. `size` is the printed sticker in cm (width × height).
+ * BL-085.1 (PO 2026-10-27): the printed Touring is the plain blue one ("decal touring no lines.png"), not the striped one.
  */
 
 export type ProductId =
@@ -34,8 +35,8 @@ export const PRODUCTS: readonly Product[] = [
   { id: "sedan-silver", sku: "ZL-E46-01", image: "/shop/sedan-silver.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Silver", de: "Silber" }, available: false },
   { id: "sedan-red", sku: "ZL-E46-02", image: "/shop/sedan-red.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Red", de: "Rot" }, available: true, size: { w: 5.2, h: 2.5 } },
   { id: "sedan-red-no-m", sku: "ZL-E46-03", image: "/shop/sedan-red-no-m.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Red, standard bumper", de: "Rot, Serienstoßstange" }, available: false },
-  { id: "touring-blue-stripes", sku: "ZL-E46-04", image: "/shop/touring-blue-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue, with stripes", de: "Blau, mit Streifen" }, available: true, size: { w: 5.1, h: 2.5 } },
-  { id: "touring-blue-no-stripes", sku: "ZL-E46-05", image: "/shop/touring-blue-no-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue, no stripes", de: "Blau, ohne Streifen" }, available: false },
+  { id: "touring-blue-stripes", sku: "ZL-E46-04", image: "/shop/touring-blue-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue, with stripes", de: "Blau, mit Streifen" }, available: false },
+  { id: "touring-blue-no-stripes", sku: "ZL-E46-05", image: "/shop/touring-blue-no-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue", de: "Blau" }, available: true, size: { w: 5.1, h: 2.5 } },
   { id: "coupe-blue", sku: "ZL-E46-06", image: "/shop/coupe-blue.webp", name: { en: "Coupé", de: "Coupé" }, variant: { en: "Blue, big e46 logo", de: "Blau, großes e46-Logo" }, available: false },
   { id: "convertible-grey", sku: "ZL-E46-07", image: "/shop/convertible-grey.webp", name: { en: "Convertible", de: "Cabrio" }, variant: { en: "Grey", de: "Grau" }, available: false },
   { id: "convertible-black", sku: "ZL-E46-08", image: "/shop/convertible-black.webp", name: { en: "Convertible", de: "Cabrio" }, variant: { en: "Black", de: "Schwarz" }, available: true, size: { w: 5.2, h: 2.5 } },

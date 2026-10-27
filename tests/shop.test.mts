@@ -12,7 +12,7 @@ const all4 = Object.fromEntries(AVAILABLE.map((p) => [p.id, 1]));
 describe("fan shop (BL-084)", () => {
   test("nine products in the catalogue, four on sale at launch (PO 2026-10-27); unique ids and SKUs, images, both languages", () => {
     assert.equal(PRODUCTS.length, 9);
-    assert.deepEqual(AVAILABLE.map((p) => p.id).sort(), ["convertible-black", "m3-yellow", "sedan-red", "touring-blue-stripes"]);
+    assert.deepEqual(AVAILABLE.map((p) => p.id).sort(), ["convertible-black", "m3-yellow", "sedan-red", "touring-blue-no-stripes"], "BL-085.1: the plain blue Touring");
     for (const p of AVAILABLE) assert.ok(p.size && p.size.h === 2.5 && p.size.w >= 5 && p.size.w <= 5.5, `${p.id} has its printed size`);
     assert.equal(new Set(PRODUCTS.map((p) => p.id)).size, 9);
     assert.equal(new Set(PRODUCTS.map((p) => p.sku)).size, 9);
@@ -33,7 +33,8 @@ describe("fan shop (BL-084)", () => {
     assert.equal(priceCart(all4).subtotal, 1690);
     assert.equal(priceCart({ ...all4, "m3-yellow": 2 }).subtotal, 1690 + 490);
     assert.equal(priceCart({ ...all4, "m3-yellow": 4 }).subtotal, 1690 + 1290);
-    assert.equal(priceCart({ "sedan-red": 2, "m3-yellow": 2, "convertible-black": 2, "touring-blue-stripes": 2 }).subtotal, 2 * 1690);
+    assert.equal(priceCart({ "sedan-red": 2, "m3-yellow": 2, "convertible-black": 2, "touring-blue-no-stripes": 2 }).subtotal, 2 * 1690);
+    assert.equal(priceCart({ "sedan-red": 1, "m3-yellow": 1, "convertible-black": 1, "touring-blue-stripes": 1 } as never).subtotal, 1290, "the striped Touring no longer completes the set");
     const g = priceCart({ "sedan-red": 2, "m3-yellow": 1, "convertible-black": 1 }).groups;
     assert.deepEqual(g.map((x) => x.kind), ["three", "single"]);
     assert.equal(g.flatMap((x) => x.items).length, 4, "every sticker is in exactly one group (the packing list)");
@@ -54,6 +55,12 @@ describe("fan shop (BL-084)", () => {
     assert.deepEqual(cleanCart({ "sedan-red": 2, nope: 1, "m3-yellow": -1, "convertible-black": 1.5, price: 1, "sedan-silver": 1 }), { "sedan-red": 2 });
     assert.deepEqual(cleanCart({ "sedan-red": 999 }), { "sedan-red": 20 });
     assert.deepEqual(cleanCart("x"), {});
+    // BL-085.1: a saved cart with the striped Touring (on sale until today) loses it on load and is saved back, with a note,
+    // so the checkout (which refuses designs not on sale) never receives it.
+    assert.deepEqual(cleanCart({ "touring-blue-stripes": 1, "m3-yellow": 1 }), { "m3-yellow": 1 });
+    const client = read("components", "ShopClient.tsx".replace(/^/, "shop/"));
+    assert.match(client, /const clean = cleanCart\(saved\);[\s\S]*save\(CART_KEY, clean\);[\s\S]*setRemoved\(true\)/);
+    assert.match(client, /body: JSON\.stringify\(\{ lang, country, cart \}\)/, "the checkout gets the cleaned cart");
   });
 
   test("hidden until launch: closed on production except for internal devices; open locally and on previews", () => {
