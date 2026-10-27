@@ -153,7 +153,9 @@ describe("fan shop (BL-084)", () => {
     assert.ok(footer.indexOf("/shop`") < footer.indexOf("footer.legal"), "Shop comes before the Legal column");
     // BL-086: the home header links to the shop only with the flag on (desktop nav).
     const home = read("app", "[lang]", "page.tsx");
-    assert.equal(home.match(/\/shop`/g)?.length, 1, "one shop link on the home page");
+    assert.equal(home.match(/\/shop`/g)?.length, 2, "desktop nav + phone header");
+    // Phones (option a): Shop replaces Blog only with the flag on; without it the old Blog link, same breakpoints.
+    assert.match(home, /\{SHOP_LAUNCHED \? \(\s*<Link href=\{`\/\$\{lang\}\/shop`\} className="[^"]*max-\[374px\]:hidden sm:hidden">\{t\.nav\.shop\}<\/Link>\s*\) : \(\s*<Link href=\{`\/\$\{lang\}\/blog`\} className="[^"]*max-\[374px\]:hidden sm:hidden">\{t\.nav\.blog\}<\/Link>/);
     assert.match(home, /\{SHOP_LAUNCHED && <Link href=\{`\/\$\{lang\}\/shop`\}[^>]*>\{t\.nav\.shop\}<\/Link>\}/);
     const ds = read("app", "[lang]", "datenschutz", "page.tsx");
     assert.match(ds, /\{SHOP_LAUNCHED && \(\s*<>\s*<h2>15\. Bestellungen und Zahlungen/);
