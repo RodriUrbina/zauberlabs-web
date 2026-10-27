@@ -2,7 +2,7 @@ import Stripe from "stripe";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { shopOpenFor, usableStripeKey } from "@/lib/shop-flag";
 import { cleanCart, priceCart, shippingFor, type PricedGroup } from "@/lib/shop-pricing";
-import { isShipCountry, productById } from "@/lib/shop-products";
+import { availableById, isShipCountry, productById } from "@/lib/shop-products";
 
 /**
  * BL-084 — starts a Stripe Checkout Session for the fan-shop cart (plan § 5). The browser sends only product ids, quantities,
@@ -21,7 +21,7 @@ const groupName = (g: PricedGroup, lang: Locale) => {
     const p = productById(id)!;
     return `${p.name[lang]} (${p.variant[lang]})`;
   };
-  if (g.kind === "all") return lang === "de" ? "Sticker-Set: alle 9 Motive" : "Sticker set: all 9 designs";
+  if (g.kind === "all") return lang === "de" ? `Sticker-Set: alle ${g.items.length} Motive` : `Sticker set: all ${g.items.length} designs`;
   if (g.kind === "three") return `${lang === "de" ? "3 Sticker" : "3 stickers"}: ${g.items.map(label).join(", ")}`;
   return `Sticker: ${label(g.items[0])}`;
 };
@@ -39,6 +39,10 @@ export async function POST(req: Request) {
   const lang: Locale = typeof body?.lang === "string" && isLocale(body.lang) ? body.lang : "de";
   const country = typeof body?.country === "string" ? body.country.toUpperCase() : "";
   if (!isShipCountry(country)) return Response.json({ error: "We ship to Germany and the EU only" }, { status: 400 });
+  // BL-085: designs that are not on sale are refused outright (not silently dropped), so a stale cart cannot buy them.
+  if (body?.cart && typeof body.cart === "object" && Object.keys(body.cart).some((id) => productById(id) && !availableById(id))) {
+    return Response.json({ error: "A design in the cart is not available" }, { status: 400 });
+  }
   const cart = cleanCart(body?.cart);
   const { groups, subtotal, count } = priceCart(cart);
   if (count === 0) return Response.json({ error: "The cart is empty" }, { status: 400 });

@@ -1,6 +1,6 @@
 import LegalPage from "@/components/LegalPage";
 import { OWNER } from "@/lib/legal-entity";
-import ProviderPlaceholder from "@/components/shop/ProviderPlaceholder";
+import Link from "next/link";
 import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 
 export const metadata = { title: "Impressum — zauberlabs", robots: { index: false } };
@@ -52,7 +52,7 @@ export default async function Impressum({ params }: { params: Promise<{ lang: st
       </p>
 
       <h2>Verbraucherstreitbeilegung</h2>
-      <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+      <p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 
       <h2>Haftung für Inhalte</h2>
       <p>
@@ -65,18 +65,18 @@ export default async function Impressum({ params }: { params: Promise<{ lang: st
       <p>
         Unsere Konfiguratoren verlinken auf Angebote externer Händler und Plattformen, auf deren Inhalte wir keinen Einfluss haben. Für diese
         fremden Inhalte ist stets der jeweilige Anbieter oder Betreiber verantwortlich.{" "}
-        {SHOP_LAUNCHED
-          ? "Kaufverträge über Teile kommen ausschließlich zwischen dir und dem jeweiligen Händler zustande; wir verkaufen keine Teile."
-          : "Kaufverträge kommen ausschließlich zwischen dir und dem jeweiligen Händler zustande; wir verkaufen keine Teile."}{" "}
+        {/* BL-085 (flag-only; plan § 6): with the fan shop launched, the old sentence would be untrue, so it names the shop. */}
+        {SHOP_LAUNCHED ? (
+          <>
+            Kaufverträge über Teile, die du über Links in unseren Konfiguratoren findest, kommen ausschließlich zwischen dir und dem jeweiligen Händler zustande;
+            diese Teile verkaufen wir nicht. Artikel aus unserem Fan-Shop verkaufen wir selbst (Angaben oben); dafür gelten unsere{" "}
+            <Link href={`/${lang}/agb`} className="underline">AGB</Link>.
+          </>
+        ) : (
+          "Kaufverträge kommen ausschließlich zwischen dir und dem jeweiligen Händler zustande; wir verkaufen keine Teile."
+        )}{" "}
         Bei Bekanntwerden von Rechtsverletzungen entfernen wir derartige Links umgehend.
       </p>
-      {/* BL-084 (PREPARED, rendered only with SHOP_LAUNCHED=1; plan § 6): the old sentence is untrue for the fan shop, where the
-          contract is with us. Placeholder for the legal-text provider's wording. */}
-      {SHOP_LAUNCHED && (
-        <ProviderPlaceholder>
-          <p>Fan-Shop: Beim Kauf von Stickern in unserem Shop kommt der Kaufvertrag mit uns zustande (Angaben oben); es gelten unsere AGB.</p>
-        </ProviderPlaceholder>
-      )}
 
       {/* optional — keep only if the configurators use affiliate links (e.g. eBay Partner Network) */}
       <h2>Hinweis zu Partnerlinks</h2>

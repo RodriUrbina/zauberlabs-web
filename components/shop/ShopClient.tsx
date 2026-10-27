@@ -7,7 +7,7 @@ import { Arrow } from "@/components/Icons";
 import type { Locale } from "@/lib/i18n";
 import { countryName, shopCopy } from "@/lib/shop-copy";
 import { cleanCart, formatEuro, itemCount, MAX_PER_PRODUCT, priceCart, shippingFor, type Cart } from "@/lib/shop-pricing";
-import { GPSR, PRICES, PRODUCTS, SHIP_COUNTRIES, isShipCountry, productById, type ProductId, type ShipCountry } from "@/lib/shop-products";
+import { AVAILABLE, GPSR, PRICES, SHIP_COUNTRIES, isShipCountry, productById, type ProductId, type ShipCountry } from "@/lib/shop-products";
 
 /**
  * BL-084 — the shop's interactive part: product grid, bundle cards, the sticky cart bar and its drawer, and the hand-off to
@@ -60,7 +60,7 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
   };
   const add = (id: ProductId, n = 1) => update({ ...cart, [id]: Math.min((cart[id] ?? 0) + n, MAX_PER_PRODUCT) });
   const setQty = (id: ProductId, q: number) => update({ ...cart, [id]: q });
-  const addAll = () => update(Object.fromEntries(PRODUCTS.map((p) => [p.id, Math.min((cart[p.id] ?? 0) + 1, MAX_PER_PRODUCT)])) as Cart);
+  const addAll = () => update(Object.fromEntries(AVAILABLE.map((p) => [p.id, Math.min((cart[p.id] ?? 0) + 1, MAX_PER_PRODUCT)])) as Cart);
 
   const priced = useMemo(() => priceCart(cart), [cart]);
   const shipping = shippingFor(priced.subtotal, country);
@@ -104,14 +104,14 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
 
   return (
     <>
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {PRODUCTS.map((p) => {
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {AVAILABLE.map((p) => {
           const inCart = cart[p.id] ?? 0;
           const showDetails = details === p.id;
           return (
             <li key={p.id} className="flex flex-col overflow-hidden rounded-[22px] bg-ink-2 text-paper">
               <div className="relative aspect-[3/2]">
-                <Image src={p.image} alt={`E46 ${p.name[lang]} – Sticker, ${p.variant[lang]}`} fill sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" className="object-contain p-3" />
+                <Image src={p.image} alt={`E46 ${p.name[lang]} – Sticker, ${p.variant[lang]}`} fill sizes="(min-width: 1440px) 320px, (min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="object-contain p-3" />
               </div>
               <div className="flex flex-1 flex-col gap-3 p-5 pt-3">
                 <div className="flex items-baseline justify-between gap-3">
@@ -142,7 +142,7 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
                 </div>
                 {/* GPSR product information (plan § 3 #8) */}
                 <dl id={`gpsr-${p.id}`} hidden={!showDetails} className="flex flex-col gap-2 border-t border-ink-3 pt-3 text-[13px] leading-snug text-fog">
-                  <div><dt className="eyebrow text-[10px] text-[#8A877F]">{t.gpsr.material}</dt><dd>{GPSR.material[lang]}</dd></div>
+                  <div><dt className="eyebrow text-[10px] text-[#8A877F]">{t.gpsr.material}</dt><dd>{GPSR.material[lang]}{p.size ? `, ${t.size(p.size.w.toLocaleString(lang), p.size.h.toLocaleString(lang))}` : ""}. {GPSR.printed[lang]}</dd></div>
                   <div><dt className="eyebrow text-[10px] text-[#8A877F]">{t.gpsr.manufacturer}</dt><dd>{GPSR.manufacturer.name}, {GPSR.manufacturer.address}, {GPSR.manufacturer.email}</dd></div>
                   <div><dt className="eyebrow text-[10px] text-[#8A877F]">{t.gpsr.sku}</dt><dd className="font-mono">{p.sku}</dd></div>
                   <div><dt className="eyebrow text-[10px] text-[#8A877F]">{t.gpsr.care}</dt><dd>{GPSR.care[lang]}</dd></div>
@@ -205,7 +205,7 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
             ) : (
               <>
                 <ul className="flex flex-col divide-y divide-line">
-                  {PRODUCTS.filter((p) => cart[p.id]).map((p) => (
+                  {AVAILABLE.filter((p) => cart[p.id]).map((p) => (
                     <li key={p.id} className="flex items-center gap-3 py-3">
                       <span className="relative h-12 w-[72px] shrink-0 overflow-hidden rounded-lg bg-ink-2">
                         <Image src={p.image} alt="" fill sizes="72px" className="object-contain p-0.5" />
