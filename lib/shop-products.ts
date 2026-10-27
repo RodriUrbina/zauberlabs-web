@@ -35,8 +35,7 @@ export type Product = {
 
 /**
  * BL-089 (PO 2026-10-27) — BMW colour names of the designs on sale, in ONE place so a corrected spelling is a one-line change.
- * Spellings from the Writer's sourcing (DE blue: BMW PresseClub 2006 „Laguna-seca Blau"). Open for the PO: the DE blue
- * („Laguna-seca Blau" vs „Laguna-Seca-Blau") and the E46-era names „Japanrot II" / „Schwarz II".
+ * Final names (PO 2026-10-27), from the Writer's sourcing; DE blue as in BMW's 2006 German release („Laguna-seca Blau").
  */
 const COLOURS = {
   japanRed: { en: "Japan Red", de: "Japanrot" },
