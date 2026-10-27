@@ -94,7 +94,7 @@ describe("home page (BL-053)", () => {
     for (const c of dictionaries.en.garage.cats.filter((c) => ["wheels", "seats"].includes(c.key))) assert.ok(!/your (car|interior|cockpit)/.test(c.line), c.line);
     // PO 2026-10-27: every picture shows the part mounted on the car (E46BUILD's stage pictures, or the steering composite).
     const onCar: Record<string, string> = {
-      headlights: "/images/closer-look/e46-look-bi-xenon-saloon-late.webp", // the mock's bi-xenon look, on the car (PO, BL-083.2)
+      headlights: "/images/closer-look/e46-headlight-look-bi-xenon-late-hires.webp", // the PO's high-res render, on the car (BL-083.3)
       bumpers: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", // bumper look, on the car
       wheels: "/images/closer-look/e46-wheel-stage-side.webp", // WHEEL_STAGE_SRC
       seats: "/images/closer-look/e46-seat-stage-interior.webp", // SEAT_STAGE_SRC
@@ -103,6 +103,9 @@ describe("home page (BL-053)", () => {
     for (const lang of LOCALES) for (const c of dictionaries[lang].garage.cats) assert.equal(c.img, onCar[c.key], `${lang} ${c.key}`);
     assert.deepEqual(fs.readdirSync(pub("/images/closer-look")).sort(), Object.values(onCar).map((p) => path.basename(p)).sort(), "no part-only pictures left");
     assert.match(fs.readFileSync(path.join(process.cwd(), "scripts", "make-closer-look-steering.mjs"), "utf8"), /747 \/ 1672[\s\S]*413 \/ 1200[\s\S]*0\.98/, "T-170 geometry");
+    // BL-083.3: the headlight is the PO's 1536×1024 render, converted by a hash-checked script; phones get a smaller width.
+    assert.match(fs.readFileSync(path.join(process.cwd(), "scripts", "make-closer-look-headlight.mjs"), "utf8"), /a814f65de7d61d74bd38f9e657d06145ec5fbc83c930a48bf4dadc1bf8581a51/);
+    assert.match(fs.readFileSync(path.join(process.cwd(), "components", "CloserLook.tsx"), "utf8"), /sizes="[^"]*calc\(100vw - 72px\)"/);
     assert.equal(dictionaries.de.garage.title.join(""), "Sieh genauer hin.");
     assert.equal(dictionaries.de.garage.cta, "Probier es an deinem E46 aus");
   });
