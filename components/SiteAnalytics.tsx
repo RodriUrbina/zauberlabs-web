@@ -2,7 +2,7 @@
 
 import { Analytics, type BeforeSendEvent } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { hasInternalMarker } from "@/lib/internal-mode-client";
+import { hasInternalMarker, withoutQueryAndHash } from "@/lib/internal-mode-client";
 
 /**
  * Vercel Web Analytics (BL-008) and Speed Insights (BL-082) with the BL-039 internal-mode filter: while the first-party
@@ -15,9 +15,14 @@ function beforeSend(event: BeforeSendEvent): BeforeSendEvent | null {
   return isInternal() ? null : event;
 }
 
-/** Speed Insights calls this once per measurement (type "vital") just before sending; null drops it. */
-function beforeSendVital<T>(event: T): T | null {
-  return isInternal() ? null : event;
+/**
+ * Speed Insights calls this once per measurement (type "vital") just before sending; null drops it. The page address goes
+ * without query and hash (data minimisation: no utm_ or filter parameters, no #anchors reach Vercel).
+ */
+function beforeSendVital<T extends { url: string }>(event: T): T | null {
+  if (isInternal()) return null;
+  const url = withoutQueryAndHash(event.url);
+  return url ? { ...event, url } : null;
 }
 
 export default function SiteAnalytics() {

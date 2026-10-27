@@ -103,11 +103,12 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       {/* BL-082 — checked against @vercel/speed-insights 2.0.0 and its script (/_vercel/speed-insights/script.js, script version
           0.1.3): one POST per page with the measured values (LCP, FCP, TTFB, CLS, INP/FID), page address and route, the page
           element concerned (CSS selector), the connection type (e.g. "4g") and SDK/script versions. No cookies, no local storage;
-          not sent from headless browsers; beforeSend drops everything on devices in internal mode (components/SiteAnalytics.tsx). */}
+          not sent from headless browsers; beforeSend drops everything on devices in internal mode and strips query and hash from the page address
+          (components/SiteAnalytics.tsx). */}
       <p>
         Um zu sehen, wie schnell unsere Seiten laden, nutzen wir auf dieser Website und auf e46.zauberlabs.de (Abschnitt 10) außerdem Vercel
-        Speed Insights, ebenfalls von Vercel Inc.: Dein Browser sendet dabei anonyme Messwerte zu Ladegeschwindigkeit, Layout-Stabilität und
-        Reaktionszeit der Seite an Vercel, zusammen mit der aufgerufenen Seite, dem betroffenen Seitenelement, der Art der Netzverbindung (z. B.
+        Speed Insights, ebenfalls von Vercel Inc.: Dein Browser sendet dabei Messwerte ohne Nutzerkennung zu Ladegeschwindigkeit,
+        Layout-Stabilität und Reaktionszeit der Seite an Vercel, zusammen mit der aufgerufenen Seite (ohne Parameter), dem betroffenen Seitenelement, der Art der Netzverbindung (z. B.
         „4g“) und der Version des Messskripts; der Dienst setzt keine Cookies und speichert nichts auf deinem Gerät, und wir sehen nur von Vercel
         zusammengefasste Werte.
       </p>

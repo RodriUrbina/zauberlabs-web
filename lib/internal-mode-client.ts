@@ -9,3 +9,13 @@ export const INTERNAL_COOKIE_VALUE = "1";
 export function hasInternalMarker(cookieHeader: string): boolean {
   return cookieHeader.split(";").some((part) => part.trim() === `${INTERNAL_COOKIE}=${INTERNAL_COOKIE_VALUE}`);
 }
+
+/** BL-082: a page address reduced to origin + path (no query, no hash) before Speed Insights sends it; null if unparsable. */
+export function withoutQueryAndHash(url: string): string | null {
+  try {
+    const u = new URL(url);
+    return u.origin + u.pathname;
+  } catch {
+    return null;
+  }
+}
