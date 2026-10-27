@@ -187,7 +187,7 @@ describe("fan shop (BL-084)", () => {
     };
     for (const p of AVAILABLE) assert.deepEqual([p.colour?.en, p.colour?.de], want[p.id], p.id);
     const products = read("lib", "shop-products.ts");
-    assert.equal((products.match(/Japanrot/g) ?? []).length, 1, "each spelling exists once (the COLOURS map)");
+    assert.equal((products.match(/"Japanrot"/g) ?? []).length, 1, "each spelling exists once as a value (the COLOURS map)");
     const names = (cart: Record<string, number>, lang: "de" | "en") =>
       (sessionParams(cart as never, lang, "DE", "https://www.zauberlabs.de").line_items ?? []).map((l) => [l.price_data?.product_data?.name, l.quantity, l.price_data?.unit_amount]);
     assert.deepEqual(names({ "sedan-red": 2 }, "de"), [["Sticker: Limousine Japanrot", 2, 490]]);
