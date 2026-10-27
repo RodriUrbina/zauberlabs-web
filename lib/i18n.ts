@@ -8,7 +8,7 @@ const en = {
     description:
       "Independent car configurators for modern classics. See the upgrades on your exact car, then find parts that genuinely fit.",
   },
-  nav: { configurators: "Configurators", next: "What’s next", suggest: "Suggest a car", blog: "Blog", open: "Open E46BUILD", comingSoon: "E46 configurator: coming soon", menu: "Menu" },
+  nav: { configurators: "Configurators", next: "What’s next", suggest: "Suggest a car", blog: "Blog", shop: "Shop", open: "Open E46BUILD", comingSoon: "E46 configurator: coming soon", menu: "Menu" },
   // BL-081 (PO 2026-10-26): Rivian-style hero, headline option 2 (e46/docs/design/zauberlabs-rivian-landing). Only title[1]
   // gets the serif accent. `cta` is the phone sticky bar's label (BL-079); the hero buttons are `configure` and `readBlog`.
   hero: {
@@ -163,7 +163,7 @@ const de: Dict = {
     description:
       "Unabhängige Auto-Konfiguratoren für Youngtimer. Sieh die Umbauten an deinem exakten Auto und finde Teile, die wirklich passen.",
   },
-  nav: { configurators: "Konfiguratoren", next: "Was kommt", suggest: "Auto vorschlagen", blog: "Blog", open: "E46BUILD öffnen", comingSoon: "E46-Konfigurator: bald verfügbar", menu: "Menü" },
+  nav: { configurators: "Konfiguratoren", next: "Was kommt", suggest: "Auto vorschlagen", blog: "Blog", shop: "Shop", open: "E46BUILD öffnen", comingSoon: "E46-Konfigurator: bald verfügbar", menu: "Menü" },
   hero: {
     live: "E46BUILD ist live",
     liveSoon: "Demnächst · BMW 3er (E46)",

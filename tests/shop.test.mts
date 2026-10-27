@@ -148,8 +148,15 @@ describe("fan shop (BL-084)", () => {
     assert.match(read("app", "[lang]", "shop", "page.tsx"), /robots: \{ index: SHOP_LAUNCHED, follow: SHOP_LAUNCHED \}/);
     assert.match(read("app", "sitemap.ts"), /SHOP_LAUNCHED \? \[page\("\/shop"/);
     const footer = read("components", "SiteFooter.tsx");
-    assert.match(footer, /\{SHOP_LAUNCHED && \(\s*<>\s*<Link href=\{`\/\$\{lang\}\/shop`\}/);
-    assert.ok(!/\/shop/.test(read("app", "[lang]", "page.tsx")), "no shop link on the home page");
+    assert.match(footer, /\{SHOP_LAUNCHED && <Link href=\{`\/\$\{lang\}\/shop`\}[^>]*>\{t\.nav\.shop\}<\/Link>\}/, "Shop in the Studio column (BL-086)");
+    assert.match(footer, /\{SHOP_LAUNCHED && \(\s*<>\s*<Link href=\{`\/\$\{lang\}\/agb`\}[\s\S]*vertrag-widerrufen/, "legal links stay under Legal");
+    assert.ok(footer.indexOf("/shop`") < footer.indexOf("footer.legal"), "Shop comes before the Legal column");
+    // BL-086: the home header links to the shop only with the flag on (desktop nav).
+    const home = read("app", "[lang]", "page.tsx");
+    assert.equal(home.match(/\/shop`/g)?.length, 2, "desktop nav + phone header");
+    // Phones (option a): Shop replaces Blog only with the flag on; without it the old Blog link, same breakpoints.
+    assert.match(home, /\{SHOP_LAUNCHED \? \(\s*<Link href=\{`\/\$\{lang\}\/shop`\} className="[^"]*max-\[374px\]:hidden sm:hidden">\{t\.nav\.shop\}<\/Link>\s*\) : \(\s*<Link href=\{`\/\$\{lang\}\/blog`\} className="[^"]*max-\[374px\]:hidden sm:hidden">\{t\.nav\.blog\}<\/Link>/);
+    assert.match(home, /\{SHOP_LAUNCHED && <Link href=\{`\/\$\{lang\}\/shop`\}[^>]*>\{t\.nav\.shop\}<\/Link>\}/);
     const ds = read("app", "[lang]", "datenschutz", "page.tsx");
     assert.match(ds, /\{SHOP_LAUNCHED && \(\s*<>\s*<h2>15\. Bestellungen und Zahlungen/);
     assert.match(ds, /localStorage[\s\S]*zl_shop_cart/, "the cart in browser storage is disclosed");

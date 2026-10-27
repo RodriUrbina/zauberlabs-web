@@ -9,6 +9,7 @@ import HomeHero from "@/components/HomeHero";
 import SiteFooter from "@/components/SiteFooter";
 import { getBlog } from "@/lib/blog";
 import StickyStartBar from "@/components/StickyStartBar";
+import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 import CloserLook from "@/components/CloserLook";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
@@ -38,11 +39,20 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <a href="#garage" className="hover:opacity-70">{t.nav.configurators}</a>
             <a href="#next" className="hover:opacity-70">{t.nav.next}</a>
             <Link href={`/${lang}/blog`} className="hover:opacity-70">{t.nav.blog}</Link>
+            {/* BL-086 (PO 2026-10-27): the shop in the desktop nav, only once it is launched (lib/shop-flag.ts). Phones: it
+                replaces "Blog" in the header (below). */}
+            {SHOP_LAUNCHED && <Link href={`/${lang}/shop`} className="hover:opacity-70">{t.nav.shop}</Link>}
           </nav>
           <div className="flex items-center gap-2.5 sm:gap-4">
             {/* BL-079: phones get "Blog" and a compact E46BUILD button (the nav and the full button start at sm/lg). Below 375 px
                 there is no room for "Blog" next to the wordmark; the sticky bar still leads into E46BUILD there. */}
-            <Link href={`/${lang}/blog`} className="py-3 text-sm font-medium hover:opacity-70 max-[374px]:hidden sm:hidden">{t.nav.blog}</Link>
+            {/* BL-086 (PO 2026-10-27, option a): with the shop launched, "Shop" takes this place on phones ("Blog" stays in the
+                hero's "Read the blog" button and the footer); without it, "Blog" as before. Same breakpoints. */}
+            {SHOP_LAUNCHED ? (
+              <Link href={`/${lang}/shop`} className="py-3 text-sm font-medium hover:opacity-70 max-[374px]:hidden sm:hidden">{t.nav.shop}</Link>
+            ) : (
+              <Link href={`/${lang}/blog`} className="py-3 text-sm font-medium hover:opacity-70 max-[374px]:hidden sm:hidden">{t.nav.blog}</Link>
+            )}
             <div className="font-mono text-xs tracking-[0.08em] whitespace-nowrap text-muted">
               {lang === "en" ? <span className="text-ink">EN</span> : <Link href="/en" hrefLang="en" className="px-1 py-3 hover:text-ink">EN</Link>}
               {" / "}
