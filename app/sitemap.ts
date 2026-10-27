@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getBlog } from "@/lib/blog";
+import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 
 const BASE = "https://www.zauberlabs.de";
 
@@ -23,5 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
   // Impressum/Datenschutz are noindex, so they stay out of the sitemap.
   // Blog: index + tag pages per language; articles only in the languages they exist in; drafts excluded on production.
-  return [page("", 1), en("", 0.9), ...getBlog().sitemapEntries()];
+  // BL-084: the fan shop only once it is launched (lib/shop-flag.ts); its legal pages stay out, like Impressum/Datenschutz.
+  const shop = SHOP_LAUNCHED ? [page("/shop", 0.6), en("/shop", 0.5)] : [];
+  return [page("", 1), en("", 0.9), ...shop, ...getBlog().sitemapEntries()];
 }

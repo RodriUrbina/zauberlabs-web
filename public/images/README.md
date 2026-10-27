@@ -25,3 +25,11 @@ files; the headlight is the PO's own render (converted) and the steering picture
 - `closer-look/e46-wheel-stage-side.webp`: from `wheels/e46-wheel-stage-side.webp` (1200×675). AI image by the PO (dark original 2026-10-06, D-002/D-010). E46BUILD's one wheel stage for every body; no label on the stage.
 - `closer-look/e46-seat-stage-interior.webp`: from `seats/e46-seat-stage-interior.webp` (1200×675). AI illustration by the PO, 2026-10-05 (D-002). E46BUILD's seat stage; no label.
 - `closer-look/e46-steering-stage-cockpit-m-sport.webp` (1672×941): a **composite** of two e46build sources, both AI renders by the PO: the empty cockpit stage `steering/e46-steering-stage-cockpit.webp` (D-002/T-170) and the M Sport cut-out `steering/e46-steering-cutout-m-sport.webp` (T-125), laid at E46BUILD's own T-170 overlay geometry (rim centre on the column hub at 747, 355 px; rim 575.45 px; cut-out 587×587 px at 454, 62). Made by `scripts/make-closer-look-steering.mjs`, which reads both inputs from e46build master and checks their SHA-256.
+
+`/shop/*.webp` (BL-084, fan shop): web previews of the PO's nine decal designs (AI renders), from e46 `docs/GTM/decal *.png`
+(1536×1024 PNG). Made by `scripts/make-shop-images.mjs` (source SHA-256 checked): the outer background (black on four, white on
+five) is flood-filled to transparent so the white die-cut border stays, then scaled to 1200×800 WebP. Not print files.
+
+- `shop/sedan-silver.webp` ← `decal Sedan.png` · `shop/sedan-red.webp` ← `decal Sedan red.png` · `shop/sedan-red-no-m.webp` ← `decal Sedan no M.png`
+- `shop/touring-blue-stripes.webp` ← `decal touring.png` · `shop/touring-blue-no-stripes.webp` ← `decal touring no lines.png`
+- `shop/coupe-blue.webp` ← `decal Coupe.png` · `shop/convertible-grey.webp` ← `decal convertible Grey.png` · `shop/convertible-black.webp` ← `decal convertible black.png` · `shop/m3-yellow.webp` ← `decal M3.png`
