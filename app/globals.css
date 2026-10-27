@@ -39,18 +39,6 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* ---------- Home hero frame fits the first screen (BL-053.3, PO decision 2026-10-19; replaces BL-053.2) ----------
-   md+ only; phones keep the stacked layout. Headline, tag, nav and spacing are fixed (72 px headline). ONLY the video
-   frame shrinks: its height is what is left of the viewport after the header (84) + top padding (48) + live tag (~18)
-   + two gaps (48) + the two-line 72 px headline (144) + ~24 px of air = 366 px; the width follows the 2:1 ratio,
-   capped at the column and at 1200 px. The frame is centred in the column (BL-053.4: no row under it). svh where supported. */
-@media (min-width: 768px) {
-  .home-hero { --hero-h: max(280px, calc(100vh - 366px)); }
-  @supports (height: 100svh) { .home-hero { --hero-h: max(280px, calc(100svh - 366px)); } }
-  .home-hero .hero-frame,
-  .home-hero .hero-picks { width: min(100%, 1200px, calc(var(--hero-h) * 2)); margin-inline: auto; } /* BL-064: picks line up with the frame */
-}
-
 /* ---------- Blog article typography (Tailwind typography plugin themed to the brand tokens) ---------- */
 .prose-zl {
   --tw-prose-body: var(--color-body);

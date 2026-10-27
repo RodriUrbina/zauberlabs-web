@@ -8,29 +8,42 @@ const en = {
     description:
       "Independent car configurators for modern classics. See the upgrades on your exact car, then find parts that genuinely fit.",
   },
-  nav: { configurators: "Configurators", how: "How it works", principles: "Principles", suggest: "Suggest a car", blog: "Blog", open: "Open E46BUILD", comingSoon: "E46 configurator: coming soon", menu: "Menu" },
-  // BL-053 (PO decision 2026-10-19): hero concept C "Headline on paper". Only title[1] gets the serif accent.
+  nav: { configurators: "Configurators", next: "What’s next", suggest: "Suggest a car", blog: "Blog", open: "Open E46BUILD", comingSoon: "E46 configurator: coming soon", menu: "Menu" },
+  // BL-081 (PO 2026-10-26): Rivian-style hero, headline option 2 (e46/docs/design/zauberlabs-rivian-landing). Only title[1]
+  // gets the serif accent. `cta` is the phone sticky bar's label (BL-079); the hero buttons are `configure` and `readBlog`.
   hero: {
-    live: "New · E46 configurator now live",
+    live: "E46BUILD is live",
     liveSoon: "Coming soon · BMW 3 Series (E46)",
-    title: ["A little bit of ", "magic", " for your daily driver."],
-    line: "Modern configurators for modern classics.",
+    title: ["See what your ", "E46 could be.", ""],
+    line: "Pick your E46. See the parts on it. Buy only what fits.",
     cta: "Start with your E46",
-    videoAlt: "E46BUILD in use: a silver BMW E46 Coupé while the search types “BMW E46 330Ci Coupe” and the parts that fit appear",
+    configure: "Configure your E46",
+    readBlog: "Read the blog",
     ogAlt: "E46BUILD: a silver BMW E46 Coupé with the search bar reading “BMW E46 330Ci Coupe”",
     pickLead: "Which E46 do you drive?",
   },
-  ticker: ["E46BUILD — live", "Community vote — live", "Your car? Suggest it"],
-  tickerSoon: "E46BUILD — coming soon",
-  tickerRight: "“Exact fit” means confirmed. Never a guess.",
+  // BL-083 (PO 2026-10-27, option C "Take a closer look"): five E46BUILD categories, each with E46BUILD's own picture and one
+  // line. The lines were fact-checked by the Editor against e46build master: wheels and seats use ONE stage picture for every
+  // body, so those lines do not say "your car". PO 2026-10-27: every picture shows the part MOUNTED ON THE CAR ("we are selling
+  // inspiration for a new mod"), never a part on its own; steering is E46BUILD's cockpit with the M Sport wheel laid on it.
   garage: {
-    eyebrow: "The garage",
-    title: ["Your car, ", "to its full potential."],
-    body: "We’ve recreated the modern car configurator but for your daily drive. Pick your car’s body style, see what mods are possible, try out new parts and learn where to buy them.",
-    e46Label: "01 · Live · BMW 3 Series (E46)",
-    e46LabelSoon: "01 · Coming soon · BMW 3 Series (E46)",
-    e46Body: "Headlights, bumpers, wheels, seats and steering wheels — shown on your E46, matched to its production date, with OEM part numbers and offers side by side.",
-    open: "Open configurator",
+    live: "live",
+    soon: "coming soon",
+    title: ["Take a ", "closer look."],
+    cats: [
+      { key: "headlights", label: "Headlights", line: "Halogen, xenon or bi-xenon, matched to your car’s build date.", img: "/images/closer-look/e46-headlight-look-bi-xenon-late-hires.webp", alt: "Bi-xenon headlight of a late E46, close-up" },
+      { key: "bumpers", label: "Bumpers", line: "Standard, M package or M3 bumpers, front and rear, on your body style.", img: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", alt: "E46 sedan with the M package front bumper" },
+      { key: "wheels", label: "Wheels", line: "BMW factory wheels, swapped onto an E46 seen from the side.", img: "/images/closer-look/e46-wheel-stage-side.webp", alt: "Front wheel of a silver E46, seen from the side" },
+      { key: "seats", label: "Seats", line: "Basic, sport or M3 seats, for your E46.", img: "/images/closer-look/e46-seat-stage-interior.webp", alt: "E46 interior with the front seats" },
+      { key: "steering", label: "Steering wheels", line: "Standard, sport, M Sport or M3 steering wheels for your E46.", img: "/images/closer-look/e46-steering-stage-cockpit-m-sport.webp", alt: "E46 cockpit with an M Sport steering wheel" },
+    ],
+    pick: "Parts in E46BUILD", // accessible name of the category tab list
+    cta: "Try it on your E46",
+    startLabel: "Start with your body",
+    open: "Open E46BUILD",
+    // BL-081: the three "Why zauberlabs" titles as chips (their sentences are gone); BL-083: under the body tiles.
+    values: ["Exact fit.", "Configure, don’t decode.", "Sellers that have it."],
+    configure: (name: string) => `Configure the ${name}`, // BL-079: accessible name of a garage body tile
     bodies: [
       { name: "Sedan", years: "1998–2005", img: "/images/sedan.jpg", start: "sedan" },
       { name: "Touring", years: "1999–2005", img: "/images/touring.jpg", start: "touring" },
@@ -40,48 +53,35 @@ const en = {
       { name: "M3", years: "2000–2006", img: "/images/m3.jpg", start: "m3" },
     ],
     e46CardAlt: "E46 M3 Touring, the one-off prototype BMW built but never sold: a dream build",
-    nextLabel: "03 · Open slot",
-    nextTitle: "Your car could be next.",
-    nextCta: "Suggest another model",
+  },
+  // BL-081: one "What's next" block, the lineup (E46BUILD live, then the cars in the vote) next to the suggest form.
+  next: {
+    eyebrow: "What’s next",
+    title: ["What’s next? ", "You decide."],
+    body: "Tap a car to vote. The car with the most fans gets its configurator built next.",
   },
   vote: {
-    label: "02 · Community vote",
+    label: "Configurators",
     live: "Live",
-    title: ["Which car is ", "next?"],
-    body: "Tap a car to vote. The one with the most fans gets built next.",
+    liveNow: "Live now",
+    soonLive: "Coming soon",
+    model: "BMW 3 Series (E46)",
+    soon: "Coming soon · in the vote",
+    lead: "Most votes",
+    open: "Open",
     total: "votes so far",
-    add: "+ Add a car",
     aria: (name: string, n: number) => `Vote for ${name}, ${n} votes`,
     numberLocale: "en-US",
   },
-  how: {
-    eyebrow: "How every configurator works",
-    title: ["Same ride. ", "Renewed promise."],
-    body: "No catalogue codes, no forum archaeology. You pick by picture; the fitment engine does the paperwork.",
-    steps: [
-      { k: "01 — Describe it", t: "Talk like an owner.", b: "Model, year, body, colour — typed the way you’d tell a friend. We work out the rest and only ask what we need.", sample: "330d Touring, 2003, M Sport" },
-      { k: "02 — See it", t: "Choose with your eyes.", b: "Headlights, bumpers, wheels, interiors — every option shown on your body style before you spend a cent.", chips: ["Headlights", "Bumpers", "Wheels", "Seats"] },
-      { k: "03 — Fit it", t: "Buy the exact part — elsewhere.", b: "You get the OEM part number for your car and offers from external sellers, side by side. We never sell or stock parts.", part: "[OEM part no.]", fit: "✓ Exact fit" },
-    ],
-  },
-  principles: {
-    eyebrow: "Why zauberlabs",
-    title: ["A little ", "Zauber", ", a lot of part numbers."],
-    items: [
-      { t: "Exact fit, or we ask.", b: "Matched to production date, trim and side. If we can’t confirm it, we say so — never a guess." },
-      { t: "Part numbers, not “universal”.", b: "Every recommendation carries a real OEM or manufacturer reference you can check anywhere." },
-      { t: "Independent by design.", b: "Not affiliated with any manufacturer. We link to the sellers you already trust and compare them openly." },
-    ],
-  },
   suggest: {
-    eyebrow: "What should we build next?",
-    title: ["Which car did the factory ", "forget?"],
-    body: "Tell us the model you own or love. The most-requested car becomes the next configurator — and you’ll hear first.",
-    carLabel: "Your car, in your words",
+    eyebrow: "Not in the list?",
+    title: ["Bring ", "yours.", ""],
+    body: "Tell us what you drive. We check it and add it to the vote, and if its configurator gets built, you’ll hear first.",
+    carLabel: "What do you drive?",
     carPlaceholder: "e.g. Mercedes W124 Estate, 1993",
-    emailLabel: "Email (optional)",
+    emailLabel: "Email (optional), to hear first",
     emailPlaceholder: "you@example.com",
-    submit: "Put it on the list",
+    submit: "Add it to the vote",
     sending: "Sending…",
     thanks: "Thanks! Once we’ve reviewed it, it’ll show up in the vote above.",
     error: "Something went wrong. Please try again.",
@@ -134,11 +134,18 @@ const en = {
     nextArticle: "Next article",
     articleNav: "More articles",
   },
+  // BL-081: the home page's blog teaser (the 3 newest articles). Title: blog.title.
+  teaser: {
+    eyebrow: "From the blog",
+    body: "Research notes from building the configurators.",
+    open: "Open E46BUILD",
+    all: "All articles",
+  },
   footer: {
     tagline: "Independent configurators for modern classics. Made by owners, for owners.",
     configurators: "Configurators",
     e46Soon: "E46BUILD — coming soon",
-    next: "[Next model] — soon",
+    next: ["Next: you decide", " → vote"], // BL-081: links to the What’s next block
     studio: "Studio",
     about: "About",
     legal: "Legal",
@@ -156,28 +163,36 @@ const de: Dict = {
     description:
       "Unabhängige Auto-Konfiguratoren für Youngtimer. Sieh die Umbauten an deinem exakten Auto und finde Teile, die wirklich passen.",
   },
-  nav: { configurators: "Konfiguratoren", how: "So funktioniert’s", principles: "Prinzipien", suggest: "Auto vorschlagen", blog: "Blog", open: "E46BUILD öffnen", comingSoon: "E46-Konfigurator: bald verfügbar", menu: "Menü" },
+  nav: { configurators: "Konfiguratoren", next: "Was kommt", suggest: "Auto vorschlagen", blog: "Blog", open: "E46BUILD öffnen", comingSoon: "E46-Konfigurator: bald verfügbar", menu: "Menü" },
   hero: {
-    live: "Neu · E46-Konfigurator jetzt live",
+    live: "E46BUILD ist live",
     liveSoon: "Demnächst · BMW 3er (E46)",
-    title: ["Ein bisschen ", "Zauber", " für deinen Alltagswagen."],
-    line: "Moderne Konfiguratoren für moderne Klassiker.",
+    title: ["Sieh, was dein ", "E46 sein kann.", ""],
+    line: "Wähl deinen E46. Sieh die Teile daran. Kauf nur, was passt.",
     cta: "Starte mit deinem E46",
-    videoAlt: "E46BUILD im Einsatz: ein silbernes BMW E46 Coupé, während die Suche „BMW E46 330Ci Coupe“ tippt und die passenden Teile erscheinen",
+    configure: "E46 konfigurieren",
+    readBlog: "Zum Blog",
     ogAlt: "E46BUILD: ein silbernes BMW E46 Coupé, in der Suchleiste steht „BMW E46 330Ci Coupe“",
     pickLead: "Welchen E46 fährst du?",
   },
-  ticker: ["E46BUILD — live", "Community-Voting — live", "Dein Auto? Schlag es vor"],
-  tickerSoon: "E46BUILD — bald verfügbar",
-  tickerRight: "„Passgenau“ heißt bestätigt. Nie geraten.",
   garage: {
-    eyebrow: "Die Garage",
-    title: ["Dein Auto, ", "voll ausgeschöpft."],
-    body: "Wir haben den modernen Autokonfigurator nachgebaut – für dein Alltagsauto. Wähle die Karosserie deines Autos, sieh, welche Umbauten möglich sind, probier neue Teile aus und erfahre, wo du sie kaufen kannst.",
-    e46Label: "01 · Live · BMW 3er (E46)",
-    e46LabelSoon: "01 · Bald verfügbar · BMW 3er (E46)",
-    e46Body: "Scheinwerfer, Stoßstangen, Felgen, Sitze und Lenkräder – direkt an deinem E46 gezeigt, abgestimmt aufs Produktionsdatum, mit OE-Teilenummern und Angeboten im Vergleich.",
-    open: "Konfigurator öffnen",
+    live: "live",
+    soon: "bald verfügbar",
+    title: ["Sieh ", "genauer hin."],
+    // BL-083: DE copy by the Writer (2026-10-27); alt texts drafted by the Builder.
+    cats: [
+      { key: "headlights", label: "Scheinwerfer", line: "Halogen, Xenon oder Bi-Xenon, passend zum Baudatum deines E46.", img: "/images/closer-look/e46-headlight-look-bi-xenon-late-hires.webp", alt: "Bi-Xenon-Scheinwerfer eines späten E46, Nahaufnahme" },
+      { key: "bumpers", label: "Stoßstangen", line: "Serie, M-Paket oder M3, vorne und hinten, passend zu deiner Karosserie.", img: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", alt: "E46-Limousine mit M-Paket-Frontstoßstange" },
+      { key: "wheels", label: "Felgen", line: "BMW-Werksfelgen, direkt an einem E46 in der Seitenansicht.", img: "/images/closer-look/e46-wheel-stage-side.webp", alt: "Vorderrad eines silbernen E46 in der Seitenansicht" },
+      { key: "seats", label: "Sitze", line: "Serie, Sport oder M3, für deinen E46.", img: "/images/closer-look/e46-seat-stage-interior.webp", alt: "E46-Innenraum mit den Vordersitzen" },
+      { key: "steering", label: "Lenkräder", line: "Standard, Sport, M Sport oder M3 – Lenkräder für deinen E46.", img: "/images/closer-look/e46-steering-stage-cockpit-m-sport.webp", alt: "E46-Cockpit mit M-Sport-Lenkrad" },
+    ],
+    pick: "Teile in E46BUILD",
+    cta: "Probier es an deinem E46 aus",
+    startLabel: "Starte mit deiner Karosserie",
+    open: "E46BUILD öffnen",
+    values: ["Passgenau.", "Konfigurieren statt entschlüsseln.", "Händler, die es haben."],
+    configure: (name: string) => `${name} konfigurieren`,
     bodies: [
       { name: "Limousine", years: "1998–2005", img: "/images/sedan.jpg", start: "sedan" },
       { name: "Touring", years: "1999–2005", img: "/images/touring.jpg", start: "touring" },
@@ -187,48 +202,34 @@ const de: Dict = {
       { name: "M3", years: "2000–2006", img: "/images/m3.jpg", start: "m3" },
     ],
     e46CardAlt: "E46 M3 Touring: der Einzelprototyp, den BMW gebaut, aber nie verkauft hat – ein Traum-Build",
-    nextLabel: "03 · Freier Platz",
-    nextTitle: "Dein Auto könnte das nächste sein.",
-    nextCta: "Anderes Modell vorschlagen",
+  },
+  next: {
+    eyebrow: "Was kommt als Nächstes",
+    title: ["Was kommt als Nächstes? ", "Du entscheidest."],
+    body: "Tippe auf ein Auto, um abzustimmen. Das Auto mit den meisten Fans bekommt als Nächstes seinen Konfigurator.",
   },
   vote: {
-    label: "02 · Community-Voting",
+    label: "Konfiguratoren",
     live: "Live",
-    title: ["Welches Auto kommt ", "als Nächstes?"],
-    body: "Tippe auf ein Auto, um abzustimmen. Das mit den meisten Fans bauen wir als Nächstes.",
+    liveNow: "Jetzt live",
+    soonLive: "Demnächst",
+    model: "BMW 3er (E46)",
+    soon: "Demnächst · im Voting",
+    lead: "Meiste Stimmen",
+    open: "Öffnen",
     total: "Stimmen bisher",
-    add: "+ Auto hinzufügen",
     aria: (name: string, n: number) => `Für ${name} abstimmen, ${n} Stimmen`,
     numberLocale: "de-DE",
   },
-  how: {
-    eyebrow: "So funktioniert jeder Konfigurator",
-    title: ["Derselbe Wagen. ", "Erneuertes Versprechen."],
-    body: "Keine Katalogcodes, keine Forums-Archäologie. Du wählst nach Bild – die Passform-Engine erledigt den Papierkram.",
-    steps: [
-      { k: "01 — Beschreiben", t: "Sprich wie ein Schrauber.", b: "Modell, Baujahr, Karosserie, Farbe – so, wie du es einem Kumpel erzählen würdest. Den Rest ermitteln wir und fragen nur, was wir wirklich brauchen.", sample: "330d Touring, 2003, M-Paket" },
-      { k: "02 — Ansehen", t: "Wähle mit den Augen.", b: "Scheinwerfer, Stoßstangen, Felgen, Innenraum – jede Option an deiner Karosserie, bevor du einen Cent ausgibst.", chips: ["Scheinwerfer", "Stoßstangen", "Felgen", "Sitze"] },
-      { k: "03 — Verbauen", t: "Das exakte Teil kaufen – woanders.", b: "Du bekommst die OE-Teilenummer für dein Auto und Angebote externer Händler im Vergleich. Wir verkaufen und lagern keine Teile.", part: "[OE-Teilenr.]", fit: "✓ Passgenau" },
-    ],
-  },
-  principles: {
-    eyebrow: "Warum zauberlabs",
-    title: ["Ein bisschen ", "Zauber", ", jede Menge Teilenummern."],
-    items: [
-      { t: "Passgenau – oder wir fragen nach.", b: "Abgestimmt auf Produktionsdatum, Ausstattung und Einbauseite. Können wir es nicht bestätigen, sagen wir es – geraten wird nie." },
-      { t: "Teilenummern statt „universal“.", b: "Jede Empfehlung hat eine echte OE- oder Herstellernummer, die du überall prüfen kannst." },
-      { t: "Unabhängig aus Prinzip.", b: "Mit keinem Hersteller verbunden. Wir verlinken Händler, denen du schon vertraust, und vergleichen sie offen." },
-    ],
-  },
   suggest: {
-    eyebrow: "Was bauen wir als Nächstes?",
-    title: ["Welches Auto hat das Werk ", "vergessen?"],
-    body: "Nenn uns das Modell, das du fährst oder liebst. Das meistgewünschte Auto wird der nächste Konfigurator – und du erfährst es zuerst.",
-    carLabel: "Dein Auto, in deinen Worten",
+    eyebrow: "Nicht in der Liste?",
+    title: ["Bring ", "deins", " mit."],
+    body: "Sag uns, was du fährst. Wir prüfen es und nehmen es ins Voting auf, und wenn sein Konfigurator gebaut wird, erfährst du es zuerst.",
+    carLabel: "Was fährst du?",
     carPlaceholder: "z. B. Mercedes W124 T-Modell, 1993",
-    emailLabel: "E-Mail (optional)",
+    emailLabel: "E-Mail (optional), damit du es zuerst erfährst",
     emailPlaceholder: "du@beispiel.de",
-    submit: "Auf die Liste setzen",
+    submit: "Ins Voting aufnehmen",
     sending: "Wird gesendet…",
     thanks: "Danke! Sobald wir ihn geprüft haben, erscheint er oben im Voting.",
     error: "Da ist etwas schiefgelaufen. Bitte versuch es noch einmal.",
@@ -281,11 +282,17 @@ const de: Dict = {
     nextArticle: "Nächster Artikel",
     articleNav: "Weitere Artikel",
   },
+  teaser: {
+    eyebrow: "Aus dem Blog",
+    body: "Notizen aus der Recherche für die Konfiguratoren.",
+    open: "E46BUILD öffnen",
+    all: "Alle Artikel",
+  },
   footer: {
     tagline: "Unabhängige Konfiguratoren für Youngtimer. Von Besitzern, für Besitzer.",
     configurators: "Konfiguratoren",
     e46Soon: "E46BUILD – bald verfügbar",
-    next: "[Nächstes Modell] – bald",
+    next: ["Als Nächstes: du entscheidest", " → abstimmen"],
     studio: "Studio",
     about: "Über uns",
     legal: "Rechtliches",
@@ -304,6 +311,12 @@ export const E46_URL = process.env.NEXT_PUBLIC_E46_URL ?? "https://e46.zauberlab
  * garage.bodies[].start (sedan, touring, coupe, convertible, compact, m3).
  */
 export const e46StartUrl = (start: string) => `${E46_URL.replace(/\/+$/, "")}/?start=${encodeURIComponent(start)}`;
+/**
+ * BL-083.1: open E46BUILD at a section (E46BUILD T-179, contract in e46build apps/web/src/lib/start-body.ts): `/?section=<value>`;
+ * without a body the owner picks the body first and then lands in that section. Unknown values are ignored by E46BUILD.
+ */
+export const E46_SECTIONS = ["headlights", "wheels", "bumpers", "seats", "steering"] as const;
+export const e46SectionUrl = (section: string) => `${E46_URL.replace(/\/+$/, "")}/?section=${encodeURIComponent(section)}`;
 // THE E46 SWITCH (PO decision 2026-10-02, BL-001): the configurator is not online yet, so every
 // E46 button on the site and the article CTA show "coming soon" with no link.
 // Going live is a one-line change: set NEXT_PUBLIC_E46_LIVE=1 on Vercel (or flip the fallback to true).

@@ -14,7 +14,7 @@
 import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { cookiesFor, findChrome, hasMarker, isHeadlessUa, parseArgs, shotName } from "./prod-check-lib.mjs";
+import { cookiesFor, findChrome, hasMarker, isCountingRequest, isHeadlessUa, parseArgs, shotName } from "./prod-check-lib.mjs";
 
 // Node 20 has WebSocket only behind a flag; re-run this script with it.
 if (typeof WebSocket === "undefined") {
@@ -56,7 +56,7 @@ async function main() {
     // Belt and braces: any analytics or statistics request leaving the page means the marker did not work.
     const counted = [];
     cdp.on("Network.requestWillBeSent", ({ request }) => {
-      if (/\/_vercel\/insights\/|\/api\/m(\?|$)|va\.vercel-scripts\.com\/.*\/(view|event)/.test(request.url)) counted.push(request.url);
+      if (isCountingRequest(request.url)) counted.push(request.url);
     });
 
     await cdp.send("Network.enable");
@@ -98,6 +98,10 @@ async function main() {
         console.log(`✓ ${width}x${height}  ${url}  →  ${file}`);
       }
     }
+    // Speed Insights (BL-082) sends its measurements when the page is hidden or left; leave the last page and check once more.
+    await cdp.send("Page.navigate", { url: "about:blank" });
+    await sleep(1000);
+    if (counted.length) throw new Error(`a counting request was sent despite the marker (${counted[0]}); stopping.`);
     console.log("✓ no analytics or statistics request was sent");
     cdp.close();
   } finally {

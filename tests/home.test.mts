@@ -2,7 +2,7 @@ import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { dictionaries, e46StartUrl, LOCALES } from "../lib/i18n";
+import { dictionaries, E46_SECTIONS, e46SectionUrl, e46StartUrl, LOCALES } from "../lib/i18n";
 import { SITE_OG_IMAGE } from "../lib/blog-og";
 
 const pub = (p: string) => path.join(process.cwd(), "public", p);
@@ -17,11 +17,47 @@ describe("home page (BL-053)", () => {
     assert.match(hero, /href=\{e46StartUrl\(b\.start\)\}\s+rel="nofollow"/, "start links carry rel=nofollow");
     assert.ok(!/e46StartUrl[\s\S]{0,200}target=/.test(hero), "start links stay in the same tab");
   });
-  test("garage card: the M3 Touring image (BL-053.1), no second video on the page", () => {
-    assert.ok(fs.existsSync(pub("/images/e46-m3-touring-garage-centred.webp")));
+  test("garage tiles link to E46BUILD with the body pre-chosen, nofollow, same tab, with an accessible name (BL-079)", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
-    assert.ok(!page.includes("<video"), "the loop plays in the hero only");
+    assert.match(page, /href=\{e46StartUrl\(b\.start\)\}\s+rel="nofollow"/);
+    assert.match(page, /aria-label=\{t\.garage\.configure\(b\.name\)\}/);
+    assert.ok(!/e46StartUrl[\s\S]{0,300}target=/.test(page), "tile links stay in the same tab");
+    assert.equal(dictionaries.en.garage.configure("Sedan"), "Configure the Sedan");
+    assert.equal(dictionaries.de.garage.configure("Limousine"), "Limousine konfigurieren");
+  });
+  test("phone sticky bar reuses the hero CTA copy and watches the hero button, the What's next block and the footer (BL-079, BL-081)", () => {
+    const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
+    assert.match(page, /<StickyStartBar href=\{E46_URL\} label=\{t\.hero\.cta\} \/>/);
+    assert.equal(dictionaries.de.hero.cta, "Starte mit deinem E46");
+    const bar = fs.readFileSync(path.join(process.cwd(), "components", "StickyStartBar.tsx"), "utf8");
+    assert.match(bar, /sm:hidden/, "phones only");
+    assert.match(bar, /safe-area-inset-bottom/);
+    assert.match(bar, /\[data-sticky-cta-hide\], footer/);
+    assert.match(fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8"), /data-hero-cta/);
+    assert.match(page, /id="next" data-sticky-cta-hide/);
+  });
+  test("the hero shows the M3 Touring photo, the garage does not repeat it, no video anywhere on the page, alt says never sold (BL-081, BL-083)", () => {
+    assert.ok(fs.existsSync(pub("/images/e46-m3-touring-hero.webp")));
+    const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
+    assert.ok(!/m3-touring/.test(page), "the garage section does not show the M3 Touring photo again");
+    const hero = fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8");
+    assert.ok(!page.includes("<video") && !hero.includes("<video"), "no loop on the home page");
+    assert.match(hero, /alt=\{d\.garage\.e46CardAlt\}/);
     assert.match(dictionaries.en.garage.e46CardAlt, /never sold/);
+    assert.match(dictionaries.de.garage.e46CardAlt, /nie verkauft/);
+  });
+  test("trimmed page (BL-081): only hero, garage, What's next, blog teaser; nav and footer point at sections that exist", () => {
+    const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
+    const footer = fs.readFileSync(path.join(process.cwd(), "components", "SiteFooter.tsx"), "utf8");
+    const ids = [...page.matchAll(/id="([a-z]+)"/g)].map((m) => m[1]);
+    assert.deepEqual(ids, ["garage", "next", "suggest", "blog"]);
+    const anchors = [...(page + footer).matchAll(/href=\{?[`"](?:\$\{homePath\})?#([a-z]+)/g)].map((m) => m[1]);
+    for (const a of anchors) assert.ok(ids.includes(a), `#${a} exists`);
+    assert.ok(!/ticker|t\.how|principles/.test(page), "ticker, how it works and principles are gone");
+    assert.deepEqual(dictionaries.en.footer.next, ["Next: you decide", " → vote"]);
+    assert.deepEqual(dictionaries.de.footer.next, ["Als Nächstes: du entscheidest", " → abstimmen"]);
+    assert.match(page, /export const revalidate = 300/, "the blog teaser follows the publish schedule");
+    assert.match(page, /getBlog\(\)\.listPosts\(lang\)/, "same visibility rules as /blog");
   });
   test("garage: five bodies plus the M3 in both languages, in order, each image present", () => {
     for (const lang of LOCALES) {
@@ -31,16 +67,61 @@ describe("home page (BL-053)", () => {
     }
   });
   test("hero copy: three-part headline with the accent word in the middle, no brand capital", () => {
-    assert.deepEqual(dictionaries.en.hero.title[1], "magic");
-    assert.deepEqual(dictionaries.de.hero.title[1], "Zauber");
+    assert.deepEqual(dictionaries.en.hero.title, ["See what your ", "E46 could be.", ""]);
+    assert.deepEqual(dictionaries.de.hero.title, ["Sieh, was dein ", "E46 sein kann.", ""]);
     for (const lang of LOCALES) {
       const d = dictionaries[lang];
-      assert.ok(!JSON.stringify([d.hero, d.principles, d.garage]).includes("Zauberlabs"), lang);
+      assert.ok(!JSON.stringify([d.hero, d.next, d.vote, d.garage, d.teaser, d.footer]).includes("Zauberlabs"), lang);
     }
   });
   test("link-preview image exists and is a JPEG (1200×630, BL-053)", () => {
     const buf = fs.readFileSync(pub(SITE_OG_IMAGE));
     assert.equal(buf.readUInt16BE(0), 0xffd8);
     assert.ok(!fs.existsSync(pub("/images/hero.jpg")), "the old hero.jpg is gone");
+  });
+  test("closer look (BL-083): five categories in the same order in EN and DE, each picture present and listed with its source", () => {
+    const readme = fs.readFileSync(pub("/images/README.md"), "utf8");
+    for (const lang of LOCALES) {
+      const cats = dictionaries[lang].garage.cats;
+      assert.deepEqual(cats.map((c) => c.key), ["headlights", "bumpers", "wheels", "seats", "steering"], lang);
+      for (const c of cats) {
+        assert.ok(fs.existsSync(pub(c.img)), c.img);
+        assert.ok(readme.includes(`\`${c.img.replace("/images/", "")}\``), `${c.img} in public/images/README.md`);
+        assert.ok(c.alt && c.line && c.label, `${lang} ${c.key} has label, line and alt`);
+      }
+    }
+    // Editor fact-check: wheels and seats use ONE stage picture for every body, so those lines never say "your car".
+    for (const c of dictionaries.en.garage.cats.filter((c) => ["wheels", "seats"].includes(c.key))) assert.ok(!/your (car|interior|cockpit)/.test(c.line), c.line);
+    // PO 2026-10-27: every picture shows the part mounted on the car (E46BUILD's stage pictures, or the steering composite).
+    const onCar: Record<string, string> = {
+      headlights: "/images/closer-look/e46-headlight-look-bi-xenon-late-hires.webp", // the PO's high-res render, on the car (BL-083.3)
+      bumpers: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", // bumper look, on the car
+      wheels: "/images/closer-look/e46-wheel-stage-side.webp", // WHEEL_STAGE_SRC
+      seats: "/images/closer-look/e46-seat-stage-interior.webp", // SEAT_STAGE_SRC
+      steering: "/images/closer-look/e46-steering-stage-cockpit-m-sport.webp", // empty cockpit + M Sport cut-out
+    };
+    for (const lang of LOCALES) for (const c of dictionaries[lang].garage.cats) assert.equal(c.img, onCar[c.key], `${lang} ${c.key}`);
+    assert.deepEqual(fs.readdirSync(pub("/images/closer-look")).sort(), Object.values(onCar).map((p) => path.basename(p)).sort(), "no part-only pictures left");
+    assert.match(fs.readFileSync(path.join(process.cwd(), "scripts", "make-closer-look-steering.mjs"), "utf8"), /747 \/ 1672[\s\S]*413 \/ 1200[\s\S]*0\.98/, "T-170 geometry");
+    // BL-083.3: the headlight is the PO's 1536×1024 render, converted by a hash-checked script; phones get a smaller width.
+    assert.match(fs.readFileSync(path.join(process.cwd(), "scripts", "make-closer-look-headlight.mjs"), "utf8"), /a814f65de7d61d74bd38f9e657d06145ec5fbc83c930a48bf4dadc1bf8581a51/);
+    assert.match(fs.readFileSync(path.join(process.cwd(), "components", "CloserLook.tsx"), "utf8"), /sizes="[^"]*calc\(100vw - 72px\)"/);
+    assert.equal(dictionaries.de.garage.title.join(""), "Sieh genauer hin.");
+    assert.equal(dictionaries.de.garage.cta, "Probier es an deinem E46 aus");
+  });
+  test("closer look: the CTA opens E46BUILD at the chosen tab's section (T-179), nofollow, same tab (configurator_click, no new data); tabs are accessible", () => {
+    const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
+    const cl = fs.readFileSync(path.join(process.cwd(), "components", "CloserLook.tsx"), "utf8");
+    assert.match(page, /<CloserLook [^>]*hrefs=\{E46_LIVE \? t\.garage\.cats\.map\(\(c\) => e46SectionUrl\(c\.key\)\) : null\}/);
+    assert.match(cl, /href=\{hrefs\[on\]\}\s+rel="nofollow"/);
+    // BL-083.1: every tab key is a T-179 section value (e46build start-body.ts START_SECTIONS), same in EN and DE.
+    assert.deepEqual([...E46_SECTIONS].sort(), ["bumpers", "headlights", "seats", "steering", "wheels"]);
+    for (const lang of LOCALES) for (const c of dictionaries[lang].garage.cats) assert.ok((E46_SECTIONS as readonly string[]).includes(c.key), `${lang} ${c.key}`);
+    assert.equal(e46SectionUrl("steering"), "https://e46.zauberlabs.de/?section=steering");
+    assert.ok(!/target=|track\(/.test(cl), "same tab, no extra tracking call");
+    assert.match(cl, /role="tablist"/);
+    assert.match(cl, /role="tab"/);
+    assert.match(cl, /aria-selected=\{i === on\}/);
+    assert.match(cl, /role="tabpanel"/);
   });
 });

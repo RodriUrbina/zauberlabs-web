@@ -68,33 +68,73 @@ export async function getCounts(cars?: Car[]): Promise<Record<CarId, number>> {
   return out;
 }
 
-/** Adds or removes one voter's vote for a car. Returns the new count and whether the vote actually changed. */
-export async function setVote(car: CarId, voter: string, on: boolean): Promise<{ count: number; changed: boolean }> {
+/*
+ * BL-078 (PO 2026-10-26): a vote from a browser with the internal marker (zl_internal) goes into its own set,
+ * `voters-internal:{car}`, and never changes the count, so the PO can test the vote card. The count is always the size
+ * of `voters:{car}`. Taking a vote back removes it from whichever set holds it; only a counted vote lowers the count.
+ */
+const votersKey = (car: CarId) => `voters:${car}`;
+const internalVotersKey = (car: CarId) => `voters-internal:${car}`;
+
+async function isMember(key: string, voter: string): Promise<boolean> {
   const redis = getRedis();
-  const key = `voters:${car}`;
-  if (redis) {
-    const changed = on ? await redis.sadd(key, voter) : await redis.srem(key, voter);
-    if (changed) return { count: await redis.hincrby("votes", car, on ? 1 : -1), changed: true };
-    return { count: Number((await redis.hget<number>("votes", car)) ?? 0), changed: false };
-  }
+  return redis ? (await redis.sismember(key, voter)) === 1 : Boolean(mem.voters.get(key)?.has(voter));
+}
+
+async function addMember(key: string, voter: string): Promise<boolean> {
+  const redis = getRedis();
+  if (redis) return (await redis.sadd(key, voter)) === 1;
   const set = mem.voters.get(key) ?? new Set<string>();
   mem.voters.set(key, set);
-  const had = set.has(voter);
-  if (on && !had) set.add(voter);
-  if (!on && had) set.delete(voter);
-  const n = (mem.counts.get(car) ?? 0) + (on && !had ? 1 : !on && had ? -1 : 0);
+  if (set.has(voter)) return false;
+  set.add(voter);
+  return true;
+}
+
+async function removeMember(key: string, voter: string): Promise<boolean> {
+  const redis = getRedis();
+  return redis ? (await redis.srem(key, voter)) === 1 : Boolean(mem.voters.get(key)?.delete(voter));
+}
+
+async function addToCount(car: CarId, by: number): Promise<number> {
+  const redis = getRedis();
+  if (redis) return by ? await redis.hincrby("votes", car, by) : Number((await redis.hget<number>("votes", car)) ?? 0);
+  const n = (mem.counts.get(car) ?? 0) + by;
   mem.counts.set(car, n);
-  return { count: n, changed: on !== had };
+  return n;
+}
+
+/**
+ * Adds or removes one voter's vote for a car. `changed`: the voter's own state changed; `counted`: the count changed
+ * (never for an internal vote). Returns the new count.
+ */
+export async function setVote(
+  car: CarId,
+  voter: string,
+  on: boolean,
+  internal = false
+): Promise<{ count: number; changed: boolean; counted: boolean }> {
+  if (on) {
+    // Already voted in either set: nothing changes (a vote never sits in both).
+    if ((await isMember(votersKey(car), voter)) || (await isMember(internalVotersKey(car), voter))) {
+      return { count: await addToCount(car, 0), changed: false, counted: false };
+    }
+    if (internal) {
+      await addMember(internalVotersKey(car), voter);
+      return { count: await addToCount(car, 0), changed: true, counted: false };
+    }
+    const added = await addMember(votersKey(car), voter);
+    return { count: await addToCount(car, added ? 1 : 0), changed: added, counted: added };
+  }
+  const removed = await removeMember(votersKey(car), voter);
+  const removedInternal = await removeMember(internalVotersKey(car), voter);
+  return { count: await addToCount(car, removed ? -1 : 0), changed: removed || removedInternal, counted: removed };
 }
 
 export async function getVotedBy(voter: string, cars?: Car[]): Promise<CarId[]> {
-  const redis = getRedis();
   const list = cars ?? (await getCars());
   const flags = await Promise.all(
-    list.map((c) => {
-      const key = `voters:${c.id}`;
-      return redis ? redis.sismember(key, voter) : Promise.resolve(mem.voters.get(key)?.has(voter) ? 1 : 0);
-    })
+    list.map(async (c) => (await isMember(votersKey(c.id), voter)) || (await isMember(internalVotersKey(c.id), voter)))
   );
   return list.filter((_, i) => flags[i]).map((c) => c.id);
 }
