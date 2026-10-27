@@ -32,7 +32,7 @@ export const PRODUCTS: readonly Product[] = [
   { id: "sedan-red-no-m", sku: "ZL-E46-03", image: "/shop/sedan-red-no-m.webp", name: { en: "Sedan", de: "Limousine" }, variant: { en: "Red, standard bumper", de: "Rot, Serienstoßstange" } },
   { id: "touring-blue-stripes", sku: "ZL-E46-04", image: "/shop/touring-blue-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue, with stripes", de: "Blau, mit Streifen" } },
   { id: "touring-blue-no-stripes", sku: "ZL-E46-05", image: "/shop/touring-blue-no-stripes.webp", name: { en: "Touring", de: "Touring" }, variant: { en: "Blue, no stripes", de: "Blau, ohne Streifen" } },
-  { id: "coupe-blue", sku: "ZL-E46-06", image: "/shop/coupe-blue.webp", name: { en: "Coupé", de: "Coupé" }, variant: { en: "Blue, e46 lettering", de: "Blau, e46-Schriftzug" } },
+  { id: "coupe-blue", sku: "ZL-E46-06", image: "/shop/coupe-blue.webp", name: { en: "Coupé", de: "Coupé" }, variant: { en: "Blue, big e46 logo", de: "Blau, großes e46-Logo" } },
   { id: "convertible-grey", sku: "ZL-E46-07", image: "/shop/convertible-grey.webp", name: { en: "Convertible", de: "Cabrio" }, variant: { en: "Grey", de: "Grau" } },
   { id: "convertible-black", sku: "ZL-E46-08", image: "/shop/convertible-black.webp", name: { en: "Convertible", de: "Cabrio" }, variant: { en: "Black", de: "Schwarz" } },
   { id: "m3-yellow", sku: "ZL-E46-09", image: "/shop/m3-yellow.webp", name: { en: "M3", de: "M3" }, variant: { en: "Yellow", de: "Gelb" } },

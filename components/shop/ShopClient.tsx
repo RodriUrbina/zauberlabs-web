@@ -225,7 +225,7 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
                 <dl className="flex flex-col gap-1.5 text-sm">
                   {priced.groups.map((g, i) => (
                     <div key={i} className="flex justify-between gap-3 text-muted">
-                      <dt className="truncate">{t.cart.groups[g.kind]}{g.kind !== "all" && `: ${g.items.map((id) => productById(id)!.variant[lang]).join(", ")}`}</dt>
+                      <dt className="min-w-0">{t.cart.groups[g.kind]}{g.kind !== "all" && `: ${g.items.map((id) => `${productById(id)!.name[lang]} ${productById(id)!.variant[lang]}`).join(" · ")}`}</dt>
                       <dd>{euro(g.amount)}</dd>
                     </div>
                   ))}

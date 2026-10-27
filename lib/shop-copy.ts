@@ -1,6 +1,6 @@
 import type { Locale } from "./i18n";
 
-/** BL-084 — fan shop copy (plan § 5 "Shop page design"). DE drafted by the Builder; the Writer checks it before launch. */
+/** BL-084 — fan shop copy (plan § 5 "Shop page design"). DE drafted by the Builder, checked by the Writer (2026-10-27). */
 const en = {
   metaTitle: "Shop — zauberlabs",
   eyebrow: "Shop — 01",
@@ -13,7 +13,7 @@ const en = {
   details: "Details",
   gpsr: { manufacturer: "Manufacturer", material: "Material and size", care: "Care and safety", sku: "Product no." },
   bundles: {
-    three: ["Any 3", "Pick any three stickers; the price applies by itself in the cart."],
+    three: ["Any 3", "Pick any three stickers; the bundle price applies automatically in the cart."],
     all: ["All 9", "One of each design."],
     addAll: "Add all 9",
   },
@@ -56,7 +56,7 @@ const de: typeof en = {
   details: "Details",
   gpsr: { manufacturer: "Hersteller", material: "Material und Größe", care: "Pflege und Sicherheit", sku: "Artikelnr." },
   bundles: {
-    three: ["Beliebige 3", "Wähl drei beliebige Sticker; der Preis gilt im Warenkorb automatisch."],
+    three: ["Beliebige 3", "Wähl drei beliebige Sticker – der Paketpreis gilt im Warenkorb automatisch."],
     all: ["Alle 9", "Jedes Motiv einmal."],
     addAll: "Alle 9 hinzufügen",
   },
@@ -82,7 +82,7 @@ const de: typeof en = {
     error: "Die Zahlungsseite konnte nicht geöffnet werden. Bitte versuch es noch einmal.",
     note: "Du bezahlst auf der sicheren Seite von Stripe. Preise inkl. MwSt.",
   },
-  success: { title: ["Danke. ", "Deine Bestellung ist da."], body: "Stripe schickt dir die Quittung per E-Mail. Wir packen deine Sticker und schicken sie dir per Post.", back: "Zurück zum Shop" },
+  success: { title: ["Danke. ", "Deine Bestellung ist eingegangen."], body: "Stripe schickt dir den Beleg per E-Mail. Wir packen deine Sticker und schicken sie dir per Post.", back: "Zurück zum Shop" },
   cancel: { title: ["Zahlung ", "abgebrochen."], body: "Es wurde nichts belastet. Dein Warenkorb ist noch da.", back: "Zurück zum Shop" },
   shippingLink: "Versand & Zahlung",
 };
