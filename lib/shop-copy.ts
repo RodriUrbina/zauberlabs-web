@@ -11,7 +11,7 @@ const en = {
   add: "Add to cart",
   added: "In cart",
   details: "Details",
-  gpsr: { manufacturer: "Manufacturer", material: "Material and size", care: "Care and safety", sku: "Product no." },
+  gpsr: { manufacturer: "Manufacturer", material: "Material and size", care: "Care and safety", sku: "Product no.", colour: "BMW colour" },
   size: (w: string, h: string) => `about ${w} × ${h} cm`,
   bundles: {
     three: ["Any 3", "Pick any three stickers; the bundle price applies automatically in the cart."],
@@ -56,7 +56,7 @@ const de: typeof en = {
   add: "In den Warenkorb",
   added: "Im Warenkorb",
   details: "Details",
-  gpsr: { manufacturer: "Hersteller", material: "Material und Größe", care: "Pflege und Sicherheit", sku: "Artikelnr." },
+  gpsr: { manufacturer: "Hersteller", material: "Material und Größe", care: "Pflege und Sicherheit", sku: "Artikelnr.", colour: "BMW-Farbe" },
   size: (w: string, h: string) => `ca. ${w} × ${h} cm`,
   bundles: {
     three: ["Beliebige 3", "Wähl drei beliebige Sticker – der Paketpreis gilt im Warenkorb automatisch."],

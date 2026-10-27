@@ -130,6 +130,8 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
                   </h2>
                   <span className="shrink-0 font-semibold">{euro(PRICES.single)}</span>
                 </div>
+                {/* BL-089: the BMW colour name (lib/shop-products.ts COLOURS). */}
+                {p.colour && <p className="-mt-2 text-sm text-fog">{p.colour[lang]}</p>}
                 <p className="text-xs text-[#A9A6A0] [&_a]:decoration-[#4A4A52] [&_a:hover]:text-paper">{vat}</p>
                 <div className="mt-auto flex items-center gap-2">
                   <button
@@ -152,6 +154,7 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
                 </div>
                 {/* GPSR product information (plan § 3 #8) */}
                 <dl id={`gpsr-${p.id}`} hidden={!showDetails} className="flex flex-col gap-2 border-t border-ink-3 pt-3 text-[13px] leading-snug text-fog">
+                  {p.colour && <div><dt className="eyebrow text-[10px] text-[#8A877F]">{t.gpsr.colour}</dt><dd>{p.colour[lang]}</dd></div>}
                   <div><dt className="eyebrow text-[10px] text-[#8A877F]">{t.gpsr.material}</dt><dd>{GPSR.material[lang]}{p.size ? `, ${t.size(p.size.w.toLocaleString(lang), p.size.h.toLocaleString(lang))}` : ""}. {GPSR.printed[lang]}</dd></div>
                   <div><dt className="eyebrow text-[10px] text-[#8A877F]">{t.gpsr.manufacturer}</dt><dd>{GPSR.manufacturer.name}, {GPSR.manufacturer.address}, {GPSR.manufacturer.email}</dd></div>
                   <div><dt className="eyebrow text-[10px] text-[#8A877F]">{t.gpsr.sku}</dt><dd className="font-mono">{p.sku}</dd></div>

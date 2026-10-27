@@ -102,8 +102,10 @@ describe("fan shop (BL-084)", () => {
     }
     const src = read("app", "api", "checkout", "route.ts");
     assert.ok(src.indexOf("shopOpenFor(") < src.indexOf("usableStripeKey("), "the gate comes first");
-    assert.match(src, /submit_type: "pay"/);
-    assert.match(src, /allowed_countries: \[country\]/);
+    const lib = read("lib", "shop-checkout.ts");
+    assert.match(src, /sessionParams\(cart, lang, country/, "the route sends the session built in lib/shop-checkout.ts");
+    assert.match(lib, /submit_type: "pay"/);
+    assert.match(lib, /allowed_countries: \[country\]/);
     assert.ok(!/console\.\w+\([^)]*[(,]\s*(key|process\.env\.STRIPE_SECRET_KEY)\s*[,)]/.test(src), "the key is never logged");
   });
 
@@ -174,5 +176,22 @@ describe("fan shop (BL-084)", () => {
     for (const p of [["app", "[lang]", "agb", "page.tsx"], ["app", "[lang]", "widerrufsbelehrung", "page.tsx"], ["app", "[lang]", "versand-zahlung", "page.tsx"], ["app", "[lang]", "datenschutz", "page.tsx"]]) {
       assert.ok(!/\[(zu bestätigen|to confirm|X\]|Datum|launch date)/.test(read(...p)), `${p.join("/")}: no open placeholders`);
     }
+  });
+  test("BL-089: BMW colour names on every design on sale, kept in one map; Stripe line items carry them", async () => {
+    const { sessionParams } = await import("../lib/shop-checkout");
+    const want: Record<string, [string, string]> = {
+      "sedan-red": ["Japan Red", "Japanrot"],
+      "touring-blue-no-stripes": ["Laguna Seca Blue", "Laguna-seca Blau"],
+      "convertible-black": ["Jet Black", "Jetschwarz"],
+      "m3-yellow": ["Phoenix Yellow", "Phönixgelb"],
+    };
+    for (const p of AVAILABLE) assert.deepEqual([p.colour?.en, p.colour?.de], want[p.id], p.id);
+    const products = read("lib", "shop-products.ts");
+    assert.equal((products.match(/"Japanrot"/g) ?? []).length, 1, "each spelling exists once as a value (the COLOURS map)");
+    const names = (cart: Record<string, number>, lang: "de" | "en") =>
+      (sessionParams(cart as never, lang, "DE", "https://www.zauberlabs.de").line_items ?? []).map((l) => [l.price_data?.product_data?.name, l.quantity, l.price_data?.unit_amount]);
+    assert.deepEqual(names({ "sedan-red": 2 }, "de"), [["Sticker: Limousine Japanrot", 2, 490]]);
+    assert.deepEqual(names({ "m3-yellow": 1, "convertible-black": 1, "sedan-red": 1 }, "en"), [["3 stickers: Sedan Japan Red, Convertible Jet Black, M3 Phoenix Yellow", 1, 1290]]);
+    assert.deepEqual(names(all4, "de"), [["Sticker-Set: alle 4 Motive (Limousine Japanrot, Touring Laguna-seca Blau, Cabrio Jetschwarz, M3 Phönixgelb)", 1, 1690]]);
   });
 });
