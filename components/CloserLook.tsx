@@ -100,7 +100,9 @@ export default function CloserLook({ cats, pick, cta, hrefs, soon }: { cats: Cat
             alt={i === on ? c.alt : ""}
             aria-hidden={i !== on}
             fill
-            sizes="(min-width: 1440px) 900px, (min-width: 768px) 62vw, 100vw"
+            // BL-083.3: the stage's real width (phones: the page gutter 2×20 + panel padding 2×16; md+: minus the tab column,
+            // gap and padding; 880 px from 1440 up), so a 390 @2x phone gets the 640 w file, not the full one.
+            sizes="(min-width: 1440px) 880px, (min-width: 768px) calc(100vw - 460px), calc(100vw - 72px)"
             className={`object-cover transition-opacity duration-300 motion-reduce:transition-none ${i === on ? "opacity-100" : "opacity-0"}`}
           />
         ))}
