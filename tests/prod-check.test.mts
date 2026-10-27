@@ -1,7 +1,7 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 // @ts-expect-error plain .mjs helper without type declarations
-import { cookiesFor, hasMarker, isHeadlessUa, parseArgs, shotName } from "../scripts/prod-check-lib.mjs";
+import { cookiesFor, hasMarker, isCountingRequest, isHeadlessUa, parseArgs, shotName } from "../scripts/prod-check-lib.mjs";
 
 describe("prod-check (BL-058)", () => {
   test("parses URLs, viewports, output folder; defaults to desktop + phone", () => {
@@ -32,5 +32,27 @@ describe("prod-check (BL-058)", () => {
   test("file names say host, path and viewport", () => {
     assert.equal(shotName("https://www.zauberlabs.de/de/blog", { width: 390, height: 844 }), "www.zauberlabs.de_de-blog_390x844.png");
     assert.equal(shotName("https://www.zauberlabs.de/", { width: 1440, height: 900 }), "www.zauberlabs.de_home_1440x900.png");
+  });
+  test("stops on every counting request, including Vercel's random prefix and Speed Insights (BL-082)", () => {
+    for (const u of [
+      "https://www.zauberlabs.de/4af0a58b770e44fd/view",
+      "https://www.zauberlabs.de/4af0a58b770e44fd/event",
+      "https://www.zauberlabs.de/4af0a58b770e44fd/session",
+      "https://www.zauberlabs.de/_vercel/insights/view",
+      "https://www.zauberlabs.de/4af0a58b770e44fd/speed-insights/vitals",
+      "https://www.zauberlabs.de/_vercel/speed-insights/vitals",
+      "https://vitals.vercel-insights.com/v2/vitals?dsn=x&ve=production",
+      "https://www.zauberlabs.de/api/m",
+      "https://www.zauberlabs.de/api/m?x=1",
+    ]) assert.equal(isCountingRequest(u), true, u);
+    for (const u of [
+      "https://www.zauberlabs.de/4af0a58b770e44fd/script.js",
+      "https://www.zauberlabs.de/_vercel/speed-insights/script.js",
+      "https://va.vercel-scripts.com/v1/speed-insights/script.js",
+      "https://www.zauberlabs.de/api/vote",
+      "https://www.zauberlabs.de/en/blog/view",
+      "https://www.zauberlabs.de/api/metrics",
+      "not a url",
+    ]) assert.equal(isCountingRequest(u), false, u);
   });
 });

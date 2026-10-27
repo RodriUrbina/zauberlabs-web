@@ -17,6 +17,7 @@ export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: 
  * (60 days, no IP/UA stored), keyed-hash rate limits, sign-in emails via Brevo (Abschnitt 12). Accounts off until this text is live.
  * BL-044 (PO decision 2026-10-14): E46BUILD reads the visitor's country from Vercel's x-vercel-ip-country header to show which
  * sellers deliver there; not stored (Abschnitt 10). Must be live before the next e46build production promotion.
+ * BL-082 (PO-approved 2026-10-26): Vercel Speed Insights on zauberlabs.de and e46.zauberlabs.de (Abschnitt 5; E46BUILD via T-177).
  * BL-050: one Vercel Web Analytics custom event, "configurator_click" with only { configurator }, described in Abschnitt 5.
  * BL-051: own anonymous statistics (Abschnitt 6): daily counters in Upstash, salted daily hash only inside a HyperLogLog.
  * BL-052 (E46 T-106): optional seller notices for signed-in owners — part, build, delivery country (detected from the IP, not confirmed by the owner), date; the PO emails owners by hand
@@ -57,7 +58,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       <h2>2. Überblick</h2>
       <p>
         Wir verarbeiten personenbezogene Daten nur, soweit es für den Betrieb dieser Website und ihrer Funktionen nötig ist. Zur Reichweitenmessung
-        nutzen wir Vercel Web Analytics (Abschnitt 5) und eine eigene Zählung (Abschnitt 6); beide arbeiten ohne Cookies. Darüber hinaus setzen wir keine Tracking- oder
+        nutzen wir Vercel Web Analytics (Abschnitt 5) und eine eigene Zählung (Abschnitt 6), zur Messung der Ladezeiten Vercel Speed Insights
+        (ebenfalls Abschnitt 5); alle arbeiten ohne Cookies. Darüber hinaus setzen wir keine Tracking- oder
         Werbe-Tools ein und verkaufen keine Daten.
       </p>
 
@@ -87,7 +89,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
 
       {/* BL-008 — wording drafted from https://vercel.com/docs/analytics/privacy-policy (version of 2026-06-26): no cookies,
           visitors grouped by a hash built from the request and discarded after 24 h, aggregated data only, no cross-site tracking. */}
-      <h2>5. Reichweitenmessung (Vercel Web Analytics)</h2>
+      <h2>5. Reichweitenmessung und Ladezeiten (Vercel Web Analytics, Vercel Speed Insights)</h2>
       <p>
         Um zu verstehen, welche Seiten gelesen werden, nutzen wir Vercel Web Analytics, einen Dienst der Vercel Inc. (USA), die auch unsere Website
         hostet. Der Dienst setzt keine Cookies. Bei jedem Seitenaufruf werden erfasst: Zeitpunkt, aufgerufene
@@ -98,10 +100,22 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Außerdem zählen wir, wie oft ein Link zu einem unserer Konfiguratoren (z. B. E46BUILD) angeklickt wird: Dabei wird ein Ereignis an Vercel Web
         Analytics übermittelt, das nur den Namen des Konfigurators enthält, zusammen mit denselben Angaben wie bei einem Seitenaufruf.
       </p>
+      {/* BL-082 — checked against @vercel/speed-insights 2.0.0 and its script (/_vercel/speed-insights/script.js, script version
+          0.1.3): one POST per page with the measured values (LCP, FCP, TTFB, CLS, INP/FID), page address and route, the page
+          element concerned (CSS selector), the connection type (e.g. "4g") and SDK/script versions. No cookies, no local storage;
+          not sent from headless browsers; beforeSend drops everything on devices in internal mode and strips query and hash from the page address
+          (components/SiteAnalytics.tsx). */}
+      <p>
+        Um zu sehen, wie schnell unsere Seiten laden, nutzen wir auf dieser Website und auf e46.zauberlabs.de (Abschnitt 10) außerdem Vercel
+        Speed Insights, ebenfalls von Vercel Inc.: Dein Browser sendet dabei Messwerte ohne Nutzerkennung zu Ladegeschwindigkeit,
+        Layout-Stabilität und Reaktionszeit der Seite an Vercel, zusammen mit der aufgerufenen Seite (ohne Parameter), dem betroffenen Seitenelement, der Art der Netzverbindung (z. B.
+        „4g“) und der Version des Messskripts; der Dienst setzt keine Cookies und speichert nichts auf deinem Gerät, und wir sehen nur von Vercel
+        zusammengefasste Werte.
+      </p>
       <p>
         Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse, die Nutzung unserer Website zu verstehen und sie zu verbessern). Da
-        der Dienst keine Cookies setzt, ist dafür keine Einwilligung nach § 25 TDDDG erforderlich. Es gilt der mit Vercel geschlossene Vertrag zur Auftragsverarbeitung (siehe Abschnitt 3). Weitere Informationen:
-        https://vercel.com/docs/analytics/privacy-policy
+        beide Dienste keine Cookies setzen, ist dafür keine Einwilligung nach § 25 TDDDG erforderlich. Es gilt der mit Vercel geschlossene Vertrag zur Auftragsverarbeitung (siehe Abschnitt 3). Weitere Informationen:
+        https://vercel.com/docs/analytics/privacy-policy und https://vercel.com/docs/speed-insights/privacy-policy
       </p>
 
       {/* BL-051 — own anonymous statistics (PO decision 2026-10-19, option A: daily salted hash in a HyperLogLog, salt deleted
@@ -199,8 +213,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
       </p>
       <p>
         Ohne Konto setzt E46BUILD keine Cookies und legt nichts im lokalen Speicher deines Browsers ab; für ein Konto siehe den folgenden Absatz. Zur
-        Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics – ohne Cookies, nur zusammengefasste Seitenaufrufe und Besucherzahlen;
-        es gilt Abschnitt 5. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet
+        Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics – ohne Cookies, nur zusammengefasste Seitenaufrufe und Besucherzahlen –,
+        zur Messung der Ladezeiten Vercel Speed Insights; es gilt Abschnitt 5. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet
         keine Verbindung zu Google Fonts statt. Angebote im Konfigurator verlinken auf die Websites externer Händler; sobald du einem solchen Link
         folgst, gelten deren Datenschutzbestimmungen (Abschnitt 14).
       </p>
