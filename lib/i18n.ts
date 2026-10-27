@@ -311,6 +311,12 @@ export const E46_URL = process.env.NEXT_PUBLIC_E46_URL ?? "https://e46.zauberlab
  * garage.bodies[].start (sedan, touring, coupe, convertible, compact, m3).
  */
 export const e46StartUrl = (start: string) => `${E46_URL.replace(/\/+$/, "")}/?start=${encodeURIComponent(start)}`;
+/**
+ * BL-083.1: open E46BUILD at a section (E46BUILD T-179, contract in e46build apps/web/src/lib/start-body.ts): `/?section=<value>`;
+ * without a body the owner picks the body first and then lands in that section. Unknown values are ignored by E46BUILD.
+ */
+export const E46_SECTIONS = ["headlights", "wheels", "bumpers", "seats", "steering"] as const;
+export const e46SectionUrl = (section: string) => `${E46_URL.replace(/\/+$/, "")}/?section=${encodeURIComponent(section)}`;
 // THE E46 SWITCH (PO decision 2026-10-02, BL-001): the configurator is not online yet, so every
 // E46 button on the site and the article CTA show "coming soon" with no link.
 // Going live is a one-line change: set NEXT_PUBLIC_E46_LIVE=1 on Vercel (or flip the fallback to true).

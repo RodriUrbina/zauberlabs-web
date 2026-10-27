@@ -10,10 +10,10 @@ type Cat = { key: string; label: string; line: string; img: string; alt: string 
  * BL-083 (PO 2026-10-27, option C "Take a closer look", e46/docs/design/zauberlabs-second-section) — a dark panel with the
  * five E46BUILD categories as tabs; picking one swaps the stage picture (E46BUILD's own, see public/images/README.md) and its
  * line. Desktop: tabs in a column left, picture right. Phones: picture on top, tabs as one row you can swipe.
- * The CTA opens E46BUILD's start page (a category deep link waits for E46BUILD T-179); it is counted as configurator_click by
- * the page-wide tracker (BL-050), with no extra data. All five pictures are rendered stacked, so switching never waits.
+ * BL-083.1: the CTA opens E46BUILD at the chosen tab's section (`?section=`, E46BUILD T-179; nofollow like `?start=`, as
+ * robots.txt disallows them); it is counted as configurator_click by the page-wide tracker (BL-050), with no extra data. All five pictures are rendered stacked, so switching never waits.
  */
-export default function CloserLook({ cats, pick, cta, href, soon }: { cats: Cat[]; pick: string; cta: string; href: string | null; soon: string }) {
+export default function CloserLook({ cats, pick, cta, hrefs, soon }: { cats: Cat[]; pick: string; cta: string; hrefs: string[] | null; soon: string }) {
   const [on, setOn] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -78,9 +78,10 @@ export default function CloserLook({ cats, pick, cta, href, soon }: { cats: Cat[
         <p id="closer-panel" role="tabpanel" aria-labelledby={`closer-tab-${cats[on].key}`} aria-live="polite" className="pt-3 text-[15px] leading-normal text-fog md:mt-auto md:pt-[18px]">
           {cats[on].line}
         </p>
-        {href ? (
+        {hrefs ? (
           <a
-            href={href}
+            href={hrefs[on]}
+            rel="nofollow" // each load can create state on E46BUILD; robots.txt disallows section links
             className="mt-4 flex h-12 items-center justify-center gap-2 rounded-full bg-paper px-6 text-[15px] font-semibold text-ink hover:bg-white md:mt-[18px] md:h-[52px]"
           >
             {cta} <Arrow className="size-[18px]" />

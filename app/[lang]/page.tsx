@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { dictionaries, E46_LIVE, E46_URL, e46StartUrl, isLocale, type Locale } from "@/lib/i18n";
+import { dictionaries, E46_LIVE, E46_URL, e46SectionUrl, e46StartUrl, isLocale, type Locale } from "@/lib/i18n";
 import { Arrow, Wordmark } from "@/components/Icons";
 import VoteCard from "@/components/VoteCard";
 import SuggestForm from "@/components/SuggestForm";
@@ -87,7 +87,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
 
           <div className="mt-7 md:mt-10">
-            <CloserLook cats={t.garage.cats} pick={t.garage.pick} cta={t.garage.cta} href={E46_LIVE ? E46_URL : null} soon={t.nav.comingSoon} />
+            <CloserLook cats={t.garage.cats} pick={t.garage.pick} cta={t.garage.cta} hrefs={E46_LIVE ? t.garage.cats.map((c) => e46SectionUrl(c.key)) : null} soon={t.nav.comingSoon} />
           </div>
 
           <div className="mt-7 grid items-center gap-3.5 border-t border-line pt-7 md:mt-10 md:grid-cols-[200px_1fr] md:gap-6">

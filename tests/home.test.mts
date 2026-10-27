@@ -2,7 +2,7 @@ import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { dictionaries, e46StartUrl, LOCALES } from "../lib/i18n";
+import { dictionaries, E46_SECTIONS, e46SectionUrl, e46StartUrl, LOCALES } from "../lib/i18n";
 import { SITE_OG_IMAGE } from "../lib/blog-og";
 
 const pub = (p: string) => path.join(process.cwd(), "public", p);
@@ -106,10 +106,15 @@ describe("home page (BL-053)", () => {
     assert.equal(dictionaries.de.garage.title.join(""), "Sieh genauer hin.");
     assert.equal(dictionaries.de.garage.cta, "Probier es an deinem E46 aus");
   });
-  test("closer look: the CTA opens E46BUILD's start page in the same tab (configurator_click, no new data); tabs are accessible", () => {
+  test("closer look: the CTA opens E46BUILD at the chosen tab's section (T-179), nofollow, same tab (configurator_click, no new data); tabs are accessible", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
     const cl = fs.readFileSync(path.join(process.cwd(), "components", "CloserLook.tsx"), "utf8");
-    assert.match(page, /<CloserLook [^>]*href=\{E46_LIVE \? E46_URL : null\}/);
+    assert.match(page, /<CloserLook [^>]*hrefs=\{E46_LIVE \? t\.garage\.cats\.map\(\(c\) => e46SectionUrl\(c\.key\)\) : null\}/);
+    assert.match(cl, /href=\{hrefs\[on\]\}\s+rel="nofollow"/);
+    // BL-083.1: every tab key is a T-179 section value (e46build start-body.ts START_SECTIONS), same in EN and DE.
+    assert.deepEqual([...E46_SECTIONS].sort(), ["bumpers", "headlights", "seats", "steering", "wheels"]);
+    for (const lang of LOCALES) for (const c of dictionaries[lang].garage.cats) assert.ok((E46_SECTIONS as readonly string[]).includes(c.key), `${lang} ${c.key}`);
+    assert.equal(e46SectionUrl("steering"), "https://e46.zauberlabs.de/?section=steering");
     assert.ok(!/target=|track\(/.test(cl), "same tab, no extra tracking call");
     assert.match(cl, /role="tablist"/);
     assert.match(cl, /role="tab"/);
