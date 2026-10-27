@@ -36,10 +36,10 @@ describe("home page (BL-053)", () => {
     assert.match(fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8"), /data-hero-cta/);
     assert.match(page, /id="next" data-sticky-cta-hide/);
   });
-  test("hero and garage card show the M3 Touring photo, no video anywhere on the page, alt says never sold (BL-081)", () => {
-    assert.ok(fs.existsSync(pub("/images/e46-m3-touring-garage-centred.webp")));
+  test("the hero shows the M3 Touring photo, the garage does not repeat it, no video anywhere on the page, alt says never sold (BL-081, BL-083)", () => {
     assert.ok(fs.existsSync(pub("/images/e46-m3-touring-hero.webp")));
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
+    assert.ok(!/m3-touring/.test(page), "the garage section does not show the M3 Touring photo again");
     const hero = fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8");
     assert.ok(!page.includes("<video") && !hero.includes("<video"), "no loop on the home page");
     assert.match(hero, /alt=\{d\.garage\.e46CardAlt\}/);
@@ -78,5 +78,31 @@ describe("home page (BL-053)", () => {
     const buf = fs.readFileSync(pub(SITE_OG_IMAGE));
     assert.equal(buf.readUInt16BE(0), 0xffd8);
     assert.ok(!fs.existsSync(pub("/images/hero.jpg")), "the old hero.jpg is gone");
+  });
+  test("closer look (BL-083): five categories in the same order in EN and DE, each picture present and listed with its source", () => {
+    const readme = fs.readFileSync(pub("/images/README.md"), "utf8");
+    for (const lang of LOCALES) {
+      const cats = dictionaries[lang].garage.cats;
+      assert.deepEqual(cats.map((c) => c.key), ["headlights", "bumpers", "wheels", "seats", "steering"], lang);
+      for (const c of cats) {
+        assert.ok(fs.existsSync(pub(c.img)), c.img);
+        assert.ok(readme.includes(`\`${c.img.replace("/images/", "")}\``), `${c.img} in public/images/README.md`);
+        assert.ok(c.alt && c.line && c.label, `${lang} ${c.key} has label, line and alt`);
+      }
+    }
+    // Editor fact-check: wheels, seats and steering use ONE stage picture for every body, so those lines never say "your car".
+    for (const c of dictionaries.en.garage.cats.filter((c) => ["wheels", "seats", "steering"].includes(c.key))) assert.ok(!/your (car|interior|cockpit)/.test(c.line), c.line);
+    assert.equal(dictionaries.de.garage.title.join(""), "Sieh genauer hin.");
+    assert.equal(dictionaries.de.garage.cta, "Probier es an deinem E46 aus");
+  });
+  test("closer look: the CTA opens E46BUILD's start page in the same tab (configurator_click, no new data); tabs are accessible", () => {
+    const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
+    const cl = fs.readFileSync(path.join(process.cwd(), "components", "CloserLook.tsx"), "utf8");
+    assert.match(page, /<CloserLook [^>]*href=\{E46_LIVE \? E46_URL : null\}/);
+    assert.ok(!/target=|track\(/.test(cl), "same tab, no extra tracking call");
+    assert.match(cl, /role="tablist"/);
+    assert.match(cl, /role="tab"/);
+    assert.match(cl, /aria-selected=\{i === on\}/);
+    assert.match(cl, /role="tabpanel"/);
   });
 });
