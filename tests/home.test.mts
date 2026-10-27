@@ -90,8 +90,15 @@ describe("home page (BL-053)", () => {
         assert.ok(c.alt && c.line && c.label, `${lang} ${c.key} has label, line and alt`);
       }
     }
-    // Editor fact-check: wheels, seats and steering use ONE stage picture for every body, so those lines never say "your car".
-    for (const c of dictionaries.en.garage.cats.filter((c) => ["wheels", "seats", "steering"].includes(c.key))) assert.ok(!/your (car|interior|cockpit)/.test(c.line), c.line);
+    // Editor fact-check: wheels and seats use ONE stage picture for every body, so those lines never say "your car".
+    for (const c of dictionaries.en.garage.cats.filter((c) => ["wheels", "seats"].includes(c.key))) assert.ok(!/your (car|interior|cockpit)/.test(c.line), c.line);
+    // PO 2026-10-27: steering shows the M Sport wheel picture, not the cockpit stage without a wheel.
+    for (const lang of LOCALES) {
+      const s = dictionaries[lang].garage.cats.find((c) => c.key === "steering")!;
+      assert.match(s.img, /steering-wheel-look-m-sport/, lang);
+      assert.ok(!/cockpit/i.test(s.line + s.alt), `${lang}: no cockpit claim for a picture without a cockpit`);
+    }
+    assert.ok(!fs.existsSync(pub("/images/closer-look/e46-steering-stage-cockpit.webp")), "unused cockpit copy removed");
     assert.equal(dictionaries.de.garage.title.join(""), "Sieh genauer hin.");
     assert.equal(dictionaries.de.garage.cta, "Probier es an deinem E46 aus");
   });

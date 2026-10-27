@@ -23,18 +23,18 @@ const en = {
     pickLead: "Which E46 do you drive?",
   },
   // BL-083 (PO 2026-10-27, option C "Take a closer look"): five E46BUILD categories, each with E46BUILD's own picture and one
-  // line. The lines were fact-checked by the Editor against e46build master: wheels, seats and steering wheel use ONE stage
-  // picture for every body, so those lines do not say "your car".
+  // line. The lines were fact-checked by the Editor against e46build master: wheels and seats use ONE stage picture for every
+  // body, so those lines do not say "your car". Steering (PO 2026-10-27): the M Sport wheel picture, not the wheel-less cockpit stage.
   garage: {
     live: "live",
     soon: "coming soon",
     title: ["Take a ", "closer look."],
     cats: [
-      { key: "headlights", label: "Headlights", line: "Halogen, xenon or bi-xenon, matched to your car’s build date.", img: "/images/closer-look/e46-look-bi-xenon-saloon-late.webp", alt: "Bi-xenon headlights on a late E46 sedan" },
+      { key: "headlights", label: "Headlights", line: "Halogen, xenon or bi-xenon, matched to your car’s build date.", img: "/images/closer-look/e46-look-bi-xenon-saloon-late.webp", alt: "Bi-xenon headlight of a late E46, close-up" },
       { key: "bumpers", label: "Bumpers", line: "Standard, M package or M3 bumpers, front and rear, on your body style.", img: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", alt: "E46 sedan with the M package front bumper" },
       { key: "wheels", label: "Wheels", line: "BMW factory wheels, swapped onto an E46 seen from the side.", img: "/images/closer-look/e46-wheel-stage-side.webp", alt: "Front wheel of a silver E46, seen from the side" },
       { key: "seats", label: "Seats", line: "Basic, sport or M3 seats, for your E46.", img: "/images/closer-look/e46-seat-stage-interior.webp", alt: "E46 interior with the front seats" },
-      { key: "steering", label: "Steering wheels", line: "Standard, sport, M Sport or M3, in an E46 cockpit.", img: "/images/closer-look/e46-steering-stage-cockpit.webp", alt: "E46 cockpit seen from the driver’s seat" },
+      { key: "steering", label: "Steering wheels", line: "Standard, sport, M Sport or M3 steering wheels for your E46.", img: "/images/closer-look/e46-steering-wheel-look-m-sport.webp", alt: "E46 M Sport steering wheel" },
     ],
     pick: "Parts in E46BUILD", // accessible name of the category tab list
     cta: "Try it on your E46",
@@ -180,11 +180,11 @@ const de: Dict = {
     title: ["Sieh ", "genauer hin."],
     // BL-083: DE copy by the Writer (2026-10-27); alt texts drafted by the Builder.
     cats: [
-      { key: "headlights", label: "Scheinwerfer", line: "Halogen, Xenon oder Bi-Xenon, passend zum Baudatum deines E46.", img: "/images/closer-look/e46-look-bi-xenon-saloon-late.webp", alt: "Bi-Xenon-Scheinwerfer an einer späten E46-Limousine" },
+      { key: "headlights", label: "Scheinwerfer", line: "Halogen, Xenon oder Bi-Xenon, passend zum Baudatum deines E46.", img: "/images/closer-look/e46-look-bi-xenon-saloon-late.webp", alt: "Bi-Xenon-Scheinwerfer eines späten E46, Nahaufnahme" },
       { key: "bumpers", label: "Stoßstangen", line: "Serie, M-Paket oder M3, vorne und hinten, passend zu deiner Karosserie.", img: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", alt: "E46-Limousine mit M-Paket-Frontstoßstange" },
       { key: "wheels", label: "Felgen", line: "BMW-Werksfelgen, direkt an einem E46 in der Seitenansicht.", img: "/images/closer-look/e46-wheel-stage-side.webp", alt: "Vorderrad eines silbernen E46 in der Seitenansicht" },
       { key: "seats", label: "Sitze", line: "Serie, Sport oder M3, für deinen E46.", img: "/images/closer-look/e46-seat-stage-interior.webp", alt: "E46-Innenraum mit den Vordersitzen" },
-      { key: "steering", label: "Lenkräder", line: "Serie, Sport, M Sport oder M3, im Cockpit eines E46.", img: "/images/closer-look/e46-steering-stage-cockpit.webp", alt: "E46-Cockpit aus Fahrersicht" },
+      { key: "steering", label: "Lenkräder", line: "Standard, Sport, M Sport oder M3 – Lenkräder für deinen E46.", img: "/images/closer-look/e46-steering-wheel-look-m-sport.webp", alt: "M-Sport-Lenkrad des E46" },
     ],
     pick: "Teile in E46BUILD",
     cta: "Probier es an deinem E46 aus",
