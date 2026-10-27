@@ -77,6 +77,29 @@ export const hasMarker = (cookieString) => String(cookieString ?? "").split(";")
 /** Headless Chromium must keep its default UA so the server-side filter also catches it (BL-058 rule b). */
 export const isHeadlessUa = (ua) => /HeadlessChrome\//.test(String(ua ?? ""));
 
+/**
+ * A request that would count this visit (BL-058 guard, BL-082). On Vercel the analytics endpoints sit under a per-project
+ * random prefix (e.g. /4af0a58b770e44fd/view), not only under /_vercel/…, so match the endpoint names, not the prefix:
+ * Web Analytics view/event/session, Speed Insights vitals (also on vitals.vercel-insights.com) and our own /api/m.
+ * Script loads (…/script.js) are not counted.
+ */
+export function isCountingRequest(u) {
+  let url;
+  try {
+    url = new URL(u);
+  } catch {
+    return false;
+  }
+  const p = url.pathname;
+  return (
+    p === "/api/m" ||
+    /^\/(?:_vercel\/insights|[0-9a-f]{16})\/(?:view|event|session)$/.test(p) ||
+    /^\/(?:_vercel|[0-9a-f]{16})\/speed-insights\/vitals$/.test(p) ||
+    url.hostname === "vitals.vercel-insights.com" ||
+    (url.hostname === "va.vercel-scripts.com" && /\/(?:view|event|session|vitals)$/.test(p))
+  );
+}
+
 /** Chrome binary: $CHROME_PATH, else Playwright's cached headless shell / Chromium, else a system Chrome. */
 export function findChrome(env = process.env) {
   if (env.CHROME_PATH) return env.CHROME_PATH;

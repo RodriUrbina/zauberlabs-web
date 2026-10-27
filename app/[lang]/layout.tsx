@@ -63,7 +63,9 @@ export default async function RootLayout({ children, params }: { children: React
         {/* Vercel Web Analytics (BL-008, PO decision 2026-10-02): cookieless page-view counting by Vercel; no cookies,
             no cross-site tracking, visitor hash reset daily. Described in app/[lang]/datenschutz (Abschnitt "Reichweitenmessung").
             Collects nothing until Web Analytics is enabled in the Vercel dashboard (project → Analytics → Enable).
-            BL-039: devices carrying the zl_internal marker (the PO's own) are excluded — see components/SiteAnalytics.tsx. */}
+            BL-039: devices carrying the zl_internal marker (the PO's own) are excluded — see components/SiteAnalytics.tsx.
+            BL-082: the same component renders Vercel Speed Insights (load speed, layout stability, responsiveness; no cookies),
+            described in Abschnitt 5 too; collects nothing until Speed Insights is enabled in the Vercel dashboard. */}
         <SiteAnalytics />
         {/* BL-050: "configurator_click" custom event ({ configurator: "e46" } only) — needs Vercel Pro to show up. */}
         <ConfiguratorClickTracker />
