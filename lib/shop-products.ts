@@ -35,11 +35,12 @@ export type Product = {
 
 /**
  * BL-089 (PO 2026-10-27) — BMW colour names of the designs on sale, in ONE place so a corrected spelling is a one-line change.
- * Provisional until the Writer confirms them from BMW sources (the PO wrote „Phoenixgelb" / „Laguna-Seca-Blau").
+ * Spellings from the Writer's sourcing (DE blue: BMW PresseClub 2006 „Laguna-seca Blau"). Open for the PO: the DE blue
+ * („Laguna-seca Blau" vs „Laguna-Seca-Blau") and the E46-era names „Japanrot II" / „Schwarz II".
  */
 const COLOURS = {
   japanRed: { en: "Japan Red", de: "Japanrot" },
-  lagunaSecaBlue: { en: "Laguna Seca Blue", de: "Laguna Seca Blau" },
+  lagunaSecaBlue: { en: "Laguna Seca Blue", de: "Laguna-seca Blau" },
   jetBlack: { en: "Jet Black", de: "Jetschwarz" },
   phoenixYellow: { en: "Phoenix Yellow", de: "Phönixgelb" },
 } satisfies Record<string, Record<Locale, string>>;

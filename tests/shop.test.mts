@@ -181,7 +181,7 @@ describe("fan shop (BL-084)", () => {
     const { sessionParams } = await import("../lib/shop-checkout");
     const want: Record<string, [string, string]> = {
       "sedan-red": ["Japan Red", "Japanrot"],
-      "touring-blue-no-stripes": ["Laguna Seca Blue", "Laguna Seca Blau"],
+      "touring-blue-no-stripes": ["Laguna Seca Blue", "Laguna-seca Blau"],
       "convertible-black": ["Jet Black", "Jetschwarz"],
       "m3-yellow": ["Phoenix Yellow", "Phönixgelb"],
     };
@@ -192,6 +192,6 @@ describe("fan shop (BL-084)", () => {
       (sessionParams(cart as never, lang, "DE", "https://www.zauberlabs.de").line_items ?? []).map((l) => [l.price_data?.product_data?.name, l.quantity, l.price_data?.unit_amount]);
     assert.deepEqual(names({ "sedan-red": 2 }, "de"), [["Sticker: Limousine Japanrot", 2, 490]]);
     assert.deepEqual(names({ "m3-yellow": 1, "convertible-black": 1, "sedan-red": 1 }, "en"), [["3 stickers: Sedan Japan Red, Convertible Jet Black, M3 Phoenix Yellow", 1, 1290]]);
-    assert.deepEqual(names(all4, "de"), [["Sticker-Set: alle 4 Motive (Limousine Japanrot, Touring Laguna Seca Blau, Cabrio Jetschwarz, M3 Phönixgelb)", 1, 1690]]);
+    assert.deepEqual(names(all4, "de"), [["Sticker-Set: alle 4 Motive (Limousine Japanrot, Touring Laguna-seca Blau, Cabrio Jetschwarz, M3 Phönixgelb)", 1, 1690]]);
   });
 });
