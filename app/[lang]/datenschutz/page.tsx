@@ -191,12 +191,16 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
           Wording approved by the PO 2026-10-07: Vercel plan Pro without Observability Plus → runtime-log retention 1 day
           (https://vercel.com/docs/logs/runtime, 2026-08-28: Hobby 1 h, Pro 1 day, Pro + Observability Plus 30 days, Enterprise 3 days);
           Neon DPA with SCCs accepted; records kept indefinitely without personal reference (the planned 30-day cleanup, E46 T-066, was
-          cancelled by the PO). */}
+          cancelled by the PO).
+          BL-087 (Writer's text, 2026-10-27): the opening describes how E46BUILD starts today — body style first, or taken from a
+          start link (?start=<body>, optionally &section=…, T-179), then only fit questions; the free-text "Beschreibe dein Auto" box
+          is gone (e46build master 1c64fe32, apps/web/src/app/HomePage.tsx T-144: describe box removed; ?describe= is development only). */}
       <h2>10. E46BUILD-Konfigurator (e46.zauberlabs.de)</h2>
       <p>
-        Unser Konfigurator E46BUILD läuft unter e46.zauberlabs.de. Ohne Konto und ohne Anmeldung kannst du dort dein Auto beschreiben und eine
-        Konfiguration zusammenstellen. Im Feld „Beschreibe dein Auto“ kannst du frei tippen (z. B. „2001 325i Touring“); dieser Text wird an unseren
-        Server geschickt, dort nur im Arbeitsspeicher in Vorschläge für Karosserie, Modell und Baujahr zerlegt und nicht gespeichert. Gespeichert
+        Unser Konfigurator E46BUILD läuft unter e46.zauberlabs.de. Ohne Konto und ohne Anmeldung kannst du dort dein Auto auswählen und eine
+        Konfiguration zusammenstellen. Du beginnst mit der Karosserieform deines E46, zum Beispiel Touring; kommst du über einen Link, der die
+        Karosserieform und gegebenenfalls einen Bereich wie Felgen schon enthält, übernimmt E46BUILD diese Auswahl. Danach fragt E46BUILD nur, was
+        für die Passform eines Teils nötig ist, etwa Baujahr, Facelift oder Motor. Ein Freitextfeld zur Beschreibung deines Autos gibt es nicht. Gespeichert
         werden nur die Angaben, die du bestätigst oder aus Listen auswählst: Karosserieform, Modell, Baujahr und deine Antworten auf Passform-Fragen
         (z. B. die Scheinwerferform), sowie die Teile, die du in deine Konfiguration legst – je Teil das Produkt und ein Abbild des gewählten
         Händlerangebots (Händlername, Link zum Angebot, Preis). Jede Konfiguration erhält dafür eine zufällige Kennung und optional eine Bezeichnung,
