@@ -1,4 +1,7 @@
 import LegalPage from "@/components/LegalPage";
+import { OWNER } from "@/lib/legal-entity";
+import ProviderPlaceholder from "@/components/shop/ProviderPlaceholder";
+import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 
 export const metadata = { title: "Impressum — zauberlabs", robots: { index: false } };
 
@@ -7,17 +10,6 @@ export const metadata = { title: "Impressum — zauberlabs", robots: { index: fa
  * Replace every [PLACEHOLDER]. Delete blocks marked "optional" that don't apply.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
-const OWNER = {
-  name: "Alvaro Hernandez", // or company name incl. legal form, e.g. "Zauberlabs UG (haftungsbeschränkt)"
-  street: "Anton-Wilhelm-Amo-Straße 50",
-  city: "10117 Berlin",
-  country: "Deutschland",
-  email: "hello@zauberlabs.de",
-  phone: "+49 151 67067 413", // § 5 DDG: a second fast contact channel besides email
-  vatId: "DE452363836", // optional: "DE123456789" — leave empty if you have none
-  register: "", // optional, only for registered companies: "Amtsgericht [ORT], HRB [NUMMER]"
-  representative: "", // optional, only for companies: "Geschäftsführer: [NAME]"
-};
 
 export default async function Impressum({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -72,9 +64,19 @@ export default async function Impressum({ params }: { params: Promise<{ lang: st
       <h2>Haftung für Links</h2>
       <p>
         Unsere Konfiguratoren verlinken auf Angebote externer Händler und Plattformen, auf deren Inhalte wir keinen Einfluss haben. Für diese
-        fremden Inhalte ist stets der jeweilige Anbieter oder Betreiber verantwortlich. Kaufverträge kommen ausschließlich zwischen dir und dem
-        jeweiligen Händler zustande; wir verkaufen keine Teile. Bei Bekanntwerden von Rechtsverletzungen entfernen wir derartige Links umgehend.
+        fremden Inhalte ist stets der jeweilige Anbieter oder Betreiber verantwortlich.{" "}
+        {SHOP_LAUNCHED
+          ? "Kaufverträge über Teile kommen ausschließlich zwischen dir und dem jeweiligen Händler zustande; wir verkaufen keine Teile."
+          : "Kaufverträge kommen ausschließlich zwischen dir und dem jeweiligen Händler zustande; wir verkaufen keine Teile."}{" "}
+        Bei Bekanntwerden von Rechtsverletzungen entfernen wir derartige Links umgehend.
       </p>
+      {/* BL-084 (PREPARED, rendered only with SHOP_LAUNCHED=1; plan § 6): the old sentence is untrue for the fan shop, where the
+          contract is with us. Placeholder for the legal-text provider's wording. */}
+      {SHOP_LAUNCHED && (
+        <ProviderPlaceholder>
+          <p>Fan-Shop: Beim Kauf von Stickern in unserem Shop kommt der Kaufvertrag mit uns zustande (Angaben oben); es gelten unsere AGB.</p>
+        </ProviderPlaceholder>
+      )}
 
       {/* optional — keep only if the configurators use affiliate links (e.g. eBay Partner Network) */}
       <h2>Hinweis zu Partnerlinks</h2>

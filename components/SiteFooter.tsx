@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CONTACT_EMAIL, dictionaries, E46_LIVE, E46_URL, type Locale } from "@/lib/i18n";
+import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 import { Wordmark } from "./Icons";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
@@ -43,6 +44,16 @@ export default function SiteFooter({ lang, otherHref, homePath = "" }: Props) {
             <span className="eyebrow text-[11px] text-[#8A877F]">{t.footer.legal}</span>
             <Link href={`/${lang}/impressum`} className="hover:text-paper">{t.footer.impressum}</Link>
             <Link href={`/${lang}/datenschutz`} className="hover:text-paper">{t.footer.privacy}</Link>
+            {/* BL-084: the shop and its legal pages are linked only once the shop is launched (lib/shop-flag.ts). */}
+            {SHOP_LAUNCHED && (
+              <>
+                <Link href={`/${lang}/shop`} className="hover:text-paper">Shop</Link>
+                <Link href={`/${lang}/agb`} className="hover:text-paper">AGB</Link>
+                <Link href={`/${lang}/widerrufsbelehrung`} className="hover:text-paper">Widerrufsbelehrung</Link>
+                <Link href={`/${lang}/versand-zahlung`} className="hover:text-paper">{lang === "de" ? "Versand & Zahlung" : "Shipping & payment"}</Link>
+                <Link href={`/${lang}/vertrag-widerrufen`} className="hover:text-paper">Vertrag widerrufen</Link>
+              </>
+            )}
           </div>
         </div>
         <div className="flex flex-col justify-between gap-3 border-t border-ink-3 pt-6 text-xs text-[#8A877F] md:flex-row">

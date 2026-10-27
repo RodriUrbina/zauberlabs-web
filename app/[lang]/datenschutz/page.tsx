@@ -1,4 +1,6 @@
 import LegalPage from "@/components/LegalPage";
+import ProviderPlaceholder from "@/components/shop/ProviderPlaceholder";
+import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 
 export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: false } };
 
@@ -26,6 +28,9 @@ export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: 
  * where a seller now delivers there; nothing new collected, copied, cached, logged or shared; emailed + marked → kept 30 days, then deleted.
  * BL-061 (DRAFT): eBay Partner Network links in E46BUILD (Abschnitt 14); we set no cookies and store no clicks for them.
  * BL-062 (eBay listings, T-102.5): server-side Browse API with part numbers + delivery country only; in-memory cache, re-fetched after 3 h, never shown after 6 h; images via our proxy (Abschnitt 14).
+ * BL-084 (PREPARED, rendered only with SHOP_LAUNCHED=1): § 2 line and section 15 "Bestellungen und Zahlungen" for the fan shop
+ * (Stripe, PayPal/Klarna if switched on, Deutsche Post/DHL, 10-year tax retention, the cart in localStorage); placeholder for
+ * the legal-text provider's module. With the flag on, "Deine Rechte" and "Aktualität" become 16 and 17.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
  */
@@ -61,6 +66,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         nutzen wir Vercel Web Analytics (Abschnitt 5) und eine eigene Zählung (Abschnitt 6), zur Messung der Ladezeiten Vercel Speed Insights
         (ebenfalls Abschnitt 5); alle arbeiten ohne Cookies. Darüber hinaus setzen wir keine Tracking- oder
         Werbe-Tools ein und verkaufen keine Daten.
+        {SHOP_LAUNCHED && " Für Bestellungen in unserem Fan-Shop nutzen wir den Zahlungsdienstleister Stripe; die Einzelheiten stehen in Abschnitt 15."}
       </p>
 
       <h2>3. Hosting und Server-Logfiles</h2>
@@ -327,7 +333,34 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         eBay Partner Network zu eBay; erst wenn du ihn anklickst, setzt eBay eigene Cookies (siehe oben).
       </p>
 
-      <h2>15. Deine Rechte</h2>
+      {SHOP_LAUNCHED && (
+        <>
+          <h2>15. Bestellungen und Zahlungen (Fan-Shop)</h2>
+          <ProviderPlaceholder>
+            <p>
+              Entwurf, wird durch das Datenschutz-Modul des Rechtstexte-Anbieters ersetzt. <strong>Warenkorb:</strong> Was du in den Warenkorb legst,
+              und das gewählte Lieferland speichern wir nur im lokalen Speicher deines Browsers („localStorage“, Einträge „zl_shop_cart“ und
+              „zl_shop_country“), nicht in einem Cookie und nicht auf unserem Server. Du kannst sie jederzeit über die Einstellungen deines Browsers
+              löschen; nach einer erfolgreichen Bestellung leeren wir den Warenkorb selbst. Das ist für den von dir gewünschten Warenkorb unbedingt
+              erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG).
+            </p>
+            <p className="mt-2">
+              <strong>Bestellung und Zahlung:</strong> Wenn du auf „Weiter zur Zahlung“ tippst, schickt dein Browser den Warenkorb und das Lieferland
+              an unseren Server, der damit eine Bezahlsitzung bei Stripe (Stripe Payments Europe, Ltd., Dublin, Irland) anlegt. Name, E-Mail-Adresse,
+              Lieferadresse und Zahlungsdaten gibst du direkt auf der Zahlungsseite von Stripe ein; Stripe verarbeitet sie zur Abwicklung der Zahlung,
+              Kartendaten erreichen uns nicht. Wählst du PayPal oder Klarna (sofern angeboten), verarbeiten auch PayPal (Europe) S.à r.l. et Cie, S.C.A.
+              bzw. Klarna Bank AB deine Zahlungsdaten. Die Bestelldaten liegen in unserem Stripe-Konto; eine eigene Bestelldatenbank führen wir nicht.
+            </p>
+            <p className="mt-2">
+              <strong>Versand:</strong> Für den Versand geben wir Name und Lieferadresse an die Deutsche Post AG bzw. DHL weiter.{" "}
+              <strong>Aufbewahrung:</strong> Buchungsbelege bewahren wir nach § 147 AO und § 257 HGB zehn Jahre auf.{" "}
+              <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Vertrag) und lit. c (gesetzliche Aufbewahrungspflichten).
+            </p>
+          </ProviderPlaceholder>
+        </>
+      )}
+
+      <h2>{SHOP_LAUNCHED ? 16 : 15}. Deine Rechte</h2>
       <p>
         Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
         Datenübertragbarkeit (Art. 20) sowie auf Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21). Eine erteilte
@@ -339,7 +372,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, zum Beispiel bei: {C.authority}.
       </p>
 
-      <h2>16. Aktualität</h2>
+      <h2>{SHOP_LAUNCHED ? 17 : 16}. Aktualität</h2>
       <p>Stand: {C.updated}. Wir passen diese Erklärung an, wenn sich unsere Website oder die Rechtslage ändert.</p>
     </LegalPage>
   );
