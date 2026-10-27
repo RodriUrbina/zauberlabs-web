@@ -94,7 +94,7 @@ describe("home page (BL-053)", () => {
     for (const c of dictionaries.en.garage.cats.filter((c) => ["wheels", "seats"].includes(c.key))) assert.ok(!/your (car|interior|cockpit)/.test(c.line), c.line);
     // PO 2026-10-27: every picture shows the part mounted on the car (E46BUILD's stage pictures, or the steering composite).
     const onCar: Record<string, string> = {
-      headlights: "/images/closer-look/e46-headlight-stage-front.webp", // HEADLIGHT_FRONT_VIEW
+      headlights: "/images/closer-look/e46-look-bi-xenon-saloon-late.webp", // the mock's bi-xenon look, on the car (PO, BL-083.2)
       bumpers: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", // bumper look, on the car
       wheels: "/images/closer-look/e46-wheel-stage-side.webp", // WHEEL_STAGE_SRC
       seats: "/images/closer-look/e46-seat-stage-interior.webp", // SEAT_STAGE_SRC
