@@ -92,13 +92,17 @@ describe("home page (BL-053)", () => {
     }
     // Editor fact-check: wheels and seats use ONE stage picture for every body, so those lines never say "your car".
     for (const c of dictionaries.en.garage.cats.filter((c) => ["wheels", "seats"].includes(c.key))) assert.ok(!/your (car|interior|cockpit)/.test(c.line), c.line);
-    // PO 2026-10-27: steering shows the M Sport wheel picture, not the cockpit stage without a wheel.
-    for (const lang of LOCALES) {
-      const s = dictionaries[lang].garage.cats.find((c) => c.key === "steering")!;
-      assert.match(s.img, /steering-wheel-look-m-sport/, lang);
-      assert.ok(!/cockpit/i.test(s.line + s.alt), `${lang}: no cockpit claim for a picture without a cockpit`);
-    }
-    assert.ok(!fs.existsSync(pub("/images/closer-look/e46-steering-stage-cockpit.webp")), "unused cockpit copy removed");
+    // PO 2026-10-27: every picture shows the part mounted on the car (E46BUILD's stage pictures, or the steering composite).
+    const onCar: Record<string, string> = {
+      headlights: "/images/closer-look/e46-headlight-stage-front.webp", // HEADLIGHT_FRONT_VIEW
+      bumpers: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", // bumper look, on the car
+      wheels: "/images/closer-look/e46-wheel-stage-side.webp", // WHEEL_STAGE_SRC
+      seats: "/images/closer-look/e46-seat-stage-interior.webp", // SEAT_STAGE_SRC
+      steering: "/images/closer-look/e46-steering-stage-cockpit-m-sport.webp", // empty cockpit + M Sport cut-out
+    };
+    for (const lang of LOCALES) for (const c of dictionaries[lang].garage.cats) assert.equal(c.img, onCar[c.key], `${lang} ${c.key}`);
+    assert.deepEqual(fs.readdirSync(pub("/images/closer-look")).sort(), Object.values(onCar).map((p) => path.basename(p)).sort(), "no part-only pictures left");
+    assert.match(fs.readFileSync(path.join(process.cwd(), "scripts", "make-closer-look-steering.mjs"), "utf8"), /747 \/ 1672[\s\S]*413 \/ 1200[\s\S]*0\.98/, "T-170 geometry");
     assert.equal(dictionaries.de.garage.title.join(""), "Sieh genauer hin.");
     assert.equal(dictionaries.de.garage.cta, "Probier es an deinem E46 aus");
   });
