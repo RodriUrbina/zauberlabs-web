@@ -57,7 +57,8 @@ export function sessionParams(cart: Cart, lang: Locale, country: ShipCountry, or
     ],
     // The packing list for the PO, next to the order in the Stripe dashboard (ids and quantities only).
     metadata: { cart: Object.entries(cart).map(([id, q]) => `${id}:${q}`).join(","), country },
-    success_url: `${origin}/${lang}/shop/success`,
+    // BL-097: Stripe fills in {CHECKOUT_SESSION_ID}; the success page uses it only as a local once-only key.
+    success_url: `${origin}/${lang}/shop/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/${lang}/shop/cancel`,
   };
 }

@@ -2,7 +2,7 @@
 
 import { Analytics, type BeforeSendEvent } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { hasInternalMarker, withoutQueryAndHash } from "@/lib/internal-mode-client";
+import { hasInternalMarker, withoutQueryAndHash, withoutSessionId } from "@/lib/internal-mode-client";
 
 /**
  * Vercel Web Analytics (BL-008) and Speed Insights (BL-082) with the BL-039 internal-mode filter: while the first-party
@@ -12,7 +12,8 @@ import { hasInternalMarker, withoutQueryAndHash } from "@/lib/internal-mode-clie
 const isInternal = () => typeof document !== "undefined" && hasInternalMarker(document.cookie);
 
 function beforeSend(event: BeforeSendEvent): BeforeSendEvent | null {
-  return isInternal() ? null : event;
+  if (isInternal()) return null;
+  return { ...event, url: withoutSessionId(event.url) };
 }
 
 /**

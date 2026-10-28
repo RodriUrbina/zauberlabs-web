@@ -19,3 +19,15 @@ export function withoutQueryAndHash(url: string): string | null {
     return null;
   }
 }
+
+/** BL-097: the shop's success page carries ?session_id= (Stripe's); it never reaches Vercel Web Analytics. */
+export function withoutSessionId(url: string): string {
+  try {
+    const u = new URL(url);
+    if (!u.searchParams.has("session_id")) return url;
+    u.searchParams.delete("session_id");
+    return u.toString();
+  } catch {
+    return url;
+  }
+}
