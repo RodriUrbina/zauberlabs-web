@@ -32,9 +32,11 @@ export function orderFromSession(s: Stripe.Checkout.Session, pi: Stripe.PaymentI
   // API 2026-09-30: the shipping address sits in collected_information.shipping_details (older API versions: shipping_details).
   const ship = s.collected_information?.shipping_details ?? (s as unknown as { shipping_details?: Stripe.Checkout.Session.CollectedInformation.ShippingDetails }).shipping_details ?? null;
   const a = ship?.address;
-  const address = [ship?.name, a?.line1, a?.line2, [a?.postal_code, a?.city].filter(Boolean).join(" "), a?.state, a?.country].filter((x): x is string => !!x && x.trim() !== "");
+  const lang = s.locale === "en" ? "en" : "de";
+  const countryName = a?.country ? (new Intl.DisplayNames([lang === "de" ? "de-DE" : "en-GB"], { type: "region" }).of(a.country) ?? a.country) : "";
+  const address = [ship?.name, a?.line1, a?.line2, [a?.postal_code, a?.city].filter(Boolean).join(" "), a?.state, countryName].filter((x): x is string => !!x && x.trim() !== "");
   return {
-    lang: s.locale === "en" ? "en" : "de",
+    lang,
     ref: pi.id,
     created: new Date(s.created * 1000),
     email: s.customer_details?.email ?? "",

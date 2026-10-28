@@ -83,7 +83,7 @@ describe("order confirmation (BL-090)", () => {
         "- 1 × Sticker: M3 Phönixgelb — 4,90 €",
         "Versand: kostenlos",
         `Gesamt: 18,80 € (inkl. 19 % MwSt.: 3,00 €)`,
-        "Musterweg 1\n10115 Berlin\nDE",
+        "Musterweg 1\n10115 Berlin\nDeutschland",
         "Lieferzeit: 3–5 Werktage",
         "https://www.zauberlabs.de/de/vertrag-widerrufen",
       ]) assert.ok(t.includes(part), part);
