@@ -39,7 +39,7 @@ const COPY = {
   de: {
     subject: (ref: string) => `Deine Bestellung bei zauberlabs (${ref})`,
     thanks: "Danke für deinen Kauf!",
-    intro: "Hier ist deine Bestellung.",
+    intro: "hier ist deine Bestellung.", // follows „Hallo …," on the next line
     hello: (name: string) => (name ? `Hallo ${name},` : "Hallo,"),
     date: "Bestelldatum",
     ref: "Bestellnummer",
@@ -64,7 +64,7 @@ const COPY = {
   en: {
     subject: (ref: string) => `Your zauberlabs order (${ref})`,
     thanks: "Thanks for your purchase!",
-    intro: "Here is your order.",
+    intro: "here is your order.",
     hello: (name: string) => (name ? `Hello ${name},` : "Hello,"),
     date: "Order date",
     ref: "Order number",
