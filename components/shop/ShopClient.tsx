@@ -7,6 +7,7 @@ import { Arrow } from "@/components/Icons";
 import type { Locale } from "@/lib/i18n";
 import { countryName, shopCopy } from "@/lib/shop-copy";
 import { cleanCart, formatEuro, itemCount, MAX_PER_PRODUCT, priceCart, shippingFor, type Cart } from "@/lib/shop-pricing";
+import { trackShop, totalBucket } from "@/lib/shop-analytics";
 import { AVAILABLE, GPSR, PRICES, SHIP_COUNTRIES, isShipCountry, productById, type ProductId, type ShipCountry } from "@/lib/shop-products";
 
 /**
@@ -70,7 +71,16 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
   };
   const add = (id: ProductId, n = 1) => update({ ...cart, [id]: Math.min((cart[id] ?? 0) + n, MAX_PER_PRODUCT) });
   const setQty = (id: ProductId, q: number) => update({ ...cart, [id]: q });
-  const addAll = () => update(Object.fromEntries(AVAILABLE.map((p) => [p.id, Math.min((cart[p.id] ?? 0) + 1, MAX_PER_PRODUCT)])) as Cart);
+  const addAll = () => {
+    update(Object.fromEntries(AVAILABLE.map((p) => [p.id, Math.min((cart[p.id] ?? 0) + 1, MAX_PER_PRODUCT)])) as Cart);
+    // BL-097: one add-to-cart event per design added (there is no "set" product).
+    for (const p of AVAILABLE) trackShop({ name: "shop_add_to_cart", props: { design: p.id, lang } });
+  };
+  /** BL-097: an add-to-cart ACTION (the card button) is tracked; quantity edits in the cart drawer are not. */
+  const addToCart = (id: ProductId) => {
+    add(id);
+    trackShop({ name: "shop_add_to_cart", props: { design: id, lang } });
+  };
 
   const priced = useMemo(() => priceCart(cart), [cart]);
   const shipping = shippingFor(priced.subtotal, country);
@@ -79,6 +89,8 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
 
   const pay = async () => {
     setState("paying");
+    // BL-097: before /api/checkout is called; item count and a price band only (no exact total, no country, no ids).
+    trackShop({ name: "shop_checkout_start", props: { items: count, total_bucket: totalBucket(priced.subtotal), lang } });
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
@@ -136,7 +148,7 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
                 <div className="mt-auto flex items-center gap-2">
                   <button
                     type="button"
-                    onClick={() => add(p.id)}
+                    onClick={() => addToCart(p.id)}
                     className="flex h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-4 text-[15px] font-semibold text-ink hover:bg-white"
                   >
                     + {t.add}

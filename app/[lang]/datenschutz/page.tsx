@@ -20,6 +20,8 @@ export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: 
  * sellers deliver there; not stored (Abschnitt 10). Must be live before the next e46build production promotion.
  * BL-082 (PO-approved 2026-10-26): Vercel Speed Insights on zauberlabs.de and e46.zauberlabs.de (Abschnitt 5; E46BUILD via T-177).
  * BL-050: one Vercel Web Analytics custom event, "configurator_click" with only { configurator }, described in Abschnitt 5.
+ * BL-097: three shop events (lib/shop-analytics.ts), described right after it: shop_add_to_cart { design, lang },
+ * shop_checkout_start { items, total_bucket, lang }, shop_order_completed { lang }.
  * BL-051: own anonymous statistics (Abschnitt 6): daily counters in Upstash, salted daily hash only inside a HyperLogLog.
  * BL-052 (E46 T-106): optional seller notices for signed-in owners — part, build, delivery country (detected from the IP, not confirmed by the owner), date; the PO emails owners by hand
  * from hello@zauberlabs.de (no automatic notifier, no Brevo); stopped ones deleted at once, open ones after 12 months (Abschnitt 10).
@@ -105,6 +107,10 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Websites hinweg oder eine Zuordnung zu deiner Person ist nicht möglich. Wir sehen ausschließlich zusammengefasste Statistiken.
         Außerdem zählen wir, wie oft ein Link zu einem unserer Konfiguratoren (z. B. E46BUILD) angeklickt wird: Dabei wird ein Ereignis an Vercel Web
         Analytics übermittelt, das nur den Namen des Konfigurators enthält, zusammen mit denselben Angaben wie bei einem Seitenaufruf.
+        Ebenso zählen wir im Fan-Shop, wie oft ein Sticker in den Warenkorb gelegt, die Zahlung begonnen und eine Bestellung abgeschlossen
+        wird: Dabei werden Ereignisse an Vercel Web Analytics übermittelt, die nur das Motiv, die Anzahl der Sticker, eine Preisspanne und die
+        Sprache der Seite enthalten, zusammen mit denselben Angaben wie bei einem Seitenaufruf; personenbezogene Daten sowie Bestell- oder
+        Zahlungsnummern sind nicht dabei.
       </p>
       {/* BL-082 — checked against @vercel/speed-insights 2.0.0 and its script (/_vercel/speed-insights/script.js, script version
           0.1.3): one POST per page with the measured values (LCP, FCP, TTFB, CLS, INP/FID), page address and route, the page
