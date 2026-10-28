@@ -370,8 +370,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
           </p>
           <p>
             Die Bestelldaten (Artikel, Name, E-Mail-Adresse, Lieferadresse, Zahlungsstatus) liegen in unserem Stripe-Konto; eine eigene Bestelldatenbank führen wir
-            nicht. Stripe schickt dir einen Beleg per E-Mail. Zusätzlich schicken wir dir eine Bestellbestätigung mit unseren AGB und der
-            Widerrufsbelehrung per E-Mail: Dafür liest unser Server nach der Zahlung die Bestellung bei Stripe ab (Name, E-Mail-Adresse,
+            nicht. Stripe schickt dir einen Beleg per E-Mail. Zusätzlich schicken wir dir eine Bestellbestätigung per E-Mail: Dafür liest unser Server nach der Zahlung die Bestellung bei Stripe ab (Name, E-Mail-Adresse,
             Lieferadresse, Artikel, Beträge) und versendet die E-Mail über Brevo (Paris, Frankreich) als Auftragsverarbeiter, mit einer Kopie an
             uns (Abschnitt 12). Auf unserem Server speichern wir davon nichts; bei der Zahlung in Stripe vermerken wir nur, dass die Bestätigung
             verschickt wurde.

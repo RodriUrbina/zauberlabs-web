@@ -35,7 +35,7 @@ const event = (type: string, obj: Record<string, unknown>) => ({ id: "evt_1", ty
 /** Fake Stripe + Brevo: the PaymentIntent metadata lives in memory, like Stripe would keep it. */
 function fakes(start: Stripe.Checkout.Session = session()) {
   const piMeta: Record<string, string> = { ...((start.payment_intent as Stripe.PaymentIntent).metadata ?? {}) };
-  const mails: { to: { email: string }; subject: string; text: string }[] = [];
+  const mails: { to: { email: string }; subject: string; text: string; html?: string }[] = [];
   const marks: string[] = [];
   const deps: Deps = {
     retrieveSession: async () => ({ ...start, payment_intent: { ...(start.payment_intent as Stripe.PaymentIntent), metadata: { ...piMeta } } }) as Stripe.Checkout.Session,
@@ -73,7 +73,7 @@ describe("order confirmation (BL-090)", () => {
     assert.equal(f.marks.length, 0);
   });
 
-  test("the e-mail: data from Stripe, total incl. VAT, address, delivery time, withdrawal link, then the FULL AGB and Widerrufsbelehrung", () => {
+  test("the e-mail (text + HTML): order details from Stripe that add up, address, delivery time, links per locale; no legal clause text in the body", () => {
     const f = fakes();
     return handleEvent(event("checkout.session.completed", { id: "cs_test_123", payment_status: "paid" }), f.deps).then(() => {
       const t = f.mails[0].text.replace(/\u00a0/g, " "); // amounts use Intl's non-breaking space
@@ -85,21 +85,39 @@ describe("order confirmation (BL-090)", () => {
         `Gesamt: 21,80 € (inkl. 19 % MwSt.: 3,48 €)`,
         "Musterweg 1\n10115 Berlin\nDeutschland",
         "Lieferzeit: 3–5 Werktage",
-        "https://www.zauberlabs.de/de/vertrag-widerrufen",
+        "AGB: https://www.zauberlabs.de/de/agb",
+        "Widerrufsbelehrung: https://www.zauberlabs.de/de/widerrufsbelehrung",
+        "Vertrag widerrufen: https://www.zauberlabs.de/de/vertrag-widerrufen",
+        "Danke für deinen Kauf!",
+        "Von E46-Fans für E46-Fans – danke, dass du dabei bist.",
       ]) assert.ok(t.includes(part), part);
-      assert.ok(t.includes(clausesText(agb("de").clauses)), "the full AGB, from the same source as the page");
-      assert.ok(t.includes(blocksText(widerruf("de").blocks)), "the full Widerrufsbelehrung + Muster-Widerrufsformular");
+      const h = (f.mails[0].html ?? "").replace(/\u00a0/g, " ");
+      for (const part of [
+        "1 × Sticker-Set: alle 4 Motive (Limousine Japanrot, Touring Laguna-seca Blau, Cabrio Jetschwarz, M3 Phönixgelb)", "16,90 €", "4,90 €", "kostenlos", "21,80 €", "inkl. 19 % MwSt.: 3,48 €",
+        'href="https://www.zauberlabs.de/de/agb"', 'href="https://www.zauberlabs.de/de/widerrufsbelehrung"', 'href="https://www.zauberlabs.de/de/vertrag-widerrufen"',
+        'src="https://www.zauberlabs.de/email/spark.png"', "zauber<span",
+      ]) assert.ok(h.includes(part), `html: ${part}`);
+      // PO 2026-10-28: links only — no legal clause text, no "Kaufvertrag", no 14-day sentence in the body.
+      for (const body of [t, h]) {
+        assert.ok(!body.includes("Geltungsbereich und Vertragspartner") && !body.includes("Sie haben das Recht, binnen vierzehn Tagen"), "no AGB/Widerruf text");
+        assert.ok(!body.includes(clausesText(agb("de").clauses).slice(0, 80)) && !body.includes(blocksText(widerruf("de").blocks).slice(0, 80)));
+        assert.ok(!/Kaufvertrag|innerhalb von 14 Tagen/.test(body));
+      }
       assert.ok(!/Rabatt\/Anpassung/.test(t), "a consistent order has no adjustment line");
       assert.equal(vatIn(2180), 348, "the VAT line is 19/119 of the total");
     });
   });
 
-  test("English e-mail says the German text is binding; EU delivery time", () => {
-    const { subject, text } = orderMail({ lang: "en", ref: "pi_1", created: new Date(1793091600000), email: "a@b.de", name: "A", items: [{ name: "Sticker: Sedan Japan Red", quantity: 2, amount: 980 }], shipping: 690, total: 1670, address: ["A", "Rue 1", "75001 Paris", "FR"], country: "FR" });
+  test("English e-mail: EN links, EU delivery time, no binding note, no contract wording; HTML adds up", () => {
+    const { subject, text, html } = orderMail({ lang: "en", ref: "pi_1", created: new Date(1793091600000), email: "a@b.de", name: "A", items: [{ name: "Sticker: Sedan Japan Red", quantity: 2, amount: 980 }], shipping: 690, total: 1670, address: ["A", "Rue 1", "75001 Paris", "France"], country: "FR" });
     assert.equal(subject, "Your zauberlabs order (pi_1)");
-    assert.match(text, /only the German text is binding/);
-    assert.match(text, /7–14 working days/);
-    assert.ok(text.includes(clausesText(agb("en").clauses)));
+    const t = text.replace(/\u00a0/g, " ");
+    for (const part of ["Thanks for your purchase!", "- 2 × Sticker: Sedan Japan Red — €9.80", "Shipping: €6.90", "Total: €16.70 (incl. 19 % VAT: €2.67)", "7–14 working days",
+      "Terms: https://www.zauberlabs.de/en/agb", "Withdrawal information: https://www.zauberlabs.de/en/widerrufsbelehrung", "Withdraw from contract: https://www.zauberlabs.de/en/vertrag-widerrufen",
+      "From one E46 fan to another – thanks for being part of it."]) assert.ok(t.includes(part), part);
+    assert.ok(!/binding|convenience translation|purchase contract/i.test(text + html));
+    assert.ok(html.includes('href="https://www.zauberlabs.de/en/agb"') && html.includes("€16.70"));
+    assert.ok(!html.includes("Scope and seller"), "no EN AGB text");
   });
 
   test("webhook route: missing secret → 503; bad signature → 400; a valid signature on an unrelated event → 200 without any API call", async () => {

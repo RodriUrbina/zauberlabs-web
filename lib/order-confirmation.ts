@@ -20,7 +20,7 @@ export type Deps = {
   retrieveSession: (id: string) => Promise<Stripe.Checkout.Session>;
   /** Marks the PaymentIntent as confirmed (metadata), idempotent per session. */
   markSent: (paymentIntentId: string, sessionId: string, at: string) => Promise<void>;
-  send: (mail: { to: { email: string; name?: string }; subject: string; text: string }) => Promise<"sent" | "no-key" | "refused">;
+  send: (mail: { to: { email: string; name?: string }; subject: string; text: string; html?: string }) => Promise<"sent" | "no-key" | "refused">;
 };
 
 export type Outcome = "ignored" | "unpaid" | "already-sent" | "no-email" | "sent";
