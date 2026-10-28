@@ -235,6 +235,20 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         folgst, gelten deren Datenschutzbestimmungen (Abschnitt 14).
       </p>
 
+      {/* BL-098 — E46 T-196 plan feedback (e46build agent-3/T-196-plan-feedback 09457dc2): PlanFeedback rows (rating 1–5, fixed
+          topics, a note of at most 200 characters) linked only to the build's random id, deleted with the build (onDelete Cascade);
+          at most 3 per build per 24 h; not cleared by releaseAll/detach (PO decision 2026-10-28). Wording decided by the PO via the
+          Coordinator. Must be live before or with the E46 release. */}
+      <p>
+        <strong>Rückmeldung zu deinem Plan (optional).</strong> Auf der Seite „Mein E46-Plan“ kannst du den Konfigurator mit 1 bis 5 Sternen
+        bewerten, aus festen Themen auswählen, was du dir als Nächstes wünschst, und eine kurze Notiz (höchstens 200 Zeichen) hinzufügen. Wir speichern
+        deine Bewertung, die gewählten Themen und deine Notiz nur zusammen mit der zufälligen Kennung der Konfiguration – ohne Namen, E-Mail-Adresse
+        oder IP-Adresse – und nutzen sie nur, um zu entscheiden, was wir verbessern und als Nächstes ergänzen. Bitte schreib keine persönlichen
+        Angaben in die Notiz. Die Rückmeldungen bewahren wir so lange auf wie die Konfiguration (siehe oben), auch wenn du dein Konto löschst oder die
+        Konfiguration aus deinem Konto entfernst; sie haben dann keinen Bezug mehr zu dir. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO
+        (berechtigtes Interesse an der Verbesserung des Konfigurators).
+      </p>
+
       {/* BL-043 — owner accounts (E46 card T-078). Text from e46build docs/legal/t078-lawyer-review.md § 6, adjusted per the
           Coordinator's brief and approved by the PO on 2026-10-12 (T-078.6b live in production a5ad73d; Brevo DPA in place).
           E46BUILD accounts are switched on in production only once this text is live. */}
@@ -260,7 +274,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Rechtsgrundlage für Konto, Anmeldung und gespeicherte Konfigurationen ist Art. 6 Abs. 1 lit. b DSGVO, für den Missbrauchsschutz Art. 6 Abs. 1
         lit. f DSGVO. Deine Daten bleiben gespeichert, bis du dein Konto löschst. Auf der Seite „Meine Builds“ kannst du jederzeit deine Daten
         herunterladen, einzelne Konfigurationen aus deinem Konto entfernen oder dein Konto löschen. Beim Löschen entfernen wir deine E-Mail-Adresse und
-        alle Anmeldedaten; deine Konfigurationen bleiben ohne Bezug zu dir und ohne von dir eingegebene Freitexte erhalten (siehe oben). Die Daten liegen
+        alle Anmeldedaten; deine Konfigurationen bleiben ohne Bezug zu dir und ohne von dir eingegebene Freitexte erhalten (siehe oben) – mit Ausnahme
+        der Notiz in einer Rückmeldung zu deinem Plan, die ebenfalls ohne Bezug zu dir erhalten bleibt. Die Daten liegen
         in unserer Datenbank (Abschnitt 11).
       </p>
       {/* BL-052 — E46 T-106 "Notify me when a seller is found". Based on the draft in e46build docs/plans/t106-notify-when-seller-found.md § 6
