@@ -1,0 +1,124 @@
+---
+# BL-091 — Writer draft, German. Same slug and sources as en.mdx. No seller names (PO rule); eBay named as the platform.
+title: "Deinen E46 aus Polen aufbauen: welche Händler in E46BUILD liefern und was der Versand kostet"
+description: "Was ein E46-Besitzer in Polen in E46BUILD sieht: die Shops, die nach Polen liefern, ihre Angebote und Versandkosten und eBay-Angebote für dein Land."
+date: 2026-10-28
+updated: 2026-11-12
+publishAt: "2026-11-12"
+lang: de
+slug: e46-from-poland
+card: BL-091
+author: "zauberlabs"
+tags:
+  - E46
+  - buying guide
+  - shipping
+  - configurator
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # no hero: no correct image in the PO's library (PO rule: no correct image, no image)
+  alt: "Ein BMW E46, auf einer Straße in Polen geparkt"
+  credit: "KI-generierte Illustration"
+  licence: null
+  placeholder: "No hero planned. If the PO adds one later: an E46 photo or AI illustration from the PO's library, labelled if AI; no shop names, no number-plate text."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "E46BUILD-Händler- und Angebotsdaten: die Lieferländer jedes Händlers, ausgeblendete Händler, die Angebote mit ihrem Prüfdatum und die Regel, dass ein Angebot nur Besitzern in einem Land angezeigt wird, in das der Händler liefert, und nur 30 Tage nach der letzten Prüfung"
+    type: Projektnachweis (Daten und Code des Konfigurators)
+    path: "e46build master 5c794545: packages/marketplace-data/src/vendors.ts, e46-eu-offers.data.ts, e46-bumper-offers.data.ts, e46-seat-offers.data.ts, e46-steering-offers.data.ts; apps/api/src/domain/offer-visibility.ts"
+    confidence: n/a
+  - id: S2
+    title: "T-031 — Recherche europäischer Händler, 1. Oktober 2026: Lieferbedingungen und Versandtabellen, wie die Seiten sie angaben, darunter die Länderliste des Shops eines deutschen BMW-Händlers und die Versandtabelle je Land eines niederländischen BMW-Spezialisten"
+    type: Händlerseiten (was die Seite am Abrufdatum angab)
+    path: "t031-evidence/dealers-headlights.json; t031-evidence/specialists.json"
+    confidence: HIGH
+    note: "HIGH dafür, dass die Seiten dies am 2026-10-01 angaben. Versandpreise und Länderlisten können sich ändern. Kein Händler wird in diesem Artikel genannt."
+  - id: S3
+    title: "T-155 — erneute Prüfung der sichtbaren Shop-Angebote am 28. Oktober 2026: 203 Angebote von vier Händlern, darunter alle des deutschen BMW-Händlers, geprüft auf Teilenummer, Bestellknopf, Verfügbarkeit und Preis"
+    type: Händlerseiten (erneute Prüfung)
+    path: "web: e46build branch agent-7/T-155-recheck-offers 81e91601, docs/research/t155-recheck/README.md and recheck.json (not yet on master)"
+    confidence: HIGH
+    note: "HIGH dafür, dass die Seiten dies am 2026-10-28 angaben. Gelesen aus dem Agent-Branch, nicht aus master."
+  - id: S4
+    title: "eBay-Angebote in E46BUILD: eine serverseitige Suche auf eBay Deutschland nach den BMW-Nummern des Teils, nur gewerbliche Verkäufer, Festpreis und Angebote mit Lieferung in das Land des Besitzers, mit den Versandkosten und dem Lieferzeitraum, die eBay angibt"
+    type: Projektnachweis (Code des Konfigurators)
+    path: "e46build master 5c794545: apps/api/src/ebay/browse.ts"
+    confidence: n/a
+---
+
+Wenn du einen E46 in Polen fährst, ist selten die Frage, was du willst. Schwierig ist, einen Händler zu finden, der das Originalteil hat, nach Polen liefert und dir sagt, was der Versand kostet. Dieser Ratgeber zeigt, was E46BUILD einem Besitzer in Polen heute zeigt: welche Shops nach Polen liefern, was sie anbieten, was der Versand kostet, soweit wir es wissen, und wie eBay dazu passt.
+
+Preise und Angebote unten sind das, was die Seiten der Händler an den genannten Tagen angaben. Sie ändern sich, nimm sie also als Momentaufnahme.
+
+## Wie E46BUILD weiß, dass du in Polen bist
+
+E46BUILD nutzt dein ungefähres Land, das unser Hoster aus deiner IP-Adresse ableitet, für zwei Dinge. Es behandelt dein Auto als europäischen E46, der Katalog zeigt also europäische Teilenummern. Und es zeigt nur die Händler, die in dein Land liefern. [S1] Eine Adresse gibst du nicht ein, und dein Land wird nicht gespeichert, außer du forderst eine Benachrichtigung über einen Händler an.
+
+Ein Händler, der nur innerhalb Deutschlands oder der Niederlande liefert, erscheint für dich also gar nicht. Das ist Absicht: Ein Angebot, das du dir nicht liefern lassen kannst, ist kein Angebot.
+
+## Die Shops, die nach Polen liefern
+
+Von den europäischen Shops in E46BUILD nennen zwei Polen als Lieferland. [S1] [S2, HIGH]
+
+| Shop | Sitz | Was er in E46BUILD anbietet | Zustand |
+| --- | --- | --- | --- |
+| Der Online-Teileshop eines BMW-Händlers | Deutschland | 59 Angebote: 34 Scheinwerfer, 8 Felgen, 11 Stoßstangenteile, 6 Lenkräder | alle neu, Original BMW |
+| Ein BMW-Spezialist | Niederlande | 10 Angebote: 4 Scheinwerfer, 5 Felgen, 1 Lenkrad | neu; das Lenkrad aufbereitet |
+
+Zahlen aus den Daten von E46BUILD am 28. Oktober 2026. [S1]
+
+Die Preise des deutschen Händlers lagen in E46BUILD bei etwa 97 bis 1.665 € je Teil, die des niederländischen Spezialisten bei etwa 106 bis 1.160 €, jeweils an den Tagen der letzten Prüfung. [S1] Beide geben ihre Preise inklusive der Mehrwertsteuer ihres Landes an: 19 % in Deutschland und 21 % in den Niederlanden. [S1]
+
+Die anderen europäischen Shops in E46BUILD liefern nur innerhalb Deutschlands, nur in die Niederlande und nach Belgien oder in eine Liste westeuropäischer Länder ohne Polen. [S1] Ein weiterer Händler nennt Polen, aber E46BUILD zeigt ihn nach einer Prüfung seiner Angebote gar nicht an. [S1]
+
+**Sitze** sind die Lücke. Jeder Sitzhändler, den E46BUILD anzeigen kann, liefert nur innerhalb Deutschlands, soweit wir es bestätigen konnten. [S1] Als Besitzer in Polen siehst du bei Sitzen deshalb meist noch keinen Händler.
+
+## Was der Versand kostet
+
+| Shop | Versand nach Polen | Lieferzeit |
+| --- | --- | --- |
+| Der niederländische BMW-Spezialist | 28,95 € je Paket, laut seiner eigenen Tabelle je Land | 3–7 Tage |
+| Der Shop des deutschen BMW-Händlers | Polen steht auf seiner Lieferliste; einen Preis für Polen haben wir auf seinen Seiten nicht gefunden | nicht angegeben |
+
+So, wie die Seiten der Shops es am 1. Oktober 2026 angaben. [S2, HIGH]
+
+Der kostenlose Versand des deutschen Shops ab 200 € gilt nur für Bestellungen innerhalb Deutschlands. [S2, HIGH] Für Polen zeigt seine Kasse die Versandkosten an.
+
+Die Preise in E46BUILD sind die Preise auf der Seite des Shops. Der Endbetrag für eine Lieferung nach Polen, mit Versand und der Mehrwertsteuer, die der Shop berechnet, ist der, den seine Kasse zeigt.
+
+## eBay: Angebote, gefiltert auf Polen
+
+Für Felgen, Scheinwerfer, Stoßstangen und Lenkräder zeigt E46BUILD zusätzlich aktuelle eBay-Angebote, die zu deinem Auto passen. Unser Server sucht auf eBay Deutschland nach den BMW-Nummern des Teils. Er behält nur gewerbliche Verkäufer mit Festpreis und nur Angebote, die in dein Land liefern; als Besitzer in Polen siehst du also nur Angebote mit Versand nach Polen. [S4] Jedes Angebot zeigt die Versandkosten zu dir, wie eBay sie angibt, und, wo eBay ihn nennt, den Lieferzeitraum. [S4]
+
+Für einen Besitzer in Polen ist eBay damit oft die größte Auswahl. Der Verkäufer kann in einem anderen Land sitzen, prüf deshalb vor dem Kauf Versand und Rückgabe im Angebot selbst.
+
+Die eBay-Links enthalten eine Kennung des eBay Partner Network. Kaufst du über einen solchen Link, erhalten wir unter Umständen eine Provision; dein Preis ändert sich nicht.
+
+## Und Shops in Polen?
+
+Shops mit Sitz in Polen sind noch nicht in E46BUILD. [S1] Örtliche Verwerter und BMW-Händler haben das Teil vielleicht, und Abholen spart den Versand. E46BUILD hilft trotzdem: Es sagt dir, welche Ausführung an dein Auto passt, und du weißt genau, wonach du fragen musst.
+
+## Wie aktuell die Angebote sind
+
+Ein Angebot erscheint in E46BUILD nur 30 Tage nach seiner letzten Prüfung. [S1] Am 28. Oktober 2026 wurden alle Angebote des deutschen Händlers erneut geprüft: Jede Seite führte das Teil noch, hatte einen Bestellknopf und zeigte einen Preis. [S3, HIGH] Die Angebote des niederländischen Spezialisten wurden zuletzt zwischen dem 8. und 19. Oktober 2026 geprüft. [S1] Werden sie nicht erneut geprüft, verschwinden sie 30 Tage danach aus E46BUILD.
+
+## Was du als Besitzer in Polen siehst
+
+1. **Wähl deine Karosserie.** Starte mit der Karosserieform deines E46: [Limousine](https://e46.zauberlabs.de/?start=sedan), [Touring](https://e46.zauberlabs.de/?start=touring), [Coupé](https://e46.zauberlabs.de/?start=coupe), [Cabrio](https://e46.zauberlabs.de/?start=convertible), [Compact](https://e46.zauberlabs.de/?start=compact) oder [M3](https://e46.zauberlabs.de/?start=m3).
+2. **Beantworte die Passform-Fragen.** E46BUILD fragt nur, was für die Passform eines Teils nötig ist, etwa Baujahr oder Facelift.
+3. **Lies die Händler.** Unter jedem Teil siehst du die Shops, die nach Polen liefern, und die eBay-Angebote, die es tun. Gibt es keinen, sagt das Teil es dir.
+4. **Plan den ganzen Umbau.** „My E46 plan" rechnet die ungefähren Kosten aus denselben Händlern zusammen; seine Spanne enthält also schon nur Händler, die zu dir liefern. [S1]
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Welche Händler nach Polen liefern, was sie anbieten und wann jedes Angebot geprüft wurde, stammt aus den eigenen Daten von E46BUILD. Versandpreise und Lieferbedingungen sind das, was die Seiten der Shops am 1. Oktober 2026 angaben (HIGH für diesen Tag). Die Angebote des deutschen Händlers wurden am 28. Oktober 2026 erneut geprüft, in einer Prüfung, die noch nicht in die Hauptdaten übernommen ist.
+
+**Nicht geklärt.** Der Versandpreis des deutschen Shops nach Polen; ob einer der beiden Shops für eine Lieferung nach Polen polnische Mehrwertsteuer berechnet; und was Shops in Polen haben, da keiner in E46BUILD ist.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Teile an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben. Wähl deine Karosserie, und E46BUILD zeigt nur die Händler, die nach Polen liefern.
