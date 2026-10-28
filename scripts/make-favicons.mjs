@@ -11,6 +11,8 @@
  *                       dark tab bar ≈ 6.5:1 instead of ≈ 3.2:1)
  * - app/favicon.ico     16 × 16 and 32 × 32 PNG frames, accent on transparent
  * - app/apple-icon.png  180 × 180, accent Spark on a solid paper background (iOS ignores transparency)
+ * - public/email/spark.png  48 × 48, accent Spark on transparent: the logo of the order e-mail (BL-090; mail clients block
+ *                       inline SVG, so the e-mail links this hosted PNG and shows the text wordmark next to it)
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -64,4 +66,8 @@ fs.writeFileSync(path.join(root, "app", "favicon.ico"), Buffer.concat([header, .
 const apple = svg(accent, `<rect x="-6" y="-6" width="36" height="36" fill="${paper}"/>`).replace('viewBox="0 0 24 24"', 'viewBox="-4 -4 32 32"');
 await sharp(Buffer.from(apple), { density: 72 * (180 / 32) * 2 }).resize(180, 180).flatten({ background: paper }).png().toFile(path.join(root, "app", "apple-icon.png"));
 
-console.log(`✓ app/icon.svg, app/favicon.ico (16+32), app/apple-icon.png (180) — Spark ${spark.slice(0, 18)}…, accent ${accent} / dark ${accentDark}, paper ${paper}`);
+// 4. public/email/spark.png — for the order confirmation e-mail (shown at 24 px, 48 px for sharp phone screens).
+fs.mkdirSync(path.join(root, "public", "email"), { recursive: true });
+fs.writeFileSync(path.join(root, "public", "email", "spark.png"), await png(48));
+
+console.log(`✓ public/email/spark.png (48), app/icon.svg, app/favicon.ico (16+32), app/apple-icon.png (180) — Spark ${spark.slice(0, 18)}…, accent ${accent} / dark ${accentDark}, paper ${paper}`);

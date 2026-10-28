@@ -1,4 +1,4 @@
-import { OWNER } from "@/lib/legal-entity";
+import { sendBrevoMail } from "@/lib/brevo";
 import { shopOpenFor } from "@/lib/shop-flag";
 import { berlinTime, confirmationText, FIELDS, type Declaration } from "@/lib/withdrawal-mail";
 
@@ -32,27 +32,18 @@ export async function POST(req: Request) {
     return Response.json({ error: "Name, e-mail and order are required" }, { status: 400 });
   }
 
-  const key = process.env.BREVO_API_KEY;
-  if (!key) {
+  const receivedAt = new Date();
+  const sent = await sendBrevoMail({
+    to: { email: d.email, name: d.name },
+    subject: `Eingangsbestätigung deines Widerrufs (${d.order})`,
+    text: confirmationText(d, receivedAt),
+  });
+  if (sent === "no-key") {
     console.error("withdrawal: BREVO_API_KEY is not set; no confirmation could be sent");
     return Response.json({ error: "Confirmation e-mail is not available" }, { status: 503 });
   }
-  const receivedAt = new Date();
-  const from = process.env.SHOP_MAIL_FROM || OWNER.email;
-  const res = await fetch(process.env.BREVO_API_URL || "https://api.brevo.com/v3/smtp/email", {
-    method: "POST",
-    headers: { "api-key": key, "content-type": "application/json", accept: "application/json" },
-    body: JSON.stringify({
-      sender: { name: "zauberlabs", email: from },
-      to: [{ email: d.email, name: d.name }],
-      bcc: [{ email: OWNER.email }],
-      replyTo: { email: OWNER.email },
-      subject: `Eingangsbestätigung deines Widerrufs (${d.order})`,
-      textContent: confirmationText(d, receivedAt),
-    }),
-  }).catch(() => null);
-  if (!res?.ok) {
-    console.error("withdrawal: Brevo did not accept the e-mail, status", res?.status ?? "network error");
+  if (sent === "refused") {
+    console.error("withdrawal: Brevo did not accept the e-mail");
     return Response.json({ error: "Confirmation e-mail could not be sent" }, { status: 502 });
   }
   return Response.json({ ok: true, receivedAt: receivedAt.toISOString(), receivedAtText: berlinTime(receivedAt) });
