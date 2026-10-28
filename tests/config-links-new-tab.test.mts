@@ -28,4 +28,16 @@ describe("blog configurator links open in a new tab (BL-056)", () => {
     const other = renderToStaticMarkup(A({ href: "https://example.com/", children: "x" }));
     assert.ok(other.includes("noreferrer"));
   });
+  test("BL-095: a start link (?start= / ?section=) gets nofollow and still opens in a new tab with the referrer; plain configurator links don't", () => {
+    const A = mdxComponents("de").a as (p: { href: string; children: string; rel?: string }) => React.ReactElement;
+    for (const href of ["https://e46.zauberlabs.de/?start=touring", "https://e46.zauberlabs.de/?section=wheels", "https://e46.zauberlabs.de/?start=m3&section=steering"]) {
+      const html = renderToStaticMarkup(A({ href, children: "E46BUILD" }));
+      assert.ok(html.includes('rel="nofollow noopener"') && html.includes('target="_blank"') && !html.includes("noreferrer"), html);
+    }
+    const plain = renderToStaticMarkup(A({ href: "https://e46.zauberlabs.de/", children: "E46BUILD" }));
+    assert.ok(plain.includes('rel="noopener"') && !plain.includes("nofollow"), plain);
+    const own = renderToStaticMarkup(A({ href: "https://e46.zauberlabs.de/?start=sedan", children: "x", rel: "sponsored" }));
+    assert.ok(own.includes('rel="nofollow noopener"'), "the article's own rel is still replaced, as before for configurator links");
+  });
 });
+
