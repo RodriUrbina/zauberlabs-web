@@ -1,72 +1,161 @@
 # zauberlabs.de
 
-Landing page for Zauberlabs — independent configurators for modern classics. First configurator: E46BUILD.
+> **Independent configurators for modern classics. Made by owners, for owners.**
 
-Next.js (App Router) + Tailwind CSS v4, deployed on Vercel.
+zauberlabs.de is the hub for zauberlabs' car configurators. It is **live at <https://www.zauberlabs.de>** in German
+(`/de`, the default) and English (`/en`).
 
-## Run locally
+- **Configurators.** The first one is **E46BUILD** for the BMW 3 Series E46, which runs separately at
+  <https://e46.zauberlabs.de>. The home page leads into it: the hero, body-style buttons and the "Take a closer look"
+  panel link straight into E46BUILD, optionally with a body (`?start=`) or a section (`?section=`) already chosen.
+- **Blog.** Researched E46 articles in German and English (MDX), published one at a time on a schedule.
+- **Community vote.** Visitors vote for the car that should get the next configurator, and can suggest a car.
+- **Fan shop.** Die-cut E46 stickers, paid through Stripe Checkout, with our own order confirmation e-mail and an
+  online withdrawal function.
 
-```bash
-npm install
-npm run dev   # http://localhost:3000 → redirects to /de
+How the team of agents works on this repository: [`docs/HOW-WE-WORK.md`](docs/HOW-WE-WORK.md).
+
+---
+
+## Architecture
+
+```mermaid
+flowchart LR
+  visitor([Visitor's browser])
+
+  subgraph vercel [Vercel]
+    next["Next.js 16 app<br/>pages /de · /en, blog (ISR, 5 min)<br/>API routes /api/*"]
+  end
+
+  redis[("Upstash Redis<br/>votes · suggestions · approved cars<br/>own statistics counters")]
+  stripe["Stripe Checkout"]
+  brevo["Brevo<br/>transactional e-mail"]
+  analytics["Vercel Web Analytics<br/>+ Speed Insights"]
+  e46["E46BUILD<br/>e46.zauberlabs.de"]
+
+  visitor -->|pages, /api/vote, /api/suggest, /api/m| next
+  next --> redis
+  visitor -->|/api/checkout| next
+  next -->|creates the Checkout Session| stripe
+  visitor -->|pays on Stripe's page| stripe
+  stripe -->|webhook /api/stripe/webhook| next
+  next -->|order confirmation · withdrawal confirmation| brevo
+  visitor -.->|cookieless page views, vitals| analytics
+  visitor -.->|links and start links| e46
 ```
 
-Votes and suggestions work without any setup (kept in memory). For persistence, add Upstash Redis.
+Only these outside services are used; each is wired up in the code named below:
+- **Upstash Redis:** `lib/store.ts`, `lib/metrics-store.ts`.
+- **Stripe:** `app/api/checkout`, `app/api/stripe/webhook`, `lib/shop-checkout.ts`.
+- **Brevo:** `lib/brevo.ts`.
+- **Vercel Web Analytics and Speed Insights:** `components/SiteAnalytics.tsx`.
 
-## Structure
+Orders live in Stripe; this app stores none.
 
-- `app/[lang]/page.tsx` — the landing page (`/de`, `/en`)
-- `lib/i18n.ts` — all copy in German and English, plus `E46_URL`
-- `lib/cars.ts` — built-in cars in the community vote
-- `/de/admin` — review visitor suggestions: approve (becomes a vote tag) or dismiss; remove approved cars. Password: `ADMIN_PASSWORD` env var
-- `app/api/vote` — GET counts, POST `{ car, on }` (one vote per car per visitor, cookie `zl_vid`, rate-limited by hashed IP)
-- `app/api/suggest` — POST `{ car, email? }` → Redis list `suggestions`
-- `app/[lang]/impressum`, `app/[lang]/datenschutz` — **drafts, fill in before launch**
-- `app/[lang]/blog` — blog: listing, `tag/<tag>`, `<slug>` (de/en with fallback), `feed.xml`. Articles are MDX files in `content/blog/<slug>/{en,de}.mdx`; see `content/blog/README.md` for the front matter. Drafts (`draft: true`) are hidden on production only. Scheduled publishing: `publishAt: "YYYY-MM-DD"` → live from 07:00 Europe/Berlin that day via ISR (pages revalidate every 5 min), hidden before.
-- `lib/i18n.ts` → `E46_LIVE`: while the E46 configurator is offline every E46 button shows "coming soon"; set `NEXT_PUBLIC_E46_LIVE=1` to go live.
+## Stack
 
-## Checks
+| | |
+| --- | --- |
+| Framework | Next.js `^16.3.6` (App Router), React `^19.3.0`, TypeScript `^5.9` |
+| Styling | Tailwind CSS `^4.3.3` (+ `@tailwindcss/typography` for articles) |
+| Content | MDX via `next-mdx-remote` `^6`, `gray-matter`, `remark-gfm`, `rehype-slug`; front matter checked with `zod` `^4` |
+| Data | `@upstash/redis` `^1.39` |
+| Payments | `stripe` `23.0.0` (pinned) |
+| Analytics | `@vercel/analytics` `^2.0.1`, `@vercel/speed-insights` `2.0.0` (pinned) |
+| Tests | `node:test` run through `tsx` |
+| Hosting | Vercel |
 
-```bash
-npm run typecheck   # tsc
-npm test            # node:test — blog schema/loader/RSS/sitemap, every article compiles
-npm run smoke       # next build + next start on port 3010 + request every blog route
+Note: install with `npm ci --legacy-peer-deps` (a plain `npm install` hits an npm peer-dependency bug in this tree).
+
+## Repository layout
+
+```
+app/
+  [lang]/                 pages per language: home, blog (+ tag pages, sources, feed.xml), shop (+ success/cancel),
+                          agb, widerrufsbelehrung, versand-zahlung, vertrag-widerrufen, impressum, datenschutz, admin
+  api/                    vote, suggest, m (own statistics beacon), internal-mode, admin (+ stats),
+                          checkout, stripe/webhook, withdrawal
+  icon.svg, favicon.ico, apple-icon.png, sitemap.ts, robots.ts
+components/               page sections (HomeHero, CloserLook, VoteCard, SuggestForm, SiteFooter …),
+  blog/                   article components (MDX map, figures, sources, configurator CTA, read beacon)
+  shop/                   shop UI (ShopClient, legal blocks, withdrawal form)
+content/blog/<slug>/      one folder per article: en.mdx, de.mdx, images — see content/blog/README.md
+lib/                      i18n copy, blog loader + schema, shop catalogue/pricing/checkout, legal texts (lib/legal),
+                          order and withdrawal e-mails, Redis store, statistics, internal mode
+public/                   images (origins in public/images/README.md), shop pictures, e-mail logo
+scripts/                  smoke test, production-check tool, image/favicon generators
+tests/                    node:test suites (*.test.mts)
+docs/                     how the team works
 ```
 
-## Agent rules
+## Key flows
 
-Rules for every agent working in this repository (Builder, Writer, Editor, Coordinator); the full operating agreement is Trello card BL-000 on the "ZAUBERLABS — Blog" board.
+**Blog.** Articles are MDX files in `content/blog/<slug>/{de,en}.mdx`, with front matter described in
+`content/blog/README.md`. An article with `publishAt: "YYYY-MM-DD"` goes live at **07:00 Europe/Berlin** that day and
+stays hidden before that (`lib/publish-time.ts`). The blog pages re-render at most every 5 minutes (ISR,
+`revalidate = 300`), so no deploy is needed at publish time. `draft: true` hides an article on production only.
 
-- **No personal data in outbound requests (PO decision 2026-10-11, BL-042).** Never send personal data — the PO's email address, names, tokens — in a User-Agent, header, URL or request body to an outside host. Check helper and subagent briefs for the same before handing them out.
-- **Neutral User-Agent for outside fetches.** Scripts and tools that fetch from outside hosts identify as a research tool with a neutral User-Agent, for example `zauberlabs-research/1.0`, and carry no personal data.
+**Shop.**
+1. The cart is kept in the browser's `localStorage` (`zl_shop_cart`, `zl_shop_country`).
+2. "Continue to payment" posts the product ids, quantities, language and delivery country to `/api/checkout`.
+   That route prices everything server-side (`lib/shop-pricing.ts`, `lib/shop-products.ts`) and creates a Stripe
+   Checkout Session.
+3. The buyer pays on Stripe's page.
+4. Stripe calls `/api/stripe/webhook`. The route checks the signature, reads the paid session and sends our order
+   confirmation through Brevo (bcc to us).
+5. It marks the PaymentIntent (`metadata.zl_confirmation_sent`), so the mail goes out once.
 
-## Agent rules: production checks
+`SHOP_LAUNCHED` controls everything that changes at launch: the public shop pages, indexing, the sitemap, the footer
+and header links, the legal texts in the Datenschutz/Impressum, and whether live Stripe keys are accepted. While it is
+off, the shop is visible only to internal devices and on local and preview builds.
 
-Coordinator rule since 2026-10-20 (BL-058). zauberlabs.de's statistics must not count the PO or the agents.
+**Withdrawal (§ 356a BGB).** `/[lang]/vertrag-widerrufen` posts to `/api/withdrawal`, which immediately e-mails the
+confirmation of receipt (the content of the declaration, plus the date and time) to the customer, with a copy to us.
+Nothing is stored on our server.
 
-- **(a) Internal mode first.** Before opening www.zauberlabs.de in any browser, set the cookie `zl_internal=1` for that host (BL-039). Vercel Web Analytics and our own statistics then drop the visit. No secret is needed; the secret only gates the PO's `/api/internal-mode?k=…` link.
-- **(b) Keep the headless User-Agent.** Don't replace Chromium's default "HeadlessChrome" UA. Our statistics also drop that UA, as a second safety net. Vercel Web Analytics doesn't.
-- **(c) Preview and curl where possible.** Do visual checks on the Vercel preview (its statistics go to separate `m:test:*` keys). Do "is it live" checks with curl: no JavaScript, so nothing is counted anywhere.
-- **The tool:** `node scripts/prod-check.mjs [-v WxH]... [--out DIR] [--full] URL...` does (a) and (b) for you. It sets the cookie for every host before the first navigation, and refuses to run if the cookie isn't in place or the UA isn't the headless default. It also stops if any analytics or statistics request leaves the page, then saves one screenshot per URL and viewport (default 1440×900 and 390×844, into the git-ignored `prod-check-shots/`). No dependencies; it uses `$CHROME_PATH` or Playwright's cached Chromium.
+**Votes and suggestions.**
+- `/api/vote` handles one vote per car per visitor (cookie `zl_vid`, rate-limited).
+- `/api/suggest` stores car suggestions.
+- Suggestions are reviewed on `/de/admin` (password-protected); approved cars join the vote.
 
-## Deploy
+**Own statistics.** Article pages send an anonymous beacon to `/api/m`, which keeps daily counters in Redis (no cookies,
+no IP stored; production `m:*`, preview/local `m:test:*`). The counters show up under "Reading statistics" on
+`/de/admin`. Devices carrying the internal marker cookie `zl_internal=1` are counted neither here nor in Vercel
+Analytics. The marker is set once per device via `/api/internal-mode`.
 
-1. Import this repo in Vercel (Add New → Project).
-2. Storage → Upstash for Redis → connect to the project (adds `UPSTASH_REDIS_REST_URL` / `_TOKEN`).
-3. Settings → Environment Variables: `VOTE_SALT` (random string), `ADMIN_PASSWORD` (for /de/admin), optionally `NEXT_PUBLIC_E46_URL`.
-4. Settings → Domains: add `zauberlabs.de` and `www.zauberlabs.de`, then create the A/CNAME records Vercel shows in the whois.com DNS panel.
+## Environment variables
 
-Read suggestions: `LRANGE suggestions 0 -1` in the Upstash console.
+Names only; the values live in Vercel.
 
-## Statistics (BL-051)
+| Group | Variables |
+| --- | --- |
+| Redis | `KV_REST_API_URL`, `KV_REST_API_TOKEN` (from Vercel's Upstash integration) or `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` |
+| Votes / admin | `VOTE_SALT`, `ADMIN_PASSWORD` |
+| Statistics | `STATS_MONTHLY_COMMAND_BUDGET` (optional), `ZL_INTERNAL_SECRET` (gates `/api/internal-mode`) |
+| Shop | `SHOP_LAUNCHED` (`1` = launched), `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` |
+| E-mail | `BREVO_API_KEY`, `SHOP_MAIL_FROM` (optional sender, must be verified in Brevo), `BREVO_API_URL` (local tests only) |
+| E46BUILD links | `NEXT_PUBLIC_E46_LIVE` (`1` = links are live), `NEXT_PUBLIC_E46_URL` (optional, default `https://e46.zauberlabs.de`) |
+| Set by Vercel | `VERCEL_ENV` |
+| Smoke test | `SMOKE_PORT`, `SMOKE_SKIP_BUILD` |
 
-Our own anonymous reading statistics, shown under "Reading statistics" on `/de/admin` (same password). Described in the Datenschutz, Abschnitt 6.
+Without Redis credentials, votes and suggestions fall back to an in-memory store for local development only. On
+production that is refused.
 
-- **What is counted:** article views per article and language, unique readers per day, referrer domain only, country (`x-vercel-ip-country`, counted on its own), engaged reading time in buckets, read-to-end, and configurator clicks. Article pages send a beacon to `app/api/m` (`components/blog/ReadBeacon.tsx`); configurator clicks come from `components/ConfiguratorClickTracker.tsx`.
-- **Votes (BL-051.2):** each new vote (not a withdrawn one) adds 1 to three separate daily counters: per car, per referrer domain of the visit (`document.referrer`, sent with the vote; our own pages count as "internal") and per country. None of them is linked to the `zl_vid` voter id or cookie.
-- **Start date (BL-060):** the panel counts from `STATS_START_DAY` (2026-10-21, Berlin day keys) in `lib/metrics.ts`; the 7/30/90-day periods never reach earlier. Older keys aren't deleted, just not shown, and expire normally.
-- **What is stored:** daily counters only, in the existing Upstash Redis (`lib/metrics-store.ts`). No IP, no cookies, nothing in the browser, no record per visitor. Unique readers: a SHA-256 of a daily random salt + IP + User-Agent goes only into a HyperLogLog. The salt expires 24 h after it's created. The next day the HyperLogLog is rolled up into a plain number and deleted. Daily keys expire after 400 days (about 13 months).
-- **Keys:** production writes `m:*`. Preview and local builds write `m:test:*`, so test clicks never mix with real numbers.
-- **Not counted:** bots (User-Agent), devices in internal mode (BL-039), drafts and scheduled previews, slugs that aren't published articles.
-- **Upstash region:** database "zauberlabs-votes", AWS Frankfurt (eu-central-1), free tier (500k commands a month, 250 MB). Verified by the PO in the Upstash console on 2026-10-19.
-- **Monthly budget:** the votes and suggestions share this free database, so the statistics stop counting for the rest of the Berlin month once they've used `STATS_MONTHLY_COMMAND_BUDGET` commands (default 250,000), or as soon as Redis reports a limit error. Usage is tracked in `m:budget:{YYYY-MM}` and shown on the admin panel. Stats errors never reach the reader: `/api/m` always answers 204 and article pages don't wait for it.
+## Run, test, deploy
+
+```bash
+npm ci --legacy-peer-deps
+npm run dev          # http://localhost:3000 → redirects to /de
+
+npm run typecheck    # tsc --noEmit
+npm test             # node:test suites in tests/
+npm run smoke        # production build, start on a free port (default 3010), request every blog route
+npm run check        # all three
+```
+
+**Deploy:** a push or merge to `main` deploys to production on Vercel automatically; every other branch gets a preview
+deployment.
+
+**Checking production in a browser:** use `node scripts/prod-check.mjs [-v WxH]... [--full] URL...` only. It sets the
+internal-mode cookie before the first page loads, keeps the headless User-Agent, and stops if any analytics or
+statistics request leaves the page. So checks are never counted. For "is it live" checks, plain `curl` is enough.
