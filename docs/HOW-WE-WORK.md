@@ -73,14 +73,14 @@ at **07:14** confirms it is live (with `curl`) and moves the card to PUBLISHED.
    tmux new -d -s blog-writer  -c "$HOME/.a Projects/zauberlabs-web-writer"  'claude --continue --remote-control Writer -n Writer'
    ```
 
-3. Re-create the session-only schedules (the morning checks): they don't survive a restart.
+3. Check in each session that its scheduled checks are still there (the morning checks); re-create any that are missing.
 4. Remember that `/tmp` is cleared, including any scratch files and screenshots kept there.
 
 ## Standing rules
 
 - **No personal data in outbound requests.** Never send personal data (e-mail addresses, names, tokens) in a
-  User-Agent, header, URL or request body to an outside host. Outside fetches use a neutral User-Agent such as
-  `zauberlabs-research/1.0`.
+  User-Agent, header, URL or request body to an outside host. Outside fetches use a neutral User-Agent with no personal
+  data.
 - **No heavy jobs during an E46 gate.** No builds, test suites or screenshot servers while `/tmp/e46-gate.lock`
   exists, and none while the load is above about 6. Run one heavy job at a time and stop dev servers after use.
 - **Change only what was asked.** A UI fix touches only the named element.
