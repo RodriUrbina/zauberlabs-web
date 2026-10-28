@@ -2,7 +2,7 @@ import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 import Stripe from "stripe";
 import { handleEvent, type Deps } from "../lib/order-confirmation";
-import { orderMail, vatIn } from "../lib/order-mail";
+import { adjustmentOf, orderMail, vatIn } from "../lib/order-mail";
 import { agb } from "../lib/legal/agb";
 import { widerruf } from "../lib/legal/widerruf";
 import { clausesText, blocksText } from "../lib/legal/blocks";
@@ -17,13 +17,13 @@ function session(over: Partial<Record<string, unknown>> = {}, piMeta: Record<str
     payment_status: "paid",
     locale: "de",
     created: 1793091600, // 2026-10-28 08:00 UTC
-    amount_total: 1880,
+    amount_total: 2180, // = lines (1690 + 490) + shipping (0)
     shipping_cost: { amount_total: 0 },
     customer_details: { email: "erika@example.org", name: "Erika Muster" },
     collected_information: { shipping_details: { name: "Erika Muster", address: { line1: "Musterweg 1", line2: null, postal_code: "10115", city: "Berlin", state: null, country: "DE" } } },
     line_items: { data: [
-      { description: "Sticker-Set: alle 4 Motive (Limousine Japanrot, Touring Laguna-seca Blau, Cabrio Jetschwarz, M3 Phönixgelb)", quantity: 1, amount_total: 1690 },
-      { description: "Sticker: M3 Phönixgelb", quantity: 1, amount_total: 490 },
+      { description: "Sticker-Set: alle 4 Motive (Limousine Japanrot, Touring Laguna-seca Blau, Cabrio Jetschwarz, M3 Phönixgelb)", quantity: 1, amount_subtotal: 1690, amount_total: 1690 },
+      { description: "Sticker: M3 Phönixgelb", quantity: 1, amount_subtotal: 490, amount_total: 490 },
     ] },
     payment_intent: { id: "pi_test_456", object: "payment_intent", metadata: piMeta },
     ...over,
@@ -82,14 +82,15 @@ describe("order confirmation (BL-090)", () => {
         "- 1 × Sticker-Set: alle 4 Motive (Limousine Japanrot, Touring Laguna-seca Blau, Cabrio Jetschwarz, M3 Phönixgelb) — 16,90 €",
         "- 1 × Sticker: M3 Phönixgelb — 4,90 €",
         "Versand: kostenlos",
-        `Gesamt: 18,80 € (inkl. 19 % MwSt.: 3,00 €)`,
+        `Gesamt: 21,80 € (inkl. 19 % MwSt.: 3,48 €)`,
         "Musterweg 1\n10115 Berlin\nDeutschland",
         "Lieferzeit: 3–5 Werktage",
         "https://www.zauberlabs.de/de/vertrag-widerrufen",
       ]) assert.ok(t.includes(part), part);
       assert.ok(t.includes(clausesText(agb("de").clauses)), "the full AGB, from the same source as the page");
       assert.ok(t.includes(blocksText(widerruf("de").blocks)), "the full Widerrufsbelehrung + Muster-Widerrufsformular");
-      assert.equal(vatIn(1880), 300);
+      assert.ok(!/Rabatt\/Anpassung/.test(t), "a consistent order has no adjustment line");
+      assert.equal(vatIn(2180), 348, "the VAT line is 19/119 of the total");
     });
   });
 
@@ -121,5 +122,22 @@ describe("order confirmation (BL-090)", () => {
     } finally {
       process.env = env;
     }
+  });
+  test("a Stripe discount shows as its own line, so the mail adds up to Stripe's total (never recomputed)", async () => {
+    // A 10 % promo code: lines keep their pre-discount subtotal, Stripe's amount_total is lower, total_details.amount_discount > 0.
+    const disc = session({
+      amount_total: 1962, // 2180 − 218
+      total_details: { amount_discount: 218, amount_shipping: 0, amount_tax: 0 },
+      line_items: { data: [
+        { description: "Sticker-Set: alle 4 Motive (Limousine Japanrot, Touring Laguna-seca Blau, Cabrio Jetschwarz, M3 Phönixgelb)", quantity: 1, amount_subtotal: 1690, amount_total: 1521 },
+        { description: "Sticker: M3 Phönixgelb", quantity: 1, amount_subtotal: 490, amount_total: 441 },
+      ] },
+    });
+    const f = fakes(disc);
+    await handleEvent(event("checkout.session.completed", { id: "cs_test_123", payment_status: "paid" }), f.deps);
+    const t = f.mails[0].text.replace(/\u00a0/g, " ");
+    for (const part of ["— 16,90 €", "— 4,90 €", "Versand: kostenlos", "Rabatt/Anpassung: −2,18 €", "Gesamt: 19,62 € (inkl. 19 % MwSt.: 3,13 €)"]) assert.ok(t.includes(part), part);
+    assert.equal(adjustmentOf({ items: [{ name: "a", quantity: 1, amount: 1690 }, { name: "b", quantity: 1, amount: 490 }], shipping: 0, total: 1962 }), -218);
+    assert.equal(1690 + 490 + 0 - 218, 1962, "items + shipping + adjustment = total (cents)");
   });
 });

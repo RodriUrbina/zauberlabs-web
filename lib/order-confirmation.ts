@@ -41,7 +41,8 @@ export function orderFromSession(s: Stripe.Checkout.Session, pi: Stripe.PaymentI
     created: new Date(s.created * 1000),
     email: s.customer_details?.email ?? "",
     name: s.customer_details?.name || ship?.name || "",
-    items: (s.line_items?.data ?? []).map((li) => ({ name: li.description ?? "", quantity: li.quantity ?? 1, amount: li.amount_total })),
+    // Line amounts BEFORE any discount (Stripe's amount_subtotal), so a discount shows as its own line in the mail (orderMail).
+    items: (s.line_items?.data ?? []).map((li) => ({ name: li.description ?? "", quantity: li.quantity ?? 1, amount: li.amount_subtotal ?? li.amount_total })),
     shipping: s.shipping_cost?.amount_total ?? 0,
     total: s.amount_total ?? 0,
     address,

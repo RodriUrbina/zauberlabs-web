@@ -17,12 +17,18 @@ export type Order = {
   created: Date;
   email: string;
   name: string;
-  items: { name: string; quantity: number; amount: number }[]; // amount = line total in cents, gross
-  shipping: number; // cents, gross
-  total: number; // cents, gross
+  items: { name: string; quantity: number; amount: number }[]; // amount = line total in cents, gross, before discounts
+  shipping: number; // cents, gross (Stripe's shipping_cost.amount_total)
+  total: number; // cents, gross (Stripe's amount_total; never recomputed)
   address: string[]; // name and address lines as Stripe collected them
   country: string; // ISO code of the delivery country
 };
+
+/**
+ * The difference between Stripe's total and items + shipping: a discount/promo code or any other adjustment (negative = less
+ * to pay). Printed as its own line so the mail always adds up to the total Stripe charged.
+ */
+export const adjustmentOf = (o: Pick<Order, "items" | "shipping" | "total">) => o.total - (o.items.reduce((s, i) => s + i.amount, 0) + o.shipping);
 
 /** The VAT included in a gross amount at 19 % (all prices are gross). */
 export const vatIn = (gross: number) => Math.round((gross * 19) / 119);
@@ -35,6 +41,8 @@ export function orderMail(o: Order): { subject: string; text: string } {
     ? de ? "3–5 Werktage nach Zahlungseingang (Deutsche Post, Brief)" : "3–5 working days after payment (Deutsche Post, letter)"
     : de ? "7–14 Werktage nach Zahlungseingang (DHL Päckchen)" : "7–14 working days after payment (DHL small parcel)";
   const items = o.items.map((i) => `- ${i.quantity} × ${i.name} — ${eur(i.amount)}`);
+  const adj = adjustmentOf(o);
+  const adjLine = adj === 0 ? [] : [`${de ? "Rabatt/Anpassung" : "Discount/adjustment"}: ${adj < 0 ? "−" : "+"}${eur(Math.abs(adj))}`];
   const terms = agb(o.lang);
   const notice = widerruf(o.lang);
   const rule = "────────────────────────────────────────";
@@ -51,6 +59,7 @@ export function orderMail(o: Order): { subject: string; text: string } {
         "Deine Bestellung:",
         ...items,
         `Versand: ${o.shipping === 0 ? "kostenlos" : eur(o.shipping)}`,
+        ...adjLine,
         `Gesamt: ${eur(o.total)} (inkl. 19 % MwSt.: ${eur(vatIn(o.total))})`,
         "",
         "Lieferadresse:",
@@ -78,6 +87,7 @@ export function orderMail(o: Order): { subject: string; text: string } {
         "Your order:",
         ...items,
         `Shipping: ${o.shipping === 0 ? "free" : eur(o.shipping)}`,
+        ...adjLine,
         `Total: ${eur(o.total)} (incl. 19 % VAT: ${eur(vatIn(o.total))})`,
         "",
         "Delivery address:",
