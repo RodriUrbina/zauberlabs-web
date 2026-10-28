@@ -29,7 +29,7 @@ export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: 
  * BL-062 (eBay listings, T-102.5): server-side Browse API with part numbers + delivery country only; in-memory cache, re-fetched after 3 h, never shown after 6 h; images via our proxy (Abschnitt 14).
  * BL-084/BL-085 (rendered only with SHOP_LAUNCHED=1): § 2 line and section 15 "Bestellungen und Zahlungen" for the fan shop
  * (cart in localStorage, Stripe, PayPal/Klarna, Deutsche Post/DHL, withdrawal confirmations via Brevo, retention), and § 12
- * renamed "E-Mail-Versand (Brevo)" with the withdrawal mails. Self-drafted, not lawyer-reviewed. With the flag on, "Deine
+ * renamed "E-Mail-Versand (Brevo)" with the withdrawal mails. BL-090: + the order confirmation via Brevo (§ 15, § 12). Self-drafted, not lawyer-reviewed. With the flag on, "Deine
  * Rechte" and "Aktualität" become 16 and 17.
  * If you add another analytics tool, a newsletter tool, embeds or ads, this page must be updated.
  * Boilerplate only, not legal advice — have it checked if you're unsure.
@@ -288,7 +288,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Die Anmelde-E-Mails für E46BUILD-Konten (Abschnitt 10) versenden wir über Brevo (Paris, Frankreich) als Auftragsverarbeiter. Dabei verarbeitet
         Brevo deine E-Mail-Adresse, den Betreff und den Anmeldelink. Mit Brevo besteht ein Vertrag zur Auftragsverarbeitung.
         {SHOP_LAUNCHED &&
-          " Ebenfalls über Brevo versenden wir die Eingangsbestätigungen für Widerrufe aus unserem Fan-Shop und eine Kopie an uns; dabei verarbeitet Brevo deine E-Mail-Adresse und den Inhalt der Bestätigung (Abschnitt 15)."}
+          " Ebenfalls über Brevo versenden wir die Bestellbestätigungen und die Eingangsbestätigungen für Widerrufe aus unserem Fan-Shop, jeweils mit einer Kopie an uns; dabei verarbeitet Brevo deine E-Mail-Adresse und den Inhalt der Bestätigung, bei Bestellungen auch Name, Lieferadresse und Artikel (Abschnitt 15)."}
       </p>
 
       <h2>13. Kontakt per E-Mail</h2>
@@ -370,7 +370,11 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
           </p>
           <p>
             Die Bestelldaten (Artikel, Name, E-Mail-Adresse, Lieferadresse, Zahlungsstatus) liegen in unserem Stripe-Konto; eine eigene Bestelldatenbank führen wir
-            nicht. Stripe schickt dir einen Beleg per E-Mail.
+            nicht. Stripe schickt dir einen Beleg per E-Mail. Zusätzlich schicken wir dir eine Bestellbestätigung mit unseren AGB und der
+            Widerrufsbelehrung per E-Mail: Dafür liest unser Server nach der Zahlung die Bestellung bei Stripe ab (Name, E-Mail-Adresse,
+            Lieferadresse, Artikel, Beträge) und versendet die E-Mail über Brevo (Paris, Frankreich) als Auftragsverarbeiter, mit einer Kopie an
+            uns (Abschnitt 12). Auf unserem Server speichern wir davon nichts; bei der Zahlung in Stripe vermerken wir nur, dass die Bestätigung
+            verschickt wurde.
           </p>
           <p>
             <strong>Versand.</strong> Für den Versand übergeben wir deine Sendung mit Name und Lieferadresse an die Deutsche Post AG bzw. an DHL.
