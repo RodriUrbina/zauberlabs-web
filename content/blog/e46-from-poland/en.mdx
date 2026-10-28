@@ -1,0 +1,124 @@
+---
+# BL-091 — Writer draft, English. Country series 1/4 (PO 2026-10-28). No seller names (PO rule, as BL-019); eBay named as the platform.
+title: "Building your E46 from Poland: which sellers in E46BUILD deliver, and what shipping costs"
+description: "What a Polish E46 owner sees in E46BUILD: the shops that deliver to Poland, their offers and shipping costs, and eBay listings filtered to your country."
+date: 2026-10-28
+updated: 2026-11-12
+publishAt: "2026-11-12"
+lang: en
+slug: e46-from-poland
+card: BL-091
+author: "zauberlabs"
+tags:
+  - E46
+  - buying guide
+  - shipping
+  - configurator
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # no hero: no correct image in the PO's library (PO rule: no correct image, no image)
+  alt: "A BMW E46 parked on a street in Poland"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "No hero planned. If the PO adds one later: an E46 photo or AI illustration from the PO's library, labelled if AI; no shop names, no number-plate text."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "E46BUILD seller and offer data: each seller's ship-to list, hidden sellers, the offers with their check date, and the rule that an offer shows only to owners in a country the seller delivers to, for 30 days after its last check"
+    type: project record (configurator data and code)
+    path: "e46build master 5c794545: packages/marketplace-data/src/vendors.ts, e46-eu-offers.data.ts, e46-bumper-offers.data.ts, e46-seat-offers.data.ts, e46-steering-offers.data.ts; apps/api/src/domain/offer-visibility.ts"
+    confidence: n/a
+  - id: S2
+    title: "T-031 — European seller research, 1 October 2026: each seller's delivery terms and shipping tables as their pages stated them, including the country list of a German BMW dealer's shop and the per-country shipping table of a Dutch BMW specialist"
+    type: retailer pages (what each page said on the fetch date)
+    path: "t031-evidence/dealers-headlights.json; t031-evidence/specialists.json"
+    confidence: HIGH
+    note: "HIGH that the pages said this on 2026-10-01. Shipping rates and country lists can change. No seller is named in this article."
+  - id: S3
+    title: "T-155 — re-check of the visible shop offers on 28 October 2026: 203 offers from four sellers, including all of the German BMW dealer's, checked for part number, order button, availability and price"
+    type: retailer pages (re-check)
+    path: "web: e46build branch agent-7/T-155-recheck-offers 81e91601, docs/research/t155-recheck/README.md and recheck.json (not yet on master)"
+    confidence: HIGH
+    note: "HIGH that the pages said this on 2026-10-28. Read from the agent branch, not master."
+  - id: S4
+    title: "E46BUILD's eBay listings: a server-side search on eBay Germany for the part's BMW numbers, limited to business sellers, fixed prices and listings that deliver to the owner's country, with eBay's stated shipping cost and delivery window"
+    type: project record (configurator code)
+    path: "e46build master 5c794545: apps/api/src/ebay/browse.ts"
+    confidence: n/a
+---
+
+If you drive an E46 in Poland, the hard part is rarely knowing what you want. It is finding a seller who has the genuine part, ships it to Poland, and tells you what the shipping costs. This guide shows what E46BUILD shows a Polish owner today: which shops deliver to Poland, what they offer, what shipping costs where we know it, and how eBay fits in.
+
+Prices and offers below are what the sellers' pages said on the dates given. They change, so treat them as a snapshot.
+
+## How E46BUILD knows you are in Poland
+
+E46BUILD uses your approximate country, which our host derives from your IP address, for two things. It treats your car as a European E46, so the catalogue shows European part numbers. And it shows only the sellers that deliver to your country. [S1] You don't enter an address, and nothing about your country is stored unless you ask for a seller notice.
+
+In practice, a seller that ships only within Germany or the Netherlands doesn't appear for you at all. That is deliberate: an offer you can't have delivered isn't an offer.
+
+## The shops that deliver to Poland
+
+Of the European shops in E46BUILD, two list Poland as a delivery country. [S1] [S2, HIGH]
+
+| Shop | Based in | What it offers in E46BUILD | Condition |
+| --- | --- | --- | --- |
+| A BMW dealer's online parts shop | Germany | 59 offers: 34 headlights, 8 wheels, 11 bumper parts, 6 steering wheels | all new, genuine BMW |
+| A BMW specialist | Netherlands | 10 offers: 4 headlights, 5 wheels, 1 steering wheel | new; the steering wheel refurbished |
+
+Counts are from E46BUILD's data on 28 October 2026. [S1]
+
+The German dealer's prices in E46BUILD ran from about €97 to €1,665 per part, and the Dutch specialist's from about €106 to €1,160, on the dates they were last checked. [S1] Both state their prices including their own country's VAT: German 19 % and Dutch 21 %. [S1]
+
+The other European shops in E46BUILD deliver only within Germany, only to the Netherlands and Belgium, or to a list of western European countries that doesn't include Poland. [S1] One more seller lists Poland, but E46BUILD doesn't show it at all after a check of its listings. [S1]
+
+**Seats** are the gap. Every seat seller in E46BUILD that we can show delivers only within Germany, as far as we have been able to confirm. [S1] A Polish owner will usually see seats with no seller for now.
+
+## What shipping costs
+
+| Shop | Shipping to Poland | Delivery time |
+| --- | --- | --- |
+| The Dutch BMW specialist | €28.95 per parcel, from its own per-country table | 3–7 days |
+| The German BMW dealer's shop | Poland is on its delivery list; we found no rate for Poland on its pages | not stated |
+
+As each shop's pages stated it on 1 October 2026. [S2, HIGH]
+
+The German shop's free shipping from €200 applies to orders within Germany only. [S2, HIGH] For Poland, the shipping cost shows at its checkout.
+
+The prices in E46BUILD are the shop's page prices. The final amount for delivery to Poland, including shipping and the VAT the shop charges, is the one its checkout shows.
+
+## eBay: listings filtered to Poland
+
+For wheels, headlights, bumpers and steering wheels, E46BUILD also shows current eBay listings that match your car. Our server searches eBay Germany for the part's BMW numbers. It keeps only business sellers with a fixed price, and only listings that deliver to your country, so a Polish owner sees only listings that ship to Poland. [S4] Each listing shows eBay's stated shipping cost to you and, where eBay gives one, the delivery window. [S4]
+
+For a Polish owner, that often makes eBay the widest choice. The seller may be in another country, so check the listing's own shipping and returns before you buy.
+
+The eBay links carry an eBay Partner Network ID. If you buy through one, we may earn a commission; your price doesn't change.
+
+## What about shops in Poland?
+
+E46BUILD doesn't include shops based in Poland yet. [S1] Local dismantlers and BMW dealers may well have the part you need, and collecting it can save the shipping. E46BUILD can still help: it tells you which version fits your car, so you know exactly what to ask for.
+
+## How fresh the offers are
+
+An offer shows in E46BUILD only for 30 days after it was last checked. [S1] On 28 October 2026 all of the German dealer's offers were checked again: every page still listed the part, had an order button and showed a price. [S3, HIGH] The Dutch specialist's offers were last checked between 8 and 19 October 2026. [S1] Until they are checked again, they leave E46BUILD 30 days after that.
+
+## What you see as a Polish owner
+
+1. **Pick your body.** Start with your E46's body style: [Sedan](https://e46.zauberlabs.de/?start=sedan), [Touring](https://e46.zauberlabs.de/?start=touring), [Coupé](https://e46.zauberlabs.de/?start=coupe), [Convertible](https://e46.zauberlabs.de/?start=convertible), [Compact](https://e46.zauberlabs.de/?start=compact) or [M3](https://e46.zauberlabs.de/?start=m3).
+2. **Answer the fit questions.** E46BUILD asks only what a part's fit depends on, such as the year or the facelift.
+3. **Read the sellers.** Under each part you see the shops that deliver to Poland and the eBay listings that do. Where there is none, the part says so.
+4. **Plan the whole job.** "My E46 plan" adds up the approximate cost from the same sellers, so its range is already limited to sellers who deliver to you. [S1]
+
+## Notes on the evidence
+
+**Confidence.** Which sellers deliver to Poland, what they offer and when each offer was checked come from E46BUILD's own data. Shipping rates and delivery terms are what each shop's pages said on 1 October 2026 (HIGH for that date). The German dealer's offers were re-checked on 28 October 2026, in a check that isn't yet merged into the main data.
+
+**Not established.** The German shop's shipping rate to Poland; whether either shop charges Polish VAT for delivery to Poland; and what Polish shops have, since none is in E46BUILD.
+
+## What comes next
+
+Our E46 configurator is live: it shows which parts fit your car and links to sellers where we've found one. Pick your body style, and E46BUILD shows only the sellers that deliver to Poland.
