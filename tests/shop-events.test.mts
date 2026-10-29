@@ -77,8 +77,9 @@ describe("shop analytics events (BL-097)", () => {
   test("wiring: card button and 'add all' fire per design, drawer +/- does not; checkout fires before /api/checkout; success page uses the guard", () => {
     const shop = read("components", "shop", "ShopClient.tsx");
     assert.match(shop, /onClick=\{\(\) => addToCart\(p\.id\)\}/, "card button");
-    assert.match(shop, /for \(const p of AVAILABLE\) trackShop\(\{ name: "shop_add_to_cart"/, "add all: one event per design");
-    assert.match(shop, /aria-label=\{`\$\{t\.cart\.more\}[^`]*`\} onClick=\{\(\) => add\(p\.id\)\}/, "drawer + uses add() without tracking");
+    assert.match(shop, /for \(const p of belowMax\) trackShop\(\{ name: "shop_add_to_cart"/, "add all: one event per design actually added (BL-099)");
+    assert.match(shop, /if \(add\(id\)\) trackShop\(\{ name: "shop_add_to_cart"/, "card button: an event only when something was added (BL-099)");
+    assert.match(shop, /aria-label=\{`\$\{t\.cart\.more\}[^`]*`\}\s+onClick=\{\(\) => add\(p\.id\)\}/, "drawer + uses add() without tracking");
     assert.ok(shop.indexOf('name: "shop_checkout_start"') < shop.indexOf('fetch("/api/checkout"'), "checkout_start before the API call");
     assert.match(read("app", "[lang]", "shop", "success", "page.tsx"), /<OrderCompleted lang=\{lang\} \/>/);
     assert.match(read("lib", "shop-checkout.ts"), /success_url: `\$\{origin\}\/\$\{lang\}\/shop\/success\?session_id=\{CHECKOUT_SESSION_ID\}`/);

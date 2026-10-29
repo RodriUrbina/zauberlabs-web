@@ -56,10 +56,9 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
     const saved = load<Record<string, unknown>>(CART_KEY, {});
     const clean = cleanCart(saved);
     setCart(clean);
-    if (saved && typeof saved === "object" && Object.keys(saved).length !== Object.keys(clean).length) {
-      save(CART_KEY, clean);
-      setRemoved(true);
-    }
+    // BL-099: an old cart with more than 2 of a design is clamped to 2 and saved back (no note: nothing was removed).
+    if (JSON.stringify(saved) !== JSON.stringify(clean)) save(CART_KEY, clean);
+    if (saved && typeof saved === "object" && Object.keys(saved).length !== Object.keys(clean).length) setRemoved(true);
     const c = load(COUNTRY_KEY, "DE");
     if (typeof c === "string" && isShipCountry(c)) setCountry(c);
   }, []);
@@ -69,17 +68,27 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
     setCart(clean);
     save(CART_KEY, clean);
   };
-  const add = (id: ProductId, n = 1) => update({ ...cart, [id]: Math.min((cart[id] ?? 0) + n, MAX_PER_PRODUCT) });
-  const setQty = (id: ProductId, q: number) => update({ ...cart, [id]: q });
-  const addAll = () => {
-    update(Object.fromEntries(AVAILABLE.map((p) => [p.id, Math.min((cart[p.id] ?? 0) + 1, MAX_PER_PRODUCT)])) as Cart);
-    // BL-097: one add-to-cart event per design added (there is no "set" product).
-    for (const p of AVAILABLE) trackShop({ name: "shop_add_to_cart", props: { design: p.id, lang } });
+  /** BL-099: true when this design is at the per-order maximum (2). */
+  const atMax = (id: ProductId) => (cart[id] ?? 0) >= MAX_PER_PRODUCT;
+  /** Adds one of a design unless it is at the maximum; returns whether something was added. */
+  const add = (id: ProductId) => {
+    if (atMax(id)) return false;
+    update({ ...cart, [id]: (cart[id] ?? 0) + 1 });
+    return true;
   };
-  /** BL-097: an add-to-cart ACTION (the card button) is tracked; quantity edits in the cart drawer are not. */
+  const setQty = (id: ProductId, q: number) => update({ ...cart, [id]: q });
+  const remove = (id: ProductId) => update({ ...cart, [id]: 0 });
+  /** BL-099: "add all" adds only designs below the maximum; disabled when every design is at it. */
+  const belowMax = AVAILABLE.filter((p) => !atMax(p.id));
+  const addAll = () => {
+    if (belowMax.length === 0) return;
+    update({ ...cart, ...Object.fromEntries(belowMax.map((p) => [p.id, (cart[p.id] ?? 0) + 1])) } as Cart);
+    // BL-097: one add-to-cart event per design actually added (there is no "set" product).
+    for (const p of belowMax) trackShop({ name: "shop_add_to_cart", props: { design: p.id, lang } });
+  };
+  /** BL-097: an add-to-cart ACTION (the card button) is tracked, only when something was added; drawer +/− are not tracked. */
   const addToCart = (id: ProductId) => {
-    add(id);
-    trackShop({ name: "shop_add_to_cart", props: { design: id, lang } });
+    if (add(id)) trackShop({ name: "shop_add_to_cart", props: { design: id, lang } });
   };
 
   const priced = useMemo(() => priceCart(cart), [cart]);
@@ -149,7 +158,9 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
                   <button
                     type="button"
                     onClick={() => addToCart(p.id)}
-                    className="flex h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-4 text-[15px] font-semibold text-ink hover:bg-white"
+                    disabled={atMax(p.id)}
+                    aria-disabled={atMax(p.id)}
+                    className="flex h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-4 text-[15px] font-semibold text-ink hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-paper"
                   >
                     + {t.add}
                     {inCart > 0 && <span className="rounded-full bg-ink px-2 py-0.5 text-xs text-paper">{inCart}</span>}
@@ -164,6 +175,7 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
                     {t.details}
                   </button>
                 </div>
+                {atMax(p.id) && <p className="-mt-1 text-xs text-fog">{t.cart.max}</p>}
                 {/* GPSR product information (plan § 3 #8) */}
                 <dl id={`gpsr-${p.id}`} hidden={!showDetails} className="flex flex-col gap-2 border-t border-ink-3 pt-3 text-[13px] leading-snug text-fog">
                   {p.colour && <div><dt className="eyebrow text-[10px] text-[#8A877F]">{t.gpsr.colour}</dt><dd>{p.colour[lang]}</dd></div>}
@@ -191,9 +203,18 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
             <p className="text-xl font-extrabold tracking-tight">{t.bundles.all[0]} · {euro(PRICES.all)}</p>
             <p className="mt-1 text-sm text-fog">{t.bundles.all[1]}</p>
           </div>
-          <button type="button" onClick={addAll} className="h-11 cursor-pointer rounded-full bg-paper px-5 text-[15px] font-semibold text-ink hover:bg-white">
-            + {t.bundles.addAll}
-          </button>
+          <div className="flex flex-col items-end gap-1">
+            <button
+              type="button"
+              onClick={addAll}
+              disabled={belowMax.length === 0}
+              aria-disabled={belowMax.length === 0}
+              className="h-11 cursor-pointer rounded-full bg-paper px-5 text-[15px] font-semibold text-ink hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-paper"
+            >
+              + {t.bundles.addAll}
+            </button>
+            {belowMax.length === 0 && <span className="text-xs text-fog">{t.cart.max}</span>}
+          </div>
         </div>
       </div>
 
@@ -232,19 +253,38 @@ export default function ShopClient({ lang, shippingHref }: { lang: Locale; shipp
               <>
                 <ul className="flex flex-col divide-y divide-line">
                   {AVAILABLE.filter((p) => cart[p.id]).map((p) => (
-                    <li key={p.id} className="flex items-center gap-3 py-3">
+                    <li key={p.id} className="flex gap-3 py-3">
                       <span className="relative h-12 w-[72px] shrink-0 overflow-hidden rounded-lg bg-ink-2">
                         <Image src={p.image} alt="" fill sizes="72px" className="object-contain p-0.5" />
                       </span>
-                      <span className="min-w-0 flex-1 text-sm">
-                        <span className="block font-semibold">{p.name[lang]}</span>
-                        <span className="block text-muted">{p.variant[lang]}</span>
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <button type="button" aria-label={`${t.cart.less}: ${p.name[lang]}, ${p.variant[lang]}`} onClick={() => setQty(p.id, (cart[p.id] ?? 1) - 1)} className="size-8 cursor-pointer rounded-full border border-line">−</button>
-                        <span className="w-6 text-center font-mono text-sm">{cart[p.id]}</span>
-                        <button type="button" aria-label={`${t.cart.more}: ${p.name[lang]}, ${p.variant[lang]}`} onClick={() => add(p.id)} className="size-8 cursor-pointer rounded-full border border-line">+</button>
-                      </span>
+                      <div className="flex min-w-0 flex-1 flex-col gap-2">
+                        <span className="text-sm">
+                          <span className="block font-semibold">{p.name[lang]}</span>
+                          <span className="block text-muted">{p.variant[lang]}</span>
+                        </span>
+                        {/* BL-099: stepper (44 px targets on phones; − at 1 removes the line) and a labelled remove, like Crate & Barrel;
+                            + greyed at the maximum (Warby Parker) with our hint. */}
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="flex items-center gap-1">
+                            <button type="button" aria-label={`${t.cart.less}: ${p.name[lang]}, ${p.variant[lang]}`} onClick={() => setQty(p.id, (cart[p.id] ?? 1) - 1)} className="size-11 cursor-pointer rounded-full border border-line text-lg sm:size-9">−</button>
+                            <span className="w-7 text-center font-mono text-sm" aria-live="polite">{cart[p.id]}</span>
+                            <button
+                              type="button"
+                              aria-label={`${t.cart.more}: ${p.name[lang]}, ${p.variant[lang]}`}
+                              onClick={() => add(p.id)}
+                              disabled={atMax(p.id)}
+                              aria-disabled={atMax(p.id)}
+                              className="size-11 cursor-pointer rounded-full border border-line text-lg disabled:cursor-not-allowed disabled:opacity-35 sm:size-9"
+                            >
+                              +
+                            </button>
+                          </span>
+                          <button type="button" aria-label={`${t.cart.remove}: ${p.name[lang]}, ${p.variant[lang]}`} onClick={() => remove(p.id)} className="min-h-11 cursor-pointer px-1 text-sm font-semibold text-muted underline underline-offset-2 hover:text-ink sm:min-h-9">
+                            {t.cart.remove}
+                          </button>
+                        </div>
+                        {atMax(p.id) && <p className="text-xs text-muted">{t.cart.max}</p>}
+                      </div>
                     </li>
                   ))}
                 </ul>

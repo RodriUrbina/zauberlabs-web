@@ -53,7 +53,7 @@ describe("fan shop (BL-084)", () => {
 
   test("the browser's cart is cleaned: unknown ids, bad quantities and prices are dropped", () => {
     assert.deepEqual(cleanCart({ "sedan-red": 2, nope: 1, "m3-yellow": -1, "convertible-black": 1.5, price: 1, "sedan-silver": 1 }), { "sedan-red": 2 });
-    assert.deepEqual(cleanCart({ "sedan-red": 999 }), { "sedan-red": 20 });
+    assert.deepEqual(cleanCart({ "sedan-red": 999 }), { "sedan-red": 2 }, "BL-099: at most 2 per design");
     assert.deepEqual(cleanCart("x"), {});
     // BL-085.1: a saved cart with the striped Touring (on sale until today) loses it on load and is saved back, with a note,
     // so the checkout (which refuses designs not on sale) never receives it.
@@ -194,4 +194,33 @@ describe("fan shop (BL-084)", () => {
     assert.deepEqual(names({ "m3-yellow": 1, "convertible-black": 1, "sedan-red": 1 }, "en"), [["3 stickers: Sedan Japan Red, Convertible Jet Black, M3 Phoenix Yellow", 1, 1290]]);
     assert.deepEqual(names(all4, "de"), [["Sticker-Set: alle 4 Motive (Limousine Japanrot, Touring Laguna-seca Blau, Cabrio Jetschwarz, M3 Phönixgelb)", 1, 1690]]);
   });
+  test("BL-099: max 2 per design — pricing with 2 of each, and the checkout clamps a larger quantity", async () => {
+    const { MAX_PER_PRODUCT } = await import("../lib/shop-pricing");
+    const { sessionParams } = await import("../lib/shop-checkout");
+    assert.equal(MAX_PER_PRODUCT, 2);
+    const two = Object.fromEntries(AVAILABLE.map((p) => [p.id, 2]));
+    assert.equal(priceCart(two).subtotal, 3380, "2 × all 4 = 2 sets = 33,80 €");
+    assert.equal(priceCart({ "sedan-red": 2, "m3-yellow": 2 }).subtotal, 1290 + 490, "4 stickers = any 3 + 1");
+    assert.equal(priceCart({ "sedan-red": 2, "m3-yellow": 2, "convertible-black": 2 }).subtotal, 2 * 1290, "6 stickers = 2 × any 3");
+    assert.equal(priceCart({ ...all4, "m3-yellow": 2 }).subtotal, 1690 + 490);
+    assert.equal(priceCart({ ...all4, "m3-yellow": 2, "sedan-red": 2 }).subtotal, 1690 + 980);
+    // A body with qty 5 (old cart, hand-made request) → the route cleans it to 2, and the Stripe session is priced for 2.
+    const lines = sessionParams(cleanCart({ "sedan-red": 5 }), "de", "DE", "https://www.zauberlabs.de").line_items ?? [];
+    assert.deepEqual(lines.map((l) => [l.price_data?.product_data?.name, l.quantity, l.price_data?.unit_amount]), [["Sticker: Limousine Japanrot", 2, 490]]);
+    assert.match(read("app", "api", "checkout", "route.ts"), /const cart = cleanCart\(body\?\.cart\);/);
+    assert.match(read("lib", "shop-checkout.ts"), /no adjustable_quantity/);
+    assert.ok(!/adjustable_quantity:/.test(read("lib", "shop-checkout.ts")), "Stripe-side quantity stays off");
+  });
+
+  test("BL-099: cart UI — stepper with 44 px targets, labelled remove, + disabled at 2 with the hint; card and 'add all' disabled at the max", () => {
+    const c = read("components", "shop", "ShopClient.tsx");
+    assert.match(c, /aria-label=\{`\$\{t\.cart\.less\}: \$\{p\.name\[lang\]\}, \$\{p\.variant\[lang\]\}`\}[\s\S]{0,100}className="size-11 /, "− 44 px on phones");
+    assert.match(c, /aria-label=\{`\$\{t\.cart\.more\}[\s\S]{0,240}disabled=\{atMax\(p\.id\)\}[\s\S]{0,60}aria-disabled=\{atMax\(p\.id\)\}[\s\S]{0,80}className="size-11 /, "+ disabled at the max, 44 px");
+    assert.match(c, /aria-label=\{`\$\{t\.cart\.remove\}: \$\{p\.name\[lang\]\}, \$\{p\.variant\[lang\]\}`\} onClick=\{\(\) => remove\(p\.id\)\}/);
+    assert.match(c, /\{atMax\(p\.id\) && <p className="text-xs text-muted">\{t\.cart\.max\}<\/p>\}/, "hint under the cart line");
+    assert.match(c, /onClick=\{\(\) => addToCart\(p\.id\)\}\s+disabled=\{atMax\(p\.id\)\}/, "card button disabled at the max");
+    assert.match(c, /onClick=\{addAll\}\s+disabled=\{belowMax\.length === 0\}/, "add all disabled when every design is at the max");
+    assert.match(c, /onClick=\{\(\) => setQty\(p\.id, \(cart\[p\.id\] \?\? 1\) - 1\)\}/, "− at 1 removes the line (qty 0 is dropped by cleanCart)");
+  });
 });
+

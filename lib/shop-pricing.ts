@@ -3,9 +3,10 @@ import { AVAILABLE, PRICES, SHIPPING, availableById, type ProductId, type ShipCo
 /** A cart as the browser keeps it: product id → quantity. */
 export type Cart = Partial<Record<ProductId, number>>;
 
-export const MAX_PER_PRODUCT = 20;
+/** BL-099 (PO 2026-10-29): at most 2 of each design per order. */
+export const MAX_PER_PRODUCT = 2;
 
-/** Keeps only products on sale with a whole quantity of 1–20; anything else is dropped (never trust the browser). */
+/** Keeps only products on sale with a whole quantity, clamped to 1–MAX_PER_PRODUCT; anything else is dropped (never trust the browser). */
 export function cleanCart(input: unknown): Cart {
   const out: Cart = {};
   if (!input || typeof input !== "object") return out;
