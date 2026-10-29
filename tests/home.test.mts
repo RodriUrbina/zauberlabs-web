@@ -83,7 +83,7 @@ describe("home page (BL-053)", () => {
     const readme = fs.readFileSync(pub("/images/README.md"), "utf8");
     for (const lang of LOCALES) {
       const cats = dictionaries[lang].garage.cats;
-      assert.deepEqual(cats.map((c) => c.key), ["headlights", "bumpers", "wheels", "seats", "steering"], lang);
+      assert.deepEqual(cats.map((c) => c.key), ["headlights", "wheels", "bumpers", "seats", "steering"], lang);
       for (const c of cats) {
         assert.ok(fs.existsSync(pub(c.img)), c.img);
         assert.ok(readme.includes(`\`${c.img.replace("/images/", "")}\``), `${c.img} in public/images/README.md`);
@@ -124,4 +124,15 @@ describe("home page (BL-053)", () => {
     assert.match(cl, /aria-selected=\{i === on\}/);
     assert.match(cl, /role="tabpanel"/);
   });
+  test("BL-100: closer-look tabs in E46BUILD's order (Headlights, Wheels, Bumpers, Seats, Steering wheels); each tab links to its own section", async () => {
+    const { e46SectionUrl } = await import("../lib/i18n");
+    for (const lang of LOCALES) {
+      const cats = dictionaries[lang].garage.cats;
+      assert.deepEqual(cats.map((c) => c.key), ["headlights", "wheels", "bumpers", "seats", "steering"], lang);
+      for (const c of cats) assert.equal(new URL(e46SectionUrl(c.key)).searchParams.get("section"), c.key, `${lang} ${c.key}`);
+    }
+    assert.deepEqual(dictionaries.de.garage.cats.map((c) => c.label), ["Scheinwerfer", "Felgen", "Stoßstangen", "Sitze", "Lenkräder"]);
+    assert.match(fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8"), /hrefs=\{E46_LIVE \? t\.garage\.cats\.map\(\(c\) => e46SectionUrl\(c\.key\)\) : null\}/, "hrefs built per key, so they follow the order");
+  });
 });
+
