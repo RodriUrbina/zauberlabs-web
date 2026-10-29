@@ -38,6 +38,8 @@ export function sessionParams(cart: Cart, lang: Locale, country: ShipCountry, or
     mode: "payment",
     submit_type: "pay", // § 312j BGB: the final button must clearly mean "pay"
     locale: lang,
+    // BL-099: no adjustable_quantity on Stripe's page. Our line items are PRICE GROUPS (all-4 set, any 3, single), not one line
+    // per design, so a quantity control there would break the bundle pricing; quantities are changed in our cart only.
     line_items: [...lines.values()].map((l) => ({
       quantity: l.quantity,
       price_data: { currency: "eur", unit_amount: l.amount, product_data: { name: l.name } },
