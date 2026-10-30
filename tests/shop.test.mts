@@ -163,8 +163,8 @@ describe("fan shop (BL-084)", () => {
     // BL-086: the home header links to the shop only with the flag on (desktop nav).
     const home = read("app", "[lang]", "page.tsx");
     assert.equal(home.match(/\/shop`/g)?.length, 2, "desktop nav + phone header");
-    // Phones (option a): Shop replaces Blog only with the flag on (from 412 px; Blog at 375–411 px, BL-102); without it the old Blog link (from 375 px).
-    assert.match(home, /\{SHOP_LAUNCHED \? \(\s*<>\s*<Link href=\{`\/\$\{lang\}\/shop`\} className="[^"]*max-\[412px\]:hidden sm:hidden">\{t\.nav\.shop\}<\/Link>\s*<Link href=\{`\/\$\{lang\}\/blog`\} className="[^"]*max-\[374px\]:hidden min-\[412px\]:hidden">\{t\.nav\.blog\}<\/Link>\s*<\/>\s*\) : \(\s*<Link href=\{`\/\$\{lang\}\/blog`\} className="[^"]*max-\[374px\]:hidden sm:hidden">\{t\.nav\.blog\}<\/Link>/);
+    // Phones (option a): Shop replaces Blog only with the flag on (from 412 px, nothing below, BL-102 option c); without it the old Blog link (from 375 px).
+    assert.match(home, /\{SHOP_LAUNCHED \? \(\s*<Link href=\{`\/\$\{lang\}\/shop`\} className="[^"]*max-\[412px\]:hidden sm:hidden">\{t\.nav\.shop\}<\/Link>\s*\) : \(\s*<Link href=\{`\/\$\{lang\}\/blog`\} className="[^"]*max-\[374px\]:hidden sm:hidden">\{t\.nav\.blog\}<\/Link>/);
     assert.match(home, /\{SHOP_LAUNCHED && <Link href=\{`\/\$\{lang\}\/shop`\}[^>]*>\{t\.nav\.shop\}<\/Link>\}/);
     const ds = read("app", "[lang]", "datenschutz", "page.tsx");
     assert.match(ds, /\{SHOP_LAUNCHED && \(\s*<>\s*<h2>15\. Bestellungen und Zahlungen/);
