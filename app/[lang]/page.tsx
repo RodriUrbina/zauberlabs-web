@@ -52,7 +52,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 412 px (28 px gap); smaller phones reach the shop through the footer and get "Blog" here instead (375–411 px). */}
             {SHOP_LAUNCHED ? (
               <>
-                <Link href={`/${lang}/shop`} className="py-3 text-sm font-medium hover:opacity-70 max-[411px]:hidden sm:hidden">{t.nav.shop}</Link>
+                <Link href={`/${lang}/shop`} className="py-3 text-sm font-medium hover:opacity-70 max-[412px]:hidden sm:hidden">{t.nav.shop}</Link>
                 <Link href={`/${lang}/blog`} className="py-3 text-sm font-medium hover:opacity-70 max-[374px]:hidden min-[412px]:hidden">{t.nav.blog}</Link>
               </>
             ) : (
