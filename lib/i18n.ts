@@ -39,7 +39,7 @@ const en = {
     ],
     pick: "Parts in E46BUILD", // accessible name of the category tab list
     cta: "Try it on your E46",
-    startLabel: "Start with your body",
+    startLabel: "Start configuring your E46 by picking its body style first",
     open: "Open E46BUILD",
     // BL-081: the three "Why zauberlabs" titles as chips (their sentences are gone); BL-083: under the body tiles.
     values: ["Exact fit.", "Configure, don’t decode.", "Sellers that have it."],
@@ -56,7 +56,7 @@ const en = {
   },
   // BL-081: one "What's next" block, the lineup (E46BUILD live, then the cars in the vote) next to the suggest form.
   next: {
-    eyebrow: "What’s next",
+    eyebrow: "What car configurator is next",
     title: ["What’s next? ", "You decide."],
     body: "Tap a car to vote. The car with the most fans gets its configurator built next.",
   },
@@ -74,8 +74,8 @@ const en = {
     numberLocale: "en-US",
   },
   suggest: {
-    eyebrow: "Not in the list?",
-    title: ["Bring ", "yours.", ""],
+    eyebrow: "Your daily driver not in the list?",
+    title: ["Add ", "yours.", ""],
     body: "Tell us what you drive. We check it and add it to the vote, and if its configurator gets built, you’ll hear first.",
     carLabel: "What do you drive?",
     carPlaceholder: "e.g. Mercedes W124 Estate, 1993",
@@ -189,7 +189,7 @@ const de: Dict = {
     ],
     pick: "Teile in E46BUILD",
     cta: "Probier es an deinem E46 aus",
-    startLabel: "Starte mit deiner Karosserie",
+    startLabel: "Beginne die Konfiguration deines E46 mit der Wahl der Karosserie.",
     open: "E46BUILD öffnen",
     values: ["Passgenau.", "Konfigurieren statt entschlüsseln.", "Händler, die es haben."],
     configure: (name: string) => `${name} konfigurieren`,
@@ -204,7 +204,7 @@ const de: Dict = {
     e46CardAlt: "E46 M3 Touring: der Einzelprototyp, den BMW gebaut, aber nie verkauft hat – ein Traum-Build",
   },
   next: {
-    eyebrow: "Was kommt als Nächstes",
+    eyebrow: "Welcher Auto-Konfigurator kommt als Nächstes",
     title: ["Was kommt als Nächstes? ", "Du entscheidest."],
     body: "Tippe auf ein Auto, um abzustimmen. Das Auto mit den meisten Fans bekommt als Nächstes seinen Konfigurator.",
   },
@@ -222,8 +222,8 @@ const de: Dict = {
     numberLocale: "de-DE",
   },
   suggest: {
-    eyebrow: "Nicht in der Liste?",
-    title: ["Bring ", "deins", " mit."],
+    eyebrow: "Dein Alltagsauto ist nicht dabei?",
+    title: ["Füge ", "deins", " hinzu."],
     body: "Sag uns, was du fährst. Wir prüfen es und nehmen es ins Voting auf, und wenn sein Konfigurator gebaut wird, erfährst du es zuerst.",
     carLabel: "Was fährst du?",
     carPlaceholder: "z. B. Mercedes W124 T-Modell, 1993",
