@@ -22,7 +22,7 @@ describe("blog hero focal point (BL-101)", () => {
     for (const lang of ["en", "de"] as const) {
       for (const r of blog.listPosts(lang)) {
         const pos = r.post.meta.hero.position;
-        if (r.post.slug === "e46-genuine-m-front-bumper") assert.equal(pos, "50% 10%", lang);
+        if (r.post.slug === "e46-genuine-m-front-bumper") assert.equal(pos, "50% 18%", lang);
         else assert.equal(pos, undefined, `${lang} ${r.post.slug}`);
       }
     }
