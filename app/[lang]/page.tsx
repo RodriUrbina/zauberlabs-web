@@ -47,9 +47,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             {/* BL-079: phones get "Blog" and a compact E46BUILD button (the nav and the full button start at sm/lg). Below 375 px
                 there is no room for "Blog" next to the wordmark; the sticky bar still leads into E46BUILD there. */}
             {/* BL-086 (PO 2026-10-27, option a): with the shop launched, "Shop" takes this place on phones ("Blog" stays in the
-                hero's "Read the blog" button and the footer); without it, "Blog" as before. Same breakpoints. */}
+                hero's "Read the blog" button and the footer); without it, "Blog" as before. */}
+            {/* BL-102 (PO 2026-10-30): below 412 px "Shop" touches the wordmark (0 px gap at 375, 6 px at 390), so it shows from
+                412 px (28 px gap); smaller phones get no link here (PO, option c: "Blog" touched it the same way) and reach the shop
+                through the footer. */}
             {SHOP_LAUNCHED ? (
-              <Link href={`/${lang}/shop`} className="py-3 text-sm font-medium hover:opacity-70 max-[374px]:hidden sm:hidden">{t.nav.shop}</Link>
+              <Link href={`/${lang}/shop`} className="py-3 text-sm font-medium hover:opacity-70 max-[412px]:hidden sm:hidden">{t.nav.shop}</Link>
             ) : (
               <Link href={`/${lang}/blog`} className="py-3 text-sm font-medium hover:opacity-70 max-[374px]:hidden sm:hidden">{t.nav.blog}</Link>
             )}
