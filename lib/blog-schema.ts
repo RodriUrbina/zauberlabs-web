@@ -53,6 +53,11 @@ const heroInput = z
     licence: z.string().min(1).max(160).nullable().optional(),
     /** Brief for the image that is still to be made (shown to editors only). */
     placeholder: z.string().min(1).max(400).optional(),
+    /**
+     * BL-101: optional focal point for the 16:9 crop (card and article hero), as CSS object-position "X% Y%", e.g. "50% 10%"
+     * keeps the top of a 3:2 picture. Absent = centred, exactly as before.
+     */
+    position: z.string().regex(/^(100|[1-9]?\d)% (100|[1-9]?\d)%$/, 'position must look like "50% 10%"').optional(),
   })
   .refine((h) => !h.src || (h.credit && h.licence), { message: "a hero image needs credit and licence", path: ["credit"] });
 
@@ -111,7 +116,7 @@ const base = z.strictObject({
 });
 
 export type Source = { id: string; label: string; type?: string; path: string; confidence: Confidence; note?: string };
-export type Hero = { src: string | null; alt: string; credit: string | null; licence: string | null; placeholder?: string };
+export type Hero = { src: string | null; alt: string; credit: string | null; licence: string | null; placeholder?: string; position?: string };
 
 export const frontMatterSchema = base
   .transform((fm) => {
@@ -124,7 +129,7 @@ export const frontMatterSchema = base
       confidence: s.confidence,
       note: s.note,
     }));
-    const hero: Hero = { src: fm.hero.src ?? null, alt: fm.hero.alt, credit: fm.hero.credit ?? null, licence: fm.hero.licence ?? null, placeholder: fm.hero.placeholder };
+    const hero: Hero = { src: fm.hero.src ?? null, alt: fm.hero.alt, credit: fm.hero.credit ?? null, licence: fm.hero.licence ?? null, placeholder: fm.hero.placeholder, ...(fm.hero.position ? { position: fm.hero.position } : {}) };
     // The date readers see is the publish day (Berlin) when a publish moment is set.
     const publishAtMs = fm.publishAt ? parsePublishAt(fm.publishAt) : null;
     const date = publishAtMs === null ? fm.date : dayInZone(publishAtMs);

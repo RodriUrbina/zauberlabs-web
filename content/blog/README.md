@@ -38,6 +38,7 @@ hero:
   credit: "AI-generated (zauberlabs)"            # required when src is set
   licence: "AI-generated, labelled"              # required when src is set
   placeholder: "Brief for the image still to be made"   # optional
+  position: "50% 10%"                            # optional focal point for the 16:9 crop (CSS object-position); default centred
 evidenceRoot: "e46build master docs/research/"  # optional; shown as "Paths are relative to …"
 sources:                           # at least one; rendered as the "Sources & confidence" box (plain text, no links)
   - id: S1                         # optional (defaults to S1, S2, …); used by the inline marks below
