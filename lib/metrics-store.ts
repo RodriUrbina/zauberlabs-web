@@ -16,8 +16,9 @@ import { RETENTION_DAYS, TIME_BUCKETS, berlinDay, medianBucket, previousDay, typ
  *   vw:{day}         hash  car → votes taken back (BL-078; never linked to the voter id or cookie)
  *   salt:{day}       random value for that day's hash; expires 24 h after it is created
  *   vl:{YYYY-MM}     list  one JSON entry per counted vote or take-back (BL-104): {hour, type, car, country, source, lang},
- *                    newest first; the hour is rounded down (UTC), never an exact time, cookie id, IP, hash or User-Agent
- * Daily keys expire after RETENTION_DAYS; a month's vote list RETENTION_DAYS after that month began, so no entry is kept longer.
+ *                    newest first; the hour is rounded down (UTC), never an exact time, cookie id, IP, hash or User-Agent;
+ *                    kept without expiry (BL-104.1, PO 2026-11-02)
+ * Daily keys expire after RETENTION_DAYS.
  * No IP, no User-Agent, no hash is stored outside the HyperLogLog.
  * Preview and local builds write under "m:test:" so tests never mix with production numbers.
  */
@@ -166,12 +167,21 @@ export function voteLogEntry(type: VoteLogEntry["type"], input: VoteInput, at = 
   return { hour: hourOf(at), type, car: input.car, country: input.country, source: input.ref, lang: input.lang };
 }
 
-/** Adds one entry to its month's list; the list is deleted RETENTION_DAYS after the month began. Returns the command count. */
-export function pushVoteLog(tx: { lpush: (k: string, v: string) => unknown; expireat: (k: string, at: number) => unknown }, entry: VoteLogEntry): number {
+/** The only month BL-104 wrote with an expiry (EXPIREAT) before BL-104.1. */
+const LEGACY_TTL_MONTH = "2026-11";
+
+/**
+ * Adds one entry to its month's list, kept without expiry (BL-104.1). PERSIST clears any expiry on that month's list, and
+ * also on the 2026-11 list, the one BL-104 wrote with an expiry: if the first vote after the deploy only comes in December or
+ * later, that list would otherwise still expire. PERSIST on a missing key or one without expiry changes nothing; nobody
+ * writes to the production database by hand. Returns the command count.
+ */
+export function pushVoteLog(tx: { lpush: (k: string, v: string) => unknown; persist: (k: string) => unknown }, entry: VoteLogEntry): number {
   const month = entry.hour.slice(0, 7);
   tx.lpush(key.voteLog(month), JSON.stringify(entry));
-  tx.expireat(key.voteLog(month), Math.floor(Date.parse(`${month}-01T00:00:00Z`) / 1000) + TTL);
-  return 2;
+  tx.persist(key.voteLog(month));
+  tx.persist(key.voteLog(LEGACY_TTL_MONTH));
+  return 3;
 }
 
 /** BL-051.2 — one new vote: totals per car, per referrer domain and per country, each in its own counter. BL-104: plus a log entry. */
