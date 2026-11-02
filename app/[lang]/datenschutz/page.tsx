@@ -163,7 +163,12 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         speichern wir außerdem auf unserem Server zu jedem Auto, für das du abgestimmt hast, ohne Ablaufdatum – nur so können wir Doppelstimmen
         verhindern; deiner Person lässt sie sich nicht zuordnen. Stimmen aus Browsern, in denen wir selbst unsere interne Markierung gesetzt
         haben (ein Cookie „zl_internal“, das es nur auf unseren eigenen Geräten gibt), zählen wir nicht mit; dafür lesen wir beim Abstimmen nur
-        diese Markierung.
+        diese Markierung. Für unsere Statistik speichern wir zu jeder gezählten Stimme (und jeder zurückgenommenen) nur das Auto, die Stunde
+        der Abstimmung, dein ungefähres Land (von unserem Hoster aus der IP-Adresse abgeleitet, die wir dafür nicht speichern), die Seite, über
+        die du gekommen bist (nur die Domain, z. B. google.com, oder „direkt“), und die Sprache der Seite – ohne Cookie-Kennung, IP-Adresse
+        oder andere Angaben zu deiner Person. Diese Einträge löschen wir nach 13 Monaten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO
+        (berechtigtes Interesse, zu verstehen, welche Autos gewünscht werden und woher die Stimmen kommen).
+        {/* BL-104: lib/metrics-store.ts pushVoteLog — vl:{YYYY-MM}, six fields, deleted RETENTION_DAYS (400) after the month began. */}
         {/* BL-078: app/api/vote/route.ts reads the zl_internal cookie (lib/internal-mode-client.ts hasInternalMarker); such votes go to
             voters-internal:{car} and never change the count. Withdrawals: vw:{day} in lib/metrics-store.ts. */}
       </p>

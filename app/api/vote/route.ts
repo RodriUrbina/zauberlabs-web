@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { looksLikeCarId } from "@/lib/cars";
 import { allow, getCars, getCounts, getVotedBy, hashIp, isVotableCar, setVote } from "@/lib/store";
 import { hasInternalMarker } from "@/lib/internal-mode-client";
-import { countryCode, isBot, referrerDomain } from "@/lib/metrics";
+import { countryCode, isBot, referrerDomain, voteLang } from "@/lib/metrics";
 import { recordVote, recordWithdrawal } from "@/lib/metrics-store";
 
 export const dynamic = "force-dynamic";
@@ -45,17 +45,17 @@ export async function POST(req: NextRequest) {
   const { counted } = await setVote(body.car, id, body.on, internal);
   // BL-051.2: anonymous vote sources for the admin statistics. Totals only, never linked to the voter id or cookie;
   // a statistics error never affects the vote. BL-078: only votes that changed the count, and votes taken back too.
+  // BL-104: both also add one vote-log entry (hour, car, country, source domain, page language; nothing about the voter).
   if (counted && !isBot(req.headers.get("user-agent"))) {
     try {
-      if (body.on) {
-        await recordVote({
-          car: body.car,
-          ref: referrerDomain(typeof body.r === "string" ? body.r.slice(0, 200) : "", undefined, "internal"),
-          country: countryCode(req.headers.get("x-vercel-ip-country")),
-        });
-      } else {
-        await recordWithdrawal(body.car);
-      }
+      const input = {
+        car: body.car,
+        ref: referrerDomain(typeof body.r === "string" ? body.r.slice(0, 200) : "", undefined, "internal"),
+        country: countryCode(req.headers.get("x-vercel-ip-country")),
+        lang: voteLang(body.l, req.headers.get("referer")),
+      };
+      if (body.on) await recordVote(input);
+      else await recordWithdrawal(input);
     } catch (err) {
       console.error("vote statistics failed", err instanceof Error ? err.message : "unknown error");
     }

@@ -77,6 +77,24 @@ export function referrerDomain(referrer: string | null | undefined, ownHosts: re
   return host;
 }
 
+/** BL-104: a log hour ("2026-11-02T14:00Z") as its Berlin hour slot for the admin: "02.11. 15–16 h". */
+export function berlinHourSlot(hour: string): string {
+  const start = new Date(hour.replace(/Z$/, ":00Z"));
+  const part = (d: Date, o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat("de-DE", { timeZone: "Europe/Berlin", ...o }).format(d);
+  const h = Number(new Intl.DateTimeFormat("de-DE", { timeZone: "Europe/Berlin", hour: "numeric", hourCycle: "h23" }).formatToParts(start).find((p) => p.type === "hour")?.value);
+  return `${part(start, { day: "2-digit", month: "2-digit" })} ${h}–${(h + 1) % 24} h`;
+}
+
+/** BL-104: the page language a vote came from — the card sends it; older cached pages don't, then the page URL tells. */
+export function voteLang(l: unknown, referer: string | null): "de" | "en" {
+  if (l === "de" || l === "en") return l;
+  try {
+    return new URL(referer ?? "").pathname.startsWith("/en") ? "en" : "de";
+  } catch {
+    return "de";
+  }
+}
+
 /** Two-letter country code from x-vercel-ip-country, or "XX" when unknown. */
 export function countryCode(header: string | null | undefined): string {
   const c = (header ?? "").trim().toUpperCase();

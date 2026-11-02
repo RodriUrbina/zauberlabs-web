@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Stats } from "@/lib/metrics-store";
+import type { Stats, VoteLogEntry } from "@/lib/metrics-store";
+import { berlinHourSlot } from "@/lib/metrics";
 
 type Budget = { month: string; used: number; budget: number; paused: boolean };
 type Standing = { car: string; name: string; votes: number }[];
@@ -50,7 +51,7 @@ function Ranked({ title, rows, empty }: { title: string; rows: { label: string; 
  */
 export default function StatsPanel({ password }: { password: string }) {
   const [days, setDays] = useState<(typeof RANGES)[number]>(30);
-  const [stats, setStats] = useState<(Stats & { budget?: Budget; since?: string; standing?: Standing }) | null>(null);
+  const [stats, setStats] = useState<(Stats & { budget?: Budget; since?: string; standing?: Standing; latest?: VoteLogEntry[] }) | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -206,6 +207,39 @@ export default function StatsPanel({ password }: { password: string }) {
               <Ranked title="Net votes by car" rows={(stats.votes?.cars ?? []).map((c) => ({ label: carName(c.car), value: c.votes }))} empty="No votes yet." />
               <Ranked title="New votes came from" rows={(stats.votes?.referrers ?? []).map((r) => ({ label: r.domain, value: r.votes }))} empty="No votes yet." />
               <Ranked title="New votes by country" rows={(stats.votes?.countries ?? []).map((c) => ({ label: c.code === "XX" ? "unknown" : c.code, value: c.votes }))} empty="No votes yet." />
+            </div>
+            {/* BL-104 — the vote log: newest first, the last 100 of this and last month, whatever the period above */}
+            <div className="flex flex-col gap-3 rounded-2xl border border-line bg-white p-4">
+              <h4 className="eyebrow text-muted">Latest votes</h4>
+              {!stats.latest?.length ? (
+                <p className="text-sm text-muted">No entries yet.</p>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-sm">
+                    <thead className="text-muted">
+                      <tr>
+                        <th className="py-1.5 pr-3 font-medium">Time (Berlin)</th>
+                        <th className="py-1.5 pr-3 font-medium">Car</th>
+                        <th className="py-1.5 pr-3 font-medium">Country</th>
+                        <th className="py-1.5 font-medium">Came from</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {stats.latest.map((e, i) => (
+                        <tr key={i} className="border-t border-line">
+                          <td className="py-1.5 pr-3 font-mono whitespace-nowrap">{berlinHourSlot(e.hour)}</td>
+                          <td className="py-1.5 pr-3 font-semibold">
+                            {e.type === "unvote" ? <span title="taken back">− {carName(e.car)}</span> : carName(e.car)}
+                          </td>
+                          <td className="py-1.5 pr-3">{e.country === "XX" ? "unknown" : e.country}</td>
+                          <td className="py-1.5">{e.source}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p className="mt-2 text-xs text-muted">“−” = vote taken back. Times are hour slots; nothing about the voter is stored.</p>
+                </div>
+              )}
             </div>
           </div>
         </>
