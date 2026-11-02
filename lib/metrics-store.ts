@@ -15,7 +15,10 @@ import { RETENTION_DAYS, TIME_BUCKETS, berlinDay, medianBucket, previousDay, typ
  *   vc:{day}         hash  country → votes (never stored together with anything else)
  *   vw:{day}         hash  car → votes taken back (BL-078; never linked to the voter id or cookie)
  *   salt:{day}       random value for that day's hash; expires 24 h after it is created
- * Daily keys expire after RETENTION_DAYS. No IP, no User-Agent, no hash is stored outside the HyperLogLog.
+ *   vl:{YYYY-MM}     list  one JSON entry per counted vote or take-back (BL-104): {hour, type, car, country, source, lang},
+ *                    newest first; the hour is rounded down (UTC), never an exact time, cookie id, IP, hash or User-Agent
+ * Daily keys expire after RETENTION_DAYS; a month's vote list RETENTION_DAYS after that month began, so no entry is kept longer.
+ * No IP, no User-Agent, no hash is stored outside the HyperLogLog.
  * Preview and local builds write under "m:test:" so tests never mix with production numbers.
  */
 const P = process.env.VERCEL_ENV === "production" ? "m:" : "m:test:";
@@ -35,6 +38,7 @@ const key = {
   voteRefs: (d: string) => `${P}vr:${d}`,
   voteCountries: (d: string) => `${P}vc:${d}`,
   voteWithdrawals: (d: string) => `${P}vw:${d}`,
+  voteLog: (month: string) => `${P}vl:${month}`,
   budget: (month: string) => `${P}budget:${month}`,
 };
 
@@ -148,8 +152,30 @@ export async function recordClick(configurator: string): Promise<void> {
   });
 }
 
-/** BL-051.2 — one new vote: totals per car, per referrer domain and per country, each in its own counter. */
-export async function recordVote(input: { car: string; ref: string; country: string }): Promise<void> {
+// ─── BL-104: the vote log ───────────────────────────────────────────────────
+
+export type VoteLang = "de" | "en";
+export type VoteLogEntry = { hour: string; type: "vote" | "unvote"; car: string; country: string; source: string; lang: VoteLang };
+type VoteInput = { car: string; ref: string; country: string; lang: VoteLang };
+
+/** The hour a moment falls in, rounded down, UTC: "2026-11-02T14:00Z". */
+export const hourOf = (at: Date) => `${at.toISOString().slice(0, 13)}:00Z`;
+
+/** Exactly the six fields of a log entry, nothing else. */
+export function voteLogEntry(type: VoteLogEntry["type"], input: VoteInput, at = new Date()): VoteLogEntry {
+  return { hour: hourOf(at), type, car: input.car, country: input.country, source: input.ref, lang: input.lang };
+}
+
+/** Adds one entry to its month's list; the list is deleted RETENTION_DAYS after the month began. Returns the command count. */
+export function pushVoteLog(tx: { lpush: (k: string, v: string) => unknown; expireat: (k: string, at: number) => unknown }, entry: VoteLogEntry): number {
+  const month = entry.hour.slice(0, 7);
+  tx.lpush(key.voteLog(month), JSON.stringify(entry));
+  tx.expireat(key.voteLog(month), Math.floor(Date.parse(`${month}-01T00:00:00Z`) / 1000) + TTL);
+  return 2;
+}
+
+/** BL-051.2 — one new vote: totals per car, per referrer domain and per country, each in its own counter. BL-104: plus a log entry. */
+export async function recordVote(input: VoteInput): Promise<void> {
   const day = berlinDay();
   await write((tx) => {
     tx.hincrby(key.votes(day), input.car, 1);
@@ -158,18 +184,38 @@ export async function recordVote(input: { car: string; ref: string; country: str
     tx.expire(key.voteRefs(day), TTL);
     tx.hincrby(key.voteCountries(day), input.country, 1);
     tx.expire(key.voteCountries(day), TTL);
-    return 6;
+    return 6 + pushVoteLog(tx, voteLogEntry("vote", input));
   });
 }
 
-/** BL-078 — one counted vote taken back: per day and car only, so the admin can show net votes. */
-export async function recordWithdrawal(car: string): Promise<void> {
+/** BL-078 — one counted vote taken back: per day and car only, so the admin can show net votes. BL-104: plus a log entry. */
+export async function recordWithdrawal(input: VoteInput): Promise<void> {
   const day = berlinDay();
   await write((tx) => {
-    tx.hincrby(key.voteWithdrawals(day), car, 1);
+    tx.hincrby(key.voteWithdrawals(day), input.car, 1);
     tx.expire(key.voteWithdrawals(day), TTL);
-    return 2;
+    return 2 + pushVoteLog(tx, voteLogEntry("unvote", input));
   });
+}
+
+/** Newest first, at most `limit`: the current month's list, then the previous month's. */
+export function mergeVoteLogs(current: unknown[], previous: unknown[], limit = 100): VoteLogEntry[] {
+  const parse = (v: unknown) => (typeof v === "string" ? (JSON.parse(v) as VoteLogEntry) : (v as VoteLogEntry)); // Upstash may parse JSON already
+  return [...current, ...previous].map(parse).filter((e) => e && typeof e.hour === "string").slice(0, limit);
+}
+
+/** For the admin panel: the latest 100 entries of this and last month (UTC months, as the keys). */
+export async function getLatestVotes(limit = 100): Promise<VoteLogEntry[]> {
+  const redis = getRedis();
+  if (!redis) return [];
+  const now = new Date();
+  const month = now.toISOString().slice(0, 7);
+  const prev = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
+  const tx = redis.pipeline();
+  tx.lrange(key.voteLog(month), 0, limit - 1);
+  tx.lrange(key.voteLog(prev), 0, limit - 1);
+  const [cur, old] = (await tx.exec()) as unknown[][];
+  return mergeVoteLogs(cur ?? [], old ?? [], limit);
 }
 
 /** For the admin panel: commands the statistics used this month, the budget, and whether counting is paused. */

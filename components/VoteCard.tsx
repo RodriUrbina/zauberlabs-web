@@ -45,7 +45,8 @@ export default function VoteCard({ lang }: { lang: Locale }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // BL-051.2: host of the page the visitor arrived from (the browser's own document.referrer, nothing stored).
-        body: JSON.stringify(on ? { car, on, r: referrerHost(document.referrer) } : { car, on }),
+        // BL-104: also on take-backs, plus the page language, for the vote log.
+        body: JSON.stringify({ car, on, r: referrerHost(document.referrer), l: lang }),
       });
       if (res.ok) setState(await res.json());
       else load();
