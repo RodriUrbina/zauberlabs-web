@@ -1,6 +1,9 @@
 import Link from "next/link";
-import { CONTACT_EMAIL, dictionaries, E46_LIVE, e46Url, type Locale } from "@/lib/i18n";
+import { CONTACT_EMAIL, dictionaries, E46_LIVE, e46Url, localizeE46Href, type Locale } from "@/lib/i18n";
 import { SHOP_LAUNCHED } from "@/lib/shop-flag";
+import { getBlog } from "@/lib/blog";
+import { footerBlogTopics } from "@/lib/footer-topics";
+import { E46_TOPIC_GROUPS } from "@/lib/e46-topics";
 import { Wordmark } from "./Icons";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
@@ -19,6 +22,7 @@ export default function SiteFooter({ lang, otherHref, homePath = "" }: Props) {
   return (
     <footer className="bg-ink text-fog">
       <div className={`${wrap} flex flex-col gap-14 pt-14 pb-10 md:pt-[72px]`}>
+        <PopularTopics lang={lang} />
         <div className="grid grid-cols-2 gap-10 md:grid-cols-[minmax(0,2fr)_repeat(3,minmax(0,1fr))]">
           <div className="col-span-2 flex flex-col gap-4 text-paper md:col-span-1">
             <Wordmark dark />
@@ -66,5 +70,63 @@ export default function SiteFooter({ lang, otherHref, homePath = "" }: Props) {
         </div>
       </div>
     </footer>
+  );
+}
+
+const heading = "eyebrow text-[11px] text-[#8A877F]";
+const groupList = "flex flex-col gap-2 text-[13px] leading-snug";
+
+/**
+ * BL-106 (PO 2026-11-03) — "Popular topics" above the footer rows: every published blog article of the language, grouped by
+ * topic (lib/footer-topics.ts), and E46BUILD's topic pages (lib/e46-topics.ts). Plain links in the server HTML. Blog links stay
+ * in the tab; E46BUILD links open a new tab with the referrer (BL-056) and are followed (no ?start=/?section=, so no nofollow).
+ */
+function PopularTopics({ lang }: { lang: Locale }) {
+  const t = dictionaries[lang];
+  const blog = footerBlogTopics(getBlog(), lang);
+  const e46 = (path: string) => localizeE46Href(`${e46Url("en").replace(/\/+$/, "")}${path}`, lang);
+  const newTab = <span className="sr-only"> {t.blog.opensNewTab}</span>;
+  return (
+    <section aria-labelledby="footer-topics" className="flex flex-col gap-10 border-b border-ink-3 pb-12">
+      <div className="flex flex-col gap-6">
+        <h2 id="footer-topics" className={heading}>{t.footer.topics}</h2>
+        <div className="grid grid-cols-1 gap-x-8 gap-y-8 min-[480px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
+          {blog.map((g) => (
+            <div key={g.key} className="flex flex-col gap-3">
+              <h3 className="text-sm text-paper">{g.label}</h3>
+              <ul className={groupList}>
+                {g.posts.map((p) => (
+                  <li key={p.slug}>
+                    <Link href={`/${lang}/blog/${p.slug}`} className="hover:text-paper">{p.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+      {E46_LIVE && (
+        <div className="flex flex-col gap-6">
+          <h2 className={heading}>
+            <a href={e46Url(lang)} target="_blank" rel="noopener" className="hover:text-paper">E46BUILD{newTab}</a>
+          </h2>
+          {/* PO 2026-11-03: two columns on phones (the labels are short), four from md. */}
+          <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4 md:gap-x-8">
+            {E46_TOPIC_GROUPS.map((g) => (
+              <div key={g.key} className="flex flex-col gap-3">
+                <h3 className="text-sm text-paper">{g.label[lang]}</h3>
+                <ul className={groupList}>
+                  {g.pages.map((p) => (
+                    <li key={p.en.path}>
+                      <a href={e46(p.en.path)} target="_blank" rel="noopener" className="hover:text-paper">{p[lang].label}{newTab}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
   );
 }
