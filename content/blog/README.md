@@ -28,10 +28,10 @@ slug: e46-steering-wheel-swaps     # optional; must match the folder name
 card: BL-015                       # optional; the Trello card
 author: zauberlabs                 # optional, default "zauberlabs"; a person's name is allowed
 tags: [E46, Steering wheels, Safety]   # 1–8; MUST include the configurator tag; each tag gets its own page
-configurator: E46                  # or  configurator: { tag: E46, url: https://e46.zauberlabs.de/steering-wheels }
+configurator: E46                  # or  configurator: { tag: E46, url: https://e46.zauberlabs.de/?section=steering }
 cta:                               # optional override of the "Try it on your car" button
   label: "Try it on your car in the E46 configurator"
-  href: https://e46.zauberlabs.de/steering-wheels
+  href: https://e46.zauberlabs.de/?section=steering
 hero:
   src: /blog/e46-steering-wheel-swaps/hero.jpg   # file under public/; `null` while no licensed image exists → labelled placeholder
   alt: "E46 steering wheel with multifunction buttons, studio shot"
@@ -108,6 +108,8 @@ Do your low beams swivel when you steer?
 **Rendered by the layout, never written by hand:** the "Try it on your car" box, the "Sources & confidence" box and its legend. Keep your "Recorded conflicts / Not established / Method note" prose in the body under a heading such as `## Notes on the evidence`.
 
 While the E46 configurator is offline (`E46_LIVE` false in `lib/i18n.ts`), every configurator button shows "coming soon" with no link.
+
+In `de.mdx`, write E46BUILD links in English (`https://e46.zauberlabs.de`, `/?start=…`, `/?section=…`). German pages turn them into the German E46BUILD when they render (`/de`, `/de?section=…`; `/steering-wheels/multifunction` and `/steering-wheels/m3-alcantara` become `/de/lenkraeder/…`). This applies to `cta.href` and `<ConfiguratorLink href>` too.
 
 ## Images
 

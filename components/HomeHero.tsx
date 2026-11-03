@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Arrow } from "@/components/Icons";
-import { dictionaries, E46_LIVE, E46_URL, e46StartUrl, type Locale } from "@/lib/i18n";
+import { dictionaries, E46_LIVE, e46StartUrl, e46Url, type Locale } from "@/lib/i18n";
 
 /**
  * BL-081 (PO decision 2026-10-26) — Rivian-style hero, as mocked in e46/docs/design/zauberlabs-rivian-landing (version b,
@@ -46,7 +46,7 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
             <div className="mt-[22px] flex w-full flex-col gap-2.5 lg:mt-7 lg:w-auto lg:flex-row lg:gap-3">
               {E46_LIVE ? (
                 <a
-                  href={E46_URL}
+                  href={e46Url(lang)}
                   data-hero-cta
                   className="flex h-[52px] items-center justify-center gap-2 rounded-full bg-paper px-[26px] text-base font-semibold whitespace-nowrap text-ink hover:bg-white"
                 >
@@ -76,7 +76,7 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
           {d.garage.bodies.map((b) => (
             <a
               key={b.start}
-              href={e46StartUrl(b.start)}
+              href={e46StartUrl(b.start, lang)}
               rel="nofollow" // each load creates a build on E46BUILD; crawlers should not follow these
               className="inline-flex h-[38px] items-center rounded-full border border-line px-4 text-[15px] font-semibold text-ink hover:border-ink md:h-10 md:px-[18px]"
             >

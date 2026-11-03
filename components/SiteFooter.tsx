@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONTACT_EMAIL, dictionaries, E46_LIVE, E46_URL, type Locale } from "@/lib/i18n";
+import { CONTACT_EMAIL, dictionaries, E46_LIVE, e46Url, type Locale } from "@/lib/i18n";
 import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 import { Wordmark } from "./Icons";
 
@@ -26,7 +26,7 @@ export default function SiteFooter({ lang, otherHref, homePath = "" }: Props) {
           </div>
           <div className="flex flex-col gap-3 text-sm">
             <span className="eyebrow text-[11px] text-[#8A877F]">{t.footer.configurators}</span>
-            {E46_LIVE ? <a href={E46_URL} className="text-paper hover:opacity-80">E46BUILD</a> : <span>{t.footer.e46Soon}</span>}
+            {E46_LIVE ? <a href={e46Url(lang)} className="text-paper hover:opacity-80">E46BUILD</a> : <span>{t.footer.e46Soon}</span>}
             {/* BL-081: replaces the "[Next model] — soon" placeholder; names no car. */}
             <a href={`${homePath}#next`} className="text-paper hover:opacity-80">
               {t.footer.next[0]}

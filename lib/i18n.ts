@@ -307,16 +307,46 @@ export const dictionaries: Record<Locale, Dict> = { en, de };
 // Where the E46 configurator lives. Change once the subdomain is set up.
 export const E46_URL = process.env.NEXT_PUBLIC_E46_URL ?? "https://e46.zauberlabs.de";
 /**
+ * BL-105 (PO 2026-11-03): German pages open the German E46BUILD (E46 T-240), at /de with the same deep links (/de?start=, /de?section=).
+ * English pages keep exactly the URLs they had before.
+ */
+export const e46Url = (lang: Locale) => (lang === "de" ? `${E46_URL.replace(/\/+$/, "")}/de` : E46_URL);
+/** The page the deep links hang off: `<base>/?…` in English (as before BL-105), `<base>/de?…` in German. */
+const e46Base = (lang: Locale) => (lang === "de" ? e46Url("de") : `${E46_URL.replace(/\/+$/, "")}/`);
+/** BL-105: E46BUILD topic pages whose German path is not just /de + the English path. */
+const E46_DE_PATHS: Record<string, string> = {
+  "/steering-wheels/multifunction": "/de/lenkraeder/multifunktion",
+  "/steering-wheels/m3-alcantara": "/de/lenkraeder/m3-alcantara",
+};
+/**
+ * BL-105: a link to E46BUILD written in an article (or its cta.href) points to the German E46BUILD on German pages:
+ * the path gets the /de prefix (the two topic pages above are mapped), query and hash stay. Other links, links already
+ * under /de and every link on English pages come back unchanged.
+ */
+export function localizeE46Href(href: string, lang: Locale): string {
+  if (lang !== "de") return href;
+  let u: URL;
+  try {
+    u = new URL(href);
+    if (u.host !== new URL(E46_URL).host) return href;
+  } catch {
+    return href;
+  }
+  const path = u.pathname.replace(/\/+$/, "");
+  if (path === "/de" || path.startsWith("/de/")) return href;
+  return `${u.origin}${E46_DE_PATHS[path] ?? `/de${path}`}${u.search}${u.hash}`;
+}
+/**
  * BL-064: open E46BUILD with a body pre-chosen. Contract with Agent 3 (E46BUILD entry param): `/?start=<value>`, values as in
  * garage.bodies[].start (sedan, touring, coupe, convertible, compact, m3).
  */
-export const e46StartUrl = (start: string) => `${E46_URL.replace(/\/+$/, "")}/?start=${encodeURIComponent(start)}`;
+export const e46StartUrl = (start: string, lang: Locale) => `${e46Base(lang)}?start=${encodeURIComponent(start)}`;
 /**
  * BL-083.1: open E46BUILD at a section (E46BUILD T-179, contract in e46build apps/web/src/lib/start-body.ts): `/?section=<value>`;
  * without a body the owner picks the body first and then lands in that section. Unknown values are ignored by E46BUILD.
  */
 export const E46_SECTIONS = ["headlights", "wheels", "bumpers", "seats", "steering"] as const;
-export const e46SectionUrl = (section: string) => `${E46_URL.replace(/\/+$/, "")}/?section=${encodeURIComponent(section)}`;
+export const e46SectionUrl = (section: string, lang: Locale) => `${e46Base(lang)}?section=${encodeURIComponent(section)}`;
 // THE E46 SWITCH (PO decision 2026-10-02, BL-001): the configurator is not online yet, so every
 // E46 button on the site and the article CTA show "coming soon" with no link.
 // Going live is a one-line change: set NEXT_PUBLIC_E46_LIVE=1 on Vercel (or flip the fallback to true).

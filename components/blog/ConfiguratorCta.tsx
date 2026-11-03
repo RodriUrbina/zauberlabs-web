@@ -1,8 +1,9 @@
 import { ArrowUpRight } from "@/components/Icons";
-import { dictionaries, E46_LIVE, E46_URL, type Locale } from "@/lib/i18n";
+import { dictionaries, E46_LIVE, e46Url, localizeE46Href, type Locale } from "@/lib/i18n";
 
-export function configuratorHref(url?: string) {
-  return url ?? E46_URL;
+/** BL-105: German pages open the German E46BUILD, also when the article names its own E46BUILD link (cta.href). */
+export function configuratorHref(lang: Locale, url?: string) {
+  return url ? localizeE46Href(url, lang) : e46Url(lang);
 }
 
 /**
@@ -30,7 +31,7 @@ export default function ConfiguratorCta({ lang, tag, url, label, compact = false
       </h2>
       <p className="mt-4 max-w-[520px] text-[15px] leading-relaxed text-fog">{t.blog.ctaBody}</p>
       {E46_LIVE ? (
-        <a href={configuratorHref(url)} {...NEW_TAB} className="mt-6 inline-flex h-12 items-center gap-2 rounded-full bg-paper px-6 text-[15px] font-semibold text-ink hover:bg-white">
+        <a href={configuratorHref(lang, url)} {...NEW_TAB} className="mt-6 inline-flex h-12 items-center gap-2 rounded-full bg-paper px-6 text-[15px] font-semibold text-ink hover:bg-white">
           {label ?? t.blog.ctaButton(tag.toUpperCase())} <ArrowUpRight />
           <span className="sr-only">{t.blog.opensNewTab}</span>
         </a>
@@ -51,7 +52,7 @@ export function ConfiguratorLink({ href, children, lang }: { href?: string; chil
     );
   }
   return (
-    <a href={configuratorHref(href)} {...NEW_TAB} className="inline-flex items-center gap-1.5 font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">
+    <a href={configuratorHref(lang, href)} {...NEW_TAB} className="inline-flex items-center gap-1.5 font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">
       {children} <ArrowUpRight className="size-3.5" />
       <span className="sr-only">{dictionaries[lang].blog.opensNewTab}</span>
     </a>
