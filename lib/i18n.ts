@@ -1,3 +1,5 @@
+import { E46_DE_PATHS } from "./e46-topics";
+
 export const LOCALES = ["de", "en"] as const;
 export type Locale = (typeof LOCALES)[number];
 export const isLocale = (v: string): v is Locale => (LOCALES as readonly string[]).includes(v);
@@ -149,6 +151,7 @@ const en = {
     studio: "Studio",
     about: "About",
     legal: "Legal",
+    topics: "Popular topics", // BL-106
     impressum: "Impressum",
     privacy: "Privacy policy",
     disclaimer: "Independent — not affiliated with BMW AG or any vehicle manufacturer. Trademarks belong to their owners.",
@@ -296,6 +299,7 @@ const de: Dict = {
     studio: "Studio",
     about: "Über uns",
     legal: "Rechtliches",
+    topics: "Beliebte Themen",
     impressum: "Impressum",
     privacy: "Datenschutz",
     disclaimer: "Unabhängig – nicht mit der BMW AG oder einem anderen Fahrzeughersteller verbunden. Marken gehören ihren jeweiligen Inhabern.",
@@ -313,14 +317,9 @@ export const E46_URL = process.env.NEXT_PUBLIC_E46_URL ?? "https://e46.zauberlab
 export const e46Url = (lang: Locale) => (lang === "de" ? `${E46_URL.replace(/\/+$/, "")}/de` : E46_URL);
 /** The page the deep links hang off: `<base>/?…` in English (as before BL-105), `<base>/de?…` in German. */
 const e46Base = (lang: Locale) => (lang === "de" ? e46Url("de") : `${E46_URL.replace(/\/+$/, "")}/`);
-/** BL-105: E46BUILD topic pages whose German path is not just /de + the English path. */
-const E46_DE_PATHS: Record<string, string> = {
-  "/steering-wheels/multifunction": "/de/lenkraeder/multifunktion",
-  "/steering-wheels/m3-alcantara": "/de/lenkraeder/m3-alcantara",
-};
 /**
  * BL-105: a link to E46BUILD written in an article (or its cta.href) points to the German E46BUILD on German pages:
- * the path gets the /de prefix (the two topic pages above are mapped), query and hash stay. Other links, links already
+ * the path gets the /de prefix (E46BUILD's topic pages map to their German paths, lib/e46-topics.ts), query and hash stay. Other links, links already
  * under /de and every link on English pages come back unchanged.
  */
 export function localizeE46Href(href: string, lang: Locale): string {
