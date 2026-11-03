@@ -164,7 +164,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <p className="eyebrow text-muted">{t.next.eyebrow}</p>
               <h2 className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]">
                 {t.next.title[0]}
-                <span className="accent-serif">{t.next.title[1]}</span>
+                {/* BL-107: the accent ("Du entscheidest." / "You decide.") wraps as a whole, never between its words. */}
+                <span className="accent-serif whitespace-nowrap">{t.next.title[1]}</span>
               </h2>
             </div>
             <p className="max-w-[400px] text-base leading-relaxed text-body">{t.next.body}</p>
