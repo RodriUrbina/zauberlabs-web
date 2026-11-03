@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { dictionaries, E46_LIVE, E46_URL, type Locale } from "@/lib/i18n";
+import { dictionaries, E46_LIVE, e46Url, type Locale } from "@/lib/i18n";
 import { Arrow, Wordmark } from "@/components/Icons";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
@@ -27,7 +27,7 @@ export default function BlogHeader({ lang, otherHref }: { lang: Locale; otherHre
             {lang === "de" ? <span className="text-ink">DE</span> : <Link href={otherHref} hrefLang="de" className="px-1 py-3 hover:text-ink">DE</Link>}
           </div>
           {E46_LIVE ? (
-            <a href={E46_URL} className="hidden h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-paper hover:bg-black sm:flex">
+            <a href={e46Url(lang)} className="hidden h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-paper hover:bg-black sm:flex">
               {t.nav.open} <Arrow />
             </a>
           ) : (

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { VOTE_CARS, type Car, type CarId } from "@/lib/cars";
-import { dictionaries, E46_LIVE, E46_URL, type Locale } from "@/lib/i18n";
+import { dictionaries, E46_LIVE, e46Url, type Locale } from "@/lib/i18n";
 import { Arrow } from "@/components/Icons";
 import { referrerHost } from "@/lib/beacon-client";
 
@@ -87,7 +87,7 @@ export default function VoteCard({ lang }: { lang: Locale }) {
             </span>
           </span>
           {E46_LIVE && (
-            <a href={E46_URL} className="flex h-10 items-center gap-1.5 rounded-full bg-ink px-4 text-sm font-semibold text-paper hover:bg-black">
+            <a href={e46Url(lang)} className="flex h-10 items-center gap-1.5 rounded-full bg-ink px-4 text-sm font-semibold text-paper hover:bg-black">
               {t.open} <Arrow className="size-3.5" />
             </a>
           )}

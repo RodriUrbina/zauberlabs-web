@@ -12,14 +12,14 @@ describe("home page (BL-053)", () => {
     for (const lang of LOCALES) {
       assert.deepEqual(dictionaries[lang].garage.bodies.map((b) => b.start), ["sedan", "touring", "coupe", "convertible", "compact", "m3"]);
     }
-    assert.equal(e46StartUrl("coupe"), "https://e46.zauberlabs.de/?start=coupe");
+    assert.equal(e46StartUrl("coupe", "en"), "https://e46.zauberlabs.de/?start=coupe");
     const hero = fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8");
-    assert.match(hero, /href=\{e46StartUrl\(b\.start\)\}\s+rel="nofollow"/, "start links carry rel=nofollow");
+    assert.match(hero, /href=\{e46StartUrl\(b\.start, lang\)\}\s+rel="nofollow"/, "start links carry rel=nofollow");
     assert.ok(!/e46StartUrl[\s\S]{0,200}target=/.test(hero), "start links stay in the same tab");
   });
   test("garage tiles link to E46BUILD with the body pre-chosen, nofollow, same tab, with an accessible name (BL-079)", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
-    assert.match(page, /href=\{e46StartUrl\(b\.start\)\}\s+rel="nofollow"/);
+    assert.match(page, /href=\{e46StartUrl\(b\.start, lang\)\}\s+rel="nofollow"/);
     assert.match(page, /aria-label=\{t\.garage\.configure\(b\.name\)\}/);
     assert.ok(!/e46StartUrl[\s\S]{0,300}target=/.test(page), "tile links stay in the same tab");
     assert.equal(dictionaries.en.garage.configure("Sedan"), "Configure the Sedan");
@@ -27,7 +27,7 @@ describe("home page (BL-053)", () => {
   });
   test("phone sticky bar reuses the hero CTA copy and watches the hero button, the What's next block and the footer (BL-079, BL-081)", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
-    assert.match(page, /<StickyStartBar href=\{E46_URL\} label=\{t\.hero\.cta\} \/>/);
+    assert.match(page, /<StickyStartBar href=\{e46Url\(lang\)\} label=\{t\.hero\.cta\} \/>/);
     assert.equal(dictionaries.de.hero.cta, "Starte mit deinem E46");
     const bar = fs.readFileSync(path.join(process.cwd(), "components", "StickyStartBar.tsx"), "utf8");
     assert.match(bar, /sm:hidden/, "phones only");
@@ -112,12 +112,12 @@ describe("home page (BL-053)", () => {
   test("closer look: the CTA opens E46BUILD at the chosen tab's section (T-179), nofollow, same tab (configurator_click, no new data); tabs are accessible", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
     const cl = fs.readFileSync(path.join(process.cwd(), "components", "CloserLook.tsx"), "utf8");
-    assert.match(page, /<CloserLook [^>]*hrefs=\{E46_LIVE \? t\.garage\.cats\.map\(\(c\) => e46SectionUrl\(c\.key\)\) : null\}/);
+    assert.match(page, /<CloserLook [^>]*hrefs=\{E46_LIVE \? t\.garage\.cats\.map\(\(c\) => e46SectionUrl\(c\.key, lang\)\) : null\}/);
     assert.match(cl, /href=\{hrefs\[on\]\}\s+rel="nofollow"/);
     // BL-083.1: every tab key is a T-179 section value (e46build start-body.ts START_SECTIONS), same in EN and DE.
     assert.deepEqual([...E46_SECTIONS].sort(), ["bumpers", "headlights", "seats", "steering", "wheels"]);
     for (const lang of LOCALES) for (const c of dictionaries[lang].garage.cats) assert.ok((E46_SECTIONS as readonly string[]).includes(c.key), `${lang} ${c.key}`);
-    assert.equal(e46SectionUrl("steering"), "https://e46.zauberlabs.de/?section=steering");
+    assert.equal(e46SectionUrl("steering", "en"), "https://e46.zauberlabs.de/?section=steering");
     assert.ok(!/target=|track\(/.test(cl), "same tab, no extra tracking call");
     assert.match(cl, /role="tablist"/);
     assert.match(cl, /role="tab"/);
@@ -129,10 +129,10 @@ describe("home page (BL-053)", () => {
     for (const lang of LOCALES) {
       const cats = dictionaries[lang].garage.cats;
       assert.deepEqual(cats.map((c) => c.key), ["headlights", "wheels", "bumpers", "seats", "steering"], lang);
-      for (const c of cats) assert.equal(new URL(e46SectionUrl(c.key)).searchParams.get("section"), c.key, `${lang} ${c.key}`);
+      for (const c of cats) assert.equal(new URL(e46SectionUrl(c.key, lang)).searchParams.get("section"), c.key, `${lang} ${c.key}`);
     }
     assert.deepEqual(dictionaries.de.garage.cats.map((c) => c.label), ["Scheinwerfer", "Felgen", "Stoßstangen", "Sitze", "Lenkräder"]);
-    assert.match(fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8"), /hrefs=\{E46_LIVE \? t\.garage\.cats\.map\(\(c\) => e46SectionUrl\(c\.key\)\) : null\}/, "hrefs built per key, so they follow the order");
+    assert.match(fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8"), /hrefs=\{E46_LIVE \? t\.garage\.cats\.map\(\(c\) => e46SectionUrl\(c\.key, lang\)\) : null\}/, "hrefs built per key, so they follow the order");
   });
 });
 

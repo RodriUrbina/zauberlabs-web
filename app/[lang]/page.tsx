@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { dictionaries, E46_LIVE, E46_URL, e46SectionUrl, e46StartUrl, isLocale, type Locale } from "@/lib/i18n";
+import { dictionaries, E46_LIVE, e46SectionUrl, e46StartUrl, e46Url, isLocale, type Locale } from "@/lib/i18n";
 import { Arrow, Wordmark } from "@/components/Icons";
 import VoteCard from "@/components/VoteCard";
 import SuggestForm from "@/components/SuggestForm";
@@ -63,10 +63,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </div>
             {E46_LIVE ? (
               <>
-                <a href={E46_URL} aria-label={t.nav.open} className="flex h-10 items-center rounded-full bg-ink px-3 text-[13px] font-semibold text-paper hover:bg-black sm:hidden">
+                <a href={e46Url(lang)} aria-label={t.nav.open} className="flex h-10 items-center rounded-full bg-ink px-3 text-[13px] font-semibold text-paper hover:bg-black sm:hidden">
                   E46BUILD
                 </a>
-                <a href={E46_URL} className="hidden h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-paper hover:bg-black sm:flex">
+                <a href={e46Url(lang)} className="hidden h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-paper hover:bg-black sm:flex">
                   {t.nav.open} <Arrow />
                 </a>
               </>
@@ -100,7 +100,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
 
           <div className="mt-7 md:mt-10">
-            <CloserLook cats={t.garage.cats} pick={t.garage.pick} cta={t.garage.cta} hrefs={E46_LIVE ? t.garage.cats.map((c) => e46SectionUrl(c.key)) : null} soon={t.nav.comingSoon} />
+            <CloserLook cats={t.garage.cats} pick={t.garage.pick} cta={t.garage.cta} hrefs={E46_LIVE ? t.garage.cats.map((c) => e46SectionUrl(c.key, lang)) : null} soon={t.nav.comingSoon} />
           </div>
 
           <div className="mt-7 grid items-center gap-3.5 border-t border-line pt-7 md:mt-10 md:grid-cols-[200px_1fr] md:gap-6">
@@ -125,7 +125,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 return E46_LIVE ? (
                   <a
                     key={b.name}
-                    href={e46StartUrl(b.start)}
+                    href={e46StartUrl(b.start, lang)}
                     rel="nofollow" // each load creates a build on E46BUILD; crawlers should not follow these
                     aria-label={t.garage.configure(b.name)}
                     className={`group ${box} transition-colors hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink active:bg-[#f4f1ec]`}
@@ -149,7 +149,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               ))}
             </ul>
             {E46_LIVE && (
-              <a href={E46_URL} className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-ink px-6 text-[15px] font-semibold text-paper hover:bg-black sm:w-auto">
+              <a href={e46Url(lang)} className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-ink px-6 text-[15px] font-semibold text-paper hover:bg-black sm:w-auto">
                 {t.garage.open} <Arrow className="size-[18px]" />
               </a>
             )}
@@ -213,7 +213,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                         {post.meta.title}
                       </Link>
                       {E46_LIVE && (
-                        <a href={E46_URL} className="text-sm font-semibold whitespace-nowrap text-accent hover:opacity-80">
+                        <a href={e46Url(lang)} className="text-sm font-semibold whitespace-nowrap text-accent hover:opacity-80">
                           {t.teaser.open} →
                         </a>
                       )}
@@ -230,7 +230,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </main>
 
       <SiteFooter lang={lang} />
-      {E46_LIVE && <StickyStartBar href={E46_URL} label={t.hero.cta} />}
+      {E46_LIVE && <StickyStartBar href={e46Url(lang)} label={t.hero.cta} />}
     </>
   );
 }
