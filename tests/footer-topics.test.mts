@@ -76,5 +76,8 @@ describe("footer: popular topics (BL-106)", () => {
     assert.match(f, /const newTab = <span className="sr-only"> \{t\.blog\.opensNewTab\}<\/span>;/);
     const block = f.slice(f.indexOf("function PopularTopics"));
     assert.ok(!block.includes("nofollow") && !block.includes("noreferrer"));
+    // PO 2026-11-03: E46BUILD groups two-up on phones, four columns on desktop; article lists stay one column on phones
+    assert.match(block, /className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4 md:gap-x-8"/);
+    assert.match(block, /className="grid grid-cols-1 gap-x-8 gap-y-8 min-\[480px\]:grid-cols-2 md:grid-cols-3 xl:grid-cols-6"/);
   });
 });

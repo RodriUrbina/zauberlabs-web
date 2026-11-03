@@ -110,7 +110,8 @@ function PopularTopics({ lang }: { lang: Locale }) {
           <h2 className={heading}>
             <a href={e46Url(lang)} target="_blank" rel="noopener" className="hover:text-paper">E46BUILD{newTab}</a>
           </h2>
-          <div className="grid grid-cols-1 gap-x-8 gap-y-8 min-[480px]:grid-cols-2 md:grid-cols-4">
+          {/* PO 2026-11-03: two columns on phones (the labels are short), four from md. */}
+          <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4 md:gap-x-8">
             {E46_TOPIC_GROUPS.map((g) => (
               <div key={g.key} className="flex flex-col gap-3">
                 <h3 className="text-sm text-paper">{g.label[lang]}</h3>
