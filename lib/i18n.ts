@@ -206,7 +206,7 @@ const de: Dict = {
   next: {
     eyebrow: "Welcher Auto-Konfigurator kommt als Nächstes",
     title: ["Was kommt als Nächstes? ", "Du entscheidest."],
-    body: "Tippe auf ein Auto, um abzustimmen. Das Auto mit den meisten Fans bekommt als Nächstes seinen Konfigurator.",
+    body: "Tippe auf ein Auto und stimm ab. Das beliebteste bekommt den nächsten Konfigurator.", // BL-107 (PO 2026-11-03)
   },
   vote: {
     label: "Konfiguratoren",

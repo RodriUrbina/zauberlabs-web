@@ -143,5 +143,6 @@ describe("What's next title (BL-107)", () => {
     assert.match(page, /<span className="accent-serif whitespace-nowrap">\{t\.next\.title\[1\]\}<\/span>/);
     assert.deepEqual(dictionaries.de.next.title, ["Was kommt als Nächstes? ", "Du entscheidest."]);
     assert.deepEqual(dictionaries.en.next.title, ["What’s next? ", "You decide."]);
+    assert.equal(dictionaries.de.next.body, "Tippe auf ein Auto und stimm ab. Das beliebteste bekommt den nächsten Konfigurator.", "BL-107 part 2");
   });
 });
