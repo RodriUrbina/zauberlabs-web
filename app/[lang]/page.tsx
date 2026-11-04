@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { dictionaries, E46_LIVE, e46SectionUrl, e46StartUrl, e46Url, isLocale, type Locale } from "@/lib/i18n";
+import { dictionaries, E46_LIVE, e46SectionUrl, e46Url, isLocale, type Locale } from "@/lib/i18n";
 import { Arrow, Wordmark } from "@/components/Icons";
 import VoteCard from "@/components/VoteCard";
 import SuggestForm from "@/components/SuggestForm";
@@ -83,7 +82,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <HomeHero lang={lang} wrap={wrap} />
 
         {/* GARAGE — BL-083 (PO 2026-10-27, option C "Take a closer look"): the five E46BUILD categories with E46BUILD's own
-            pictures, then the six body tiles (BL-079) and the three value chips. The M3 Touring photo stays in the hero only. */}
+            pictures, then the three value chips. The M3 Touring photo stays in the hero only. BL-114 (PO 2026-11-04): the six body
+            tiles (BL-079) and their "pick the body style" heading are gone; the body pills under the hero (BL-064) stay. */}
         <section id="garage" className={`${wrap} flex scroll-mt-4 flex-col py-16 md:py-28`}>
           <div className="flex flex-col gap-4">
             <p className="eyebrow flex items-center gap-2 text-muted">
@@ -99,44 +99,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
           <div className="mt-7 md:mt-10">
             <CloserLook cats={t.garage.cats} pick={t.garage.pick} auto={t.garage.auto} cta={t.garage.cta} hrefs={E46_LIVE ? t.garage.cats.map((c) => e46SectionUrl(c.key, lang)) : null} soon={t.nav.comingSoon} />
-          </div>
-
-          <div className="mt-7 grid items-center gap-3.5 border-t border-line pt-7 md:mt-10 md:grid-cols-[200px_1fr] md:gap-6">
-            <h3 className="text-lg font-bold tracking-[-0.01em]">{t.garage.startLabel}</h3>
-            <div className="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-2.5">
-              {/* BL-079 (PO 2026-10-26): each body tile opens E46BUILD with that body pre-chosen, like the hero pills (BL-064).
-                  Counted as configurator_click by the page-wide tracker (BL-050). */}
-              {t.garage.bodies.map((b) => {
-                const inner = (
-                  <>
-                    <Image src={b.img} alt={E46_LIVE ? "" : `E46 ${b.name}`} width={240} height={150} sizes="(min-width: 768px) 200px, 33vw" className="aspect-[1.6] w-full object-cover" />
-                    <span className="flex items-center justify-between gap-1 px-2 py-1.5 md:px-2.5 md:py-2">
-                      <span className="flex flex-col">
-                        <span className="text-[13px] font-semibold md:text-sm">{b.name}</span>
-                        <span className="text-[11px] text-muted">{b.years}</span>
-                      </span>
-                      {E46_LIVE && <Arrow className="hidden size-4 shrink-0 text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-ink md:block" />}
-                    </span>
-                  </>
-                );
-                const box = "flex flex-col overflow-hidden rounded-[14px] border border-[#e3ddd3] bg-white";
-                return E46_LIVE ? (
-                  <a
-                    key={b.name}
-                    href={e46StartUrl(b.start, lang)}
-                    rel="nofollow" // each load creates a build on E46BUILD; crawlers should not follow these
-                    aria-label={t.garage.configure(b.name)}
-                    className={`group ${box} transition-colors hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink active:bg-[#f4f1ec]`}
-                  >
-                    {inner}
-                  </a>
-                ) : (
-                  <div key={b.name} className={box}>
-                    {inner}
-                  </div>
-                );
-              })}
-            </div>
           </div>
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-5">

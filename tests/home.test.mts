@@ -17,13 +17,15 @@ describe("home page (BL-053)", () => {
     assert.match(hero, /href=\{e46StartUrl\(b\.start, lang\)\}\s+rel="nofollow"/, "start links carry rel=nofollow");
     assert.ok(!/e46StartUrl[\s\S]{0,200}target=/.test(hero), "start links stay in the same tab");
   });
-  test("garage tiles link to E46BUILD with the body pre-chosen, nofollow, same tab, with an accessible name (BL-079)", () => {
+  test("the garage body tiles and their heading are gone, EN and DE; the hero body pills stay (BL-114)", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
-    assert.match(page, /href=\{e46StartUrl\(b\.start, lang\)\}\s+rel="nofollow"/);
-    assert.match(page, /aria-label=\{t\.garage\.configure\(b\.name\)\}/);
-    assert.ok(!/e46StartUrl[\s\S]{0,300}target=/.test(page), "tile links stay in the same tab");
-    assert.equal(dictionaries.en.garage.configure("Sedan"), "Configure the Sedan");
-    assert.equal(dictionaries.de.garage.configure("Limousine"), "Limousine konfigurieren");
+    assert.ok(!/garage\.bodies|e46StartUrl|startLabel|garage\.configure/.test(page), "no body tiles on the page");
+    for (const lang of LOCALES) {
+      const g = dictionaries[lang].garage as Record<string, unknown>;
+      assert.ok(!("startLabel" in g) && !("configure" in g), lang);
+      for (const b of dictionaries[lang].garage.bodies) assert.deepEqual(Object.keys(b), ["name", "start"], `${lang} ${b.name}`);
+    }
+    assert.match(fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8"), /d\.garage\.bodies\.map/);
   });
   test("phone sticky bar reuses the hero CTA copy and watches the hero button, the What's next block and the footer (BL-079, BL-081)", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
@@ -58,13 +60,6 @@ describe("home page (BL-053)", () => {
     assert.deepEqual(dictionaries.de.footer.next, ["Als Nächstes: du entscheidest", " → abstimmen"]);
     assert.match(page, /export const revalidate = 300/, "the blog teaser follows the publish schedule");
     assert.match(page, /getBlog\(\)\.listPosts\(lang\)/, "same visibility rules as /blog");
-  });
-  test("garage: five bodies plus the M3 in both languages, in order, each image present", () => {
-    for (const lang of LOCALES) {
-      const bodies = dictionaries[lang].garage.bodies;
-      assert.deepEqual(bodies.map((b) => b.img), ["/images/sedan.jpg", "/images/touring.jpg", "/images/coupe.jpg", "/images/convertible.jpg", "/images/compact.jpg", "/images/m3.jpg"]);
-      for (const b of bodies) assert.ok(fs.existsSync(pub(b.img)), b.img);
-    }
   });
   test("hero copy: three-part headline with the accent word in the middle, no brand capital", () => {
     assert.deepEqual(dictionaries.en.hero.title, ["See what your ", "E46 can become.", ""], "BL-110");

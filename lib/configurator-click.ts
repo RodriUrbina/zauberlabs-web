@@ -1,6 +1,6 @@
 /**
  * BL-050 — which configurator a link points to, for the "configurator_click" analytics event.
- * Matched by host only, so every link to a configurator counts (header button, hero card, garage card,
+ * Matched by host only, so every link to a configurator counts (header button, hero, garage panel,
  * article CTA, inline article links, footer) and nothing from the URL itself (path, query) is sent.
  */
 export const CONFIGURATOR_CLICK_EVENT = "configurator_click";
