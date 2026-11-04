@@ -95,7 +95,10 @@ describe("About page (BL-108)", () => {
     const p = read("components", "AboutPage.tsx");
     assert.match(p, /if \(!isLocale\(lang\) \|\| lang !== only\) notFound\(\);/);
     assert.match(p, /canonical: `\$\{SITE_URL\}\$\{aboutPath\(only\)\}`, languages: Object\.fromEntries\(LOCALES\.map\(\(l\) => \[l, `\$\{SITE_URL\}\$\{aboutPath\(l\)\}`\]\)\)/);
-    assert.match(p, /<BlogHeader lang=\{lang\} otherHref=\{aboutPath\(other\)\} \/>/);
+    assert.match(p, /<BlogHeader lang=\{lang\} otherHref=\{aboutPath\(other\)\} blogLabel=\{false\} \/>/, "no Blog label on the About page (PO 2026-11-04)");
+    const h = read("components", "blog", "BlogHeader.tsx");
+    assert.match(h, /blogLabel = true/, "blog pages keep it");
+    assert.match(h, /\{blogLabel && \(\s*<>\s*<span aria-hidden="true" className="hidden h-5 w-px bg-line sm:block" \/>\s*<Link href=\{`\/\$\{lang\}\/blog`\}/);
     assert.match(p, /<SiteFooter lang=\{lang\} otherHref=\{aboutPath\(other\)\} homePath=\{`\/\$\{lang\}`\} \/>/);
   });
 

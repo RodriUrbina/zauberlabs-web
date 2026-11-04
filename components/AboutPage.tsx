@@ -24,7 +24,8 @@ export default function AboutPage({ lang, only }: { lang: string; only: Locale }
   const other: Locale = lang === "de" ? "en" : "de";
   return (
     <div className="min-h-screen">
-      <BlogHeader lang={lang} otherHref={aboutPath(other)} />
+      {/* PO 2026-11-04: no "Blog" label next to the logo on the About page. */}
+      <BlogHeader lang={lang} otherHref={aboutPath(other)} blogLabel={false} />
       <main className="mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20">
         <article className="mx-auto flex w-full max-w-[760px] flex-col gap-8 py-10 md:py-16">
           <h1 className="text-[34px] leading-[1.02] font-extrabold tracking-[-0.035em] text-ink md:text-[52px]">{ABOUT_TITLE[lang]}</h1>
