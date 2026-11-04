@@ -2,6 +2,7 @@
 
 One line per file. Article images live under `public/blog/<slug>/` with their credits in the article's front matter.
 
+- Since BL-114 (PO 2026-11-04) the six body pictures below are on no page (the garage body cards were removed); `coupe.jpg` is still used by the sample article.
 - `sedan.jpg`: AI render by the PO (garage body card).
 - `touring.jpg`: AI render by the PO (garage body card).
 - `coupe.jpg`: AI render by the PO (garage body card; two-door Coupé body).
