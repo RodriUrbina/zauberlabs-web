@@ -32,6 +32,12 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
+/* BL-109: the closer-look auto-play bar fills over one part's time */
+@keyframes zl-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 .accent-serif {
   font-family: var(--font-serif);
   font-style: italic;

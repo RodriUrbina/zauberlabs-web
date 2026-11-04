@@ -100,7 +100,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
 
           <div className="mt-7 md:mt-10">
-            <CloserLook cats={t.garage.cats} pick={t.garage.pick} cta={t.garage.cta} hrefs={E46_LIVE ? t.garage.cats.map((c) => e46SectionUrl(c.key, lang)) : null} soon={t.nav.comingSoon} />
+            <CloserLook cats={t.garage.cats} pick={t.garage.pick} auto={t.garage.auto} cta={t.garage.cta} hrefs={E46_LIVE ? t.garage.cats.map((c) => e46SectionUrl(c.key, lang)) : null} soon={t.nav.comingSoon} />
           </div>
 
           <div className="mt-7 grid items-center gap-3.5 border-t border-line pt-7 md:mt-10 md:grid-cols-[200px_1fr] md:gap-6">
