@@ -32,6 +32,7 @@ const en = {
     live: "live",
     soon: "coming soon",
     title: ["Take a ", "closer look."],
+    body: "Tap a part, then “Try it on your E46” to start configuring your car from there.", // BL-115 (PO 2026-11-04): the side text, like What's next
     cats: [
       { key: "headlights", label: "Headlights", line: "Halogen, xenon or bi-xenon, matched to your car’s build date.", img: "/images/closer-look/e46-headlight-look-bi-xenon-late-hires.webp", alt: "Bi-xenon headlight of a late E46, close-up" },
       { key: "wheels", label: "Wheels", line: "BMW factory wheels, swapped onto an E46 seen from the side.", img: "/images/closer-look/e46-wheel-stage-side.webp", alt: "Front wheel of a silver E46, seen from the side" },
@@ -180,6 +181,7 @@ const de: Dict = {
     live: "live",
     soon: "bald verfügbar",
     title: ["Sieh ", "genauer hin."],
+    body: "Tippe auf ein Teil, dann auf „Probier es an deinem E46 aus“, um dein Auto ab dort zu konfigurieren.",
     // BL-083: DE copy by the Writer (2026-10-27); alt texts drafted by the Builder.
     cats: [
       { key: "headlights", label: "Scheinwerfer", line: "Halogen, Xenon oder Bi-Xenon, passend zum Baudatum deines E46.", img: "/images/closer-look/e46-headlight-look-bi-xenon-late-hires.webp", alt: "Bi-Xenon-Scheinwerfer eines späten E46, Nahaufnahme" },

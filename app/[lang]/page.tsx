@@ -86,16 +86,20 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             the panel is gone: the "pick the body style" heading, the six body tiles (BL-079), the three value chips (BL-081) and the
             "Open E46BUILD" button. The body pills under the hero (BL-064) and the header button stay. */}
         <section id="garage" className={`${wrap} flex scroll-mt-4 flex-col py-16 md:py-28`}>
-          <div className="flex flex-col gap-4">
-            <p className="eyebrow flex items-center gap-2 text-muted">
-              <span aria-hidden="true" className={`size-2 rounded-full ${E46_LIVE ? "bg-[#1f9d63]" : "border border-muted"}`} />
-              <span className="font-bold text-ink">
-                E46<span className="text-[#5d6fd6]">BUILD</span>
-              </span>
-              <span aria-hidden="true">·</span>
-              {E46_LIVE ? t.garage.live : t.garage.soon}
-            </p>
-            <Title lead={t.garage.title[0]} accent={t.garage.title[1]} className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]" />
+          {/* BL-115 (PO 2026-11-04): the side text opposite the title, same slot and style as What's next and the blog teaser. */}
+          <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div className="flex flex-col gap-4">
+              <p className="eyebrow flex items-center gap-2 text-muted">
+                <span aria-hidden="true" className={`size-2 rounded-full ${E46_LIVE ? "bg-[#1f9d63]" : "border border-muted"}`} />
+                <span className="font-bold text-ink">
+                  E46<span className="text-[#5d6fd6]">BUILD</span>
+                </span>
+                <span aria-hidden="true">·</span>
+                {E46_LIVE ? t.garage.live : t.garage.soon}
+              </p>
+              <Title lead={t.garage.title[0]} accent={t.garage.title[1]} className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]" />
+            </div>
+            <p className="max-w-[400px] text-base leading-relaxed text-body">{t.garage.body}</p>
           </div>
 
           <div className="mt-7 md:mt-10">
