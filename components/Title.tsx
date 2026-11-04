@@ -17,17 +17,20 @@ type Props = {
   id?: string;
   /** BL-107: the accent half wraps as a whole, never between its words. */
   keepAccentTogether?: boolean;
+  /** BL-113: the accent half always starts a new line. */
+  breakBeforeAccent?: boolean;
   eyebrow?: string;
   /** Size and colour of the eyebrow when the place needs its own (default: grey). */
   eyebrowClassName?: string;
 };
 
-export default function Title({ as: H = "h2", lead, accent, tail, tone = "light", className, id, keepAccentTogether = false, eyebrow, eyebrowClassName = "text-muted" }: Props) {
+export default function Title({ as: H = "h2", lead, accent, tail, tone = "light", className, id, keepAccentTogether = false, breakBeforeAccent = false, eyebrow, eyebrowClassName = "text-muted" }: Props) {
   return (
     <>
       {eyebrow && <p className={`eyebrow ${eyebrowClassName}`}>{eyebrow}</p>}
       <H id={id} className={className}>
         {lead}
+        {breakBeforeAccent && <br />}
         <span className={`accent-serif ${tone === "dark" ? "text-accent-dark" : "text-accent"}${keepAccentTogether ? " whitespace-nowrap" : ""}`}>{accent}</span>
         {tail}
       </H>

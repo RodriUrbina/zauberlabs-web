@@ -172,7 +172,7 @@ const de: Dict = {
   hero: {
     live: "E46BUILD ist live",
     liveSoon: "Demnächst · BMW 3er (E46)",
-    title: ["Sieh, was aus deinem ", "E46 werden kann.", ""], // BL-110 (PO 2026-11-04)
+    title: ["Was aus deinem ", "E46 werden kann.", ""], // BL-113 (PO 2026-11-04): two lines, the break after "deinem" (HomeHero)
     line: "Wähl deinen E46. Sieh die Teile daran. Kauf nur, was passt.",
     cta: "Starte mit deinem E46",
     configure: "E46 konfigurieren",

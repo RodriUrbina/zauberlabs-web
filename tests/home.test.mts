@@ -68,7 +68,9 @@ describe("home page (BL-053)", () => {
   });
   test("hero copy: three-part headline with the accent word in the middle, no brand capital", () => {
     assert.deepEqual(dictionaries.en.hero.title, ["See what your ", "E46 can become.", ""], "BL-110");
-    assert.deepEqual(dictionaries.de.hero.title, ["Sieh, was aus deinem ", "E46 werden kann.", ""], "BL-110");
+    assert.deepEqual(dictionaries.de.hero.title, ["Was aus deinem ", "E46 werden kann.", ""], "BL-113");
+    // BL-113: German on exactly two lines, the break after "deinem"; English as it was
+    assert.match(fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8"), /breakBeforeAccent=\{lang === "de"\}\s*keepAccentTogether=\{lang === "de"\}/);
     for (const lang of LOCALES) {
       const d = dictionaries[lang];
       assert.ok(!JSON.stringify([d.hero, d.next, d.vote, d.garage, d.teaser, d.footer]).includes("Zauberlabs"), lang);

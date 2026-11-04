@@ -38,7 +38,17 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
               <span aria-hidden="true" className={`size-2 rounded-full ${E46_LIVE ? "bg-[#1f9d63]" : "border border-fog"}`} />
               {E46_LIVE ? t.live : t.liveSoon}
             </p>
-            <Title as="h1" tone="dark" lead={t.title[0]} accent={t.title[1]} tail={t.title[2]} className="mt-3 text-[38px] leading-none font-extrabold tracking-[-0.045em] [text-wrap:balance] lg:mt-[18px] lg:text-[60px]" />
+            {/* BL-113 (PO 2026-11-04): the German headline is exactly two lines, "Was aus deinem" / "E46 werden kann.". */}
+            <Title
+              as="h1"
+              tone="dark"
+              lead={t.title[0]}
+              accent={t.title[1]}
+              tail={t.title[2]}
+              breakBeforeAccent={lang === "de"}
+              keepAccentTogether={lang === "de"}
+              className="mt-3 text-[38px] leading-none font-extrabold tracking-[-0.045em] [text-wrap:balance] lg:mt-[18px] lg:text-[60px]"
+            />
             <p className="mt-3 text-base leading-normal text-[#e6e2dc] [text-wrap:pretty] lg:mt-4 lg:text-[19px]">{t.line}</p>
             <div className="mt-[22px] flex w-full flex-col gap-2.5 lg:mt-7 lg:w-auto lg:flex-row lg:gap-3">
               {E46_LIVE ? (

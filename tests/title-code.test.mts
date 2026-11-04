@@ -52,7 +52,8 @@ describe("title code (BL-111)", () => {
     const page = read("app", "[lang]", "page.tsx");
     assert.equal(page.match(/<Title\b/g)?.length, 4, "closer look, What's next, Add yours, From the blog");
     assert.match(page, /tone="dark"\s+eyebrow=\{t\.suggest\.eyebrow\}/, "Add yours sits on the dark card");
-    assert.match(read("components", "HomeHero.tsx"), /<Title as="h1" tone="dark" lead=\{t\.title\[0\]\} accent=\{t\.title\[1\]\} tail=\{t\.title\[2\]\}/);
+    assert.match(read("components", "HomeHero.tsx"), /<Title\s+as="h1"\s+tone="dark"\s+lead=\{t\.title\[0\]\}\s+accent=\{t\.title\[1\]\}\s+tail=\{t\.title\[2\]\}/);
+    assert.equal(html({ as: "h1", tone: "dark", lead: "Was aus deinem ", accent: "E46 werden kann.", breakBeforeAccent: true, keepAccentTogether: true, className: "h" }), '<h1 class="h">Was aus deinem <br/><span class="accent-serif text-accent-dark whitespace-nowrap">E46 werden kann.</span></h1>', "BL-113");
   });
 
   test("written down in the README with the component name, an EN and a DE example and both tokens", () => {
