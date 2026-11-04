@@ -97,8 +97,8 @@ describe("home page (BL-053)", () => {
       headlights: "/images/closer-look/e46-headlight-look-bi-xenon-late-hires.webp", // the PO's high-res render, on the car (BL-083.3)
       bumpers: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", // bumper look, on the car
       wheels: "/images/closer-look/e46-wheel-stage-side.webp", // WHEEL_STAGE_SRC
-      seats: "/images/closer-look/e46-seat-stage-interior.webp", // SEAT_STAGE_SRC
-      steering: "/images/closer-look/e46-steering-stage-cockpit-m-sport.webp", // empty cockpit + M Sport cut-out
+      seats: "/images/closer-look/e46-seat-stage-interior-leather.webp", // SEAT_STAGE_SRC, leather since T-247.1 (BL-112)
+      steering: "/images/closer-look/e46-steering-stage-cockpit-m3.webp", // empty cockpit + M3 cut-out (BL-112)
     };
     for (const lang of LOCALES) for (const c of dictionaries[lang].garage.cats) assert.equal(c.img, onCar[c.key], `${lang} ${c.key}`);
     assert.deepEqual(fs.readdirSync(pub("/images/closer-look")).sort(), Object.values(onCar).map((p) => path.basename(p)).sort(), "no part-only pictures left");
@@ -144,5 +144,21 @@ describe("What's next title (BL-107)", () => {
     assert.deepEqual(dictionaries.de.next.title, ["Was kommt als Nächstes? ", "Du entscheidest."]);
     assert.deepEqual(dictionaries.en.next.title, ["What’s next? ", "You decide."]);
     assert.equal(dictionaries.de.next.body, "Tippe auf ein Auto und stimm ab. Das beliebteste bekommt den nächsten Konfigurator.", "BL-107 part 2");
+  });
+});
+
+describe("closer look pictures (BL-112)", () => {
+  test("leather seats and the M3 wheel, both E46BUILD's own, hash-checked; the panel texts unchanged", async () => {
+    const { createHash } = await import("node:crypto");
+    const sha = (p: string) => createHash("sha256").update(fs.readFileSync(path.join(process.cwd(), "public", p))).digest("hex");
+    assert.equal(sha("/images/closer-look/e46-seat-stage-interior-leather.webp"), "5643ea34fbced2cc02b516a3c04e0e1fc43a71e5008f27e5c9e1075f48f4aede", "byte-identical to e46build seats/e46-seat-stage-interior.webp (T-247.1)");
+    const script = fs.readFileSync(path.join(process.cwd(), "scripts", "make-closer-look-steering.mjs"), "utf8");
+    assert.match(script, /e46-steering-cutout-m3\.webp", sha256: "6502ec23a418962f9629c5fc6645d1ad61bf13a79d9ef16aa396717f1d5b1f01"/);
+    assert.match(script, /e46-steering-stage-cockpit\.webp", sha256: "49dd75052c14109488fa8cb359882b8769ce78da731f71f389f652b0eb95e731"/);
+    const cats = (lang: "en" | "de") => Object.fromEntries(dictionaries[lang].garage.cats.map((c) => [c.key, c]));
+    assert.equal(cats("en").seats.line, "Basic, sport or M3 seats, for your E46.");
+    assert.equal(cats("en").steering.line, "Standard, sport, M Sport or M3 steering wheels for your E46.");
+    assert.equal(cats("en").steering.alt, "E46 cockpit with an M3 steering wheel");
+    assert.equal(cats("de").seats.alt, "E46-Innenraum mit schwarzen Leder-Sportsitzen");
   });
 });
