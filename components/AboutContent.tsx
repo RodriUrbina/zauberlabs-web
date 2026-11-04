@@ -44,7 +44,7 @@ function En() {
       <p>So why not get excited about the car we already own? With a modern configurator of its own, we owners can play with its potential and imagine what it could become.</p>
       <p>We built the first one, E46BUILD, for the BMW E46, because we own one and wanted to see that for ours, rather than replacing it.</p>
       <p>
-        <strong>Make it better, not different.</strong> You don&apos;t need a new car to get a new feeling. Other headlights, the wheels you always wanted, the bumpers of a later year, sport
+        <strong>Make it better, not different.</strong> You don&apos;t need a new car to get a new feeling. New headlights, the wheels you always wanted, the bumpers of a later year, sport
         seats, a better steering wheel: small changes that make your car more yours, while it stays the car you love.
       </p>
       <Quote lang="en" text={"\"It feels factory, which I think is the greatest compliment you can give a build like this.\""} by="Doug DeMuro (20:38)" seconds={1238} />
@@ -87,7 +87,7 @@ function De() {
       </p>
       <p>Den ersten, E46BUILD, haben wir für den BMW E46 gebaut, weil wir selbst einen fahren und genau das für unseren sehen wollten, statt ihn zu ersetzen.</p>
       <p>
-        <strong>Besser machen, nicht anders.</strong> Für ein neues Gefühl brauchst du kein neues Auto. Andere Scheinwerfer, die Felgen, die du schon immer wolltest, die Stoßstangen eines
+        <strong>Besser machen, nicht anders.</strong> Für ein neues Gefühl brauchst du kein neues Auto. Neue Scheinwerfer, die Felgen, die du schon immer wolltest, die Stoßstangen eines
         späteren Baujahrs, Sportsitze, ein besseres Lenkrad: kleine Änderungen, die dein Auto mehr zu deinem machen, und es bleibt das Auto, das du liebst.
       </p>
       <Quote
