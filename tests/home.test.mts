@@ -17,12 +17,14 @@ describe("home page (BL-053)", () => {
     assert.match(hero, /href=\{e46StartUrl\(b\.start, lang\)\}\s+rel="nofollow"/, "start links carry rel=nofollow");
     assert.ok(!/e46StartUrl[\s\S]{0,200}target=/.test(hero), "start links stay in the same tab");
   });
-  test("the garage body tiles and their heading are gone, EN and DE; the hero body pills stay (BL-114)", () => {
+  test("the block under the garage panel is gone, EN and DE: heading, body tiles, value chips, button; the hero body pills stay (BL-114)", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
-    assert.ok(!/garage\.bodies|e46StartUrl|startLabel|garage\.configure/.test(page), "no body tiles on the page");
+    assert.ok(!/garage\.(bodies|configure|startLabel|values|open)|e46StartUrl/.test(page), "nothing of the block left on the page");
+    const garage = page.slice(page.indexOf('<section id="garage"'), page.indexOf("</section>"));
+    assert.ok(garage.trimEnd().endsWith("</div>") && garage.includes("<CloserLook "), "the panel is the section's last block");
     for (const lang of LOCALES) {
       const g = dictionaries[lang].garage as Record<string, unknown>;
-      assert.ok(!("startLabel" in g) && !("configure" in g), lang);
+      for (const k of ["startLabel", "configure", "values", "open"]) assert.ok(!(k in g), `${lang} ${k}`);
       for (const b of dictionaries[lang].garage.bodies) assert.deepEqual(Object.keys(b), ["name", "start"], `${lang} ${b.name}`);
     }
     assert.match(fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8"), /d\.garage\.bodies\.map/);

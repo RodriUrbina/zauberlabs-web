@@ -52,7 +52,7 @@ describe("German E46BUILD links (BL-105)", () => {
   test("home page: every E46BUILD link is built with the page language", () => {
     const page = read("app", "[lang]", "page.tsx");
     assert.ok(!page.includes("E46_URL"), "no language-blind link left");
-    assert.equal(page.match(/href=\{e46Url\(lang\)\}/g)?.length, 5, "header ×2, hero, What's next, sticky bar");
+    assert.equal(page.match(/href=\{e46Url\(lang\)\}/g)?.length, 4, "header ×2, blog teaser, sticky bar (the garage button is gone, BL-114)");
     assert.match(read("components", "HomeHero.tsx"), /href=\{e46StartUrl\(b\.start, lang\)\}/, "the body pills (the garage tiles are gone, BL-114)");
     assert.match(page, /e46SectionUrl\(c\.key, lang\)/);
     for (const f of [["components", "HomeHero.tsx"], ["components", "SiteFooter.tsx"], ["components", "VoteCard.tsx"], ["components", "blog", "BlogHeader.tsx"]]) {

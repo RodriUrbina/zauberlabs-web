@@ -43,9 +43,6 @@ const en = {
     // BL-109: the auto-play indicator under the panel ({part} = the part's label)
     auto: { label: "Slideshow of the parts", show: "Show {part}", pause: "Pause the slideshow", play: "Play the slideshow" },
     cta: "Try it on your E46",
-    open: "Open E46BUILD",
-    // BL-081: the three "Why zauberlabs" titles as chips (their sentences are gone); BL-114: right under the panel.
-    values: ["Exact fit.", "Configure, don’t decode.", "Sellers that have it."],
     // The body pills under the hero (BL-064); the garage body tiles were removed in BL-114.
     bodies: [
       { name: "Sedan", start: "sedan" },
@@ -194,8 +191,6 @@ const de: Dict = {
     pick: "Teile in E46BUILD",
     auto: { label: "Diashow der Teile", show: "{part} zeigen", pause: "Diashow anhalten", play: "Diashow abspielen" },
     cta: "Probier es an deinem E46 aus",
-    open: "E46BUILD öffnen",
-    values: ["Passgenau.", "Konfigurieren statt entschlüsseln.", "Händler, die es haben."],
     bodies: [
       { name: "Limousine", start: "sedan" },
       { name: "Touring", start: "touring" },
