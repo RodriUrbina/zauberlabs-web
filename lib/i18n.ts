@@ -40,6 +40,8 @@ const en = {
       { key: "steering", label: "Steering wheels", line: "Standard, sport, M Sport or M3 steering wheels for your E46.", img: "/images/closer-look/e46-steering-stage-cockpit-m-sport.webp", alt: "E46 cockpit with an M Sport steering wheel" },
     ],
     pick: "Parts in E46BUILD", // accessible name of the category tab list
+    // BL-109: the auto-play indicator under the panel ({part} = the part's label)
+    auto: { label: "Slideshow of the parts", show: "Show {part}", pause: "Pause the slideshow", play: "Play the slideshow" },
     cta: "Try it on your E46",
     startLabel: "Start configuring your E46 by picking its body style first",
     open: "Open E46BUILD",
@@ -191,6 +193,7 @@ const de: Dict = {
       { key: "steering", label: "Lenkräder", line: "Standard, Sport, M Sport oder M3 – Lenkräder für deinen E46.", img: "/images/closer-look/e46-steering-stage-cockpit-m-sport.webp", alt: "E46-Cockpit mit M-Sport-Lenkrad" },
     ],
     pick: "Teile in E46BUILD",
+    auto: { label: "Diashow der Teile", show: "{part} zeigen", pause: "Diashow anhalten", play: "Diashow abspielen" },
     cta: "Probier es an deinem E46 aus",
     startLabel: "Beginne die Konfiguration deines E46 mit der Wahl der Karosserie.",
     open: "E46BUILD öffnen",
