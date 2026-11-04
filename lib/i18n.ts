@@ -16,7 +16,7 @@ const en = {
   hero: {
     live: "E46BUILD is live",
     liveSoon: "Coming soon · BMW 3 Series (E46)",
-    title: ["See what your ", "E46 could be.", ""],
+    title: ["See what your ", "E46 can become.", ""], // BL-110 (PO 2026-11-04)
     line: "Pick your E46. See the parts on it. Buy only what fits.",
     cta: "Start with your E46",
     configure: "Configure your E46",
@@ -170,7 +170,7 @@ const de: Dict = {
   hero: {
     live: "E46BUILD ist live",
     liveSoon: "Demnächst · BMW 3er (E46)",
-    title: ["Sieh, was dein ", "E46 sein kann.", ""],
+    title: ["Sieh, was aus deinem ", "E46 werden kann.", ""], // BL-110 (PO 2026-11-04)
     line: "Wähl deinen E46. Sieh die Teile daran. Kauf nur, was passt.",
     cta: "Starte mit deinem E46",
     configure: "E46 konfigurieren",
