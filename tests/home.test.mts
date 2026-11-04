@@ -29,6 +29,14 @@ describe("home page (BL-053)", () => {
     }
     assert.match(fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8"), /d\.garage\.bodies\.map/);
   });
+  test("Take a closer look has the side text opposite its title, same slot and style as What's next (BL-115)", () => {
+    const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
+    assert.match(page, /<p className="max-w-\[400px\] text-base leading-relaxed text-body">\{t\.garage\.body\}<\/p>/);
+    assert.match(page, /<p className="max-w-\[400px\] text-base leading-relaxed text-body">\{t\.next\.body\}<\/p>/, "the same style as What's next");
+    assert.equal(dictionaries.en.garage.body, "Tap a part, then “Try it on your E46” to start configuring your car from there.");
+    assert.equal(dictionaries.de.garage.body, "Tippe auf ein Teil, dann auf „Probier es an deinem E46 aus“, um dein Auto ab dort zu konfigurieren.");
+    assert.ok(dictionaries.en.garage.body.includes(`“${dictionaries.en.garage.cta}”`) && dictionaries.de.garage.body.includes(`„${dictionaries.de.garage.cta}“`), "names the panel button as it reads");
+  });
   test("phone sticky bar reuses the hero CTA copy and watches the hero button, the What's next block and the footer (BL-079, BL-081)", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
     assert.match(page, /<StickyStartBar href=\{e46Url\(lang\)\} label=\{t\.hero\.cta\} \/>/);
