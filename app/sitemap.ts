@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getBlog } from "@/lib/blog";
 import { SHOP_LAUNCHED } from "@/lib/shop-flag";
+import { aboutPath } from "@/lib/about";
 
 const BASE = "https://www.zauberlabs.de";
 
@@ -26,5 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Blog: index + tag pages per language; articles only in the languages they exist in; drafts excluded on production.
   // BL-084: the fan shop only once it is launched (lib/shop-flag.ts); its legal pages stay out, like Impressum/Datenschutz.
   const shop = SHOP_LAUNCHED ? [page("/shop", 0.6), en("/shop", 0.5)] : [];
-  return [page("", 1), en("", 0.9), ...shop, ...getBlog().sitemapEntries()];
+  // BL-108: the About page has its own path per language (/de/ueber-uns, /en/about).
+  const aboutLanguages = { de: `${BASE}${aboutPath("de")}`, en: `${BASE}${aboutPath("en")}` };
+  const about = (["de", "en"] as const).map((l) => ({ url: aboutLanguages[l], lastModified: now, priority: 0.5, alternates: { languages: aboutLanguages } }));
+  return [page("", 1), en("", 0.9), ...shop, ...about, ...getBlog().sitemapEntries()];
 }

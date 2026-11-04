@@ -4,8 +4,8 @@ import { Arrow, Wordmark } from "@/components/Icons";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
 
-/** Compact header for blog pages. The language switch keeps the reader on the same page. */
-export default function BlogHeader({ lang, otherHref }: { lang: Locale; otherHref: string }) {
+/** Compact header for blog pages. The language switch keeps the reader on the same page. `blogLabel={false}`: no "Blog" label next to the logo (BL-108, About page). */
+export default function BlogHeader({ lang, otherHref, blogLabel = true }: { lang: Locale; otherHref: string; blogLabel?: boolean }) {
   const t = dictionaries[lang];
   const other: Locale = lang === "de" ? "en" : "de";
   return (
@@ -15,10 +15,14 @@ export default function BlogHeader({ lang, otherHref }: { lang: Locale; otherHre
           <Link href={`/${lang}`} aria-label="zauberlabs">
             <Wordmark />
           </Link>
-          <span aria-hidden="true" className="hidden h-5 w-px bg-line sm:block" />
-          <Link href={`/${lang}/blog`} className="eyebrow hidden text-muted hover:text-ink sm:block">
-            {t.nav.blog}
-          </Link>
+          {blogLabel && (
+            <>
+              <span aria-hidden="true" className="hidden h-5 w-px bg-line sm:block" />
+              <Link href={`/${lang}/blog`} className="eyebrow hidden text-muted hover:text-ink sm:block">
+                {t.nav.blog}
+              </Link>
+            </>
+          )}
         </div>
         <div className="flex items-center gap-4">
           <div className="font-mono text-xs tracking-[0.08em] text-muted">

@@ -4,6 +4,7 @@ import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 import { getBlog } from "@/lib/blog";
 import { footerBlogTopics } from "@/lib/footer-topics";
 import { E46_TOPIC_GROUPS } from "@/lib/e46-topics";
+import { aboutPath } from "@/lib/about";
 import { Wordmark } from "./Icons";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
@@ -42,7 +43,8 @@ export default function SiteFooter({ lang, otherHref, homePath = "" }: Props) {
             <Link href={`/${lang}/blog`} className="hover:text-paper">{t.nav.blog}</Link>
             {/* BL-086 (PO 2026-10-27): the shop sits with the studio links, not under Legal; only once launched. */}
             {SHOP_LAUNCHED && <Link href={`/${lang}/shop`} className="hover:text-paper">{t.nav.shop}</Link>}
-            <a href={`${homePath}#garage`} className="hover:text-paper">{t.footer.about}</a>
+            {/* BL-108: the About page (/en/about, /de/ueber-uns), no longer the configurators section. */}
+            <Link href={aboutPath(lang)} className="hover:text-paper">{t.footer.about}</Link>
             <a href={`${homePath}#suggest`} className="hover:text-paper">{t.nav.suggest}</a>
             <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-paper">{CONTACT_EMAIL}</a>
           </div>
