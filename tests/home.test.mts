@@ -68,7 +68,9 @@ describe("home page (BL-053)", () => {
   });
   test("hero copy: three-part headline with the accent word in the middle, no brand capital", () => {
     assert.deepEqual(dictionaries.en.hero.title, ["See what your ", "E46 can become.", ""], "BL-110");
-    assert.deepEqual(dictionaries.de.hero.title, ["Sieh, was aus deinem ", "E46 werden kann.", ""], "BL-110");
+    assert.deepEqual(dictionaries.de.hero.title, ["Was aus deinem ", "E46 werden kann.", ""], "BL-113");
+    // BL-113: German on exactly two lines, the break after "deinem"; English as it was
+    assert.match(fs.readFileSync(path.join(process.cwd(), "components", "HomeHero.tsx"), "utf8"), /breakBeforeAccent=\{lang === "de"\}\s*keepAccentTogether=\{lang === "de"\}/);
     for (const lang of LOCALES) {
       const d = dictionaries[lang];
       assert.ok(!JSON.stringify([d.hero, d.next, d.vote, d.garage, d.teaser, d.footer]).includes("Zauberlabs"), lang);
@@ -140,7 +142,7 @@ describe("home page (BL-053)", () => {
 describe("What's next title (BL-107)", () => {
   test("the accent wraps as a whole, never between its words", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
-    assert.match(page, /<span className="accent-serif whitespace-nowrap">\{t\.next\.title\[1\]\}<\/span>/);
+    assert.match(page, /<Title eyebrow=\{t\.next\.eyebrow\} lead=\{t\.next\.title\[0\]\} accent=\{t\.next\.title\[1\]\} keepAccentTogether /, "BL-111: the title code keeps it together");
     assert.deepEqual(dictionaries.de.next.title, ["Was kommt als Nächstes? ", "Du entscheidest."]);
     assert.deepEqual(dictionaries.en.next.title, ["What’s next? ", "You decide."]);
     assert.equal(dictionaries.de.next.body, "Tippe auf ein Auto und stimm ab. Das beliebteste bekommt den nächsten Konfigurator.", "BL-107 part 2");

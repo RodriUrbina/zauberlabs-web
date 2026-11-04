@@ -61,7 +61,7 @@ describe("About page (BL-108)", () => {
     assert.deepEqual(ABOUT_TITLE, { en: "About zauberlabs", de: "Über zauberlabs" });
     // PO 2026-11-04 (option 1): like the homepage headlines, "zauberlabs" in the accent serif, the rest black
     for (const l of ["en", "de"] as const) assert.equal(ABOUT_HEADLINE[l].join(""), ABOUT_TITLE[l]);
-    assert.match(read("components", "AboutPage.tsx"), /\{ABOUT_HEADLINE\[lang\]\[0\]\}\s*<span className="accent-serif text-accent">\{ABOUT_HEADLINE\[lang\]\[1\]\}<\/span>\s*<\/h1>/);
+    assert.match(read("components", "AboutPage.tsx"), /<Title as="h1" lead=\{ABOUT_HEADLINE\[lang\]\[0\]\} accent=\{ABOUT_HEADLINE\[lang\]\[1\]\} className="[^"]*md:text-\[52px\]" \/>/, "BL-111 title code");
   });
 
   test("the copy is the approved text, word for word, in order (EN and DE)", () => {
