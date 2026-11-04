@@ -18,7 +18,7 @@ export const AUTO_SECONDS = 4;
  * robots.txt disallows them); it is counted as configurator_click by the page-wide tracker (BL-050), with no extra data. All five pictures are rendered stacked, so switching never waits.
  * BL-109 (PO 2026-11-04): the panel moves through the parts by itself, AUTO_SECONDS each, with a row under it: the active part a
  * bar that fills over its time, the others dots, a pause/play button at the end. It runs only while the section is in view and the
- * tab is visible, holds while the mouse is over it or a part/dot has keyboard focus, and never starts by itself with reduced motion.
+ * tab is visible, holds while the mouse is over the panel or a part/dot has keyboard focus, and never starts by itself with reduced motion.
  * A visitor's own pick (part, dot, arrow keys) stops it and stays shown; the play button restarts it. The fill is a CSS animation,
  * so a hold freezes the bar where it is; its end moves to the next part.
  */
@@ -84,13 +84,16 @@ export default function CloserLook({ cats, pick, auto, cta, hrefs, soon }: { cat
   return (
     <div
       ref={root}
-      onPointerEnter={(e) => e.pointerType === "mouse" && setHovered(true)}
-      onPointerLeave={() => setHovered(false)}
       onFocus={onFocus}
       onBlur={onBlur}
       className="flex flex-col gap-4 md:gap-5"
     >
-      <div className="grid gap-4 rounded-[22px] bg-ink p-4 text-paper md:grid-cols-[minmax(260px,320px)_1fr] md:gap-6 md:rounded-[28px] md:p-7">
+      {/* The mouse holds it over the panel only: over the row below, a click on play must start it at once. */}
+      <div
+        onPointerEnter={(e) => e.pointerType === "mouse" && setHovered(true)}
+        onPointerLeave={() => setHovered(false)}
+        className="grid gap-4 rounded-[22px] bg-ink p-4 text-paper md:grid-cols-[minmax(260px,320px)_1fr] md:gap-6 md:rounded-[28px] md:p-7"
+      >
         <div className="order-2 flex min-w-0 flex-col md:order-1">
           <div
             role="tablist"

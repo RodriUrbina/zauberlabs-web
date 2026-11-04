@@ -24,7 +24,8 @@ describe("closer look auto-play (BL-109)", () => {
     assert.match(cl, /new IntersectionObserver\(\(\[e\]\) => setInView\(e\.isIntersecting\)/);
     assert.match(cl, /document\.addEventListener\("visibilitychange", vis\)/);
     assert.match(cl, /if \(window\.matchMedia\("\(prefers-reduced-motion: reduce\)"\)\.matches\) setPlaying\(false\);/);
-    assert.match(cl, /onPointerEnter=\{\(e\) => e\.pointerType === "mouse" && setHovered\(true\)\}/);
+    // over the dark panel only, so a mouse click on play (in the row below) starts it at once
+    assert.match(cl, /onPointerEnter=\{\(e\) => e\.pointerType === "mouse" && setHovered\(true\)\}\s*onPointerLeave=\{\(\) => setHovered\(false\)\}\s*className="grid gap-4 rounded-\[22px\] bg-ink/);
     assert.match(cl, /setFocused\(e\.target !== toggle\.current && e\.target\.matches\(":focus-visible"\)\)/);
   });
 
