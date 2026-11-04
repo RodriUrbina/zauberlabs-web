@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SITE_URL } from "@/lib/blog";
-import { ABOUT_DESCRIPTION, ABOUT_TITLE, aboutPath } from "@/lib/about";
+import { ABOUT_DESCRIPTION, ABOUT_HEADLINE, ABOUT_TITLE, aboutPath } from "@/lib/about";
 import { isLocale, LOCALES, type Locale } from "@/lib/i18n";
 import BlogHeader from "@/components/blog/BlogHeader";
 import AboutContent from "@/components/AboutContent";
@@ -28,7 +28,10 @@ export default function AboutPage({ lang, only }: { lang: string; only: Locale }
       <BlogHeader lang={lang} otherHref={aboutPath(other)} blogLabel={false} />
       <main className="mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20">
         <article className="mx-auto flex w-full max-w-[760px] flex-col gap-8 py-10 md:py-16">
-          <h1 className="text-[34px] leading-[1.02] font-extrabold tracking-[-0.035em] text-ink md:text-[52px]">{ABOUT_TITLE[lang]}</h1>
+          <h1 className="text-[34px] leading-[1.02] font-extrabold tracking-[-0.035em] text-ink md:text-[52px]">
+            {ABOUT_HEADLINE[lang][0]}
+            <span className="accent-serif text-accent">{ABOUT_HEADLINE[lang][1]}</span>
+          </h1>
           <div className="prose prose-zl prose-lg max-w-none">
             <AboutContent lang={lang} />
           </div>

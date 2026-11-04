@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { aboutPath, ABOUT_TITLE, demuroAt } from "../lib/about";
+import { aboutPath, ABOUT_HEADLINE, ABOUT_TITLE, demuroAt } from "../lib/about";
 import AboutContent from "../components/AboutContent";
 import sitemap from "../app/sitemap";
 
@@ -59,6 +59,9 @@ describe("About page (BL-108)", () => {
     assert.equal(aboutPath("en"), "/en/about");
     assert.equal(aboutPath("de"), "/de/ueber-uns");
     assert.deepEqual(ABOUT_TITLE, { en: "About zauberlabs", de: "Über zauberlabs" });
+    // PO 2026-11-04 (option 1): like the homepage headlines, "zauberlabs" in the accent serif, the rest black
+    for (const l of ["en", "de"] as const) assert.equal(ABOUT_HEADLINE[l].join(""), ABOUT_TITLE[l]);
+    assert.match(read("components", "AboutPage.tsx"), /\{ABOUT_HEADLINE\[lang\]\[0\]\}\s*<span className="accent-serif text-accent">\{ABOUT_HEADLINE\[lang\]\[1\]\}<\/span>\s*<\/h1>/);
   });
 
   test("the copy is the approved text, word for word, in order (EN and DE)", () => {

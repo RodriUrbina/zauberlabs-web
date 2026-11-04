@@ -9,6 +9,8 @@ export const ABOUT_SLUG: Record<Locale, string> = { en: "about", de: "ueber-uns"
 export const aboutPath = (lang: Locale) => `/${lang}/${ABOUT_SLUG[lang]}`;
 
 export const ABOUT_TITLE: Record<Locale, string> = { en: "About zauberlabs", de: "Über zauberlabs" };
+/** The h1 like the homepage headlines (PO 2026-11-04): first part black, second in the accent serif. */
+export const ABOUT_HEADLINE: Record<Locale, [string, string]> = { en: ["About ", "zauberlabs"], de: ["Über ", "zauberlabs"] };
 /** Meta description: the page's own second sentence. */
 export const ABOUT_DESCRIPTION: Record<Locale, string> = {
   en: "zauberlabs makes configurators for modern classics: the cars people still drive and love every day.",
