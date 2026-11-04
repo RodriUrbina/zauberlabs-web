@@ -6,6 +6,7 @@ import { isLocale, LOCALES, type Locale } from "@/lib/i18n";
 import BlogHeader from "@/components/blog/BlogHeader";
 import AboutContent from "@/components/AboutContent";
 import SiteFooter from "@/components/SiteFooter";
+import Title from "@/components/Title";
 
 /** BL-108 — shared by app/[lang]/about (English only) and app/[lang]/ueber-uns (German only); the other combinations are 404s. */
 export function aboutMetadata(lang: string, only: Locale): Metadata {
@@ -28,10 +29,7 @@ export default function AboutPage({ lang, only }: { lang: string; only: Locale }
       <BlogHeader lang={lang} otherHref={aboutPath(other)} blogLabel={false} />
       <main className="mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20">
         <article className="mx-auto flex w-full max-w-[760px] flex-col gap-8 py-10 md:py-16">
-          <h1 className="text-[34px] leading-[1.02] font-extrabold tracking-[-0.035em] text-ink md:text-[52px]">
-            {ABOUT_HEADLINE[lang][0]}
-            <span className="accent-serif text-accent">{ABOUT_HEADLINE[lang][1]}</span>
-          </h1>
+          <Title as="h1" lead={ABOUT_HEADLINE[lang][0]} accent={ABOUT_HEADLINE[lang][1]} className="text-[34px] leading-[1.02] font-extrabold tracking-[-0.035em] text-ink md:text-[52px]" />
           <div className="prose prose-zl prose-lg max-w-none">
             <AboutContent lang={lang} />
           </div>

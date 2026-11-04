@@ -123,6 +123,24 @@ no IP stored; production `m:*`, preview/local `m:test:*`). The counters show up 
 `/de/admin`. Devices carrying the internal marker cookie `zl_internal=1` are counted neither here nor in Vercel
 Analytics. The marker is set once per device via `/api/internal-mode`.
 
+## Title code
+
+PO decision 2026-11-04 (BL-111): every two-part title on zauberlabs looks the same. Build them with `components/Title.tsx`,
+never with hand-made spans.
+
+- **Structure:** optional eyebrow (mono caps, letter-spaced, grey) → title = **lead** in bold sans + **accent** in the italic
+  serif. The accent is the second half, and there is exactly one per title.
+- **Colours:** the lead is black on light backgrounds and off-white on dark ones. The accent is always orange:
+  `--color-accent` (#c4441c, `text-accent`) on light, `--color-accent-dark` (#f08a60, `text-accent-dark`) on dark
+  (`tone="dark"`). No other colours. Orange in a title means the accent half and nothing else.
+- **Exception:** the green-dot status line ("● E46BUILD · LIVE") stays as it is and is not an eyebrow.
+- **Sizes and line breaks** belong to each page (`className`). `keepAccentTogether` keeps the accent on one line (BL-107).
+
+```tsx
+<Title eyebrow={t.next.eyebrow} lead="What’s next? " accent="You decide." keepAccentTogether className="text-[40px] …" />
+<Title as="h1" lead="Über " accent="zauberlabs" className="text-[34px] …" />
+```
+
 ## Environment variables
 
 Names only; the values live in Vercel.

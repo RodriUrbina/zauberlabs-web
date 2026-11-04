@@ -6,6 +6,9 @@ import JsonLd from "./JsonLd";
 import PostCard from "./PostCard";
 import TagChips from "./TagChips";
 import SiteFooter from "@/components/SiteFooter";
+import Title from "@/components/Title";
+
+const blogH1 = "text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
 
@@ -25,17 +28,14 @@ export default function BlogListing({ lang, items, tags, activeTag }: { lang: Lo
         <section className={`${wrap} flex flex-col gap-8 pt-12 pb-10 md:pt-20 md:pb-14`}>
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div className="flex max-w-[760px] flex-col gap-4">
-              <p className="eyebrow text-muted">{t.eyebrow}</p>
-              <h1 className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]">
-                {activeTag ? (
-                  t.tagTitle(activeTag.name)
-                ) : (
-                  <>
-                    {t.title[0]}
-                    <span className="accent-serif text-accent">{t.title[1]}</span>
-                  </>
-                )}
-              </h1>
+              {activeTag ? (
+                <>
+                  <p className="eyebrow text-muted">{t.eyebrow}</p>
+                  <h1 className={blogH1}>{t.tagTitle(activeTag.name)}</h1>
+                </>
+              ) : (
+                <Title as="h1" eyebrow={t.eyebrow} lead={t.title[0]} accent={t.title[1]} className={blogH1} />
+              )}
               <p className="max-w-[560px] text-base leading-relaxed text-body md:text-[17px]">{t.intro}</p>
             </div>
             <a href={`/${lang}/blog/feed.xml`} className="inline-flex h-10 items-center gap-2 self-start rounded-full border border-line px-4 font-mono text-[12px] tracking-[0.08em] text-muted hover:border-ink hover:text-ink md:self-end">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ShopShell from "@/components/shop/ShopShell";
 import ShopClient from "@/components/shop/ShopClient";
+import Title from "@/components/Title";
 import { dictionaries, isLocale, type Locale } from "@/lib/i18n";
 import { shopCopy } from "@/lib/shop-copy";
 import { SHOP_LAUNCHED } from "@/lib/shop-flag";
@@ -26,11 +27,7 @@ export default async function ShopPage({ params }: { params: Promise<{ lang: str
   return (
     <ShopShell lang={lang} otherHref={`/${other}/shop`}>
       <div className="flex max-w-[760px] flex-col gap-4">
-        <p className="eyebrow text-muted">{t.eyebrow}</p>
-        <h1 className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]">
-          {t.title[0]}
-          <span className="accent-serif text-accent">{t.title[1]}</span>
-        </h1>
+        <Title as="h1" eyebrow={t.eyebrow} lead={t.title[0]} accent={t.title[1]} className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]" />
         <p className="text-lg text-body">{t.sub}</p>
       </div>
       <div className="mt-10 md:mt-14">

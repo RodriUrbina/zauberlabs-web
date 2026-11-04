@@ -11,6 +11,7 @@ import { getBlog } from "@/lib/blog";
 import StickyStartBar from "@/components/StickyStartBar";
 import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 import CloserLook from "@/components/CloserLook";
+import Title from "@/components/Title";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
 
@@ -93,10 +94,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <span aria-hidden="true">·</span>
               {E46_LIVE ? t.garage.live : t.garage.soon}
             </p>
-            <h2 className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]">
-              {t.garage.title[0]}
-              <span className="accent-serif text-accent">{t.garage.title[1]}</span>
-            </h2>
+            <Title lead={t.garage.title[0]} accent={t.garage.title[1]} className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]" />
           </div>
 
           <div className="mt-7 md:mt-10">
@@ -161,24 +159,24 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <section id="next" data-sticky-cta-hide className={`${wrap} flex scroll-mt-4 flex-col gap-8 pb-16 md:gap-14 md:pb-28`}>
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div className="flex flex-col gap-4">
-              <p className="eyebrow text-muted">{t.next.eyebrow}</p>
-              <h2 className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]">
-                {t.next.title[0]}
-                {/* BL-107: the accent ("Du entscheidest." / "You decide.") wraps as a whole, never between its words. */}
-                <span className="accent-serif whitespace-nowrap">{t.next.title[1]}</span>
-              </h2>
+              {/* BL-107: the accent ("Du entscheidest." / "You decide.") wraps as a whole, never between its words. */}
+              <Title eyebrow={t.next.eyebrow} lead={t.next.title[0]} accent={t.next.title[1]} keepAccentTogether className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]" />
             </div>
             <p className="max-w-[400px] text-base leading-relaxed text-body">{t.next.body}</p>
           </div>
           <div className="grid gap-4 md:grid-cols-2 md:gap-6">
             <VoteCard lang={lang} />
             <div id="suggest" className="flex scroll-mt-4 flex-col gap-2.5 rounded-3xl bg-ink p-5 text-paper md:p-8">
-              <p className="eyebrow text-[11px] text-[#A9A6A0]">{t.suggest.eyebrow}</p>
-              <h3 className="text-[30px] leading-[1.05] font-extrabold tracking-[-0.03em]">
-                {t.suggest.title[0]}
-                <span className="accent-serif text-accent-dark">{t.suggest.title[1]}</span>
-                {t.suggest.title[2]}
-              </h3>
+              <Title
+                as="h3"
+                tone="dark"
+                eyebrow={t.suggest.eyebrow}
+                eyebrowClassName="text-[11px] text-[#A9A6A0]"
+                lead={t.suggest.title[0]}
+                accent={t.suggest.title[1]}
+                tail={t.suggest.title[2]}
+                className="text-[30px] leading-[1.05] font-extrabold tracking-[-0.03em]"
+              />
               <p className="mb-2 text-[15px] leading-relaxed text-fog">{t.suggest.body}</p>
               <SuggestForm t={t.suggest} lang={lang} />
             </div>
@@ -191,11 +189,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <section id="blog" className={`${wrap} flex scroll-mt-4 flex-col gap-8 pb-16 md:gap-14 md:pb-28`}>
             <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
               <div className="flex flex-col gap-4">
-                <p className="eyebrow text-muted">{t.teaser.eyebrow}</p>
-                <h2 className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]">
-                  {t.blog.title[0]}
-                  <span className="accent-serif">{t.blog.title[1]}</span>
-                </h2>
+                <Title eyebrow={t.teaser.eyebrow} lead={t.blog.title[0]} accent={t.blog.title[1]} className="text-[40px] leading-none font-extrabold tracking-[-0.035em] md:text-[64px]" />
               </div>
               <p className="max-w-[400px] text-base leading-relaxed text-body">{t.teaser.body}</p>
             </div>

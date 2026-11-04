@@ -140,7 +140,7 @@ describe("home page (BL-053)", () => {
 describe("What's next title (BL-107)", () => {
   test("the accent wraps as a whole, never between its words", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
-    assert.match(page, /<span className="accent-serif whitespace-nowrap">\{t\.next\.title\[1\]\}<\/span>/);
+    assert.match(page, /<Title eyebrow=\{t\.next\.eyebrow\} lead=\{t\.next\.title\[0\]\} accent=\{t\.next\.title\[1\]\} keepAccentTogether /, "BL-111: the title code keeps it together");
     assert.deepEqual(dictionaries.de.next.title, ["Was kommt als Nächstes? ", "Du entscheidest."]);
     assert.deepEqual(dictionaries.en.next.title, ["What’s next? ", "You decide."]);
     assert.equal(dictionaries.de.next.body, "Tippe auf ein Auto und stimm ab. Das beliebteste bekommt den nächsten Konfigurator.", "BL-107 part 2");
