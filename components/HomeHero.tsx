@@ -17,7 +17,7 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
   const t = d.hero;
   return (
     <>
-      <section className="relative overflow-hidden bg-ink text-paper">
+      <section data-click-place="hero" className="relative overflow-hidden bg-ink text-paper">
         <div className="relative aspect-[4/3.1] lg:aspect-auto lg:h-[min(78vh,760px)] lg:min-h-[560px]">
           <Image
             src="/images/e46-m3-touring-hero.webp"
@@ -78,7 +78,7 @@ export default function HomeHero({ lang, wrap }: { lang: Locale; wrap: string })
       {/* BL-064: one quiet row of body buttons; each opens E46BUILD with that body pre-chosen (same tab, like the other home
           links). Outline pills, so the hero button stays the one primary action. */}
       {E46_LIVE && (
-        <nav aria-label={t.pickLead} className={`${wrap} flex flex-wrap items-center justify-center gap-x-3 gap-y-2.5 pt-[22px] pb-[26px] md:pt-[26px] md:pb-[30px]`}>
+        <nav aria-label={t.pickLead} data-click-place="hero" className={`${wrap} flex flex-wrap items-center justify-center gap-x-3 gap-y-2.5 pt-[22px] pb-[26px] md:pt-[26px] md:pb-[30px]`}>
           <span className="w-full text-center text-[15px] text-body md:mr-1 md:w-auto">{t.pickLead}</span>
           {d.garage.bodies.map((b) => (
             <a

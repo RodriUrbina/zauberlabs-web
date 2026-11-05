@@ -32,7 +32,7 @@ export function mdxComponents(lang: Locale, configuratorUrl?: string, sourcesHre
       // BL-105: on German pages an E46BUILD link goes to the German E46BUILD (/de…); the .mdx files keep the plain URL.
       if (configuratorFor(href, configuratorHosts(E46_URL))) {
         return (
-          <a href={localizeE46Href(href, lang)} {...rest} {...NEW_TAB} {...(isStartLink(href) ? { rel: `nofollow ${NEW_TAB.rel}` } : {})}>
+          <a href={localizeE46Href(href, lang)} {...rest} {...NEW_TAB} data-click-place="inline" {...(isStartLink(href) ? { rel: `nofollow ${NEW_TAB.rel}` } : {})}>
             {children}
             <span className="sr-only"> {dictionaries[lang].blog.opensNewTab}</span>
           </a>

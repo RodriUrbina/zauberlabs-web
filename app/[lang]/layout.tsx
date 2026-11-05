@@ -67,7 +67,7 @@ export default async function RootLayout({ children, params }: { children: React
             BL-082: the same component renders Vercel Speed Insights (load speed, layout stability, responsiveness; no cookies),
             described in Abschnitt 5 too; collects nothing until Speed Insights is enabled in the Vercel dashboard. */}
         <SiteAnalytics />
-        {/* BL-050: "configurator_click" custom event ({ configurator: "e46" } only) — needs Vercel Pro to show up. */}
+        {/* BL-050: "configurator_click" custom event ({ configurator: "e46" }, since BL-116 with { from, place }) — needs Vercel Pro to show up. */}
         <ConfiguratorClickTracker />
       </body>
     </html>

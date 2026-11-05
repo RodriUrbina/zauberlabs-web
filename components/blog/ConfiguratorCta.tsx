@@ -24,7 +24,7 @@ type Props = { lang: Locale; tag: string; url?: string; label?: string; compact?
 export default function ConfiguratorCta({ lang, tag, url, label, compact = false }: Props) {
   const t = dictionaries[lang];
   return (
-    <section className={`not-prose rounded-3xl bg-ink text-paper ${compact ? "p-6 md:p-8" : "p-6 md:p-10"}`} aria-labelledby="cta-title">
+    <section data-click-place="article-cta" className={`not-prose rounded-3xl bg-ink text-paper ${compact ? "p-6 md:p-8" : "p-6 md:p-10"}`} aria-labelledby="cta-title">
       <Title
         id="cta-title"
         tone="dark"
@@ -57,7 +57,7 @@ export function ConfiguratorLink({ href, children, lang }: { href?: string; chil
     );
   }
   return (
-    <a href={configuratorHref(lang, href)} {...NEW_TAB} className="inline-flex items-center gap-1.5 font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">
+    <a href={configuratorHref(lang, href)} {...NEW_TAB} data-click-place="inline" className="inline-flex items-center gap-1.5 font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">
       {children} <ArrowUpRight className="size-3.5" />
       <span className="sr-only">{dictionaries[lang].blog.opensNewTab}</span>
     </a>

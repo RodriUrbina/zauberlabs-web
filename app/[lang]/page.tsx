@@ -161,7 +161,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                         {post.meta.title}
                       </Link>
                       {E46_LIVE && (
-                        <a href={e46Url(lang)} className="text-sm font-semibold whitespace-nowrap text-accent hover:opacity-80">
+                        <a href={e46Url(lang)} data-click-place="blog-teaser" className="text-sm font-semibold whitespace-nowrap text-accent hover:opacity-80">
                           {t.teaser.open} →
                         </a>
                       )}

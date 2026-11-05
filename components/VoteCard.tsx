@@ -87,7 +87,7 @@ export default function VoteCard({ lang }: { lang: Locale }) {
             </span>
           </span>
           {E46_LIVE && (
-            <a href={e46Url(lang)} className="flex h-10 items-center gap-1.5 rounded-full bg-ink px-4 text-sm font-semibold text-paper hover:bg-black">
+            <a href={e46Url(lang)} data-click-place="vote" className="flex h-10 items-center gap-1.5 rounded-full bg-ink px-4 text-sm font-semibold text-paper hover:bg-black">
               {t.open} <Arrow className="size-3.5" />
             </a>
           )}
