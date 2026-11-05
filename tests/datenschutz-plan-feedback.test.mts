@@ -20,8 +20,8 @@ describe("Datenschutz § 10: plan feedback (BL-098, E46 T-196)", () => {
 });
 
 describe("Datenschutz §10: country code with the configurator demand events (BL-117, with E46 T-207)", () => {
-  test("the PO-approved sentence is there, word for word", () => {
-    assert.ok(ds.includes("Dafür speichern wir deine IP-Adresse nicht. Außerdem speichern wir dein ungefähres Land (nur den zweistelligen Ländercode, z. B. „DE“, nie deine IP-Adresse) zusammen mit den Teilen, die du dir in der Konfiguration ansiehst, um zu verstehen, in welchen Ländern welche Teile gesucht werden."));
+  test("the PO-approved sentence is there, word for word, naming the US/Europe market (PO 2026-11-05)", () => {
+    assert.ok(ds.includes("Dafür speichern wir deine IP-Adresse nicht. Außerdem speichern wir dein ungefähres Land (nur den zweistelligen Ländercode, z. B. „DE“, nie deine IP-Adresse) zusammen mit den Teilen, die du dir in der Konfiguration ansiehst, sowie, ob dein Auto als US- oder europäisches Fahrzeug gilt, um zu verstehen, in welchen Ländern welche Teile gesucht werden."));
   });
   test("the two clauses that are no longer true are gone; the Notify-me paragraph stays", () => {
     assert.ok(!ds.includes("dein Land nur, wenn du eine Benachrichtigung"));
