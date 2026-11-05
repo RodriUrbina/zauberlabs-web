@@ -15,7 +15,7 @@ export const AUTO_SECONDS = 4;
  * five E46BUILD categories as tabs; picking one swaps the stage picture (E46BUILD's own, see public/images/README.md) and its
  * line. Desktop: tabs in a column left, picture right. Phones: picture on top, tabs as one row you can swipe.
  * BL-083.1: the CTA opens E46BUILD at the chosen tab's section (`?section=`, E46BUILD T-179; nofollow like `?start=`, as
- * robots.txt disallows them); it is counted as configurator_click by the page-wide tracker (BL-050), with no extra data. All five pictures are rendered stacked, so switching never waits.
+ * robots.txt disallows them); it is counted as configurator_click by the page-wide tracker (BL-050), with place "closer-look" (BL-116). All five pictures are rendered stacked, so switching never waits.
  * BL-109 (PO 2026-11-04): the panel moves through the parts by itself, AUTO_SECONDS each, with a row under it: the active part a
  * bar that fills over its time, the others dots, a pause/play button at the end. It runs only while the section is in view and the
  * tab is visible, holds while the mouse is over the panel or a part/dot has keyboard focus, and never starts by itself with reduced motion.
@@ -84,6 +84,7 @@ export default function CloserLook({ cats, pick, auto, cta, hrefs, soon }: { cat
   return (
     <div
       ref={root}
+      data-click-place="closer-look"
       onFocus={onFocus}
       onBlur={onBlur}
       className="flex flex-col gap-4 md:gap-5"
