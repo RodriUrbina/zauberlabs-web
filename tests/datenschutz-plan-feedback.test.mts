@@ -18,3 +18,14 @@ describe("Datenschutz § 10: plan feedback (BL-098, E46 T-196)", () => {
     assert.ok(ds.includes("deine Konfigurationen bleiben ohne Bezug zu dir und ohne von dir eingegebene Freitexte erhalten (siehe oben) – mit Ausnahme der Notiz in einer Rückmeldung zu deinem Plan, die ebenfalls ohne Bezug zu dir erhalten bleibt."));
   });
 });
+
+describe("Datenschutz §10: country code with the configurator demand events (BL-117, with E46 T-207)", () => {
+  test("the PO-approved sentence is there, word for word", () => {
+    assert.ok(ds.includes("Dafür speichern wir deine IP-Adresse nicht. Außerdem speichern wir dein ungefähres Land (nur den zweistelligen Ländercode, z. B. „DE“, nie deine IP-Adresse) zusammen mit den Teilen, die du dir in der Konfiguration ansiehst, um zu verstehen, in welchen Ländern welche Teile gesucht werden."));
+  });
+  test("the two clauses that are no longer true are gone; the Notify-me paragraph stays", () => {
+    assert.ok(!ds.includes("dein Land nur, wenn du eine Benachrichtigung"));
+    assert.ok(!ds.includes("auch die Einordnung als US- oder europäisches Fahrzeug speichern wir nicht"));
+    assert.ok(ds.includes("<strong>Benachrichtigung, wenn ein Verkäufer gefunden ist (optional).</strong>"));
+  });
+});

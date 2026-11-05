@@ -219,10 +219,14 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Händlerangebots (Händlername, Link zum Angebot, Preis). Jede Konfiguration erhält dafür eine zufällige Kennung und optional eine Bezeichnung,
         die du selbst vergibst. Wir verwenden dein ungefähres Land, das unser Hoster aus deiner IP-Adresse ableitet, nur um anzuzeigen, welche
         Verkäufer zu dir liefern, und um zu entscheiden, ob wir dein Auto als US-Fahrzeug oder als europäisches Fahrzeug behandeln, also welche
-        Teilenummern und Verkäufer dazu passen. Dafür speichern wir deine IP-Adresse nicht, und dein Land nur, wenn du eine Benachrichtigung über
-        einen Verkäufer anforderst (siehe unten); auch die Einordnung als US- oder europäisches Fahrzeug speichern wir nicht.
+        Teilenummern und Verkäufer dazu passen. Dafür speichern wir deine IP-Adresse nicht. Außerdem speichern wir dein ungefähres Land (nur den
+        zweistelligen Ländercode, z. B. „DE“, nie deine IP-Adresse) zusammen mit den Teilen, die du dir in der Konfiguration ansiehst, um zu
+        verstehen, in welchen Ländern welche Teile gesucht werden.
         {/* BL-071: E46BUILD T-136 (master 81b52ab, rule e46-market-from-owner-country): market US for a US visitor, decided per
-            request in apps/api/src/domain/vehicle-knowledge.ts requestDetectedMarket, never written to the car. */}
+            request in apps/api/src/domain/vehicle-knowledge.ts requestDetectedMarket, never written to the car.
+            BL-117 (PO 2026-11-05, with E46 T-207): the demand events store the 2-letter country code from Vercel (never the IP), so the
+            clause "country only with a seller notification" is gone; so is the clause that the US/Europe market is not stored, as the
+            demand events have stored it since E46 T-074 (DemandEvent.market). */}
       </p>
       <p>
         Bei Konfigurationen ohne Konto werden kein Name, keine E-Mail-Adresse, keine IP-Adresse, keine Cookie-Kennung und kein Freigabelink
