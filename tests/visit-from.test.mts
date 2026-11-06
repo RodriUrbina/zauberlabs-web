@@ -38,3 +38,12 @@ describe("visit_from: visits from our Instagram profile (BL-119)", () => {
     assert.ok(ds.includes("Kommst du über einen Link aus unserem Instagram-Profil (erkennbar am Zusatz „from=instagram“ in der Adresse), übermitteln wir beim Laden der ersten Seite ein Ereignis an Vercel Web Analytics, das nur diese Herkunft und die aufgerufene Seite (ohne Parameter) enthält, zusammen mit denselben Angaben wie bei einem Seitenaufruf; in deinem Browser wird dafür nichts gespeichert."));
   });
 });
+
+describe("Datenschutz §10: E46BUILD events and visit_from (BL-122)", () => {
+  test("the PO's two sentences, word for word; the old 'nur zusammengefasste' wording is gone", () => {
+    const ds = read("app", "[lang]", "datenschutz", "page.tsx").replace(/\{\/\*[\s\S]*?\*\/\}/g, "").replace(/\s+/g, " ");
+    assert.ok(ds.includes("Vercel Web Analytics – ohne Cookies, zusammengefasste Seitenaufrufe und Besucherzahlen sowie einzelne Ereignisse, die nur die jeweils genannte Angabe enthalten –, zur Messung der Ladezeiten Vercel Speed Insights; es gilt Abschnitt 5."));
+    assert.ok(ds.includes("Kommst du über einen Link aus unserem Instagram-Profil (Zusatz „from=instagram“) zu E46BUILD, übermitteln wir wie in Abschnitt 5 beim Laden der ersten Seite ein Ereignis nur mit dieser Herkunft und der aufgerufenen Seite (ohne Parameter); in deinem Browser wird dafür nichts gespeichert. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein."));
+    assert.ok(!ds.includes("nur zusammengefasste Seitenaufrufe und Besucherzahlen"));
+  });
+});
