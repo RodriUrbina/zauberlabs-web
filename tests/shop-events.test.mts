@@ -98,3 +98,24 @@ describe("shop analytics events (BL-097)", () => {
     assert.match(ds, /Ebenso zählen wir im Fan-Shop[\s\S]*nur das Motiv, die Anzahl der Sticker, eine Preisspanne und die\s+Sprache der Seite[\s\S]*Bestell- oder\s+Zahlungsnummern sind nicht dabei\./);
   });
 });
+
+describe("shop_order_completed waits for Analytics (BL-120)", () => {
+  test("sent once window.va exists, not before; given up after the last try", async () => {
+    const { whenAnalyticsReady } = await import("../lib/analytics-ready");
+    const win: { va?: unknown } = {};
+    let sent = 0;
+    whenAnalyticsReady(() => sent++, 100, win);
+    assert.equal(sent, 0, "not ready: nothing sent (track() would drop it)");
+    await new Promise((r) => setTimeout(r, 150));
+    win.va = () => {};
+    await new Promise((r) => setTimeout(r, 150));
+    assert.equal(sent, 1);
+    let late = 0;
+    whenAnalyticsReady(() => late++, 2, {});
+    await new Promise((r) => setTimeout(r, 300));
+    assert.equal(late, 0, "gives up instead of waiting forever");
+    const cancel = whenAnalyticsReady(() => late++, 100, {});
+    cancel();
+    assert.match(read("components", "shop", "OrderCompleted.tsx"), /return whenAnalyticsReady\(\(\) => completeOrderOnce\(lang, sessionId, storage\)\);/);
+  });
+});

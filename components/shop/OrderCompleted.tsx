@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { whenAnalyticsReady } from "@/lib/analytics-ready";
 import { trackShop } from "@/lib/shop-analytics";
 import { clearShopCart } from "./ShopClient";
 
@@ -45,7 +46,8 @@ export default function OrderCompleted({ lang }: { lang: "de" | "en" }) {
     } catch {
       storage = null;
     }
-    completeOrderOnce(lang, sessionId, storage);
+    // BL-120: sent once Analytics is ready; from the mount effect directly, track() dropped it (window.va not set up yet).
+    return whenAnalyticsReady(() => completeOrderOnce(lang, sessionId, storage));
   }, [lang]);
   return null;
 }
