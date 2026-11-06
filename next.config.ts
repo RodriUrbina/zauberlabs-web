@@ -2,7 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async redirects() {
-    return [{ source: "/", destination: "/de", permanent: false }];
+    return [
+      { source: "/", destination: "/de", permanent: false },
+      // BL-119: the Instagram bio link zauberlabs.de/links (German first, like "/"); the query (?from=instagram) is kept.
+      { source: "/links", destination: "/de/links", permanent: false },
+    ];
   },
   // BL-051: the stats endpoint checks beacons against the published articles, so it needs the content files.
   outputFileTracingIncludes: {

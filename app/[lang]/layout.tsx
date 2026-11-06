@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import localFont from "next/font/local";
 import SiteAnalytics from "@/components/SiteAnalytics";
 import ConfiguratorClickTracker from "@/components/ConfiguratorClickTracker";
+import VisitFromTracker from "@/components/VisitFromTracker";
 import { dictionaries, isLocale, LOCALES, type Locale } from "@/lib/i18n";
 import { SITE_OG_IMAGE } from "@/lib/blog-og";
 import "../globals.css";
@@ -69,6 +70,8 @@ export default async function RootLayout({ children, params }: { children: React
         <SiteAnalytics />
         {/* BL-050: "configurator_click" custom event ({ configurator: "e46" }, since BL-116 with { from, place }) — needs Vercel Pro to show up. */}
         <ConfiguratorClickTracker />
+        {/* BL-119: "visit_from" { from: "instagram", page } once per landing from our Instagram profile (?from=instagram). */}
+        <VisitFromTracker />
       </body>
     </html>
   );
