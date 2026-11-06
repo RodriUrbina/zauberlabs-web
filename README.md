@@ -170,7 +170,7 @@ on other accounts, ever; that is the PO's own.
   `meta.json` (`publishAt` with its Berlin offset, `status` `draft` | `approved` | `published`, one `alt` per slide). Only
   `approved` posts go out; the PO approves them one at a time. Slides of approved posts are public at
   `/social/instagram/<id>/<n>.jpg` (Instagram fetches them from there); drafts answer 404.
-- **Publisher:** Vercel Cron calls `/api/instagram/publish` Mon/Wed/Fri at 16:00 and 17:00 UTC (18:00 Berlin in summer and
+- **Publisher:** Vercel Cron calls `/api/instagram/publish` daily at 16:00 and 17:00 UTC (18:00 Berlin in summer and
   winter). Each run posts at most one due approved post and mails hello@zauberlabs.de when it went out or failed. It publishes
   only with `IG_PUBLISH_ENABLED=1` on production; otherwise it answers what it would post.
 - **Never twice:** Redis key `ig:post:<id>` is claimed with SET NX before the first API call and then holds

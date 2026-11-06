@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 120; // a carousel waits for each slide container
 
 /**
- * BL-118 — Vercel Cron (vercel.json): Mon/Wed/Fri at 16:00 and 17:00 UTC, i.e. 18:00 Berlin in summer and in winter; the run
+ * BL-118 — Vercel Cron (vercel.json): daily (PO 2026-11-06, "every day a post") at 16:00 and 17:00 UTC, i.e. 18:00 Berlin in summer and in winter; the run
  * before 18:00 finds nothing due. Publishes at most one due, approved post (lib/instagram/publisher.ts) and mails the PO
  * when a post went out or failed. Without IG_PUBLISH_ENABLED=1 on production it only answers what it would post.
  */
