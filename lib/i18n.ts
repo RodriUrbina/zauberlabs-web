@@ -144,6 +144,7 @@ const en = {
   },
   footer: {
     tagline: "Independent configurators for modern classics. Made by owners, for owners.",
+    instagram: "zauberlabs on Instagram", // BL-121: accessible name of the footer's Instagram icon
     configurators: "Configurators",
     e46Soon: "E46BUILD — coming soon",
     next: ["Next: you decide", " → vote"], // BL-081: links to the What’s next block
@@ -290,6 +291,7 @@ const de: Dict = {
   },
   footer: {
     tagline: "Unabhängige Konfiguratoren für Youngtimer. Von Besitzern, für Besitzer.",
+    instagram: "zauberlabs auf Instagram",
     configurators: "Konfiguratoren",
     e46Soon: "E46BUILD – bald verfügbar",
     next: ["Als Nächstes: du entscheidest", " → abstimmen"],
@@ -348,3 +350,5 @@ export const e46SectionUrl = (section: string, lang: Locale) => `${e46Base(lang)
 // Going live is a one-line change: set NEXT_PUBLIC_E46_LIVE=1 on Vercel (or flip the fallback to true).
 export const E46_LIVE = (process.env.NEXT_PUBLIC_E46_LIVE ?? "0") === "1";
 export const CONTACT_EMAIL = "hello@zauberlabs.de";
+/** BL-121 (PO 2026-11-06): our Instagram profile, a plain link in the footer (no embed, no script, nothing loaded from Instagram). */
+export const INSTAGRAM_URL = "https://www.instagram.com/zauberlabs.de/";
