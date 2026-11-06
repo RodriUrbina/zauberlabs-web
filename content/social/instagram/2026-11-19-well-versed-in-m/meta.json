@@ -1,0 +1,30 @@
+{
+  "publishAt": "2026-11-19T18:00:00+01:00",
+  "status": "draft",
+  "title": "Thu 19 Nov · Carousel 4 · \"Well versed in M.\" · BLOG",
+  "headline": "Well versed in M.",
+  "link": "blog/e46-m-sport-package-ii",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver BMW E46 Sedan facelift with M front bumper and M double-spoke wheels on a wet salt flat."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "AI image of a silver BMW E46 Touring with M front bumper and Style 68M wheels on a wet salt flat."
+    },
+    {
+      "file": "3.jpg",
+      "alt": "AI image of a silver pre-facelift BMW E46 Sedan with the M front bumper, on black."
+    },
+    {
+      "file": "4.jpg",
+      "alt": "AI image of an E46 interior with sport seats in black cloth with Alcantara."
+    }
+  ],
+  "factSources": "68M 17-inch, staggered (7.5J/8.5J), five pairs of spokes: blog `telling-e46-wheels-apart` (S1 catalogue mirror, MEDIUM; spoke count from the canonical photo, S6). · 68M = M Sport package II wheel on Sedan, Touring, Coupé, Convertible: blog `e46-m-sport-package-ii` (S2 German price lists, HIGH). · Slide 2 car wears 68M: `e46build-agent1/docs/research/t085-look-images/README.md` (PO check 2026-10-13). · One M front cover for every Sedan and Touring, no facelift split: blog `e46-genuine-m-front-bumper` (S1 catalogue, MEDIUM). · Code 338 in the German price lists: blog `e46-m-sport-package-ii` (S2, HIGH). Launched 14 May 2001: same article (S1 BMW press release, HIGH). \"Laser\" cloth with Alcantara sport seats: same article (S1 + S2, HIGH). · 135M and M3 on slide 1 are named only, with no claim attached.",
+  "reviewNotes": [
+    "the coordinator's idea included the M3 steering wheel. I left it out because our steering pictures are isolated cut-outs or an empty cockpit, so no \"part on the car\" picture exists, and P2 already showed that the seat stage doesn't show a specific M wheel."
+  ],
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p14, 2026-11-06): slide-01.png, slide-02.png, slide-03.png, slide-04.png"
+}
