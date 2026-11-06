@@ -7,7 +7,7 @@
   "slides": [
     {
       "file": "1.jpg",
-      "alt": "\"Wish wisely.\" with three choices, VW Golf, Audi A4 and Mercedes W203, plus \"Add a car\", above a side view of a silver BMW E46 Coupé."
+      "alt": "\"Wish wisely.\" with three choices, VW Golf, Audi A4 and Mercedes W203, plus \"Add a car\", above an AI image of a silver BMW E46 Coupé in side view."
     }
   ],
   "factSources": "zauberlabs-web `lib/cars.ts` (VOTE_CARS: VW Golf, Audi A4, Mercedes W203) and `components/VoteCard.tsx` (vote + suggestions live on zauberlabs.de).",

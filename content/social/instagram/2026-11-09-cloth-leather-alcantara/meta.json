@@ -7,15 +7,15 @@
   "slides": [
     {
       "file": "1.jpg",
-      "alt": "BMW E46 interior with sport seats in black cloth, seen from the passenger door."
+      "alt": "AI image of a BMW E46 interior with sport seats in black cloth, seen from the passenger door."
     },
     {
       "file": "2.jpg",
-      "alt": "The same interior with black leather sport seats."
+      "alt": "AI image of the same interior with black leather sport seats."
     },
     {
       "file": "3.jpg",
-      "alt": "The same interior with sport seats in black cloth with Alcantara."
+      "alt": "AI image of the same interior with sport seats in black cloth with Alcantara."
     }
   ],
   "factSources": "blog `e46-seats-cost-new` (S1 German price lists 2002–2006, HIGH: leather with seat heating; Individual Alcantara only with sport seats, €2,800; 2004-09 Touring €1,990 + €500 + €1,200 = €3,690). Research `t084-seat-options/README.md §1a`, `t273-basic-seat-covers/findings.md` (row 3, HIGH). \"Laser\" cloth: blog `e46-m-sport-package-ii`.",
