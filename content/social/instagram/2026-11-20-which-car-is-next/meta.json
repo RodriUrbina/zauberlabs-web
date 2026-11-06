@@ -1,0 +1,16 @@
+{
+  "publishAt": "2026-11-20T18:00:00+01:00",
+  "status": "draft",
+  "title": "Week 2 Friday · Single · \"Wish wisely.\"",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "\"Wish wisely.\" with three choices, VW Golf, Audi A4 and Mercedes W203, plus \"Add a car\", above a side view of a silver BMW E46 Coupé."
+    }
+  ],
+  "factSources": "zauberlabs-web `lib/cars.ts` (VOTE_CARS: VW Golf, Audi A4, Mercedes W203) and `components/VoteCard.tsx` (vote + suggestions live on zauberlabs.de).",
+  "reviewNotes": [
+    "round 2 removed \"the one with the most fans gets built next\" (the W203 is already picked). The post makes no promise about what the vote decides. The site's own vote copy (`lib/i18n.ts`) still says it; that is a separate site fix for the PO."
+  ],
+  "importedFrom": "e46build docs/social/instagram (BL-118 phase 1 mock-ups, 2026-11-06): p6-vote.png"
+}

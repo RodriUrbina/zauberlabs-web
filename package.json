@@ -10,6 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test tests/*.test.mts",
     "smoke": "node scripts/smoke.mjs",
+    "instagram:dry-run": "node --import tsx scripts/instagram-dry-run.mts",
+    "instagram:page-token": "node --import tsx scripts/instagram-page-token.mts",
     "check": "npm run typecheck && npm test && npm run smoke"
   },
   "dependencies": {

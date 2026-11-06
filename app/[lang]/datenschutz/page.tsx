@@ -426,7 +426,24 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         </>
       )}
 
-      <h2>{SHOP_LAUNCHED ? 16 : 15}. Deine Rechte</h2>
+      {/* BL-118 (DRAFT for the PO, 2026-11-06): our Instagram profile. Facts from lib/instagram/comments.ts and graph.ts: the daily
+          digest reads the text and time of comments on our own posts (fields=id,text,timestamp; no username), mails them to
+          hello@zauberlabs.de through Brevo, and keeps only the ids of comments already mailed (Redis set "ig:comments:seen").
+          Nothing is replied, liked or followed automatically. The Insights joint-controller addendum is Meta's own page. */}
+      <h2>{SHOP_LAUNCHED ? 16 : 15}. Unser Instagram-Profil</h2>
+      <p>
+        Wir betreiben auf Instagram das Profil „zauberlabs.de“. Instagram ist ein Dienst der Meta Platforms Ireland Ltd. (Irland); was
+        Instagram selbst verarbeitet, wenn du unser Profil besuchst oder mit ihm interagierst, regeln die Datenschutzbestimmungen von Meta
+        (https://privacycenter.instagram.com/policy). Für die Statistiken, die Instagram uns zu unserem Profil anzeigt, sind wir mit Meta
+        gemeinsam verantwortlich; die Vereinbarung dazu: https://www.facebook.com/legal/terms/information_about_page_insights_data.
+        Kommentierst du einen unserer Beiträge, rufen wir einmal am Tag über die Schnittstelle von Instagram den Text und den Zeitpunkt
+        neuer Kommentare zu unseren eigenen Beiträgen ab – nicht deinen Namen – und schicken sie uns über Brevo (Abschnitt 12) per E-Mail,
+        damit wir antworten können. Wir antworten selbst, nie automatisch. Bei uns gespeichert wird dabei nur die Kennung der bereits
+        gemeldeten Kommentare, damit keiner doppelt gemeldet wird. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse,
+        mit den Menschen zu sprechen, die sich für unsere Konfiguratoren interessieren).
+      </p>
+
+      <h2>{SHOP_LAUNCHED ? 17 : 16}. Deine Rechte</h2>
       <p>
         Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
         Datenübertragbarkeit (Art. 20) sowie auf Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21). Eine erteilte
@@ -438,7 +455,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, zum Beispiel bei: {C.authority}.
       </p>
 
-      <h2>{SHOP_LAUNCHED ? 17 : 16}. Aktualität</h2>
+      <h2>{SHOP_LAUNCHED ? 18 : 17}. Aktualität</h2>
       <p>Stand: {C.updated}. Wir passen diese Erklärung an, wenn sich unsere Website oder die Rechtslage ändert.</p>
     </LegalPage>
   );

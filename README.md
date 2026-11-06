@@ -152,12 +152,36 @@ Names only; the values live in Vercel.
 | Statistics | `STATS_MONTHLY_COMMAND_BUDGET` (optional), `ZL_INTERNAL_SECRET` (gates `/api/internal-mode`) |
 | Shop | `SHOP_LAUNCHED` (`1` = launched), `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` |
 | E-mail | `BREVO_API_KEY`, `SHOP_MAIL_FROM` (optional sender, must be verified in Brevo), `BREVO_API_URL` (local tests only) |
+| Instagram (BL-118) | `IG_USER_ID`, `IG_PAGE_TOKEN`, `IG_PUBLISH_ENABLED` (`1` = really publish; anything else = report only), `CRON_SECRET`, `IG_GRAPH_VERSION` (optional, default `v24.0`) |
 | E46BUILD links | `NEXT_PUBLIC_E46_LIVE` (`1` = links are live), `NEXT_PUBLIC_E46_URL` (optional, default `https://e46.zauberlabs.de`) |
 | Set by Vercel | `VERCEL_ENV` |
 | Smoke test | `SMOKE_PORT`, `SMOKE_SKIP_BUILD` |
 
 Without Redis credentials, votes and suggestions fall back to an in-memory store for local development only. On
 production that is refused.
+
+## Instagram
+
+BL-118: the zauberlabs Instagram account (zauberlabs.de) posts from a queue in this repo. Nothing likes, follows or comments
+on other accounts, ever; that is the PO's own.
+
+- **Queue:** `content/social/instagram/<yyyy-mm-dd>-<slug>/` with `1.jpg` … `10.jpg` (1080 × 1350; Instagram's publishing API
+  takes JPEG only), `caption.txt` (German, a line `—`, English, then the hashtags; at most 2,200 characters and 30 hashtags) and
+  `meta.json` (`publishAt` with its Berlin offset, `status` `draft` | `approved` | `published`, one `alt` per slide). Only
+  `approved` posts go out; the PO approves them one at a time. Slides of approved posts are public at
+  `/social/instagram/<id>/<n>.jpg` (Instagram fetches them from there); drafts answer 404.
+- **Publisher:** Vercel Cron calls `/api/instagram/publish` Mon/Wed/Fri at 16:00 and 17:00 UTC (18:00 Berlin in summer and
+  winter). Each run posts at most one due approved post and mails hello@zauberlabs.de when it went out or failed. It publishes
+  only with `IG_PUBLISH_ENABLED=1` on production; otherwise it answers what it would post.
+- **Never twice:** Redis key `ig:post:<id>` is claimed with SET NX before the first API call and then holds
+  `published` (with the media id), or `failed`. A post with any record is never tried again by itself. After a failure, look
+  on Instagram first: if the post is not there, delete the key (`DEL ig:post:<id>` in the Upstash console) and the next run
+  tries again.
+- **Comments:** `/api/instagram/comments` runs daily at 07:00 UTC, reads the text and time of new comments on our posts and
+  mails them with a drafted reply each. Replies are posted by hand in the Instagram app.
+- **Locally:** `npm run instagram:dry-run` checks the queue and makes two read-only API calls with the token in
+  `~/.config/zauberlabs/instagram.env` (`-- --offline` skips them); it never publishes. `npm run instagram:page-token` (run by
+  the PO) derives the non-expiring Page token from the long-lived user token and adds it to that file as `IG_PAGE_TOKEN`.
 
 ## Run, test, deploy
 
