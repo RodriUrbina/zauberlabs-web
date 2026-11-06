@@ -42,7 +42,7 @@ export async function collectNewComments(published: { post: Post; mediaId: strin
 export function digestMail(items: DigestItem[]): { subject: string; text: string } {
   const n = items.reduce((s, i) => s + i.comments.length, 0);
   const lines = [
-    `${n} neue${n === 1 ? "r" : ""} Kommentar${n === 1 ? "" : "e"} auf Instagram (zauberlabs.de).`,
+    `${n} neue${n === 1 ? "r" : ""} Kommentar${n === 1 ? "" : "e"} auf Instagram (@zauberlabs).`,
     "Antworten bitte selbst in der Instagram-App; die Vorschläge sind nur Entwürfe. Es wird nichts automatisch beantwortet.",
     "",
   ];

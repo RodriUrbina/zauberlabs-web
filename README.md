@@ -162,7 +162,7 @@ production that is refused.
 
 ## Instagram
 
-BL-118: the zauberlabs Instagram account (zauberlabs.de) posts from a queue in this repo. Nothing likes, follows or comments
+BL-118: the zauberlabs Instagram account (@zauberlabs) posts from a queue in this repo. Nothing likes, follows or comments
 on other accounts, ever; that is the PO's own.
 
 - **Queue:** `content/social/instagram/<yyyy-mm-dd>-<slug>/` with `1.jpg` … `10.jpg` (1080 × 1350; Instagram's publishing API
