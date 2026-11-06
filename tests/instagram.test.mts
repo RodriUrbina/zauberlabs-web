@@ -5,7 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { graphClient, type Fetch } from "../lib/instagram/graph";
 import { captionProblems, duePosts, jpegSize, readPost, readQueue, servableSlide, type Post } from "../lib/instagram/queue";
-import { publishDue, publishedPosts, slideUrl } from "../lib/instagram/publisher";
+import { berlinDay, publishDue, publishedPosts, slideUrl } from "../lib/instagram/publisher";
 import { memoryState } from "../lib/instagram/state";
 import { collectNewComments, digestMail, draftReply } from "../lib/instagram/comments";
 import { cronAuthorized } from "../lib/instagram/env";
@@ -45,30 +45,30 @@ const AFTER = Date.parse("2026-11-09T17:00:30Z");
 const BEFORE = Date.parse("2026-11-09T16:00:30Z");
 
 describe("Instagram queue (BL-118)", () => {
-  test("the imported week 1–2 posts are all valid drafts, 1080 × 1350 JPEG, one alt text per slide, Mon/Wed/Fri 18:00 Berlin", () => {
+  test("the imported week 1–2 posts are all valid, 1080 × 1350 JPEG, one alt text per slide, one a day at 18:00 Berlin from Fri 6 Nov", () => {
     const { posts, broken } = readQueue();
     assert.deepEqual(broken, []);
     assert.deepEqual(posts.map((p) => p.id), [
-      "2026-11-09-hello-e46build",
-      "2026-11-11-m-sport-package-ii",
-      "2026-11-13-spot-the-wheel",
-      "2026-11-16-cloth-leather-alcantara",
-      "2026-11-18-standard-to-m-front",
-      "2026-11-20-which-car-is-next",
+      "2026-11-06-hello-e46build",
+      "2026-11-07-m-sport-package-ii",
+      "2026-11-08-spot-the-wheel",
+      "2026-11-09-cloth-leather-alcantara",
+      "2026-11-10-standard-to-m-front",
+      "2026-11-11-which-car-is-next",
     ]);
     for (const p of posts) {
-      assert.equal(p.status, "draft", `${p.id}: the PO approves each post`);
+      assert.ok(["draft", "approved"].includes(p.status), `${p.id}: the PO approves each post`);
       assert.match(p.publishAt, /T18:00:00\+01:00$/);
-      assert.ok([1, 3, 5].includes(new Date(p.publishAtMs).getUTCDay()), p.id);
       assert.ok(p.caption.indexOf("\n—\n") > 0, "German first, then English");
     }
     assert.deepEqual(posts.map((p) => p.slides.length), [3, 3, 2, 3, 1, 1]);
+    assert.deepEqual(posts.map((p) => p.publishAtMs - posts[0].publishAtMs), [0, 1, 2, 3, 4, 5].map((d) => d * 86_400_000), "one a day");
   });
   test("a broken post is reported, not published: wrong size, missing alt text, too many hashtags, unlisted slides", () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ig-"));
     const d = path.join(dir, "2026-11-09-test");
     fs.mkdirSync(d);
-    fs.copyFileSync(path.join(process.cwd(), "content/social/instagram/2026-11-18-standard-to-m-front/1.jpg"), path.join(d, "1.jpg"));
+    fs.copyFileSync(path.join(process.cwd(), "content/social/instagram/2026-11-10-standard-to-m-front/1.jpg"), path.join(d, "1.jpg"));
     fs.writeFileSync(path.join(d, "2.jpg"), "not a jpeg");
     fs.writeFileSync(path.join(d, "caption.txt"), `Hallo\n—\nHello ${Array.from({ length: 31 }, (_, i) => `#t${i}`).join(" ")}`);
     fs.writeFileSync(path.join(d, "meta.json"), JSON.stringify({ publishAt: "2026-11-10T18:00:00+01:00", status: "approved", slides: [{ file: "1.jpg", alt: "" }] }));
@@ -84,7 +84,7 @@ describe("Instagram queue (BL-118)", () => {
     assert.match(r2.problems.join(" | "), /folder date 2026-11-09 differs/);
   });
   test("JPEG size is read from the file; captions over 2,200 characters or without the language split are refused", () => {
-    assert.deepEqual(jpegSize(fs.readFileSync(path.join(process.cwd(), "content/social/instagram/2026-11-20-which-car-is-next/1.jpg"))), { width: 1080, height: 1350 });
+    assert.deepEqual(jpegSize(fs.readFileSync(path.join(process.cwd(), "content/social/instagram/2026-11-11-which-car-is-next/1.jpg"))), { width: 1080, height: 1350 });
     assert.equal(jpegSize(Buffer.from("PNG")), null);
     assert.deepEqual(captionProblems("Hallo\n—\nHello"), []);
     assert.match(captionProblems("x".repeat(2201) + "\n—\n")[0], /2204 characters/);
@@ -151,8 +151,8 @@ describe("Instagram publisher (BL-118)", () => {
     assert.equal(r.failed.length, 1);
     assert.match(r.failed[0].error, /media_publish: boom/);
     assert.equal(state.records.get("2026-11-09-hello")?.state, "failed");
-    const again = await publishDue({ posts: [post()], now: AFTER + 1, state, graph, enabled: true });
-    assert.deepEqual(again.skipped, [{ id: "2026-11-09-hello", reason: 'record "failed" in Redis' }]);
+    const again = await publishDue({ posts: [post()], now: AFTER + 86_400_000, state, graph, enabled: true });
+    assert.deepEqual(again.skipped, [{ id: "2026-11-09-hello", reason: 'record "failed" in Redis' }], "the next day too");
     assert.equal(calls.filter((c) => c.path.endsWith("media_publish")).length, 1);
     assert.match(read("app", "api", "instagram", "publish", "route.ts"), /Fehlgeschlagen/);
   });
@@ -173,6 +173,31 @@ describe("Instagram publisher (BL-118)", () => {
     assert.equal(r.published.length, 1);
     assert.deepEqual(r.skipped, [{ id: "2026-11-09-second", reason: "next run (one post per run)" }]);
   });
+  test("one post per Berlin day: a missed day shifts the backlog instead of doubling up (PO 2026-11-06)", async () => {
+    const { calls, graph } = fakeGraph();
+    const state = memoryState();
+    const p1 = post({ id: "2026-11-06-p1", publishAt: "2026-11-06T18:00:00+01:00", publishAtMs: Date.parse("2026-11-06T18:00:00+01:00") });
+    const p2 = post({ id: "2026-11-07-p2", publishAt: "2026-11-07T18:00:00+01:00", publishAtMs: Date.parse("2026-11-07T18:00:00+01:00") });
+    // P1's day was missed; on Sat at the 16:00 UTC run P1 goes out, the 17:00 UTC run must not post P2 the same day.
+    const a = await publishDue({ posts: [p1, p2], now: Date.parse("2026-11-07T16:00:10Z"), state, graph, enabled: true });
+    assert.deepEqual(a.published.map((p) => p.id), ["2026-11-06-p1"]);
+    const b = await publishDue({ posts: [p1, p2], now: Date.parse("2026-11-07T17:00:10Z"), state, graph, enabled: true });
+    assert.deepEqual(b, { published: [], wouldPublish: [], failed: [], skipped: [{ id: "2026-11-07-p2", reason: "tomorrow (one post per Berlin day)" }] });
+    const c = await publishDue({ posts: [p1, p2], now: Date.parse("2026-11-08T16:00:10Z"), state, graph, enabled: true });
+    assert.deepEqual(c.published.map((p) => p.id), ["2026-11-07-p2"]);
+    assert.equal(calls.filter((x) => x.path.endsWith("media_publish")).length, 2);
+    // The Berlin day, not the UTC day: 23:30 UTC on 7 Nov is already 8 Nov in Berlin.
+    assert.equal(berlinDay(Date.parse("2026-11-07T23:30:00Z")), "2026-11-08");
+    assert.equal(berlinDay(Date.parse("2026-07-07T22:30:00Z")), "2026-07-08", "summer time too");
+  });
+  test("a failed post today also blocks a second try the same day", async () => {
+    const { graph } = fakeGraph();
+    const state = memoryState();
+    await state.set("2026-11-06-other", { state: "failed", at: "2026-11-06T17:00:05.000Z", error: "x" });
+    const r = await publishDue({ posts: [post({ id: "2026-11-06-other", publishAtMs: Date.parse("2026-11-06T17:00:00Z") }), post({ id: "2026-11-06-next", publishAtMs: Date.parse("2026-11-06T17:00:00Z") })], now: Date.parse("2026-11-06T17:30:00Z"), state, graph, enabled: true });
+    assert.deepEqual(r.published, []);
+    assert.deepEqual(r.skipped, [{ id: "2026-11-06-next", reason: "tomorrow (one post per Berlin day)" }]);
+  });
   test("real publishing needs IG_PUBLISH_ENABLED=1 on production; the cron routes need CRON_SECRET", () => {
     const env = read("lib", "instagram", "env.ts");
     assert.match(env, /process\.env\.IG_PUBLISH_ENABLED === "1" && process\.env\.VERCEL_ENV === "production"/);
@@ -186,10 +211,10 @@ describe("Instagram publisher (BL-118)", () => {
     if (saved !== undefined) process.env.CRON_SECRET = saved;
     for (const r of ["publish", "comments"]) assert.match(read("app", "api", "instagram", r, "route.ts"), /if \(!cronAuthorized\(req\.headers\.get\("authorization"\)\)\) return NextResponse\.json\(\{ error: "Unauthorized" \}, \{ status: 401 \}\)/);
   });
-  test("vercel.json: Mon/Wed/Fri at 16:00 and 17:00 UTC (18:00 Berlin in summer and winter), comments daily", () => {
+  test("vercel.json: daily at 16:00 and 17:00 UTC (18:00 Berlin in summer and winter), comments daily", () => {
     const crons = JSON.parse(read("vercel.json")).crons;
     assert.deepEqual(crons, [
-      { path: "/api/instagram/publish", schedule: "0 16,17 * * 1,3,5" },
+      { path: "/api/instagram/publish", schedule: "0 16,17 * * *" },
       { path: "/api/instagram/comments", schedule: "0 7 * * *" },
     ]);
   });
