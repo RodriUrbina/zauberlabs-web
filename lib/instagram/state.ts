@@ -6,7 +6,8 @@ import { getRedis } from "@/lib/store";
  * comments already sent to the PO. Simpler and safer than a commit from the cron: the claim is one atomic SET NX, so two runs
  * at the same moment can never both publish a post, and a post that has any record is never tried again by itself.
  * A "publishing" or "failed" record stays until someone removes it on purpose (see README "Instagram"), because a failure
- * during the last API call cannot tell whether Instagram already posted it.
+ * during the last API call cannot tell whether Instagram already posted it. BL-118.4: a retryable failure (auth error, or an
+ * error before any media container existed) leaves no record, only a note in "ig:retry:<id>", so the next run tries again.
  */
 export type PostRecord =
   | { state: "publishing"; at: string }
@@ -20,6 +21,8 @@ export type State = {
   set(id: string, record: PostRecord): Promise<void>;
   /** True when this comment id was not seen before (and marks it seen). */
   firstSeen(commentId: string): Promise<boolean>;
+  /** BL-118.4: a retryable failure: the post's claim is removed (so it is not a record of the day) and the failure is noted in "ig:retry:<id>". */
+  release(id: string, note: { at: string; error: string }): Promise<void>;
 };
 
 const key = (id: string) => `ig:post:${id}`;
@@ -34,16 +37,26 @@ export function redisState(): State {
       await redis.set(key(id), record);
     },
     firstSeen: async (commentId) => (await redis.sadd("ig:comments:seen", commentId)) === 1,
+    release: async (id, note) => {
+      await redis.del(key(id));
+      await redis.set(`ig:retry:${id}`, note);
+    },
   };
 }
 
 /** For tests and local runs without Redis. */
-export function memoryState(): State & { records: Map<string, PostRecord>; seen: Set<string> } {
+export function memoryState(): State & { records: Map<string, PostRecord>; seen: Set<string>; retries: Map<string, { at: string; error: string }> } {
   const records = new Map<string, PostRecord>();
   const seen = new Set<string>();
+  const retries = new Map<string, { at: string; error: string }>();
   return {
     records,
     seen,
+    retries,
+    release: async (id, note) => {
+      records.delete(id);
+      retries.set(id, note);
+    },
     get: async (id) => records.get(id) ?? null,
     claim: async (id, at) => {
       if (records.has(id)) return false;

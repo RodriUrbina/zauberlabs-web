@@ -1,4 +1,4 @@
-import type { Graph } from "./graph";
+import { isRetryable, type Graph } from "./graph";
 import { duePosts, type Post } from "./queue";
 import type { State } from "./state";
 
@@ -21,11 +21,13 @@ export type RunReport = {
   published: { id: string; mediaId: string; permalink?: string }[];
   wouldPublish: string[];
   failed: { id: string; error: string }[];
+  /** BL-118.4: failed in a way that is safe to try again; the next run does. */
+  retry: { id: string; error: string }[];
   skipped: { id: string; reason: string }[];
 };
 
 export async function publishDue(opts: { posts: Post[]; now: number; state: State; graph: Graph | null; enabled: boolean; base?: string }): Promise<RunReport> {
-  const report: RunReport = { published: [], wouldPublish: [], failed: [], skipped: [] };
+  const report: RunReport = { published: [], wouldPublish: [], failed: [], retry: [], skipped: [] };
   let budget = PER_RUN;
   const today = berlinDay(opts.now);
   const records = await Promise.all(opts.posts.map((p) => opts.state.get(p.id)));
@@ -62,8 +64,13 @@ export async function publishDue(opts: { posts: Post[]; now: number; state: Stat
       report.published.push({ id: post.id, mediaId, permalink });
     } catch (e) {
       const error = e instanceof Error ? e.message : String(e);
-      await opts.state.set(post.id, { state: "failed", at, error });
-      report.failed.push({ id: post.id, error });
+      if (isRetryable(e)) {
+        await opts.state.release(post.id, { at, error });
+        report.retry.push({ id: post.id, error });
+      } else {
+        await opts.state.set(post.id, { state: "failed", at, error });
+        report.failed.push({ id: post.id, error });
+      }
     }
   }
   return report;
