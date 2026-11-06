@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-11-14T18:00:00+01:00",
+  "status": "draft",
+  "title": "Sat 14 Nov · Single · \"Option 768.\" · BLOG",
+  "headline": "Option 768.",
+  "link": "blog/e46-m-sport-package-ii",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "BMW Style 135M alloy wheel, ten pairs of double spokes, face on."
+    }
+  ],
+  "factSources": "blog `e46-m-sport-package-ii`, section \"The Editions and the Clubsport\" (S4 BMW UK press release 22 Feb 2002, HIGH, UK only; S2 German price lists, HIGH: option 768, 2004-09 Coupé p12, €4,200, 135M). Research `t071-factory-packages/`.",
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p09, 2026-11-06): slide-01.png"
+}

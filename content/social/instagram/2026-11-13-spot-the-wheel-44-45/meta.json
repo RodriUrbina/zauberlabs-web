@@ -1,0 +1,19 @@
+{
+  "publishAt": "2026-11-13T18:00:00+01:00",
+  "status": "draft",
+  "title": "Fri 13 Nov · Carousel 2 · \"Seven spokes. Which inch?\" → \"Read the back.\" · BLOG",
+  "headline": "Seven spokes. Which inch?",
+  "link": "blog/telling-e46-wheels-apart",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "Two seven-spoke BMW alloy wheels side by side, labelled A and B."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "The same wheels labelled: A, Style 44, 17-inch, 8J; B, Style 45, 16-inch, 7J."
+    }
+  ],
+  "factSources": "blog `telling-e46-wheels-apart` (S1 catalogue mirror, MEDIUM: sizes, offsets, Feb 1998, no 330 for Style 45; \"read the size off the sidewall, or the size cast into the back of the rim\").",
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p08, 2026-11-06): slide-01.png, slide-02.png"
+}

@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-11-12T18:00:00+01:00",
+  "status": "draft",
+  "title": "Thu 12 Nov · Single · \"Youngline. Code 753.\"",
+  "headline": "Youngline. Code 753.",
+  "link": "e46build",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "Side view of a silver BMW E46 Compact on black."
+    }
+  ],
+  "factSources": "`e46build/docs/research/t273-basic-seat-covers/findings.md` rows 4–5 (ETK + German price lists, HIGH). September 2002 is the earliest list the research holds for this (the \"floor\"), so \"from\" may be earlier.",
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p07, 2026-11-06): slide-01.png"
+}
