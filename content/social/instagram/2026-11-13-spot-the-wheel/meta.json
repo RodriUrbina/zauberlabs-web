@@ -1,0 +1,17 @@
+{
+  "publishAt": "2026-11-13T18:00:00+01:00",
+  "status": "draft",
+  "title": "Week 1 Friday · Carousel 2 · Spot the wheel",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "Two BMW M double-spoke alloy wheels side by side, labelled A and B."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "The same wheels labelled: A, Style 68M, 17-inch, five pairs of spokes; B, Style 135M, 18-inch, ten pairs of spokes."
+    }
+  ],
+  "factSources": "blog `telling-e46-wheels-apart` (S1 catalogue mirror, MEDIUM: 68M 17-inch staggered 7.5J/8.5J, 135M 18-inch staggered 8J/8.5J; spoke pairs from the canonical photos S6, `t069-wheel-photos/README.md`; research `t035-evidence/REPORT.md`).",
+  "importedFrom": "e46build docs/social/instagram (BL-118 phase 1 mock-ups, 2026-11-06): p3-spot-1.png, p3-spot-2.png"
+}

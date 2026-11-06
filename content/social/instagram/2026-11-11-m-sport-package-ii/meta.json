@@ -1,0 +1,24 @@
+{
+  "publishAt": "2026-11-11T18:00:00+01:00",
+  "status": "draft",
+  "title": "Week 1 Wednesday · Carousel 3 · M Sport package II",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "Silver BMW E46 Sedan facelift with M front bumper and M double-spoke wheels on a wet salt flat."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "BMW Style 68M alloy wheel, five pairs of double spokes, face on."
+    },
+    {
+      "file": "3.jpg",
+      "alt": "E46 interior with sport seats in black cloth with Alcantara and a three-spoke steering wheel."
+    }
+  ],
+  "factSources": "blog `e46-m-sport-package-ii` (S1 BMW press release 14 May 2001, HIGH; S2 German price lists, HIGH: code 338, 68M/97M, 135M from 2004-03; seats \"Laser\" cloth with Alcantara S1+S2 HIGH). Research: `t071-factory-packages/raw/press-de-2001-05-m-sportpaket-22321.txt`, `t071-factory-packages/pricelists-de-packages.json`.",
+  "reviewNotes": [
+    "slide 3's interior shows the stage's own steering wheel, not specifically the M Sport wheel; the slide text says \"with the M Sport leather steering wheel\" as a package fact. If the PO prefers, drop that half-sentence."
+  ],
+  "importedFrom": "e46build docs/social/instagram (BL-118 phase 1 mock-ups, 2026-11-06): p2-msport-1.png, p2-msport-2.png, p2-msport-3.png"
+}

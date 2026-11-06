@@ -1,0 +1,16 @@
+{
+  "publishAt": "2026-11-20T18:00:00+01:00",
+  "status": "draft",
+  "title": "Week 2 Friday · Single · Which car is next?",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "\"Which car is next?\" with three choices, VW Golf, Audi A4 and Mercedes W203, plus \"Add a car\", above a side view of a silver BMW E46 Coupé."
+    }
+  ],
+  "factSources": "zauberlabs-web `lib/i18n.ts` (vote: \"Which car is next?\", \"The one with the most fans gets built next.\" / DE \"Das mit den meisten Fans bauen wir als Nächstes.\") and `lib/cars.ts` (VOTE_CARS: VW Golf, Audi A4, Mercedes W203).",
+  "reviewNotes": [
+    "the PO picked the W203 as next project on 2026-10-22. \"The one with the most fans gets built next\" is the site's own copy; the PO should confirm it still holds before this post goes out."
+  ],
+  "importedFrom": "e46build docs/social/instagram (BL-118 phase 1 mock-ups, 2026-11-06): p6-vote.png"
+}
