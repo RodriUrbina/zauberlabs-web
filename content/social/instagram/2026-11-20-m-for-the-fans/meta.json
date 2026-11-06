@@ -1,0 +1,27 @@
+{
+  "publishAt": "2026-11-20T18:00:00+01:00",
+  "status": "approved",
+  "title": "Fri 20 Nov · Carousel 3 · \"M for the fans, not for the Masses.\" · BLOG",
+  "headline": "M for the fans, not for the Masses.",
+  "link": "blog/telling-e46-wheels-apart",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver BMW E46 Touring with M front bumper and M double-spoke wheels on a wet salt flat."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "AI image of a silver BMW E46 Sedan facelift with M front bumper and Style 68M wheels on a wet salt flat."
+    },
+    {
+      "file": "3.jpg",
+      "alt": "AI image of a silver pre-facelift BMW E46 Sedan from behind, with the M rear bumper, on black."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| 68M is not an M3 wheel; catalogued for ordinary E46s | blog `telling-e46-wheels-apart` (\"Neither of these is an M3 wheel: both were catalogued for ordinary E46s\") | MEDIUM (S1/S4) |\n| 68M listed for the whole range, Compact included (Europe) | blog `telling-e46-wheels-apart` (S1 catalogue mirror) | MEDIUM |\n| 68M is 17-inch | blog `telling-e46-wheels-apart` (S1) | MEDIUM |\n| M package covers catalogued for ordinary Sedan, Touring, Compact; a listed path | blog `e46-bumpers-body-era-package` short version (S1) | MEDIUM |\n| Slide 1/2 cars wear 68M | `e46build-agent1/docs/research/t085-look-images/README.md` (Sedan, Touring, Coupé, Convertible \"68M wheels\") | PO check 2026-10-13 |\n| \"See it on your car first\" | E46BUILD product (configurator shows parts on the owner's body/era) | product claim |\n\nNo rarity or production numbers are used.",
+  "reviewNotes": [
+    "Tone note: \"Masses\" (the PO's capital M) is about devotion, not looking down on anyone. The post praises owners who add M parts one at a time and says nothing about other cars or owners.",
+    "Not used: the M Sport II steering wheel (no picture of it on the car) and the Laser seats (already in P2, P4 and P14)."
+  ],
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p15, 2026-11-06): slide-01.png, slide-02.png, slide-03.png"
+}

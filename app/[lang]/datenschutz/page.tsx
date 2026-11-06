@@ -21,6 +21,7 @@ export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: 
  * BL-082 (PO-approved 2026-10-26): Vercel Speed Insights on zauberlabs.de and e46.zauberlabs.de (Abschnitt 5; E46BUILD via T-177).
  * BL-050: one Vercel Web Analytics custom event, "configurator_click" with only { configurator }, described in Abschnitt 5;
  * BL-116: plus { from, place }, the page and the spot on it where the link was clicked.
+ * BL-119: "visit_from" { from: "instagram", page } on the first page load from our Instagram links (lib/visit-from.ts); no storage.
  * BL-097: three shop events (lib/shop-analytics.ts), described right after it: shop_add_to_cart { design, lang },
  * shop_checkout_start { items, total_bucket, lang }, shop_order_completed { lang }.
  * BL-051: own anonymous statistics (Abschnitt 6): daily counters in Upstash, salted daily hash only inside a HyperLogLog.
@@ -108,7 +109,10 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Websites hinweg oder eine Zuordnung zu deiner Person ist nicht möglich. Wir sehen ausschließlich zusammengefasste Statistiken.
         Außerdem zählen wir, wie oft ein Link zu einem unserer Konfiguratoren (z. B. E46BUILD) angeklickt wird: Dabei wird ein Ereignis an Vercel Web
         Analytics übermittelt, das nur den Namen des Konfigurators und die Seite enthält, auf der geklickt wurde (samt der Stelle auf der Seite,
-        z. B. Fußzeile), zusammen mit denselben Angaben wie bei einem Seitenaufruf.
+        z. B. Fußzeile), zusammen mit denselben Angaben wie bei einem Seitenaufruf. Kommst du über einen Link aus unserem Instagram-Profil
+        (erkennbar am Zusatz „from=instagram“ in der Adresse), übermitteln wir beim Laden der ersten Seite ein Ereignis an Vercel Web
+        Analytics, das nur diese Herkunft und die aufgerufene Seite (ohne Parameter) enthält, zusammen mit denselben Angaben wie bei einem
+        Seitenaufruf; in deinem Browser wird dafür nichts gespeichert.
         Ebenso zählen wir im Fan-Shop, wie oft ein Sticker in den Warenkorb gelegt, die Zahlung begonnen und eine Bestellung abgeschlossen
         wird: Dabei werden Ereignisse an Vercel Web Analytics übermittelt, die nur das Motiv, die Anzahl der Sticker, eine Preisspanne und die
         Sprache der Seite enthalten, zusammen mit denselben Angaben wie bei einem Seitenaufruf; personenbezogene Daten sowie Bestell- oder
