@@ -3,7 +3,7 @@ import { graphClient, type Graph } from "./graph";
 
 /**
  * BL-118 — the Vercel settings of the Instagram publisher (entered by the PO in the Vercel dashboard, never in the repo):
- *   IG_USER_ID           the Instagram account id (zauberlabs.de)
+ *   IG_USER_ID           the Instagram account id (@zauberlabs)
  *   IG_PAGE_TOKEN        the Page access token of the "Zauberlabs" Facebook Page (does not expire; scripts/instagram-page-token.mjs)
  *   IG_PUBLISH_ENABLED   "1" only once the PO says go; anything else = the cron only reports what it would post
  *   CRON_SECRET          Vercel sends it to the cron routes as "Authorization: Bearer …"; other callers get 401

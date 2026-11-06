@@ -8,7 +8,10 @@ const read = (...p: string[]) => fs.readFileSync(path.join(process.cwd(), ...p),
 
 describe("footer: Instagram link (BL-121)", () => {
   test("a plain link to our profile, new tab, noopener noreferrer, named in EN and DE", () => {
-    assert.equal(INSTAGRAM_URL, "https://www.instagram.com/zauberlabs.de/");
+    assert.equal(INSTAGRAM_URL, "https://www.instagram.com/zauberlabs/", "@zauberlabs (BL-123)");
+    const ds = read("app", "[lang]", "datenschutz", "page.tsx");
+    assert.ok(ds.includes("Wir betreiben auf Instagram das Profil „zauberlabs“.") && !ds.includes("Profil „zauberlabs.de“"), "Datenschutz names @zauberlabs");
+    for (const f of [["README.md"], ["lib", "instagram", "comments.ts"], ["lib", "instagram", "env.ts"], ["lib", "i18n.ts"]]) assert.ok(!/instagram\.com\/zauberlabs\.de|\(zauberlabs\.de\)/.test(read(...f)), f.join("/"));
     assert.equal(dictionaries.en.footer.instagram, "zauberlabs on Instagram");
     assert.equal(dictionaries.de.footer.instagram, "zauberlabs auf Instagram");
     const footer = read("components", "SiteFooter.tsx");

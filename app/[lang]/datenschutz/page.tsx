@@ -436,7 +436,7 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
           Nothing is replied, liked or followed automatically. The Insights joint-controller addendum is Meta's own page. */}
       <h2>{SHOP_LAUNCHED ? 16 : 15}. Unser Instagram-Profil</h2>
       <p>
-        Wir betreiben auf Instagram das Profil „zauberlabs.de“. Instagram ist ein Dienst der Meta Platforms Ireland Ltd. (Irland); was
+        Wir betreiben auf Instagram das Profil „zauberlabs“. Instagram ist ein Dienst der Meta Platforms Ireland Ltd. (Irland); was
         Instagram selbst verarbeitet, wenn du unser Profil besuchst oder mit ihm interagierst, regeln die Datenschutzbestimmungen von Meta
         (https://privacycenter.instagram.com/policy). Für die Statistiken, die Instagram uns zu unserem Profil anzeigt, sind wir mit Meta
         gemeinsam verantwortlich; die Vereinbarung dazu: https://www.facebook.com/legal/terms/information_about_page_insights_data.

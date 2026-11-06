@@ -351,4 +351,4 @@ export const e46SectionUrl = (section: string, lang: Locale) => `${e46Base(lang)
 export const E46_LIVE = (process.env.NEXT_PUBLIC_E46_LIVE ?? "0") === "1";
 export const CONTACT_EMAIL = "hello@zauberlabs.de";
 /** BL-121 (PO 2026-11-06): our Instagram profile, a plain link in the footer (no embed, no script, nothing loaded from Instagram). */
-export const INSTAGRAM_URL = "https://www.instagram.com/zauberlabs.de/";
+export const INSTAGRAM_URL = "https://www.instagram.com/zauberlabs/"; // BL-123: the account is @zauberlabs
