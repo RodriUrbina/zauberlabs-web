@@ -1,16 +1,16 @@
 {
   "publishAt": "2026-11-18T18:00:00+01:00",
   "status": "draft",
-  "title": "Week 2 Wednesday · Single · Standard to M",
+  "title": "Week 2 Wednesday · Single · \"One M front. Both faces.\"",
   "slides": [
     {
       "file": "1.jpg",
       "alt": "Two front views of the same silver pre-facelift BMW E46 Sedan: above with the standard front bumper, below with the M front bumper."
     }
   ],
-  "factSources": "blog `e46-genuine-m-front-bumper` (S1 catalogue, MEDIUM: one primed M cover for Sedan and Touring, no facelift split, standard bumper changed September 2001; S2, LOW, observation 16 Oct 2026: most \"M-Tech\" fronts on sale are reproductions). Research `t101-front-m-bumper/README.md`, `t045-bumper-pairs/T-045-findings.md`.",
+  "factSources": "blog `e46-genuine-m-front-bumper` (S1 catalogue, MEDIUM: one primed M cover for Sedan and Touring, no facelift split, standard bumper changed September 2001;; \"Both faces\" = pre-facelift and facelift). Research `t101-front-m-bumper/README.md`, `t045-bumper-pairs/T-045-findings.md`.",
   "reviewNotes": [
-    "the \"reproductions\" line is LOW (a dated market observation). Drop it if the PO wants only HIGH/MEDIUM facts in social posts."
+    "round 2 dropped the LOW \"most M-Tech fronts are reproductions\" line."
   ],
   "importedFrom": "e46build docs/social/instagram (BL-118 phase 1 mock-ups, 2026-11-06): p5-bumper.png"
 }
