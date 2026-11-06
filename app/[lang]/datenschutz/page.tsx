@@ -242,10 +242,16 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         dieser Log-Aufbewahrung lassen sich die Datensätze keiner Person mehr zuordnen – es sei denn, du trägst selbst personenbezogene Angaben in die
         Bezeichnung ein. Die Konfigurationen liegen in unserer Datenbank (Abschnitt 11).
       </p>
+      {/* BL-122 (PO 2026-11-06, with E46 T-277): E46BUILD's own Analytics events, and visit_from there as on this site (BL-119);
+          the missing-translation sentence covers E46BUILD's api_text_missing event (T-256), approved by the PO 2026-11-07. */}
       <p>
         Ohne Konto setzt E46BUILD keine Cookies und legt nichts im lokalen Speicher deines Browsers ab; für ein Konto siehe den folgenden Absatz. Zur
-        Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics – ohne Cookies, nur zusammengefasste Seitenaufrufe und Besucherzahlen –,
-        zur Messung der Ladezeiten Vercel Speed Insights; es gilt Abschnitt 5. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet
+        Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics – ohne Cookies, zusammengefasste Seitenaufrufe und Besucherzahlen sowie
+        einzelne Ereignisse, die nur die jeweils genannte Angabe enthalten –, zur Messung der Ladezeiten Vercel Speed Insights; es gilt Abschnitt 5.
+        Kommst du über einen Link aus unserem Instagram-Profil (Zusatz „from=instagram“) zu E46BUILD, übermitteln wir wie in Abschnitt 5 beim
+        Laden der ersten Seite ein Ereignis nur mit dieser Herkunft und der aufgerufenen Seite (ohne Parameter); in deinem Browser wird dafür
+        nichts gespeichert. Fehlt für einen Hinweistext von E46BUILD noch die deutsche Übersetzung, übermitteln wir ein Ereignis nur mit diesem
+        englischen Text. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet
         keine Verbindung zu Google Fonts statt. Angebote im Konfigurator verlinken auf die Websites externer Händler; sobald du einem solchen Link
         folgst, gelten deren Datenschutzbestimmungen (Abschnitt 14).
       </p>
