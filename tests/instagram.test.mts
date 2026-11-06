@@ -5,7 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { graphClient, type Fetch } from "../lib/instagram/graph";
 import { captionProblems, duePosts, jpegSize, readPost, readQueue, servableSlide, type Post } from "../lib/instagram/queue";
-import { publishDue, publishedPosts, slideUrl } from "../lib/instagram/publisher";
+import { berlinDay, publishDue, publishedPosts, slideUrl } from "../lib/instagram/publisher";
 import { memoryState } from "../lib/instagram/state";
 import { collectNewComments, digestMail, draftReply } from "../lib/instagram/comments";
 import { cronAuthorized } from "../lib/instagram/env";
@@ -151,8 +151,8 @@ describe("Instagram publisher (BL-118)", () => {
     assert.equal(r.failed.length, 1);
     assert.match(r.failed[0].error, /media_publish: boom/);
     assert.equal(state.records.get("2026-11-09-hello")?.state, "failed");
-    const again = await publishDue({ posts: [post()], now: AFTER + 1, state, graph, enabled: true });
-    assert.deepEqual(again.skipped, [{ id: "2026-11-09-hello", reason: 'record "failed" in Redis' }]);
+    const again = await publishDue({ posts: [post()], now: AFTER + 86_400_000, state, graph, enabled: true });
+    assert.deepEqual(again.skipped, [{ id: "2026-11-09-hello", reason: 'record "failed" in Redis' }], "the next day too");
     assert.equal(calls.filter((c) => c.path.endsWith("media_publish")).length, 1);
     assert.match(read("app", "api", "instagram", "publish", "route.ts"), /Fehlgeschlagen/);
   });
@@ -172,6 +172,31 @@ describe("Instagram publisher (BL-118)", () => {
     const r = await publishDue({ posts: [post(), post({ id: "2026-11-09-second" })], now: AFTER, state: memoryState(), graph, enabled: true });
     assert.equal(r.published.length, 1);
     assert.deepEqual(r.skipped, [{ id: "2026-11-09-second", reason: "next run (one post per run)" }]);
+  });
+  test("one post per Berlin day: a missed day shifts the backlog instead of doubling up (PO 2026-11-06)", async () => {
+    const { calls, graph } = fakeGraph();
+    const state = memoryState();
+    const p1 = post({ id: "2026-11-06-p1", publishAt: "2026-11-06T18:00:00+01:00", publishAtMs: Date.parse("2026-11-06T18:00:00+01:00") });
+    const p2 = post({ id: "2026-11-07-p2", publishAt: "2026-11-07T18:00:00+01:00", publishAtMs: Date.parse("2026-11-07T18:00:00+01:00") });
+    // P1's day was missed; on Sat at the 16:00 UTC run P1 goes out, the 17:00 UTC run must not post P2 the same day.
+    const a = await publishDue({ posts: [p1, p2], now: Date.parse("2026-11-07T16:00:10Z"), state, graph, enabled: true });
+    assert.deepEqual(a.published.map((p) => p.id), ["2026-11-06-p1"]);
+    const b = await publishDue({ posts: [p1, p2], now: Date.parse("2026-11-07T17:00:10Z"), state, graph, enabled: true });
+    assert.deepEqual(b, { published: [], wouldPublish: [], failed: [], skipped: [{ id: "2026-11-07-p2", reason: "tomorrow (one post per Berlin day)" }] });
+    const c = await publishDue({ posts: [p1, p2], now: Date.parse("2026-11-08T16:00:10Z"), state, graph, enabled: true });
+    assert.deepEqual(c.published.map((p) => p.id), ["2026-11-07-p2"]);
+    assert.equal(calls.filter((x) => x.path.endsWith("media_publish")).length, 2);
+    // The Berlin day, not the UTC day: 23:30 UTC on 7 Nov is already 8 Nov in Berlin.
+    assert.equal(berlinDay(Date.parse("2026-11-07T23:30:00Z")), "2026-11-08");
+    assert.equal(berlinDay(Date.parse("2026-07-07T22:30:00Z")), "2026-07-08", "summer time too");
+  });
+  test("a failed post today also blocks a second try the same day", async () => {
+    const { graph } = fakeGraph();
+    const state = memoryState();
+    await state.set("2026-11-06-other", { state: "failed", at: "2026-11-06T17:00:05.000Z", error: "x" });
+    const r = await publishDue({ posts: [post({ id: "2026-11-06-other", publishAtMs: Date.parse("2026-11-06T17:00:00Z") }), post({ id: "2026-11-06-next", publishAtMs: Date.parse("2026-11-06T17:00:00Z") })], now: Date.parse("2026-11-06T17:30:00Z"), state, graph, enabled: true });
+    assert.deepEqual(r.published, []);
+    assert.deepEqual(r.skipped, [{ id: "2026-11-06-next", reason: "tomorrow (one post per Berlin day)" }]);
   });
   test("real publishing needs IG_PUBLISH_ENABLED=1 on production; the cron routes need CRON_SECRET", () => {
     const env = read("lib", "instagram", "env.ts");
