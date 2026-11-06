@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { CONTACT_EMAIL, dictionaries, E46_LIVE, e46Url, localizeE46Href, type Locale } from "@/lib/i18n";
+import { CONTACT_EMAIL, dictionaries, E46_LIVE, e46Url, INSTAGRAM_URL, localizeE46Href, type Locale } from "@/lib/i18n";
 import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 import { getBlog } from "@/lib/blog";
 import { footerBlogTopics } from "@/lib/footer-topics";
 import { E46_TOPIC_GROUPS } from "@/lib/e46-topics";
 import { aboutPath } from "@/lib/about";
-import { Wordmark } from "./Icons";
+import { Instagram, Wordmark } from "./Icons";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
 
@@ -28,6 +28,17 @@ export default function SiteFooter({ lang, otherHref, homePath = "" }: Props) {
           <div className="col-span-2 flex flex-col gap-4 text-paper md:col-span-1">
             <Wordmark dark />
             <p className="max-w-[340px] text-sm leading-relaxed text-fog">{t.footer.tagline}</p>
+            {/* BL-121 (PO 2026-11-06): a plain link to our Instagram profile; new tab, no embed, nothing loaded from Instagram. */}
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t.footer.instagram}
+              title={t.footer.instagram}
+              className="-ml-2 grid size-10 place-items-center rounded-full text-fog hover:text-paper focus-visible:outline-2 focus-visible:outline-paper"
+            >
+              <Instagram className="size-5" />
+            </a>
           </div>
           <div className="flex flex-col gap-3 text-sm">
             <span className="eyebrow text-[11px] text-[#8A877F]">{t.footer.configurators}</span>
