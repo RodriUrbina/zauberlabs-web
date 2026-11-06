@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-11-22T18:00:00+01:00",
+  "status": "draft",
+  "title": "Sun 22 Nov · Single · \"Stop dreaming.\"",
+  "headline": "Stop dreaming.",
+  "link": "e46build",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver BMW E46 Touring facelift with M front bumper and Style 68M wheels on a wet salt flat, under the headline \"Stop dreaming.\" and \"Build yours at e46.zauberlabs.de\"."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| The car wears 68M wheels | `e46build-agent1/docs/research/t085-look-images/README.md` | PO check 2026-10-13 |\n| Genuine M front cover fits every Touring, pre- and post-facelift | blog `e46-genuine-m-front-bumper` (S1 catalogue) | MEDIUM |\n| 68M = M Sport package II wheel on the Touring | blog `e46-m-sport-package-ii` (S2 German price lists) | HIGH |\n| \"See it on your car before you buy\" | E46BUILD product | product claim |",
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p17, 2026-11-06): slide-01.png"
+}
