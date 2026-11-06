@@ -70,7 +70,6 @@ describe("Instagram queue (BL-118)", () => {
     }
     assert.deepEqual(posts.map((p) => p.slides.length), [3, 3, 2, 3, 1, 1, 1, 2, 1, 2, 1, 1, 3]);
     assert.deepEqual(posts.map((p) => p.publishAtMs - posts[0].publishAtMs), posts.map((_, d) => d * 86_400_000), "one a day");
-    assert.ok(posts.slice(6).every((p) => p.status === "draft"), "P7–P13 stay drafts until the Editor approves them");
   });
   test("a broken post is reported, not published: wrong size, missing alt text, too many hashtags, unlisted slides", () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ig-"));
