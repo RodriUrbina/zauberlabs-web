@@ -13,15 +13,20 @@ import { cronAuthorized } from "../lib/instagram/env";
 const read = (...p: string[]) => fs.readFileSync(path.join(process.cwd(), ...p), "utf8");
 
 /** A fake Graph API: answers the calls the publisher makes and records them (method, path, body). */
-function fakeGraph(opts: { failOn?: string } = {}) {
+function fakeGraph(opts: { failOn?: string; status?: number; code?: number; failFrom?: number; failTimes?: number } = {}) {
   const calls: { method: string; path: string; params: Record<string, string>; auth: string | null }[] = [];
   let n = 0;
+  let hits = 0; // matching calls so far (failFrom: fail from the nth matching call on; failTimes: then succeed again)
+  let failed = 0;
   const fetchImpl: Fetch = async (url, init) => {
     const u = new URL(url);
     const p = u.pathname.replace(/^\/v[\d.]+\//, "");
     const params = Object.fromEntries(init?.method === "POST" ? new URLSearchParams(String(init.body)) : u.searchParams);
     calls.push({ method: init?.method ?? "GET", path: p, params, auth: new Headers(init?.headers).get("authorization") });
-    if (opts.failOn && p.endsWith(opts.failOn)) return new Response(JSON.stringify({ error: { message: "boom" } }), { status: 400 });
+    if (opts.failOn && p.endsWith(opts.failOn) && ++hits >= (opts.failFrom ?? 1) && failed < (opts.failTimes ?? Infinity)) {
+      failed++;
+      return new Response(JSON.stringify({ error: { message: "boom", ...(opts.code ? { type: "OAuthException", code: opts.code } : {}) } }), { status: opts.status ?? 400 });
+    }
     if (p.endsWith("/media")) return Response.json({ id: `c${++n}` });
     if (p.endsWith("/media_publish")) return Response.json({ id: "m1" });
     if (p.endsWith("/comments")) return Response.json({ data: [{ id: "k1", text: "Passt das 135M an meinen Compact?", timestamp: "2026-11-10T08:00:00+0000" }, { id: "k2", text: "Love it 🔥" }] });
@@ -168,6 +173,42 @@ describe("Instagram publisher (BL-118)", () => {
     assert.equal(calls.filter((c) => c.path.endsWith("media_publish")).length, 1);
     assert.match(read("app", "api", "instagram", "publish", "route.ts"), /Fehlgeschlagen/);
   });
+  test("retryable (BL-118.4): an auth error, or any error before the first container, leaves no record; the next run posts once", async () => {
+    // 401 on the very first container call (e.g. a refused token): nothing exists on Instagram.
+    const g1 = fakeGraph({ failOn: "17841/media", status: 401, code: 190, failTimes: 1 });
+    const state = memoryState();
+    const a = await publishDue({ posts: [post()], now: AFTER, state, graph: g1.graph, enabled: true });
+    assert.deepEqual(a.retry.map((r) => r.id), ["2026-11-09-hello"]);
+    assert.equal(a.failed.length, 0);
+    assert.equal(state.records.size, 0, "no record: the day guard does not count it");
+    assert.match(state.retries.get("2026-11-09-hello")?.error ?? "", /media: boom/);
+    const b = await publishDue({ posts: [post()], now: AFTER + 60_000, state, graph: g1.graph, enabled: true });
+    assert.deepEqual(b.published.map((p) => p.id), ["2026-11-09-hello"], "the same day, a manual Run posts it");
+    const c = await publishDue({ posts: [post()], now: AFTER + 120_000, state, graph: g1.graph, enabled: true });
+    assert.equal(c.published.length, 0, "and only once");
+    assert.equal(g1.calls.filter((x) => x.path.endsWith("media_publish")).length, 1);
+  });
+  test("retryable: a non-auth error before any container (e.g. Meta can't fetch the image) is retried too", async () => {
+    const g = fakeGraph({ failOn: "17841/media", status: 500, failTimes: 1 });
+    const r = await publishDue({ posts: [post({ slides: [{ file: "1.jpg", alt: "One" }] })], now: AFTER, state: memoryState(), graph: g.graph, enabled: true });
+    assert.equal(r.retry.length, 1);
+  });
+  test("retryable: an auth error even at media_publish (the call was refused, nothing posted)", async () => {
+    const g = fakeGraph({ failOn: "media_publish", status: 400, code: 190 });
+    const state = memoryState();
+    const r = await publishDue({ posts: [post()], now: AFTER, state, graph: g.graph, enabled: true });
+    assert.equal(r.retry.length, 1);
+    assert.equal(state.records.size, 0);
+  });
+  test("still blocking: a non-auth error once a container exists (second carousel slide, or media_publish)", async () => {
+    const g = fakeGraph({ failOn: "17841/media", status: 400, failFrom: 2 });
+    const state = memoryState();
+    const r = await publishDue({ posts: [post()], now: AFTER, state, graph: g.graph, enabled: true });
+    assert.deepEqual(r.retry, []);
+    assert.equal(r.failed.length, 1);
+    assert.equal(state.records.get("2026-11-09-hello")?.state, "failed");
+    assert.match(read("app", "api", "instagram", "publish", "route.ts"), /der nächste Lauf \(oder „Run“ in Vercel\) versucht es erneut/);
+  });
   test("switched off (the default), drafts, not yet due: nothing is sent to Instagram", async () => {
     const { calls, graph } = fakeGraph();
     const state = memoryState();
@@ -175,7 +216,7 @@ describe("Instagram publisher (BL-118)", () => {
     assert.deepEqual(off.wouldPublish, ["2026-11-09-hello"]);
     await publishDue({ posts: [post({ status: "draft" })], now: AFTER, state, graph, enabled: true });
     const early = await publishDue({ posts: [post()], now: BEFORE, state, graph, enabled: true });
-    assert.deepEqual(early, { published: [], wouldPublish: [], failed: [], skipped: [] }, "the 16:00 UTC run in winter finds nothing");
+    assert.deepEqual(early, { published: [], wouldPublish: [], failed: [], retry: [], skipped: [] }, "the 16:00 UTC run in winter finds nothing");
     assert.equal(calls.length, 0);
     assert.equal(state.records.size, 0);
   });
@@ -194,7 +235,7 @@ describe("Instagram publisher (BL-118)", () => {
     const a = await publishDue({ posts: [p1, p2], now: Date.parse("2026-11-07T16:00:10Z"), state, graph, enabled: true });
     assert.deepEqual(a.published.map((p) => p.id), ["2026-11-06-p1"]);
     const b = await publishDue({ posts: [p1, p2], now: Date.parse("2026-11-07T17:00:10Z"), state, graph, enabled: true });
-    assert.deepEqual(b, { published: [], wouldPublish: [], failed: [], skipped: [{ id: "2026-11-07-p2", reason: "tomorrow (one post per Berlin day)" }] });
+    assert.deepEqual(b, { published: [], wouldPublish: [], failed: [], retry: [], skipped: [{ id: "2026-11-07-p2", reason: "tomorrow (one post per Berlin day)" }] });
     const c = await publishDue({ posts: [p1, p2], now: Date.parse("2026-11-08T16:00:10Z"), state, graph, enabled: true });
     assert.deepEqual(c.published.map((p) => p.id), ["2026-11-07-p2"]);
     assert.equal(calls.filter((x) => x.path.endsWith("media_publish")).length, 2);
