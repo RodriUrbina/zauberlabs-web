@@ -25,9 +25,11 @@ export async function GET(req: NextRequest) {
   const lines = [
     ...report.published.map((p) => `Veröffentlicht: ${p.id}${p.permalink ? ` – ${p.permalink}` : ""}`),
     ...report.failed.map((p) => `Fehlgeschlagen: ${p.id} – ${p.error}\nNicht noch einmal versucht. Erst auf Instagram nachsehen, dann den Redis-Eintrag ig:post:${p.id} löschen (README „Instagram“).`),
+    // BL-118.4: nothing reached Instagram, so the next run (or Cron Jobs → Run) tries again by itself.
+    ...report.retry.map((p) => `Nicht veröffentlicht: ${p.id} – ${p.error}\nAuf Instagram ist nichts angekommen; der nächste Lauf (oder „Run“ in Vercel) versucht es erneut.${/190|401|token|OAuth/i.test(p.error) ? " Der Zugang (IG_PAGE_TOKEN) wurde abgelehnt: bitte zuerst den Token prüfen." : ""}`),
   ];
   if (lines.length) {
-    await sendBrevoMail({ to: { email: OWNER.email }, subject: `Instagram: ${report.failed.length ? "Fehler beim Posten" : "Post veröffentlicht"}`, text: lines.join("\n\n"), bccOwner: false });
+    await sendBrevoMail({ to: { email: OWNER.email }, subject: `Instagram: ${report.failed.length ? "Fehler beim Posten" : report.retry.length ? "Post wird erneut versucht" : "Post veröffentlicht"}`, text: lines.join("\n\n"), bccOwner: false });
   }
   return NextResponse.json({ enabled, ...report, broken: broken.map((b) => b.id) }, { headers: { "Cache-Control": "no-store" } });
 }

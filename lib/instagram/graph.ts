@@ -9,10 +9,22 @@ const BASE = `https://graph.facebook.com/${GRAPH_VERSION}`;
 export type Fetch = (url: string, init?: RequestInit) => Promise<Response>;
 
 export class GraphError extends Error {
-  constructor(message: string, readonly status: number) {
+  /** BL-118.4: set by publish() when the error came before any media container existed (nothing on Instagram yet). */
+  beforeContainer = false;
+  constructor(message: string, readonly status: number, readonly code?: number) {
     super(message);
   }
 }
+
+/** BL-118.4: Meta refused the token (HTTP 401 or OAuthException code 190): the request did nothing on Instagram. */
+export const isAuthError = (e: unknown) => e instanceof GraphError && (e.status === 401 || e.code === 190);
+
+/**
+ * BL-118.4: errors after which publishing may simply be tried again: an auth error at any step (the call was refused), or any
+ * error before the first media container was created. Everything else stays blocking, because after a container exists a
+ * failure cannot tell whether Instagram already posted it.
+ */
+export const isRetryable = (e: unknown) => isAuthError(e) || (e instanceof GraphError && e.beforeContainer);
 
 export type Graph = ReturnType<typeof graphClient>;
 
@@ -25,9 +37,9 @@ export function graphClient(token: string, igUserId: string, fetchImpl: Fetch = 
       headers: { authorization: `Bearer ${token}`, ...(method === "POST" ? { "content-type": "application/x-www-form-urlencoded" } : {}) },
       ...(method === "POST" ? { body: qs } : {}),
     });
-    const body = (await res.json().catch(() => ({}))) as { error?: { message?: string } } & T;
-    // Only Meta's error message is kept: it never contains the token.
-    if (!res.ok || body.error) throw new GraphError(`${method} ${path.split("?")[0]}: ${body.error?.message ?? res.status}`, res.status);
+    const body = (await res.json().catch(() => ({}))) as { error?: { message?: string; code?: number } } & T;
+    // Only Meta's error message and code are kept: they never contain the token.
+    if (!res.ok || body.error) throw new GraphError(`${method} ${path.split("?")[0]}: ${body.error?.message ?? res.status}`, res.status, body.error?.code);
     return body;
   }
 
@@ -50,25 +62,36 @@ export function graphClient(token: string, igUserId: string, fetchImpl: Fetch = 
 
     /** Publishes one post (one slide = single image, more = carousel). Returns the new media id and its permalink. */
     async publish(images: { url: string; alt: string }[], caption: string): Promise<{ mediaId: string; permalink?: string }> {
-      let creationId: string;
-      if (images.length === 1) {
-        const { id } = await call<{ id: string }>("POST", `${igUserId}/media`, { image_url: images[0].url, alt_text: images[0].alt, caption });
-        await waitFinished(id);
-        creationId = id;
-      } else {
-        const children: string[] = [];
-        for (const img of images) {
-          const { id } = await call<{ id: string }>("POST", `${igUserId}/media`, { image_url: img.url, alt_text: img.alt, is_carousel_item: "true" });
-          await waitFinished(id);
-          children.push(id);
-        }
-        const { id } = await call<{ id: string }>("POST", `${igUserId}/media`, { media_type: "CAROUSEL", children: children.join(","), caption });
-        await waitFinished(id);
-        creationId = id;
+      let containers = 0;
+      try {
+        return await steps();
+      } catch (e) {
+        if (e instanceof GraphError && containers === 0) e.beforeContainer = true;
+        throw e;
       }
-      const { id: mediaId } = await call<{ id: string }>("POST", `${igUserId}/media_publish`, { creation_id: creationId });
-      const { permalink } = await call<{ permalink?: string }>("GET", mediaId, { fields: "permalink" }).catch(() => ({ permalink: undefined }));
-      return { mediaId, permalink };
+      async function steps() {
+        let creationId: string;
+        if (images.length === 1) {
+          const { id } = await call<{ id: string }>("POST", `${igUserId}/media`, { image_url: images[0].url, alt_text: images[0].alt, caption });
+          containers++;
+          await waitFinished(id);
+          creationId = id;
+        } else {
+          const children: string[] = [];
+          for (const img of images) {
+            const { id } = await call<{ id: string }>("POST", `${igUserId}/media`, { image_url: img.url, alt_text: img.alt, is_carousel_item: "true" });
+            containers++;
+            await waitFinished(id);
+            children.push(id);
+          }
+          const { id } = await call<{ id: string }>("POST", `${igUserId}/media`, { media_type: "CAROUSEL", children: children.join(","), caption });
+          await waitFinished(id);
+          creationId = id;
+        }
+        const { id: mediaId } = await call<{ id: string }>("POST", `${igUserId}/media_publish`, { creation_id: creationId });
+        const { permalink } = await call<{ permalink?: string }>("GET", mediaId, { fields: "permalink" }).catch(() => ({ permalink: undefined }));
+        return { mediaId, permalink };
+      }
     },
 
     /** Read only: the comments on one of our posts (text and time; the commenter's name is not asked for). */

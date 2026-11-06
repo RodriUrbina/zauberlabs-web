@@ -177,6 +177,9 @@ on other accounts, ever; that is the PO's own.
   `published` (with the media id), or `failed`. A post with any record is never tried again by itself. After a failure, look
   on Instagram first: if the post is not there, delete the key (`DEL ig:post:<id>` in the Upstash console) and the next run
   tries again.
+  BL-118.4: an auth error (HTTP 401 or OAuthException 190) at any step, or any error before the first media container
+  exists, is not "failed": the key is removed (the failure is noted in `ig:retry:<id>`), the PO gets a mail, and the next
+  run (or Cron Jobs → Run in Vercel) tries again, still one post per Berlin day.
 - **Comments:** `/api/instagram/comments` runs daily at 07:00 UTC, reads the text and time of new comments on our posts and
   mails them with a drafted reply each. Replies are posted by hand in the Instagram app.
 - **Locally:** `npm run instagram:dry-run` checks the queue and makes two read-only API calls with the token in
