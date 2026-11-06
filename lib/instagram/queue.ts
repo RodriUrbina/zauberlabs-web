@@ -25,6 +25,10 @@ const MetaSchema = z.object({
   publishAt: z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?[+-]\d{2}:\d{2}$/, "publishAt needs an ISO time with offset"),
   status: z.enum(STATUSES),
   title: z.string().optional(),
+  // BL-118 /links: the tile's headline (the slide's own words) and where the tile leads: "e46build", "vote" (the vote on
+  // zauberlabs.de) or a blog article's slug. Without a link the tile opens E46BUILD.
+  headline: z.string().min(1).max(120).optional(),
+  link: z.union([z.literal("e46build"), z.literal("vote"), z.string().regex(/^blog\/[a-z0-9]+(?:-[a-z0-9]+)*$/, 'link is "e46build", "vote" or "blog/<slug>"')]).optional(),
   slides: z
     .array(z.object({ file: z.string().regex(SLIDE_FILE, "slides are 1.jpg … 10.jpg"), alt: z.string().min(1).max(1000) }))
     .min(1)

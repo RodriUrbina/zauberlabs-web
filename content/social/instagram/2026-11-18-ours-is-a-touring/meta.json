@@ -1,0 +1,23 @@
+{
+  "publishAt": "2026-11-18T18:00:00+01:00",
+  "status": "draft",
+  "title": "Wed 18 Nov · Carousel 3 · \"Ours is a 2001 Touring.\"",
+  "headline": "Ours is a 2001 Touring.",
+  "link": "e46build",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "Side view of a silver BMW E46 Touring (an E46BUILD stage picture, not our car)."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "AI image of a silver BMW E46 M3 Touring in a dark studio; BMW never sold this car."
+    },
+    {
+      "file": "3.jpg",
+      "alt": "Silver BMW E46 Touring with M front bumper and 68M wheels on a wet salt flat."
+    }
+  ],
+  "factSources": "owner voice: PO decision 6 Nov 2026 (drives a 2001 Touring); M3 Touring: E46BUILD landing copy; slide 3 wheels 68M: `e46build-agent1/docs/research/t085-look-images/README.md`.",
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p13, 2026-11-06): slide-01.png, slide-02.png, slide-03.png"
+}
