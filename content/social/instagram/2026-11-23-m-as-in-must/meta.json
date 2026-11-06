@@ -1,0 +1,23 @@
+{
+  "publishAt": "2026-11-23T18:00:00+01:00",
+  "status": "approved",
+  "title": "Mon 23 Nov · Carousel 3 · \"M as in Must.\" · BLOG",
+  "headline": "M as in Must.",
+  "link": "blog/e46-bumpers-body-era-package",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver pre-facelift BMW E46 Touring with the M front bumper, on black."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "AI image of a silver facelift BMW E46 Coupé with the M front bumper, on black."
+    },
+    {
+      "file": "3.jpg",
+      "alt": "AI image of a silver BMW E46 Compact with the M front bumper, on black."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| One genuine M front cover for every Sedan and Touring | blog `e46-genuine-m-front-bumper` (S1 catalogue) | MEDIUM |\n| Coupé and Convertible have one M front cover (shared, identical covers) | blog `e46-bumpers-body-era-package` short version (S1, S7) | MEDIUM |\n| The Compact's M front cover is its own, not the Sedan's | blog `e46-compact-front-end-bumpers` (S1, S2) | MEDIUM |\n| Every body (Sedan, Touring, Coupé, Convertible, Compact) has a catalogued M front | the three rows above combined | MEDIUM |\n\nThe M3 is left out on purpose: it has its own front, which is not an M package part.",
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p18, 2026-11-06): slide-01.png, slide-02.png, slide-03.png"
+}

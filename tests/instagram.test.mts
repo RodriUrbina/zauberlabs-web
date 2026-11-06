@@ -45,7 +45,7 @@ const AFTER = Date.parse("2026-11-09T17:00:30Z");
 const BEFORE = Date.parse("2026-11-09T16:00:30Z");
 
 describe("Instagram queue (BL-118)", () => {
-  test("the imported posts (P1–P16) are all valid, 1080 × 1350 JPEG, one alt text per slide, one a day at 18:00 Berlin from Fri 6 Nov", () => {
+  test("the imported posts (P1–P18) are all valid, 1080 × 1350 JPEG, one alt text per slide, one a day at 18:00 Berlin from Fri 6 Nov", () => {
     const { posts, broken } = readQueue();
     assert.deepEqual(broken, []);
     assert.deepEqual(posts.map((p) => p.id), [
@@ -65,13 +65,15 @@ describe("Instagram queue (BL-118)", () => {
       "2026-11-19-well-versed-in-m",
       "2026-11-20-m-for-the-fans",
       "2026-11-21-you-can-get-what-you-want",
+      "2026-11-22-stop-dreaming",
+      "2026-11-23-m-as-in-must",
     ]);
     for (const p of posts) {
       assert.ok(["draft", "approved"].includes(p.status), `${p.id}: the PO approves each post`);
       assert.match(p.publishAt, /T18:00:00\+01:00$/);
       assert.ok(p.caption.indexOf("\n—\n") > 0, "German first, then English");
     }
-    assert.deepEqual(posts.map((p) => p.slides.length), [3, 3, 2, 3, 1, 1, 1, 2, 1, 2, 1, 1, 3, 4, 3, 1]);
+    assert.deepEqual(posts.map((p) => p.slides.length), [3, 3, 2, 3, 1, 1, 1, 2, 1, 2, 1, 1, 3, 4, 3, 1, 1, 3]);
     assert.deepEqual(posts.map((p) => p.publishAtMs - posts[0].publishAtMs), posts.map((_, d) => d * 86_400_000), "one a day");
   });
   test("a broken post is reported, not published: wrong size, missing alt text, too many hashtags, unlisted slides", () => {
