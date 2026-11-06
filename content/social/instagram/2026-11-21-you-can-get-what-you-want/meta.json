@@ -1,0 +1,18 @@
+{
+  "publishAt": "2026-11-21T18:00:00+01:00",
+  "status": "draft",
+  "title": "Sat 21 Nov · Single · \"You can~~'t always~~ get what you want.\"",
+  "headline": "You can get what you want.",
+  "link": "e46build",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver BMW E46 M3 Touring in a dark studio, a dream build: BMW never sold this car. Above it the headline \"You can't always get what you want\" with \"'t always\" struck through, and e46.zauberlabs.de."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| BMW never sold an E46 M3 Touring | E46BUILD landing copy (\"the E46 M3 Touring that BMW never built\"); memory `e46-m3-touring-dream-build` | PO-stated |\n| Genuine M front cover fits every Touring, pre- and post-facelift | blog `e46-genuine-m-front-bumper` (S1 catalogue) | MEDIUM |\n| M Sport package II on the Touring with 68M (17-inch) | blog `e46-m-sport-package-ii` (S2 German price lists: package 338 on the 2002-09 Touring p5; 68M as the package wheel) | HIGH |\n| Package sport seats in \"Laser\" cloth with Alcantara | blog `e46-m-sport-package-ii` (S1 + S2) | HIGH |\n| \"See it on your car first\" | E46BUILD product | product claim |\n\nNo claim to \"build an M3\". The parts named are M Sport package II / M aero parts for the Touring, not M3 parts.",
+  "reviewNotes": [
+    "the DE opener is a natural German saying rather than a translation of the song title; the image keeps the English title."
+  ],
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p16, 2026-11-06): slide-01.png"
+}
