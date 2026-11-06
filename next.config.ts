@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
     "/api/instagram/publish": ["./content/social/instagram/**/*"],
     "/api/instagram/comments": ["./content/social/instagram/**/*"],
     "/social/instagram/[post]/[file]": ["./content/social/instagram/**/*"],
+    "/[lang]/links": ["./content/social/instagram/**/*"],
   },
 };
 

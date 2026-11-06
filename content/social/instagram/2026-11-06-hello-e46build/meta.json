@@ -2,6 +2,8 @@
   "publishAt": "2026-11-06T18:00:00+01:00",
   "status": "approved",
   "title": "Week 1 Monday · Carousel 3 · \"The one BMW never sold.\"",
+  "headline": "The one BMW never sold.",
+  "link": "e46build",
   "slides": [
     {
       "file": "1.jpg",
@@ -9,11 +11,11 @@
     },
     {
       "file": "2.jpg",
-      "alt": "Side view of a silver BMW E46 Touring with five-spoke wheels, under the five E46BUILD steps: headlights, wheels, bumpers, seats, steering wheel, my project."
+      "alt": "AI image of a silver BMW E46 Touring in side view with five-spoke wheels, under the five E46BUILD steps: headlights, wheels, bumpers, seats, steering wheel, my project."
     },
     {
       "file": "3.jpg",
-      "alt": "Silver BMW E46 Touring with M front bumper and M double-spoke wheels on a wet salt flat."
+      "alt": "AI image of a silver BMW E46 Touring with M front bumper and M double-spoke wheels on a wet salt flat."
     }
   ],
   "factSources": "M3 Touring line: E46BUILD landing copy \"We were inspired by the E46 M3 Touring that BMW never built but we all wanted.\" (memory `e46-m3-touring-dream-build`, T-239). Steps: canonical steps (PO 2026-11-04). \"Checked against BMW's parts catalogue\", \"Free, no account\": E46BUILD landing (T-236). Slide 3 wears 68M: `e46build-agent1/docs/research/t085-look-images/README.md` (PO check 2026-10-13, \"68M wheels\"); 68M = M Sport package II wheel: blog `e46-m-sport-package-ii`. Sign-off line: `voice.md` Tribe #1.",

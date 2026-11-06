@@ -1,0 +1,19 @@
+{
+  "publishAt": "2026-11-15T18:00:00+01:00",
+  "status": "approved",
+  "title": "Sun 15 Nov · Carousel 2 · \"Spot the facelift.\" → \"Mind September 2001.\" · BLOG",
+  "headline": "Spot the facelift.",
+  "link": "blog/e46-headlight-changeovers",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "Two front views of a silver BMW E46 Sedan, labelled A and B: A before the facelift, B after."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "The same pictures labelled \"A · Before\" and \"B · Facelift\"."
+    }
+  ],
+  "factSources": "blog `e46-headlight-changeovers` short version (Europe numbers HIGH, date MEDIUM; bi-xenon new for MY2002 HIGH; 2001 trap MEDIUM); bumper split: blog `e46-bumpers-body-era-package` (Sedan/Touring Sept 2001, Coupé/Convertible March 2003, HIGH).",
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p10, 2026-11-06): slide-01.png, slide-02.png"
+}

@@ -41,6 +41,7 @@ describe("title code (BL-111)", () => {
     assert.deepEqual(hand, []);
     const users = all.filter((f) => /<Title\b/.test(read(f))).map((f) => f.split(path.sep).join("/")).sort();
     assert.deepEqual(users, [
+      "app/[lang]/links/page.tsx",
       "app/[lang]/page.tsx",
       "app/[lang]/shop/page.tsx",
       "components/AboutPage.tsx",

@@ -23,8 +23,8 @@ export function clickFrom(pathname: string): string {
   return parts.join("/");
 }
 
-/** BL-116 — the slots a configurator link can sit in. Marked with data-click-place; header and footer are found by their element. */
-export const CLICK_PLACES = ["header", "hero", "closer-look", "vote", "blog-teaser", "sticky-bar", "article-cta", "inline", "footer"] as const;
+/** BL-116 — the slots a configurator link can sit in ("links": the Instagram link page, BL-118). Marked with data-click-place; header and footer are found by their element. */
+export const CLICK_PLACES = ["header", "hero", "closer-look", "vote", "blog-teaser", "sticky-bar", "article-cta", "inline", "links", "footer"] as const;
 export type ClickPlace = (typeof CLICK_PLACES)[number];
 
 type Closest = { closest(selector: string): { getAttribute(name: string): string | null } | null };

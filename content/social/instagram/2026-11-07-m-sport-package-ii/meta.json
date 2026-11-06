@@ -2,10 +2,12 @@
   "publishAt": "2026-11-07T18:00:00+01:00",
   "status": "approved",
   "title": "Week 1 Wednesday · Carousel 3 · \"Tick box 338.\"",
+  "headline": "Tick box 338.",
+  "link": "blog/e46-m-sport-package-ii",
   "slides": [
     {
       "file": "1.jpg",
-      "alt": "Silver BMW E46 Sedan facelift with M front bumper and M double-spoke wheels on a wet salt flat."
+      "alt": "AI image of a silver BMW E46 Sedan facelift with M front bumper and M double-spoke wheels on a wet salt flat."
     },
     {
       "file": "2.jpg",
@@ -13,7 +15,7 @@
     },
     {
       "file": "3.jpg",
-      "alt": "E46 interior with sport seats in black cloth with Alcantara and a three-spoke steering wheel."
+      "alt": "AI image of an E46 interior with sport seats in black cloth with Alcantara and a three-spoke steering wheel."
     }
   ],
   "factSources": "blog `e46-m-sport-package-ii` (S1 BMW press release 14 May 2001, HIGH; S2 German price lists, HIGH: code 338, 68M/97M, 135M from 2004-03; seats \"Laser\" cloth with Alcantara S1+S2 HIGH). Research: `t071-factory-packages/raw/press-de-2001-05-m-sportpaket-22321.txt`, `t071-factory-packages/pricelists-de-packages.json`.",

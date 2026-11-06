@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-11-17T18:00:00+01:00",
+  "status": "approved",
+  "title": "Tue 17 Nov · Single · \"Same Sedan. M rear.\" · BLOG",
+  "headline": "Same Sedan. M rear.",
+  "link": "blog/e46-bumpers-body-era-package",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "Two rear views of the same silver pre-facelift BMW E46 Sedan: above with the standard rear bumper, below with the M rear bumper."
+    }
+  ],
+  "factSources": "blog `e46-bumpers-body-era-package` short version (engine S1 MEDIUM; M covers catalogued for ordinary cars S1 MEDIUM). Editor fact-check: the LOW brackets line removed, the engine line scoped to the standard Sedan cover.",
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p12, 2026-11-06): slide-01.png"
+}

@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-11-16T18:00:00+01:00",
+  "status": "approved",
+  "title": "Mon 16 Nov · Single · \"Compact. Its own face.\" · BLOG",
+  "headline": "Compact. Its own face.",
+  "link": "blog/e46-compact-front-end-bumpers",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "Front view of a silver BMW E46 Compact with its twin round headlights, on black."
+    }
+  ],
+  "factSources": "blog `e46-compact-front-end-bumpers` short version (headlights S3 HIGH; front covers S1/S2 MEDIUM; no facelift line MEDIUM).",
+  "importedFrom": "e46build docs/social/instagram/drafts (manifest p11, 2026-11-06): slide-01.png"
+}
