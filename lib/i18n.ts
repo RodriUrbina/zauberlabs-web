@@ -39,7 +39,7 @@ const en = {
       { key: "bumpers", label: "Bumpers", line: "Standard, M package or M3 bumpers, front and rear, on your body style.", img: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", alt: "E46 sedan with the M package front bumper" },
       { key: "seats", label: "Seats", line: "Basic, sport or M3 seats, for your E46.", img: "/images/closer-look/e46-seat-stage-interior-leather.webp", alt: "E46 interior with black leather sport seats" },
       { key: "steering", label: "Steering wheels", line: "Standard, sport, M Sport or M3 steering wheels for your E46.", img: "/images/closer-look/e46-steering-stage-cockpit-m3.webp", alt: "E46 cockpit with an M3 steering wheel" },
-      // BL-124 (PO 2026-11-09): E46BUILD's step 06 (T-278) and its own cockpit stage, until the PO's dash pictures arrive.
+      // BL-124 (PO 2026-11-09): E46BUILD's step 06 (T-278); its cockpit stage with the standard wheel, until the PO's dash pictures arrive.
       { key: "infotainment", label: "Infotainment", line: "BMW factory radio and navigation, or a CarPlay screen made for the E46.", img: "/images/closer-look/e46-infotainment-stage-cockpit.webp", alt: "E46 cockpit with the BMW radio and climate controls in the centre console" },
     ],
     pick: "Parts in E46BUILD", // accessible name of the category tab list
