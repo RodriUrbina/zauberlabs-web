@@ -81,7 +81,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         {/* HERO — BL-081 (Rivian-style, static photo) */}
         <HomeHero lang={lang} wrap={wrap} />
 
-        {/* GARAGE — BL-083 (PO 2026-10-27, option C "Take a closer look"): the five E46BUILD categories with E46BUILD's own
+        {/* GARAGE — BL-083 (PO 2026-10-27, option C "Take a closer look"): the E46BUILD categories (six since BL-124) with E46BUILD's own
             pictures. The M3 Touring photo stays in the hero only. BL-114 (PO 2026-11-04, "just delete this part"): the block under
             the panel is gone: the "pick the body style" heading, the six body tiles (BL-079), the three value chips (BL-081) and the
             "Open E46BUILD" button. The body pills under the hero (BL-064) and the header button stay. */}
