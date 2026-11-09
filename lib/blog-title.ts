@@ -8,9 +8,19 @@
  *   3. else the last ", " / " – " / " — ": "The wheel that fits an E46, | unless the E46 is American"
  *   4. else the last three words: "What four genuine E46 wheels really | cost in 2026"
  * The lead keeps its punctuation and the space before the accent; the accent is trimmed.
+ * TITLE_ACCENTS overrides the rules for a title the PO split by hand (it wins over every rule).
  */
+
+/** Hand-picked accents, by the exact title (PO 2026-11-09 for the wheels-cost article; rule 4 split it as "…really | cost in 2026"). */
+export const TITLE_ACCENTS: Readonly<Record<string, string>> = {
+  "What four genuine E46 wheels really cost in 2026": "really cost in 2026",
+  "Was vier originale E46-Felgen 2026 wirklich kosten": "2026 wirklich kosten",
+};
+
 export function splitTitle(title: string): { lead: string; accent: string } {
   const t = title.trim();
+  const manual = TITLE_ACCENTS[t];
+  if (manual && t.endsWith(manual)) return cut(t, t.length - manual.length);
   const colon = firstOutsideQuotes(t, ":");
   if (colon > 0 && t.slice(colon + 1).trim()) return cut(t, colon + 1);
   const question = firstOutsideQuotes(t, "?");

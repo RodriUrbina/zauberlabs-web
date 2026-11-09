@@ -2,7 +2,7 @@ import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { splitTitle } from "../lib/blog-title";
+import { splitTitle, TITLE_ACCENTS } from "../lib/blog-title";
 
 const read = (...p: string[]) => fs.readFileSync(path.join(process.cwd(), ...p), "utf8");
 
@@ -22,8 +22,14 @@ describe("article h1 in the title code (BL-126)", () => {
     assert.deepEqual(splitTitle("Genuine or replica? How to read an E46 wheel listing"), { lead: "Genuine or replica? ", accent: "How to read an E46 wheel listing" });
     assert.deepEqual(splitTitle("The wheel that fits an E46, unless the E46 is American"), { lead: "The wheel that fits an E46, ", accent: "unless the E46 is American" });
     assert.deepEqual(splitTitle("Same car — different lights"), { lead: "Same car — ", accent: "different lights" });
-    assert.deepEqual(splitTitle("What four genuine E46 wheels really cost in 2026"), { lead: "What four genuine E46 wheels really ", accent: "cost in 2026" });
+    assert.deepEqual(splitTitle("Four genuine E46 wheels cost in 2026"), { lead: "Four genuine E46 wheels ", accent: "cost in 2026" }, "rule 4");
     assert.deepEqual(splitTitle("Short title"), { lead: "", accent: "Short title" });
+  });
+  test("the PO's hand-picked split wins over rule 4 (wheels-cost article, EN + DE); each override matches a real title", () => {
+    assert.deepEqual(splitTitle("What four genuine E46 wheels really cost in 2026"), { lead: "What four genuine E46 wheels ", accent: "really cost in 2026" });
+    assert.deepEqual(splitTitle("Was vier originale E46-Felgen 2026 wirklich kosten"), { lead: "Was vier originale E46-Felgen ", accent: "2026 wirklich kosten" });
+    const titles = ["en", "de"].map((l) => /^title:\s*"?(.+?)"?$/m.exec(read("content", "blog", "e46-four-genuine-wheels-cost", `${l}.mdx`))?.[1]);
+    assert.deepEqual(Object.keys(TITLE_ACCENTS).sort(), titles.sort(), "the overrides are exactly this article's titles");
   });
   test("every article title splits into a lead and a non-empty accent that read as the whole title", () => {
     const dir = path.join(process.cwd(), "content", "blog");
