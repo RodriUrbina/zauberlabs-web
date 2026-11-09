@@ -1,0 +1,142 @@
+---
+# BL-125 — Writer draft, German. Same slug and sources as en.mdx. No maker or seller named.
+title: "Was in deiner Mittelkonsole steckt und was hineinpasst: E46-Radios, Bildschirme und moderne Touchscreens"
+description: "Radio oder BMWs Breitbildschirm, Navigation, Harman Kardon, BMW-Bluetooth und AUX, moderne Touchscreens: was in einen E46 passt und was du dafür aufgibst."
+date: 2026-11-09
+updated: 2026-11-12
+publishAt: "2026-11-12"
+lang: de
+slug: e46-infotainment-dash
+card: BL-125
+author: "zauberlabs"
+tags:
+  - E46
+  - infotainment
+  - buying guide
+  - configurator
+configurator: E46
+cta:
+  label: "Sieh, was an dein Auto passt"
+  href: "https://e46.zauberlabs.de/de?section=infotainment"
+hero:
+  src: null # no hero: E46BUILD has no infotainment photo yet (its step-06 tiles are drawings); no new AI images (PO, cost)
+  alt: "Die Mittelkonsole eines BMW E46 mit einem Werksradio unter den Luftdüsen"
+  credit: "KI-generierte Illustration"
+  licence: null
+  placeholder: "No hero planned. If one is added later: an E46BUILD infotainment picture, once the PO's I-1 to I-5 images exist; labelled if AI."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW-Pressemappe UK, Modelljahr 2002 (vom 26. Oktober 2001): 'A wide-screen on board monitor is available for the first time on all 3 Series models'"
+    type: BMW-Dokument (Pressemappe)
+    path: "t055-infotainment-fitment/raw/bmw-press-uk-2001-39145.txt"
+    confidence: HIGH
+  - id: S2
+    title: "Schulungsunterlagen und Handbücher von BMW of North America: Breitbild-Bordmonitor (6,5 Zoll, 16:9, Nachfolger des 5-Zoll-Monitors in 4:3), Radios der 'New Generation' (ab 03/2001; Betrieb nur am Bus, kein Diebstahlcode), Bedienungsanleitung Business CD Radio, das Radio im Kofferraum bei Bildschirm-Autos, der Bordcomputer als Monitor-Menü"
+    type: BMW-Dokument (Schulung, Bedienungsanleitung)
+    path: "t057-infotainment-manuals/T-057-findings.md §1.1–1.3, 2.1, 3.1–3.5; raw/bmw-wide-screen-obm-extract.txt"
+    confidence: HIGH
+  - id: S3
+    title: "BMW-Teilekatalog (ETK), Europa-Bäume aller sechs Karosserien, gelesen auf einem Spiegel: Radio- und Monitorgruppen mit Daten, Generationen des Navigationsrechners (CD-Karten bis 09/2002, DVD-Laufwerk ab 09/2002), Lautsprechersysteme Stereo / HiFi / Harman Kardon mit eigenen Kabelsätzen und Verstärkern, und der Compact-Baum ohne Harman-Kardon-Gruppe"
+    type: ETK-Spiegel (ein Spiegel)
+    path: "t055-infotainment-fitment/T-055-findings.md §1.1, 1.7, 2.1–2.3; raw/tree-sedan-gps_computer_video_module, tree-sedan-navigation_computer_drive"
+    confidence: MEDIUM
+    note: "MEDIUM: ein Spiegel von BMWs Katalog. Der Befund zum Compact beruht auf einem Motorbaum (325ti)."
+  - id: S4
+    title: "BMW-Einbauanleitungen (EBA) für den E46: Bluetooth-Freisprecheinrichtung je Karosserie (08.2002, ab 03/2002, Sonderausstattung 640 nötig, Codierung durch BMW), AUX-Anschluss (10.2003, ab 09/2002, genannte Radios und Bildschirme, keine Codierung) und der einzige gefundene Navigations-Nachrüstsatz (EBA 578en: ein Monitor statt des Aschenbechers, nur Limousine mit Linkslenkung)"
+    type: BMW-Dokument (Einbauanleitungen)
+    path: "t057-infotainment-manuals/raw/eba-5985de.txt … eba-5988de.txt, eba-6116de.txt, eba-578en.txt; T-057-findings.md §4.1–4.4"
+    confidence: HIGH
+  - id: S5
+    title: "Schulungsunterlage von BMW of North America 'Mk-3 Navigation System' (E46 ab 06/2000): Navigationsrechner links im Kofferraum, Einbauort der GPS-Antenne je Karosserie, Geschwindigkeits- und Rückwärtssignal, Codierung und Software (Breitbild-Autos brauchen CD V16.1 oder neuer)"
+    type: BMW-Dokument (Schulung)
+    path: "web: e46build branch agent-6/T-057-addendum-head-units 593839f, t057-infotainment-manuals/raw/bmw-mk3-navigation-extract-p1.txt (not on master; summarised in branch agent-6/T-278-infotainment fb0c7cb0, nav-and-aux-check.md)"
+    confidence: HIGH
+    note: "HIGH: BMWs eigener Schulungstext. Gelesen aus einem nicht übernommenen Recherche-Branch."
+  - id: S6
+    title: "Produktseiten der Hersteller für E46-spezifische Touchscreens (7 und 9 Zoll) und einen Bluetooth-Adapter für BMW-Radios, gespeichert am 4. Oktober 2026: für welche Karosserien sie passen sollen und was das Auto laut Hersteller behält"
+    type: Händler- und Herstellerseiten (Angaben)
+    path: "web: e46build branch agent-4/T-056-infotainment-market c764743; summarised in branch agent-6/T-278-infotainment fb0c7cb0, findings.md §2 'Modern units'"
+    confidence: LOW
+    note: "LOW: eigene Angaben der Hersteller, nie ein Passform-Urteil. Kein Hersteller wird hier genannt."
+---
+
+In jeder E46-Mittelkonsole steckt eines von zwei Dingen: ein BMW-Radio oder BMWs Bildschirm. Was in deiner steckt, entscheidet fast alles in diesem Artikel. Bevor es an den Katalog geht, schau also in die Mittelkonsole.
+
+## Radio oder Bildschirm: erst hinschauen
+
+Ein **Radio-Auto** hat ein BMW-Radio im Schacht. Oft zu sehen ist das Business CD Radio: ein CD-Schlitz, ein Display und sechs Stationstasten. [S2, HIGH]
+
+Ein **Bildschirm-Auto** hat BMWs Bordmonitor in der Mittelkonsole, und das Radio ist gar nicht dort: Es sitzt im Kofferraum. Das Kassetten-, MiniDisc- oder CD-Laufwerk steckt stattdessen im Gehäuse des Monitors. [S2, HIGH] [S3, MEDIUM]
+
+2001 bekam der Bildschirm eine neue Form. BMWs Pressemappe zum Modelljahr 2002 kündigte einen Breitbild-Bordmonitor an, „erstmals für alle 3er-Modelle". [S1, HIGH] BMWs Schulungsunterlagen nennen die Zahlen: 6,5 Zoll, 16:9, als Nachfolger des 5-Zoll-Monitors im Format 4:3. [S2, HIGH]
+
+**Das Datum:** 09/2001 für die meisten E46. Das Cabrio ist der schwierige Fall: Laut BMWs Schulung bekam es den Breitbildschirm schon ab 03/2001, der Teilekatalog führt ihn ab 09/2001. [S2, HIGH] [S3, MEDIUM] Bei einem Cabrio, das zwischen März und August 2001 gebaut wurde, schau auf den Bildschirm, nicht auf das Baudatum.
+
+Ein Detail erspart dir einen verlorenen Nachmittag. BMWs Radios der „New Generation", ab 03/2001, haben keinen Diebstahlcode und funktionieren nur am Bus des Autos, mit mindestens einem weiteren Steuergerät. [S2, HIGH] Ein gebrauchtes braucht also keinen Code, und auf der Werkbank spielt es nicht.
+
+## Navigation Professional: ein Bildschirm, zwei Generationen
+
+Bei einem Breitbild-Auto sieht BMWs Navigation in beiden Generationen gleich aus. Der Unterschied sitzt im Kofferraum, links: Dort verortet BMWs Schulung den Navigationsrechner. [S5, HIGH]
+
+BMWs Teilekatalog, wie wir ihn auf einem Spiegel gelesen haben, führt für den Breitbildschirm zwei Rechner: den **Mk III** mit Karten auf CD bis 09/2002 und den **Mk IV** mit DVD-Laufwerk ab 09/2002. [S3, MEDIUM] Nach dem Katalog hat ein Auto, gebaut von 09/2001 bis 08/2002, also den Mk III, und eines ab 09/2002 den Mk IV.
+
+**Navigation in ein Bildschirm-Auto nachrüsten** ist ein echter Umbau, aber der Bildschirm bleibt. BMWs Schulung nennt, was der Navigationsrechner braucht:
+- eine GPS-Antenne mit eigenem Kabel: unter der Hutablage bei Limousine und Coupé, über der Heckscheibe unter dem Spoiler beim Touring, hinter dem Kombiinstrument beim Cabrio;
+- ein Geschwindigkeits- und ein Rückwärtssignal;
+- Codierung und Software. Mit dem Mk-III-Rechner brauchen Breitbild-Autos die Navigations-Software-CD V16.1 oder neuer. [S5, HIGH]
+
+**Den Breitbildschirm in ein Radio-Auto einbauen**: Hier werden Besitzer überrascht. Der einzige BMW-Nachrüstsatz für Navigation, den wir gefunden haben, setzt einen Farbmonitor in die Mittelkonsole, wo der Aschenbecher war, nur für Limousinen mit Linkslenkung, und behält das Werksradio. [S4, HIGH] Einen BMW-Satz, der den Breitbildschirm in die Mittelkonsole eines Radio-Autos bringt, haben wir nicht gefunden. Dafür braucht es eine neue Einheit in der Mittelkonsole, ein Radio im Kofferraum, den Navigationsrechner, eine GPS-Antenne und die Kabel dazwischen. [S2, HIGH] [S5, HIGH] Das ist eine Arbeit für einen Spezialisten, nicht für einen Abend.
+
+## Harman Kardon: kein Nachstecken
+
+BMWs Teilekatalog, wie wir ihn auf einem Spiegel gelesen haben, führt für den E46 drei Lautsprechersysteme: Stereo, HiFi und Harman Kardon. Jedes hat seinen eigenen Kabelsatz. [S3, MEDIUM] Harman Kardon bringt einen eigenen Verstärker mit, dazu bei Limousine, Coupé, Cabrio und M3 einen Subwoofer-Verstärker und Subwoofer in der Hutablage. [S3, MEDIUM] Es ist also kein Kästchen zum Nachrüsten, sondern Lautsprecher, Kabelsatz, Verstärker und Subwoofer.
+
+Einen BMW-Nachrüstsatz dafür haben wir nicht gefunden. Und im Katalogbaum, den wir für den Compact gelesen haben, gibt es überhaupt keine Harman-Kardon-Gruppe, nur einen HiFi-Verstärker. [S3, MEDIUM]
+
+## BMW-Bluetooth: telefonieren, nicht Musik hören
+
+BMW hat für jede E46-Karosserie eine Bluetooth-Freisprecheinrichtung angeboten. [S4, HIGH] Die Bedingungen sind streng:
+- nur Autos **ab 03/2002**;
+- **Telefonvorbereitung (Sonderausstattung 640)** nötig;
+- danach von einer BMW-Werkstatt codiert, bei etwa zwei Stunden Einbau;
+- die Handy-Halterung gibt es separat. [S4, HIGH]
+
+BMW nennt sie Freisprecheinrichtung, und genau das ist sie: Die Anleitungen beschreiben Telefonate. Musik über Bluetooth kommt darin nicht vor. [S4, HIGH]
+
+Die Sätze für Limousine, Coupé und Compact nennen das Business und das Business CD Radio, das Reverse-Radio und BMWs Bildschirme. Das Professional-Radio nennen sie nicht. [S4, HIGH]
+
+## AUX: eine Buchse, ab 09/2002
+
+BMWs AUX-Anschluss ist die einfachste Nachrüstung in diesem Artikel: etwa anderthalb Stunden und keine Codierung. [S4, HIGH] Er spielt über das Radio, Lautstärke und Klang bleiben also bei den BMW-Bedienelementen, und Verkehrsdurchsagen unterbrechen ihn. [S4, HIGH]
+
+Er gilt nur für Autos **ab 09/2002** mit dem **Business CD Radio** oder **BMWs Bildschirm, mit oder ohne Navigation**. In beiden Fällen kommt die Buchse ins Handschuhfach; beim Bildschirm-Auto wird das Kabel am Monitor angesteckt, beim Business CD Radio am Radio. [S4, HIGH] Seine anderen Radios nennt BMW dafür nicht: die Kassettenradios, das Reverse, das Professional und das Radio-Navigationssystem. [S4, HIGH]
+
+## Moderne Touchscreens: was du behältst, was du aufgibst
+
+Mehrere Hersteller verkaufen Touchscreens für den E46, in 7 und 9 Zoll, die den Werksschacht füllen und Apple CarPlay und Android Auto mitbringen. Alles in diesem Abschnitt sagen die Hersteller, nicht wir. [S6, LOW]
+
+- **Passform:** Laut Herstellern passen ihre Geräte in jede E46-Karosserie und jedes Baujahr, auch in den M3. [S6, LOW]
+- **Bildschirm-Autos:** Für Autos, die BMWs Bildschirm hatten, verkauft mindestens ein Hersteller einen zusätzlichen Kabelsatz, weil das Radio im Kofferraum sitzt. [S6, LOW]
+- **Was du laut Herstellern behältst:** die Lenkradtasten, die Parksensoren und einen Harman-Kardon-Verstärker. [S6, LOW] Beim E46 sprechen die Lenkradtasten über den Bus des Autos mit dem Radio; ein neues Gerät behält sie also nur über seine eigene Bus-Schnittstelle. [S2, HIGH]
+- **Was du aufgibst:** BMWs Navigation und TV, falls vorhanden, und den Werks-Look. In einem Bildschirm-Auto fällt auch das Bordcomputer-Menü des Bildschirms weg; das im Kombiinstrument bleibt. [S2] [S3, MEDIUM]
+
+Willst du lieber das BMW-Radio behalten: Laut ihren Produktseiten gibt es Adapter, die hinter dem BMW-Radio angeschlossen werden und Bluetooth und USB nachrüsten. [S6, LOW] Deine Mittelkonsole ändert sich dann gar nicht.
+
+**Vor dem Kauf:** Lass dir vom Verkäufer bestätigen, dass Gerät und Kabelsatz zu deinem Auto passen und ob er in dein Land liefert.
+
+## Was E46BUILD daraus macht
+
+Schritt 06 von E46BUILD, Infotainment, zeigt die Optionen für deinen E46 und was jede braucht, ausgehend von deiner Mittelkonsole und dem Baumonat deines Autos.
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Die Daten, die Nachrüstsätze und was jeder braucht, stammen aus BMWs eigenen Dokumenten: der Pressemappe von 2001, Schulungsunterlagen von BMW of North America und BMWs Einbauanleitungen (HIGH). Navigationsgenerationen, Lautsprechersysteme und die fehlende Harman-Kardon-Gruppe beim Compact stammen aus einem Spiegel von BMWs Teilekatalog (MEDIUM). Alles zu modernen Touchscreens sind Angaben der Hersteller (LOW). Die Navigationsschulung und die Herstellerseiten haben wir aus noch nicht übernommenen Recherche-Branches gelesen.
+
+**Widersprüche.** Das Breitbild-Datum des Cabrios: BMWs Schulung sagt 03/2001, der Katalog 09/2001.
+
+**Nicht geklärt.** Ob ein Mk-IV-Navigationsrechner in einem Auto von 09/2001 bis 08/2002 funktioniert; ob das Professional-Radio BMWs Bluetooth-Satz nimmt; ein BMW-Nachrüstsatz für Harman Kardon; ein BMW-USB- oder iPod-Satz für den E46.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welches Infotainment in dein Auto passt, und verlinkt Verkäufer, wo wir einen gefunden haben.
