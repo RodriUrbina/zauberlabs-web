@@ -10,12 +10,9 @@
  * output is reproducible. Both are AI renders by the PO (provenance: e46build docs/research/d002-stage-images and
  * docs/research/t125-steering-cutouts).
  *
- *   node scripts/make-closer-look-steering.mjs [path to the e46build checkout] [git ref] [wheel]   (default: ../e46/e46build, master, m3)
+ *   node scripts/make-closer-look-steering.mjs [path to the e46build checkout] [git ref]   (default: ../e46/e46build, master)
  *
  * Writes public/images/closer-look/e46-steering-stage-cockpit-m3.webp (1672×941).
- * BL-124 (PO 2026-11-09): wheel "standard" writes the Infotainment picture, e46-infotainment-stage-cockpit-standard.webp: the same
- * cockpit with E46BUILD's STANDARD cut-out, as its step 05 shows with the standard wheel picked (T-170 cut-out "standard";
- * geometry unchanged at e46build f10e548c).
  */
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
@@ -24,23 +21,11 @@ import sharp from "sharp";
 
 const REPO = path.resolve(process.argv[2] ?? path.join(process.cwd(), "..", "e46", "e46build"));
 const REF = process.argv[3] ?? "master";
-const WHEELS = {
-  m3: {
-    cutout: { path: "apps/web/public/images/steering/e46-steering-cutout-m3.webp", sha256: "6502ec23a418962f9629c5fc6645d1ad61bf13a79d9ef16aa396717f1d5b1f01" },
-    out: "e46-steering-stage-cockpit-m3.webp",
-  },
-  standard: {
-    cutout: { path: "apps/web/public/images/steering/e46-steering-cutout-standard.webp", sha256: "737b02be233f22b820f1184c97e95fad3dd07b732074271de921fd71b6e792fc" },
-    out: "e46-infotainment-stage-cockpit-standard.webp",
-  },
-};
-const WHEEL = WHEELS[process.argv[4] ?? "m3"];
-if (!WHEEL) throw new Error(`wheel is one of: ${Object.keys(WHEELS).join(", ")}`);
 const INPUTS = {
   cockpit: { path: "apps/web/public/images/steering/e46-steering-stage-cockpit.webp", sha256: "49dd75052c14109488fa8cb359882b8769ce78da731f71f389f652b0eb95e731" },
-  cutout: WHEEL.cutout,
+  cutout: { path: "apps/web/public/images/steering/e46-steering-cutout-m3.webp", sha256: "6502ec23a418962f9629c5fc6645d1ad61bf13a79d9ef16aa396717f1d5b1f01" },
 };
-const OUT = path.join(process.cwd(), "public", "images", "closer-look", WHEEL.out);
+const OUT = path.join(process.cwd(), "public", "images", "closer-look", "e46-steering-stage-cockpit-m3.webp");
 
 // T-170 geometry, in cockpit pixels (see the header).
 const W = 1672;
