@@ -13,7 +13,7 @@
  *   node scripts/make-closer-look-steering.mjs [path to the e46build checkout] [git ref] [wheel]   (default: ../e46/e46build, master, m3)
  *
  * Writes public/images/closer-look/e46-steering-stage-cockpit-m3.webp (1672×941).
- * BL-124 (PO 2026-11-09): wheel "standard" writes the Infotainment picture, e46-infotainment-stage-cockpit.webp: the same
+ * BL-124 (PO 2026-11-09): wheel "standard" writes the Infotainment picture, e46-infotainment-stage-cockpit-standard.webp: the same
  * cockpit with E46BUILD's STANDARD cut-out, as its step 05 shows with the standard wheel picked (T-170 cut-out "standard";
  * geometry unchanged at e46build f10e548c).
  */
@@ -31,7 +31,7 @@ const WHEELS = {
   },
   standard: {
     cutout: { path: "apps/web/public/images/steering/e46-steering-cutout-standard.webp", sha256: "737b02be233f22b820f1184c97e95fad3dd07b732074271de921fd71b6e792fc" },
-    out: "e46-infotainment-stage-cockpit.webp",
+    out: "e46-infotainment-stage-cockpit-standard.webp",
   },
 };
 const WHEEL = WHEELS[process.argv[4] ?? "m3"];

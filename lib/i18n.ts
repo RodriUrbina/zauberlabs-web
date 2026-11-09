@@ -40,7 +40,7 @@ const en = {
       { key: "seats", label: "Seats", line: "Basic, sport or M3 seats, for your E46.", img: "/images/closer-look/e46-seat-stage-interior-leather.webp", alt: "E46 interior with black leather sport seats" },
       { key: "steering", label: "Steering wheels", line: "Standard, sport, M Sport or M3 steering wheels for your E46.", img: "/images/closer-look/e46-steering-stage-cockpit-m3.webp", alt: "E46 cockpit with an M3 steering wheel" },
       // BL-124 (PO 2026-11-09): E46BUILD's step 06 (T-278); its cockpit stage with the standard wheel, until the PO's dash pictures arrive.
-      { key: "infotainment", label: "Infotainment", line: "BMW factory radio and navigation, or a CarPlay screen made for the E46.", img: "/images/closer-look/e46-infotainment-stage-cockpit.webp", alt: "E46 cockpit with the BMW radio and climate controls in the centre console" },
+      { key: "infotainment", label: "Infotainment", line: "BMW factory radio and navigation, or a CarPlay screen made for the E46.", img: "/images/closer-look/e46-infotainment-stage-cockpit-standard.webp", alt: "E46 cockpit with the BMW radio and climate controls in the centre console" },
     ],
     pick: "Parts in E46BUILD", // accessible name of the category tab list
     // BL-109: the auto-play indicator under the panel ({part} = the part's label)
@@ -192,7 +192,7 @@ const de: Dict = {
       { key: "bumpers", label: "Stoßstangen", line: "Serie, M-Paket oder M3, vorne und hinten, passend zu deiner Karosserie.", img: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", alt: "E46-Limousine mit M-Paket-Frontstoßstange" },
       { key: "seats", label: "Sitze", line: "Serie, Sport oder M3, für deinen E46.", img: "/images/closer-look/e46-seat-stage-interior-leather.webp", alt: "E46-Innenraum mit schwarzen Leder-Sportsitzen" },
       { key: "steering", label: "Lenkräder", line: "Standard, Sport, M Sport oder M3 – Lenkräder für deinen E46.", img: "/images/closer-look/e46-steering-stage-cockpit-m3.webp", alt: "E46-Cockpit mit M3-Lenkrad" },
-      { key: "infotainment", label: "Infotainment", line: "BMW-Radio und -Navigation ab Werk oder ein CarPlay-Display, gemacht für den E46.", img: "/images/closer-look/e46-infotainment-stage-cockpit.webp", alt: "E46-Cockpit mit BMW-Radio und Klimabedienung in der Mittelkonsole" },
+      { key: "infotainment", label: "Infotainment", line: "BMW-Radio und -Navigation ab Werk oder ein CarPlay-Display, gemacht für den E46.", img: "/images/closer-look/e46-infotainment-stage-cockpit-standard.webp", alt: "E46-Cockpit mit BMW-Radio und Klimabedienung in der Mittelkonsole" },
     ],
     pick: "Teile in E46BUILD",
     auto: { label: "Diashow der Teile", show: "{part} zeigen", pause: "Diashow anhalten", play: "Diashow abspielen" },
