@@ -8,11 +8,11 @@ import { getBlog } from "../lib/blog";
 const POSITION = /^(100|[1-9]?\d)% (100|[1-9]?\d)%$/;
 
 describe("blog hero focal point (BL-101)", () => {
-  test("without hero.position the image gets no extra props (centred object-cover, exactly as before)", () => {
+  test("without hero.position heroFocus gives nothing; since BL-127 the hero no longer crops, so the focal point is not applied", () => {
     assert.deepEqual(heroFocus({}), {});
     assert.deepEqual(heroFocus({ position: undefined }), {});
     const src = fs.readFileSync(path.join(process.cwd(), "components", "blog", "HeroImage.tsx"), "utf8");
-    assert.match(src, /className="object-cover" \{\.\.\.heroFocus\(hero\)\} \/>/, "the only change to the image element");
+    assert.ok(!/object-cover/.test(src) && !/\{\.\.\.heroFocus\(hero\)\}/.test(src), "no crop, no focal point (BL-127)");
   });
   test("with hero.position only object-position is set", () => {
     assert.deepEqual(heroFocus({ position: "50% 10%" }), { style: { objectPosition: "50% 10%" } });
