@@ -10,6 +10,8 @@ import { formatPublishMoment } from "@/lib/publish-time";
 import { articleOgImage } from "@/lib/blog-og";
 import { dictionaries, isLocale, LOCALES, type Locale } from "@/lib/i18n";
 import BlogHeader from "@/components/blog/BlogHeader";
+import Title from "@/components/Title";
+import { splitTitle } from "@/lib/blog-title";
 import ConfiguratorCta from "@/components/blog/ConfiguratorCta";
 import HeroImage from "@/components/blog/HeroImage";
 import JsonLd from "@/components/blog/JsonLd";
@@ -133,7 +135,8 @@ export default async function ArticlePage({ params }: { params: Params }) {
                 </>
               )}
             </div>
-            <h1 className="text-[34px] leading-[1.02] font-extrabold tracking-[-0.035em] text-ink md:text-[52px]">{m.title}</h1>
+            {/* BL-126 (PO 2026-11-09): the h1 in the title code; <title>, meta and og:title keep the plain title. */}
+            <Title as="h1" {...splitTitle(m.title)} className="text-[34px] leading-[1.02] font-extrabold tracking-[-0.035em] text-ink md:text-[52px]" />
             <p className="text-lg leading-relaxed text-body md:text-[21px]">{m.description}</p>
             <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5">
               <p className="text-sm text-muted" lang={lang}>
