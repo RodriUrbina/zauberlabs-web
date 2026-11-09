@@ -44,7 +44,7 @@ describe("closer look auto-play (BL-109)", () => {
     assert.match(cl, /aria-live=\{running \? "off" : "polite"\}/);
     assert.deepEqual(dictionaries.en.garage.auto, { label: "Slideshow of the parts", show: "Show {part}", pause: "Pause the slideshow", play: "Play the slideshow" });
     assert.deepEqual(dictionaries.de.garage.auto, { label: "Diashow der Teile", show: "{part} zeigen", pause: "Diashow anhalten", play: "Diashow abspielen" });
-    for (const lang of LOCALES) assert.equal(dictionaries[lang].garage.cats.length, 5);
+    for (const lang of LOCALES) assert.equal(dictionaries[lang].garage.cats.length, 6, "BL-124: Infotainment is the sixth part");
     assert.match(read("app", "[lang]", "page.tsx"), /<CloserLook cats=\{t\.garage\.cats\} pick=\{t\.garage\.pick\} auto=\{t\.garage\.auto\} cta=/);
   });
 

@@ -86,11 +86,11 @@ describe("home page (BL-053)", () => {
     assert.equal(buf.readUInt16BE(0), 0xffd8);
     assert.ok(!fs.existsSync(pub("/images/hero.jpg")), "the old hero.jpg is gone");
   });
-  test("closer look (BL-083): five categories in the same order in EN and DE, each picture present and listed with its source", () => {
+  test("closer look (BL-083, BL-124): six categories in the same order in EN and DE, each picture present and listed with its source", () => {
     const readme = fs.readFileSync(pub("/images/README.md"), "utf8");
     for (const lang of LOCALES) {
       const cats = dictionaries[lang].garage.cats;
-      assert.deepEqual(cats.map((c) => c.key), ["headlights", "wheels", "bumpers", "seats", "steering"], lang);
+      assert.deepEqual(cats.map((c) => c.key), ["headlights", "wheels", "bumpers", "seats", "steering", "infotainment"], lang);
       for (const c of cats) {
         assert.ok(fs.existsSync(pub(c.img)), c.img);
         assert.ok(readme.includes(`\`${c.img.replace("/images/", "")}\``), `${c.img} in public/images/README.md`);
@@ -106,6 +106,7 @@ describe("home page (BL-053)", () => {
       wheels: "/images/closer-look/e46-wheel-stage-side.webp", // WHEEL_STAGE_SRC
       seats: "/images/closer-look/e46-seat-stage-interior-leather.webp", // SEAT_STAGE_SRC, leather since T-247.1 (BL-112)
       steering: "/images/closer-look/e46-steering-stage-cockpit-m3.webp", // empty cockpit + M3 cut-out (BL-112)
+      infotainment: "/images/closer-look/e46-infotainment-stage-cockpit.webp", // E46BUILD's step 06 cockpit stage (BL-124)
     };
     for (const lang of LOCALES) for (const c of dictionaries[lang].garage.cats) assert.equal(c.img, onCar[c.key], `${lang} ${c.key}`);
     assert.deepEqual(fs.readdirSync(pub("/images/closer-look")).sort(), Object.values(onCar).map((p) => path.basename(p)).sort(), "no part-only pictures left");
@@ -122,7 +123,7 @@ describe("home page (BL-053)", () => {
     assert.match(page, /<CloserLook [^>]*hrefs=\{E46_LIVE \? t\.garage\.cats\.map\(\(c\) => e46SectionUrl\(c\.key, lang\)\) : null\}/);
     assert.match(cl, /href=\{hrefs\[on\]\}\s+rel="nofollow"/);
     // BL-083.1: every tab key is a T-179 section value (e46build start-body.ts START_SECTIONS), same in EN and DE.
-    assert.deepEqual([...E46_SECTIONS].sort(), ["bumpers", "headlights", "seats", "steering", "wheels"]);
+    assert.deepEqual([...E46_SECTIONS].sort(), ["bumpers", "headlights", "infotainment", "seats", "steering", "wheels"]);
     for (const lang of LOCALES) for (const c of dictionaries[lang].garage.cats) assert.ok((E46_SECTIONS as readonly string[]).includes(c.key), `${lang} ${c.key}`);
     assert.equal(e46SectionUrl("steering", "en"), "https://e46.zauberlabs.de/?section=steering");
     assert.ok(!/target=|track\(/.test(cl), "same tab, no extra tracking call");
@@ -131,14 +132,15 @@ describe("home page (BL-053)", () => {
     assert.match(cl, /aria-selected=\{i === on\}/);
     assert.match(cl, /role="tabpanel"/);
   });
-  test("BL-100: closer-look tabs in E46BUILD's order (Headlights, Wheels, Bumpers, Seats, Steering wheels); each tab links to its own section", async () => {
+  test("BL-100, BL-124: closer-look tabs in E46BUILD's order (Headlights, Wheels, Bumpers, Seats, Steering wheels, Infotainment); each tab links to its own section", async () => {
     const { e46SectionUrl } = await import("../lib/i18n");
     for (const lang of LOCALES) {
       const cats = dictionaries[lang].garage.cats;
-      assert.deepEqual(cats.map((c) => c.key), ["headlights", "wheels", "bumpers", "seats", "steering"], lang);
+      assert.deepEqual(cats.map((c) => c.key), ["headlights", "wheels", "bumpers", "seats", "steering", "infotainment"], lang);
       for (const c of cats) assert.equal(new URL(e46SectionUrl(c.key, lang)).searchParams.get("section"), c.key, `${lang} ${c.key}`);
     }
-    assert.deepEqual(dictionaries.de.garage.cats.map((c) => c.label), ["Scheinwerfer", "Felgen", "Stoßstangen", "Sitze", "Lenkräder"]);
+    assert.deepEqual(dictionaries.de.garage.cats.map((c) => c.label), ["Scheinwerfer", "Felgen", "Stoßstangen", "Sitze", "Lenkräder", "Infotainment"]);
+    assert.equal(e46SectionUrl("infotainment", "de"), "https://e46.zauberlabs.de/de?section=infotainment", "E46BUILD T-278 startSlug");
     assert.match(fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8"), /hrefs=\{E46_LIVE \? t\.garage\.cats\.map\(\(c\) => e46SectionUrl\(c\.key, lang\)\) : null\}/, "hrefs built per key, so they follow the order");
   });
 });

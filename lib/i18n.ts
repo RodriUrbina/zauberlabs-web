@@ -24,7 +24,7 @@ const en = {
     ogAlt: "E46BUILD: a silver BMW E46 Coupé with the search bar reading “BMW E46 330Ci Coupe”",
     pickLead: "Which E46 do you drive?",
   },
-  // BL-083 (PO 2026-10-27, option C "Take a closer look"): five E46BUILD categories, each with E46BUILD's own picture and one
+  // BL-083 (PO 2026-10-27, option C "Take a closer look"): five E46BUILD categories (six since BL-124, Infotainment), each with E46BUILD's own picture and one
   // line. The lines were fact-checked by the Editor against e46build master: wheels and seats use ONE stage picture for every
   // body, so those lines do not say "your car". PO 2026-10-27: every picture shows the part MOUNTED ON THE CAR ("we are selling
   // inspiration for a new mod"), never a part on its own; steering is E46BUILD's cockpit with the M Sport wheel laid on it.
@@ -39,6 +39,8 @@ const en = {
       { key: "bumpers", label: "Bumpers", line: "Standard, M package or M3 bumpers, front and rear, on your body style.", img: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", alt: "E46 sedan with the M package front bumper" },
       { key: "seats", label: "Seats", line: "Basic, sport or M3 seats, for your E46.", img: "/images/closer-look/e46-seat-stage-interior-leather.webp", alt: "E46 interior with black leather sport seats" },
       { key: "steering", label: "Steering wheels", line: "Standard, sport, M Sport or M3 steering wheels for your E46.", img: "/images/closer-look/e46-steering-stage-cockpit-m3.webp", alt: "E46 cockpit with an M3 steering wheel" },
+      // BL-124 (PO 2026-11-09): E46BUILD's step 06 (T-278) and its own cockpit stage, until the PO's dash pictures arrive.
+      { key: "infotainment", label: "Infotainment", line: "BMW factory radio and navigation, or a CarPlay screen made for the E46.", img: "/images/closer-look/e46-infotainment-stage-cockpit.webp", alt: "E46 cockpit with the BMW radio and climate controls in the centre console" },
     ],
     pick: "Parts in E46BUILD", // accessible name of the category tab list
     // BL-109: the auto-play indicator under the panel ({part} = the part's label)
@@ -190,6 +192,7 @@ const de: Dict = {
       { key: "bumpers", label: "Stoßstangen", line: "Serie, M-Paket oder M3, vorne und hinten, passend zu deiner Karosserie.", img: "/images/closer-look/e46-bumper-look-front-sedan-touring-m-package.webp", alt: "E46-Limousine mit M-Paket-Frontstoßstange" },
       { key: "seats", label: "Sitze", line: "Serie, Sport oder M3, für deinen E46.", img: "/images/closer-look/e46-seat-stage-interior-leather.webp", alt: "E46-Innenraum mit schwarzen Leder-Sportsitzen" },
       { key: "steering", label: "Lenkräder", line: "Standard, Sport, M Sport oder M3 – Lenkräder für deinen E46.", img: "/images/closer-look/e46-steering-stage-cockpit-m3.webp", alt: "E46-Cockpit mit M3-Lenkrad" },
+      { key: "infotainment", label: "Infotainment", line: "BMW-Radio und -Navigation ab Werk oder ein CarPlay-Display, gemacht für den E46.", img: "/images/closer-look/e46-infotainment-stage-cockpit.webp", alt: "E46-Cockpit mit BMW-Radio und Klimabedienung in der Mittelkonsole" },
     ],
     pick: "Teile in E46BUILD",
     auto: { label: "Diashow der Teile", show: "{part} zeigen", pause: "Diashow anhalten", play: "Diashow abspielen" },
@@ -343,7 +346,7 @@ export const e46StartUrl = (start: string, lang: Locale) => `${e46Base(lang)}?st
  * BL-083.1: open E46BUILD at a section (E46BUILD T-179, contract in e46build apps/web/src/lib/start-body.ts): `/?section=<value>`;
  * without a body the owner picks the body first and then lands in that section. Unknown values are ignored by E46BUILD.
  */
-export const E46_SECTIONS = ["headlights", "wheels", "bumpers", "seats", "steering"] as const;
+export const E46_SECTIONS = ["headlights", "wheels", "bumpers", "seats", "steering", "infotainment"] as const; // BL-124: E46BUILD T-278 startSlug
 export const e46SectionUrl = (section: string, lang: Locale) => `${e46Base(lang)}?section=${encodeURIComponent(section)}`;
 // THE E46 SWITCH (PO decision 2026-10-02, BL-001): the configurator is not online yet, so every
 // E46 button on the site and the article CTA show "coming soon" with no link.
