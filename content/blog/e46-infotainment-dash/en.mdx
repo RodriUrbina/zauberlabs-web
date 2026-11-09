@@ -1,0 +1,142 @@
+---
+# BL-112 — Writer draft, English. PO task 2026-11-09 (via the Coordinator). No maker or seller named.
+title: "What's in your dash, and what can go in it: E46 radios, screens and modern touchscreens"
+description: "Radio or BMW's wide screen, Navigation Professional, Harman Kardon, BMW Bluetooth and AUX, modern touchscreens: what fits an E46, and what each one costs you."
+date: 2026-11-09
+updated: 2026-11-12
+publishAt: "2026-11-12"
+lang: en
+slug: e46-infotainment-dash
+card: BL-112
+author: "zauberlabs"
+tags:
+  - E46
+  - infotainment
+  - buying guide
+  - configurator
+configurator: E46
+cta:
+  label: "See what fits your car"
+  href: "https://e46.zauberlabs.de/?section=infotainment"
+hero:
+  src: null # no hero: E46BUILD has no infotainment photo yet (its step-06 tiles are drawings); no new AI images (PO, cost)
+  alt: "The centre stack of a BMW E46 with a factory radio below the air vents"
+  credit: "AI-generated illustration"
+  licence: null
+  placeholder: "No hero planned. If one is added later: an E46BUILD infotainment picture, once the PO's I-1 to I-5 images exist; labelled if AI."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW UK press kit, model year 2002 (dated 26 October 2001): 'A wide-screen on board monitor is available for the first time on all 3 Series models'"
+    type: BMW-authored (press kit)
+    path: "t055-infotainment-fitment/raw/bmw-press-uk-2001-39145.txt"
+    confidence: HIGH
+  - id: S2
+    title: "BMW of North America training and manuals: Wide Screen On-Board Monitor (6.5-inch, 16:9, replacing the 5-inch 4:3 monitor), New Generation radios (from 03/2001; bus-only operation, no anti-theft code), Business CD radio owner's manual, the radio in the boot on screen cars, the on-board computer as a monitor menu"
+    type: BMW-authored (training, owner's manual)
+    path: "t057-infotainment-manuals/T-057-findings.md §1.1–1.3, 2.1, 3.1–3.5; raw/bmw-wide-screen-obm-extract.txt"
+    confidence: HIGH
+  - id: S3
+    title: "BMW parts catalogue (ETK), Europe trees for all six bodies, read on one mirror: radio and monitor groups with dates, navigation computer generations (CD maps to 09/2002, DVD drive from 09/2002), Stereo / HiFi / Harman Kardon speaker systems with their own harnesses and amplifiers, and the Compact tree without a Harman Kardon group"
+    type: ETK mirror (one mirror)
+    path: "t055-infotainment-fitment/T-055-findings.md §1.1, 1.7, 2.1–2.3; raw/tree-sedan-gps_computer_video_module, tree-sedan-navigation_computer_drive"
+    confidence: MEDIUM
+    note: "MEDIUM: one mirror of BMW's catalogue. The Compact finding rests on one engine tree (325ti)."
+  - id: S4
+    title: "BMW installation instructions (EBAs) for the E46: Bluetooth hands-free kits per body (08.2002, from 03/2002, option 640 required, coded by BMW), the AUX input (10.2003, from 09/2002, named radios and screens, no coding), and the only navigation retrofit kit found (EBA 578en: a monitor in place of the ashtray, Sedan LHD only)"
+    type: BMW-authored (installation instructions)
+    path: "t057-infotainment-manuals/raw/eba-5985de.txt … eba-5988de.txt, eba-6116de.txt, eba-578en.txt; T-057-findings.md §4.1–4.4"
+    confidence: HIGH
+  - id: S5
+    title: "BMW of North America training 'Mk-3 Navigation System' (E46 from 06/2000): navigation computer in the left of the boot, GPS antenna place per body, speed and reverse inputs, coding and software (wide-screen cars need CD V16.1 or later)"
+    type: BMW-authored (training)
+    path: "web: e46build branch agent-6/T-057-addendum-head-units 593839f, t057-infotainment-manuals/raw/bmw-mk3-navigation-extract-p1.txt (not on master; summarised in branch agent-6/T-278-infotainment fb0c7cb0, nav-and-aux-check.md)"
+    confidence: HIGH
+    note: "HIGH: BMW's own training text. Read from an unmerged research branch."
+  - id: S6
+    title: "Makers' product pages for E46-specific touchscreens (7- and 9-inch) and a Bluetooth adapter for BMW radios, saved 4 October 2026: which bodies they claim to fit and what they claim the car keeps"
+    type: retailer and maker pages (claims)
+    path: "web: e46build branch agent-4/T-056-infotainment-market c764743; summarised in branch agent-6/T-278-infotainment fb0c7cb0, findings.md §2 'Modern units'"
+    confidence: LOW
+    note: "LOW: makers' own claims, never a fit verdict. No maker is named here."
+---
+
+Every E46 dash holds one of two things: a BMW radio, or BMW's screen. Which one yours has decides almost everything else in this article. So before the catalogue, look at the dash.
+
+## Radio or screen: look first
+
+A **radio car** has a BMW radio in the slot. The Business CD radio is the common one: a CD slot, one display and six station keys. [S2, HIGH]
+
+A **screen car** has BMW's on-board monitor in the dash, and its radio isn't there at all: it sits in the boot. The cassette, MiniDisc or CD drive lives in the monitor's housing instead. [S2, HIGH]
+
+The screen changed shape in 2001. BMW's press kit for model year 2002 announced a wide-screen on-board monitor "for the first time on all 3 Series models". [S1, HIGH] BMW's training gives the numbers: 6.5 inches, 16:9, replacing the 5-inch 4:3 monitor. [S2, HIGH]
+
+**The date:** 09/2001 for most E46s. The Convertible is the awkward one: BMW's training says the Cabrio got the wide screen from 03/2001, while the parts catalogue lists it from 09/2001. [S2, HIGH] [S3, MEDIUM] For a Convertible built between March and August 2001, look at the screen, not the build date.
+
+One detail saves a wasted afternoon. BMW's "New Generation" radios, from 03/2001, have no anti-theft code, and they work only on the car's bus with at least one other module. [S2, HIGH] A used one needs no code, and it won't play on a workbench.
+
+## Navigation Professional: one screen, two generations
+
+On a wide-screen car, BMW's navigation looks the same whichever generation you have. The difference sits in the boot, on the left: BMW's training puts the navigation computer there. [S5, HIGH]
+
+BMW's parts catalogue, as read on our mirror, lists two computers for the wide screen: the **Mk III** with maps on CD up to 09/2002, and the **Mk IV** with a DVD drive from 09/2002. [S3, MEDIUM] By the catalogue, then, a car built from 09/2001 to 08/2002 has the Mk III, and one built from 09/2002 the Mk IV.
+
+**Adding navigation to a screen car** is a real job, but the screen stays. BMW's training lists what the navigation computer needs:
+- a GPS antenna on its own cable: under the rear parcel shelf on the Sedan and Coupé, above the rear window under the spoiler on the Touring, behind the instrument cluster on the Convertible;
+- a speed signal and a reverse signal;
+- coding and software. Wide-screen cars need navigation software CD V16.1 or later. [S5, HIGH]
+
+**Adding the wide screen to a radio car** is where owners get surprised. The only BMW navigation retrofit kit we found puts a colour monitor in the centre console where the ashtray was, for left-hand-drive Sedans only, and keeps the factory radio. [S4, HIGH] We found no BMW kit that puts the wide screen into a radio car's dash. Doing it means a new dash unit, a radio in the boot, the navigation computer, a GPS antenna and the wiring between them. It's a job for a specialist, not an evening.
+
+## Harman Kardon: not a plug-in
+
+BMW's parts catalogue, as read on our mirror, lists three speaker systems for the E46: Stereo, HiFi and Harman Kardon. Each has its own wiring harness. [S3, MEDIUM] Harman Kardon adds its own amplifier, plus a subwoofer amplifier and subwoofers in the parcel shelf on the Sedan, Coupé, Convertible and M3. [S3, MEDIUM] So it isn't a box you add; it's speakers, harness, amplifier and subwoofer.
+
+We found no BMW retrofit kit for it. And in the catalogue tree we read for the Compact, there is no Harman Kardon group at all, only a HiFi amplifier. [S3, MEDIUM]
+
+## BMW Bluetooth: calls, not music
+
+BMW made a Bluetooth hands-free kit for every E46 body. [S4, HIGH] Its terms are strict:
+- cars **from 03/2002** only;
+- **telephone preparation (factory option 640)** required;
+- coded by a BMW workshop afterwards, in about two hours of fitting;
+- the phone adapter is sold separately. [S4, HIGH]
+
+BMW calls it a hands-free kit, and that is what it is: the instructions describe calls. Playing music over Bluetooth isn't mentioned anywhere in them. [S4, HIGH]
+
+The kit lists the Business and Business CD radios, the Reverse radio and BMW's screens. It doesn't name the Professional radio. [S4, HIGH]
+
+## AUX: a jack, from 09/2002
+
+BMW's AUX input is the simplest upgrade in this article: about an hour and a half, and no coding. [S4, HIGH] It plays through the radio, so volume and tone stay on the BMW controls, and traffic announcements interrupt it. [S4, HIGH]
+
+It is valid only for cars **from 09/2002** with the **Business CD radio** or **BMW's screen, with or without navigation**. With the Business CD radio, the jack goes in the glove box; with the screen, a plug connects at the monitor. [S4, HIGH] BMW doesn't list its other radios for it: the cassette radios, the Reverse and the Professional. [S4, HIGH]
+
+## Modern touchscreens: what you keep, what you give up
+
+Several makers sell touchscreens made for the E46, in 7-inch and 9-inch versions, that fill the factory opening and add Apple CarPlay and Android Auto. Everything in this section is what the makers say, not our verdict. [S6, LOW]
+
+- **Fit:** the makers say their units fit every E46 body and year, including the M3. [S6, LOW]
+- **Screen cars:** the makers sell an extra harness for cars that had BMW's screen, because the radio sits in the boot. [S6, LOW]
+- **What they say you keep:** the steering-wheel buttons, the parking sensors and a Harman Kardon amplifier. [S6, LOW] On an E46 the steering-wheel buttons talk to the radio over the car's bus, so a new unit keeps them only through its own bus interface. [S2, HIGH]
+- **What you give up:** BMW's navigation and TV, if fitted, and the factory look. On a screen car you also lose the screen's on-board computer menu; the one in the instrument cluster stays. [S2, HIGH]
+
+If you'd rather keep the BMW radio, adapters plug into the CD-changer connection and add Bluetooth and USB, according to their makers. [S6, LOW] Your dash doesn't change at all.
+
+**Before you buy:** confirm with the seller that the unit and its harness suit your car, and whether it ships to your country.
+
+## What E46BUILD does with all this
+
+Step 06 of E46BUILD, Infotainment, shows the options for your E46 and what each one needs, from the dash you have and your car's build month.
+
+## Notes on the evidence
+
+**Confidence.** The dates, the kits and what each needs come from BMW's own documents: the 2001 press kit, BMW of North America training and BMW's installation instructions (HIGH). Navigation generations, speaker systems and the Compact's missing Harman Kardon group come from one mirror of BMW's parts catalogue (MEDIUM). Everything about modern touchscreens is the makers' own claim (LOW). The navigation training and the makers' pages were read from research branches not yet merged.
+
+**Conflicts.** The Convertible's wide-screen date: BMW's training says 03/2001, the catalogue 09/2001.
+
+**Not established.** Whether a Mk IV navigation computer works in a car built 09/2001–08/2002; whether the Professional radio takes BMW's Bluetooth kit; a BMW retrofit kit for Harman Kardon; a BMW USB or iPod kit for the E46.
+
+## What comes next
+
+Our E46 configurator is live: it shows which infotainment fits your car and links to sellers where we've found one.
