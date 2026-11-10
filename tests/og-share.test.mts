@@ -27,4 +27,9 @@ describe("share preview (T-286)", () => {
     assert.match(layout, /description: t\.meta\.description,/, "meta description");
     assert.match(layout, /openGraph: \{ title: t\.meta\.title, description: t\.meta\.ogDescription, images: \[\{ url: SITE_OG_IMAGE, width: 1200, height: 630, alt:/);
   });
+  test("the About pages get the share image and alt too, with their own title and description", () => {
+    const about = read("components", "AboutPage.tsx");
+    assert.match(about, /title: ABOUT_TITLE\[only\], description: ABOUT_DESCRIPTION\[only\]/);
+    assert.match(about, /images: \[\{ url: SITE_OG_IMAGE, width: 1200, height: 630, alt: dictionaries\[only\]\.hero\.ogAlt \}\]/);
+  });
 });
