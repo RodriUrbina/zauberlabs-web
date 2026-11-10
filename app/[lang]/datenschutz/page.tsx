@@ -22,8 +22,8 @@ export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: 
  * BL-050: one Vercel Web Analytics custom event, "configurator_click" with only { configurator }, described in Abschnitt 5;
  * BL-116: plus { from, place }, the page and the spot on it where the link was clicked.
  * BL-119: "visit_from" { from: "instagram", page } on the first page load from our Instagram links (lib/visit-from.ts); no storage.
- * BL-128 (PO-approved 2026-11-10): from= also pdf, reddit, email, whatsapp; §5 names all five sources. §10 stays Instagram-only
- * until E46BUILD counts the same five (E46 T-285; its own branch builder/BL-128-p10-sources).
+ * BL-128 (PO-approved 2026-11-10): from= also pdf, reddit, email, whatsapp; §5 names all five sources, and since E46 T-285
+ * (E46BUILD counts the same five) §10 too.
  * BL-097: three shop events (lib/shop-analytics.ts), described right after it: shop_add_to_cart { design, lang },
  * shop_checkout_start { items, total_bucket, lang }, shop_order_completed { lang }.
  * BL-051: own anonymous statistics (Abschnitt 6): daily counters in Upstash, salted daily hash only inside a HyperLogLog.
@@ -251,7 +251,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Ohne Konto setzt E46BUILD keine Cookies und legt nichts im lokalen Speicher deines Browsers ab; für ein Konto siehe den folgenden Absatz. Zur
         Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics – ohne Cookies, zusammengefasste Seitenaufrufe und Besucherzahlen sowie
         einzelne Ereignisse, die nur die jeweils genannte Angabe enthalten –, zur Messung der Ladezeiten Vercel Speed Insights; es gilt Abschnitt 5.
-        Kommst du über einen Link aus unserem Instagram-Profil (Zusatz „from=instagram“) zu E46BUILD, übermitteln wir wie in Abschnitt 5 beim
+        Kommst du über einen von uns gesetzten Link (Zusatz „from=…“: aus unserem Instagram-Profil, unserem Projekt-PDF, Reddit, einer
+        E-Mail oder WhatsApp) zu E46BUILD, übermitteln wir wie in Abschnitt 5 beim
         Laden der ersten Seite ein Ereignis nur mit dieser Herkunft und der aufgerufenen Seite (ohne Parameter); in deinem Browser wird dafür
         nichts gespeichert. Fehlt für einen Hinweistext von E46BUILD noch die deutsche Übersetzung, übermitteln wir ein Ereignis nur mit diesem
         englischen Text. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet
