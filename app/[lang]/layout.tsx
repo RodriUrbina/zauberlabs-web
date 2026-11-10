@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     title: t.meta.title,
     description: t.meta.description,
     alternates: { canonical: `/${lang}`, languages: { de: "/de", en: "/en" } },
-    openGraph: { title: t.meta.title, description: t.meta.description, images: [{ url: SITE_OG_IMAGE, width: 1200, height: 630, alt: dictionaries[lang as Locale].hero.ogAlt }], locale: lang === "de" ? "de_DE" : "en_US", type: "website" },
+    openGraph: { title: t.meta.ogTitle, description: t.meta.ogDescription, images: [{ url: SITE_OG_IMAGE, width: 1200, height: 630, alt: dictionaries[lang as Locale].hero.ogAlt }], locale: lang === "de" ? "de_DE" : "en_US", type: "website" },
   };
 }
 

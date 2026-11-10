@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SITE_URL } from "@/lib/blog";
 import { ABOUT_DESCRIPTION, ABOUT_HEADLINE, ABOUT_TITLE, aboutPath } from "@/lib/about";
-import { isLocale, LOCALES, type Locale } from "@/lib/i18n";
+import { dictionaries, isLocale, LOCALES, type Locale } from "@/lib/i18n";
+import { SITE_OG_IMAGE } from "@/lib/blog-og";
 import BlogHeader from "@/components/blog/BlogHeader";
 import AboutContent from "@/components/AboutContent";
 import SiteFooter from "@/components/SiteFooter";
@@ -16,7 +17,9 @@ export function aboutMetadata(lang: string, only: Locale): Metadata {
     title: ABOUT_TITLE[only],
     description: ABOUT_DESCRIPTION[only],
     alternates: { canonical: `${SITE_URL}${aboutPath(only)}`, languages: Object.fromEntries(LOCALES.map((l) => [l, `${SITE_URL}${aboutPath(l)}`])) },
-    openGraph: { title: ABOUT_TITLE[only], description: ABOUT_DESCRIPTION[only], url: `${SITE_URL}${aboutPath(only)}`, locale: only === "de" ? "de_DE" : "en_US", type: "website" },
+    openGraph: { title: ABOUT_TITLE[only], description: ABOUT_DESCRIPTION[only], url: `${SITE_URL}${aboutPath(only)}`, locale: only === "de" ? "de_DE" : "en_US", type: "website",
+      // T-286 (PO 2026-11-10): the site's share image too (this openGraph replaces the layout's, so it had none); own title and description.
+      images: [{ url: SITE_OG_IMAGE, width: 1200, height: 630, alt: dictionaries[only].hero.ogAlt }] },
   };
 }
 

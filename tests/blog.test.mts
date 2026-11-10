@@ -320,9 +320,9 @@ describe("articleOgImage", () => {
     const hero = { src: null, alt: "No image", credit: null, licence: null, placeholder: "brief" };
     const en = articleOgImage(hero, "en");
     const de = articleOgImage(hero, "de");
-    assert.equal(en.url, "https://www.zauberlabs.de/images/og-e46build.jpg");
-    assert.equal(en.alt, "E46BUILD: a silver BMW E46 Coupé with the search bar reading “BMW E46 330Ci Coupe”");
-    assert.equal(de.alt, "E46BUILD: ein silbernes BMW E46 Coupé, in der Suchleiste steht „BMW E46 330Ci Coupe“");
+    assert.equal(en.url, "https://www.zauberlabs.de/images/og-zauberlabs-v2.jpg");
+    assert.equal(en.alt, "AI image of a BMW E46 M3 Touring — a dream build BMW never sold.");
+    assert.equal(de.alt, "KI-Bild eines BMW E46 M3 Touring – ein Traum-Build, den BMW nie verkauft hat.");
     assert.ok(!en.alt.includes("No image") && !de.alt.includes("No image"));
   });
 });
