@@ -2,8 +2,9 @@ import type { Hero } from "./blog-schema";
 import { dictionaries, type Locale } from "./i18n";
 import { SITE_URL } from "./blog";
 
-// BL-053: the configurator loop's poster frame at 1200×630 (replaces the old hero.jpg).
-export const SITE_OG_IMAGE = "/images/og-e46build.jpg";
+// T-286 (PO 2026-11-10): the M3 Touring dream build, whole, on black, no text on the car (scripts/make-og-image.mjs). New name so
+// WhatsApp's cache refetches; it replaces BL-053's og-e46build.jpg (a search bar over a Coupé).
+export const SITE_OG_IMAGE = "/images/og-zauberlabs-v2.jpg";
 
 /**
  * The social-share image of an article (og:image / twitter:image).

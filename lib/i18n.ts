@@ -9,6 +9,9 @@ const en = {
     title: "zauberlabs — configurators for the cars the factory forgot",
     description:
       "Independent car configurators for modern classics. See the upgrades on your exact car, then find parts that genuinely fit.",
+    // T-286 (PO 2026-11-10): the share text (og:/twitter:description) of the pages with the default share image; the SEO
+    // description above stays as it is.
+    ogDescription: "See what your car could be — and buy only what fits it.",
   },
   nav: { configurators: "Configurators", next: "What’s next", suggest: "Suggest a car", blog: "Blog", shop: "Shop", open: "Open E46BUILD", comingSoon: "E46 configurator: coming soon", menu: "Menu" },
   // BL-081 (PO 2026-10-26): Rivian-style hero, headline option 2 (e46/docs/design/zauberlabs-rivian-landing). Only title[1]
@@ -21,7 +24,7 @@ const en = {
     cta: "Start with your E46",
     configure: "Configure your E46",
     readBlog: "Read the blog",
-    ogAlt: "E46BUILD: a silver BMW E46 Coupé with the search bar reading “BMW E46 330Ci Coupe”",
+    ogAlt: "AI image of a BMW E46 M3 Touring — a dream build BMW never sold.", // T-286: the default share image (og-zauberlabs-v2.jpg)
     pickLead: "Which E46 do you drive?",
   },
   // BL-083 (PO 2026-10-27, option C "Take a closer look"): five E46BUILD categories (six since BL-124, Infotainment), each with E46BUILD's own picture and one
@@ -167,6 +170,7 @@ const de: Dict = {
     title: "zauberlabs — Konfiguratoren für die Autos, die das Werk vergessen hat",
     description:
       "Unabhängige Auto-Konfiguratoren für Youngtimer. Sieh die Umbauten an deinem exakten Auto und finde Teile, die wirklich passen.",
+    ogDescription: "Sieh, was dein Auto sein könnte – und kauf nur, was passt.",
   },
   nav: { configurators: "Konfiguratoren", next: "Was kommt", suggest: "Auto vorschlagen", blog: "Blog", shop: "Shop", open: "E46BUILD öffnen", comingSoon: "E46-Konfigurator: bald verfügbar", menu: "Menü" },
   hero: {
@@ -177,7 +181,7 @@ const de: Dict = {
     cta: "Starte mit deinem E46",
     configure: "E46 konfigurieren",
     readBlog: "Zum Blog",
-    ogAlt: "E46BUILD: ein silbernes BMW E46 Coupé, in der Suchleiste steht „BMW E46 330Ci Coupe“",
+    ogAlt: "KI-Bild eines BMW E46 M3 Touring – ein Traum-Build, den BMW nie verkauft hat.",
     pickLead: "Welchen E46 fährst du?",
   },
   garage: {

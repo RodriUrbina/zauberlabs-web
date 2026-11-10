@@ -11,7 +11,8 @@ One line per file. Article images live under `public/blog/<slug>/` with their cr
 - `m3.jpg`: AI render by the PO (garage card "M3"), from e46 `docs/images/body_styles_main/m3_main.png`, cropped to 900×594 (BL-053.1).
 - `e46-m3-touring-hero.webp`: AI render by the PO, the E46BUILD hero itself (e46build `apps/web/public/images/hero/e46-m3-touring-hero.webp`, 1774×887, byte-identical copy); the home hero since BL-081 (and, since BL-083, the only place on the home page that shows it). A dream build: BMW never sold an E46 M3 Touring.
 - `e46-configurator-loop-poster.webp`: poster frame of the E46BUILD configurator loop supplied by the PO (own material, AI-assisted; see BL-029 in `app/[lang]/page.tsx`).
-- `og-e46build.jpg`: the same poster frame at 1200×630 for link previews (BL-053; replaces the former `hero.jpg`, an AI render by the PO).
+- `og-e46build.jpg`: the same poster frame at 1200×630 for link previews (BL-053; replaces the former `hero.jpg`, an AI render by the PO). Since T-286 no longer referenced (kept so old shared links still show a picture).
+- `og-zauberlabs-v2.jpg` (1200×630 JPEG): the default share image since T-286 (PO 2026-11-10): the PO's AI image of the E46 M3 Touring dream build with the plate blanked (e46build `docs/social/instagram/assets/e46-m3-touring-hero-plate-blank.webp`, 1774×887, SHA-256 1a2f039b…), the whole picture contained on black (bars top and bottom), no text or logo. Made by `scripts/make-og-image.mjs`.
 - `salt.jpg`: used only by the sample article (`content/blog/sample-not-for-publication`); origin not recorded.
 - `map-germany-eisenach.svg`: self-drawn outline map for the Eisenach article (BL-024).
 
