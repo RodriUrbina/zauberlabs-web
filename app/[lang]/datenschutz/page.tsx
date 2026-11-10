@@ -22,6 +22,7 @@ export const metadata = { title: "Datenschutz — zauberlabs", robots: { index: 
  * BL-050: one Vercel Web Analytics custom event, "configurator_click" with only { configurator }, described in Abschnitt 5;
  * BL-116: plus { from, place }, the page and the spot on it where the link was clicked.
  * BL-119: "visit_from" { from: "instagram", page } on the first page load from our Instagram links (lib/visit-from.ts); no storage.
+ * BL-128 (DRAFT wording for the PO, 2026-11-10): from= also pdf, reddit, email, whatsapp; §5 and §10 name all five sources.
  * BL-097: three shop events (lib/shop-analytics.ts), described right after it: shop_add_to_cart { design, lang },
  * shop_checkout_start { items, total_bucket, lang }, shop_order_completed { lang }.
  * BL-051: own anonymous statistics (Abschnitt 6): daily counters in Upstash, salted daily hash only inside a HyperLogLog.
@@ -109,8 +110,9 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Websites hinweg oder eine Zuordnung zu deiner Person ist nicht möglich. Wir sehen ausschließlich zusammengefasste Statistiken.
         Außerdem zählen wir, wie oft ein Link zu einem unserer Konfiguratoren (z. B. E46BUILD) angeklickt wird: Dabei wird ein Ereignis an Vercel Web
         Analytics übermittelt, das nur den Namen des Konfigurators und die Seite enthält, auf der geklickt wurde (samt der Stelle auf der Seite,
-        z. B. Fußzeile), zusammen mit denselben Angaben wie bei einem Seitenaufruf. Kommst du über einen Link aus unserem Instagram-Profil
-        (erkennbar am Zusatz „from=instagram“ in der Adresse), übermitteln wir beim Laden der ersten Seite ein Ereignis an Vercel Web
+        z. B. Fußzeile), zusammen mit denselben Angaben wie bei einem Seitenaufruf. Kommst du über einen von uns gesetzten Link
+        (erkennbar am Zusatz „from=…“ in der Adresse: aus unserem Instagram-Profil, unserem Projekt-PDF, Reddit, einer E-Mail oder WhatsApp),
+        übermitteln wir beim Laden der ersten Seite ein Ereignis an Vercel Web
         Analytics, das nur diese Herkunft und die aufgerufene Seite (ohne Parameter) enthält, zusammen mit denselben Angaben wie bei einem
         Seitenaufruf; in deinem Browser wird dafür nichts gespeichert.
         Ebenso zählen wir im Fan-Shop, wie oft ein Sticker in den Warenkorb gelegt, die Zahlung begonnen und eine Bestellung abgeschlossen
@@ -248,7 +250,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Ohne Konto setzt E46BUILD keine Cookies und legt nichts im lokalen Speicher deines Browsers ab; für ein Konto siehe den folgenden Absatz. Zur
         Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics – ohne Cookies, zusammengefasste Seitenaufrufe und Besucherzahlen sowie
         einzelne Ereignisse, die nur die jeweils genannte Angabe enthalten –, zur Messung der Ladezeiten Vercel Speed Insights; es gilt Abschnitt 5.
-        Kommst du über einen Link aus unserem Instagram-Profil (Zusatz „from=instagram“) zu E46BUILD, übermitteln wir wie in Abschnitt 5 beim
+        Kommst du über einen von uns gesetzten Link (Zusatz „from=…“: aus unserem Instagram-Profil, unserem Projekt-PDF, Reddit, einer
+        E-Mail oder WhatsApp) zu E46BUILD, übermitteln wir wie in Abschnitt 5 beim
         Laden der ersten Seite ein Ereignis nur mit dieser Herkunft und der aufgerufenen Seite (ohne Parameter); in deinem Browser wird dafür
         nichts gespeichert. Fehlt für einen Hinweistext von E46BUILD noch die deutsche Übersetzung, übermitteln wir ein Ereignis nur mit diesem
         englischen Text. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet
