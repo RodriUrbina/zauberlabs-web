@@ -20,12 +20,15 @@ describe("share preview (T-286)", () => {
   test("alt texts and share descriptions as the PO decided; the SEO description is unchanged", () => {
     assert.equal(dictionaries.en.hero.ogAlt, "AI image of a BMW E46 M3 Touring — a dream build BMW never sold.");
     assert.equal(dictionaries.de.hero.ogAlt, "KI-Bild eines BMW E46 M3 Touring – ein Traum-Build, den BMW nie verkauft hat.");
-    assert.equal(dictionaries.en.meta.ogDescription, "See what your car could be — and buy only what fits it.");
-    assert.equal(dictionaries.de.meta.ogDescription, "Sieh, was dein Auto sein könnte – und kauf nur, was passt.");
+    assert.equal(dictionaries.en.meta.ogTitle, "zauberlabs — See what your car could be.");
+    assert.equal(dictionaries.de.meta.ogTitle, "zauberlabs — Sieh, was dein Auto sein könnte.");
+    assert.equal(dictionaries.en.meta.ogDescription, "And buy only what fits. Configurators for youngtimers.");
+    assert.equal(dictionaries.de.meta.ogDescription, "Und kauf nur, was passt. Konfiguratoren für Youngtimer.");
+    assert.equal(dictionaries.de.meta.title, "zauberlabs — Konfiguratoren für die Autos, die das Werk vergessen hat", "browser title unchanged");
     assert.match(dictionaries.en.meta.description, /^Independent car configurators for modern classics\./, "SEO description unchanged");
     const layout = read("app", "[lang]", "layout.tsx");
-    assert.match(layout, /description: t\.meta\.description,/, "meta description");
-    assert.match(layout, /openGraph: \{ title: t\.meta\.title, description: t\.meta\.ogDescription, images: \[\{ url: SITE_OG_IMAGE, width: 1200, height: 630, alt:/);
+    assert.match(layout, /title: t\.meta\.title,\n    description: t\.meta\.description,/, "browser title and meta description");
+    assert.match(layout, /openGraph: \{ title: t\.meta\.ogTitle, description: t\.meta\.ogDescription, images: \[\{ url: SITE_OG_IMAGE, width: 1200, height: 630, alt:/);
   });
   test("the About pages get the share image and alt too, with their own title and description", () => {
     const about = read("components", "AboutPage.tsx");

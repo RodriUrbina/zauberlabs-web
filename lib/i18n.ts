@@ -9,9 +9,10 @@ const en = {
     title: "zauberlabs — configurators for the cars the factory forgot",
     description:
       "Independent car configurators for modern classics. See the upgrades on your exact car, then find parts that genuinely fit.",
-    // T-286 (PO 2026-11-10): the share text (og:/twitter:description) of the pages with the default share image; the SEO
-    // description above stays as it is.
-    ogDescription: "See what your car could be — and buy only what fits it.",
+    // T-286 (PO 2026-11-10, final wording): the share title and text (og:/twitter:) of the pages with the default share image;
+    // the browser title and the SEO description above stay as they are.
+    ogTitle: "zauberlabs — See what your car could be.",
+    ogDescription: "And buy only what fits. Configurators for youngtimers.",
   },
   nav: { configurators: "Configurators", next: "What’s next", suggest: "Suggest a car", blog: "Blog", shop: "Shop", open: "Open E46BUILD", comingSoon: "E46 configurator: coming soon", menu: "Menu" },
   // BL-081 (PO 2026-10-26): Rivian-style hero, headline option 2 (e46/docs/design/zauberlabs-rivian-landing). Only title[1]
@@ -170,7 +171,8 @@ const de: Dict = {
     title: "zauberlabs — Konfiguratoren für die Autos, die das Werk vergessen hat",
     description:
       "Unabhängige Auto-Konfiguratoren für Youngtimer. Sieh die Umbauten an deinem exakten Auto und finde Teile, die wirklich passen.",
-    ogDescription: "Sieh, was dein Auto sein könnte – und kauf nur, was passt.",
+    ogTitle: "zauberlabs — Sieh, was dein Auto sein könnte.",
+    ogDescription: "Und kauf nur, was passt. Konfiguratoren für Youngtimer.",
   },
   nav: { configurators: "Konfiguratoren", next: "Was kommt", suggest: "Auto vorschlagen", blog: "Blog", shop: "Shop", open: "E46BUILD öffnen", comingSoon: "E46-Konfigurator: bald verfügbar", menu: "Menü" },
   hero: {
