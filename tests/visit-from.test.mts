@@ -13,8 +13,9 @@ describe("visit_from: visits from our Instagram profile (BL-119)", () => {
     assert.deepEqual(visitFrom("?from=instagram", "/de/links", "https://l.instagram.com/", HOST), { from: "instagram", page: "/de/links" });
     assert.deepEqual(visitFrom("?from=instagram&utm_source=x", "/en/blog/telling-e46-wheels-apart/", "", HOST), { from: "instagram", page: "/en/blog/telling-e46-wheels-apart" });
   });
-  test("only 'instagram' is recorded; other sources, no source and odd paths send nothing or 'other'", () => {
-    for (const q of ["", "?from=facebook", "?from=Instagram", "?utm_source=instagram", "?from=instagram2"]) assert.equal(visitFrom(q, "/de", "", HOST), null, q);
+  test("only our five sources are recorded (BL-128); other sources, no source and odd paths send nothing or 'other'", () => {
+    for (const from of ["instagram", "pdf", "reddit", "email", "whatsapp"]) assert.deepEqual(visitFrom(`?from=${from}`, "/de", "", HOST), { from, page: "/de" }, from);
+    for (const q of ["", "?from=facebook", "?from=Instagram", "?from=PDF", "?utm_source=instagram", "?from=instagram2", "?from=e-mail", "?from=newsletter"]) assert.equal(visitFrom(q, "/de", "", HOST), null, q);
     assert.deepEqual(visitFrom("?from=instagram", "/de/x@y.de", "", HOST), { from: "instagram", page: "other" });
   });
   test("not again when the visitor came from one of our own pages (/links → article), without storing anything", () => {
@@ -35,7 +36,7 @@ describe("visit_from: visits from our Instagram profile (BL-119)", () => {
   });
   test("Datenschutz §5 names the event: origin and page only, nothing stored in the browser", () => {
     const ds = read("app", "[lang]", "datenschutz", "page.tsx").replace(/\s+/g, " ");
-    assert.ok(ds.includes("Kommst du über einen Link aus unserem Instagram-Profil (erkennbar am Zusatz „from=instagram“ in der Adresse), übermitteln wir beim Laden der ersten Seite ein Ereignis an Vercel Web Analytics, das nur diese Herkunft und die aufgerufene Seite (ohne Parameter) enthält, zusammen mit denselben Angaben wie bei einem Seitenaufruf; in deinem Browser wird dafür nichts gespeichert."));
+    assert.ok(ds.includes("Kommst du über einen von uns gesetzten Link (erkennbar am Zusatz „from=…“ in der Adresse: aus unserem Instagram-Profil, unserem Projekt-PDF, Reddit, einer E-Mail oder WhatsApp), übermitteln wir beim Laden der ersten Seite ein Ereignis an Vercel Web Analytics, das nur diese Herkunft und die aufgerufene Seite (ohne Parameter) enthält, zusammen mit denselben Angaben wie bei einem Seitenaufruf; in deinem Browser wird dafür nichts gespeichert."));
   });
 });
 

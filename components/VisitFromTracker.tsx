@@ -6,7 +6,8 @@ import { hasInternalMarker } from "@/lib/internal-mode-client";
 import { VISIT_FROM_EVENT, visitFrom } from "@/lib/visit-from";
 
 /**
- * BL-119 — sends "visit_from" { from: "instagram", page } once when a page loads with ?from=instagram (see lib/visit-from.ts).
+ * BL-119 — sends "visit_from" { from, page } once when a page loads with ?from=<one of our sources> (BL-128: instagram, pdf,
+ * reddit, email, whatsapp; see lib/visit-from.ts).
  * Mounted once in the layout, so it runs on full page loads only. The PO's own devices (zl_internal) send nothing, here and
  * again in SiteAnalytics' beforeSend.
  */
