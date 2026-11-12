@@ -48,3 +48,11 @@ describe("Datenschutz §10: E46BUILD events and visit_from (BL-122)", () => {
     assert.ok(!ds.includes("nur zusammengefasste Seitenaufrufe und Besucherzahlen"));
   });
 });
+
+describe("Datenschutz §10: time in the E46 configurator (BL-129, with E46 T-311)", () => {
+  test("the PO's sentence, word for word, right after the demand-events sentence", () => {
+    const ds = read("app", "[lang]", "datenschutz", "page.tsx").replace(/\{\/\*[\s\S]*?\*\/\}/g, "").replace(/\s+/g, " ");
+    const sentence = "Um zu erfahren, wie lange der E46-Konfigurator genutzt wird, sendet dein Browser beim Verlassen oder Wechseln der Seite die Anzahl der Sekunden, die der Konfigurator auf deinem Bildschirm sichtbar war, zusammen mit der anonymen ID deines Projekts, einer zufälligen Kennung für diesen Besuch (neu bei jedem Seitenaufruf) und deinem Land (zwei Buchstaben, z. B. DE). Dafür speichern wir weder deine IP-Adresse noch Browserangaben oder Cookies, nichts wird an Dritte weitergegeben, und die Daten werden zusammen mit dem Projekt gelöscht.";
+    assert.ok(ds.includes(`in welchen Ländern welche Teile gesucht werden. ${sentence}`));
+  });
+});
