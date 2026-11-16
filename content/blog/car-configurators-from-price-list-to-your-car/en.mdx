@@ -1,0 +1,138 @@
+---
+# BL-130 — Writer draft, English. PO go 2026-11-16 on the Editor-checked outline (e46/docs/briefs/bl130-configurator-history-outline.md).
+title: "From the price list to your own car: how car configurators grew up"
+description: "From paper price lists and colour cards to online configurators, pre-rendered pictures, real-time 3D and AI, and why they all stop at the sale."
+date: 2026-11-16
+updated: 2026-11-26
+publishAt: "2026-11-26"
+lang: en
+slug: car-configurators-from-price-list-to-your-car
+card: BL-130
+author: "zauberlabs"
+tags:
+  - E46
+  - configurator
+  - history
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: "/blog/car-configurators-from-price-list-to-your-car/hero.webp"
+  alt: "Screenshot of the E46BUILD start page: the headline 'Configure your dream E46', the six steps from headlights to infotainment, and the first body-style cards"
+  credit: "Screenshot: E46BUILD, zauberlabs"
+  licence: "zauberlabs, own screenshot"
+evidenceRoot: "e46build master docs/research/ (S1, S2: e46/docs/preisliste_e46/)"
+sources:
+  - id: S1
+    title: "BMW Germany price lists for the E46 3 Series that we hold, September 1998 to March 2006: options as priced tables, with paint and upholstery referred to a separate colour and trim card (confirmed in the 2005-03 and 2006-03 lists)"
+    type: BMW-authored (price lists), PO-supplied; private, facts only, not quoted
+    path: "e46/docs/preisliste_e46/ (e.g. 1998-09_preisliste_bmw_3er-limousine, 2005-03 and 2006-03 lists)"
+    confidence: HIGH
+  - id: S2
+    title: "BMW brochure 'Der BMW 3er touring', German, 1998, 32 pages, ending with its colour card (Farbkarte, pages 30–31)"
+    type: BMW-authored (brochure), PO-supplied; facts only
+    path: "e46/docs/preisliste_e46/BMW-Serie-3-Touring-1998-GER.pdf"
+    confidence: HIGH
+    note: "A 1998 Touring brochure covers the previous 3 Series (E36) Touring, so the article calls it a 1998 BMW brochure, not an E46 one."
+  - id: S3
+    title: "Mercedes-Benz.io, 'Behind the Engine: How the Car Configurator Turns Dreams into Reality', 11 November 2025: 'The story of car configuration at Mercedes-Benz began in 1997'; the team is 'exploring new technologies like Artificial Intelligence' (web: https://www.mercedes-benz.io/blog/2025-11-11-behind-the-engine-how-the-car-configurator-turns-dreams-into-reality)"
+    type: maker's own text
+    path: "web: mercedes-benz.io blog, read 2026-11-16"
+    confidence: HIGH
+  - id: S4
+    title: "Our observation of Volkswagen's live configurator for the ID. Polo on 14 November 2026: about 394 pre-rendered .webp images from VW's media server, fixed camera views, image addresses that encode model, trim, colour and wheels, no 3D model or engine loaded (web: https://www.volkswagen.de/de/konfigurator.html/__app/id-polo.app)"
+    type: our own observation (zauberlabs, card T-318)
+    path: "web: volkswagen.de configurator, checked 2026-11-14"
+    confidence: MEDIUM
+    note: "MEDIUM: what we saw in the page's network traffic on one day, not a statement by Volkswagen."
+  - id: S5
+    title: "Audi, 'Audi VR experience: the dealership in a briefcase', 15 January 2015: customers configure at the dealership in VR headsets, the whole model range 'including all possible equipment combinations' (web: https://www.audi.com/en/photos/detail/audi-vr-experience-the-dealership-in-a-briefcase-4552)"
+    type: maker's own text
+    path: "web: audi.com media page, read 2026-11-16"
+    confidence: HIGH
+  - id: S6
+    title: "BMW Group, 'Into virtual worlds.', 11 September 2020: every BMW and MINI model can be reconstructed with any optional equipment, 'rendered in real-time' and presented at a dealership screen, in VR goggles or via a link (web: https://www.bmwgroup.com/en/news/general/2020/into-virtual-worlds.html)"
+    type: maker's own text
+    path: "web: bmwgroup.com, read 2026-11-16"
+    confidence: HIGH
+  - id: S7
+    title: "BMW Group press release, Munich, 17 July 2026: 'BMW launches vehicle configurator as a dialogue-based plugin in OpenAI's ChatGPT'; configuration by text or voice, the specification opens in the BMW Configurator (web: https://newsroom.bmwgroup.com/emea/bmw-launches-vehicle-configurator-as-a-dialogue-based-plugin-in-openais-chatgpt/)"
+    type: maker's press release
+    path: "web: newsroom.bmwgroup.com, read 2026-11-16"
+    confidence: HIGH
+  - id: S8
+    title: "BMW Deutschland, 'BMW CarConfigurator' start page on bmw.de, Wayback Machine capture of 27 November 1999 (web: https://web.archive.org/web/19991127213140/http://www.bmw.de:80/carconfigurator/index.htm)"
+    type: maker's own web page (dated archive capture)
+    path: "web: web.archive.org capture 19991127213140"
+    confidence: HIGH
+    note: "Proves the page existed by that date; it is not a start date and not a 'first'."
+  - id: S9
+    title: "BMW Deutschland, CarConfigurator main page on bmw.de, Wayback capture of 25 Jan 2000: build your BMW, save it, compare equipment, finance offer, print it; Netscape 4.0; '© 1999 BMW Deutschland' (web: https://web.archive.org/web/20000125020315/http://www.bmw.de:80/carconfigurator/main.htm)"
+    type: maker's own web page (dated archive capture)
+    path: "web: web.archive.org capture 20000125020315"
+    confidence: HIGH
+  - id: S10
+    title: "E46BUILD, zauberlabs' E46 configurator: start from your car's body style and build year, answer only what a part's fit depends on, collect the parts in 'My project'; screenshots of production (web build 7a2f38b) taken on 16 November 2026"
+    type: our own product
+    path: "web: https://e46.zauberlabs.de"
+    confidence: n/a
+---
+
+Every car configurator answers the same question: what will my car look like, and what will it cost? Over the years the answer has moved from paper to the screen to a conversation. This is a short history of that move, told through the makers' own documents, and of the one question it still leaves out.
+
+## Paper first: the price list and the colour card
+
+Before screens, you configured a BMW with a pencil. The German price lists we hold for the E46 run from September 1998 to March 2006. [S1, HIGH] They are dense tables: every option a line, every line a price, standard or extra marked per model. Paint and upholstery weren't in the table at all: the lists send you to a separate colour and trim card. [S1, HIGH] A 1998 BMW brochure from our collection ends the same way, with its own colour card on the last pages. [S2, HIGH]
+
+So the first configurator was you: a price list on your knee, a colour card in your hand, and the dealer to tell you what went with what.
+
+## The configurator goes online
+
+By November 1999, bmw.de had a page called "BMW CarConfigurator". [S8, HIGH] A capture from January 2000 shows what it offered: put together the BMW "der genau zu Ihnen paßt", save it to your personal parking space, compare equipment variants, see a finance offer from BMW Financial Services, and print it to talk it over with friends or your BMW dealer. [S9, HIGH] It was optimised for Netscape 4.0, and its footer reads "© 1999 BMW Deutschland". [S9, HIGH] That's the E46's own first years, on the web.
+
+Mercedes-Benz dates the start of its car configurator to 1997. [S3, HIGH] Neither date is a "first": an archived page proves only that it existed by then.
+
+## Pictures per choice: rendered in advance
+
+Choose a colour, and the car on the screen changes. Often, what you see is not a car being drawn for you but a picture made in advance for that exact combination.
+
+Some configurators still work this way. When we looked at Volkswagen's configurator for the ID. Polo on 14 November 2026, it loaded around 394 ready-made images from Volkswagen's media server, each address naming the model, trim, colour and wheels, in fixed camera views such as side and three-quarter. We saw no 3D model and no 3D engine loading. [S4, MEDIUM] Its "360°" view, as we saw it, is a flip-book of those pictures.
+
+## Into the headset, then real time
+
+In January 2015 Audi brought the configurator to the dealer in a VR headset: customers could configure their car there, with the whole model range "including all possible equipment combinations". [S5, HIGH] Audi called itself the first carmaker to build retail software for VR headsets; that's its own claim. [S5, HIGH]
+
+In September 2020 BMW described the next step in plain words. Every BMW and MINI model can be reconstructed with any optional equipment, "rendered in real-time" and shown to the customer: on a screen at the dealer, in VR goggles in the showroom, or through a link at home. [S6, HIGH] The car had stopped being a set of pictures made in advance and become a 3D object you could turn.
+
+## Today: describe it, don't click it
+
+In July 2026 BMW put its configurator into ChatGPT. You describe what you want, by text or by voice: space, ground clearance, drivetrain, how you'll use it. The plugin suggests models and configurations, and the result opens in the BMW Configurator. [S7, HIGH] BMW calls itself the first carmaker to offer vehicle advice directly in ChatGPT; that, too, is its own claim. [S7, HIGH]
+
+Mercedes-Benz, for its part, says its configurator team is "exploring" artificial intelligence. [S3, HIGH]
+
+## The gap: they all stop at the sale
+
+Look back over the story, from price list to chatbot. The configurators in it all build a car that doesn't exist yet. They answer "which new car should I order?", and once the car is delivered they have nothing more to say.
+
+But most cars on the road were configured years ago. Their owners have a different question: *what can my car become, and which parts actually fit it?*
+
+That's where zauberlabs begins: "See what your car could be — and buy only what fits it." E46BUILD starts from the car you already have. You pick its body style, then answer only what a part's fit depends on, such as the build year or whether it's a facelift. [S10]
+
+<Figure src="/blog/car-configurators-from-price-list-to-your-car/your-car.webp" alt="Screenshot of E46BUILD with a 2002 Sedan, post-facelift, 320i: the 'Your car' bar at the bottom and step 2, 'Choose the headlight tech to buy', with halogen and bi-xenon headlights both marked 'Fits your car'" width={1440} height={900} caption="Your car first: E46BUILD asks only what the fit depends on, then shows what fits." credit="Screenshot: E46BUILD, zauberlabs" />
+
+From there it shows the parts that fit that car, and collects your choices in "My project", with an approximate total and where to buy each part. [S10]
+
+<Figure src="/blog/car-configurators-from-price-list-to-your-car/my-project.webp" alt="Screenshot of E46BUILD's 'My project' page for the same 2002 Sedan: one line, a pair of new halogen headlights, with an approximate total of 368 euros, excluding shipping and fitting" width={1440} height={900} caption="My project: the parts for your car, with an approximate total." credit="Screenshot: E46BUILD, zauberlabs" />
+
+The price list, the colour card and the configurator were all about the day you ordered. For an owner, that day is long past. The interesting question is the next one.
+
+## Notes on the evidence
+
+**Confidence.** Every date and claim about the makers comes from their own texts: BMW's price lists and brochure, BMW's archived web pages, Mercedes-Benz's own blog, Audi's media page and BMW's press releases (HIGH). The Volkswagen section is our own observation on one day, not a statement by Volkswagen (MEDIUM). The "firsts" in this article are the makers' own claims, attributed to them.
+
+**Not established.** When the first online car configurator went live, and who built it; an archived page only shows that a configurator existed by its capture date.
+
+## What comes next
+
+Our E46 configurator is live: it shows which parts fit your car and links to sellers where we've found one.
