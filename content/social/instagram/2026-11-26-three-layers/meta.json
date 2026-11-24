@@ -1,0 +1,23 @@
+{
+  "publishAt": "2026-11-26T18:00:00+01:00",
+  "status": "draft",
+  "title": "Thu 26 Nov · Carousel 3 · \"Three questions. One wheel.\" · BLOG (BL-131)",
+  "headline": "Three questions. One wheel.",
+  "link": "blog/will-that-wheel-fit-your-e46",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver BMW E46 seen from the side, its front wheel and tyre in the arch, on a black background."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "AI image of a silver facelifted BMW E46 Sedan from the side, on black."
+    },
+    {
+      "file": "3.jpg",
+      "alt": "AI image of a silver BMW E46 M3 Coupé from the side, on black."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| Three layers: bolt-on, brake clearance, sitting in the arch with the tyre | blog `will-that-wheel-fit-your-e46` intro | n/a (framing) |\n| 5×120 for every E46, the M3 included (attributed to E46 specialists) | blog `will-that-wheel-fit-your-e46` (S1) | MEDIUM |\n| Brake clearance depends on the wheel's design, not its diameter; some 17-inch wheels clear big brakes, some don't (attributed to our research's sources) | blog `will-that-wheel-fit-your-e46` (S1) | MEDIUM |\n\nPictures: slide 1 is the article's own hero; slides 2 and 3 are E46BUILD wheel stage pictures (sedan-post, m3), whole, nothing on the cars.",
+  "importedFrom": "rendered by the Writer (BL-118 batch Dec) with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
