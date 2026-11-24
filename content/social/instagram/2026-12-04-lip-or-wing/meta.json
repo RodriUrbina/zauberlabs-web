@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-12-04T18:00:00+01:00",
+  "status": "draft",
+  "title": "Fri 4 Dec · Single · \"Lip or wing? Depends on the year.\" · BLOG (BL-135)",
+  "headline": "Lip or wing? Depends on the year.",
+  "link": "blog/e46-coupe-rear-m-spoiler-lip",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver E46 Coupé from behind, with an M rear bumper and a small lip spoiler on the boot lid."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| \"M Heckspoiler\" in the 09/2002 list (one list, attributed) | blog `e46-coupe-rear-m-spoiler-lip` (S1) | MEDIUM |\n| \"freistehender Heckflügel\" in the 03/2004 list (one list, attributed) | blog `e46-coupe-rear-m-spoiler-lip` (S1) | MEDIUM |\n| \"Heckspoilerlippe\" standard from 09/2004, wing option 754 | blog `e46-coupe-rear-m-spoiler-lip` (S1) | HIGH |\n| 51717893671 primed, 51710018269 painted (as read on our mirror) | blog `e46-coupe-rear-m-spoiler-lip` (S2) | MEDIUM |\n\nPicture: the article's own hero, whole. The €650 price of option 754 is in the article but left out here.",
+  "importedFrom": "rendered by the Writer (BL-118 batch Dec) with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}

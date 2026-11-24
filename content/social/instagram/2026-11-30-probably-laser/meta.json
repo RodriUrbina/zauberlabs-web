@@ -1,0 +1,19 @@
+{
+  "publishAt": "2026-11-30T18:00:00+01:00",
+  "status": "draft",
+  "title": "Mon 30 Nov · Carousel 2 · \"Alcantara? Probably Laser.\" · BLOG (BL-133)",
+  "headline": "Alcantara? Probably Laser.",
+  "link": "blog/e46-cloth-leather-alcantara",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of an E46 interior with anthracite cloth and Alcantara Sport front seats, seen from the rear passenger side."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "AI image of an E46 interior with black leather Sport front seats, seen from the rear passenger side."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| M Sport package sport seats in \"Laser\" cloth/Alcantara design (May 2001 press release) | blog `e46-cloth-leather-alcantara` (S2) | HIGH |\n| Most \"Alcantara\" E46 sport seats for sale are Laser (attributed: \"as we read it\") | blog `e46-cloth-leather-alcantara` (S2 + S3) | MEDIUM |\n| Montana, the common E46 leather, every body except the M3 | blog `e46-cloth-leather-alcantara` (S1) | HIGH |\n\nPictures: the article's own two pictures, whole.",
+  "importedFrom": "rendered by the Writer (BL-118 batch Dec) with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
