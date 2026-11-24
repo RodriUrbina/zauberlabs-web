@@ -1,0 +1,112 @@
+---
+# BL-134 — Writer draft, English. PO 24 Nov 2026 (via the Editor). No seller named.
+title: "The 2001 facelift: what changed on the E46, when, and on which body"
+description: "The E46 was facelifted in stages: Sedan and Touring in September 2001, Coupé and Convertible in March 2003, the Compact only at the rear, the M3 hardly at all."
+date: 2026-11-24
+updated: 2026-12-02
+publishAt: "2026-12-02"
+lang: en
+slug: e46-2001-facelift
+card: BL-134
+author: "zauberlabs"
+tags:
+  - E46
+  - facelift
+  - buying guide
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: "/blog/e46-2001-facelift/hero.webp"
+  alt: "AI image of a silver facelifted BMW E46 Sedan from the side, on a black background"
+  credit: "AI-generated illustration"
+  licence: "zauberlabs, own AI illustration (PO)"
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW (GB) press kit, model year 2002, 'The new BMW 3 Series' (26 October 2001): the Saloon and Touring's exterior changes, listed by BMW"
+    type: BMW-authored (press kit)
+    path: "t055-infotainment-fitment/raw/bmw-press-uk-2001-39145.txt"
+    confidence: HIGH
+  - id: S2
+    title: "BMW's parts catalogue (ETK) for the Sedan and Touring, read on mirrors with month views: the facelift headlight and bumper groups start 'from Sep '01'"
+    type: ETK mirrors
+    path: "t030-evidence/sedan-touring-markets.json; t045-bumper-pairs/T-045-findings.md (F2, R2)"
+    confidence: HIGH
+  - id: S3
+    title: "T-024 — Coupé and Convertible facelift in BMW's parts catalogue, two mirrors with month views: the changeover in March 2003; headlights, grille, bonnet, front bumper, indicators and side repeaters change; the rear-light conversion kit 'Facelift 2003'; the M3's headlights and grille"
+    type: ETK mirrors (two)
+    path: "t024-t025-evidence/coupe-facelift.json"
+    confidence: HIGH
+  - id: S4
+    title: "The Compact: rear lights split in BMW's parts catalogue at March 2003 (clear to fully red), one mirror; its headlights with no date split (T-025)"
+    type: ETK mirror (one mirror)
+    path: "E46BUILD packages/types/src/e46-factory-era.ts (T-197 research note); t024-t025-evidence/compact.json"
+    confidence: MEDIUM
+  - id: S5
+    title: "E46BUILD's era rules: an owner's year is the year of first registration, which can lag the build by months, so around a changeover E46BUILD asks about the car instead of guessing (T-309); production screenshot of a 2002 Sedan asking for the current headlights, 16 Nov 2026"
+    type: our own product (configurator code and screen)
+    path: "E46BUILD packages/types/src/e46-factory-era.ts (T-309 note); https://e46.zauberlabs.de"
+    confidence: n/a
+---
+
+The E46 wasn't facelifted in one go. BMW changed the Sedan and Touring in September 2001, the Coupé and Convertible in March 2003, gave the Compact only a new rear, and left the M3's face almost alone. If you're buying headlights, bumpers or tail lights, which side of that line your car is on matters more than its engine.
+
+## Sedan and Touring: September 2001
+
+BMW's own parts catalogue, as read on our mirrors, starts the facelift headlights and bumpers of the Sedan and Touring from September 2001. [S2, HIGH] BMW presented the result in its press kit for model year 2002, dated 26 October 2001. [S1, HIGH] It lists the changes itself: [S1, HIGH]
+
+- **new headlights**, curved, with the indicators behind clear glass;
+- **round fog lamps** in place of the rectangular ones;
+- **a wider kidney grille**;
+- **a new bonnet and front wings**: the bonnet's power dome now runs up to the A-pillars, the old line above the wheel arches is gone, and teardrop-shaped side repeaters sit higher on the wing;
+- **a new front air dam** on both;
+- **a new rear valance and a re-arranged tail light on the Sedan only**: the light's outer shape is unchanged, but the brake light now sits at the top. The Touring got the new front only.
+
+BMW's British press kit adds, with some pride, that BMW "would not call it a facelift". [S1, HIGH] Owners do anyway.
+
+<Figure src="/blog/e46-2001-facelift/sedan-pre.webp" alt="AI image of a silver pre-facelift BMW E46 Sedan from the side, on a black background" width={2400} height={1340} caption="Before September 2001: the Sedan as it first looked. The picture above shows it after." credit="AI-generated illustration" />
+
+Under the skin, the same press kit announces two new four-cylinder engines and new options, among them bi-xenon headlights and a wide-screen navigation monitor. [S1, HIGH]
+
+## Coupé and Convertible: their own facelift, March 2003
+
+The Coupé and Convertible kept their first face in 2001. Their facelift came in March 2003: in BMW's parts catalogue, on two mirrors, every pre-facelift front-end part ends in March 2003 and every facelift part starts then, the same for Coupé and Convertible, in Europe and the US. [S3, HIGH] What changes, by the catalogue: [S3, HIGH]
+- the headlights, now with the indicator built in;
+- the kidney grille and the bonnet;
+- the front bumper;
+- the front indicators and the side repeaters;
+- at the back, a conversion kit for the rear lights is titled "Facelift 2003".
+
+One thing did change on the Coupé and Convertible in September 2001: in the catalogue, their xenon headlight gives way to bi-xenon then, without changing the car's look. [S3, HIGH] That's why a 2002 Coupé can have bi-xenon and still be "pre-facelift".
+
+## The Compact: only the rear, March 2003
+
+The Compact had its own front from the start, and it never changed. BMW's parts catalogue, as read on our mirror, shows no date split for its headlights. [S4, MEDIUM] What did change, in March 2003, were its rear lights: clear glass up to then, fully red after. [S4, MEDIUM]
+
+## The M3: its own face throughout
+
+The M3 kept its own headlights and grille through all of this: BMW's catalogue, as read on our mirrors, shows no facelift front for it, only the change from xenon to bi-xenon in September 2001. [S3, HIGH]
+
+## Is your car before or after?
+
+The build month decides, not the model year or the registration. The first registration can come months after the car was built, so a Sedan registered in early 2002 can still be a pre-facelift car. [S5] On the car itself, the Sedan and Touring are easiest to tell by the front: curved headlights with clear-glass indicators, round fog lamps and the teardrop side repeaters are facelift. [S1, HIGH]
+
+## What it means for parts
+
+- **Headlights:** the facelift changes the shape of the headlight, so pre- and post-facelift units are different parts. [S2, HIGH] The details are in [Two dates decide every E46 headlight, and 2001 is the trap](/en/blog/e46-headlight-changeovers).
+- **Bumpers:** the front bumper changes with each body's facelift, and on the Sedan the rear too. [S1, HIGH] [S2, HIGH] [S3, HIGH] More in [Forget the engine: what really decides which bumper fits your E46](/en/blog/e46-bumpers-body-era-package).
+- **The Compact:** its front is its own, before and after. See [Same badge, different nose](/en/blog/e46-compact-front-end-bumpers) and [The loner](/en/blog/e46-compact-headlights).
+
+E46BUILD asks only what the fit depends on. For a car registered close to a changeover, such as a 2002 Sedan, it asks which headlights your car has. [S5]
+
+## Notes on the evidence
+
+**Confidence.** What changed on the Sedan and Touring comes from BMW's own press kit of October 2001 (HIGH). The September 2001 and March 2003 changeovers come from BMW's parts catalogue on mirrors with month views (HIGH). The Compact's rear lights and unchanged headlights come from one mirror (MEDIUM).
+
+**Not established.** Whether the M3's side repeaters changed in March 2003; the catalogue shows both versions. What else changed on the Coupé and Convertible in March 2003 beyond the front end and rear lights.
+
+## What comes next
+
+Our E46 configurator is live: it shows which parts fit your car and links to sellers where we've found one.
