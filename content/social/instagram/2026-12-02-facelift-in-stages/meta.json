@@ -14,6 +14,6 @@
       "alt": "AI image of a silver facelifted BMW E46 Sedan from the side, on a black background."
     }
   ],
-  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| Sedan and Touring facelift September 2001 | blog `e46-2001-facelift` (S2) | HIGH |\n| Coupé and Convertible facelift March 2003 | blog `e46-2001-facelift` (S3) | HIGH |\n| Compact: only the rear (attributed to one mirror) | blog `e46-2001-facelift` (S4) | MEDIUM |\n| \"hardly old enough to have suffered from facial ageing\" | blog `e46-2001-facelift` (S1, BMW UK press kit 26 Oct 2001) | HIGH |\n\nPictures: the article's own two pictures (sedan-pre, hero), whole.",
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| Sedan and Touring facelift September 2001 | blog `e46-2001-facelift` (S2) | HIGH |\n| Coupé and Convertible facelift March 2003 | blog `e46-2001-facelift` (S3) | HIGH |\n| Compact: no date split for its headlights; new rear lights in March 2003 (attributed to one mirror) | blog `e46-2001-facelift` (S4) | MEDIUM |\n| \"hardly old enough to have suffered from facial ageing\" | blog `e46-2001-facelift` (S1, BMW UK press kit 26 Oct 2001) | HIGH |\n\nPictures: the article's own two pictures (sedan-pre, hero), whole.",
   "importedFrom": "rendered by the Writer (BL-118 batch Dec) with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
 }
