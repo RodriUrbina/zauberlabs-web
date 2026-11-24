@@ -1,0 +1,19 @@
+{
+  "publishAt": "2026-12-06T18:00:00+01:00",
+  "status": "draft",
+  "title": "Sun 6 Dec · Carousel 2 · \"It fits. Is it legal?\" · BLOG (BL-136)",
+  "headline": "It fits. Is it legal?",
+  "link": "blog/e46-aftermarket-wheels-germany",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver facelifted BMW E46 Touring from the side, on a black background."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "AI image of a silver facelifted BMW E46 Coupé from the side, on black."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| An aftermarket wheel needs papers that name your car | blog `e46-aftermarket-wheels-germany` intro (StVZO § 19, official text, linked in the article) | n/a (official text) |\n| Approvals name the E46 by type codes, each with a kW range | blog `e46-aftermarket-wheels-germany` (S1) | HIGH |\n| No new Teilegutachten after 19 June 2025; usable until 19 June 2028 | blog `e46-aftermarket-wheels-germany` (S2, KBA FAQ) | n/a (official text) |\n\nPictures: E46BUILD Touring post-facelift stage (the article's hero) and Coupé post-facelift stage, whole. Not legal advice; no brand named.",
+  "importedFrom": "rendered by the Writer (BL-118 batch Dec) with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
