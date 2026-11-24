@@ -51,8 +51,10 @@ const BEFORE = Date.parse("2026-11-09T16:00:30Z");
 
 describe("Instagram queue (BL-118)", () => {
   test("the imported posts (P1–P18) are all valid, 1080 × 1350 JPEG, one alt text per slide, one a day at 18:00 Berlin from Fri 6 Nov", () => {
-    const { posts, broken } = readQueue();
+    const { posts: all, broken } = readQueue();
     assert.deepEqual(broken, []);
+    // BL-118 batch Dec: posts after P18 follow the blog (one every 2 days), so only P1–P18 are pinned here; later ones are checked below.
+    const posts = all.slice(0, 18);
     assert.deepEqual(posts.map((p) => p.id), [
       "2026-11-06-hello-e46build",
       "2026-11-07-m-sport-package-ii",
@@ -80,6 +82,13 @@ describe("Instagram queue (BL-118)", () => {
     }
     assert.deepEqual(posts.map((p) => p.slides.length), [3, 3, 2, 3, 1, 1, 1, 2, 1, 2, 1, 1, 3, 4, 3, 1, 1, 3]);
     assert.deepEqual(posts.map((p) => p.publishAtMs - posts[0].publishAtMs), posts.map((_, d) => d * 86_400_000), "one a day");
+    for (const p of all) {
+      assert.ok(["draft", "approved"].includes(p.status), `${p.id}: the PO approves each post`);
+      assert.match(p.publishAt, /T18:00:00\+01:00$/, `${p.id}: 18:00 Berlin`);
+      assert.ok(p.caption.indexOf("\n—\n") > 0, `${p.id}: German first, then English`);
+    }
+    const days = all.map((p) => p.publishAt.slice(0, 10));
+    assert.equal(new Set(days).size, days.length, "at most one post per Berlin day (the cron publishes one a day)");
   });
   test("a broken post is reported, not published: wrong size, missing alt text, too many hashtags, unlisted slides", () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ig-"));
