@@ -1,0 +1,128 @@
+---
+# BL-131 — Writer draft, English. PO 24 Nov 2026 (via the Editor). No seller named.
+title: "Will that wheel fit your E46? Bolt pattern, centre bore, offset and brakes"
+description: "Bolt pattern, centre bore, bolts, brakes, width and offset: what decides whether a wheel fits an E46, what a listing must state, and what is still unknown."
+date: 2026-11-24
+updated: 2026-11-26
+publishAt: "2026-11-26"
+lang: en
+slug: will-that-wheel-fit-your-e46
+card: BL-131
+author: "zauberlabs"
+tags:
+  - E46
+  - wheels
+  - buying guide
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: "/blog/will-that-wheel-fit-your-e46/hero.webp"
+  alt: "AI image of a silver BMW E46 seen from the side, its front wheel and tyre in the arch, on a black background"
+  credit: "AI-generated illustration"
+  licence: "zauberlabs, own AI illustration (PO)"
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "E46 wheel physical fitment (research note): bolt pattern, hub bore, wheel bolts, brake sizes by model, M3 as its own class, factory sizes and what stays unknown; built from E46 specialist, brake-maker and vendor pages, no BMW document reached"
+    type: research note on specialist and vendor sources
+    path: "e46-wheel-physical-fitment.md"
+    confidence: MEDIUM
+    note: "MEDIUM: specialist and vendor sources that agree with each other, not a BMW document. The note itself rates bolt pattern and hub bore HIGH (several sources agree); we keep MEDIUM and attribute every figure."
+  - id: S2
+    title: "T-089 — German wheel approvals for the E46: ABE certificates and their BMW annexes, which give the bolt pattern (5/120) and each version's centre bore or the hub ring it needs"
+    type: type-approval documents (ABE annexes), read 2026-10-13
+    path: "t089-aftermarket-wheels/T-089-findings.md; raw/ (ABE annexes)"
+    confidence: MEDIUM
+    note: "Context only for this article: what an approval paper states. The legal side of aftermarket wheels is not covered here."
+  - id: S3
+    title: "T-035 — BMW's parts catalogue (ETK) for six E46 factory wheel styles, read on mirrors: sizes and offsets, e.g. Style 68M 17×7.5 ET41 front / 17×8.5 ET50 rear, Style 135M 18×8 ET47 / 18×8.5 ET50"
+    type: ETK mirror (Europe side two mirrors agree)
+    path: "t035-evidence/REPORT.md; t035-evidence/applicability-by-market.md"
+    confidence: MEDIUM
+  - id: S4
+    title: "BMW USA PressClub, 'BMW M3 CSL' press kit, March 2003: the standard M3's front brakes 325 × 28 mm against the CSL's 345 × 28 mm (web: https://press.bmwgroup.com/usa/article/attachment/T0022168EN_US/41493)"
+    type: BMW-authored (press kit)
+    path: "t188-m3-wheels/raw/bmwpress-us-T0022168EN_US-att.html.gz; t188-m3-wheels/README.md §2"
+    confidence: HIGH
+---
+
+Every E46 wheel question comes down to three layers: does it bolt on, does it clear the brakes, and does it sit right in the arch with its tyre. The first layer is close to settled. The second depends on the wheel's design. The third, for anything that isn't a factory size, is still largely unknown. Here is what we can say for each, and how sure we are.
+
+## Layer one: does it bolt on?
+
+**Bolt pattern.** E46 specialist sources give five bolts on a 120 mm circle (5×120) for every E46, the M3 included. [S1, MEDIUM] The German approval papers we read for aftermarket E46 wheels list the same pattern for every E46 row. [S2, MEDIUM] A wheel with any other bolt pattern doesn't fit; there's nothing to adapt.
+
+**Centre bore.** The same specialist sources give the hub as 72.56 mm, often written 72.6. [S1, MEDIUM] The bore in the wheel decides what happens next:
+- **The same size:** the wheel centres on the hub.
+- **Larger:** it bolts on, but needs a hub-centric ring to centre it. Rings are sold for exactly this, for example to fit wheels with a 74.1 mm bore. [S1, MEDIUM] The German approvals we read name either the bore of each wheel version or the exact ring it needs. [S2, MEDIUM]
+- **Smaller:** it can't seat on the hub at all. That follows from the geometry; no source was needed. [S1, MEDIUM]
+
+**Bolts.** Specialist sources give the E46's wheel bolt thread as M12×1.5. [S1, MEDIUM] Listings for BMW's own wheel bolt describe a 60° cone seat; our sources for that are thin, so check that the wheel is made for that seat, or buy the bolts the wheel maker specifies. [S1, LOW] If you add spacers, the bolts must be longer by the spacer's thickness. As a specialist's rule of thumb, each bolt should screw in at least 10 mm, about six and a half turns. [S1, MEDIUM]
+
+## Layer two: does it clear the brakes?
+
+This is where "E46" stops being one car. The front discs differ by model, according to the brake makers' and specialists' pages our research read: [S1, MEDIUM]
+
+| Model | Front disc | Confidence |
+| --- | --- | --- |
+| 323i to 328i | about 300 mm | LOW |
+| 330i, 330Ci, 330xi | 325 mm | MEDIUM |
+| M3 | 325 mm | HIGH |
+| M3 with the Competition package, and the CSL | 345 mm | MEDIUM |
+
+As our research's sources give them. The 323i–328i figure rests on vendor listings only [S1, LOW]; the standard M3's 325 mm is from BMW's own press kit for the CSL [S4, HIGH]; and for the 316i, 318i, 320i, the diesels and the Compact we have no reliable figure. [S1, MEDIUM]
+
+The catch is that brake clearance depends on the **wheel's own design**, not on its diameter. One vendor of a 345 mm brake kit says it clears "most 18 inch wheels and selected 17 inch" ones, which is exactly the point: some 17-inch wheels do, some don't. [S1, MEDIUM] Whether a 16-inch wheel clears a 330's front brakes is contested in owner forums, and the factory record doesn't settle it either: BMW's catalogue, as read on our mirrors, doesn't list the 16-inch Style 45 for any 330. [S1, MEDIUM] [S3, MEDIUM] We cover that gap in [Six wheels, three families: how to tell E46 factory wheels apart](/en/blog/telling-e46-wheels-apart).
+
+So for any wheel that isn't a factory fitment on your model, the only reliable answer is the wheel maker's own statement of which brakes it clears.
+
+## Layer three: width, offset and the tyre
+
+Width and offset (ET) decide where the rim sits in the arch. Here the honest answer is short: **no published source gives a numeric limit** for any E46 body, not for maximum width or minimum offset. [S1, MEDIUM]
+
+What we do have are BMW's own factory sizes, and each is proven on the cars BMW fitted it to. BMW's catalogue, as read on our mirrors, lists the Style 68M at 7.5×17 ET41 in front and 8.5×17 ET50 at the rear, and the Style 135M at 8×18 ET47 and 8.5×18 ET50. [S3, MEDIUM] A wheel that matches a factory size for your model is the safest bet there is.
+
+Simple arithmetic shows why offset matters. Specialist sources give the M3's own rear wheel as 9×18 ET26. [S1, MEDIUM] Compared with a non-M rear at 8.5×18 ET50, that puts the outer rim edge about 30 mm further out. That's arithmetic, not a fitment verdict, but it's reason enough not to assume an M3 rear wheel fits a non-M arch. [S1, MEDIUM]
+
+Specialists publish size suggestions beyond the factory sizes, but with conditions: extra camber, trimmed wheel-arch liners, rolled arches, spacers. They don't say which size needs which. [S1, MEDIUM] Treat them as what worked on someone's car, not as a promise for yours.
+
+And the tyre is part of it. Arch and suspension clearance belong to the wheel and tyre together, so a wheel that fits on one tyre size can rub on another. [S1, MEDIUM]
+
+## The M3 is its own car
+
+For wheels, treat the M3 as a separate car. Specialist and spec sources give it a wider track, its own offsets, and bigger brakes on the Competition and CSL models. [S1, MEDIUM] One specialist describes the M3's front clearance from the factory as "enormous" and the rear as "tight". [S1, MEDIUM] Nothing in this article about non-M cars applies to an M3 by default, and the reverse is true too.
+
+## What a wheel listing must tell you
+
+Before you pay, the listing (or the seller, in writing) should give you:
+- **Diameter, width and offset, per axle** if front and rear differ. For a factory BMW wheel, the size cast into the back of the rim settles it; see [The wheel that fits an E46, unless the E46 is American](/en/blog/e46-factory-wheels-by-market) for which sizes BMW listed for which market.
+- **Bolt pattern:** 5×120.
+- **Centre bore**, or the hub-centric rings that come with it.
+- **Bolt seat**, if the wheel isn't BMW's own.
+- **Which brakes it clears**, for any non-factory wheel on a 330, an M3 or a car with upgraded brakes.
+- **The tyre size**, if it's sold with tyres.
+- **Whether it's a genuine BMW wheel at all.** [Genuine or replica? How to read an E46 wheel listing](/en/blog/e46-wheel-listing-genuine-or-replica) shows how to read that from the listing.
+
+In Germany, aftermarket wheels also come with approval papers that name the cars and tyre sizes they're approved for. [S2, MEDIUM]
+
+## What is still unknown
+
+- A numeric width or offset limit for any E46 body.
+- Whether the Sedan, Touring, Coupé, Convertible or Compact differ at the arch. Owners say the Coupé has more room, but no source we trust measures it.
+- The brake sizes of the smaller-engined models, the diesels and the Compact.
+- Whether a 16-inch wheel clears a 330's front brakes.
+- What the all-wheel-drive xi models' different struts mean for wheel clearance.
+
+All of these come from the same research note. [S1, MEDIUM] Two figures in this article are weaker still: the 60° bolt seat and the 300 mm brake discs rest on vendor listings only. [S1, LOW]
+
+## Notes on the evidence
+
+**Confidence.** No BMW document in our research states the E46's bolt pattern or hub size, and only one gives a brake size: the M3's, in its CSL press kit. The figures here come from E46 specialists, a brake maker and vendors that agree with each other, plus the German approval papers for the bolt pattern (MEDIUM), so every figure is attributed. The bolt seat and the 300 mm disc size rest on vendor listings only (LOW). The standard M3's 325 mm front disc is from BMW's own CSL press kit (HIGH). Factory wheel sizes come from BMW's parts catalogue, read on mirrors (MEDIUM).
+
+**Not established.** See the list above.
+
+## What comes next
+
+Our E46 configurator is live: it shows which wheels fit your car and links to sellers where we've found one.

@@ -1,0 +1,128 @@
+---
+# BL-131 — Writer draft, German. Same slug and sources as en.mdx. No seller named.
+title: "Passt die Felge an deinen E46? Lochkreis, Mittenloch, Einpresstiefe und Bremsen"
+description: "Lochkreis, Mittenloch, Radschrauben, Bremsen, Breite und Einpresstiefe: was entscheidet, ob eine Felge an einen E46 passt, und was eine Anzeige nennen muss."
+date: 2026-11-24
+updated: 2026-11-26
+publishAt: "2026-11-26"
+lang: de
+slug: will-that-wheel-fit-your-e46
+card: BL-131
+author: "zauberlabs"
+tags:
+  - E46
+  - wheels
+  - buying guide
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: "/blog/will-that-wheel-fit-your-e46/hero.webp"
+  alt: "KI-Bild eines silbernen BMW E46 von der Seite, das Vorderrad mit Reifen im Radkasten, auf schwarzem Hintergrund"
+  credit: "KI-generierte Illustration"
+  licence: "zauberlabs, own AI illustration (PO)"
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "Physische Passform von E46-Felgen (Recherchenotiz): Lochkreis, Nabendurchmesser, Radschrauben, Bremsgrößen je Modell, der M3 als eigene Klasse, Werksgrößen und was offen ist; aus Seiten von E46-Spezialisten, eines Bremsenherstellers und von Händlern, kein BMW-Dokument erreicht"
+    type: Recherchenotiz zu Spezialisten- und Händlerquellen
+    path: "e46-wheel-physical-fitment.md"
+    confidence: MEDIUM
+    note: "MEDIUM: Spezialisten- und Händlerquellen, die übereinstimmen, kein BMW-Dokument. Die Notiz selbst bewertet Lochkreis und Nabe mit HIGH; wir bleiben bei MEDIUM und nennen bei jeder Zahl die Herkunft."
+  - id: S2
+    title: "T-089 — deutsche Felgengutachten für den E46: ABE-Bescheinigungen und ihre BMW-Anlagen mit Lochkreis (5/120) und dem Mittenloch jeder Version oder dem nötigen Zentrierring"
+    type: Typgenehmigungen (ABE-Anlagen), gelesen 2026-10-13
+    path: "t089-aftermarket-wheels/T-089-findings.md; raw/ (ABE annexes)"
+    confidence: MEDIUM
+    note: "Hier nur als Hintergrund: was ein Gutachten angibt. Die rechtliche Seite von Nachrüstfelgen behandelt dieser Artikel nicht."
+  - id: S3
+    title: "T-035 — BMWs Teilekatalog (ETK) für sechs E46-Werksfelgen, gelesen auf Spiegeln: Größen und Einpresstiefen, z. B. Style 68M 7,5×17 ET41 vorn / 8,5×17 ET50 hinten, Style 135M 8×18 ET47 / 8,5×18 ET50"
+    type: "ETK-Spiegel (Europa-Seite: zwei Spiegel stimmen überein)"
+    path: "t035-evidence/REPORT.md; t035-evidence/applicability-by-market.md"
+    confidence: MEDIUM
+  - id: S4
+    title: "BMW USA PressClub, Pressemappe 'BMW M3 CSL', März 2003: die Vorderbremse des normalen M3 mit 325 × 28 mm gegenüber 345 × 28 mm beim CSL (web: https://press.bmwgroup.com/usa/article/attachment/T0022168EN_US/41493)"
+    type: BMW-Dokument (Pressemappe)
+    path: "t188-m3-wheels/raw/bmwpress-us-T0022168EN_US-att.html.gz; t188-m3-wheels/README.md §2"
+    confidence: HIGH
+---
+
+Jede Felgenfrage am E46 hat drei Ebenen: Lässt sie sich anschrauben, passt sie über die Bremse, und sitzt sie mit ihrem Reifen richtig im Radkasten? Die erste Ebene ist fast geklärt. Die zweite hängt vom Design der Felge ab. Die dritte ist für alles, was keine Werksgröße ist, noch weitgehend offen. Hier steht, was wir zu jeder Ebene sagen können und wie sicher wir sind.
+
+## Ebene eins: Lässt sie sich anschrauben?
+
+**Lochkreis.** E46-Spezialisten geben für jeden E46, auch den M3, fünf Schrauben auf einem Kreis von 120 mm an (5×120). [S1, MEDIUM] Die deutschen Gutachten für Nachrüstfelgen, die wir gelesen haben, nennen für jede E46-Zeile denselben Lochkreis. [S2, MEDIUM] Eine Felge mit anderem Lochkreis passt nicht, da gibt es nichts anzupassen.
+
+**Mittenloch.** Dieselben Spezialisten geben die Nabe mit 72,56 mm an, oft als 72,6 geschrieben. [S1, MEDIUM] Das Mittenloch der Felge entscheidet, wie es weitergeht:
+- **Gleich groß:** Die Felge zentriert sich auf der Nabe.
+- **Größer:** Sie lässt sich anschrauben, braucht aber einen Zentrierring. Solche Ringe gibt es genau dafür, etwa für Felgen mit 74,1 mm Mittenloch. [S1, MEDIUM] Die deutschen Gutachten, die wir gelesen haben, nennen entweder das Mittenloch jeder Felgenversion oder genau den Ring, den sie braucht. [S2, MEDIUM]
+- **Kleiner:** Sie sitzt gar nicht auf der Nabe. Das folgt aus der Geometrie, dafür braucht es keine Quelle. [S1, MEDIUM]
+
+**Radschrauben.** Spezialisten geben das Gewinde der E46-Radschrauben mit M12×1,5 an. [S1, MEDIUM] Angebote für BMWs eigene Radschraube beschreiben einen 60°-Kegelbund; unsere Quellen dafür sind dünn, prüf also, ob die Felge für diesen Bund gemacht ist, oder nimm die Schrauben, die der Felgenhersteller vorgibt. [S1, LOW] Mit Spurplatten müssen die Schrauben um die Dicke der Platte länger sein. Als Faustregel eines Spezialisten soll jede Schraube mindestens 10 mm tief einschrauben, etwa sechseinhalb Umdrehungen. [S1, MEDIUM]
+
+## Ebene zwei: Passt sie über die Bremse?
+
+Hier hört „E46" auf, ein einziges Auto zu sein. Die vorderen Bremsscheiben unterscheiden sich je Modell, nach den Seiten von Bremsenherstellern und Spezialisten, die unsere Recherche gelesen hat: [S1, MEDIUM]
+
+| Modell | Bremsscheibe vorn | Belastbarkeit |
+| --- | --- | --- |
+| 323i bis 328i | etwa 300 mm | LOW |
+| 330i, 330Ci, 330xi | 325 mm | MEDIUM |
+| M3 | 325 mm | HIGH |
+| M3 mit Competition-Paket und CSL | 345 mm | MEDIUM |
+
+So, wie die Quellen unserer Recherche sie nennen. Der Wert für 323i bis 328i beruht nur auf Händlerangeboten [S1, LOW]; die 325 mm des normalen M3 stammen aus BMWs eigener Pressemappe zum CSL [S4, HIGH]; und für 316i, 318i, 320i, die Diesel und den Compact haben wir keine verlässliche Zahl. [S1, MEDIUM]
+
+Der Haken: Ob eine Felge über die Bremse passt, hängt vom **Design der Felge** ab, nicht vom Durchmesser. Ein Händler eines 345-mm-Bremsensatzes schreibt, er passe hinter „most 18 inch wheels and selected 17 inch" – genau das ist der Punkt: manche 17-Zoll-Felgen passen, manche nicht. [S1, MEDIUM] Ob eine 16-Zoll-Felge über die Vorderbremse eines 330 passt, ist in Besitzerforen umstritten, und die Werksangaben klären es auch nicht: BMWs Katalog, wie wir ihn auf Spiegeln gelesen haben, führt die 16-Zoll-Style-45 bei keinem 330. [S1, MEDIUM] [S3, MEDIUM] Mehr zu dieser Lücke steht in [Sechs Felgen, drei Familien: So unterscheidest du die Werksfelgen des E46](/de/blog/telling-e46-wheels-apart).
+
+Bei jeder Felge, die an deinem Modell nicht ab Werk verbaut war, ist die einzige verlässliche Antwort also die Angabe des Felgenherstellers, über welche Bremsen sie passt.
+
+## Ebene drei: Breite, Einpresstiefe und der Reifen
+
+Breite und Einpresstiefe (ET) entscheiden, wo die Felge im Radkasten sitzt. Die ehrliche Antwort ist kurz: **Keine veröffentlichte Quelle nennt einen Zahlenwert** für irgendeine E46-Karosserie, weder für die größte Breite noch für die kleinste Einpresstiefe. [S1, MEDIUM]
+
+Was es gibt, sind BMWs eigene Werksgrößen, und jede ist an den Autos erprobt, an die BMW sie verbaut hat. BMWs Katalog, wie wir ihn auf Spiegeln gelesen haben, führt die Style 68M mit 7,5×17 ET41 vorn und 8,5×17 ET50 hinten und die Style 135M mit 8×18 ET47 und 8,5×18 ET50. [S3, MEDIUM] Eine Felge, die einer Werksgröße für dein Modell entspricht, ist die sicherste Wahl, die es gibt.
+
+Einfache Rechnung zeigt, warum die Einpresstiefe zählt. Spezialisten geben das eigene Hinterrad des M3 mit 9×18 ET26 an. [S1, MEDIUM] Gegenüber einem Nicht-M-Hinterrad mit 8,5×18 ET50 sitzt der äußere Felgenrand damit etwa 30 mm weiter außen. Das ist Rechnen, kein Passform-Urteil, aber Grund genug, nicht anzunehmen, dass ein M3-Hinterrad in einen Nicht-M-Radkasten passt. [S1, MEDIUM]
+
+Spezialisten veröffentlichen auch Größenvorschläge jenseits der Werksgrößen, aber mit Bedingungen: mehr Sturz, gekürzte Radhausschalen, gebördelte Kotflügel, Spurplatten. Welche Größe was braucht, sagen sie nicht. [S1, MEDIUM] Nimm sie als das, was an jemandes Auto funktioniert hat, nicht als Zusage für deins.
+
+Und der Reifen gehört dazu. Freigang zu Radkasten und Fahrwerk ist eine Sache von Felge und Reifen zusammen; eine Felge, die mit einer Reifengröße passt, kann mit einer anderen schleifen. [S1, MEDIUM]
+
+## Der M3 ist ein eigenes Auto
+
+Bei Felgen behandelst du den M3 am besten als eigenes Auto. Spezialisten- und Datenquellen geben ihm eine breitere Spur, eigene Einpresstiefen und beim Competition-Paket und CSL größere Bremsen. [S1, MEDIUM] Ein Spezialist beschreibt den Platz vorn ab Werk als „enormous" und hinten als „tight". [S1, MEDIUM] Nichts in diesem Artikel über Nicht-M-Autos gilt automatisch für einen M3, und umgekehrt genauso.
+
+## Was eine Felgenanzeige nennen muss
+
+Bevor du bezahlst, sollte die Anzeige (oder der Verkäufer schriftlich) angeben:
+- **Durchmesser, Breite und Einpresstiefe, je Achse**, wenn vorn und hinten unterschiedlich sind. Bei einer Werksfelge von BMW klärt das die Größe, die hinten in die Felge gegossen ist; welche Größen BMW für welchen Markt führte, steht in [The wheel that fits an E46, unless the E46 is American](/en/blog/e46-factory-wheels-by-market) (auf Englisch).
+- **Lochkreis:** 5×120.
+- **Mittenloch**, oder die Zentrierringe, die dabei sind.
+- **Schraubenbund**, wenn es keine BMW-Felge ist.
+- **Über welche Bremsen sie passt**, bei jeder Nicht-Werksfelge an einem 330, einem M3 oder einem Auto mit größerer Bremse.
+- **Die Reifengröße**, wenn Reifen dabei sind.
+- **Ob es überhaupt eine Original-BMW-Felge ist.** Wie du das aus der Anzeige liest, steht in [Original oder Nachbau? So liest du eine E46-Felgenanzeige](/de/blog/e46-wheel-listing-genuine-or-replica).
+
+In Deutschland gehören zu Nachrüstfelgen außerdem Papiere, die die Autos und Reifengrößen nennen, für die sie zugelassen sind. [S2, MEDIUM]
+
+## Was noch offen ist
+
+- Ein Zahlenwert für Breite oder Einpresstiefe bei irgendeiner E46-Karosserie.
+- Ob sich Limousine, Touring, Coupé, Cabrio oder Compact am Radkasten unterscheiden. Besitzer sagen, das Coupé habe mehr Platz, aber keine Quelle, der wir trauen, misst es.
+- Die Bremsgrößen der kleineren Motoren, der Diesel und des Compact.
+- Ob eine 16-Zoll-Felge über die Vorderbremse eines 330 passt.
+- Was die anderen Federbeine der Allrad-xi-Modelle für den Freigang bedeuten.
+
+All das stammt aus derselben Recherchenotiz. [S1, MEDIUM] Zwei Angaben in diesem Artikel sind noch dünner belegt: der 60°-Kegelbund und die 300-mm-Bremsscheiben beruhen nur auf Händlerangeboten. [S1, LOW]
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Kein BMW-Dokument in unserer Recherche nennt Lochkreis oder Nabengröße des E46, und nur eines nennt eine Bremsgröße: die des M3, in der Pressemappe zum CSL. Die Zahlen hier stammen von E46-Spezialisten, einem Bremsenhersteller und Händlern, die übereinstimmen, dazu den deutschen Gutachten für den Lochkreis (MEDIUM); jede Zahl ist deshalb mit Herkunft genannt. Schraubenbund und die Scheibengröße 300 mm beruhen nur auf Händlerangeboten (LOW). Die 325-mm-Vorderscheibe des normalen M3 stammt aus BMWs eigener Pressemappe zum CSL (HIGH). Die Werksgrößen stammen aus BMWs Teilekatalog, gelesen auf Spiegeln (MEDIUM).
+
+**Nicht geklärt.** Siehe die Liste oben.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Felgen an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben.
