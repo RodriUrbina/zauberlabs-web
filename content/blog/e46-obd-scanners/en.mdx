@@ -31,10 +31,10 @@ sources:
     note: "HIGH for what BMW of North America wrote about US cars. Whether European E46s changed on the same date isn't stated in it."
   - id: S2
     title: "Directive 98/69/EC (13 October 1998, amending Directive 70/220/EEC), as adopted, read on legislation.gov.uk: on-board diagnostics (OBD) for emission control on petrol and diesel cars, the diesel dates, the standardised connector, what OBD must monitor (web: https://www.legislation.gov.uk/eudr/1998/69/contents/adopted)"
-    type: official text (EU directive)
+    type: official text
     path: "web: legislation.gov.uk/eudr/1998/69 (Annex I point 24 section 8; Annex XI); EUR-Lex refused automated reading"
-    confidence: LOW
-    note: "Graded LOW and attributed in the text, as our rule for official texts requires. Read on 24 Nov 2026. The 2000/2001 dates: Article 2(2) and 2(3), https://www.legislation.gov.uk/eudr/1998/69/article/2/adopted. Not legal advice."
+    confidence: n/a
+    note: "An official text is the source itself and carries no grade (PO rule, 24 Nov 2026); linked in the text. Read on 24 Nov 2026. The 2000/2001 dates: Article 2(2) and 2(3), https://www.legislation.gov.uk/eudr/1998/69/article/2/adopted. Not legal advice."
   - id: S3
     title: "BMW's parts catalogue (ETK), European E46 Sedan 320i (M52) and 330i (M54), group 'Diagnosis plug', read on one mirror on 24 Nov 2026: an OBD II socket cover and a 16-pole contact, plus engine-compartment 'Diagnose' plug parts; no dates shown"
     type: ETK mirror (one mirror)
@@ -60,16 +60,16 @@ That training is written for US cars. For European cars, BMW's parts catalogue, 
 
 ## What the law asked for
 
-In the EU, on-board diagnostics for emissions (often called EOBD) came with Directive 98/69/EC, as we read it. [S2, LOW]
-- **Petrol cars** must have an OBD system for emission control, with the directive's dates of 1 January 2000 for new types and 1 January 2001 for all new cars. [S2, LOW]
-- **Diesel cars** must have one from 1 January 2003 for new types and from 1 January 2004 for all new cars, with later dates for heavier cars and those with more than six seats. [S2, LOW]
-- **The socket is standardised:** the connection to the tester has to meet an ISO standard, and it has to be readily accessible for service staff. [S2, LOW]
+In the EU, on-board diagnostics for emissions (often called EOBD) came with [Directive 98/69/EC](https://www.legislation.gov.uk/eudr/1998/69/contents/adopted), as we read it. [S2]
+- **Petrol cars** must have an OBD system for emission control, with [the directive's dates](https://www.legislation.gov.uk/eudr/1998/69/article/2/adopted) of 1 January 2000 for new types and 1 January 2001 for all new cars. [S2]
+- **Diesel cars** must have one from 1 January 2003 for new types and from 1 January 2004 for all new cars, with later dates for heavier cars and those with more than six seats. [S2]
+- **The socket is standardised:** the connection to the tester has to meet an ISO standard, and it has to be readily accessible for service staff. [S2]
 
 So an early diesel E46 may not have been required to have full EOBD. Whether BMW fitted it earlier on a given diesel, the directive can't tell you.
 
 ## What a generic scanner reads
 
-The directive describes OBD as a system that must indicate the failure of emission-related components, and for petrol engines it must at least watch things like the catalytic converter, misfires and the oxygen sensors. [S2, LOW] That's what a generic OBD or EOBD scanner is built for: the emission-related faults behind the engine warning light, read through the standardised socket. [S2, LOW]
+The directive describes OBD as a system that must indicate the failure of emission-related components, and for petrol engines it must at least watch things like the catalytic converter, misfires and the oxygen sensors. [S2] That's what a generic OBD or EOBD scanner is built for: the emission-related faults behind the engine warning light, read through the standardised socket. [S2]
 
 On a car with a lit engine warning light, that's often enough to point you to the right area.
 
@@ -89,7 +89,7 @@ So:
 
 ## Notes on the evidence
 
-**Confidence.** The sockets, the June 2000 change and the split between emissions data and BMW's own diagnosis line come from BMW of North America's training (HIGH, for US cars); the coding example from BMW's installation instructions (HIGH). The EU rules come from Directive 98/69/EC as adopted, read on legislation.gov.uk because EUR-Lex refused automated reading (graded LOW and attributed, as our rule for official texts requires). The European parts come from one mirror of BMW's catalogue, with no dates (MEDIUM).
+**Confidence.** The sockets, the June 2000 change and the split between emissions data and BMW's own diagnosis line come from BMW of North America's training (HIGH, for US cars); the coding example from BMW's installation instructions (HIGH). The EU rules come from Directive 98/69/EC as adopted, read on legislation.gov.uk because EUR-Lex refused automated reading, and linked: the text itself is the source. The European parts come from one mirror of BMW's catalogue, with no dates (MEDIUM).
 
 **Not established.** When European E46s lost the 20-pin socket. Which early diesel E46s have full EOBD. What any particular scanner model can read; we don't test or recommend products.
 
