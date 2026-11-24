@@ -1,0 +1,89 @@
+---
+# BL-135 — Writer draft, English. PO 24 Nov 2026 (via the Editor). Evidence: e46build t281-clubsport (branch), t282-spoiler-lip-sellers. No seller named; no part numbers in the body.
+title: "The Coupé's rear M spoiler lip: primed or painted, and which Coupés it fits"
+description: "The small lip on an E46 Coupé's boot lid: what BMW's catalogue lists, primed or painted to your colour, which Coupés it fits, and what buying one involves."
+date: 2026-11-24
+updated: 2026-12-04
+publishAt: "2026-12-04"
+lang: en
+slug: e46-coupe-rear-m-spoiler-lip
+card: BL-135
+author: "zauberlabs"
+tags:
+  - E46
+  - bumpers
+  - Coupé
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: "/blog/e46-coupe-rear-m-spoiler-lip/hero.webp"
+  alt: "AI image of a silver E46 Coupé from behind, with an M rear bumper and a small lip spoiler on the boot lid"
+  credit: "AI-generated illustration"
+  licence: "zauberlabs, own AI illustration (PO)"
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW Germany price lists for the E46 Coupé, 2002-09, 2004-03 and 2004-09: how BMW named the Coupé's rear spoiler in the Clubsport package, and the separate wing option"
+    type: BMW-authored (price lists), PO-supplied; private, facts only, not quoted
+    path: "web: e46build branch agent-6/T-281-clubsport 9f50ace0, docs/research/t281-clubsport/findings.md (not on master)"
+    confidence: HIGH
+    note: "HIGH for what the lists state (Germany). Read from an unmerged research branch."
+  - id: S2
+    title: "BMW's parts catalogue (ETK), E46 Coupé group 'Rear spoiler', read on one mirror: one spoiler, primed, with a painted variant ('to your colour code'), no option condition printed; its part page lists every European Coupé model and the M3, not the CSL"
+    type: ETK mirror (one mirror)
+    path: "t281-clubsport raw (branch agent-6/T-281-clubsport); E46BUILD packages/fitment-engine/src/e46-bumper-catalogue.ts (T-281 note, master); t282-spoiler-lip-sellers/findings.md"
+    confidence: MEDIUM
+  - id: S3
+    title: "European BMW parts dealers' pages for the Coupé spoiler, checked on 9 November 2026: which version is on sale new, at what price, and the terms for the painted one (no seller named)"
+    type: retailer pages (what each page said on the check date)
+    path: "t282-spoiler-lip-sellers/findings.md"
+    confidence: MEDIUM
+    note: "MEDIUM: unnamed dealer pages on one day. Prices and stock change."
+---
+
+Look at the boot lid of an E46 Coupé with the M package and you'll often see it: a thin lip along the trailing edge. It's a small part with a surprising amount of confusion around it: which Coupés it fits, whether it should come painted, and what it's even called.
+
+## One part in BMW's catalogue
+
+BMW's parts catalogue, as read on our mirror, has one rear spoiler in the E46 Coupé's group: an "M spoiler rear", sold **primed**. [S2, MEDIUM] Next to it the catalogue lists a **painted** version, painted "to your colour code". [S2, MEDIUM] No option condition is printed for it: the catalogue doesn't tie the lip to the M package or to any other option. [S2, MEDIUM]
+
+Its part page lists every European Coupé model, from the 316Ci to the 330Cd, and the M3. It doesn't list the M3 CSL, which BMW's catalogue treats as its own model. [S2, MEDIUM] The Sedan has its own boot spoiler in BMW's catalogue, a different part; don't buy one for the other. [S2, MEDIUM]
+
+## What BMW called it
+
+BMW's German price lists name the Coupé's rear spoiler as part of the Clubsport package, and the name moves around: [S1, HIGH]
+- **September 2002:** an "M Heckspoiler" (M rear spoiler).
+- **March 2004:** a "freistehender Heckflügel", a free-standing rear wing.
+- **September 2004:** a "Heckspoilerlippe", a rear spoiler lip, as standard, with a separate rear wing as an option (number 754, €650, only with the Clubsport).
+
+So "the Clubsport spoiler" can mean a lip or a wing, depending on the year. Whether the one spoiler in BMW's catalogue is the lip or the wing isn't settled by our sources. [S2, MEDIUM] E46BUILD treats it as the lip, the same small lip our Coupé M-rear picture shows.
+
+## Primed or painted
+
+- **Primed** is the version you'll find for sale new. When we checked European BMW parts dealers on 9 November 2026, two had it in stock, at about €193 and €209. [S3, MEDIUM] It needs painting in your car's colour before it goes on.
+- **Painted** sounds easier, but only one dealer listed it, at about €158: cheaper than primed. There was no way to enter a colour online, so the colour code has to be arranged with the dealer, and that dealer doesn't take back painted parts. [S3, MEDIUM]
+
+If you go painted, give the dealer your paint code in writing and get the colour confirmed before you pay. The code is on your car's paint plate. For most owners, primed plus a local paint shop is the safer route.
+
+## Buying one: what to check
+
+- **That it's the Coupé part.** BMW's genuine lip comes with BMW's number on the listing; the Sedan's boot spoiler is a different part. [S2, MEDIUM]
+- **That it's BMW's own.** Aftermarket lips sold as an "M3 look" or "CSL look" aren't BMW parts, even when they look alike.
+- **That your Coupé is on the list.** BMW's catalogue lists every European Coupé model and the M3, but not the CSL. [S2, MEDIUM]
+- **Used:** a used lip comes in its donor car's colour, and at the time of our check a used one cost more than a new primed one. [S3, MEDIUM]
+
+## In E46BUILD
+
+On a Coupé, E46BUILD offers the lip in the bumpers step, primed or painted, for every European Coupé model and the M3, but not the CSL. [S2, MEDIUM] For the bumpers it goes with, see [Forget the engine: what really decides which bumper fits your E46](/en/blog/e46-bumpers-body-era-package).
+
+## Notes on the evidence
+
+**Confidence.** How BMW named the spoiler and the wing comes from BMW's German price lists (HIGH), read from a research branch that isn't merged yet. What the catalogue lists, and for which Coupés, comes from one mirror of BMW's parts catalogue (MEDIUM). Prices, stock and the painted version's terms are what dealers' pages said on 9 November 2026 (MEDIUM).
+
+**Not established.** Whether the catalogue's one spoiler is the lip or the Clubsport's free-standing wing; the wing has no part number in our evidence. Whether the lip fits the Convertible: the catalogue group we read is the Coupé's.
+
+## What comes next
+
+Our E46 configurator is live: it shows which bumpers fit your car and links to sellers where we've found one.
