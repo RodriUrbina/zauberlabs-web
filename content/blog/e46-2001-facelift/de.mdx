@@ -1,0 +1,112 @@
+---
+# BL-134 — Writer draft, German. Same slug and sources as en.mdx. No seller named.
+title: "Das Facelift von 2001: was sich am E46 geändert hat, wann und bei welcher Karosserie"
+description: "Der E46 bekam sein Facelift in Etappen: Limousine und Touring im September 2001, Coupé und Cabrio im März 2003, der Compact nur hinten, der M3 kaum."
+date: 2026-11-24
+updated: 2026-12-02
+publishAt: "2026-12-02"
+lang: de
+slug: e46-2001-facelift
+card: BL-134
+author: "zauberlabs"
+tags:
+  - E46
+  - facelift
+  - buying guide
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: "/blog/e46-2001-facelift/hero.webp"
+  alt: "KI-Bild einer silbernen BMW E46 Limousine nach dem Facelift, von der Seite, vor schwarzem Hintergrund"
+  credit: "KI-generierte Illustration"
+  licence: "zauberlabs, own AI illustration (PO)"
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW (GB) Pressemappe zum Modelljahr 2002, 'The new BMW 3 Series' (26. Oktober 2001): die Änderungen an Limousine und Touring außen, von BMW aufgelistet"
+    type: BMW-Dokument (Pressemappe)
+    path: "t055-infotainment-fitment/raw/bmw-press-uk-2001-39145.txt"
+    confidence: HIGH
+  - id: S2
+    title: "BMWs Teilekatalog (ETK) für Limousine und Touring, gelesen auf Spiegeln mit Monatsansicht: Facelift-Scheinwerfer und -Stoßfänger ab 'Sep '01'"
+    type: ETK-Spiegel
+    path: "t030-evidence/sedan-touring-markets.json; t045-bumper-pairs/T-045-findings.md (F2, R2)"
+    confidence: HIGH
+  - id: S3
+    title: "T-024 — Facelift von Coupé und Cabrio in BMWs Teilekatalog, zwei Spiegel mit Monatsansicht: der Wechsel im März 2003; Scheinwerfer, Niere, Motorhaube, Frontstoßfänger, Blinker und Seitenblinker ändern sich; der Umrüstsatz für die Rückleuchten 'Facelift 2003'; Scheinwerfer und Niere des M3"
+    type: ETK-Spiegel (zwei)
+    path: "t024-t025-evidence/coupe-facelift.json"
+    confidence: HIGH
+  - id: S4
+    title: "Der Compact: Rückleuchten in BMWs Teilekatalog im März 2003 geteilt (Klarglas zu ganz rot), ein Spiegel; seine Scheinwerfer ohne Datumsteilung (T-025)"
+    type: ETK-Spiegel (ein Spiegel)
+    path: "E46BUILD packages/types/src/e46-factory-era.ts (T-197 research note); t024-t025-evidence/compact.json"
+    confidence: MEDIUM
+  - id: S5
+    title: "Die Ära-Regeln von E46BUILD: Das Jahr, das ein Besitzer angibt, ist das Jahr der Erstzulassung und kann Monate nach dem Bau liegen; rund um einen Wechsel fragt E46BUILD deshalb nach dem Auto, statt zu raten (T-309); Screenshot der Produktion einer Limousine von 2002 mit der Frage nach den aktuellen Scheinwerfern, 16. November 2026"
+    type: eigenes Produkt (Code und Bildschirm des Konfigurators)
+    path: "E46BUILD packages/types/src/e46-factory-era.ts (T-309 note); https://e46.zauberlabs.de"
+    confidence: n/a
+---
+
+Der E46 bekam sein Facelift nicht auf einmal. BMW änderte Limousine und Touring im September 2001, Coupé und Cabrio im März 2003, gab dem Compact nur ein neues Heck und ließ das Gesicht des M3 fast unberührt. Wenn du Scheinwerfer, Stoßfänger oder Rückleuchten kaufst, ist die Seite dieser Linie, auf der dein Auto steht, wichtiger als sein Motor.
+
+## Limousine und Touring: September 2001
+
+BMWs eigener Teilekatalog, wie wir ihn auf Spiegeln gelesen haben, lässt die Facelift-Scheinwerfer und -Stoßfänger von Limousine und Touring ab September 2001 beginnen. [S2, HIGH] Das Ergebnis stellte BMW in seiner Pressemappe zum Modelljahr 2002 vom 26. Oktober 2001 vor. [S1, HIGH] Die Änderungen listet sie selbst auf: [S1, HIGH]
+
+- **neue Scheinwerfer**, gewölbt, mit den Blinkern hinter Klarglas;
+- **runde Nebelscheinwerfer** statt der eckigen;
+- **eine breitere Niere**;
+- **neue Motorhaube und Kotflügel**: Der Powerdome der Haube läuft jetzt bis zu den A-Säulen, die alte Linie über den Radhäusern ist weg, die Kotflügel bekommen eine neue Sicke, und tropfenförmige Seitenblinker sitzen höher am Kotflügel;
+- **eine neue Frontschürze** bei beiden;
+- **eine neue Heckschürze und eine neu aufgeteilte Rückleuchte nur bei der Limousine**: Die Außenform der Leuchte bleibt, aber das Bremslicht sitzt jetzt oben. Der Touring bekam nur die neue Front.
+
+BMWs britische Pressemappe fügt hinzu, BMW „would not call it a facelift", weil der 3er von 1998 kaum alt genug sei, um „facial ageing" zu zeigen. [S1, HIGH] Besitzer nennen es trotzdem so.
+
+<Figure src="/blog/e46-2001-facelift/sedan-pre.webp" alt="KI-Bild einer silbernen BMW E46 Limousine vor dem Facelift, von der Seite, vor schwarzem Hintergrund" width={2400} height={1340} caption="Vor September 2001: die Limousine, wie sie zuerst aussah. Das Bild oben zeigt sie danach." credit="KI-generierte Illustration" />
+
+Unter dem Blech kündigt dieselbe Pressemappe zwei neue Vierzylinder und neue Sonderausstattungen an, darunter Bi-Xenon-Scheinwerfer und einen Breitbild-Navigationsmonitor. [S1, HIGH]
+
+## Coupé und Cabrio: ihr eigenes Facelift, März 2003
+
+Coupé und Cabrio behielten 2001 ihr erstes Gesicht. Ihr Facelift kam im März 2003: In BMWs Teilekatalog endet auf zwei Spiegeln jedes Frontteil vor dem Facelift im März 2003, und jedes Facelift-Teil beginnt dann, gleich bei Coupé und Cabrio, in Europa und den USA. [S3, HIGH] Was sich laut Katalog ändert: [S3, HIGH]
+- die Scheinwerfer, jetzt mit eingebautem Blinker;
+- Niere und Motorhaube;
+- der Frontstoßfänger;
+- die vorderen Blinker und die Seitenblinker;
+- hinten heißt ein Umrüstsatz für die Rückleuchten „Facelift 2003".
+
+Eines änderte sich bei Coupé und Cabrio doch im September 2001: Im Katalog weicht ihr Xenon-Scheinwerfer dann dem Bi-Xenon, ohne dass sich das Aussehen ändert. [S3, HIGH] Deshalb kann ein Coupé von 2002 Bi-Xenon haben und trotzdem „vor dem Facelift" sein.
+
+## Der Compact: nur das Heck, März 2003
+
+Der Compact hatte von Anfang an seine eigene Front. BMWs Teilekatalog, wie wir ihn auf einem Spiegel gelesen haben, zeigt für seine Scheinwerfer keine Datumsteilung. [S4, MEDIUM] Was sich im März 2003 änderte, waren seine Rückleuchten: bis dahin mit Klarglas, danach ganz rot. [S4, MEDIUM]
+
+## Der M3: durchgehend sein eigenes Gesicht
+
+Der M3 behielt bei all dem seine eigenen Scheinwerfer und seine Niere: BMWs Katalog, wie wir ihn auf Spiegeln gelesen haben, zeigt für ihn keine Facelift-Front, nur den Wechsel von Xenon zu Bi-Xenon im September 2001. [S3, HIGH]
+
+## Ist dein Auto davor oder danach?
+
+Es entscheidet der Baumonat, nicht das Modelljahr oder die Zulassung. Die Erstzulassung kann Monate nach dem Bau liegen; eine Limousine mit Erstzulassung Anfang 2002 kann also noch vor dem Facelift gebaut sein. [S5] Am Auto selbst erkennst du es bei Limousine und Touring am leichtesten vorn: gewölbte Scheinwerfer mit Klarglas-Blinkern, runde Nebelscheinwerfer und die tropfenförmigen Seitenblinker gehören zum Facelift. [S1, HIGH]
+
+## Was das für Teile bedeutet
+
+- **Scheinwerfer:** Das Facelift ändert die Form des Scheinwerfers, Einheiten vor und nach dem Facelift sind also verschiedene Teile. [S2, HIGH] Die Einzelheiten stehen in [Two dates decide every E46 headlight, and 2001 is the trap](/en/blog/e46-headlight-changeovers) (auf Englisch).
+- **Stoßfänger:** Der Frontstoßfänger ändert sich mit dem Facelift jeder Karosserie, bei der Limousine auch der hintere. [S1, HIGH] [S2, HIGH] [S3, HIGH] Mehr in [Forget the engine: what really decides which bumper fits your E46](/en/blog/e46-bumpers-body-era-package) (auf Englisch).
+- **Der Compact:** Seine Front ist seine eigene. Siehe [Gleiches Emblem, andere Nase](/de/blog/e46-compact-front-end-bumpers) und [The loner](/en/blog/e46-compact-headlights) (auf Englisch).
+
+E46BUILD fragt nur, wovon die Passform abhängt. Bei einem Auto, das nahe an einem Wechsel zugelassen wurde, etwa einer Limousine von 2002, fragt es, welche Scheinwerfer dein Auto hat. [S5]
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Was sich an Limousine und Touring änderte, stammt aus BMWs eigener Pressemappe vom Oktober 2001 (HIGH). Die Wechsel im September 2001 und März 2003 stammen aus BMWs Teilekatalog auf Spiegeln mit Monatsansicht (HIGH). Die Rückleuchten des Compact und seine unveränderten Scheinwerfer stammen aus einem Spiegel (MEDIUM).
+
+**Nicht geklärt.** Ob sich die Seitenblinker des M3 im März 2003 änderten; der Katalog zeigt beide Versionen. Was sich bei Coupé und Cabrio im März 2003 über Front und Rückleuchten hinaus änderte.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Teile an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben.
