@@ -1,0 +1,98 @@
+---
+# BL-137 — Writer draft, German. Same slug and sources as en.mdx. No seller, no product, no brand recommended. Not legal advice.
+title: "OBD-Scanner und der E46: was ein einfacher Scanner sagen kann und was nicht"
+description: "Wo die Diagnosedosen des E46 sitzen, wann die Dose im Motorraum wegfiel, was ein günstiger OBD-Scanner liest und wofür es ein BMW-Diagnosegerät braucht."
+date: 2026-11-24
+updated: 2026-12-08
+publishAt: "2026-12-08"
+lang: de
+slug: e46-obd-scanners
+card: BL-137
+author: "zauberlabs"
+tags:
+  - E46
+  - diagnostics
+  - buying guide
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # kein Hero: wir haben kein korrektes Bild der Diagnosedosen des E46 (PO-Regel: kein korrektes Bild, kein Bild)
+  alt: "Die 16-polige Diagnosedose im Fahrerfußraum eines BMW E46"
+  placeholder: "Kein Hero geplant. Falls später eins dazukommt: unser eigenes Foto der 16-poligen Dose im Fahrerfußraum eines E46; kein Text auf dem Auto."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "Schulungsunterlage von BMW of North America, „2001 Model Year Changes“ (Oktober 2000): die 20-polige Diagnosedose im Motorraum entfällt beim E46 ab 6/00; die 16-polige OBD-II-Dose im Fahrerfußraum links der Lenksäule als einziger Diagnosezugang; vorher nur abgasrelevante Daten über die 16-polige Dose"
+    type: BMW-Dokument (Schulungsunterlage, US-Markt)
+    path: "t057-infotainment-manuals/raw/bmw-model-year-changes-extract.txt"
+    confidence: HIGH
+    note: "HIGH für das, was BMW of North America über US-Autos schreibt. Ob europäische E46 zum selben Datum umgestellt wurden, steht dort nicht."
+  - id: S2
+    title: "Richtlinie 98/69/EG (13. Oktober 1998, zur Änderung der Richtlinie 70/220/EWG) in der beschlossenen Fassung, gelesen auf legislation.gov.uk: On-Board-Diagnose (OBD) für die Abgasüberwachung bei Benzinern und Diesel, die Diesel-Daten, die genormte Schnittstelle, was OBD überwachen muss (web: https://www.legislation.gov.uk/eudr/1998/69/contents/adopted)"
+    type: amtlicher Text (EU-Richtlinie)
+    path: "web: legislation.gov.uk/eudr/1998/69 (Annex I point 24 section 8; Annex XI); EUR-Lex refused automated reading"
+    confidence: LOW
+    note: "Nach unserer Regel für amtliche Texte mit LOW bewertet und im Text zugeordnet. Gelesen am 24. Nov. 2026. Keine Rechtsberatung."
+  - id: S3
+    title: "BMWs Teilekatalog (ETK), europäische E46 Limousine 320i (M52) und 330i (M54), Gruppe „Diagnosestecker“, gelesen auf einem Spiegel am 24. Nov. 2026: eine Abdeckung für die OBD-II-Dose und ein 16-poliger Kontakt, dazu Teile des Diagnosesteckers im Motorraum; keine Daten angegeben"
+    type: ETK-Spiegel (ein Spiegel)
+    path: "web: https://www.bmwfans.info/parts-catalog/E46-Sedan/Europe/320i-M52/L-N/browse/vehicle_electrical_system/diagnosis_plug (and the 330i-M54 equivalent)"
+    confidence: MEDIUM
+    note: "MEDIUM: ein Spiegel, und die Seite zeigt keine Daten, also kann sie nicht sagen, wann welche Dose verbaut war."
+  - id: S4
+    title: "BMW-Einbauanleitung für die Nachrüstung der Bluetooth-Freisprecheinrichtung im E46 (Stand 08.2002): die Nachrüstung muss mit BMWs Werkstatt-Diagnosesystemen (DISplus, MoDiC III oder GT1) codiert werden"
+    type: BMW-Dokument (Einbauanleitung)
+    path: "t057-infotainment-manuals/T-057-findings.md §4.3; raw/eba-5985de.txt"
+    confidence: HIGH
+---
+
+Eine Warnleuchte im Kombiinstrument und ein günstiger OBD-Scanner auf dem Beifahrersitz: So fangen die meisten Besitzer an, einen E46 zu diagnostizieren. Manchmal sagt der Scanner genau, was los ist. Oft sagt er weniger, als man denkt. Hier steht, was er erreicht, und warum.
+
+## Zwei Dosen, und eine fiel weg
+
+Frühe E46 hatten, zumindest in den USA, zwei Diagnosedosen: eine runde 20-polige Dose im Motorraum und eine 16-polige OBD-Dose im Innenraum. [S1, HIGH] Laut der Schulungsunterlage von BMW of North America zum Modelljahr 2001 verlor der E46 die 20-polige Dose ab der Produktion im Juni 2000. [S1, HIGH] Ab dann ist die 16-polige OBD-Dose im Fahrerfußraum, links der Lenksäule, der einzige Diagnosezugang. [S1, HIGH]
+
+BMWs Schulungsunterlage erklärt auch, warum das wichtig war. Vor der Umstellung lieferte die 16-polige Dose nur abgasrelevante Daten; BMWs eigene Diagnoseleitung erreichte das Auto über die 20-polige Dose. Ab Juni 2000 liegt diese Leitung auch an der 16-poligen Dose an. [S1, HIGH]
+
+Diese Unterlage ist für US-Autos geschrieben. Für europäische Autos führt BMWs Teilekatalog, wie wir ihn auf einem Spiegel gelesen haben, sowohl eine Abdeckung für die OBD-II-Dose mit 16-poligem Kontakt als auch Teile des Diagnosesteckers im Motorraum, aber ohne Daten. [S3, MEDIUM] Das genaue Umstellungsdatum für europäische Autos ist also nicht geklärt; schau an deinem Auto nach: Sitzt unter der Motorhaube eine runde Dose, hat es beide.
+
+## Was das Gesetz verlangte
+
+In der EU kam die On-Board-Diagnose für Abgase (oft EOBD genannt), wie wir sie lesen, mit der Richtlinie 98/69/EG. [S2, LOW]
+- **Benziner** müssen ein OBD-System für die Abgasüberwachung haben. Die allgemeinen Daten der Richtlinie für Pkw sind der 1. Januar 2000 für neue Typen und der 1. Januar 2001 für alle Neuwagen; ihr OBD-Abschnitt selbst nennt für Benziner kein eigenes Datum. [S2, LOW]
+- **Diesel** müssen eins ab dem 1. Januar 2003 für neue Typen und ab dem 1. Januar 2004 für alle Neuwagen haben, mit späteren Daten für schwerere Autos und solche mit mehr als sechs Sitzplätzen. [S2, LOW]
+- **Die Schnittstelle ist genormt:** Die Verbindung zum Testgerät muss einer ISO-Norm entsprechen und für das Werkstattpersonal leicht zugänglich sein. [S2, LOW]
+
+Ein früher Diesel-E46 musste also womöglich noch keine vollständige EOBD haben. Ob BMW sie bei einem bestimmten Diesel schon früher eingebaut hat, sagt die Richtlinie nicht.
+
+## Was ein einfacher Scanner liest
+
+Die Richtlinie beschreibt OBD als System, das den Ausfall abgasrelevanter Bauteile anzeigen muss, und bei Benzinern muss es mindestens Dinge wie den Katalysator, Zündaussetzer und die Lambdasonden überwachen. [S2, LOW] Genau dafür ist ein einfacher OBD- oder EOBD-Scanner gebaut: die abgasrelevanten Fehler hinter der Motorkontrollleuchte, ausgelesen über die genormte Dose. [S2, LOW]
+
+Bei einem Auto mit leuchtender Motorkontrollleuchte reicht das oft, um die richtige Stelle zu finden.
+
+## Was er nicht liest
+
+BMWs Schulungsunterlage trennt zwei Dinge: die abgasrelevanten Daten, die die genormte OBD-Verbindung immer geliefert hat, und BMWs eigene Diagnoseleitung, die die Werkstattgeräte nutzen. [S1, HIGH] Ein einfacher Scanner ist für das Erste gebaut. Die anderen Systeme des Autos, etwa Airbag, ABS und DSC oder die Karosserieelektronik, sind nicht abgasrelevant, also liegen sie außerhalb dessen, wofür ein einfacher Scanner gemacht ist. Das ist unsere Lesart, wie BMW und die Richtlinie die beiden Arten von Daten beschreiben, keine Aussage über einen bestimmten Scanner.
+
+Also:
+- **Eine Airbag- oder ABS-Leuchte** braucht meist ein Gerät, das BMWs Diagnose spricht, keinen einfachen OBD-Scanner.
+- **Codieren** braucht BMWs eigene Geräte. BMWs Einbauanleitung für die Bluetooth-Nachrüstung im E46 sagt zum Beispiel, dass das Auto danach mit BMWs Werkstatt-Diagnosesystemen codiert werden muss. [S4, HIGH] Welche Nachrüstungen das betrifft, steht in unserem [Infotainment-Artikel](/de/blog/e46-infotainment-dash).
+
+## Wann es sich lohnt, einen Scanner einzustecken
+
+- **Bevor du einen gebrauchten E46 kaufst.** Lies die Fehler aus und frag nach allen gespeicherten, auch wenn die Leuchte aus ist.
+- **Vor und nach dem Einbau von Teilen.** Ein Scan vorher zeigt, was schon da war; ein Scan danach, ob du etwas dazugebracht hast.
+- **Wenn eine Leuchte angeht.** Erst auslesen. Einen Fehler zu löschen, ohne die Ursache zu beheben, schaltet die Leuchte nur aus, bis sie wiederkommt.
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Die Dosen, die Umstellung im Juni 2000 und die Trennung zwischen Abgasdaten und BMWs eigener Diagnoseleitung stammen aus der Schulungsunterlage von BMW of North America (HIGH, für US-Autos); das Beispiel zum Codieren aus BMWs Einbauanleitung (HIGH). Die EU-Regeln stammen aus der Richtlinie 98/69/EG in der beschlossenen Fassung, gelesen auf legislation.gov.uk, weil EUR-Lex das automatische Lesen verweigerte (mit LOW bewertet und zugeordnet, wie es unsere Regel für amtliche Texte verlangt). Die europäischen Teile stammen aus einem Spiegel von BMWs Katalog, ohne Daten (MEDIUM).
+
+**Nicht geklärt.** Wann europäische E46 die 20-polige Dose verloren. Welche frühen Diesel-E46 eine vollständige EOBD haben. Was ein bestimmtes Scanner-Modell lesen kann; wir testen oder empfehlen keine Produkte.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Teile an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben.

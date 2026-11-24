@@ -1,0 +1,98 @@
+---
+# BL-137 — Writer draft, English. PO request 24 Nov 2026 (via the Editor). No seller, no product, no brand recommended. Not legal advice.
+title: "OBD scanners and the E46: what a generic scanner can and can't tell you"
+description: "Where the E46's diagnostic sockets are, when the engine-bay socket went, what a cheap OBD scanner reads, and what still needs a BMW-level tool."
+date: 2026-11-24
+updated: 2026-12-08
+publishAt: "2026-12-08"
+lang: en
+slug: e46-obd-scanners
+card: BL-137
+author: "zauberlabs"
+tags:
+  - E46
+  - diagnostics
+  - buying guide
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # no hero: we have no correct picture of the E46's diagnostic sockets (PO rule: no correct image, no image)
+  alt: "The 16-pin diagnostic socket in the driver's footwell of a BMW E46"
+  placeholder: "No hero planned. If one is added later: our own photo of an E46's 16-pin socket in the driver's footwell; no text on the car."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW of North America training, '2001 Model Year Changes' (October 2000): the 20-pin diagnostic socket deleted from the engine compartment on the E46 from 6/00; the 16-pin OBD II socket in the driver's footwell left of the steering column as the only diagnosis port; before that, only emissions-relevant data through the 16-pin socket"
+    type: BMW-authored (training document, US market)
+    path: "t057-infotainment-manuals/raw/bmw-model-year-changes-extract.txt"
+    confidence: HIGH
+    note: "HIGH for what BMW of North America wrote about US cars. Whether European E46s changed on the same date isn't stated in it."
+  - id: S2
+    title: "Directive 98/69/EC (13 October 1998, amending Directive 70/220/EEC), as adopted, read on legislation.gov.uk: on-board diagnostics (OBD) for emission control on petrol and diesel cars, the diesel dates, the standardised connector, what OBD must monitor (web: https://www.legislation.gov.uk/eudr/1998/69/contents/adopted)"
+    type: official text (EU directive)
+    path: "web: legislation.gov.uk/eudr/1998/69 (Annex I point 24 section 8; Annex XI); EUR-Lex refused automated reading"
+    confidence: LOW
+    note: "Graded LOW and attributed in the text, as our rule for official texts requires. Read on 24 Nov 2026. Not legal advice."
+  - id: S3
+    title: "BMW's parts catalogue (ETK), European E46 Sedan 320i (M52) and 330i (M54), group 'Diagnosis plug', read on one mirror on 24 Nov 2026: an OBD II socket cover and a 16-pole contact, plus engine-compartment 'Diagnose' plug parts; no dates shown"
+    type: ETK mirror (one mirror)
+    path: "web: https://www.bmwfans.info/parts-catalog/E46-Sedan/Europe/320i-M52/L-N/browse/vehicle_electrical_system/diagnosis_plug (and the 330i-M54 equivalent)"
+    confidence: MEDIUM
+    note: "MEDIUM: one mirror, and the page shows no dates, so it can't say when each socket was fitted."
+  - id: S4
+    title: "BMW installation instructions for the E46 Bluetooth hands-free kit (08.2002): the retrofit must be coded with BMW's workshop diagnosis systems (DISplus, MoDiC III or GT1)"
+    type: BMW-authored (installation instructions)
+    path: "t057-infotainment-manuals/T-057-findings.md §4.3; raw/eba-5985de.txt"
+    confidence: HIGH
+---
+
+A warning light on the dash and a cheap OBD scanner on the seat: it's how most owners start diagnosing an E46. Sometimes the scanner tells you exactly what's wrong. Often it tells you less than you think. Here is what it can reach, and why.
+
+## Two sockets, and one went away
+
+Early E46s, at least in the US, had two diagnostic sockets: a round 20-pin socket under the bonnet, and a 16-pin OBD socket inside the car. [S1, HIGH] According to BMW of North America's training on the 2001 model year, the E46 lost the 20-pin socket from June 2000 production. [S1, HIGH] From then on, the 16-pin OBD socket in the driver's footwell, to the left of the steering column, is the only diagnosis port. [S1, HIGH]
+
+BMW's training also explains why that mattered. Before the change, the 16-pin socket gave access only to emissions-relevant data; BMW's own diagnosis line reached the car through the 20-pin socket. From June 2000, that line runs to the 16-pin socket too. [S1, HIGH]
+
+That training is written for US cars. For European cars, BMW's parts catalogue, as read on our mirror, lists both an OBD II socket cover with a 16-pole contact and the engine-bay diagnosis plug parts, but without dates. [S3, MEDIUM] So the exact changeover date for European cars isn't established; check your car: if there's a round socket under the bonnet, it has both.
+
+## What the law asked for
+
+In the EU, on-board diagnostics for emissions (often called EOBD) came with Directive 98/69/EC, as we read it. [S2, LOW]
+- **Petrol cars** must have an OBD system for emission control. The directive's general dates for cars are 1 January 2000 for new types and 1 January 2001 for all new cars; its OBD section itself gives no separate date for petrol cars. [S2, LOW]
+- **Diesel cars** must have one from 1 January 2003 for new types and from 1 January 2004 for all new cars, with later dates for heavier cars and those with more than six seats. [S2, LOW]
+- **The socket is standardised:** the connection to the tester has to meet an ISO standard, and it has to be readily accessible for service staff. [S2, LOW]
+
+So an early diesel E46 may not have been required to have full EOBD. Whether BMW fitted it earlier on a given diesel, the directive can't tell you.
+
+## What a generic scanner reads
+
+The directive describes OBD as a system that must indicate the failure of emission-related components, and for petrol engines it must at least watch things like the catalytic converter, misfires and the oxygen sensors. [S2, LOW] That's what a generic OBD or EOBD scanner is built for: the emission-related faults behind the engine warning light, read through the standardised socket. [S2, LOW]
+
+On a car with a lit engine warning light, that's often enough to point you to the right area.
+
+## What it can't read
+
+BMW's training separates two things: the emissions-relevant data the standard OBD connection always gave, and BMW's own diagnosis line, which its workshop tools use. [S1, HIGH] A generic scanner is built for the first. The car's other systems, such as the airbag, ABS and DSC, or the body electronics, aren't emission-related, so they're outside what a generic scanner is made to read. That's our reading of how BMW and the directive describe the two kinds of data, not a statement about any particular scanner.
+
+So:
+- **An airbag or ABS light** usually needs a tool that speaks BMW's diagnosis, not a generic OBD scanner.
+- **Coding** needs BMW's own tools. BMW's instructions for its E46 Bluetooth kit, for example, say the car must be coded afterwards with BMW's workshop diagnosis systems. [S4, HIGH] Our [infotainment article](/en/blog/e46-infotainment-dash) covers which kits need it.
+
+## When a scanner is worth plugging in
+
+- **Before you buy a used E46.** Read the codes, and ask about any that are stored, even if the warning light is off.
+- **Before and after fitting parts.** A scan before tells you what was already there; a scan after tells you whether you added anything.
+- **When a light comes on.** Read it first. Clearing a code without fixing the cause only switches the light off until it comes back.
+
+## Notes on the evidence
+
+**Confidence.** The sockets, the June 2000 change and the split between emissions data and BMW's own diagnosis line come from BMW of North America's training (HIGH, for US cars); the coding example from BMW's installation instructions (HIGH). The EU rules come from Directive 98/69/EC as adopted, read on legislation.gov.uk because EUR-Lex refused automated reading (graded LOW and attributed, as our rule for official texts requires). The European parts come from one mirror of BMW's catalogue, with no dates (MEDIUM).
+
+**Not established.** When European E46s lost the 20-pin socket. Which early diesel E46s have full EOBD. What any particular scanner model can read; we don't test or recommend products.
+
+## What comes next
+
+Our E46 configurator is live: it shows which parts fit your car and links to sellers where we've found one.
