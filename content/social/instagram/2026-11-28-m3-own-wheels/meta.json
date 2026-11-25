@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-11-28T18:00:00+01:00",
+  "status": "approved",
+  "title": "Sat 28 Nov · Single · \"M3. Its own wheels.\" · BLOG (BL-132)",
+  "headline": "M3. Its own wheels.",
+  "link": "blog/e46-m3-own-wheels",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver BMW E46 M3 Coupé from the side, on 18-inch M double-spoke wheels, on a black background."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| 18-inch Style 67M standard on M3 Coupé and Convertible; 8×18 ET47 / 9×18 ET26 | blog `e46-m3-own-wheels` (S1, S2) | HIGH |\n| 19-inch Style 67M forged and polished, option 792 | blog `e46-m3-own-wheels` (S2) | HIGH |\n| Front discs 325 mm (M3), 345 mm (Competition, CSL) | blog `e46-m3-own-wheels` (S3, S4) | HIGH |\n\nPicture: the article's own hero, whole. The tag says only \"M3 Coupé\"; the wheel's style isn't named on the picture.",
+  "importedFrom": "rendered by the Writer (BL-118 batch Dec) with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
