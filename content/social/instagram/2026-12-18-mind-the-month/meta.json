@@ -1,0 +1,19 @@
+{
+  "publishAt": "2026-12-18T18:00:00+01:00",
+  "status": "draft",
+  "title": "Fri 18 Dec · Carousel 2 · \"Mind the month.\" · BLOG (BL-142)",
+  "headline": "Mind the month.",
+  "link": "blog/e46-build-month",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver pre-facelift BMW E46 Sedan from the side, on a black background."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "AI image of a silver facelifted BMW E46 Sedan from the side, on a black background."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| Sedan facelift headlights and bumpers from September 2001 | blog `e46-build-month` (S1, two mirrors) | HIGH |\n| Coupé and Convertible facelift March 2003 | blog `e46-build-month` (S1) | HIGH |\n| Airbag steering wheels change June/July 2000 (as read on one mirror) | blog `e46-build-month` (S2) | MEDIUM |\n| The year owners know is usually first registration, can lag the build by months | blog `e46-build-month` (S5, E46BUILD era rules) | n/a |\n\nPictures: the facelift article's two Sedan pictures (pre and post), whole. Both slides FIT FACT.",
+  "importedFrom": "rendered by the Writer with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}

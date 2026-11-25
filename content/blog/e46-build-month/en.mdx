@@ -1,0 +1,101 @@
+---
+# BL-142 — Writer draft, English. PO 25 Nov 2026 (via the Editor). Mostly links existing articles. No seller named.
+title: "What your E46's build month tells you, and where to find it"
+description: "On an E46 the build month, not the year or the registration, decides which parts fit. The changeovers in one place, and where the month is printed."
+date: 2026-11-25
+updated: 2026-12-18
+publishAt: "2026-12-18"
+lang: en
+slug: e46-build-month
+card: BL-142
+author: "zauberlabs"
+tags:
+  - E46
+  - buying guide
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # no hero: the article is a list of dates; the facelift picture sits in the body
+  alt: "A BMW E46 Sedan before and after its September 2001 facelift"
+  placeholder: "No hero planned. The body reuses the facelift article's before/after Sedan pictures."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMW's parts catalogue (ETK), read on two mirrors with month views: the Sedan and Touring facelift parts from September 2001, the Coupé and Convertible facelift in March 2003, xenon to bi-xenon in September 2001"
+    type: ETK mirrors (two)
+    path: "t024-t025-evidence/coupe-facelift.json; t030-evidence/sedan-touring-markets.json; t045-bumper-pairs/T-045-findings.md"
+    confidence: HIGH
+  - id: S2
+    title: "BMW's parts catalogue (ETK), read on one mirror with date columns: the airbag steering wheels change in June/July 2000 (Sedan, Touring, Coupé); the Compact's rear lights change in March 2003"
+    type: ETK mirror (one mirror)
+    path: "t047-smart-airbag-date/T-047-findings.md; t024-t025-evidence/compact.json"
+    confidence: MEDIUM
+    note: "MEDIUM: one mirror prints these dates."
+  - id: S3
+    title: "BMW of North America training, '2001 Model Year Changes' (October 2000): the 20-pin diagnostic socket deleted on the E46 from 6/00 production"
+    type: BMW-authored (training document, US market)
+    path: "t057-infotainment-manuals/raw/bmw-model-year-changes-extract.txt"
+    confidence: HIGH
+    note: "HIGH for US cars."
+  - id: S4
+    title: "Official text: US 49 CFR § 567.4, the certification label (location; 'Month and year of manufacture'), 2024 edition on govinfo.gov"
+    type: official text
+    path: "web: https://www.govinfo.gov/content/pkg/CFR-2024-title49-vol6/pdf/CFR-2024-title49-vol6-sec567-4.pdf (read 25 Nov 2026)"
+    confidence: n/a
+    note: "Official texts are the source itself and carry no grade (PO rule, 24 Nov 2026). US-market vehicles only. Not legal advice."
+  - id: S5
+    title: "E46BUILD's era rules: the year an owner gives is the year of first registration, which can lag the build by months, so near a changeover E46BUILD asks about the car instead (T-309)"
+    type: our own product (configurator code)
+    path: "E46BUILD packages/types/src/e46-factory-era.ts (T-309 note)"
+    confidence: n/a
+---
+
+Ask an E46 owner how old their car is and you'll get a year, usually the year it was first registered. For parts, that's often not enough. BMW changed the E46 on specific build months, and a car registered in one year can have been built months earlier, on the other side of a change. [S5] This article puts the changeovers in one place, says where the build month is printed where we know it, and links the articles with the details.
+
+## The changeovers in one place
+
+| Build month | What changed | Which bodies | Details |
+| --- | --- | --- | --- |
+| June 2000 | the airbag steering wheels change generation [S2, MEDIUM] | Sedan, Touring, Coupé | [June 2000: the airbag wheels](/en/blog/e46-june-2000-airbag-wheels) |
+| June 2000 | the 20-pin diagnostic socket under the bonnet goes, on US cars [S3, HIGH] | US cars | [OBD scanners and the E46](/en/blog/e46-obd-scanners) |
+| September 2001 | the facelift, with new headlights and bumpers among other parts [S1, HIGH] | Sedan, Touring | [The 2001 facelift](/en/blog/e46-2001-facelift) |
+| September 2001 | xenon gives way to bi-xenon [S1, HIGH] | Coupé, Convertible, M3 | [The 2001 facelift](/en/blog/e46-2001-facelift) |
+| March 2003 | their own facelift [S1, HIGH] | Coupé, Convertible | [The 2001 facelift](/en/blog/e46-2001-facelift) |
+| March 2003 | rear lights, clear to fully red [S2, MEDIUM] | Compact | [The 2001 facelift](/en/blog/e46-2001-facelift) |
+
+From BMW's parts catalogue as read on our mirrors, and BMW of North America's training for the socket.
+
+The headlights follow the same two dates, 09/2001 for the Sedan and Touring and 03/2003 for the Coupé and Convertible; which unit fits which side is in [Two dates decide every E46 headlight](/en/blog/e46-headlight-changeovers).
+
+<Figure src="/blog/e46-2001-facelift/sedan-pre.webp" alt="AI image of a silver pre-facelift BMW E46 Sedan from the side, on a black background" width={2400} height={1340} caption="A Sedan as built before September 2001. One month later it would have had the facelift parts." credit="AI-generated illustration" />
+
+## Why the month beats the year
+
+- **A year covers both sides** of most of these changes. A 2001 Sedan can be either side of September 2001; a 2003 Coupé either side of March.
+- **The registration year can lag the build.** The year most owners know is the year of first registration, and that can be months after the car left the factory. [S5] A Sedan first registered in early 2002 can still be a pre-facelift car.
+- **Two dates in the same month.** June 2000 changed both the airbag wheels and, on US cars, the diagnostic socket. A Sedan built in May 2000 and one built in July can need different airbag wheels. [S2, MEDIUM]
+
+This is also why E46BUILD asks about the car itself near a changeover, such as which headlights it has, rather than guessing from the year. [S5]
+
+## Where the build month is printed
+
+- **On US cars,** federal law requires a certification label next to the driver's seat, on the door hinge pillar, the door-latch post or the door edge, showing the "Month and year of manufacture". The rule's own example is "June 2000", or "6/00". [S4] See [49 CFR § 567.4](https://www.govinfo.gov/content/pkg/CFR-2024-title49-vol6/pdf/CFR-2024-title49-vol6-sec567-4.pdf).
+- **On European cars,** our research found no BMW document that says where the build date is printed. Ask the seller for the build month, or have it looked up from the car's vehicle identification number (VIN).
+
+## When it matters most
+
+- **Buying used parts for a car built near a changeover:** check the part on your car, not just the year. The part numbers settle it.
+- **Buying a car:** a "2002" in a listing doesn't tell you which side of September 2001 it's on. Ask for the build month.
+- **In E46BUILD:** if you're close to a changeover, it asks a question about the car instead of guessing. [S5] Answer from what's on the car.
+
+## Notes on the evidence
+
+**Confidence.** The facelift dates come from BMW's parts catalogue on two mirrors with month views (HIGH). The airbag-wheel change and the Compact's rear lights come from one mirror (MEDIUM). The diagnostic socket comes from BMW of North America's training (HIGH, US cars). The US label rule is the official text itself, linked. The registration lag is how E46BUILD reads an owner's year (our own product).
+
+**Not established.** Where the build date is printed on a European E46. Whether the US label rule's current wording matches the edition in force in 2000; we link the 2024 edition. Changeovers we haven't researched yet.
+
+## What comes next
+
+Our E46 configurator is live: it shows which parts fit your car and links to sellers where we've found one.
