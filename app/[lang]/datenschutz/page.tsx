@@ -257,8 +257,8 @@ export default async function Datenschutz({ params }: { params: Promise<{ lang: 
         Ohne Konto setzt E46BUILD keine Cookies und legt nichts im lokalen Speicher deines Browsers ab; für ein Konto siehe den folgenden Absatz. Zur
         Reichweitenmessung nutzt auch e46.zauberlabs.de Vercel Web Analytics – ohne Cookies, zusammengefasste Seitenaufrufe und Besucherzahlen sowie
         einzelne Ereignisse, die nur die jeweils genannte Angabe enthalten –, zur Messung der Ladezeiten Vercel Speed Insights; es gilt Abschnitt 5.
-        Kommst du über einen von uns gesetzten Link (Zusatz „from=…“: aus unserem Instagram-Profil, unserem Projekt-PDF, Reddit, einer
-        E-Mail oder WhatsApp) zu E46BUILD, übermitteln wir wie in Abschnitt 5 beim
+        Kommst du über einen von uns gesetzten Link (Zusatz „from=…“: aus unserem Instagram-Profil, unserem Blog, unserem Projekt-PDF, Reddit,
+        einer E-Mail oder WhatsApp) zu E46BUILD, übermitteln wir wie in Abschnitt 5 beim
         Laden der ersten Seite ein Ereignis nur mit dieser Herkunft und der aufgerufenen Seite (ohne Parameter); in deinem Browser wird dafür
         nichts gespeichert. Fehlt für einen Hinweistext von E46BUILD noch die deutsche Übersetzung, übermitteln wir ein Ereignis nur mit diesem
         englischen Text. Darüber hinaus setzt E46BUILD keine Tracking- oder Analyse-Tools ein. Schriftarten werden lokal ausgeliefert; es findet
