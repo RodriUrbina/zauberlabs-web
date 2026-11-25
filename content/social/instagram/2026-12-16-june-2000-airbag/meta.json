@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-12-16T18:00:00+01:00",
+  "status": "draft",
+  "title": "Wed 16 Dec · Single · \"June 2000. Mind the airbag.\" · BLOG (BL-141)",
+  "headline": "June 2000. Mind the airbag.",
+  "link": "blog/e46-june-2000-airbag-wheels",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a BMW E46 cockpit with the steering wheel removed, the bare steering column hub in the middle, dark interior."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| Sedan, Touring, Coupé airbag wheels change generation June/July 2000 | blog `e46-june-2000-airbag-wheels` (S1, one mirror) | MEDIUM |\n| Convertible, Compact, M3: Smart from the start | blog `e46-june-2000-airbag-wheels` (S1) | MEDIUM |\n| 32346753945 older four-spoke wheel; 32346753947 Smart | blog `e46-june-2000-airbag-wheels` (S1) | MEDIUM |\n| Build month decides, not first registration | blog `e46-june-2000-airbag-wheels` (framing; registration lag as in the facelift article) | n/a |\n\nPicture: E46BUILD cockpit stage picture (steering wheel removed), whole. Label FIT FACT (single slide).",
+  "importedFrom": "rendered by the Writer with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
