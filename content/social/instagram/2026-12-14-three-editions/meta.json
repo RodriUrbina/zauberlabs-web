@@ -1,0 +1,19 @@
+{
+  "publishAt": "2026-12-14T18:00:00+01:00",
+  "status": "draft",
+  "title": "Mon 14 Dec · Carousel 2 · \"Three Editions. One idea each.\" · BLOG (BL-140)",
+  "headline": "Three Editions. One idea each.",
+  "link": "blog/e46-edition-models",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver facelifted BMW E46 Sedan with M bumpers and M double-spoke wheels, on a wet salt flat."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "AI image of a silver facelifted BMW E46 Touring with M bumpers and M double-spoke wheels, on a wet salt flat."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| Editions from 2003, each its own model with its own price | blog `e46-edition-models` (S2 press kit 2003; S1 lists) | HIGH |\n| 316i Sedan Sept 2004: €24,150 / Lifestyle €25,650 / Exclusive €28,000 / Sport €28,530 | blog `e46-edition-models` (S1) | HIGH |\n| Edition Sport essentially the M Sport package with extra options | blog `e46-edition-models` (S2) | HIGH |\n| Sport adds seat heating, rain sensor, cube trim | blog `e46-edition-models` (S1) | HIGH |\n| Exclusive: leather, xenon, comfort; Lifestyle: colour and cloth (summary of the article's lists) | blog `e46-edition-models` (S1) | HIGH |\n\nPictures: E46BUILD M Sport II look pictures (Sedan = the article hero; Touring), whole; both tags say \"not an Edition itself\". Both slides INSIDER.",
+  "importedFrom": "rendered by the Writer with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
