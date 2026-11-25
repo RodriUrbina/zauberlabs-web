@@ -1,0 +1,19 @@
+{
+  "publishAt": "2026-12-08T18:00:00+01:00",
+  "status": "approved",
+  "title": "Tue 8 Dec · Carousel 2 · \"Sixteen pins. One port.\" · BLOG (BL-137)",
+  "headline": "Sixteen pins. One port.",
+  "link": "blog/e46-obd-scanners",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver pre-facelift BMW E46 Sedan from the side, on black."
+    },
+    {
+      "file": "2.jpg",
+      "alt": "AI image of a silver pre-facelift BMW E46 Touring from the side, on black."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| From 6/00 production, the 16-pin socket (driver's footwell, left of the column) is the only port; 20-pin socket deleted | blog `e46-obd-scanners` (S1, BMW NA training, US cars) | HIGH |\n| A generic OBD scanner is built for emission faults | blog `e46-obd-scanners` (S2, Directive 98/69/EC) | n/a (official text) |\n| Airbag, ABS and coding usually need a BMW-level tool (attributed: \"as we read it\") | blog `e46-obd-scanners` (S1 + S4, our reading) | HIGH sources, our reading |\n\nPictures: E46BUILD Sedan and Touring pre-facelift stages, whole (no socket picture exists). No product or brand named.",
+  "importedFrom": "rendered by the Writer (BL-118 batch Dec) with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
