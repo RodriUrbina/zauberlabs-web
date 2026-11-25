@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-12-12T18:00:00+01:00",
+  "status": "approved",
+  "title": "Sat 12 Dec · Single · \"Order by code.\" · BLOG (BL-139)",
+  "headline": "Order by code.",
+  "link": "blog/e46-paint-code",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver E46 Coupé from behind, with an M rear bumper and a small lip spoiler on the boot lid."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| Japan Red = japanrot II in the German price lists | blog `e46-paint-code` (S2 UK press kit 2001; S1 DE lists) | HIGH |\n| Laguna Seca Blue (BMW NA 2000) = Laguna-seca Blau (BMW DE press 2006) | blog `e46-paint-code` (S2) | HIGH |\n| Numerals in German names, unexplained | blog `e46-paint-code` (S1) | HIGH |\n| Painted parts sold by colour code; spoiler \"lackiert, CODE - UNI/MET.\" | blog `e46-paint-code` (S3, one mirror) | MEDIUM |\n| Sticker on a strut tower under the bonnet (owners on forums) | blog `e46-paint-code` (S4) | LOW |\n\nPicture: the spoiler-lip article's hero (Coupé M rear, spoiler in body colour), whole. No colour swatches. Label INSIDER (single slide).",
+  "importedFrom": "rendered by the Writer with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
