@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-12-26T18:00:00+01:00",
+  "status": "approved",
+  "title": "Sat 26 Dec · Single · \"Package 7RM.\" · BLOG (BL-147)",
+  "headline": "Package 7RM.",
+  "link": "blog/e46-light-package-adaptive-headlights",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver facelifted BMW E46 Coupé from the side, on black."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| 7RM from March 2004, Coupé/Convertible: xenon, washers, rain sensor, adaptive headlights; €910 | blog `e46-light-package-adaptive-headlights` (S1) | HIGH |\n| Separately in Sept 2004: xenon €790 + rain sensor €110 + adaptive €400 = €1,300 | blog (S1 prices, arithmetic) | HIGH |\n| Adaptive only with xenon and rain sensor | blog (S1) | HIGH |\n| Not a plug-in for a xenon-only car | blog, from the adaptive-headlights article (MEDIUM/LOW there) | MEDIUM |\n\nPicture: E46BUILD Coupé post-facelift wheel stage, whole; not claimed to show adaptive headlights. Label INSIDER (single slide).",
+  "importedFrom": "rendered by the Writer with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
