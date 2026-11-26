@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-12-20T18:00:00+01:00",
+  "status": "approved",
+  "title": "Sun 20 Dec · Single · \"Same car. Different numbers.\" · BLOG (BL-143)",
+  "headline": "Same car. Different numbers.",
+  "link": "blog/e46-us-market-catalogue",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver pre-facelift BMW E46 Coupé with the M front bumper, on a black background."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| 330Ci Coupé primed M front cover: US 51117893060, Europe 51117893057 | blog `e46-us-market-catalogue` (S1, one mirror) | MEDIUM |\n| Coupé/Convertible standard covers differ; Sedan/Touring covers don't (in the groups compared) | blog `e46-us-market-catalogue` (S1) | MEDIUM |\n| Painted parts (CODE - UNI/MET.) listed for Europe only in the bumper groups | blog `e46-us-market-catalogue` (S1) | MEDIUM |\n| European 330i Sedan's 4 km/h impact parts not in the US tree | blog `e46-us-market-catalogue` (S1) | MEDIUM |\n\nWording per the PO rule (26 Nov): \"per BMW's parts catalogue\", no \"mirror\" on the post. Picture: the Clubsport article's hero (pre-facelift Coupé, M front), whole. Label INSIDER (single slide).",
+  "importedFrom": "rendered by the Writer with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
