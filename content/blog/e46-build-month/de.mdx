@@ -1,0 +1,101 @@
+---
+# BL-142 — Writer draft, German. Same slug and sources as en.mdx. No seller named.
+title: "Was der Baumonat deines E46 verrät, und wo du ihn findest"
+description: "Beim E46 entscheidet der Baumonat, nicht das Jahr oder die Zulassung, welche Teile passen. Die Umstellungen auf einen Blick, und wo der Monat steht."
+date: 2026-11-25
+updated: 2026-12-18
+publishAt: "2026-12-18"
+lang: de
+slug: e46-build-month
+card: BL-142
+author: "zauberlabs"
+tags:
+  - E46
+  - buying guide
+configurator: E46
+cta:
+  label: "E46BUILD öffnen"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # kein Hero: der Artikel ist eine Liste von Daten; das Facelift-Bild steht im Text
+  alt: "Eine BMW E46 Limousine vor und nach dem Facelift vom September 2001"
+  placeholder: "Kein Hero geplant. Im Text steht das Vorher-Bild der Limousine aus dem Facelift-Artikel."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "BMWs Teilekatalog (ETK), gelesen auf zwei Spiegeln mit Monatsansicht: Facelift-Teile von Limousine und Touring ab September 2001, Facelift von Coupé und Cabrio im März 2003, Xenon zu Bi-Xenon im September 2001"
+    type: ETK-Spiegel (zwei)
+    path: "t024-t025-evidence/coupe-facelift.json; t030-evidence/sedan-touring-markets.json; t045-bumper-pairs/T-045-findings.md"
+    confidence: HIGH
+  - id: S2
+    title: "BMWs Teilekatalog (ETK), gelesen auf einem Spiegel mit Datumsspalten: Die Airbag-Lenkräder wechseln im Juni/Juli 2000 (Limousine, Touring, Coupé); die Rückleuchten des Compact wechseln im März 2003"
+    type: ETK-Spiegel (ein Spiegel)
+    path: "t047-smart-airbag-date/T-047-findings.md; t024-t025-evidence/compact.json"
+    confidence: MEDIUM
+    note: "MEDIUM: Ein Spiegel druckt diese Daten."
+  - id: S3
+    title: "Schulungsunterlage von BMW of North America, „2001 Model Year Changes“ (Oktober 2000): Die 20-polige Diagnosedose entfällt beim E46 ab der Produktion 6/00"
+    type: BMW-Dokument (Schulungsunterlage, US-Markt)
+    path: "t057-infotainment-manuals/raw/bmw-model-year-changes-extract.txt"
+    confidence: HIGH
+    note: "HIGH für US-Autos."
+  - id: S4
+    title: "Amtlicher Text: US 49 CFR § 567.4, das Zertifizierungsetikett (Ort; „Month and year of manufacture“), Ausgabe 2024 auf govinfo.gov"
+    type: amtlicher Text
+    path: "web: https://www.govinfo.gov/content/pkg/CFR-2024-title49-vol6/pdf/CFR-2024-title49-vol6-sec567-4.pdf (read 25 Nov 2026)"
+    confidence: n/a
+    note: "Amtliche Texte sind selbst die Quelle und tragen keine Bewertung (PO-Regel, 24. Nov. 2026). Nur Fahrzeuge für den US-Markt. Keine Rechtsberatung."
+  - id: S5
+    title: "Die Ära-Regeln von E46BUILD: Das Jahr, das ein Besitzer angibt, ist das Jahr der Erstzulassung, das dem Bau um Monate nachhängen kann; nah an einer Umstellung fragt E46BUILD darum nach dem Auto (T-309)"
+    type: unser eigenes Produkt (Konfigurator-Code)
+    path: "E46BUILD packages/types/src/e46-factory-era.ts (T-309 note)"
+    confidence: n/a
+---
+
+Frag einen E46-Besitzer, wie alt sein Auto ist, und du hörst ein Jahr, meist das Jahr der Erstzulassung. Für Teile reicht das oft nicht. BMW hat den E46 zu bestimmten Baumonaten geändert, und ein Auto, das in einem Jahr zugelassen wurde, kann Monate früher gebaut sein, auf der anderen Seite einer Umstellung. [S5] Dieser Artikel stellt die Umstellungen zusammen, sagt, wo der Baumonat steht, soweit wir es wissen, und verlinkt die Artikel mit den Details.
+
+## Die Umstellungen auf einen Blick
+
+| Baumonat | Was sich änderte | Welche Karosserien | Details |
+| --- | --- | --- | --- |
+| Juni 2000 | die Airbag-Lenkräder wechseln die Generation [S2, MEDIUM] | Limousine, Touring, Coupé | [Juni 2000: die Airbag-Lenkräder](/de/blog/e46-june-2000-airbag-wheels) |
+| Juni 2000 | die 20-polige Diagnosedose im Motorraum entfällt, bei US-Autos [S3, HIGH] | US-Autos | [OBD-Scanner und der E46](/de/blog/e46-obd-scanners) |
+| September 2001 | das Facelift, unter anderem mit neuen Scheinwerfern und Stoßstangen [S1, HIGH] | Limousine, Touring | [Das Facelift von 2001](/de/blog/e46-2001-facelift) |
+| September 2001 | Xenon weicht Bi-Xenon [S1, HIGH] | Coupé, Cabrio, M3 | [Das Facelift von 2001](/de/blog/e46-2001-facelift) |
+| März 2003 | ihr eigenes Facelift [S1, HIGH] | Coupé, Cabrio | [Das Facelift von 2001](/de/blog/e46-2001-facelift) |
+| März 2003 | Rückleuchten, von klar zu ganz rot [S2, MEDIUM] | Compact | [Das Facelift von 2001](/de/blog/e46-2001-facelift) |
+
+Aus BMWs Teilekatalog, wie wir ihn auf unseren Spiegeln gelesen haben, und aus der Schulungsunterlage von BMW of North America für die Dose.
+
+Die Scheinwerfer folgen denselben zwei Daten, 09/2001 bei Limousine und Touring und 03/2003 bei Coupé und Cabrio; welches Teil auf welche Seite gehört, steht in [Two dates decide every E46 headlight](/de/blog/e46-headlight-changeovers) (auf Englisch).
+
+<Figure src="/blog/e46-2001-facelift/sedan-pre.webp" alt="KI-Bild einer silbernen BMW E46 Limousine vor dem Facelift, von der Seite, vor schwarzem Hintergrund" width={2400} height={1340} caption="Eine Limousine, gebaut vor September 2001. Einen Monat später hätte sie die Facelift-Teile gehabt." credit="KI-generierte Illustration" />
+
+## Warum der Monat das Jahr schlägt
+
+- **Ein Jahr deckt beide Seiten** der meisten dieser Umstellungen ab. Eine Limousine von 2001 kann auf beiden Seiten des Septembers 2001 liegen, ein Coupé von 2003 auf beiden Seiten des März.
+- **Das Zulassungsjahr kann dem Bau nachhängen.** Das Jahr, das die meisten Besitzer kennen, ist das Jahr der Erstzulassung, und das kann Monate nach dem Werk liegen. [S5] Eine Limousine, die Anfang 2002 erstmals zugelassen wurde, kann noch ein Auto vor dem Facelift sein.
+- **Zwei Daten im selben Monat.** Im Juni 2000 änderten sich die Airbag-Lenkräder und, bei US-Autos, die Diagnosedose. Eine Limousine aus dem Mai 2000 und eine aus dem Juli können verschiedene Airbag-Lenkräder brauchen. [S2, MEDIUM]
+
+Darum fragt E46BUILD nah an einer Umstellung nach dem Auto selbst, etwa welche Scheinwerfer es hat, statt aus dem Jahr zu raten. [S5]
+
+## Wo der Baumonat steht
+
+- **Bei US-Autos** schreibt das Bundesrecht ein Zertifizierungsetikett neben dem Fahrersitz vor, an der Türscharniersäule, am Türschlosspfosten oder an der Türkante, mit „Month and year of manufacture“. Das Beispiel der Vorschrift selbst ist „June 2000“, oder „6/00“. [S4] Siehe [49 CFR § 567.4](https://www.govinfo.gov/content/pkg/CFR-2024-title49-vol6/pdf/CFR-2024-title49-vol6-sec567-4.pdf).
+- **Bei europäischen Autos** hat unsere Recherche kein BMW-Dokument gefunden, das sagt, wo das Baudatum steht. Frag den Verkäufer nach dem Baumonat, oder lass ihn über die Fahrzeug-Identifizierungsnummer (FIN) nachschlagen.
+
+## Wann es am meisten zählt
+
+- **Gebrauchte Teile für ein Auto nah an einer Umstellung kaufen:** Prüf das Teil an deinem Auto, nicht nur das Jahr. Die Teilenummern entscheiden.
+- **Ein Auto kaufen:** Ein „2002“ in einer Anzeige sagt nicht, auf welcher Seite des Septembers 2001 es liegt. Frag nach dem Baumonat.
+- **In E46BUILD:** Bist du nah an einer Umstellung, stellt es eine Frage zum Auto, statt zu raten. [S5] Antworte nach dem, was am Auto ist.
+
+## Hinweise zur Quellenlage
+
+**Belastbarkeit.** Die Facelift-Daten stammen aus BMWs Teilekatalog auf zwei Spiegeln mit Monatsansicht (HIGH). Der Wechsel der Airbag-Lenkräder und die Rückleuchten des Compact stammen aus einem Spiegel (MEDIUM). Die Diagnosedose stammt aus der Schulungsunterlage von BMW of North America (HIGH, US-Autos). Die US-Etikettregel ist der amtliche Text selbst, verlinkt. Der Zulassungsverzug ist, wie E46BUILD das Jahr eines Besitzers liest (unser eigenes Produkt).
+
+**Nicht geklärt.** Wo bei einem europäischen E46 das Baudatum steht. Ob der heutige Wortlaut der US-Etikettregel dem von 2000 entspricht; wir verlinken die Ausgabe von 2024. Umstellungen, die wir noch nicht recherchiert haben.
+
+## Wie es weitergeht
+
+Unser E46-Konfigurator ist online: Er zeigt, welche Teile an dein Auto passen, und verlinkt Verkäufer, wo wir einen gefunden haben.
