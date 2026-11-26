@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-12-24T18:00:00+01:00",
+  "status": "draft",
+  "title": "Thu 24 Dec · Single · \"Comfort. The quiet package.\" · BLOG (BL-146)",
+  "headline": "Comfort. The quiet package.",
+  "link": "blog/e46-comfort-advantage-packages",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a BMW E46 interior with black leather front seats, the centre console and the dashboard, seen from the rear passenger side."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| Comfort package (972), Sedan/Touring, Sept 2002 list: contents as listed; €1,320–1,600 by model | blog `e46-comfort-advantage-packages` (S1, DE price list 2002-09) | HIGH |\n| Top Comfort package with xenon and seat heating | blog `e46-comfort-advantage-packages` (S1, 2002-09 Sedan list) | HIGH |\n| The Compact's Advantage package | blog `e46-comfort-advantage-packages` (S1) | HIGH |\n\nPicture: E46BUILD seat-stage interior, whole; the tag says only \"Interior\" (not claimed to show a package). Label INSIDER (single slide).",
+  "importedFrom": "rendered by the Writer with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
