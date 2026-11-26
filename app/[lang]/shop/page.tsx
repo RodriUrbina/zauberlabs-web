@@ -5,6 +5,7 @@ import ShopClient from "@/components/shop/ShopClient";
 import Title from "@/components/Title";
 import { dictionaries, isLocale, type Locale } from "@/lib/i18n";
 import { shopCopy } from "@/lib/shop-copy";
+import { SITE_OG_IMAGE } from "@/lib/blog-og";
 import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 import { requireShopOpen } from "@/lib/shop-gate";
 
@@ -15,7 +16,14 @@ import { requireShopOpen } from "@/lib/shop-gate";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   if (!isLocale(lang)) return {};
-  return { title: shopCopy[lang].metaTitle, robots: { index: SHOP_LAUNCHED, follow: SHOP_LAUNCHED } };
+  const t = shopCopy[lang];
+  // BL-149: its own title and description; this openGraph replaces the layout's, so it names the site share image too.
+  return {
+    title: t.metaTitle,
+    description: t.metaDescription,
+    openGraph: { title: t.metaTitle, description: t.metaDescription, type: "website", locale: lang === "de" ? "de_DE" : "en_US", images: [{ url: SITE_OG_IMAGE, width: 1200, height: 630, alt: dictionaries[lang].hero.ogAlt }] },
+    robots: { index: SHOP_LAUNCHED, follow: SHOP_LAUNCHED },
+  };
 }
 
 export default async function ShopPage({ params }: { params: Promise<{ lang: string }> }) {

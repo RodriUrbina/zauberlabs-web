@@ -84,6 +84,11 @@ const configuratorInput = z.union([
 
 const base = z.strictObject({
   title: z.string().min(1).max(140),
+  /**
+   * BL-149 (PO 2026-11-26): optional search title for the browser tab, og:title and twitter:title only (lib/blog-seo.ts); the
+   * visible h1 (BL-126 split), cards, feed, JSON-LD and sitemap keep `title`. Unset = everything as before.
+   */
+  seoTitle: z.string().min(1).max(140).optional(),
   /** Meta description and listing teaser. ≤160 chars is the SEO guideline; up to 320 is accepted. */
   description: z.string().min(1).max(320),
   date: isoDate,

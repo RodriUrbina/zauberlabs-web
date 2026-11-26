@@ -8,6 +8,7 @@ import remarkCite from "@/lib/remark-cite";
 import { blogUrl, feedUrl, formatDate, getBlog, postUrl, SITE_URL, sourceAnchor, sourcesPath, tagSlug } from "@/lib/blog";
 import { formatPublishMoment } from "@/lib/publish-time";
 import { articleOgImage } from "@/lib/blog-og";
+import { articleHeadTitles } from "@/lib/blog-seo";
 import { dictionaries, isLocale, LOCALES, type Locale } from "@/lib/i18n";
 import BlogHeader from "@/components/blog/BlogHeader";
 import Title from "@/components/Title";
@@ -48,16 +49,17 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const languages: Record<string, string> = Object.fromEntries(available.map((l) => [l, postUrl(l, slug)]));
   languages["x-default"] = postUrl(available.includes("en") ? "en" : available[0], slug);
   const og = articleOgImage(m.hero, lang); // site hero + site alt when the article has no image (BL-005)
+  const head = articleHeadTitles(m); // BL-149: `seoTitle` for tab and share titles only; the page itself keeps `title`
   return {
     metadataBase: new URL(SITE_URL),
-    title: `${m.title} — zauberlabs`,
+    title: head.document,
     description: m.description,
     authors: [{ name: m.author }],
     alternates: { canonical, languages, types: { "application/rss+xml": feedUrl(lang) } },
     robots: m.draft || resolved.scheduled ? { index: false, follow: false } : undefined,
     openGraph: {
       type: "article",
-      title: m.title,
+      title: head.social,
       description: m.description,
       url: postUrl(lang, slug),
       locale: post.lang === "de" ? "de_DE" : "en_US",
@@ -67,7 +69,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       tags: m.tags,
       images: [{ url: og.url, alt: og.alt }],
     },
-    twitter: { card: "summary_large_image", title: m.title, description: m.description, images: [{ url: og.url, alt: og.alt }] },
+    twitter: { card: "summary_large_image", title: head.social, description: m.description, images: [{ url: og.url, alt: og.alt }] },
   };
 }
 
