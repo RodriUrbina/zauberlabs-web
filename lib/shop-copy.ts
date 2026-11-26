@@ -2,7 +2,9 @@ import type { Locale } from "./i18n";
 
 /** BL-084 — fan shop copy (plan § 5 "Shop page design"). DE drafted by the Builder, checked by the Writer (2026-10-27). */
 const en = {
-  metaTitle: "Shop — zauberlabs",
+  // BL-149 (PO 2026-11-26): the shop page's own title and description (the Writer's approved text); og: tags follow them.
+  metaTitle: "E46 stickers — zauberlabs shop",
+  metaDescription: "E46 stickers: a Sedan, Touring, Convertible and M3 in BMW colours, die-cut glossy vinyl, about 5 × 2.5 cm, printed in Germany. €4.90 each.",
   eyebrow: "Shop — 01",
   title: ["Your E46, ", "as a sticker."],
   sub: "Die-cut glossy vinyl sticker, about 5 × 2.5 cm, printed in Germany.",
@@ -48,7 +50,8 @@ const en = {
 };
 
 const de: typeof en = {
-  metaTitle: "Shop — zauberlabs",
+  metaTitle: "E46-Sticker — zauberlabs Shop",
+  metaDescription: "E46-Sticker: Limousine, Touring, Cabrio und M3 in BMW-Farben, konturgeschnittenes Vinyl, glänzend, ca. 5 × 2,5 cm, gedruckt in Deutschland. 4,90 € pro Stück.",
   eyebrow: "Shop — 01",
   title: ["Dein E46, ", "als Sticker."],
   sub: "Konturgeschnittener Vinyl-Sticker, glänzend, ca. 5 × 2,5 cm, gedruckt in Deutschland.",
