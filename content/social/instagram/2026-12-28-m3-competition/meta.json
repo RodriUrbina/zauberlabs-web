@@ -1,0 +1,15 @@
+{
+  "publishAt": "2026-12-28T18:00:00+01:00",
+  "status": "draft",
+  "title": "Mon 28 Dec · Single · \"Competition. Since December 2004.\" · BLOG (BL-148)",
+  "headline": "Competition. Since December 2004.",
+  "link": "blog/e46-m3-competition-package",
+  "slides": [
+    {
+      "file": "1.jpg",
+      "alt": "AI image of a silver BMW E46 M3 Coupé from the side, on black."
+    }
+  ],
+  "factSources": "| Claim | Source | Confidence |\n|---|---|---|\n| From Dec 2004, M3 Coupé, code 7MA, €5,300 | blog `e46-m3-competition-package` (S1 BMW AG release 15 Nov 2004; S2 DE price lists) | HIGH |\n| CSL-style 19-inch wheels; CSL brakes, 345 mm front; optimised suspension; 14.5:1 vs 15.4:1; M Track Mode | blog (S1, S2) | HIGH |\n| Alcantara-rim wheel without MF buttons; Alu Tec trim; Interlagos Blue new | blog (S1, S2) | HIGH |\n\nPicture: E46BUILD M3 wheel stage, whole; tag says \"not a Competition itself\". Label INSIDER (single slide).",
+  "importedFrom": "rendered by the Writer with the 6 Nov slide template (e46build docs/social/instagram/render-drafts-p07-p13.mjs)"
+}
