@@ -1,0 +1,90 @@
+---
+# BL-143 — Writer draft, English. PO 25 Nov 2026 (via the Editor). No seller named.
+title: "The US-market E46: what's different in BMW's own catalogue"
+description: "BMW's parts catalogue lists US and European E46s separately. Where the two match, where they don't: bumper covers, impact parts, painted trim, steering wheels."
+date: 2026-11-26
+updated: 2026-12-20
+publishAt: "2026-12-20"
+lang: en
+slug: e46-us-market-catalogue
+card: BL-143
+author: "zauberlabs"
+tags:
+  - E46
+  - US market
+  - buying guide
+configurator: E46
+cta:
+  label: "Open E46BUILD"
+  href: "https://e46.zauberlabs.de"
+hero:
+  src: null # no hero: we have no picture that shows a US and a European E46 part side by side
+  alt: "A US-market and a European BMW E46 front bumper side by side"
+  placeholder: "No hero planned. If one is added: our own photo of a US and a European E46 part side by side, part numbers readable."
+evidenceRoot: "e46build master docs/research/"
+sources:
+  - id: S1
+    title: "T-136 — BMW's parts catalogue (ETK), US and Europe trees compared group by group on one mirror: Sedan 330i, Touring 325i, Coupé 330Ci, Convertible 330Ci, M3 Coupé; bumpers and trim, front seats, steering wheels"
+    type: ETK mirror (one mirror)
+    path: "web: e46build branch agent-1/T-136-us-market 68cbda83, docs/research/t136-us-market/us-tree-part-numbers.md (not on master)"
+    confidence: MEDIUM
+    note: "MEDIUM: one mirror, one model tree per body, and only the groups listed. Read from an unmerged research branch."
+---
+
+"It's an E46" sounds like one car. BMW's parts catalogue doesn't treat it that way: it keeps separate trees for US and European cars, and for some parts the two list different numbers. Our research compared the two trees group by group on one mirror, for one model of each body. [S1, MEDIUM] Here is where they match, where they don't, and what that means if you're buying across the Atlantic.
+
+## Where the two catalogues match
+
+In the groups our research compared: [S1, MEDIUM]
+- **Front seats on the 330i Sedan:** the complete seats, the frames, the rails, the covers and sport-seat covers, and the seat wiring carry the same numbers in both trees. One electric seat mechanism from March 2003 appears only in the European tree.
+- **The Touring's M bumpers:** the 325i Touring's M front and M rear groups match.
+- **The Sedan's M bumpers** match except for one small front part and one painted rear trim.
+
+So for seats, and for M bumpers on the Sedan and Touring, a part from the other side of the Atlantic is very likely the same part. Check the number anyway.
+
+## Where they don't
+
+**Coupé and Convertible bumper covers.** In the 330Ci trees the primed front covers have different numbers for the US and Europe. [S1, MEDIUM]
+
+| 330Ci Coupé and Convertible, primed front cover | US | Europe |
+| --- | --- | --- |
+| M front | 51117893060 | 51117893057 |
+| standard front, to March 2003 | 51118251151 | 51118218172 |
+| standard front, from March 2003 | 51117076719 | 51117076720 |
+
+As listed in BMW's catalogue on one mirror. [S1, MEDIUM] The Sedan and Touring covers, by contrast, didn't differ in the groups compared.
+
+**The M3's front cover changes at different months.** The European M3 tree changes its front cover in September 2001, the US tree in November 2001. [S1, MEDIUM]
+
+**Impact parts.** The European 330i Sedan tree lists a front carrier and two shock absorbers marked "4 KM/H" that the US tree doesn't. [S1, MEDIUM] That fits what [our bumper article](/en/blog/e46-bumpers-body-era-package) found from the other side: a second carrier marked for the US five-mile-per-hour standard. The US Sedan and Touring trees also list a centre impact strip for the front bumper that the European ones don't. [S1, MEDIUM]
+
+**Painted parts.** Across the bumper groups, the European trees list painted versions, "CODE - UNI/MET.", painted to your colour code, that the US trees don't: painted bumper trims, painted towing-eye flaps, painted licence-plate bases. [S1, MEDIUM] The US trees list only the primed versions of those parts. What the code is and why it matters is in [Japan Red to Laguna Seca Blue](/en/blog/e46-paint-code).
+
+**Steering wheels.** In the 330i Sedan trees: [S1, MEDIUM]
+- The European tree lists decor covers for the sport steering wheel, in aluminium, birch and myrtle wood and several metallic finishes, and SMG steering wheels in trim colours such as aluminium, myrtle, birch, moongrey and Titan II. The US tree doesn't list them.
+- The US tree lists M sport steering wheels, with and without multi-function buttons, under numbers the European tree doesn't show, dated up to or from March 2005.
+
+## Elsewhere: headlights, wheels, diagnostics
+
+Some differences are big enough for their own articles:
+- **Headlights:** [Same car, different continent](/en/blog/e46-us-vs-european-headlights).
+- **Wheels:** the same number, listed for different cars: [The wheel that fits an E46, unless the E46 is American](/en/blog/e46-factory-wheels-by-market).
+- **The diagnostic socket under the bonnet,** which BMW's US training says went from June 2000: [OBD scanners and the E46](/en/blog/e46-obd-scanners).
+
+## Buying across the Atlantic
+
+- **Seats and Sedan or Touring M bumpers:** likely the same part. Compare the numbers.
+- **Coupé and Convertible covers:** check the number on the cover against your car's market.
+- **Painted parts:** a US source will usually have them primed only, so plan the paint.
+- **Bumper impact parts:** buy them from your car's own tree. The European tree's 4 km/h parts aren't in the US tree.
+- **Anything else:** the part number is the key. If it's in your car's tree, it's the part BMW listed for it.
+
+## Notes on the evidence
+
+**Confidence.** Everything here comes from one mirror of BMW's parts catalogue, comparing the US and European trees for one model of each body, read from an unmerged research branch (MEDIUM). It covers bumpers and trim on all five bodies, front seats and steering wheels on the 330i Sedan, and nothing else.
+
+**Not established.** Other models and engines. Other part groups, such as lights, glass or interior trim, which weren't compared. Why most parts differ: the catalogue lists numbers, not reasons. Canada and other markets.
+
+## What comes next
+
+Our E46 configurator is live: it shows which parts fit your car and links to sellers where we've found one.
