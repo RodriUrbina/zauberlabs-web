@@ -47,6 +47,7 @@ describe("title code (BL-111)", () => {
       "app/[lang]/shop/page.tsx",
       "components/AboutPage.tsx",
       "components/HomeHero.tsx",
+      "components/HomeShopTeaser.tsx",
       "components/blog/BlogListing.tsx",
       "components/blog/ConfiguratorCta.tsx",
       "components/shop/ShopNotice.tsx",

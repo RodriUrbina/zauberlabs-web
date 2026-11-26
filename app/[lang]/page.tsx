@@ -11,6 +11,7 @@ import StickyStartBar from "@/components/StickyStartBar";
 import { SHOP_LAUNCHED } from "@/lib/shop-flag";
 import CloserLook from "@/components/CloserLook";
 import Title from "@/components/Title";
+import HomeShopTeaser from "@/components/HomeShopTeaser";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-20";
 
@@ -106,6 +107,13 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <CloserLook cats={t.garage.cats} pick={t.garage.pick} auto={t.garage.auto} cta={t.garage.cta} hrefs={E46_LIVE ? t.garage.cats.map((c) => e46SectionUrl(c.key, lang)) : null} soon={t.nav.comingSoon} />
           </div>
         </section>
+
+        {/* SHOP — BL-151 (PO 2026-11-26): the shop in the page body too, after the configurators; only once launched, like the nav. */}
+        {SHOP_LAUNCHED && (
+          <section id="shop" className={`${wrap} scroll-mt-4 pb-16 md:pb-28`}>
+            <HomeShopTeaser lang={lang} />
+          </section>
+        )}
 
         {/* WHAT'S NEXT — BL-081: one block for the vote (lineup) and the suggest form. Replaces the vote card, the orange
             "Open slot" card and the separate suggest section. The phone sticky bar (BL-079) hides while this block reaches the bottom of the screen. */}

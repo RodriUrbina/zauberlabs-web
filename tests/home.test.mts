@@ -62,7 +62,7 @@ describe("home page (BL-053)", () => {
     const page = fs.readFileSync(path.join(process.cwd(), "app", "[lang]", "page.tsx"), "utf8");
     const footer = fs.readFileSync(path.join(process.cwd(), "components", "SiteFooter.tsx"), "utf8");
     const ids = [...page.matchAll(/id="([a-z]+)"/g)].map((m) => m[1]);
-    assert.deepEqual(ids, ["garage", "next", "suggest", "blog"]);
+    assert.deepEqual(ids, ["garage", "shop", "next", "suggest", "blog"]);
     const anchors = [...(page + footer).matchAll(/href=\{?[`"](?:\$\{homePath\})?#([a-z]+)/g)].map((m) => m[1]);
     for (const a of anchors) assert.ok(ids.includes(a), `#${a} exists`);
     assert.ok(!/ticker|t\.how|principles/.test(page), "ticker, how it works and principles are gone");
